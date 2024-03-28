@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta data-name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style type="text/css">
+
+    
+
+        /* Rest of your existing styles */
+
+/* ===== Google Font Import - Poppins ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  position: relative;
+  min-height: 100vh;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 65px 20px;
+  background-color: black;
+}
+.container .search-box {
+  position: relative;
+  height: 50px;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.search-box input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #323334;
+  padding: 0 15px 0 45px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 6px;
+}
+.search-box i {
+  position: absolute;
+  z-index: 2;
+  color: #999;
+  top: 50%;
+  left: 15px;
+  font-size: 22px;
+  transform: translateY(-50%);
+}
+.container .images .image-box {
+  border: 1px solid red;
+  position: relative;
+  height: 350px;
+  width: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 0px red;
+}
+.images {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.images .image-box {
+  margin: 12px;
+}
+.images .image-box img {
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  transition: transform 0.2s linear;
+}
+.image-box:hover img {
+  transform: scale(1.05);
+}
+.image-box h6 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 15px;
+    background-color: #151f30;
+    border: 3px solid red;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    z-index: 999999;
+
+}
+
+.to-top.active {
+    bottom:37px;
+    pointer-events: auto;
+    opacity:1;
+}
+
+html {
+   scroll-behavior: smooth;
+}
+
+    </style>
+
+    <!--===== Boxicons CSS =====-->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <title>MOVIES</title>
+
+</head>
+
+<body style="background-color: black;">
+
+  
+    <a href="#" class="to-top">
+        <i class='bx bx-chevron-up'></i>
+    </a>
+
+    <div class="container">
+      <div class="search-box">
+        <i class="bx bx-search"></i>
+        <input type="text" id="movieSearch" placeholder="Search a movie"  >
+      </div>
+
+
+  <div class="images">
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/515530?hash=AgADiw"> <img src="https://www.cinejosh.com/reviewsimg/big/vadhuvu-review_b_0812231123.jpg" alt="" /></a>
+          <h6>Vadhuvu (TV Series 2023)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/520260?hash=AgADhg"> <img src="https://picsxtra.com/images/2023/12/14/1920x770a605f1d9fd53484dab233243849b246f059b1a6d4dd3467281f8f5ea96a142fb.md.jpg" alt="" /></a>
+          <h6>Koose Munisamy Veerappan (2023)</h6>
+        </div>
+
+
+      </div>
+    </div>
+
+        // ... (your existing scripts) ...
+
+<script>
+  const movieSearchInput = document.getElementById('movieSearch');
+  const imageBoxes = document.querySelectorAll('.image-box');
+
+  movieSearchInput.addEventListener('input', handleMovieSearch);
+
+  function handleMovieSearch() {
+    const searchTerm = movieSearchInput.value.toLowerCase();
+
+    imageBoxes.forEach((imageBox) => {
+      const movieName = imageBox.querySelector('h6').innerText.toLowerCase();
+
+      if (movieName.includes(searchTerm)) {
+        imageBox.style.display = 'block';
+      } else {
+        imageBox.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+
+<script> 
+	
+    const toTop = document.querySelector('.to-top')
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+    toTop.style.display = "block"
+  } else {
+    toTop.style.display = "none"
+  }
+  })
+  
+  toTop.addEventListener('click', () => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 1200 || document.documentElement.scrollTop > 1200) {
+    htmlbar.classList.add('activehtml')
+    cssbar.classList.add('activecss')
+    jsbar.classList.add('activejs')
+  }
+})
+</script>
+
+
+</body>
+
+</html>

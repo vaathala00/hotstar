@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> vaathala </title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.6.2/dist/plyr.css" />
+  <script src="https://cdn.jsdelivr.net/npm/plyr@3.6.12/dist/plyr.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.1.4/dist/hls.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+  <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+  <script defer src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      text-transform: capitalize;
+    }
+
+    body {
+      background-color: #eee;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 100px auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .container .main-video-container {
+      flex: 1 1 700px;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+      background-color: #fff;
+      padding: 15px;
+    }
+
+    .container .main-video-container .main-video {
+      margin-bottom: 7px;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    .container .main-video-container .main-vid-title {
+      font-size: 20px;
+      color: #444;
+    }
+
+    .container .video-list-container {
+      flex: 1 1 350px;
+      height: 485px;
+      overflow-y: scroll;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+      background-color: #fff;
+      padding: 15px;
+    }
+
+    .container .video-list-container::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .container .video-list-container::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .container .video-list-container::-webkit-scrollbar-thumb {
+      background-color: #444;
+      border-radius: 5px;
+    }
+
+    .container .video-list-container .list {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      background-color: #eee;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .container .video-list-container .list:last-child {
+      margin-bottom: 0;
+    }
+
+    .container .video-list-container .list.active {
+      background-color: #444;
+    }
+
+    .container .video-list-container .list.active .list-title {
+      color: #fff;
+    }
+
+    .container .video-list-container .list .list-video {
+      width: 100px;
+      border-radius: 5px;
+    }
+
+    .container .video-list-container .list .list-title {
+      font-size: 17px;
+      color: #444;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @media (max-width:1200px) {
+
+      .container {
+        margin: 0;
+      }
+
+    }
+
+    @media (max-width:450px) {
+
+      .container .main-video-container .main-vid-title {
+        font-size: 15px;
+        text-align: center;
+      }
+
+      .container .video-list-container .list {
+        flex-flow: column;
+        gap: 10px;
+      }
+
+      .container .video-list-container .list .list-video {
+        width: 100%;
+      }
+
+      .container .video-list-container .list .list-title {
+        font-size: 15px;
+        text-align: center;
+      }
+
+    }
+
+.logo {
+  position: absolute;
+  top: 50px; /* Adjust the top position as needed */
+  left: 50px; /* Adjust the left position as needed */
+  width: 35px; /* Set the width of the logo */
+  height: 35px; /* Set the height of the logo */
+  background: url('https://i.postimg.cc/hv5gCFMv/photo-2023-11-28-07-45-00-photoaidcom-cropped.png') no-repeat;
+  background-size: contain;
+  z-index: 1; /* Ensure the logo is on top of the iframe */
+}
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+ 
+    <div class="main-video-container">
+<div class="logo"></div>
+     <video src="https://dai.google.com/linear/hls/event/BCOFZq1JQjq12fmaO6lAAA/master.m3u8" class="player"></video>
+  
+      <h3 class="main-vid-title"></h3>
+  <a href="https://t.me/vaathala1" target="_blank"><img
+      src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
+      </div>
+
+   
+
+  <!-- custom js file link  -->
+  <script src="js/script.js"></script>
+
+ <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+
+	<script>
+        const controls = [
+              'play-large',
+              'rewind',
+              'play', 
+              'fast-forward', 
+              'progress', 
+              'current-time',
+              'duration',
+              'mute',
+              'volume',
+              'captions',
+              'settings',
+              'pip',
+              'airplay',
+              'fullscreen'
+
+            ];
+        document.addEventListener('DOMContentLoaded', () => {
+            const player = Plyr.setup('.player', { controls });
+        });
+
+        const body = document.querySelector('body');
+        const footer = document.querySelector('footer');
+        const toogle = document.querySelector('.toogle');
+    </script>
+
+  <script>
+    let videoList = document.querySelectorAll('.video-list-container .list');
+
+    videoList.forEach(vid => {
+      vid.onclick = () => {
+        videoList.forEach(remove => {remove.classList.remove('active')});
+        vid.classList.add('active');
+        let src = vid.querySelector('.list-video').src;
+        let title = vid.querySelector('.list-title').innerHTML;
+        document.querySelector('.main-video-container .main-video').src = src;
+        document.querySelector('.main-video-container .main-video').play();
+        document.querySelector('.main-video-container .main-vid-title').innerHTML = title;
+      };
+    });
+
+    var _0x3ca68c = _0x1364; (function (_0x3c4efa, _0x6298a8) {var _0x364e34 = _0x1364, _0x1373bc = _0x3c4efa(); while (!![]) {try {var _0x5815da = parseInt(_0x364e34(0x98)) / 0x1 + parseInt(_0x364e34(0x88)) / 0x2 + parseInt(_0x364e34(0x82)) / 0x3 + parseInt(_0x364e34(0x90)) / 0x4 * (-parseInt(_0x364e34(0x7f)) / 0x5) + -parseInt(_0x364e34(0x95)) / 0x6 * (-parseInt(_0x364e34(0x75)) / 0x7) + -parseInt(_0x364e34(0x73)) / 0x8 + parseInt(_0x364e34(0x7a)) / 0x9 * (parseInt(_0x364e34(0x8d)) / 0xa); if (_0x5815da === _0x6298a8) break; else _0x1373bc['push'](_0x1373bc['shift']());} catch (_0x1ce4d9) {_0x1373bc['push'](_0x1373bc['shift']());} } }(_0xb63f, 0x418cd), $(document)[_0x3ca68c(0x94)](function () {$('input')['on']('keyup', function () {var _0x491706 = _0x1364, _0xb3027b = $(this)[_0x491706(0x9d)]()[_0x491706(0x8e)](); $('.container-fluid\x20.row\x20.col-sm-4')[_0x491706(0x85)](function () {var _0x9e0288 = _0x491706; $(this)[_0x9e0288(0x7d)]($(this)[_0x9e0288(0x9e)]()[_0x9e0288(0x8e)]()[_0x9e0288(0x92)](_0xb3027b) > -0x1);});});})); function _0x1364(_0x3753b5, _0x4c214) {var _0xb63fe7 = _0xb63f(); return _0x1364 = function (_0x13645e, _0x52e4b4) {_0x13645e = _0x13645e - 0x71; var _0x5f291f = _0xb63fe7[_0x13645e]; return _0x5f291f;}, _0x1364(_0x3753b5, _0x4c214);} var animateButton = function (_0x5b8995) {var _0x146a4b = _0x3ca68c; _0x5b8995[_0x146a4b(0x7c)], _0x5b8995['target'][_0x146a4b(0x9c)]['remove']('animate'), _0x5b8995['target'][_0x146a4b(0x9c)][_0x146a4b(0x7b)](_0x146a4b(0x78)), setTimeout(function () {var _0x11880a = _0x146a4b; _0x5b8995[_0x11880a(0x9b)]['classList'][_0x11880a(0x99)](_0x11880a(0x78));}, 0x2bc);}, bubblyButtons = document[_0x3ca68c(0x80)]('bubbly-button'); for (var i = 0x0; i < bubblyButtons['length']; i++) {bubblyButtons[i][_0x3ca68c(0x8b)](_0x3ca68c(0x86), animateButton, ![]);} setTimeout(videovisible, 0xbb8); function videovisible() {var _0xe310c1 = _0x3ca68c; document[_0xe310c1(0x76)](_0xe310c1(0x71))[_0xe310c1(0x83)][_0xe310c1(0x96)] = _0xe310c1(0x7e);} document[_0x3ca68c(0x8b)](_0x3ca68c(0x9a), () => {var _0x23bffc = _0x3ca68c; const _0x60787d = document[_0x23bffc(0x84)](_0x23bffc(0x97)), _0x2f36ee = _0x60787d[_0x23bffc(0x8c)]('source')[0x0]['src'], _0x21eafc = {}; if (Hls[_0x23bffc(0x8a)]()) {var _0x1630b1 = {'maxMaxBufferLength': 0x64}; const _0x2d78dd = new Hls(_0x1630b1); _0x2d78dd['loadSource'](_0x2f36ee), _0x2d78dd['on'](Hls[_0x23bffc(0x72)][_0x23bffc(0x79)], function (_0x229d69, _0x5586ee) {var _0x4e536b = _0x23bffc; const _0xa061d8 = _0x2d78dd[_0x4e536b(0x87)][_0x4e536b(0x74)](_0xc7bb10 => _0xc7bb10[_0x4e536b(0x89)]); _0x21eafc[_0x4e536b(0x8f)] = {'default': _0xa061d8[0x0], 'options': _0xa061d8, 'forced': !0x0, 'onChange': _0x340433 => function (_0x51deb0) {var _0x2ef88d = _0x4e536b; window[_0x2ef88d(0x91)][_0x2ef88d(0x87)][_0x2ef88d(0x77)]((_0x5d3eca, _0x276dfc) => {var _0x2dce12 = _0x2ef88d; _0x5d3eca[_0x2dce12(0x89)] === _0x51deb0 && (window[_0x2dce12(0x91)][_0x2dce12(0x81)] = _0x276dfc);});}(_0x340433)}, new Plyr(_0x60787d, _0x21eafc);}), _0x2d78dd[_0x23bffc(0x93)](_0x60787d), window[_0x23bffc(0x91)] = _0x2d78dd;} else new Plyr(_0x60787d, _0x21eafc);}); function _0xb63f() {var _0x570b7c = ['23225dFLpur', 'getElementsByClassName', 'currentLevel', '104958XfcSsL', 'style', 'querySelector', 'filter', 'click', 'levels', '283088oBQwOw', 'height', 'isSupported', 'addEventListener', 'getElementsByTagName', '3432890tFxaup', 'toLowerCase', 'quality', '308pBpEeS', 'hls', 'indexOf', 'attachMedia', 'ready', '3077058XiisSA', 'display', 'video', '92929dvogHO', 'remove', 'DOMContentLoaded', 'target', 'classList', 'val', 'text', 'loading', 'Events', '3995464iPrGDS', 'map', '7cvhxtK', 'getElementById', 'forEach', 'animate', 'MANIFEST_PARSED', '9ehNVsR', 'add', 'preventDefault', 'toggle', 'none']; _0xb63f = function () {return _0x570b7c;}; return _0xb63f();}
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta data-name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css" />
+<link rel="shortcut icon" href="https://img.freepik.com/premium-vector/colorful-movie-logo_18099-26.jpg">
+    <style type="text/css">
+
+        /* ===== Google Font Import - Poppins ===== */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Top UI Styles */
+        .top-ui {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #151f30;
+            color: white;
+            padding: 10px 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-ui h1 {
+            font-size: 24px;
+        }
+
+  .top-ui .user-image {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-ui .user-image img {
+            width: 30px; /* Adjust the size as needed */
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .top-ui .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .top-ui .social-icons i {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+            max-width: 1200px;
+            width: 100%;
+            margin: 60px auto 0; /* Adjusted margin to make space for the top UI */
+            padding: 40px 20px;
+            background-color: black;
+        }
+
+        /* Rest of your existing styles */
+
+/* ===== Google Font Import - Poppins ===== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  position: relative;
+  min-height: 100vh;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 65px 20px;
+  background-color: black;
+}
+.container .search-box {
+  position: relative;
+  height: 50px;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.search-box input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #323334;
+  padding: 0 15px 0 45px;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 6px;
+}
+.search-box i {
+  position: absolute;
+  z-index: 2;
+  color: #999;
+  top: 50%;
+  left: 15px;
+  font-size: 22px;
+  transform: translateY(-50%);
+}
+.container .images .image-box {
+  border: 1px solid red;
+  position: relative;
+  height: 350px;
+  width: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 0px red;
+}
+.images {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.images .image-box {
+  margin: 12px;
+}
+.images .image-box img {
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  transition: transform 0.2s linear;
+}
+.image-box:hover img {
+  transform: scale(1.05);
+}
+.image-box h6 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    font-size: 15px;
+    background-color: #151f30;
+    border: 3px solid red;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+    z-index: 999999;
+
+}
+
+.to-top.active {
+    bottom:37px;
+    pointer-events: auto;
+    opacity:1;
+}
+
+html {
+   scroll-behavior: smooth;
+}
+
+
+.iframeContainer{
+
+position: relative;
+  weidth:100% ;
+  height: 100%;
+  overflow: hidden:
+}
+
+.iframeContent{
+  position: absolute;
+  top: -393px;
+  left: -9px;
+  width: 116%;
+  height: 160%;
+}
+    
+    </style>
+
+    <!--===== Boxicons CSS =====-->
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <title>MOVIES</title>
+
+</head>
+
+<body style="background-color: black;">
+
+    <div class="top-ui">
+
+   <div class="user-image">
+            <img src="https://hotstar.jodame4881.repl.co/APP/assets/imgs/vt.jpg" alt="User Image">
+
+            <!-- Replace "path/to/user-image.jpg" with the actual path to the user's image -->
+            <span></span> <!-- Add user name or any other information -->
+        </div>
+
+        <h1> </h1>
+
+        <div class="social-icons">
+  <a href="https://t.me/vaathala1" >
+            <i class='bx bxs-tv'> JOIN TELEGRAM</i> </a> 
+         <h4></h4> 
+         </div>
+
+       <div class="social-icons">
+<a href="hindi">
+     <i class='bx bxs-message-square-detail'>Hindi </i></a> 
+        <h4></h4>
+        </div>
+
+      <div class="social-icons">
+<a href="malayalam">
+       <i class='bx bxs-message-square-detail'>Malayalam</i></a> 
+        <h4></h4>
+        </div>
+    </div>
+
+
+
+    <a href="#" class="to-top">
+        <i class='bx bx-chevron-up'></i>
+    </a>
+
+    <div class="container">
+   <!--   <div class="search-box">
+        <i class="bx bx-search"></i>
+        <input type="text" id="movieSearch" placeholder="Search a movie"  >
+      </div> -->
+
+
+             <div class="images">
+
+          
+             <iframe src="https://lixmovies.com/tag/tamil/?s=" class="iframeContent" scrolling="" allowfullscreen="Yes" frameBorder=""></iframe>
+             
+
+      <!--  <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/533364?hash=AgADiB"> <img src="https://m.media-amazon.com/images/M/MV5BYTg3MjQ4OTktZGFlZC00MzNjLTgwNGYtNjFhOWYyMWVmZWYyXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_.jpg" alt="" /></a>
+          <h6>Spark: L.I.F.E. (2023)</h6>
+<a href="https://www.imdb.com/title/tt1234567/" target="_blank">IMDb</a>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/533372?hash=AgADix"> <img src="https://m.media-amazon.com/images/M/MV5BOTVmYjBmMzktOWViZS00YjQ2LWEyYTAtODFhY2M0YzU0YzkwXkEyXkFqcGdeQXVyMTA4MzQ4NzMw._V1_.jpg" alt="" /></a>
+          <h6>Enjoy (2022)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/533354?hash=AgADgx"> <img src="https://picsxtra.com/images/2023/12/15/MV5BZmFkZWY4M2EtOTgzMy00YmIyLThhMTQtODJkOTc4YjZjZDJiXkEyXkFqcGdeQXVyNzIxNjkxNDI._V1_.md.jpg" alt="" /></a>
+          <h6>Pandurangadu (2023) </h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/525702?hash=AgADpA"> <img src="https://m.media-amazon.com/images/M/MV5BNGI3MTI5YjItOGM2My00NDIyLWIwOGEtYWRiODgwNWQzZmQyXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg" alt="" /></a>
+          <h6>Margazhi Thingal (2023)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/525682?hash=AgADog"> <img src="https://m.media-amazon.com/images/M/MV5BMDQ2NDFkNDktOTc4Ni00YjI5LTlmYjItMTBkZTRmMmQ2MDY2XkEyXkFqcGdeQXVyMjM0ODAwODM@._V1_QL075_UX1080_CR0,90,100,_.jpg" alt="" /></a>
+          <h6>Kida (2022)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/525714?hash=AgADpw"> <img src="https://i.ibb.co/jhjHCNY/sesham-mike-il-fathima-2023-streaming-from-december-15-v0-3nrilsvtwm5c1.jpg" alt="" /></a>
+          <h6>Sesham  Mikeil Fathima (2023)</h6>
+        </div>
+
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/516010?hash=AgADMA"> <img src="https://m.media-amazon.com/images/M/MV5BN2EwNmRhMzUtZGZjMS00YzJhLTk1YTEtNjc1NDFlMmE5MjIwXkEyXkFqcGdeQXVyNjI4NDY5ODM@._V1_.jpg" alt="" /></a>
+          <h6>The Moon (2023)</h6>
+
+        </div>
+
+        <div class="image-box" >
+        <a href="https://player.mrfooll.xyz/batch/512922?hash=AgADSg"><img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/jigarthanda-double-x-et00359702-1699446701.jpg" alt="" ></a>
+          <h6>Jigarthanda Double X (2023)</h6> 
+        </a>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/512951?hash=AgADTg"> <img src="https://pbs.twimg.com/media/FmCHZGraEAELGZv?format=jpg&name=4096x4096" alt="" /></a>
+          <h6>Japan (2023)</h6>
+        </div>
+
+
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/512899?hash=AgADSQ"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/raid-tamil-et00349097-1699268007.jpg
+" alt="" /></a>
+          <h6>Raid (2023)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/515440?hash=AgADfA"> <img src="https://m.media-amazon.com/images/M/MV5BZDhjYmUzZGEtOWIyYi00ZDgzLWEwNmQtZGI4MjdhMDg1YTQ4XkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_QL75_UY281_CR17,0,190,281_.jpg" alt="" /></a>
+          <h6>Mast Mein Rehne Ka (2023) </h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/512834?hash=AgADRg"> <img src="https://m.media-amazon.com/images/M/MV5BYzU3ZjVjNTMtYzBlZi00MmIwLWFhMGEtYjljNjU1YTE5YmUwXkEyXkFqcGdeQXVyMTY1OTgwMDAx._V1_.jpg
+" alt="" /></a>
+          <h6>Gadar 2 (2023)</h6>
+        </div>
+
+        <div class="image-box" >
+           <a href="https://player.mrfooll.xyz/batch/512847?hash=AgADRw"> <img src="https://m.media-amazon.com/images/M/MV5BM2UwMjRmNDEtODkxMi00ODg3LTkxODQtZDJkYTNkMGQ5N2Y1XkEyXkFqcGdeQXVyMTU0ODI1NTA2._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+          <h6>800 (2023)</h6>
+        </div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513364?hash=AgADhw"> <img src="https://m.media-amazon.com/images/M/MV5BZDZjMjk0ZDYtNDgyZS00NDYzLTlhZTgtMWYxYmI3Y2JhYmFhXkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_.jpg" alt="" /></a>
+  <h6>Varikkuzhiyile Kolapathakam (2019)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513637?hash=AgADsg"> <img src="https://m.media-amazon.com/images/M/MV5BOWJkZDY1OWYtNTg0MC00OWU2LWJiMzMtNmM0NTlkNDEzOTIyXkEyXkFqcGdeQXVyMTY3ODkyNDkz._V1_.jpg " alt="" /></a>
+  <h6>Kannur Squad (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513659?hash=AgADtA"> <img src="https://m.media-amazon.com/images/M/MV5BNTM0NTA2NDktNjQ3My00MWNjLTkxZDEtMTE0NmNmYWRkMjkyXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>Tiger Nageswara Rao (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513671?hash=AgADtg"> <img src="https://m.media-amazon.com/images/M/MV5BZTUzYjRlOTYtNjdjMC00ZmMyLWI3NTUtOWMwMmM2ZDU4NTRhXkEyXkFqcGdeQXVyMTUyNjIwMDEw._V1_.jpg" alt="" /></a>
+  <h6>Irugapatru (2023) </h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513690?hash=AgADtw"> <img src="https://m.media-amazon.com/images/M/MV5BYTAzYzVlYmItMWI1Yi00ZGRjLTkwYWUtYWM3ZDIwOGFiODk4XkEyXkFqcGdeQXVyMTY3ODkyNDkz._V1_.jpg" alt="" /></a>
+  <h6>Leo (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513698?hash=AgADuA"> <img src="https://pbs.twimg.com/media/F9DEHxGXUAA2u3m.jpg:large" alt="" /></a>
+  <h6>Pulimada (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513716?hash=AgADuQ"> <img src="https://i.pinimg.com/1200x/d4/96/d7/d496d7de437abb5821f242aa18286fb9.jpg" alt="" /></a>
+  <h6>Kantara (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513741?hash=AgADvA"> <img src="https://pbs.twimg.com/media/FcSDlGCaIAAbOMl.png" alt="" /></a>
+  <h6>Viruman (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/513747?hash=AgADvQ"> <img src="https://m.media-amazon.com/images/M/MV5BNDQ4MGU1ZTktOTJiZi00MDUwLTg1M2QtYmJjMGQ0OTU5NzMxXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg" alt="" /></a>
+  <h6>Veetla Vishesham (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/514066?hash=AgADzg"> <img src="https://m.media-amazon.com/images/M/MV5BNzIxYTgwOGQtZjBiZC00NzkyLWE0YzYtMWI1ZDkwMGM5ZmVhXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>O2 (2022) </h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515351?hash=AgADVA"> <img src="https://www.kerala9.com/wp-content/uploads/2022/04/kaathuvaakula-rendu-kaadhal-hd-posters-1-001-683x1024.jpg" alt="" /></a>
+  <h6>Kaathuvakula Rendu Kadhal (2022) </h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515358?hash=AgADWA"> <img src="https://m.media-amazon.com/images/M/MV5BMjI2Njg2Y2EtZjgwMC00ZGVkLWJmMWYtYjVhYjk2ZTkwNWE1XkEyXkFqcGdeQXVyMTMxMjA5NDU1._V1_.jpg" alt="" /></a>
+  <h6>K.G.F Chapter 2 (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515366?hash=AgADWQ"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/striker-2023-et00369001-1693991115.jpg" alt="" /></a>
+  <h6>Striker (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515375?hash=AgADXQ"> <img src="https://m.media-amazon.com/images/M/MV5BNDUwYThmZWUtODI4Ni00YWUxLWFmYTQtMWIzZTQ3ODk5MTI1XkEyXkFqcGdeQXVyMTUwMDg3OTQy._V1_.jpg" alt="" /></a>
+  <h6>The Warriorr (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515394?hash=AgADYw"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/chithha-et00370563-1695623173.jpg" alt="" /></a>
+  <h6>Chithha (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515400?hash=AgADZQ"> <img src="https://m.media-amazon.com/images/M/MV5BNzEyOWU0ZDktMTQ3MC00ZWU3LThmYmMtM2ZkYmM2MWZjZDM0XkEyXkFqcGdeQXVyMTA5NjIyODcx._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>Paruthiveeran (2007)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515411?hash=AgADcA"> <img src="https://picsxtra.com/images/2023/11/29/Dhoomam2023-Tamil.md.png" alt="" /></a>
+  <h6>Dhoomam (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/515419?hash=AgADdw"> <img src="https://m.media-amazon.com/images/M/MV5BYmY0OTEzMWEtNWJlMS00NTBhLWFjZGEtNmU3Y2EyNjZiMTE4XkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>Noodles (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519098?hash=AgADlw"> <img src="https://pbs.twimg.com/media/FldEVQ5aMAA7sef.jpg:large" alt="" /></a>
+  <h6>Gatta Kusthi (2023)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519104?hash=AgADmA"> <img src="https://m.media-amazon.com/images/M/MV5BNGQ1NGJlMjMtNmQ1Mi00NmRlLTlkZmYtNTNhZDMyYWI5MmNkXkEyXkFqcGdeQXVyMTI1NDEyNTM5._V1_.jpg" alt="" /></a>
+  <h6>Kalaga Thalaivan (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519111?hash=AgADmQ"> <img src="https://m.media-amazon.com/images/M/MV5BMmUzNzIzOTUtN2Q4NS00ZDI2LWI4MWItNjNjNzZkN2Q3MjY5XkEyXkFqcGdeQXVyMTU3NDgzNzM4._V1_.jpg" alt="" /></a>
+  <h6>Pattathu Arasan (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519120?hash=AgADmg"> <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202212/imgonline-com-ua-frameblurred-ph8fgvo6lqrn9s-three_four.jpg?VersionId=T4fPWYuzbiIrD6SgY5yGWZ4TmqOwxU9c" alt="" /></a>
+  <h6>Yashoda (2022) </h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519127?hash=AgADmw"> <img src="https://m.media-amazon.com/images/M/MV5BNGQ3YjM3MWMtMmIxNC00YjI0LWJhMmUtZjJiMjA0ZjY4MDNkXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg" alt="" /></a>
+  <h6>Ram Setu (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519133?hash=AgADnQ"> <img src="https://hellosouth.in/wp-content/uploads/2022/11/FgocHfxVQAAU6VX.jpg" alt="" /></a>
+  <h6>Nitham Oru Vaanam (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519141?hash=AgADng"> <img src="https://m.media-amazon.com/images/M/MV5BMjI4Y2I5ZDYtYWVjZC00MTkzLWI1ZmYtNDYyNDExYzYwYTQxXkEyXkFqcGdeQXVyMTUzOTcyODA5._V1_.jpg" alt="" /></a>
+  <h6>Thiruchitrambalam (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519159?hash=AgADnw"> <img src="https://m.media-amazon.com/images/M/MV5BODhjNDBjNDAtNzBmYi00N2VlLTk5MGEtMjg2YmExMWRmMWI5XkEyXkFqcGdeQXVyOTI3MzI4MzA@._V1_.jpg" alt="" /></a>
+  <h6>Babli Bouncer (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519173?hash=AgADoQ"> <img src="https://m.media-amazon.com/images/M/MV5BMjc0OTJhMDEtNDYyYy00NjVlLTg0ZGMtN2ZkMzAyMWQwYTY5XkEyXkFqcGdeQXVyMzYxOTQ3MDg@._V1_.jpg" alt="" /></a>
+  <h6>Diary (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519180?hash=AgADpA"> <img src="https://assets.gadgets360cdn.com/pricee/assets/product/202208/Cobra-Poster_1661962451.jpg" alt="" /></a>
+  <h6>Cobra Movie (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519187?hash=AgADpQ"> <img src="https://m.media-amazon.com/images/M/MV5BMjY0MjBjOGUtMWI4Yy00OWJhLTkzNWMtOTRhODJlNzYyNmUwXkEyXkFqcGdeQXVyMzU0ODc1MTQ@._V1_.jpg" alt="" /></a>
+  <h6>Vikrant Rona (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519194?hash=AgADpg"> <img src="https://m.media-amazon.com/images/M/MV5BY2FhNjZjYWYtNDA1MC00NmI1LTkzYjctNjg4OGYwOGFkMzNlXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_.jpg" alt="" /></a>
+  <h6>Kadamaiyai Sei (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519212?hash=AgADpw"> <img src="https://images.justwatch.com/poster/300704972/s592/sita-ramam" alt="" /></a>
+  <h6>Sita Ramam (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519223?hash=AgADqA"> <img src="https://m.media-amazon.com/images/M/MV5BNTcxNmNkZDYtMzdiMC00ZjlmLTg1Y2QtYzQ3MGJhZDE4ZWFjXkEyXkFqcGdeQXVyMTEzNzg0Mjkx._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>Gulu Gulu (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519231?hash=AgADqQ"> <img src="https://m.media-amazon.com/images/M/MV5BOTZkYTBiYWYtMzc1NS00NjgyLTllOWQtZjBlZGI3OGI3NmE3XkEyXkFqcGdeQXVyMTUwMDg3OTQy._V1_.jpg" alt="" /></a>
+  <h6>Yaanai (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519241?hash=AgADqg"> <img src="https://movieassetsdigital.sgp1.cdn.digitaloceanspaces.com/original/d407c003ba54af5c45b68e3e9fcef4138ab16be2" alt="" /></a>
+  <h6>Gargi (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519249?hash=AgADqw"> <img src="https://m.media-amazon.com/images/S/pv-target-images/082ea666d7993e7a2e2965f5a21920c303a938f40e042c7957ba165320442fcc.jpg" alt="" /></a>
+  <h6>D Block (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519258?hash=AgADrA"> <img src="https://m.media-amazon.com/images/M/MV5BNTk2MjUxMjEtZDU5OC00MzYxLTkwMWYtMGM5YWQ0MWMyN2I1XkEyXkFqcGdeQXVyMTE0MzY0NjE1._V1_.jpg" alt="" /></a>
+  <h6>Rocketry: The Nambi Effect (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519278?hash=AgADrQ"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/adade-sundara-et00330042-07-06-2022-07-40-15.jpg" alt="" /></a>
+  <h6>Adade Sundara (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519311?hash=AgADrg"> <img src="https://www.ticketly.eu/Photos/Event/Event_28034.jpg" alt="" /></a>
+  <h6>Vikram (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519325?hash=AgADsA"> <img src="https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg" alt="" /></a>
+  <h6>Titanic (1997)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519340?hash=AgADsQ"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/beast-et00311733-13-04-2022-01-25-10.jpg" alt="" /></a>
+  <h6>Beast (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519363?hash=AgADtA"> <img src="https://occ-0-1142-1723.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABXQrgO4twmu2F_zg1XLdv-_yHl14xcDdUehV6Zf3IS3fORCZMcc1BMASzmjshW9StWX_ulei6ma_ZUMCVoZGiwGkvajW.jpg" alt="" /></a>
+  <h6>Etharkkum Thunindhavan (2022)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519376?hash=AgADtg"> <img src="https://image.tmdb.org/t/p/w500/3621WvCUWHYiXbO6ZXMxBSUxApe.jpg" alt="" /></a>
+  <h6>Kurup (2021) </h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519602?hash=AgAD8Q"> <img src="https://static.toiimg.com/photo/msid-73098112/73098112.jpg" alt="" /></a>
+  <h6>Aalavandhan (2001)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519608?hash=AgAD8g"> <img src="https://m.media-amazon.com/images/S/pv-target-images/4b82f6c2cf5f4242f7534449c2d6d9f4eae6b42550eed59bc1c62ace9d2771bb.jpg" alt="" /></a>
+  <h6>David (2013)</h6>
+</div>
+
+<div class="image-box" >
+   <a href="https://player.mrfooll.xyz/batch/519616?hash=AgAD9Q"> <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/muthu-et00005370-1701157600.jpg" alt="" /></a>
+  <h6>Muthu (1995)</h6>
+</div> -->
+
+
+      </div>
+    </div> 
+
+        // ... (your existing scripts) ...
+
+<script>
+  const movieSearchInput = document.getElementById('movieSearch');
+  const imageBoxes = document.querySelectorAll('.image-box');
+
+  movieSearchInput.addEventListener('input', handleMovieSearch);
+
+  function handleMovieSearch() {
+    const searchTerm = movieSearchInput.value.toLowerCase();
+
+    imageBoxes.forEach((imageBox) => {
+      const movieName = imageBox.querySelector('h6').innerText.toLowerCase();
+
+      if (movieName.includes(searchTerm)) {
+        imageBox.style.display = 'block';
+      } else {
+        imageBox.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+
+<script> 
+	
+    const toTop = document.querySelector('.to-top')
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+    toTop.style.display = "block"
+  } else {
+    toTop.style.display = "none"
+  }
+  })
+  
+  toTop.addEventListener('click', () => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 1200 || document.documentElement.scrollTop > 1200) {
+    htmlbar.classList.add('activehtml')
+    cssbar.classList.add('activecss')
+    jsbar.classList.add('activejs')
+  }
+})
+</script>
+
+
+</body>
+
+</html>
