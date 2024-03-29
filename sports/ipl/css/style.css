@@ -206,3 +206,15 @@ body{
 
 }
  
+
+<!-- eztra -->
+.button {
+   display: inline-block;
+   padding: 10px 20px;
+   background-color: #4CAF50;
+   color: white;
+   text-align: center;
+   text-decoration: none;
+   cursor: pointer;
+   border-radius: 5px;
+ }
