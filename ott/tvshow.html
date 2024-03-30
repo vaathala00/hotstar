@@ -23,13 +23,29 @@ position: relative;
         scroll-behavior: smooth;
       }
       
+#popup {
+    display: none;
+}
     </style>
   </head>
  
 <body class="iframeContainer" allowfullscreen>
 
-    <iframe src="https://tamilghost.com" class="iframeContent" scrolling="" allowfullscreen="Yes"></iframe>
+    <iframe src="https://tamilplug.life" class="iframeContent" scrolling="" allowfullscreen="Yes"></iframe>
 
 <!-- https://tamilplug.com/  //www.thiraithee.net/ -->
 
+<script>
+
+
+// Access the content window of the iframe
+var iframeContent = iframe.contentWindow || iframe.contentDocument;
+
+// Hide the popup element within the iframe
+iframeContent.document.getElementById('popup').style.display = 'none';
+
+function hidePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+ </script>
 </body>
