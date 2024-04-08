@@ -208,13 +208,21 @@ body{
  
 
 <!-- eztra -->
-.button {
-   display: inline-block;
-   padding: 10px 20px;
-   background-color: #4CAF50;
-   color: white;
-   text-align: center;
-   text-decoration: none;
-   cursor: pointer;
-   border-radius: 5px;
- }
+
+        .additional-content {
+           margin-top: 20px;
+           text-align: center;
+       }
+
+.main-video-container {
+  position: relative;
+}
+
+#myElement img {
+    position: absolute;
+    top: 33px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+}
