@@ -241,3 +241,7 @@ body{
 }
 
 /* Add more styles as needed */
+
+h100 {
+    font-size: 50px; /* You can adjust the size to your preference */
+}
