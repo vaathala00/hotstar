@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAc21YbIN3ySohd6jBLEkvQ6IVqZNqcbK8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1024877750483</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.anandnet.harmonymusic</string>
+	<key>PROJECT_ID</key>
+	<string>melody-2b36b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>melody-2b36b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1024877750483:ios:f1242fe4fa823ddfa70c26</string>
+</dict>
+</plist>
