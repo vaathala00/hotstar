@@ -1,0 +1,382 @@
+    .loading {
+      margin-top: 0;
+      font-weight: 700;
+      vertical-align: middle;
+      line-height: 150px;
+      font-size: 25px;
+      text-transform: uppercase;
+      background: linear-gradient(to right, red 30%, rgb(10, 60, 215) 75%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h1 {
+      background-color: #000;
+      margin: 0;
+      text-align: center;
+      padding: 5px
+    }
+
+    a {
+      color: #000;
+      text-decoration: none
+    }
+
+    tr th {
+      font-tvv-name: bold;
+      background-color: green;
+      padding: 1px
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    @keyframes fadein {
+      0% {
+        opacity: 0
+      }
+
+      66% {
+        opacity: 0
+      }
+
+      100% {
+        opacity: 1
+      }
+    }
+
+    @-webkit-keyframes fadein {
+      0% {
+        opacity: 0
+      }
+
+      66% {
+        opacity: 0
+      }
+
+      100% {
+        opacity: 1
+      }
+    }
+
+    .tvv-item {
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      height: 120px;
+      margin: 3px;
+      padding: 10px;
+      border: 1px solid green z-index: 1;
+      background: White;
+      box-shadow: 1px 2px 2px red;
+      overflow: hidden;
+      border-radius: 4px;
+      filter: contrast(100%)
+    }
+
+    .tvv-item>* {
+      margin: 0;
+      padding: 0
+    }
+
+    .tvv-item .tvv-thumb {
+      width: 100%;
+      bottom: 10px;
+      top: 0px;
+      position: absolute;
+      right: 0;
+      float: center;
+    }
+
+    .tvv-item .tvv-thumb img {
+      width: 100%;
+      pointer-events: none
+    }
+
+    .tvv-item .tvv-name {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      font-size: 12px;
+      display: block;
+      text-align: center;
+      width: 100%;
+      color: black;
+      padding: 5px;
+      font-weight: 800;
+      text-overflow: ellipsis;
+      black-space: nowrap;
+      overflow: hidden;
+      background: linear-gradient(to bottom left, #f9ff82 7%, #ccffff 70%);
+      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5);
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+      transition: all 0.3s ease;
+    }
+
+    .tvv-item img {
+      width: 100%;
+      pointer-events: none
+    }
+
+    .tvv-item:after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 0;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      border-radius: 5px;
+      border: 0px solid green;
+      background-color: black;
+      background-image: linear-gradient(to bottom left, #ccffff 7%, #ffffcc 100%);
+      box-shadow: inset 2px 2px 2px 0px rgba(239, 255, 18);
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+      transition: all 0.3s ease;
+    }
+
+    .tvv-item:hover {
+      color: #000;
+    }
+
+    .tvv-item:hover:after {
+      top: auto;
+      bottom: 0;
+      height: 100%;
+    }
+
+    .tvv-item:active {
+      top: 5px;
+    }
+
+    .tvv-name:hover {}
+
+    .fin {
+      width: 100%;
+      margin-top: 1px;
+      margin-bottom: 2px;
+      float: center;
+      height: 30px;
+      font-size: small;
+      background-color: rgb(40, 40, 40);
+      color: black;
+      border-radius: 10px;
+      border: 3px solid greenoutline: none;
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .fin,
+    .dftr {
+      width: 100%;
+      margin-top: 1px;
+      margin-bottom: 2px;
+      float: center;
+      height: 30px;
+      font-style: bold;
+      background-color: rgb(40, 40, 40);
+      color: purple;
+      background: linear-gradient(135deg, snow 0%, seashell 64%);
+      border-radius: 0px;
+      border: 2px solid red;
+      outline: none;
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .fin:hover,
+    .dftr:hover {
+      border: 3px solid rgb(255, 60, 140);
+      color: red;
+      background: linear-gradient(135deg, azure 0%, floralwhite 64%);
+    }
+
+    .tvv-item {
+      width: calc(100%/20 - 10px)
+    }
+    }
+
+    @media only screen and (max-width:2600px) {
+      .tvv-item {
+        width: calc(100%/19 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:2470px) {
+      .tvv-item {
+        width: calc(100%/18 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:2340px) {
+      .tvv-item {
+        width: calc(100%/17 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:2210px) {
+      .tvv-item {
+        width: calc(100%/16 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:2080px) {
+      .tvv-item {
+        width: calc(100%/15 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1950px) {
+      .tvv-item {
+        width: calc(100%/14 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1820px) {
+      .tvv-item {
+        width: calc(100%/13 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1690px) {
+      .tvv-item {
+        width: calc(100%/12 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1560px) {
+      .tvv-item {
+        width: calc(100%/11 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1430px) {
+      .tvv-item {
+        width: calc(100%/10 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1300px) {
+      .tvv-item {
+        width: calc(100%/9 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1170px) {
+      .tvv-item {
+        width: calc(100%/8 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:1040px) {
+      .tvv-item {
+        width: calc(100%/7 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:910px) {
+      .tvv-item {
+        width: calc(100%/6 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:780px) {
+      .tvv-item {
+        width: calc(100%/5 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:650px) {
+      .tvv-item {
+        width: calc(100%/4 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:520px) {
+      .tvv-item {
+        width: calc(100%/3 - 10px)
+      }
+    }
+
+    @media only screen and (max-width:390px) {
+      .tvv-item {
+        width: calc(100%/2 - 10px)
+      }
+    }
+
+    
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      background: #111111;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .stwBlurRainbow,
+    .stwRainbow {
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      z-index: 23;
+      background: linear-gradient(-45deg, #4086f4, #31a952, #fbbe01, #eb4132, #4086f4, #31a952, #fbbe01, #eb4132);
+      background-size: 200%;
+      -webkit-animation: animeBar 5s linear infinite;
+      animation: animeBar 5s linear infinite
+    }
+
+    .stwBlurRainbow {
+      height: 13px;
+      z-index: 22;
+      filter: blur(10px);
+      opacity: .7
+    }
+
+    @-webkit-keyframes animeBar {
+      0% {
+        background-position: 0 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0 50%
+      }
+    }
+
+    @keyframes animeBar {
+      0% {
+        background-position: 0 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0 50%
+      }
+
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        background-color: #f0f0f0;
+        padding: 10px;
+        width: 100%;
+      }
+    }
