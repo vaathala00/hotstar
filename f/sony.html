@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HLS Video Player</title>
+
     <script>
         fetch('sonyplaylist.json')
             .then(response => response.json())
@@ -12,10 +9,3 @@
             })
             .catch(error => console.error('Error:', error));
     </script>
-</head>
-<body>
-    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360" data-setup='{}'>
-        Your browser does not support the video tag.
-    </video>
-</body>
-</html>
