@@ -3,7 +3,7 @@
 <head>
     <title>HLS Video Player</title>
     <script>
-        fetch('d.json')
+        fetch('sonyplaylist.json')
             .then(response => response.json())
             .then(data => {
                 const streamUrl = data.stream;
