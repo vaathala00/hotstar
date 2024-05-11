@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Player</title>
+    <title>HLS Player</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 </head>
 <body>
-    <video width="640" height="360" controls>
-        <source src="http://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731.mp4" type="video/mp4">
-        <source src="http://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731.ts" type="video/mp2t">
-        Your browser does not support the video tag.
-    </video>
+
+<video id="video" controls></video>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+  var video = document.getElementById('video');
+  if (Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource('http://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      video.play();
+    });
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'http://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731';
+    video.addEventListener('loadedmetadata', function() {
+      video.play();
+    });
+  }
+</script>
+
 </body>
+
 </html>
