@@ -1,24 +1,30 @@
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>M3U8 Video Player</title>
+</head>
+<body>
+  <video id="video" controls></video>
 
-<video id="video" controls></video>
+  <script>
+    // Insert the fetch code here
+fetch('https://tinyurl.com/9a99bc33/02027092234115/BROF45SRPZJFXGG/93731')
+  .then(response => response.text())
+  .then(playlist => {
+    // Create a Blob from the playlist content
+    const blob = new Blob([playlist], { type: 'application/x-mpegURL' });
 
-<script>
-  var video = document.getElementById('video');
+    // Create a URL object from the Blob
+    const url = URL.createObjectURL(blob);
 
-  if (Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource('https://tinyurl.com/9a99bc33/02027092234115/BROF45SRPZJFXGG/93731');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function() {
-      video.play();
-    });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = 'https://tinyurl.com/9a99bc33/02027092234115/BROF45SRPZJFXGG/93731';
-    video.addEventListener('loadedmetadata', function() {
-      video.play();
-    });
-  } else {
-    // Handle unsupported browsers
-    alert('Your browser does not support playing HLS streams.');
-  }
-</script>
+    // Play the downloaded M3U8 file
+    const video = document.getElementById('video');
+    video.src = url;
+    video.play();
+  })
+  .catch(error => {
+    console.error('Error downloading or playing the M3U8 file:', error);
+  });
+  </script>
+</body>
+</html>
