@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Viewer</title>
+</head>
+<body>
+    <div class="container" bis_skin_checked="1">
+        <div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
+            <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search">
+        </div>
+
+        <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
+            <!-- Playlist items will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        // Fetch JSON data from playlist.json
+        fetch('playlist.json')
+            .then(response => response.json())
+            .then(data => {
+                const listContainer = document.getElementById('listContainer');
+                data.playlist.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.textContent = `${item.title}: ${item.url}`;
+                    listContainer.appendChild(itemElement);
+                });
+            });
+    </script>
+</body>
+</html>
