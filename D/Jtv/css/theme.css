@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+:root
+{
+    --e_blue: #16569a;
+    --e_light: #FAFAFA;
+}
+.my-wrap{
+  font-family: 'Poppins', sans-serif;
+}
+.custom-form
+{
+    position: relative;
+    margin-bottom: 1rem;
+}
+.custom-form > .custom-form-label > label
+{
+    position: relative;
+    padding: 0.2rem 1.5rem;
+    text-align: center;
+    font-size: 60%;
+    margin-bottom: 0;
+}
+.custom-form > .custom-form-label > label
+{
+    color: #fff;
+    background: var(--e_blue);
+}
+.custom-form > .custom-form-label > label::before
+{
+    top: 4px;
+    left: -12px;
+    border-radius: 6px 0 0 0;
+    transform: rotate(35deg);
+    background: linear-gradient(145deg, var(--e_blue) 56%, #ffffff00 50%);
+}
+.custom-form > .custom-form-label > label::before
+{
+    background: linear-gradient(145deg, var(--e_blue) 56%, #ffffff00 50%);
+}
+.custom-form > .custom-form-label > label::before,.custom-form > .custom-form-label > label::after
+{
+    position: absolute;
+    content: '';
+    display: block;
+    width: 31px;
+    height: 31px;
+}
+.custom-form > .custom-form-label > label::after
+{
+    top: 4px;
+    right: -12px;
+    border-radius: 0 6px 0 0;
+    transform: rotate(-35deg);
+    background: linear-gradient(215deg, #fff 56%, #ffffff00 50%);
+}
+.custom-form > .custom-form-label > label::after
+{
+    background: linear-gradient(215deg, var(--e_blue) 56%, #ffffff00 50%);
+}
+.custom-form-panel
+{
+    height: 90%;
+}
+.custom-form > .custom-form-control
+{
+    padding: .6rem 1rem;
+    border-radius: 7px;
+    min-width: 295px;
+    text-align: center;
+}
+.custom-form > .custom-form-control
+{
+    border: solid 2px var(--e_blue);
+    color: var(--e_blue);
+    background: #FAFAFA;
+}
+
+*:focus
+{
+  outline: none;
+}
+
+.buttons button{
+  width: 50% ;
+  margin-top: .6rem;
+}
+
+@media only screen and (max-width: 532px) {
+    .buttons button{
+  width: 80% ;
+  margin-top: .6rem;
+}
+}
+
+body {
+			background-color: #000000; /* Light mode background color */
+			color: #000; /* Light mode text color */
+			transition: all 0.5s ease-in-out;
+		}
+		
+		body.dark-mode {
+			background-color: #F0F0F0; /* Dark mode background color */
+			color: #F0F0F0; /* Dark mode text color */
+			--dark-black: #111; /* Dark black color */
+		}
+		
+		.switch {
+			display: inline-block;
+			position: relative;
+			width: 60px;
+			height: 34px;
+			margin: 10px;
+			cursor: pointer;
+		}
+		
+		.switch input {
+			display: none;
+		}
+		
+		.slider {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			border-radius: 34px;
+			transition: all 0.5s ease-in-out;
+		}
+		
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: #fff;
+			border-radius: 50%;
+			transition: all 0.5s ease-in-out;
+		}
+		.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.switch-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+
+input[type="text"]:focus {
+  border-bottom: 2px solid #008CBA;
+  outline: none;
+}
+
+button[type="submit"] {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  right: 5px;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  flex: 1;
+}
+
+button[type="submit"] {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.search-icon {
+  font-size: 20px;
+}
+
+
+.footer {
+  font-weight: bold;
+}
+
+#jtvh1 {
+    margin-bottom: 10px;
+  }
+  #jtvh1 img {
+    width: 65px;
+  }
+  /* LOGIN BUTTON CSS */
+#userButtons {
+  font-size: 14px;
+  font-family: fantasy;
+  text-align-last: center;
+}
+
+#loginButton {
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+}
+
+#loginButton:hover {
+  background-color: #3cc700;
+  border: 3px solid #3cc700;
+}
+
+#logoutButton {
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+}
+
+#logoutButton:hover {
+  background-color: #ff5252;
+  border: 3px solid #ff5252;
+}
+
+#PlayListButton {
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
+}
+
+#PlayListButton:hover {
+  background-color: #ffe552;
+  border: 3px solid #ffe552;
+}
+
+#userButtons {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+  #userButtons {
+    flex-direction: row;
+    justify-content: right;
+  }
+
+  #userButtons button {
+    font-size: 19px;
+  }
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Apply dark mode to .tvv-item */
+.dark-mode .tvv-item {
+    background-color: #333; /* Adjust background color to your preference */
+}
+
+/* Apply dark mode to .tvv-name */
+.dark-mode .tvv-name {
+    color: #ccc; /* Adjust text color to your preference */
+}
+
+/* Animation for dark mode switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Change color to your preference */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white; /* Change color to your preference */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3; /* Change color to your preference */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3; /* Change color to your preference */
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}

@@ -1,0 +1,131 @@
+
+.header__button{
+width:50px;
+flex-shrink:0;
+background:none;
+outline:none;
+border:none;
+color:#fff;
+cursor:pointer;
+float:right;
+}
+
+.nav__links{
+position:fixed;
+top:0;
+left:0;
+z-index:1002;
+height:100vh;
+width:250px;
+background:linear-gradient(to right,#161616,#303030);
+transform:translateX(-250px);
+transition:transform 0.3s;
+}
+
+.nav__links a{
+text-decoration:none;
+}
+
+.nav--open .nav__links{
+transform:translateX(0);
+box-shadow:0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.nav__link{
+display:flex;
+align-items:center;
+color:#e0e0e0;
+font-weight:bold;
+font-size:14px;
+text-decoration:none;
+padding:12px 15px;
+background:transform 0.2s;
+}
+
+.nav__link > i,.nav__title > i{
+margin-right:15px;
+}
+
+.nav__link--active{
+color:#009578;
+}
+
+.nav__link--active{
+background:linear-gradient(to right,#262626,#363636);
+}
+
+.nav__link:hover{
+background:linear-gradient(to right,#363636,#464646);
+}
+
+.nav__overlay{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+background:rgba(0, 0, 0, 0.5);
+backdrop-filter:blur(2px);
+visibility:hidden;
+opacity:0;
+transition:opacity 0.3s;
+}
+
+.nav--open .nav__overlay{
+visibility:visible;
+opacity:0;
+}
+
+.nav__title{
+display:flex;
+align-items:center;
+background:linear-gradient(to right,#262626,#363636);
+color:#009578;
+font-weight:bold;
+font-size:14px;
+text-decoration:none;
+padding:12px 15px;
+}
+
+.logo img{
+display:inline-block;
+width:190px;
+height:auto;
+}
+
+.search{
+padding:15px 7px 7px 7px;
+}
+
+.search input[type=text]{
+background:linear-gradient(to right,#777,#666);
+padding:6px;
+border:none;
+border-radius:15px 0px 0px 15px;
+outline:none;
+width:70%;
+color:#eee;
+}
+
+.search input[type=text]::placeholder{
+font-size:15px;
+color:#a0a0a0;
+}
+
+.search input[type=submit]{
+padding:6px;
+background:linear-gradient(to right,#494949,#595959);
+border:none;
+color:#ececec;
+font-weight:bold;
+border-radius:0px 15px 15px 0px;
+transition:0.4s;
+outline:none;
+}
+
+.search input[type=submit]:hover{
+opacity:0.7;
+outline:none;
+}
+
+

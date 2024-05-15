@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<title>DenverLinks</title>
+  <link rel="shortcut icon" type="image/x-icon" href="logo.png">
+  <meta property="og:title" content="Denver Sports">
+    <meta property="og:description" content="Watch TATA IPL Bindass.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:url" content="t.me/+c0ReqHO-2sA1NTU1">
+    
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/channel.css">
+  <link rel="stylesheet" href="css/theme.css">
+   <!-- <link rel="stylesheet" href="css/rainbow/top.css"> -->
+  <link rel="stylesheet" href="css/wrapper.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Poppins:wght@500;600&family=REM:wght@600&family=Rowdies&display=swap');
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+  
+  
+  
+<body>
+
+  <div class="header">
+    <div class="stwRainbowTop"></div>
+</noscript>
+    <div class="stwBlurRainbowTop"></div>
+
+ <header class="header navbar-wapmash">
+<button class="header__button" id="btnNav" type="button">
+        <h2>
+</h2>
+<i class="material-icons">menu</i>
+      </button>
+      <h2>
+ </h2> 
+
+<a href="#"><img src="logo.png" alt="ak-logo" width="90" height="60" /></a>
+      <h2>
+</h2>
+    </header>
+  </div>
+  </div>
+  
+  <nav class="nav preload">
+    <div class="nav__links">
+
+<a href="/index.html" class="nav__link nav__link--active"> <i class="material-icons">home</i>Home</a>
+      
+ <a class="nav__link" href="https://t.me/DenverIsAlivee"> <i class="material-icons">telegram</i>Join Telegram</a>
+ 
+ <a class="nav__link" href="https://t.me/+c0ReqHO-2sA1NTU1"> <i class="material-icons">telegram</i>Sports Group</a>
+     
+      <a class="nav__link" href="/Copyright.html"> <i class="material-icons">copyright</i> Copyright</a>
+
+<div class="nav__title"><i class="material-icons">search</i> Search</div>
+      <form class="search" action="/" method="get"> <input type="text" name="to-search" class="fin"
+          maxlength="2048" value="" placeholder="Search here..." /><input type="submit" value="Search" />
+      </form>
+      <div style="color:#5b5b5b;font-size:13px;padding:0px 8px 8px 12px;">Search the Item.</div>
+    </div>
+    <div class="nav__overlay"></div>
+  </nav>
+  <script src="js/list.js"></script>
+  </script>
+</noscript>
+  </head>
+
+<br>
+	
+	
+  <center>
+    <a>
+  <button class="btn-11 custom-btn" id="right-button" style="width:100%;font-weight:90;height:66px;font-size:34px;position:sticky;top:3px;z-index:3; font-family: 'Oswald', sans-serif">Loading...</button>
+</a>
+
+
+    <br>
+<br>
+
+        <div id="container"></div>
+<div class="overlay" id="overlay">
+    <div class="clock" id="popup">
+      <p class="time-info" id="time"></p>
+      <H3><Strong>You Can Only Access The Web Page<br>
+During the Match Time,<br><br>
+Mon-Fri -: 6:00 Pm to 1:00 Am<br>
+Sat-Sun -: 2:30 Pm to 1:00 Am</Strong></H3>
+    </div>
+  </div>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const overlay = document.getElementById("overlay");
+  const popup = document.getElementById("popup");
+  const timeInfo = document.querySelector(".time-info");
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+  const currentHour = currentDate.getHours();
+
+  // Function to check if the current time is within the allowed hours
+  function isAllowedTime() {
+    if (
+      (currentDay >= 1 && currentDay <= 5 && (currentHour >= 18 || currentHour < 1)) || // Monday to Friday: 6pm to 1am
+      ((currentDay === 6 || currentDay === 0) && (currentHour >= 14 || currentHour < 1)) // Saturday & Sunday: 2pm to 1am
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  // Check if current time is within allowed hours
+  if (!isAllowedTime()) {
+    timeInfo.textContent = `Current time: ${currentDate.toLocaleTimeString('en-IN', {timeZone: 'Asia/Kolkata'})}`;
+    overlay.classList.add("show");
+  }
+});
+
+function updateTime() {
+  var now = new Date();
+  
+  var hours = now.getHours();
+  var amPm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12; // Convert the hours to 12-hour format
+  
+  var minutes = now.getMinutes().toString().padStart(2, '0');
+  var seconds = now.getSeconds().toString().padStart(2, '0');
+  var timeString = hours + ':' + minutes + ':' + seconds + ' ' + amPm;
+  
+  var day = now.getDate().toString().padStart(2, '0');
+  var month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-indexed
+  var year = now.getFullYear();
+  var dateString = day + '/' + month + '/' + year;
+
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var dayOfWeek = days[now.getDay()]; // Get the day of the week
+
+  var dateTimeString = dayOfWeek + ', ' + dateString;
+
+  document.getElementById('time').innerText = timeString;
+  document.getElementById('dateTime').innerText = dateTimeString;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Initial call to display time immediately
+updateTime();
+</script>
+  
+<a href="Astro.html">
+      <div class="tvv-item"> <img class="loading"
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Astro_Cricket.png">
+        <div class="tvv-name">Astro Cricket</div>
+      </div>
+    </a>
+    
+    <a href="Sports.html?id=829">
+      <div class="tvv-item"> <img class="loading"
+          src="https://media.info/i/lf/0/1507600280/1134.png">
+        <div class="tvv-name">Sky Sports Cricket</div>
+      </div>
+    </a>
+    
+    <a href="Sports.html?id=828">
+      <div class="tvv-item"> <img class="loading"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFS_dqXducppY9buVlbRxRacy8StzRu_4MPChjzQ0UAmlAylvbjZV70N8&s=10">
+        <div class="tvv-name">Willow Cricket</div>
+      </div>
+    </a> 
+    
+    <a href="Sports.html?id=876">
+      <div class="tvv-item"> <img class="loading"
+          src="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/6572f196dc5dfc4403f7c0b8/images/473.webp">
+        <div class="tvv-name">Star Sports 1</div>
+      </div>
+    </a> 
+    
+    <a href="Sports.html?id=877">
+      <div class="tvv-item"> <img class="loading"
+          src="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/65797920c5625a16ee72f2d5/images/529.webp">
+        <div class="tvv-name">Star Sports 2</div>
+      </div>
+    </a> 
+    
+    </div>
+    <div class="footer">
+      <div style="display:inline-block">
+        <b><a href="#"><button class="btn-11 custom-btn"
+              style="width:70vw;height:40px;margin-top:10px;font-size:15px; font-family: 'Oswald', sans-serif">Join the Telegram Channel</button></a><b></b></b>
+        <div class="stwRainbow"></div> </noscript>
+        <div class="stwBlurRainbow"></div> <br>
+        	
+        
+<script>
+    // Function to fetch JSON data from URL
+    async function fetchJsonData(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching JSON:', error);
+        }
+    }
+
+    // Function to generate HTML from JSON data
+    async function generateHtmlFromJson(url) {
+        const jsonData = await fetchJsonData(url);
+        if (!jsonData) {
+            console.error('No JSON data available');
+            return;
+        }
+
+        const container = document.getElementById('container');
+        jsonData.forEach(function(item) {
+            const anchor = document.createElement('a');
+            anchor.href = `Play.html?id=${item.id}`;
+
+            const divItem = document.createElement('div');
+            divItem.classList.add('tvv-item');
+
+            const image = document.createElement('img');
+            image.classList.add('loading');
+            image.src = item.logo;
+
+            const divName = document.createElement('div');
+            divName.classList.add('tvv-name');
+            divName.textContent = item.name;
+
+            divItem.appendChild(image);
+            divItem.appendChild(divName);
+            anchor.appendChild(divItem);
+            container.appendChild(anchor);
+        });
+    }
+
+    // Call the function to generate HTML from JSON URL
+    generateHtmlFromJson('M1.json');
+</script>
+
+
+        <script>
+          $(document).ready(function () {
+            var dftr = $('select.dftr'),
+              headerCount = $('#headerCount');
+            headerCount.html('select a filter or use search');
+            dftr.on('change', function () {
+              dftr.attr('disabled', 'disabled');
+              var records = $('#tvvTable').find('.tvv-item');
+              records.hide();
+              var critriaAttributes = [];
+              dftr.each(function () {
+                var $this = $(this),
+                  $selectedLength = $this.find(':selected').length,
+                  $critriaAttribute = '';
+                if ($selectedLength > 0 && $this.val() != '0') {
+                  if ($selectedLength == 1) {
+                    $critriaAttribute += '[data-' + $this.data('attribute') + '*="' + $this.val() + '"]';
+                  } else {
+                    var $startDataAttribute = '[data-' + $this.data('attribute') + '*="',
+                      $endDataAttribute = '"]',
+                      $selectedValues = $this.val().toString();
+                    $critriaAttribute += $startDataAttribute + $selectedValues.replaceAll(',', ($endDataAttribute + ',' + $startDataAttribute)) + $endDataAttribute;
+                  }
+                  critriaAttributes.push($critriaAttribute);
+                }
+              });
+              var $showRecords = records;
+              if (critriaAttributes.length > 0) {
+                $.each(critriaAttributes, function (i, filterValue) {
+                  $showRecords = $showRecords.filter(filterValue);
+                });
+              }
+              $showRecords.show();
+              headerCount.html($showRecords.length + ' channels filtered');
+              dftr.removeAttr('disabled');
+              $(".fin").val('');
+            });
+            $(".fin").keyup(function () {
+              var filter = $(this).val(),
+                count = 0;
+              $('select.dftr').prop('selectedIndex', 0);
+              $(".tvv-item").each(function () {
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                  $(this).fadeOut();
+                } else {
+                  $(this).show();
+                  count++;
+                }
+              });
+            });
+          });
+        </script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+  const button = document.getElementById("right-button");
+
+  // Fetch JSON data
+  fetch("Team.json")
+    .then(response => response.json())
+    .then(data => {
+      // Extract team names
+      const team1 = data.Team1;
+      const team2 = data.Team2;
+
+      // Update button content
+      button.innerHTML = `
+        <img src="logo/${team1}.png" style="width: 50px; height: auto; margin-right: 10px;">${team1} VS ${team2}
+        <img src="logo/${team2}.png" style="width: 55px; height: auto; margin-left: 10px;">
+      `;
+    })
+    .catch(error => {
+      console.error("Error fetching teams data:", error);
+      button.textContent = "Error loading teams";
+    });
+});
+	</script>
+        <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"> </script>
+<script disable-devtool-auto='true' src='https://cdn.jsdelivr.net/npm/disable-devtool' clear-log='true'
+    disable-select='true' disable-copy='true' disable-cut='true' disable-paste='true'></script>
+    
+    
+    <script>
+    	document.addEventListener("DOMContentLoaded", function() {
+  // Function to send notifications
+  function sendNotification(title, body, image) {
+    const options = {
+      body: body,
+      icon: image
+    };
+
+    // Check if notifications are supported
+    if (!("Notification" in window)) {
+      console.error("Notifications are not supported in this browser");
+      return;
+    }
+
+    // Request permission for notifications
+    Notification.requestPermission().then(function(permission) {
+      if (permission === "granted") {
+        // Notification permission granted, send notification
+        const notification = new Notification(title, options);
+        notification.addEventListener("click", function() {
+          // Handle notification click event if needed
+          console.log("Notification clicked");
+        });
+      } else {
+        console.warn("Notification permission denied");
+      }
+    });
+  }
+
+  // Function to fetch JSON data and schedule notifications
+  function fetchAndScheduleNotifications() {
+    // Fetch JSON data
+    fetch("Team.json")
+      .then(response => response.json())
+      .then(data => {
+        // Schedule notification using data from JSON
+        const currentDate = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+        const currentDay = new Date(currentDate).getDay();
+        const currentHour = new Date(currentDate).getHours();
+        const currentMinute = new Date(currentDate).getMinutes();
+
+        const team1 = data.Team1;
+        const team2 = data.Team2;
+        const image = data.image;
+
+        // Message with dynamic content
+        const message = `The ${team1} Vs ${team2} Started, What Are You Waiting For.`;
+
+        // Check if it's Monday to Friday 6:30pm or Saturday & Sunday 3:00pm or 6:30pm
+        if ((currentDay >= 1 && currentDay <= 5 && currentHour === 18 && currentMinute === 30) ||
+            ((currentDay === 6 || currentDay === 0) && (currentHour === 15 || currentHour === 18) && currentMinute === 0)) {
+          sendNotification("Notification Title", message, image);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching JSON data:", error);
+      });
+  }
+
+  // Fetch and schedule notifications initially
+  fetchAndScheduleNotifications();
+
+  // Schedule to fetch and send notifications every minute
+  setInterval(fetchAndScheduleNotifications, 60000); // Check every minute
+});
+
+    </script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "057bc97d-d42b-45ea-bde6-fd1880038410",
+      safari_web_id: "web.onesignal.auto.532534a2-fa6b-4796-aab8-c4e8f72a79c0",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>	      
+</body>
+</html>
