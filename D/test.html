@@ -12,13 +12,19 @@
 <div id="videoPlayer"></div>
 
 <script>
+const videoId = new URLSearchParams(window.location.search).get('id');
+
 fetch('m1.json')
     .then(response => response.json())
     .then(data => {
-        const videoPlayer = document.getElementById("videoPlayer");
-        const videoSource = data[0].link;
-        
-        videoPlayer.innerHTML = `<video controls><source src="${videoSource}" type="application/x-mpegURL"></video>`;
+        const video = data.find(item => item.id === videoId);
+        if (video) {
+            const videoPlayer = document.getElementById("videoPlayer");
+            const videoSource = video.link;
+            videoPlayer.innerHTML = `<video controls><source src="${videoSource}" type="application/x-mpegURL"></video>`;
+        } else {
+            console.error('Video not found');
+        }
     })
     .catch(error => {
         console.error('Error fetching JSON file:', error);
