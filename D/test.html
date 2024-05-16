@@ -8,16 +8,6 @@
 
 <body>
     <div id="popupMenu"></div>
-    <script src="https://cdn.jwplayer.com/libraries/SAHhwvZq.js"></script>
-    <script>
-        jwplayer.defaults = jwDefaults;
-        jwplayer("jwplayerDiv").setup({
-            file: "m1.json",
-            width: "100%",
-            aspectratio: "16:9" // Adjust as needed
-        });
-    </script>
-
     <div id="jwplayerDiv"></div> 
 
     <div id="loading" class="loading">
@@ -32,10 +22,26 @@
         </div>
     </div>
     <script>
-        setTimeout(videovisible, 3000)
-        function videovisible() {
-            document.getElementById('loading').style.display = 'none'
+        function initJWPlayer() {
+            jwplayer("jwplayerDiv").setup({
+                file: "m1.json",
+                width: "100%",
+                aspectratio: "16:9" // Adjust as needed
+            });
         }
+
+        function videovisible() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        setTimeout(function() {
+            if (typeof jwplayer === "function") {
+                initJWPlayer();
+            } else {
+                document.write("JW Player library failed to load.");
+            }
+        }, 1000); // Wait for 1 second before checking for JW Player library
     </script>
+    <script src="https://cdn.jwplayer.com/libraries/SAHhwvZq.js"></script>
 </body>
 </html>
