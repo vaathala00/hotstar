@@ -151,7 +151,7 @@
 function initJWPlayer(data, id) {
    if (data.id === id) {
       jwplayer("jwplayerDiv").setup({
-         file: "data.link",
+         file: data.link,
          width: "100%",
          aspectratio: "16:9" // Adjust as needed
       });
