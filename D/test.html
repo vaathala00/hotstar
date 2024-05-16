@@ -1,16 +1,13 @@
-// Assuming jsonData contains the JSON data from M1.json
+// Assume jsonData contains the JSON data from M1.json
 jsonData.forEach(player => {
-    // Create HTML elements for each player
-    const playerElement = document.createElement('div');
-    
-    // Set the inner HTML of the player element
-    playerElement.innerHTML = `
-        <img src="${player.logo}" alt="${player.name} Logo">
-        <h3>${player.name}</h3>
-        <p>ID: ${player.id}</p>
-        <a href="${player.link}" target="_blank">Watch Now</a>
+    const videoContainer = document.createElement('div');
+    videoContainer.classList.add('video-container');
+
+    videoContainer.innerHTML = `
+        <video id="${player.id}" autoplay controls crossorigin poster="${player.logo}" playsinline>
+            <source type="application/vnd.apple.mpegurl" src="${player.link}">
+        </video>
     `;
-    
-    // Append the player element to a container in the HTML document
-    document.querySelector('.players-container').appendChild(playerElement);
+
+    document.body.appendChild(videoContainer);
 });
