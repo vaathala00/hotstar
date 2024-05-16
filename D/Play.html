@@ -148,15 +148,17 @@
 <div id="jwplayerDiv"></div>  
 
 <script>
-function initJWPlayer(data) {
-    jwplayer("jwplayerDiv").setup({
-       file: "data.link",
-        width: "100%",
-        aspectratio: "16:9" // Adjust as needed
-    });
+function initJWPlayer(data, id) {
+   if (data.id === id) {
+      jwplayer("jwplayerDiv").setup({
+         file: "data.link",
+         width: "100%",
+         aspectratio: "16:9" // Adjust as needed
+      });
+   }
 }
-
 </script>
+
 <div id="loading" class="loading">
     <div class="loading-text">
       <span class="loading-text-words">D</span>
