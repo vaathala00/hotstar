@@ -497,27 +497,45 @@ $id = $data[1];
             height: 100% !important;
         }
     </style>
-    <video id="myElement"></video>
-    <script type="text/javascript">
-        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-    </script>
-    <script type="text/JavaScript">
-        jwplayer("myElement").setup({
-            title: '<?php echo $name; ?>',
-            description: "SnehTV",
-            image: 'https://jiotv.catchup.cdn.jio.com/dare_images/images/<?php echo $cid; ?>.png',
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            file: "live.php?id=<?php echo $id; ?>&e=.m3u8",
-            type: "mp4",
-            captions: {color: '#ffb800',fontSize: 30,backgroundOpacity: 0},
-            sharing: {
-                sites: ['facebook','twitter']
-            }
-        })
-    </script>
+   <video id="myElement"></video>
+<script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+</script>
+<script type="text/JavaScript">
+    var data;
+
+    // Make an AJAX request to load the JSON file
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            data = JSON.parse(xhr.responseText);
+            var id = "HINDI"; // Specify the ID you want to play
+            var videoData = getVideoDataById(id);
+
+            jwplayer("myElement").setup({
+                title: videoData.name,
+                description: "SnehTV",
+                image: videoData.logo,
+                aspectratio: '16:9',
+                width: '100%',
+                mute: false,
+                autostart: true,
+                file: videoData.link,
+                type: "mp4",
+                captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
+                sharing: {
+                    sites: ['facebook', 'twitter']
+                }
+            });
+        }
+    };
+    xhr.open('GET', 'm1.json', true);
+    xhr.send();
+
+    function getVideoDataById(id) {
+        return data.find(video => video.id === id);
+    }
+</script>
 </body>
 
 </html>
