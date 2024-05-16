@@ -181,21 +181,35 @@
             const anchor = document.createElement('a');
             anchor.href = `Play.html?id=${item.id}`;
 
-            const divItem = document.createElement('div');
-            divItem.classList.add('tvv-item');
+    const divContent = document.createElement('div');
+    divContent.classList.add('mb-5', 'opacity-100');
 
-            const image = document.createElement('img');
-            image.classList.add('loading');
-            image.src = item.logo;
+    const heading = document.createElement('h2');
+    heading.textContent = 'join now';
+    heading.classList.add('text-center', 'text-sm', 'font-bold');
 
-            const divName = document.createElement('div');
-            divName.classList.add('tvv-name');
-            divName.textContent = item.name;
+    const innerDiv = document.createElement('div');
+    innerDiv.classList.add('flex', 'justify-center', 'space-x-1');
 
-            divItem.appendChild(image);
-            divItem.appendChild(divName);
-            anchor.appendChild(divItem);
-            container.appendChild(anchor);
+    const innerImg = document.createElement('img');
+    innerImg.src = '1.svg';
+    innerImg.alt = '';
+
+    const paragraph = document.createElement('p');
+    paragraph.classList.add('text-xs', 'text-center');
+
+    innerDiv.appendChild(innerImg);
+    innerDiv.appendChild(paragraph);
+
+    divContent.appendChild(heading);
+    divContent.appendChild(innerDiv);
+
+    divCard.appendChild(image);
+    divCard.appendChild(divContent);
+
+    anchor.appendChild(divCard);
+    container.appendChild(anchor);
+});
         });
     }
 
