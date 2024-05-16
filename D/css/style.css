@@ -45,3 +45,68 @@ body {
 			    a. {
 			      text-decoration: none !important;
 			    }
+
+<!-- -->
+
+/* Styles for the search input */
+#searchInput {
+    width: 100%;
+    margin: 4px;
+    padding: 1.5px 3px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: transparent;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#searchInput::placeholder {
+    color: #666;
+}
+
+#searchInput:focus {
+    border-color: #007bff;
+    color: #666;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Styles for the list container */
+#listContainer {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 1rem;
+    margin: auto;
+}
+
+/* Responsive grid columns */
+@media (min-width: 640px) {
+    #listContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    #listContainer {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    #listContainer {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1280px) {
+    #listContainer {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1536px) {
+    #listContainer {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+}
