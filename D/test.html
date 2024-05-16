@@ -1,34 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Player</title>
-<style>
-    /* Add your CSS styles here */
-</style>
-</head>
-<body>
-<div id="videoPlayer"></div>
-
-<script>
-const videoId = new URLSearchParams(window.location.search).get('id');
-
-fetch('m1.json')
-    .then(response => response.json())
-    .then(data => {
-        const video = data.find(item => item.id === videoId);
-        if (video) {
-            const videoPlayer = document.getElementById("videoPlayer");
-            const videoSource = video.link;
-            videoPlayer.innerHTML = `<video controls><source src="${videoSource}" type="application/x-mpegURL"></video>`;
-        } else {
-            console.error('Video not found');
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching JSON file:', error);
-    });
-</script>
-</body>
-</html>
+// Assuming jsonData contains the JSON data from M1.json
+jsonData.forEach(player => {
+    // Create HTML elements for each player
+    const playerElement = document.createElement('div');
+    
+    // Set the inner HTML of the player element
+    playerElement.innerHTML = `
+        <img src="${player.logo}" alt="${player.name} Logo">
+        <h3>${player.name}</h3>
+        <p>ID: ${player.id}</p>
+        <a href="${player.link}" target="_blank">Watch Now</a>
+    `;
+    
+    // Append the player element to a container in the HTML document
+    document.querySelector('.players-container').appendChild(playerElement);
+});
