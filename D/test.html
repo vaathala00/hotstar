@@ -22,9 +22,9 @@
         </div>
     </div>
     <script>
-        function initJWPlayer() {
+        function initJWPlayer(data) {
             jwplayer("jwplayerDiv").setup({
-                file: "m1.json",
+                file: data.file,
                 width: "100%",
                 aspectratio: "16:9" // Adjust as needed
             });
@@ -35,12 +35,10 @@
         }
 
         setTimeout(function() {
-            if (typeof jwplayer === "function") {
-                initJWPlayer();
-            } else {
-                document.write("JW Player library failed to load.");
-            }
-        }, 1000); // Wait for 1 second before checking for JW Player library
+            var script = document.createElement('script');
+            script.src = "https://denverog.github.io/DenverLinks.in/M1.json?callback=initJWPlayer";
+            document.body.appendChild(script);
+        }, 1000); // Wait for 1 second before loading JSONP
     </script>
     <script src="https://cdn.jwplayer.com/libraries/SAHhwvZq.js"></script>
 </body>
