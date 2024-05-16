@@ -1,13 +1,41 @@
-// Assume jsonData contains the JSON data from M1.json
-jsonData.forEach(player => {
-    const videoContainer = document.createElement('div');
-    videoContainer.classList.add('video-container');
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Player</title>
+</head>
 
-    videoContainer.innerHTML = `
-        <video id="${player.id}" autoplay controls crossorigin poster="${player.logo}" playsinline>
-            <source type="application/vnd.apple.mpegurl" src="${player.link}">
-        </video>
-    `;
+<body>
+    <div id="popupMenu"></div>
+    <script src="https://cdn.jwplayer.com/libraries/SAHhwvZq.js"></script>
+    <script>
+        jwplayer.defaults = jwDefaults;
+        jwplayer("jwplayerDiv").setup({
+            file: "m1.json",
+            width: "100%",
+            aspectratio: "16:9" // Adjust as needed
+        });
+    </script>
 
-    document.body.appendChild(videoContainer);
-});
+    <div id="jwplayerDiv"></div> 
+
+    <div id="loading" class="loading">
+        <div class="loading-text">
+            <span class="loading-text-words">D</span>
+            <span class="loading-text-words">E</span>
+            <span class="loading-text-words">N</span>
+            <span class="loading-text-words">E</span>
+            <span class="loading-text-words">V</span>
+            <span class="loading-text-words">E</span>
+            <span class="loading-text-words">R</span>
+        </div>
+    </div>
+    <script>
+        setTimeout(videovisible, 3000)
+        function videovisible() {
+            document.getElementById('loading').style.display = 'none'
+        }
+    </script>
+</body>
+</html>
