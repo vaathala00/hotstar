@@ -1,7 +1,7 @@
 [
     {
-        "id": "1",
-        "name": "SET HD",
+        "name": "1",
+        "id": "SET HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SET-LOGO-HD.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009246&e=.m3u8",
@@ -10,8 +10,8 @@
         "kid": ""
     },
     {
-        "id": "2",
-        "name": "Sony SAB HD",
+        "name": "2",
+        "id": "Sony SAB HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20SAB%20HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009248&e=.m3u8",
@@ -20,8 +20,8 @@
         "kid": ""
     },
     {
-        "id": "3",
-        "name": "Sony PAL",
+        "name": "3",
+        "id": "Sony PAL",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20PAL.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009273&e=.m3u8",
@@ -30,8 +30,8 @@
         "kid": ""
     },
     {
-        "id": "4",
-        "name": "Sony YAY",
+        "name": "4",
+        "id": "Sony YAY",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20YAY.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000001971&e=.m3u8",
@@ -40,8 +40,8 @@
         "kid": ""
     },
     {
-        "id": "5",
-        "name": "Sony Marathi",
+        "name": "5",
+        "id": "Sony Marathi",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MARATHI.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009259&e=.m3u8",
@@ -50,8 +50,8 @@
         "kid": ""
     },
     {
-        "id": "6",
-        "name": "Sony AATH",
+        "name": "6",
+        "id": "Sony AATH",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20AATH.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009255&e=.m3u8",
@@ -60,8 +60,8 @@
         "kid": ""
     },
     {
-        "id": "7",
-        "name": "Sony MAX HD",
+        "name": "7",
+        "id": "Sony MAX HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX-HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009247&e=.m3u8",
@@ -70,8 +70,8 @@
         "kid": ""
     },
     {
-        "id": "8",
-        "name": "Sony MAX",
+        "name": "8",
+        "id": "Sony MAX",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009249&e=.m3u8",
@@ -80,8 +80,8 @@
         "kid": ""
     },
     {
-        "id": "9",
-        "name": "Sony WAH",
+        "name": "9",
+        "id": "Sony WAH",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_WAH.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009253&e=.m3u8",
@@ -90,8 +90,8 @@
         "kid": ""
     },
     {
-        "id": "10",
-        "name": "Sony MAX2",
+        "name": "10",
+        "id": "Sony MAX2",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX2.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000044878&e=.m3u8",
@@ -100,8 +100,8 @@
         "kid": ""
     },
     {
-        "id": "11",
-        "name": "Sony PIX HD",
+        "name": "11",
+        "id": "Sony PIX HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/PIX%20HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009258&e=.m3u8",
@@ -110,8 +110,8 @@
         "kid": ""
     },
     {
-        "id": "12",
-        "name": "Sony BBC Earth HD",
+        "name": "12",
+        "id": "Sony BBC Earth HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SBBCE_LOGO_NEW_PNG.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009252&e=.m3u8",
@@ -120,8 +120,8 @@
         "kid": ""
     },
     {
-        "id": "13",
-        "name": "Sony TEN 1 HD",
+        "name": "13",
+        "id": "Sony TEN 1 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen1_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009276&e=.m3u8",
@@ -130,8 +130,8 @@
         "kid": ""
     },
     {
-        "id": "14",
-        "name": "Sony TEN 2 HD",
+        "name": "14",
+        "id": "Sony TEN 2 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen2_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009277&e=.m3u8",
@@ -140,8 +140,8 @@
         "kid": ""
     },
     {
-        "id": "15",
-        "name": "Sony TEN 3 HD",
+        "name": "15",
+        "id": "Sony TEN 3 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen3_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009278&e=.m3u8",
@@ -150,8 +150,8 @@
         "kid": ""
     },
     {
-        "id": "16",
-        "name": "Sony TEN 4 HD",
+        "name": "16",
+        "id": "Sony TEN 4 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen4_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000119186&e=.m3u8",
@@ -160,8 +160,8 @@
         "kid": ""
     },
     {
-        "id": "17",
-        "name": "Sony TEN 5 HD",
+        "name": "17",
+        "id": "Sony TEN 5 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen5_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://mhdtvweb.com/sony/watch.php?id=1000009275&e=.m3u8",
@@ -171,8 +171,8 @@
     },
     
     {
-        "id": "23",
-        "name": "Sony Kal",
+        "name": "23",
+        "id": "Sony Kal",
         "logo": "https://upload.wikimedia.org/wikipedia/en/6/6e/Sony_Kal_Logo.jpeg",
         "group": "SonyLIV-SabbirIPTV",
         "link": "https://spt-sonykal-1-us.lg.wurl.tv/playlist_4300k.m3u8",
