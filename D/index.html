@@ -86,7 +86,7 @@
                 const listContainer = document.getElementById('listContainer');
                 jsonData.forEach(function(item) {
                     const anchor = document.createElement('a');
-                    anchor.href = item.url; // Assuming the JSON contains the URL for each item
+                    anchor.href = `Play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item
 
                     const cardDiv = document.createElement('div');
                     cardDiv.classList.add('box1'); // Add the appropriate class
@@ -95,12 +95,12 @@
                     card.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-48', 'mb-4', 'flex', 'flex-col');
 
                     const image = document.createElement('img');
-                    image.src = item.image; // Assuming the JSON contains the image URL for each item
+                    image.src = item.logo; // Assuming the JSON contains the image URL for each item
                     image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
 
                     const title = document.createElement('h2');
                     title.classList.add('text-center', 'text-sm', 'font-bold');
-                    title.textContent = item.title; // Assuming the JSON contains the title for each item
+                    title.textContent = item.name; // Assuming the JSON contains the title for each item
 
                     const description = document.createElement('div');
                     description.classList.add('mb-5', 'opacity-100');
