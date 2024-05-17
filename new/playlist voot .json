@@ -1,0 +1,389 @@
+[
+  {
+        "id": "144",
+        "group": "Entertainment",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/colors-hindi--16x9-1714557869344.jpg",
+        "name": "Colors HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1370",
+        "group": "Entertainment",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/collors-rishtey-live-channels-16x9-3-1642676080416-1674198105431-1697532377978.jpg",
+        "name": "Rishtey",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsRishtey/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "756",
+        "group": "Entertainment",
+        "language": "Bengali",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-bangla-new-16x9-4-1649659533344.jpg",
+        "name": "Colors Bengla HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsBanglaHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "757",
+        "group": "Entertainment",
+        "language": "Kannada",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-kannada-16x9-1677754085834.jpg",
+        "name": "Colors Kannada HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsKannadaHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "755",
+        "group": "Entertainment",
+        "language": "Marathi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-marathi-live-channels-16x9-4-6-apr-1649257093359.jpg",
+        "name": "Colors Marathi HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsMarathiHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "196",
+        "group": "Entertainment",
+        "language": "Gujarati",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-gujarati-16x9-1713269620328.jpg",
+        "name": "Colors Gujarati",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsGujarati/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "429",
+        "group": "Entertainment",
+        "language": "Tamil",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/ct-1644165913136.jpg",
+        "name": "Colors Tamil HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsTamilHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "198",
+        "group": "Entertainment",
+        "language": "Odia",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-odia-live-channels-16x9-4-1642583679866.jpg",
+        "name": "Colors Oriya",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsOriya/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1158",
+        "group": "Entertainment",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-infinity-live-channels-16x9-1642496946057.jpg",
+        "name": "Colors Infinity HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsInfinityHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "785",
+        "group": "Entertainment",
+        "language": "Kannada",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-super-live-channels-16x9-4-1642744939924.jpg",
+        "name": "Colors Super",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsSuperKannada/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1477",
+        "group": "Movies",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/Live-Tv-Channels-colors-cineplex-1607514413063.jpg",
+        "name": "Colors Cineplex HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsCineplexHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1450",
+        "group": "Movies",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_960,h_540/v3Storage/assets/colors-cineplex-superhit%2016x9-1648793655358.jpg",
+        "name": "Colors Cineplex Superhit",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_RishteyCineplex/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1763",
+        "group": "Movies",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/cineplex-1713963820848.jpeg",
+         "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsCineplexBollywood/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1632",
+        "group": "Movies",
+        "language": "Kannada",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/colors-kannada-cinema-16x9-1713963481807.jpg",
+        "name": "Colors Kannada Cinema",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_ColorsKannadaCinema/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1145",
+        "group": "Music",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/mtv-16x9-1714316345624.jpg",
+        "name": "MTV HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_MTVHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "753",
+        "group": "Music",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/mtv-beats-live-channels-16x9-1642675874665.jpg",
+        "name": "MTV Beats HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_MTVBeatsHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "544",
+        "group": "Kids",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/nick-jr-16x9-2-1626708077243.jpg",
+        "name": "Nick Junior",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_NickJr/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "548",
+        "group": "Kids",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/nick-hd-plus-live-channels-16x9-4-1642585145139.jpg",
+        "name": "Nickelodeon Jr",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_NickJr/JCHLS/index.m3u8"
+        },
+
+  {
+        "id": "12209",
+        "group": "Kids",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/nick-hd-plus-live-channels-16x9-4-1642585145139.jpg",
+        "name": "Nick HD+",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_NickHD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "815",
+        "group": "Kids",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/sonic-16x9-2-1626707025539.jpg",
+        "name": "Sonic",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_SonicNick/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1226",
+        "group": "Sports",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/sports18_tray-1693930594270.jpg",
+        "name": "SPORTS 18 HD",
+        "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JC_Sports18_1HD/JCHLS/index.m3u8"
+      },
+
+  {
+        "id": "1998",
+        "group": "Sports",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/sports18_khel_tray-1693931658589.jpg",
+        "name": "SPORTS 18 Khel",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/Sports18_Khel_voot_MOB/Fallback/index.m3u8"
+      },
+
+
+  {
+        "id": "2000",
+        "group": "Sports",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/jc_sports_horizontal_tray-1695561700528.jpg",
+        "name": "JC Sports 24x7",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/JC_Sports_24x7_IDC/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "2001",
+        "group": "Sports",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/sports_zone_cricket_horizontal-1695032322122.jpg",
+        "name": "CricStream",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/JV_SportsHD15_DIG_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "190",
+        "group": "Business",
+        "language": "Hindi",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/cnbc-awaaz-16x9-1702387934761.jpg",
+        "name": "CNBC Awaaz",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/CNBC_Awaaz_voot_MOB/Fallback/index.m3u8"
+      },
+
+
+  {
+        "id": "490",
+        "group": "Business",
+        "language": "Gujarati",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/whatsapp16x9-1693491956187.jpg",
+        "name": "CNBC Bazaar",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/CNBC_Bazaar_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "489",
+        "group": "Business",
+        "language": "English",
+        "logo": "https://v3img.voot.com/resizeMedium,w_1090,h_613/v3Storage/assets/cnbc18-shereen-bhan-16x9-2-1693479472079.jpg",
+        "name": "CNBC Tv 18",
+         "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/CNBC_TV18_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "231",
+        "group": "News",
+        "language": "Hindi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/IBN_7.png",
+        "name": "News18 India",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_India_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "492",
+        "group": "News",
+        "language": "English",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/CNN_NEWS_18.png",
+        "name": "CNN NEWS 18",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/CNN_News18_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "615",
+        "group": "News",
+        "language": "Tamil",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/News_18_Tamilnadu.png",
+        "name": "News18 Tamilnadu",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Tamil_Nadu_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "232",
+        "group": "News",
+        "language": "Marathi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/IBN_Lokmat.png",
+        "name": "News18 Lokmat",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Lokmat_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "717",
+        "group": "News",
+        "language": "Bengali",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_Bangla_News.png",
+        "name": "News18 Bangla News",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Bangla_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "653",
+        "group": "News",
+        "language": "Kannada",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_Kannada_News.png",
+        "name": "News18 Kannada News",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Kannada_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "620",
+        "group": "News",
+        "language": "Gujarati",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_News_Gujarati.png",
+        "name": "News18 Gujarati",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Gujarati_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "655",
+        "group": "News",
+        "language": "Hindi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_Haryana_and_HP_News.png",
+        "name": "News18 Punjab Haryana",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Punjab_Haryana_HP_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "696",
+        "group": "News",
+        "language": "Odia",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_News_Oriya.png",
+        "name": "News18 Oriya",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Odia_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "627",
+        "group": "News",
+        "language": "Assamese",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/News_18_Assam.png",
+        "name": "News18 Assam",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Assam_North_East_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "965",
+        "group": "News",
+        "language": "Malayalam",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/News_18_Kerala.png",
+        "name": "News 18 Kerala",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Kerala_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "531",
+        "group": "News",
+        "language": "Hindi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_RAJASTHAN.png",
+        "name": "News18 RAJASTHAN",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Rajasthan_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "693",
+        "group": "News",
+        "language": "Bhojpuri",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_BIHAR.png",
+        "name": "News18 BIHAR",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Bihar_Jharkhand_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "529",
+        "group": "News",
+        "language": "Hindi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_MP.png",
+        "name": "News18 MP",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_MP_Chhattisgarh_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "530",
+        "group": "News",
+        "language": "Hindi",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_UP.png",
+        "name": "News18 UP",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_UP_Uttarakhand_voot_MOB/Fallback/index.m3u8"
+      },
+
+  {
+        "id": "694",
+        "group": "News",
+        "language": "Urdu",
+        "logo": "http://jiotv.catchup.cdn.jio.com/dare_images/images/ETV_Urdu.png",
+        "name": "News18 JKLH",
+        "link": "https://prod-sports-hin-fa.jiocinema.com/bpk-tv/News18_Urdu_voot_MOB/Fallback/index.m3u8"
+      }
+         ]
