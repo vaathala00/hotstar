@@ -16,7 +16,7 @@ $id = $data[1];
 <html lang="en">
 
 <head>
-    <title><?id echo $name; ?> | Sony Liv</title>
+    <title id="pageTitle">Default Title | Sony Liv</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="ENJOY FREE LIVE TV">
     <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
@@ -28,6 +28,15 @@ $id = $data[1];
     <script src="assets/js/jwplayer.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
+
+<script>
+// Get the ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id');
+
+// Update the title with the ID
+document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+</script>
 
 </head>
 
@@ -536,7 +545,7 @@ $id = $data[1];
                 });
             }
         };
-        xhr.open('GET', 'M1.json', true);
+        xhr.open('GET', 'playlist.json', true);
         xhr.send();
     </script>
 </body>
