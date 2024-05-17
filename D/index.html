@@ -98,8 +98,15 @@
 <br>
 
         <div id="container"></div>
+				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
+  <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
+				
+
+<div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
+
 <div class="overlay" id="overlay">
     <div class="clock" id="popup">
+
   
 <a href="Astro.html">
       <div class="tvv-item"> <img class="loading"
@@ -137,6 +144,7 @@
     </a> 
     
     </div>
+
     <div class="footer">
       <div style="display:inline-block">
         <b><a href="#"><button class="btn-11 custom-btn"
@@ -173,14 +181,14 @@
             anchor.href = `Play.html?id=${item.id}`;
 
             const divItem = document.createElement('div');
-            divItem.classList.add('tvv-item');
+            divItem.classList.add('card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col');
 
             const image = document.createElement('img');
-            image.classList.add('loading');
+            image.classList.add('h-28 mt-5 m-auto opacity-100');
             image.src = item.logo;
 
             const divName = document.createElement('div');
-            divName.classList.add('tvv-name');
+            divName.classList.add('text-center text-sm font-bold');
             divName.textContent = item.name;
 
             divItem.appendChild(image);
