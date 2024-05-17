@@ -45,3 +45,42 @@
 			    a. {
 			      text-decoration: none !important;
 			    }
+
+.card {
+    width: 40%;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 48px;
+    margin-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.h-28 {
+    height: 28px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-sm {
+    font-size: 0.875rem; /* 14px at default font size */
+}
+
+.font-bold {
+    font-weight: bold;
+}
