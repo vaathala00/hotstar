@@ -4,7 +4,7 @@
         "name": "SET HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SET-LOGO-HD.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009246&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009246&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -14,7 +14,7 @@
         "name": "Sony SAB HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20SAB%20HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009248&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009248&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -24,7 +24,7 @@
         "name": "Sony PAL",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20PAL.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009273&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009273&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -34,7 +34,7 @@
         "name": "Sony YAY",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20YAY.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000001971&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000001971&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -44,7 +44,7 @@
         "name": "Sony Marathi",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MARATHI.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009259&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009259&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -54,7 +54,7 @@
         "name": "Sony AATH",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY%20AATH.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009255&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009255&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -64,7 +64,7 @@
         "name": "Sony MAX HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX-HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009247&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009247&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -74,7 +74,7 @@
         "name": "Sony MAX",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009249&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009249&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -84,7 +84,7 @@
         "name": "Sony WAH",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_WAH.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009253&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009253&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -94,7 +94,7 @@
         "name": "Sony MAX2",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX2.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000044878&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000044878&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -104,7 +104,7 @@
         "name": "Sony PIX HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/PIX%20HD_WHITE.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009258&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009258&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -114,7 +114,7 @@
         "name": "Sony BBC Earth HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SBBCE_LOGO_NEW_PNG.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009252&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009252&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -124,7 +124,7 @@
         "name": "Sony TEN 1 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen1_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009276&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009276&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -134,7 +134,7 @@
         "name": "Sony TEN 2 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen2_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009277&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009277&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -144,7 +144,7 @@
         "name": "Sony TEN 3 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen3_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009278&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009278&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -154,7 +154,7 @@
         "name": "Sony TEN 4 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen4_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000119186&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000119186&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -164,7 +164,7 @@
         "name": "Sony TEN 5 HD",
         "logo": "https://sonypicturesnetworks.com/images/logos/SONY_SportsTen5_SD_Logo_CLR.png",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://mhdtvweb.com/sony/watch.php?id=1000009275&e=.m3u8",
+        "link": "https://mhdtvweb.com/sony/watch.php?id=1000009275&e=.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -175,7 +175,7 @@
         "name": "Sony Kal",
         "logo": "https://upload.wikimedia.org/wikipedia/en/6/6e/Sony_Kal_Logo.jpeg",
         "group": "SonyLIV-SabbirIPTV",
-        "url": "https://spt-sonykal-1-us.lg.wurl.tv/playlist_4300k.m3u8",
+        "link": "https://spt-sonykal-1-us.lg.wurl.tv/playlist_4300k.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
