@@ -2,16 +2,6 @@
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
-		<link rel="shortcut icon" href="https://www.jiotv.com/favicon.ico">
-		<link rel="stylesheet" href="style.css">
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<title>DenverLinks</title>
   <link rel="shortcut icon" type="image/x-icon" href="logo.png">
@@ -37,7 +27,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/channel.css">
   <link rel="stylesheet" href="css/theme.css">
-   <!-- <link rel="stylesheet" href="css/rainbow/top.css"> -->
+  <link rel="stylesheet" href="css/rainbow/top.css">
   <link rel="stylesheet" href="css/wrapper.css">
 
   <style>
@@ -76,7 +66,7 @@
 
 <a href="/index.html" class="nav__link nav__link--active"> <i class="material-icons">home</i>Home</a>
       
- <a class="nav__link" href=""> <i class="material-icons">telegram</i>Join Telegram</a>
+ <a class="nav__link" href="https://t.me/DenverIsAlivee"> <i class="material-icons">telegram</i>Join Telegram</a>
  
  <a class="nav__link" href="https://t.me/+c0ReqHO-2sA1NTU1"> <i class="material-icons">telegram</i>Sports Group</a>
      
@@ -107,14 +97,7 @@
     <br>
 <br>
 
-        <div id="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1"></div>
-
-				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
-  <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
-				
-
-<div class="overlay" id="overlay">
-    <div class="clock" id="popup">
+        <div id="container"></div><div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
 
   
 <a href="Astro.html">
@@ -153,7 +136,6 @@
     </a> 
     
     </div>
-
     <div class="footer">
       <div style="display:inline-block">
         <b><a href="#"><button class="btn-11 custom-btn"
@@ -190,14 +172,14 @@
             anchor.href = `Play.html?id=${item.id}`;
 
             const divItem = document.createElement('div');
-            divItem.classList.add('card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col');
+            divItem.classList.add('tvv-item');
 
             const image = document.createElement('img');
-            image.classList.add('h-28 mt-5 m-auto opacity-100');
+            image.classList.add('loading');
             image.src = item.logo;
 
             const divName = document.createElement('div');
-            divName.classList.add('text-center text-sm font-bold');
+            divName.classList.add('tvv-name');
             divName.textContent = item.name;
 
             divItem.appendChild(image);
@@ -291,8 +273,7 @@
         <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"> </script>
 
-    
-    
+       
     <script>
     	document.addEventListener("DOMContentLoaded", function() {
   // Function to send notifications
