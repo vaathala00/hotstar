@@ -1,0 +1,673 @@
+
+[
+  {
+               "name": "1",
+                "url": "//fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-east)/master.mpd",
+               "license_key": "882c9f5613b43b47adc70aa968a308ce",
+                "license_key2": "de534ef8914bfe62ba3cdd6bdb9e1c04"
+            },
+               {
+               "name": "SSC1",
+                "url": "https://ssc1-ak.akamaized.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd",
+               "license_key": "d84c325f36814f39bbe59080272b10c3",
+                "license_key2": "550727de4c96ef1ecff874905493580f"
+            },
+             {
+               "name": "SSC2",
+                "url": "https://ssc2-ak.akamaized.net/out/v1/a16db2ec338a445a82d9c541cc9293f9/index.mpd",
+               "license_key": "8bcfc55359e24bd7ad1c5560a96ddd3c",
+                "license_key2": "b5dcf721ab522af92a9d3bf0bd55b596"
+            },
+                "DAZN_1_ES": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/bmnelo5c7a/out/v1/3ce2cdc4589f46189322bd3717c77957/cenc.mpd",
+               "license_key": "44dd9cd370b08a868ead115fe84ecfde",
+                "license_key2": "bff19ab0a51cf14e848389b152913fd0"
+            },
+            "DAZN_2_ES": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/xnk4m9bnxt/out/v1/4ced7b7329a54652b9bb0521ed38bd4d/cenc.mpd",
+               "license_key": "0eab5a3f3e3b4ba5d42d40ca30d17571",
+                "license_key2": "f3f061ded9b70e8160590d5802ecda6d"
+            },
+            "SSC3": {
+                "url": "https://ssc3-ak.akamaized.net/out/v1/42e86125555242aaa2a12056832e7814/index.mpd",
+               "license_key": "7de5dd08ad8041d586c2f16ccc9490a1",
+                "license_key2": "5e1503f3398b34f5099933fedab847ef"
+            },
+            "SSC4": {
+                "url": "https://ssc4-ak.akamaized.net/out/v1/5267ea5772874b0db24559d643eaad93/index.mpd",
+               "license_key": "5c672f6b85a94638872d0214f7806ed4",
+                "license_key2": "bf8756fbb866ee2d5c701c2289dd8de3"
+            },
+            "SSC5": {
+                "url": "https://ssc5-ak.akamaized.net/out/v1/99289eac5a7b4319905da595afbd792b/index.mpd",
+               "license_key": "c88b512b17ab4f6cb09eb0ff4a1056ed",
+                "license_key2": "adc08ee1c20a734972a55c9aebbd1888"
+            },
+            "SSC_EXTRA1": {
+                "url": "https://ssc-extra1-ak.akamaized.net/out/v1/647c58693f1d46af92bd7e69f17912cb/index.mpd",
+               "license_key": "ecbc9e6fe6b145efb6658fb5cf7427f8",
+                "license_key2": "03c17e28911f71221acbc0b11f900401"
+            },
+            "SSC_EXTRA2": {
+                "url": "https://ssc-extra2-ak.akamaized.net/out/v1/8b70de2b70d447ba8a7450ba90926a2d/index.mpd",
+               "license_key": "4d89249bd4ca4ebc9e70443265f9507d",
+                "license_key2": "cf074ffd2646c9c2f8513b47fa57bc30"
+            },
+            "SSC_EXTRA3": {
+                "url": "https://ssc-extra3-ak.akamaized.net/out/v1/8f1c6c3f05ef4284a64b342891bd85ae/index.mpd",
+               "license_key": "98cfd6fd4812497fb24dc75f7545f2ee",
+                "license_key2": "d3006ee69e77b25939728ebf30d3180a"
+            },
+            "SSC_NEWS": {
+                "url": "https://ssc-news-live-ak.akamaized.net/out/v1/ef466f43623c4bbaa3f905b566ec35ea/index.mpd",
+               "license_key": "3d04975236a44f62857d181597705ee6",
+                "license_key2": "362133e9cb13189ad4fe095ced216f60"
+            },
+            "ESPN_NL": {
+                "url": "https://da-d436234b20010b8800010302000000000000000d.id.cdn.upcbroadband.com/wp/wp1-anp-g05060506-hzn-nl.t1.prd.dyncdn.dmdsdp.com/live/disk1/NL_000107_019441/go-dash-hdready-avc/NL_000107_019441.mpd",
+               "license_key": "3e999e38253834baa63881ea451f2839",
+                "license_key2": "99b88d9cde1d8986decbc5985da87187"
+            },
+            "ESPN_NL_2": {
+                "url": "https://da-d436234420010b88000103020000000000000006.id.cdn.upcbroadband.com/wp/wp2-anp-g05060506-hzn-nl.t1.prd.dyncdn.dmdsdp.com/live/disk1/NL_000108_019561/go-dash-hdready-avc/NL_000108_019561.mpd",
+               "license_key": "3e999e38253834baa63881ea451f2839",
+                "license_key2": "99b88d9cde1d8986decbc5985da87187"
+            },
+            "ESPN_NL_3": {
+                "url": "https://wp-obc5-live-nl-prod.prod.cdn.dmdsdp.com/dash/NL_000109_019464/manifest.mpd",
+               "license_key": "b18766306c8b4446a7431f3664976a5e",
+                "license_key2": "064cf3223b9c2bdda24e9f89bf28a6d2"
+            },
+            "ESPN_NL_4": {
+                "url": "https://wp-obc1-live-nl-prod.prod.cdn.dmdsdp.com/dash/NL_000110_019562/manifest.mpd",
+               "license_key": "b18766306c8b4446a7431f3664976a5e",
+                "license_key2": "064cf3223b9c2bdda24e9f89bf28a6d2"
+            },
+            "TSN1_CA": {
+                "url": "https://live-ctv.video.9c9media.com/f/TSN/TSN1/manifest.mpd",
+               "license_key": "dea83ced0141424e983e1afe463b4b0d",
+                "license_key2": "c00dd5dd17b0799aa4013f365a1393ce"
+            },
+            "TSN2_CA": {
+                "url": "https://live-ctv.video.9c9media.com/f/TSN/TSN2/manifest.mpd",
+               "license_key": "ddc52c88e2c24d38a5bc8dda8a2acb61",
+                "license_key2": "ad5ea485464a13eec7dda3249c556446"
+            },
+            "TSN3_CA": {
+                "url": "https://live-ctv.video.9c9media.com/f/TSN/TSN3/manifest.mpd",
+               "license_key": "c0f378ad54e14a9c85a3d8c986d2a51f",
+                "license_key2": "5e1d040743ff78715e464ffb905e68a9"
+            },
+            "TSN4_CA": {
+                "url": "https://live-ctv.video.9c9media.com/f/TSN/TSN4/manifest.mpd",
+               "license_key": "f0a2efd11e0643c3a45d6f67d02f1a97",
+                "license_key2": "85bf4469003bd28f01ea4fefedd5a431"
+            },
+            "TSN5_CA": {
+                "url": "https://live-ctv.video.9c9media.com/f/TSN/TSN5/manifest.mpd",
+               "license_key": "cb57741a1cee422690c6294a06eb1320",
+                "license_key2": "7a0cfd493df6ef7cc0d0bb3ad95cec8c"
+            },
+            "ASIAN_CUP": {
+                "url": "https://mwmpos03.akamaized.net/out/v1/64a59477c5d34afba754e763bb12ac81/manifest.mpd",
+               "license_key": "d31e0ee60e034e228e7f219650c0d6e2",
+                "license_key2": "c50c247d5a34c1fbd565ad31886287cb"
+            },
+            "SKY_PREMIER_LEAGUE": {
+                "url": "https://linear015-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportspremierleague)/manifest_720.mpd",
+               "license_key": "0005f05c21a77f9475e05b177e70111a",
+                "license_key2": "ca009f546f9348a3659d877e3f67ee19"
+            },
+            "SKY_SPORTS_MAIN_EVENT": {
+                "url": "https://linear018-gb-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsmainevent)/manifest_720.mpd",
+               "license_key": "0005fad32eb7fe7f488093e851d71c5f",
+                "license_key2": "6342118978914afbc5fec26e93168b64"
+            },
+            "SKY_SPORTS_FOOTBALL": {
+                "url": "https://linear027-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsfootball)/manifest_720.mpd",
+               "license_key": "0005598a4d0f91328444c6fcdea04acb",
+                "license_key2": "ab03caec7a18da1fa6a8f306d91715a1"
+            },
+            "SKY_SPORTS_F1": {
+                "url": "https://linear034-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsf1)/manifest_720.mpd",
+               "license_key": "0005b57b9b4712e29641ac981ba8d3c2",
+                "license_key2": "ca13cdd1b96bf1877d2c7ad9ee37d52e"
+            },
+          "SKY_SPORTS_ARENA": {
+                "url": "https://linear033-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsarena)/manifest_720.mpd",
+               "license_key": "00054e48570403a8775b29a59941c88d",
+                "license_key2": "679d5a824c5a453e0a1e5a4277d94957"
+            },
+            "SKY_SPORTS_ACTION": {
+                "url": "https://linear018-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsaction)/manifest_720.mpd",
+               "license_key": "0003b57625e371b38e5bc521c31c8b73",
+                "license_key2": "a0ae6a685272e8a04487b9fec0f38665"
+            },
+            "SKY_SPORTS_MIX": {
+                "url": "https://linear018-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsmix)/manifest_720.mpd",
+               "license_key": "00052def539f4c65b1ddeb5ea4ea9003",
+                "license_key2": "4af118364d041875a8137c5839381cce"
+            },
+            "SKY_SPORTS_GOLF": {
+                "url": "https://linear018-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsgolf)/manifest_720.mpd",
+               "license_key": "000506039e623144c5d5185b2abab5f1",
+                "license_key2": "1d9d6af28efaf8e835c66979004798e8"
+            },
+            "SKY_SPORTS_TENNIS": {
+                "url": "https://linear014-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportstennis)/manifest_720.mpd",
+               "license_key": "00031e6287c6dcf1a92cc7450d43f9b8",
+                "license_key2": "1ca909f079b6732c00d65f59d19b8d46"
+            },
+            "SKY_SPORTS_CRICKET": {
+                "url": "https://linear014-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportscricket)/manifest_720.mpd",
+               "license_key": "000543c0dc49b43c0e816c2a404249de",
+                "license_key2": "836c311dd132a49dbed1049d92800304"
+            },
+            "SKY_SPORTS_RACING": {
+                "url": "https://linear013-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(skysportsracing)/manifest_720.mpd",
+               "license_key": "0005a8a51c6828dce3b85b65e62a15f6",
+                "license_key2": "aac8ca91db8dabf7df9393a41ff0758a"
+            },
+            "BEIN_SPORTS_1_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0001/DASH/S0001.mpd",
+               "license_key": "3fd52d1e9ba4b180aec12c9295b62c0f",
+                "license_key2": "bb274e33da0c709e62c55d0cba911889"
+            },
+            "BEIN_SPORTS_2_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0002/DASH/S0002.mpd",
+               "license_key": "30c11587a1686b72f115f34b0bf1c383",
+                "license_key2": "1e3a6af2408cdd78347b722728560c3b"
+            },
+            "BEIN_SPORTS_3_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0003/DASH/S0003.mpd",
+               "license_key": "aa724943787320593f5563048c90032d",
+                "license_key2": "a039276254f53769b040199a4eca8c2c"
+            },
+            "BEIN_SPORTS_4_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0004/DASH/S0004.mpd",
+               "license_key": "cb419fa5f5498e2c6cbc39363248ddd7",
+                "license_key2": "b5853b51f2060025a822e62973154556"
+            },
+            "BEIN_SPORTS_5_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0005/DASH/S0005.mpd",
+               "license_key": "3a165f923cd49e616f173fc6c341cc56",
+                "license_key2": "4cb96186d69f1a63c40218812a6f6910"
+            },
+            "BEIN_SPORTS_6_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0006/DASH/S0006.mpd",
+               "license_key": "ceac4607562049abb9d1b0309d9cd6f3",
+                "license_key2": "d396d277a364fab00d0193d25b700847"
+            },
+            "BEIN_SPORTS_7_TH": {
+                "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0007/DASH/S0007.mpd",
+               "license_key": "94a28a75b3891e92a97efbe76f941095",
+                "license_key2": "7b39cd0e318ee481b98c36a125c540fb"
+            },
+            "USA_NETWORK": {
+                "url": "https://fsly.stream.peacocktv.com/Content/CMAF_OL1-CTR-4s/Live/channel(usa-east)/master.mpd",
+               "license_key": "882c9f5613b43b47adc70aa968a308ce",
+                "license_key2": "de534ef8914bfe62ba3cdd6bdb9e1c04"
+            },
+            "ZIGGO_SELECT": {
+                "url": "https://da-d436236720010b88000103030000000000000009.id.cdn.upcbroadband.com/wp/wp1-anp-g05060506-hzn-nl.t1.prd.dyncdn.dmdsdp.com/live/disk1/NL_000094_019321/go-dash-hdready-avc/NL_000094_019321.mpd",
+               "license_key": "16bf72dc22743d929c4318e193408373",
+                "license_key2": "eae51a1e3904124963074cbf432c7c8e"
+            }, "ZIGGO_VOETBAL": {
+                "url": "https://da-d436234620010b88000103020000000000000008.id.cdn.upcbroadband.com/wp/wp2-anp-g05060506-hzn-nl.t1.prd.dyncdn.dmdsdp.com/live/disk1/NL_000095_019371/go-dash-hdready-avc/NL_000095_019371.mpd",
+               "license_key": "16bf72dc22743d929c4318e193408373",
+                "license_key2": "eae51a1e3904124963074cbf432c7c8e"
+            },
+            "ZIGGO_DOCU": {
+                "url": "https://da-d436236620010b88000103030000000000000008.id.cdn.upcbroadband.com/wp/wp5-anp-g05060506-hzn-nl.t1.prd.dyncdn.dmdsdp.com/live/disk1/NL_000098_019255/go-dash-hdready-avc/NL_000098_019255.mpd",
+               "license_key": "16bf72dc22743d929c4318e193408373",
+                "license_key2": "eae51a1e3904124963074cbf432c7c8e"
+            },
+             "PREMIER_SPORTS_1_IRL": {
+                "url": "https://linear001-ie-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(premiersports1)/manifest_720.mpd",
+               "license_key": "00052a8b8b89655fe5c72f61970fc45b",
+                "license_key2": "0aa687336a8329962a9affd5af46300c"
+            },
+            "PREMIER_SPORTS_2_IRL": {
+                "url": "https://linear031-ie-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_720_30/Live/channel(premiersports2)/manifest_720.mpd",
+               "license_key": "0005dbaaefccfb7c21821e3853357a15",
+                "license_key2": "3cc87d22e10759c9e3f78e523218c067"
+            },
+            "ESPN_DEPORTES_USA_VPN": {
+                "url": "https://linear.stvacdn.spectrum.com/LIVE/1166/dash/cenc/ESPNDHD_13667/manifest.mpd",
+               "license_key": "be65e5985fa04a49af310f0a92a0260a",
+                "license_key2": "1acb5ff7b0dbfdf19c4dca1aabfaaa11"
+            },
+            "DAZN_LALIGA": {
+                "url": "https://live.ll.ww.aiv-cdn.net/OTTB/dub-nitro/live/clients/dash/enc/wjgklbtvhh/out/v1/659736a1e24c40e4865a80ffd75e7de7/cenc.mpd",
+               "license_key": "43d1c3b25207ff38b22ccfe17d302367",
+                "license_key2": "7b1f85f6e81059473b114c16a25c829a"
+            },
+            "TUDN_USA_VPN": {
+                "url": "https://linear.stvacdn.spectrum.com/LIVE/1131/dash/cenc/TUDNUH_8283/manifest.mpd",
+               "license_key": "85c8956b207c44a693d89984803c908b",
+                "license_key2": "8d8ff21c464506ef396356dd761f5ccd"
+            },
+            "SPORT_TV_1PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTV1_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "SPORT_TV_2PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTV2_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "SPORT_TV_3PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTV3_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "SPORT_TV_4PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTVLive_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "SPORT_TV_5PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTV_GOLFE_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "SPORT_TV_6PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$SPORTTV6_HD/index.m3u8/S!d2EJVFZPU19MaXZlEgJU.v...wEWBJ8_/Level(5242880)",
+            },
+            "CANAL_11": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$C11_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(3000000)",
+            },
+            "TV_LA_1_ES": {
+                "url": "https://cache3.zapitv.com/live/eds_c2/la1_4k/dash_live_enc/la1_4k.mpd",
+               "license_key": "a3abc44525eef3b0a7af9138a9dbe34a",
+                "license_key2": "7740f8ae4223ce5ba293028f7f78f1c1"
+            },
+            "TRUE_PREMIER_1_IN": {
+                "url": "https://edge2.laotv.la/live/TSport1/index.m3u8"
+            },
+            "TRUE_PREMIER_2_IN": {
+                "url": "https://edge2.laotv.la/live/TSport2/index.m3u8"
+            },
+            "SONY_SPORTS_1": {
+                "url": "https://cdn-tv.co.in/myweb/watch.php?id=1000009276&e=.m3u8"
+            },
+            "SONY_SPORTS_2": {
+                "url": "https://cdn-tv.co.in/myweb/watch.php?id=1000009277&e=.m3u8"
+            },
+            "SONY_SPORTS_3": {
+                "url": "https://cdn-tv.co.in/myweb/watch.php?id=1000009278&e=.m3u8"
+            },
+            "SONY_SPORTS_4": {
+                "url": "https://cdn-tv.co.in/myweb/watch.php?id=1000119187&e=.m3u8"
+            },
+            "SONY_SPORTS_5": {
+                "url": "https://cdn-tv.co.in/myweb/watch.php?id=1000009275&e=.m3u8"
+            },
+            "ELEVEN_SPORTS_1_PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$Eleven_Sports_1_HD/index.m3u8/S!d2EJVFZPU19MaXZlEgJU.v...wEWBJ8_/Level(5242880)",
+            },
+            "ELEVEN_SPORTS_2_PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$Eleven_Sports_2_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(1200000)",
+            },
+            "ELEVEN_SPORTS_3_PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$Eleven_Sports_3_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(1200000)",
+            },
+            "ELEVEN_SPORTS_4_PT": {
+                "url": "https://da-d50d12b5.online.meo.pt/wp/cdn-er-vspp-cvl2.online.meo.pt/shls/LIVE$Eleven_Sports_4_HD/index.m3u8/S!d2EISU9TX0xpdmUSBkPIS1XDVP7...8BFgyf/Level(1200000)",
+            },
+            "ELEVEN_SPORTS_5_PT": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-058/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "ELEVEN_SPORTS_6_PT": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-059/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "PLAY_SPORTS_2_BE": {
+                "url": "https://dca-ak-livedazn.akamaized.net/dash/dazn-linear-023/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "PLAY_SPORTS_1_BE": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-051/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "ELEVEN_PRO_LEAGUE1": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-049/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "DAZN_1_DE": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-017/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "DAZN_2_DE": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-018/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "DAZN_1_ES": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/bmnelo5c7a/out/v1/3ce2cdc4589f46189322bd3717c77957/cenc.mpd",
+               "license_key": "44dd9cd370b08a868ead115fe84ecfde",
+                "license_key2": "bff19ab0a51cf14e848389b152913fd0"
+            },
+            "DAZN_2_ES": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/dub-nitro/live/clients/dash/enc/xnk4m9bnxt/out/v1/4ced7b7329a54652b9bb0521ed38bd4d/cenc.mpd",
+               "license_key": "0eab5a3f3e3b4ba5d42d40ca30d17571",
+                "license_key2": "f3f061ded9b70e8160590d5802ecda6d"
+            },
+            "SPORTDIGITALDE": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-022/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "ZONA_DAZN_ITALIA": {
+                "url": "https://dcf-ak-livedazn.akamaized.net/dashrdm/dazn-linear-024/stream.mpd",
+               "license_key": "82f8e2a17dac44c0a18f660479349c59",
+                "license_key2": "1b144f73e6fefe91cd05f850e2b589d0"
+            },
+            "BEIN_XTRA_N_ES": {
+                "url": "https://d35j504z0x2vu2.cloudfront.net/v1/master/0bc8e8376bd8417a1b6761138aa41c26c7309312/bein-sports-xtra-en-espanol/playlist.m3u8"
+            },
+            "TNT_1_GB": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd",
+               "license_key": "ae26845bd33038a9c0774a0981007294",
+                "license_key2": "63ac662dde310cfb4cc6f9b43b34196d"
+            },
+            "TNT_2_GB": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd",
+               "license_key": "6d1708b185c6c4d7b37600520c7cc93c",
+                "license_key2": "1aace05f58d8edef9697fd52cb09f441"
+            },"TNT_3_GB": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/lsdasbvglv/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd",
+               "license_key": "4e993aa8c1f295f8b94e8e9e6f6d0bfe",
+                "license_key2": "86a1ed6e96caab8eb1009fe530d2cf4f"
+            },
+            "TNT_4_GB": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd",
+               "license_key": "e31a5a81caff5d07ea2411a571fc2e59",
+                "license_key2": "96c5ef69479732ae734f962748c19729"
+            },
+            "TNT_5_GB": {
+                "url": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/gesdwrdncn/out/v1/79e752f1eccd4e18b6a8904a0bc01f2d/cenc.mpd",
+               "license_key": "60c0d9b41475e01db4ffb91ed557fbcc",
+                "license_key2": "36ee40e58948ca15e3caba8d47b8f34b"
+            },
+            "TV2_Sport_1_NO": {
+                "url": "https://live-aws-scalstrm-cdn.rikstv.no/live/rikstv/64393bf81dbc891fd41f53ac/manifest.mpd",
+               "license_key": "0c6212056d2f51fcbf569f9a1a8517d1",
+                "license_key2": "d07b404deb7c958347d742e6d1d2f3f9"
+            },
+            "SBT_BR": {
+                "url": "https://0006-bbc.dtvott.com/dash_live_0035/manifest.mpd",
+               "license_key": "3ad3dca103185934acff7a0e9000c112",
+                "license_key2": "3f396659d841a55cd1381e6735ecfa1d"
+            },
+             "CLUB_1_BE": {
+                "url": "https://origin2-rtlbe.live.6cloud.fr/pool_z6h2o6qd/clubrtl/rtlbesd/dash_short_cenc10_clubrtl/index.mpd",
+               "license_key": "b53316f32fc93b51a61ba6fdf0bce6c1",
+                "license_key2": "d752d66843a48a6fed64eed8f87adc3e"
+            },
+            "CANALE_5_IT": {
+                "url": "https://live03p-seg.msf.cdn.mediaset.net/live/ch-c5/c5-dash-widevine.isml/manifest.mpd",
+               "license_key": "00f9f3c0783536b8ce4a30a01a52e082",
+                "license_key2": "e926f7d45af4f7d154c990eae6a2d937"
+            },
+            "ITV1_GB": {
+                "url": "https://wp2-obc1112-live-ch-prod.prod.cdn.dmdsdp.com/dash/SV09212/manifest.mpd",
+               "license_key": "5d9937d586414096948337ac314d79c1",
+                "license_key2": "22ca2e250b729982c97209e0ff3f7e9b"
+            },   
+            "FOX_DEPORTES_USA": {
+                "url": "https://linear.stvacdn.spectrum.com/LIVE/1106/dash/cenc/FXDEPHD/manifest.mpd",
+               "license_key": "c9231d5e7a99429382e6a5c2e588e141",
+                "license_key2": "ca08ab407ab9393a814d720f1f41c6cf"
+            },
+            "BandSports_BR": {
+                "url": "https://0055-jbc.dtvott.com/dash_live_0054/manifest.mpd?da=1&country=BR&accountType=DTH&deviceType=web",
+               "license_key": "bd1af42db82f5a17a0d75246f25f5201",
+                "license_key2": "a9edd4e2c410923e9cbcb261102e5008"
+            },
+            "TV2_Sport_NO": {
+                "url": "https://ch11-hls-live.akamaized.net/out/u/433127.mpd",
+               "license_key": "d12e4c9dc52f4cbab7ac9b2278317e47",
+                "license_key2": "a7987e5b6ec42db68a25486e108ca9f2"
+            },
+            "FUTV": {
+                "url": "https://cdn02.teletica.com/StreamFutv/Streamfutv04122023/playlist.m3u8",
+            },
+            "ITALIA_1": {
+                "url": "https://live03p-seg.msf.cdn.mediaset.net/live/ch-i1/i1-dash-widevine.isml/manifest.mpd",
+               "license_key": "00f9f3c0783536b8ee91704e23b78016",
+                "license_key2": "bfd04d6f544c9cc4d35cb13ab6778587"
+            },
+            "CANAL_5": {
+                "url": "https://channel05.akamaized.net/hls/live/2033783/event01/index.m3u8",
+            },
+            "SPORT_PLUS_DE": {
+                "url": "https://ac-009.live.p7s1video.net/c5c609cf/t_009/sport1plus-de-hd/cenc-default.mpd",
+               "license_key": "c1c11c3844b0dffdb9d9831900f1a1da",
+                "license_key2": "a2c31e15346f339ca2b47bdd8591553f"
+            },
+            "HRT_2": {
+                "url": "https://cdn1oiv.akamaized.net/hrtliveorigin/hrt2.smil/1/manifest.mpd",
+               "license_key": "994c79af863838109e7f3503bcd2aff9",
+                "license_key2": "d2c19650ad2a2ac77a95453b941a6f0e"
+            },
+            "INFINITY_PLUS_1": {
+                "url": "https://live03p-seg.msf.cdn.mediaset.net/live/ch-u1/u1-dash-widevine.isml/manifest.mpd",
+               "license_key": "00f9f3c0783536b832a8f0326fbdc02e",
+                "license_key2": "ade0533ba667bb7e9847d8f215f03076"
+            },
+            "INFINITY_PLUS": {
+                "url": "https://live03p-seg.msf.cdn.mediaset.net/live/ch-u2/u2-dash-widevine.isml/manifest.mpd",
+               "license_key": "00f9f3c0783536b834b0f0c2bfee80ac",
+                "license_key2": "76b3afbf163f9c3feb6204b8fcf0ff53"
+            },
+            "Astro_Bola": {
+                "url": "https://d1fk7kbmz4il3.cloudfront.net/CH1/masterCH1.mpd",
+               "license_key": "7481d3e3738c46768f138e208fee9076",
+                "license_key2": "e1d428c7f1ca82339a6cfa1d0757428e"
+            },
+            "Astro_Bola_2": {
+                "url": "https://d1fk7kbmz4il3.cloudfront.net/CH5/masterCH5.mpd",
+               "license_key": "99685545491d40b493b3a4b263c7245e",
+                "license_key2": "7939e335bf8cbbd6882f9f5c9cdebe19"
+            },
+            "Astro_Bola_3": {
+                "url": "https://d1fk7kbmz4il3.cloudfront.net/CH3/masterCH3.mpd",
+               "license_key": "ca4f5ff4e4694d54bdfdc9bd34384290",
+                "license_key2": "1100fe297146f7d024b59944f09e6d1a"
+            },
+            "Astro_Sports_2": {
+                "url": "https://d3j4fjrwclc3o8.cloudfront.net/CH4/masterCH4.mpd",
+               "license_key": "8f1da399325247eca6acdd7bafb95fa2",
+                "license_key2": "41f234fb88590af3b0d224111a61bf71"
+            },
+            "Astro_Sports_3": {
+                "url": "https://d3j4fjrwclc3o8.cloudfront.net/CH5/masterCH5.mpd",
+               "license_key": "0d6d2a1ac8d14e19b17455650770cd99",
+                "license_key2": "ff65174f8ec5d4c88e8d8a21968563cf"
+            },
+            "Astro_cricket": {
+                "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2504/default_ott.mpd",
+               "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
+                "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c"
+            },
+            "Astro_Sports_4": {
+                "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2506/default_ott.mpd",
+               "license_key": "79f4028730acca9ab8b00f26158ddb10",
+                "license_key2": "91febe843c08c7cc523efd827292e40e"
+            },
+            "Willow": {
+                "url": "https://linear-novi.stvacdn.spectrum.com/LIVE/1131/dash/cenc/WLLOHD_10364/manifest.mpd",
+               "license_key": "6653c05e42fc4fac8f49d7cbf99498fe",
+                "license_key2": "3b88f2cff3affef20b265c840bafc0cc"
+            },
+            "VSport_1": {
+                "url": "https://director.streaming.telia.com/tvm-packager-prod/group1/6089c17d47a23d76645ceaf4/manifest.mpd",
+               "license_key": "04c5eaf62cd75f2d947ab4d621f39256",
+                "license_key2": "76967598962e7a7314a2b251e9070725"
+            },
+            "VSport_Extra": {
+                "url": "https://director.streaming.telia.com/tvm-packager-prod/group3/60ae4f5e1522bd739f6959a1/manifest.mpd",
+               "license_key": "bc972382f04c531983b7aab6bf642ad8",
+                "license_key2": "ddfd212680eb891b755610eac5becf85"
+            },
+            "Vsport_Football": {
+                "url": "https://director.streaming.telia.com/tvm-packager-prod/group1/60896dfd47a23d7c065cd68c/manifest.mpd",
+               "license_key": "ce37e20374e55be6bb4d26837af27605",
+                "license_key2": "52cc532f748fcbf2b806dad4289bf84c"
+            },
+            "TYC_International": {
+                "url": "https://edge-live15-hr.cvattv.com.ar/live/c3eds/TyC_Internacional/SA_Live_dash_enc/TyC_Internacional.mpd",
+               "license_key": "58e1ebe75d944f6a98ea67b1c7c0a572",
+                "license_key2": "1c311b069dbce31ce8e62a6e7e2433eb"
+            },
+            "TEN_CRICKET": {
+                "url": "https://bpcdn.dialog.lk/bpk-tv/Ch065/output/index.mpd",
+               "license_key": "abfc480ae7920a3ebd9e99e7b9a0d3e2",
+                "license_key2": "63a7fe4e7899ba2bc5bbd4307398f3ff"
+            },
+            "SKY_SPORT_24_IT": {
+                "url": "https://linear301-it-dash1-prd.selector.skycdn.it/016a/31035/FHD/skysport24/master_stereo.mpd",
+               "license_key": "003618ccd7be22b6367207ed8d64d505",
+                "license_key2": "36e97f29ec5ea6126077cc040cc2ceeb"
+            },
+            "SKY_SPORT_251_IT": {
+                "url": "https://linear311-it-dash1-prd-akp2.cdn13.skycdp.com/016a/31917/FHD/skysport251/master.mpd",
+               "license_key": "00368000eaecbeeafd84c05b3b8243af",
+                "license_key2": "8f84185910e18ae0ca8a45004625a000"
+            },
+            "Sky_Sport_253": {
+                "url": "https://linear311-it-dash1-prd-akg0.cdn13.skycdp.com/016a/32233/FHD/skysport253/master.mpd",
+               "license_key": "00365b169a077daac5081277c3fd0c28",
+                "license_key2": "f68ab32a552e13509a8ee1c4d96204bc"
+            },
+            "SKY_SPORT_CALCIO_IT": {
+                "url": "https://linear302-it-dash1-prd-ll.cdn13.skycdp.com/016a/31209/FHD/skysportseriea/master.mpd",
+               "license_key": "0036e5d0e88dfb087f1791da6150ced9",
+                "license_key2": "0bc653d830837dceb13bd17169f0f8e2"
+            },
+            "SKY_SPORT_MAX_IT": {
+                "url": "https://linear305-it-dash1-prd-ll.cdn13.skycdp.com/016a/31248/FHD/skysportmax/master.mpd",
+               "license_key": "0036ae9248d939e4e1cd2198d2593a42",
+                "license_key2": "efc6699e1756403916b0280ea63f4c28"
+            },
+             "SKY_SPORT_MOTOGP_IT": {
+                "url": "https://linear306-it-dash1-prd.selector.skycdn.it/016a/31483/FHD/skysportmotogp/master.mpd",
+               "license_key": "0036ea2e908d4cc20ef08595da9ff991",
+                "license_key2": "08e1ae9fa0ee4d9ec2b194c4908613ae"
+            },
+            "SKY_SPORT_NBA_IT": {
+                "url": "https://linear301-it-dash1-prd.selector.skycdn.it/016a/31764/FHD/skysportnba/master_stereo.mpd",
+               "license_key": "0036c4e453ae2a044f4c861ed73b560a",
+                "license_key2": "ea5626c0aa092c382ca58151b5f4b208"
+            },
+            "SKY_SPORT_UNO_IT": {
+                "url": "https://linear301-it-dash1-prd-ll.cdn13.skycdp.com/016a/31023/FHD/skysportuno/master_stereo.mpd",
+               "license_key": "00362452ed102000ccea64c311921dc2",
+                "license_key2": "02f27bd6caab7633d3083b94d3958b1c"
+            },
+            "ESPN_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c3eds/ESPN2HD/SA_Live_dash_enc_2A/ESPN2HD.mpd",
+               "license_key": "e884b711ab111beb8a7ba1e7bcbdc9bf",
+                "license_key2": "cb89ee3961599e3e648a5aad60895f34"
+            },
+            "ESPN_2_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c6eds/ESPN2_Arg/SA_Live_dash_enc_2A/ESPN2_Arg.mpd",
+               "license_key": "65a5bfa3c7a72dde60be9b0c7406c8fc",
+                "license_key2": "0b40ae9f78a7bac3b57ecbf72d3c081e"
+            },
+            "ESPN_3_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c3eds/ESPN3/SA_Live_dash_enc_2A/ESPN3.mpd",
+               "license_key": "f4c9f97e2a36feab0e5077f2b44cbc4e",
+                "license_key2": "1743cd03dfe3736b2c95da91a783af38"
+            },
+             "ESPN_DEPORTES": {
+                "url": "https://linear.stvacdn.spectrum.com/LIVE/1166/dash/cenc/ESPNDHD_13667/manifest.mpd",
+               "license_key": "be65e5985fa04a49af310f0a92a0260a",
+                "license_key2": "1acb5ff7b0dbfdf19c4dca1aabfaaa11"
+            },
+            "ESPN_EXTRA": {
+                "url": "https://cdn.cvattv.com.ar/live/c3eds/ESPNHD/SA_Live_dash_enc/ESPNHD.mpd",
+               "license_key": "cc8d44406ed6bf1898ad9f7a2d64f29e",
+                "license_key2": "fb85d059687ab0fc67805806204edbdf"
+            },
+            "FOX_SPORTS_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports/SA_Live_dash_enc_2A/FoxSports.mpd",
+               "license_key": "cbc2a0c7a38df0aa3333cd71841d3b0d",
+                "license_key2": "aac61b730e2ac1df23f1e872e7541c1b"
+            },
+             "FOX_SPORTS_2_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports2HD/SA_Live_dash_enc_2A/FoxSports2HD.mpd",
+               "license_key": "c98ddffc470fe449ae1a8d6492116976",
+                "license_key2": "5086d370e840010232cf4532b16e197f"
+            },
+            "FOX_SPORTS_3_AR": {
+                "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports3HD/SA_Live_dash_enc_2A/FoxSports3HD.mpd",
+               "license_key": "55b47390cf9e4997dae6dac85e057875",
+                "license_key2": "fa39e855543c5d70f30600d59e5e4c1b"
+            },
+            "CRICLIFE_1": {
+                "url": "https://criclive1.starzplayarabia.com/out/v1/1adbc63744e44594a273eb48ec027b65/index.mpd",
+               "license_key": "a05a54bf469c6040a288477d0082ca65",
+                "license_key2": "4344373c32a573e73a42eeab936a98a9"
+            },
+            "CRICLIFE_2": {
+                "url": "https://criclive2.starzplayarabia.com/out/v1/1b232653e5254150a60a577cc8db682f/index.mpd",
+               "license_key": "cf671610fa53cc56b07b1d235169fc81",
+                "license_key2": "50ac62719a1205fd08c01e368e27e3d4"
+            },
+            "CRICLIFE_3": {
+                "url": "https://cricmax.starzplayarabia.com/out/v1/6a04831479eb46efaaf840eb558371ef/index.mpd",
+               "license_key": "b6045efd2889ce05f4800e2f7ac0d3ee",
+                "license_key2": "abf072f537b8f4872be45f971ba24503"
+            },
+            "CRICLIFE_MAX": {
+                "url": "https://cmaxlive.starzplayarabia.com/out/v1/bebec73ea17b40b3bd0257ad8e97b531/index.mpd",
+               "license_key": "ec2168a420478062ec89540dad862bdd",
+                "license_key2": "d6d63d7a1391d2a89fb12e5e1c5ced01"
+            },
+            "STARSPORTS_1": {
+                "url": "https://bpprod5linear.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd",
+               "license_key": "06341bf3dd635e6ca5c71188d0210373",
+                "license_key2": "2c6d9ccbf866eee8c42dcf9c343f179b"
+            },
+            "STARSPORTS_HINDI": {
+                "url": "https://bpprod5linear.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd",
+               "license_key": "6a9e4204f3f8577ebf6e79b3b18573f8",
+                "license_key2": "78ca20d6f8be904eec61c0e9aca3c511"
+            },
+            "STARSPORTS_2_SD": {
+                "url": "https://bpcdn.dialog.lk/bpk-tv/Ch069/output/index.mpd",
+               "license_key": "79b340b2b5f7c3c89951daabde7cdf97",
+                "license_key2": "3e22bc39d22a7f8c3516f6b58b144668"
+            },
+             "STARSPORTS_2_HD": {
+                "url": "https://bpprod5linear.akamaized.net/bpk-tv/irdeto_com_Channel_251/output/manifest.mpd",
+               "license_key": "bc5ea952698553daaba85787001d6093",
+                "license_key2": "5287d9f823a246fdb0ecfee38f00a92a"
+            },
+           "STAR_SELECT_1": {
+                "url": "https://bpprod5linear.akamaized.net/bpk-tv/irdeto_com_Channel_413/output/manifest.mpd",
+               "license_key": "a7641523ac8758e3b1e0df228719e145",
+                "license_key2": "5718543676df110d4b457725b7ab56ec"
+            },
+            "STAR_SELECT_2": {
+                "url": "https://bpprod7linear.akamaized.net/bpk-tv/irdeto_com_Channel_729/output/manifest.mpd",
+               "license_key": "b11dd25b629159868b77d5cb4cdd8129",
+                "license_key2": "c94e61642a251d2ca3c32588688c9dd8"
+            },
+            "VSPORTS_1_NO": {
+                "url": "https://live-aws-scalstrm-cdn.rikstv.no/live/rikstv/644bb6e91dbc891fd422efc9/manifest.mpd",
+               "license_key": "4d808f2b9a74536cadbd95be141888ed",
+                "license_key2": "9dd89f67b8885dc65721a8b1fbeae700"
+            },
+            "VSPORTS_2_NO": {
+                "url": "https://live-aws-scalstrm-cdn.rikstv.no/live/rikstv/644bb6e91dbc891fd422efef/manifest.mpd",
+               "license_key": "0d3ff38c34985fdd81a37567646322b9",
+                "license_key2": "6b4504297769acefae2e50920b7c8a77"
+            },
+            "VSPORTS_3_NO": {
+                "url": "https://live-aws-scalstrm-cdn.rikstv.no/live/rikstv/644bb6ea1dbc891fd422f01e/manifest.mpd",
+               "license_key": "fdcb8ee4623458e5832a92801fc723b1",
+                "license_key2": "634a67c44b7b7030872043df95c1a55e"
+           }
+]
+
