@@ -1,0 +1,273 @@
+[
+    {
+        "name": "Zee TV HD",
+        "id": "167",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_TV_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_TV_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors HD",
+        "id": "144",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Dangal",
+        "id": "701",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Dangal.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Dangal_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors Kannada HD",
+        "id": "757",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_Kannada_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_Kannada_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Bangla",
+        "id": "625",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Bangla.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Bangla_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Kannada",
+        "id": "689",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Kannada.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Kannada_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "ETV Telugu",
+        "id": "629",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/ETV_Telugu.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/ETV_Telugu_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Aaj Tak",
+        "id": "173",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Aaj_Tak.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Aaj_Tak_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Telugu",
+        "id": "638",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Telugu.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Telugu_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Sarthak",
+        "id": "722",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Sarthak_TV.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Sarthak_TV_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Marathi",
+        "id": "445",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Marathi.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Marathi_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors Marathi HD",
+        "id": "755",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_Marathi_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_Marathi_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Sony SAB HD",
+        "id": "471",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Sony_SAB_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Sony_SAB_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Tamil",
+        "id": "628",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Tamil.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Tamil_MOB/Fallback/index.m3u8",
+       "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Sony SAB",
+        "id": "154",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Sony_SAB.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Sony_SAB_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Sun TV HD",
+        "id": "896",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Sun_TV_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Sun_TV_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors Kannada SD",
+        "id": "1370",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_Kannada_SD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_Kannada_SD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "SET HD",
+        "id": "291",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Sony_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Sony_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "India TV",
+        "id": "235",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/India_TV.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/India_TV_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Bangla HD",
+        "id": "1977",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Bangla_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Bangla_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "ABP Ananda",
+        "id": "672",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/ABP_Ananda.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/ABP_Ananda_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "News 18 India",
+        "id": "231",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/IBN_7.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/IBN_7_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Telugu HD",
+        "id": "1354",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Telugu_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Telugu_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Zee Kannada HD",
+        "id": "1362",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Kannada_HD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Zee_Kannada_HD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors Gujarati",
+        "id": "196",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_Gujarati.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_Gujarati_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "Colors Marathi SD",
+        "id": "1326",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/Colors_Marathi_SD.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/Colors_Marathi_SD_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "name": "TV9 Bharatvarsh",
+        "id": "1251",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/TV9_Bharatvarsh.png",
+        "group": "JioTV",
+        "link": "https://cdn.nayeemparvez-jtv.workers.dev/bpk-tv/TV9_Bharatvarsh_MOB/Fallback/index.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    }
+]
+
