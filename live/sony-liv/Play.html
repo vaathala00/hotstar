@@ -505,8 +505,21 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
         #videoContainer {
             height: 100% !important;
         }
+
+.logo {
+  position: absolute;
+  top: 30px; /* Adjust the top position as needed */
+  left: 30px; /* Adjust the left position as needed */
+  width: 141px; /* Set the width of the logo */
+  height: 35px; /* Set the height of the logo */
+  background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat;
+  background-size: contain;
+  z-index: 1; /* Ensure the logo is on top of the iframe */
+}
+
     </style>
    <video id="myElement"></video>
+  <div class="logo"></div>
 <script type="text/javascript">
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 </script>
