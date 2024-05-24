@@ -1,394 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>VT HOME</title>
-  <link rel="shortcut icon" href="https://static.vecteezy.com/system/resources/previews/009/295/080/non_2x/vt-v-t-letter-logo-design-in-white-colors-creative-modern-letters-icon-logo-illustration-vector.jpg"
-    <!-- ======= Styles ====== -->
-    <link rel="stylesheet" href="assets/css/style.css">
 
 
+<html>
+
+	<head>
+		
+		<title>VT-𝐉𝐈𝐎-𝐓𝐕</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+		<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
+		<link rel="shortcut icon" href="https://www.jiotv.com/favicon.ico">
+		<link rel="stylesheet" href="style.css">
+		<!-- ===== Boxicons CSS ===== -->
+		<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+		<style>
+			body {
+			      /* display: flex; */
+			      align-items: center;
+			      justify-content: center;
+			      margin: 0 12px;
+			      height: 100%;
+			      background-color: #f1f1f1;
+			
+			    }
+			
+			    .box-shadow {
+			      font-family: sans-serif;
+			      font-weight: 600;
+			      background-color: #2ecc71;
+			      color: white;
+			      padding: 10px;
+			      border-radius: 4px;
+			      box-shadow: 2px 2px 20px 23px #7fecad;
+			      background-color: #f8f8f8;
+			      padding: 20px;
+			      border-radius: 10px;
+			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			      text-align: center;
+			      font-family: 'Arial', sans-serif;
+			      font-size: 15px;
+			      color: #333;
+			    }
+			
+			    #title {
+			      font-family: 'Gloock', serif;
+			      font-weight: bold;
+			      font-size: 28px;
+			      color: #e61271;
+			      text-align: center;
+			      text-transform: uppercase;
+			      letter-spacing: 4px;
+			      margin: 20px 0;
+			      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+			      background-color: #f1f1f1;
+			      padding: 10px 20px;
+			      border-radius: 10px;
+			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+			    }
+			
+			    a. {
+			      text-decoration: none !important;
+			    }
+		</style>
 		<link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
 		<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
 		
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css">
-</head>
+	</head>
 
-<body>
-    <!-- =============== Navigation ================ -->
-    <div class="container">
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="https://t.me/vaathala1">
-                        <span class="icon">
-                            <ion-icon name="logo-vue"></ion-icon>
-                        </span>
-                        <span class="title">Vaathala</span>
-                        
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Home</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="live/voot">
-                        <span class="icon">
-                            <ion-icon name="logo-vimeo"></ion-icon>
-                        </span>
-                        <span class="title">Voot</span>
-                    </a>
-                </li>
-
-              <!--  <li>
-                    <a href="live/biggboss">
-                        <span class="icon">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </span>
-                        <span class="title">Bigg Boss</span>
-                    </a>
-                </li> -->
-
-                <li>
-                    <a href="live/play">
-                        <span class="icon">
-                            <ion-icon name="play-outline"></ion-icon>
-                        </span>
-                        <span class="title">Tata Play</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="live/sunnxt">
-                        <span class="icon">
-                            <ion-icon name="sunny-outline"></ion-icon>
-                        </span>
-                        <span class="title">SunNxt</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="live/discovery">
-                        <span class="icon">
-                            <ion-icon name="paw-outline"></ion-icon>
-                        </span>
-                        <span class="title">Discovery</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="live/sony-liv">
-                        <span class="icon">
-                            <ion-icon name="logo-html5"></ion-icon>
-                        </span>
-                        <span class="title">Sony Liv</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="live/zee">
-                        <span class="icon">
-                            <ion-icon name="easel-outline"></ion-icon>
-                        </span>
-                        <span class="title">Zee5</span>
-                    </a>
-                </li>
-
-               <!-- <li>
-                    <a href="live/tv">
-                        <span class="icon">
-                            <ion-icon name="pulse-outline"></ion-icon>
-                        </span>
-                        <span class="title">Live TV</span>
-                    </a>
-                </li> -->
-
-
-                <li>
-                    <a href="ott/radio">
-                        <span class="icon">
-                            <ion-icon name="radio-outline"></ion-icon>
-                        </span>
-                        <span class="title">Radio FM</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- ========================= Main ==================== -->
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-             <!--   <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div> -->
-
-                <div class="user">
-                    <img src="assets/imgs/vt.jpg">
-                </div>
-            </div>
-
-            <!-- ======================= Cards ================== -->
-
-
- 
-<!-- <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGdnNHpweWp6YzNvZ2U3bjI0MXpuNTRvYjl4Y2Fqc2lleTc4MDNieCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/DbG9LBRw3zBN7KUDqE/giphy.gif" alt="" width="150" height="0"> -->
-
-               <div class="cardBox">
-                <div class="card">
-
-                    <div>
-                        <a href="sports/main_sports"> 
-                        <div class="numbers">Sports</div>
-                        <div class="cardName">🔴Live</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="football-outline"></ion-icon>
-                    </div> </a>
-                </div> 
-
-                <div class="card">
-                    <div>
-                        <a href="ott/music"> 
-                        <div class="numbers">Music</div>
-                        <div class="cardName">New</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="musical-notes-outline"></ion-icon>
-                    </div></a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <a href="ott/tvshow"> 
-                        <div class="numbers">TV Show</div>
-                        <div class="cardName">New</div>
-                    </div>
-
-                    <div class="iconBx">
-                       <ion-icon name="tv-outline"></ion-icon>
-                    </div></a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <a href="ott/movie"> 
-                        <div class="numbers">Movies</div>
-                        <div class="cardName">New</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="videocam-outline"></ion-icon>
-                    </div></a>
-                </div>
-            </div>
-
-            <!-- ================ Order Details List ================= 
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
-
-                <!-- ================= New Customers ================ 
-                <div class="recentCustomers">
-                    <div class="cardHeader">
-                        <h2>Recent Customers</h2>
-                    </div>
-
-                    <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
- <!-- ================ vaathala home ================= -->
-
-
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2> </h2>
-                        <a href="live/jio" class="btn">View All</a>
-                    </div>
-
- <!-- <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXg5Mm9nanp2MW9lZjFkdTF3OTk4cGJ4Mjlob3ptZjRsMzdyMTU2NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3UovDTrDN8m0QFBqC1/giphy.gif" alt="Girl in a jacket" width="50" height="0"> -->
-
-
-
+	<body data-sveltekit-preload-data="hover" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0=">
+		<div style="display: contents">
+  <header class="text-gray-600 body-font" style="margin: 20px;">
+    <h1 id="title">VAATHALA</h1>
+  </header>
+</div>
+		<main class="">
+			<title>𝐉𝐈𝐎-𝐓𝐕</title>
 			<div class="container" bis_skin_checked="1">
 				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
   <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
+				
 
 <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
 				
@@ -12489,21 +12185,40 @@
 </div>
 </a>
 </div>
-
-  
-    <!-- =========== Scripts =========  -->
-    <script src="assets/js/main.js"></script>
-
-<div id="svelte-announcer" aria-live="assertive" aria-atomic="true" style="position: absolute; left: 0px; top: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px;" bis_skin_checked="1"></div>
+ 
+ 							
+				</div>
+			</div>
+		</main>
+		<div id="svelte-announcer" aria-live="assertive" aria-atomic="true" style="position: absolute; left: 0px; top: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px;" bis_skin_checked="1"></div>
 		<script type="text/javascript" src="channel.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+		 // Get search input element
+  const searchInput = document.getElementById('searchInput');
 
-    <script src="assets/js/jio.js"></script>
+  // Add input event listener
+  searchInput.addEventListener('input', filterData);
 
+  // Search functionality
+  function filterData() {
+    const updatedSearchValue = searchInput.value.toLowerCase();
 
-    <!-- ====== ionicons 1 ======= --> 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
+    // Get all box elements
+    const boxes = document.querySelectorAll('.box1');
+
+    boxes.forEach((box) => {
+      const h2Text = box.querySelector('h2').textContent.toLowerCase();
+      const pText = box.querySelector('p').textContent.toLowerCase();
+
+      if (h2Text.includes(updatedSearchValue) || pText.includes(updatedSearchValue)) {
+        box.style.display = 'block'; // Show matching box
+      } else {
+        box.style.display = 'none'; // Hide non-matching box
+      }
+    });
+  }
+		</script>
+	</body>
 
 </html>
