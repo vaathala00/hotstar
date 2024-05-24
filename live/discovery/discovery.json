@@ -4,7 +4,7 @@
         "name": "Animal Planet",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/422ea635-4833-4401-bdaf-7c171c2e472c.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Animal_Planet.m3u8",
+        "link": "api/Animal_Planet.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -15,7 +15,7 @@
         "name": "Discovery Channel",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/51e39f57-66bd-49a5-a166-c57f459f765f.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Discovery_Channel.m3u8",
+        "link": "api/Discovery_Channel.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -26,7 +26,7 @@
         "name": "Discovery Kids",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/636b0db9-e298-43d3-97a2-f628986a0426.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Discovery_Kids.m3u8",
+        "link": "api/Discovery_Kids.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -37,7 +37,7 @@
         "name": "Discovery Science",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/abed6104-df4b-4804-ae09-6040d48d6299.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Discovery_Science.m3u8",
+        "link": "api/Discovery_Science.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -48,7 +48,7 @@
         "name": "Discovery Turbo",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/8104e113-f6d2-46b2-85e2-c2c497eb8307.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Discovery_Turbo.m3u8",
+        "link": "api/Discovery_Turbo.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -59,7 +59,7 @@
         "name": "Discovery+",
         "logo": "https://store-images.s-microsoft.com/image/apps.52584.14423078968512755.43ed3612-6953-40c8-915d-962c273faae9.16d74f07-a28c-49f9-9f94-d419cf165688?mode=scale&q=90&h=225&w=150",
         "group": "Discovery",
-        "link": "Discovery+.m3u8",
+        "link": "api/Discovery+.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -70,7 +70,7 @@
         "name": "DMAX",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/a297d103-9ac7-4a10-8359-1e65abb625cc.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "DMAX.m3u8",
+        "link": "api/DMAX.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -81,7 +81,7 @@
         "name": "Eurosport",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/03/373989eb-46a9-4d3e-8d2e-80a76d77caee.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Eurosport.m3u8",
+        "link": "api/Eurosport.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -92,7 +92,7 @@
         "name": "Food Network",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/683d0900-f8fc-43fa-915f-7bee36ccb3bf.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Food Network.m3u8",
+        "link": "api/Food Network.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -103,7 +103,7 @@
         "name": "HGTV",
         "logo": "https://hgtvhome.sndimg.com/content/dam/images/hgtv/editorial/homepage/HGTV-default-search-image-2017-v1.jpg.rend.hgtvcom.616.462.suffix/1487358575482.jpeg?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "HGTV.m3u8",
+        "link": "api/HGTV.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -114,7 +114,7 @@
         "name": "Investigation Discovery",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/c956570d-b111-4410-93df-83ef1c45ffc9.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "Investigation_Discovery.m3u8",
+        "link": "api/Investigation_Discovery.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -125,7 +125,7 @@
         "name": "TLC",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/16/644fb820-4583-4141-b251-bb2a70f2ca80.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "TLC.m3u8",
+        "link": "api/TLC.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -136,7 +136,7 @@
         "name": "TRVL Channel",
         "logo": "https://ap2-prod-images.disco-api.com/2020/12/05/967c038f-8703-4f64-9446-5a9032c86c87.png?bf=0&f=jpg&p=true&q=85&w=260",
         "group": "Discovery",
-        "link": "TRVL_Channel.m3u8",
+        "link": "api/TRVL_Channel.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
