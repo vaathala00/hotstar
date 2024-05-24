@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Live</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<div class="container">
+
+
+
+   <div class="main-video-container">
+   <!--   <video src="images/vid-1.mp4" loop controls class="main-video"></video> -->
+
+<div class="my-iframe" id="iframe-container">
+      <iframe src="https://c2ag.short.gy/dai" allowfullscreen scrolling="no"></iframe>
+    </div>
+
+      <h5 class="main-vid-title"></h5>
+
+  <a href="https://t.me/vaathala1" target="_blank"><img
+      src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
+
+   </div>
+
+
+   <div class="video-list-container" >
+
+      <!-- <div class="list active">
+       <video src="images/vid-1.mp4" class="list-video"></video>
+         <h3 class="list-title">house flood animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-2.mp4" class="list-video"></video>
+         <h3 class="list-title">zoombie walking animation</h3>
+      </div> -->
+
+<!--  https://cdn2.tamilultra.team/SPTAMILHD/embed.html -->
+
+    <ul id="channel-list">
+<h3>=Star Sports=</h3>
+        <li data-src="https://c2ag.short.gy/dai"> 
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon" >
+         Tamil Server1
+       </li>
+
+        <li data-src="https://live.vkplay.ru/app/embed/tamilgun"> 
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon" >
+         Tamil Server2
+       </li>
+
+      <li data-src="Star Sports 1 HD.htm">
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon">
+      English
+       </li>
+
+      <li data-src="https://crichd.site/ems1.php">
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon">
+        Hindi
+       </li>
+
+
+    </ul>
+<h4 class="list-title">live chat</h4>
+
+<iframe width="350px" height="400px" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&amp;embed_domain=vaathala00.github.io" ></iframe>
+
+</div>
+</div>
+</div>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+
+
+<script type="text/javascript">
+  atOptions = {
+    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
+</script>
+
+<!-- channel list -->
+
+    <script>
+      const channelList = document.getElementById("channel-list");
+      const iframeContainer = document.getElementById("iframe-container");
+      let currentIframe = null;
+
+      channelList.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI") {
+          const src = event.target.getAttribute("data-src");
+          iframeContainer.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+          if (currentIframe !== null) {
+            currentIframe.remove();
+          }
+          currentIframe = iframeContainer.firstChild;
+        }
+      });
+    </script>
+
+
+</body>
+</html>

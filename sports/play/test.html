@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Live</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<div class="container">
+
+
+
+   <div class="main-video-container">
+   <!--   <video src="images/vid-1.mp4" loop controls class="main-video"></video> -->
+
+<div class="my-iframe" id="iframe-container">
+            <iframe src="https://tamilultra.team/live/sptamil" allowfullscreen class="custom-iframe"scrolling="no" frameborder="0"></iframe>
+    </div>
+
+      <h5 class="main-vid-title"></h5>
+
+  <a href="https://t.me/vaathala1" target="_blank"><img
+      src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
+
+   </div>
+
+
+
+
+
+
+
+   <div class="video-list-container" >
+
+
+      <!-- <div class="list active">
+       <video src="images/vid-1.mp4" class="list-video"></video>
+         <h3 class="list-title">house flood animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-2.mp4" class="list-video"></video>
+         <h3 class="list-title">zoombie walking animation</h3>
+      </div> -->
+
+
+
+    <ul id="channel-list">
+        <li data-src="tam"> 
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon" >
+         Tamil
+       </li>
+
+      <li data-src="eng">
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon">
+      English
+       </li>
+
+      <li data-src="hin">
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon">
+        Hindi
+       </li>
+
+  <li data-src="tel">
+        <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Server 1" class="channel-icon">
+        Telugu
+       </li>
+
+    </ul>
+
+
+
+</div>
+</div>
+</div>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+
+
+<script type="text/javascript">
+  atOptions = {
+    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
+</script>
+
+<!-- channel list -->
+
+    <script>
+      const channelList = document.getElementById("channel-list");
+      const iframeContainer = document.getElementById("iframe-container");
+      let currentIframe = null;
+
+      channelList.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI") {
+          const src = event.target.getAttribute("data-src");
+          iframeContainer.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+          if (currentIframe !== null) {
+            currentIframe.remove();
+          }
+          currentIframe = iframeContainer.firstChild;
+        }
+      });
+    </script>
+
+
+</body>
+</html>

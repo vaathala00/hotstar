@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Live</title>
+
+  <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
+  <script type="text/javascript">jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';</script>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+  <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+  <script src="jwplayer.js"></script>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<div class="container"> 
+
+
+   <div class="main-video-container">
+<div style="position: relative;">
+    <img src="https://i.postimg.cc/hv5gCFMv/photo-2023-11-28-07-45-00-photoaidcom-cropped.png" alt="Logo" style="position: absolute; top: 33px; left: 15px; width: 40px; height: 40px; z-index: 2;">
+ <video id="myElement"  controls autoplay poster="path_to_your_logo_image.png"></video>
+
+      <h5 class="main-vid-title"></h5>
+
+  <a href="https://t.me/vaathala1" target="_blank"><img
+      src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
+
+
+                   <h100>:Change Stream/Langu</h100>
+
+           <select id="languageSelector" onchange="changeStream (this.value)">
+               <option value="tamil_4k">Tamil 4K</option>
+               <option value="spt">Star Sports Tamil </option>
+               <option value="hindi_4k">Hindi 4K</option>
+               <option value="english_4k">English 4K</option>
+               <option value="telugu_4k">Telugu 4K</option>
+               <option value="malayalam_4k">Malayalam 4K</option>
+               <option value="kannada_4k">Kannada 4K</option>
+               <option value="insiders_cam">Insiders Cam </option>
+               <option value="split_cam">Splt Cam </option>
+
+               <!-- Add more options as needed -->
+           </select>
+</div>
+</div>
+
+
+
+   <div class="video-list-container">
+
+      <!-- <div class="list active">
+       <video src="images/vid-1.mp4" class="list-video"></video>
+         <h3 class="list-title">house flood animation</h3>
+      </div>
+
+      <div class="list">
+         <video src="images/vid-2.mp4" class="list-video"></video>
+         <h3 class="list-title">zoombie walking animation</h3>
+      </div> -->
+
+
+   <h4 class="list-title">live chat</h4>
+
+<iframe width="350px" height="400px" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&amp;embed_domain=vaathala00.github.io" ></iframe>
+
+</div>
+</div>
+</div>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+    <div class="logo"></div>
+
+<script type="text/javascript">
+  atOptions = {
+    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
+</script>
+
+<!-- channel list -->
+
+    <script>
+      const channelList = document.getElementById("channel-list");
+      const iframeContainer = document.getElementById("iframe-container");
+      let currentIframe = null;
+
+      channelList.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI") {
+          const src = event.target.getAttribute("data-src");
+          iframeContainer.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+          if (currentIframe !== null) {
+            currentIframe.remove();
+          }
+          currentIframe = iframeContainer.firstChild;
+        }
+      });
+    </script>
+
+ <script type="text/JavaScript">
+               jwplayer("myElement").setup({
+                    "autostart": false,
+                    "preload": "none",
+                    "repeat": true,
+                    "Volume": "100",
+                    "mute": false,
+                    "stretching": "exactfit",
+                    "width": "100%",
+                    "setPip": false,
+
+                    "playlist": [{
+                        "sources": [{
+                            "default": false,
+                            "type": "hls",
+                            "file": "",
+                            "label": "0"
+                        }],
+                    }],
+                    "primary": "html5",
+                    "hlshtml": true,
+                    "autostart": true,
+                    //  width: "100%",
+                    aspectratio: "16:9"
+               });
+
+           </script>
+
+
+<script>
+   var playerInstance;
+   var videoSource;
+
+   document.addEventListener("DOMContentLoaded", function() {
+       playerInstance = jwplayer("myElement");
+       videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/41d6a16977e942e8ae41cba1ae182a69/master.m3u8";
+       loadVideoSource(videoSource);
+   });
+
+   function loadVideoSource(source) {
+       playerInstance.setup({
+           file: source,
+           image: "https://example.com/video_thumbnail.jpg",
+           width: "100%",
+           aspectratio: "16:9",
+           autostart: true
+       });
+   }
+
+   function changeStream(selectedValue) {
+       if (!playerInstance) {
+           playerInstance = jwplayer("myElement");
+       }
+
+       switch (selectedValue) {
+           case "tamil_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/41d6a16977e942e8ae41cba1ae182a69/master.m3u8";
+               break;
+
+           case "spt":
+               videoSource = "https://vaathala00.github.io/stream/tamil/master.m3u8";
+               break;
+
+           case "hindi_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/81e640e5a2c74eb98201959a31a008a3/master.m3u8";
+               break;
+           case "english_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/044ed31ae2974aadb03b5c5e9a67ab06/master.m3u8";
+               break;
+           case "telugu_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/476d87131bcd4ccf97e554bbe5e5fed7/master.m3u8";
+               break;
+           case "malayalam_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/604578267cfa4dab9a02700efac705ee/master.m3u8";
+               break;
+           case "kannada_4k":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/b33f972cd1544a69963269d8fe70715c/master.m3u8";
+               break;
+           case "split_cam":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/1893486ccd08469e82b3fab606921c26/master.m3u8";
+               break;
+           case "insiders_cam":
+               videoSource = "https://prod-ent-live-gm.jiocinema.com/out/v1/82d7c37dc9ba4ad3ab7966194bee1385/master.m3u8";
+               break;
+
+           // Add casess for other languages as needed
+
+           default:
+               videoSource = "https://prod-sports-south-cf.jiocinema.com/hls/live/2109711/uhd_akamai_atv_avc_tam_ipl_s1_m1100424/master.m3u8";
+               break;
+
+
+       }
+
+       playerInstance.load({
+           file: videoSource
+       });
+   }
+</script>
+
+
+</body>
+</html>

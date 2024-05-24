@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i'>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+<link rel="stylesheet" href="./style.css">
+<link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'><link rel="stylesheet" href="./style.css">
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amita">
+<link rel="shortcut icon" href="https://t4.ftcdn.net/jpg/03/02/12/83/360_F_302128359_q6aCwgAvdYZBPF4XSwxXddLPE0h3Kor1.jpg
+">
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+
+:root {
+  --body-color: #ffffff;
+  --nav-color: #2770ff;
+  --side-nav: #010718;
+  --text-color: #FFF;
+  --search-bar: #F2F2F2;
+  --search-text: #010718;
+   --font-color: #000;
+   --more-color: #EBFF0049;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  height: 100vh;
+  background-color: var(--body-color);
+    font-family: Amita, cursive;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+body.dark {
+  --body-color: #18191A;
+  --nav-color: #242526;
+  --side-nav: #242526;
+  --text-color: #CCC;
+  --search-bar: #242526;
+  --font-color: #fff;
+}
+body.dark nav {
+  border: 1px solid #393838;
+}
+body.dark .search-field input {
+  color: var(--text-color);
+}
+body.dark .search-field i {
+  color: var(--text-color);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 55px;
+  width: 100%;
+  background-color: var(--nav-color);
+  z-index: 100;
+  box-shadow: 0 6px 6px 0 rgb(0,0,0,.4);
+}
+nav .nav-bar {
+  position: relative;
+  height: 100%;
+  max-width: 1000px;
+  width: 100%;
+  background-color: var(--nav-color);
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .nav-bar .sidebarOpen {
+  color: var(--text-color);
+  font-size: 25px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+nav .nav-bar .logo a {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.menu .logo-toggle {
+  display: none;
+}
+
+.nav-bar .nav-links {
+  display: flex;
+  align-items: center;
+}
+.nav-bar .nav-links li {
+  margin: 0 5px;
+  list-style: none;
+}
+.nav-bar .darkLight-searchBox {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li a {
+  position: relative;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: Amita, cursive;
+  padding: 10px;
+}
+.nav-links li a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.nav-links li:hover a::before {
+  opacity: 1;
+}
+
+.darkLight-searchBox .dark-light {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+.darkLight-searchBox .searchToggle {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.dark-light i {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dark-light i.sun {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.searchToggle i {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.searchToggle i.cancel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dark-light.active i.sun {
+  opacity: 1;
+  pointer-events: auto;
+}
+.dark-light.active i.moon {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.searchToggle.active i.cancel {
+  opacity: 1;
+  pointer-events: auto;
+}
+.searchToggle.active i.search {
+  opacity: 0;
+  pointer-events: none;
+}
+.searchToggle.active ~ .search-field {
+  bottom: -74px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.searchBox {
+  position: relative;
+}
+.searchBox .search-field {
+  position: absolute;
+  bottom: -60px;
+  right: 5px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  background-color: var(--nav-color);
+  padding: 3px;
+  border-radius: 6px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.search-field::before {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: -4px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--nav-color);
+  transform: rotate(-45deg);
+  z-index: -1;
+}
+.search-field input {
+  height: 100%;
+  width: 100%;
+  padding: 0 45px 0 15px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Amita, cursive;
+  font-weight: 400;
+  color: var(--search-text);
+  background-color: var(--search-bar);
+}
+.search-field i {
+  position: absolute;
+  color: var(--nav-color);
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+@media (max-width: 790px) {
+  nav .nav-bar .sidebarOpen {
+    display: block;
+  }
+
+  .menu {
+    position: fixed;
+    font-family: Amita, cursive;
+    height: 100%;
+    width: 320px;
+    left: -100%;
+    top: 0;
+    padding: 20px;
+    background-color: var(--nav-color);
+    z-index: 100;
+    transition: all 0.4s ease;
+    box-shadow: 12px 0 12px -6px rgba(0, 0, 0, 0.2);
+  }
+  .menu .logo-toggle {
+    display: block;
+    width: 100%;
+    font-family: Amita, cursive;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav.active .menu {
+    left: 0%;
+  }
+  nav.active .nav-bar .navLogo a {
+    opacity: 0;
+    font-family: Amita, cursive;
+    transition: all 0.3s ease;
+  }
+
+  .logo-toggle .siderbarClose {
+  	font-family: Amita, cursive;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .nav-bar .nav-links {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .nav-links li a {
+    display: block;
+    font-family: Amita, cursive;
+    margin-top: 20px;
+  }
+}
+
+	.alignleft {
+  float: left;
+  margin-left: 5px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: Amita, cursive;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.alignright {
+  float: right;
+  margin-right: 10px;
+  background-color: var(--bg-color);
+  color: #0099cc;
+  font-size: 15px;
+  font-family: Amita, cursive;
+  font-weight: normal;
+}
+h4 {
+  margin-left: 5px;
+  color: #0099cc;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.nta {
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+.cent {
+  font-size: auto;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+div.scrollmenu::-webkit-scrollbar {
+  display: none;
+}
+div.scrollmenu {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+  height: 130px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);"
+}
+
+div.scrollmenu a:hover {
+	filter: blur(3px);
+  transform: scale(0.97);
+  background-color: var(--bg-color);
+}
+div.scrollvoot::-webkit-scrollbar {
+  display: none;
+}
+div.scrollvoot {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.scrollvoot a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+  height: 130px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.scrollvoot a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cen {
+  text-align: center;
+  width: 205px;
+}
+
+.nt {
+  width: 205px; 
+   border-radius: 15px; 
+   height: 123px ; 
+}
+div.scrollme::-webkit-scrollbar {
+  display: none;
+}
+div.scrollme {
+  background-color: var(--bg-color);
+  overflow: auto;
+
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.scrollme a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 255px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.scrollme a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cean {
+  text-align: center;
+  width: 365px;
+}
+.net {
+  width: 365px;
+  border-radius: 15px;
+  height: 230px;
+}
+.in{ 
+   width: 205px; 
+   border-radius: 5px; 
+   height: 110px ; 
+} 
+div.ott::-webkit-scrollbar {
+  display: none;
+}
+div.ott {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.ott a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 110px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.ott a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cn {
+  text-align: center;
+  width: 205px;
+}
+.nit {
+  width: 205px; 
+   border-radius: 15px; 
+   height: 110px ; 
+}
+
+       .nature:hover { 
+filter: blur(3px);
+  transform: scale(0.97);
+  }
+.nature{
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+box-shadow: 2px 2px 5px rgba(0,0,0, .3); 
+	}
+	
+	.up {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: 15px;
+  background-color: #2770ff;
+  border: 2px solid #490a3d; 
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  z-index: 999999;
+}
+
+
+
+footer {
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    background: var(--nav-color);
+    color: var(--font-color);
+}
+
+footer p {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+footer img {
+    width: 45px;
+    margin-bottom: -10px;
+}
+
+html{
+
+    scroll-behavior: smooth;
+
+}
+
+.live-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.nature:hover {
+  filter: none;
+}
+
+div.scrollmenu a:hover,
+div.scrollme a:hover,
+div.scrollvoot a:hover,
+div.ott a:hover {
+  filter: none;
+}
+
+
+.channel {
+position: absolute;
+top: -23px;
+left: -209px;
+font-family: Arial, sans-serif;
+ font-size: 16px; /* Set the font size */
+  font-weight: bold; /* Set the font weight to bold */
+  color: #fff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #673AB7;
+    padding: 1px 7px 1px 7px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    box-shadow: 1px 0px 2px 0px black;
+}
+
+.aligncenter {
+  margin-left: 5px;
+  color: #0099cc;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: Arial, cursive;
+}
+
+<!-- yt -->
+
+.vit {
+  border-radius: 10px; /* Adjust the value to change the roundness of the corners */
+
+}
+
+div.ytt a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 110px;
+  margin: 10px;
+  border-radius: 15px;
+  
+}
+
+
+</style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<nav>
+        <div class="nav-bar">
+             <!--  <i class='bx bx-menu sidebarOpen' ></i> -->
+            <span class="logo navLogo"><a href="#"></a></span> 
+
+
+           <!-- <div class="menu">
+                <div class="logo-toggle">
+                    <span class="logo"><a href="#"></a></span>
+                    <i class='bx bx-x siderbarClose'></i>
+                </div>
+
+
+ 
+
+
+                <ul class="nav-links">
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="sunnxt.html">Sunnxt</a></li>  
+                    <li><a href="http://star7-varun-iptv.rf.gd/?i=2">Star7</a></li>
+                    <li><a href="sonyliv.html">Sonyliv</a></li>
+                    <li><a href="voot.html">Voot</a></li>
+                    <li><a href="discovery.html">Discovery</a></li>
+                    <li><a href="zee5.html">Zee5</a></li>
+                </ul>
+            </div> -->
+
+            <div class="darkLight-searchBox">
+                <div class="dark-light">
+                    <i class='bx bx-moon moon'></i>
+                    <i class='bx bx-sun sun'></i>
+                </div>
+
+                <div class="searchBox">
+                   <div class="searchToggle">
+                    <i class='bx bx-x cancel'></i>
+                    <i class='bx bx-search search'></i>
+                   </div>
+
+                    <div class="search-field">
+                        <input type="text" id="searchInput" placeholder="Search...">
+                        <i class='bx bx-search'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <i class="uil uil-angle-up up"></i>
+	
+		<br>
+			<br>
+		
+<!-- <a href=""> <img class="nature" src="https://c2ag.short.gy/Logo1" width="100%"></a>
+
+<a href=""><img class="nature" src="https://c2ag.short.gy/Logo2" width="100%"></a>
+
+ <a href=""><img class="nature" src="https://img10.hotstar.com/image/upload/f_auto,q_90,w_1080/sources/r1/cms/prod/7087/1607087-h-bd87a605abdf" width="100%" width="100%"></a>
+
+<a href=""><img class="nature" src="https://english.cdn.zeenews.com/sites/default/files/2022/10/17/1104340-indausblog.jpg" width="100%"></a> -->
+
+<script>
+w3.slideshow(".nature", 4000);
+</script>
+
+
+<iframe src="https://bwidget.crictimes.org/" style="width:100%;min-height: 210px;" frameborder="0" scrolling="no"></iframe>
+
+    <!-- <div class="nta"> 
+<h4 class="alignleft">Live </h4>
+</div> 
+<div class="ott"> 
+	<a href="star/main"><div class="cn"> <img class="nit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9GvFWcn9-DG0w2voz1r343BhiXeMiPWc3NtirBfxUgN1M6cL8bN5kzCxFwuIxIpXxpfE&usqp=CAU">  <span  class="channel "></span> <span class="live-tag">Live</span></div></a> 
+
+  <a href="ind+vs+eng/main"><div class="cn"> <img class="nit" src="https://v3img.voot.com/v3Storage/assets/1_test_ind_vs_eng_clean_ctv-1706119545088.jpg"> <span class="live-tag">Live</span></div></a> 
+
+  <a href="wpl/main"><div class="cn"> <img class="nit" src="https://static.toiimg.com/thumb/msid-107072295,width-1280,height-720,resizemode-4/107072295.jpg"> <span class="live-tag">Live</span></div></a> -->
+
+</div>
+
+</div>
+
+
+<div class="nta"> 
+<h4 class="alignleft">IPL 2024</h4>
+</div> 
+<div class="ott"> 
+ 
+  <a href="https://www.google.com/search?client=google-b-d&q=ipl+2024+schedule#sie=lg;/g/11ldjyf34d;5;/m/03b_lm1;mt;fp;1;;;"><div class="cn"> <img class="nit" src="https://i.postimg.cc/Rh4pr94f/indian-t20-league-2024-schedule-1am-main.jpg">  <span  class="channel "></span>  <span class="live-tag"> </span></div> </a> 
+
+  <a href="https://c2ag.short.gy/123"><div class="cn"> <img class="nit" src="https://i.postimg.cc/8zR2Gnj8/jiocinema-banner-1280x720-1682324171969.avif">  <span  class="channel ">Highlights</span>  <span class="live-tag"></span></div></a> 
+
+
+  <a href="ipl/main.html"><div class="cn"> <img class="nit" src="https://i.postimg.cc/Hs8kJFd3/images.jpg">  <span  class="channel ">Star Sports</span>  <span class="live-tag">Live</span></div></a> 
+
+  <a href="ipl/m1.html"><div class="cn"> <img class="nit" src="https://exchange4media.gumlet.io/news-photo/131465-ipl.webp?w=400&dpr=2.6">  <span  class="channel ">Match 1</span>  <span class="live-tag">Live</span></div></a> 
+
+  <a href="ipl/m2.html"><div class="cn"> <img class="nit" src="https://exchange4media.gumlet.io/news-photo/131465-ipl.webp?w=400&dpr=2.6">  <span  class="channel ">Match 2</span>  <span class="live-tag">Live</span></div></a> 
+
+</div>
+
+</div>
+
+	
+<div class="nta"> 
+<h4 class="alignleft">Sports</h4>
+</div> 
+<div class="ott"> 
+	
+ <a href="play/sst2"><div class="cn"> <img class="nit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU">  <br> <span class="aligncenter">Tamil</span> </div></a> 
+
+ <a href="play/sst"><div class="cn"> <img class="nit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU">  <br> <span class="aligncenter">Tamil</span> </div></a>
+ 
+ <a href="play/ssh"><div class="cn"> <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h">  <br> <span class="aligncenter">Hindi</span> </div></a> 
+
+<a href="play/sse"><div class="cn"> <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h">  <br> <span class="aligncenter">English</span> </div></a>
+
+</div>
+
+</div>
+
+ 
+<div class="nta"> 
+<h4 class="alignleft"></h4>
+<a href="#">
+<h4 class="alignright">more»</h4></a> </div> 
+<div class="scrollmenu"> 
+ 
+  <a href="play/tnt"><div class="cen"> <img class="nt" src="https://www.bt.com/content/dam/bt/portal/images/articles/sport/tnt-sports/tntsports.jpg" width="110px" height="110px">   <br> <span class="aligncenter">TNT Sports</span> </div></a> 
+
+  <a href="play/astro"><div class="cen"> <img class="nt" src="https://dj7fdt04hl8tv.cloudfront.net/acm/media/njoi/cricket.png" width="110px" height="110px">   <br> <span class="aligncenter">Astro Cricket</span> </div></a> 
+ 
+ <a href="play/skycricket"><div class="cen"> <img class="nt" src="https://e0.365dm.com/23/07/2048x1152/skysports-cricket-podcast_6230507.jpg" width="110px" height="110px">   <br> <span class="aligncenter">SKY Cricket</span> </div></a> 
+ 
+ <a href="play/18main"><div class="cen"> <img class="nt" src="https://assets.mspimages.in/gear/wp-content/uploads/2022/11/Sports-18.jpg" width="110px" height="110px">   <br> <span class="aligncenter">18 Sports</span> </div></a> 
+ 
+ <a href="play/willow"><div class="cen"> <img class="nt" src="https://cdn6.aptoide.com/imgs/8/2/9/8297c2bdee06363d19f3f7d95ac774ae_fgraphic.jpg" width="110px" height="110px">  <br> <span class="aligncenter">	Willow</span> </div></a> 
+ 
+
+</div>
+
+<div class="nta"> 
+<h4 class="alignleft"></h4>
+<a href="#">
+<h4 class="alignright">more»</h4></a> </div> 
+<div class="scrollmenu"> 
+ 
+	 <a href="sony/11"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg">  <br> <span class="aligncenter">Sony 1</span> </div></a> 
+
+		<a href="sony/12"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg">  <br> <span class="aligncenter">Sony 2</span> </div></a> 
+
+	<a href="sony/13"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg">  <br> <span class="aligncenter">Sony 3</span> </div></a> 
+ 
+        <a href="sony/14"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg">  <br> <span class="aligncenter">Sony 4</span> </div></a> 
+ 
+        <a href="sony/15"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg">  <br> <span class="aligncenter">Sony 5</span> </div></a> 
+ 
+</div>
+ 
+<!-- <div class="nta"> 
+<h4 class="alignleft"></h4>
+<a href="#">
+<h4 class="alignright">more»</h4></a> </div> 
+	<div class="scrollme"> 
+		 <a href="sony/11"><div class="cean"> <img class="net" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg"></div></a> 
+
+		<a href="sony/12"><div class="cean"> <img class="net" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg"></div></a> 
+
+	<a href="sony/13"><div class="cean"> <img class="net" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg"></div></a> 
+ 
+        <a href="sony/14"><div class="cean"> <img class="net" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg"></div></a> 
+ 
+        <a href="sony/15"><div class="cean"> <img class="net" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg"></div></a> 
+ 
+
+</div> -->
+   
+  <!-- <div class="nta"> 
+<h4 class="alignleft">Sunnxt</h4>
+<a href="sunnxt.html">
+<h4 class="alignright">more»</h4></a> </div> 
+<div class="scrollmenu">
+	
+   <a href="https://sunnxt.varun-iptv.repl.co/14020.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/14020/300x300_9dd88de4-18ab-493b-98fe-6eb27e9cbf5e.jpg" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/26569.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/26569/250x250_SunLife_26569_4b759496-79e6-4914-8c0e-976497182ac3.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/9013.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/9025/250x250_SunMusic_9025_555eed5e-5937-4bd5-9dfd-5251e0fe5dc7.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/14019.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/14019/250x250_GeminiTVHD_14019_65bc2d50-f266-4521-8fd5-38791f3272b4.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/26570.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/26570/250x250_GeminiMoviesHD_26570_0ca1d1e8-f04d-41d0-943d-5e8948e271bc.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/26568.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/26568/250x250_GeminiMusicHD_26568_2dc0c46d-afdf-407d-8862-3c2df67bee5b.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/30846.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/30846/250x250_UdayaTVHD_30846_25b8347b-f9bf-4d83-89d8-54f0a06b6dce.png" width="110px" height="110px"></div></a> 
+       
+       <a href="https://sunnxt.varun-iptv.repl.co/26574.html"> 
+       <div class="cen"> <img class="nt" src="https://sund-images.sunnxt.com/26574/250x250_SuryaTVHD_26574_01dc275d-8c77-418d-9c90-bc889ff5955d.png" width="110px" height="110px"></div></a> 
+       
+    </div>
+    
+<div class="nta"> 
+<h4 class="alignleft">Discovery</h4>
+<a href="discovery.html">
+<h4 class="alignright">more»</h4></a> </div> 
+<div class="scrollmenu">
+	<a href="https://discovery.varun-iptv.repl.co/play.php?id=Discovery_Channel"> 
+       <div class="cen"> <img class="nt" src="https://hcil.umd.edu/wp-content/uploads/2015/12/Discovery-Channel-logo.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=Animal_Planet"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/17/6bfada34-767b-4654-a6a2-526173c6da8c.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=Discovery_Science"> 
+       <div class="cen"> <img class="nt" src="https://upload.wikimedia.org/wikipedia/en/f/f8/DiscoveryChannel%28India%29Logo.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=TLC"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/16/644fb820-4583-4141-b251-bb2a70f2ca80.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=Discovery_Turbo"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/16/8104e113-f6d2-46b2-85e2-c2c497eb8307.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=Investigation_Discovery"> 
+       <div class="cen"> <img class="nt" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Investigation_Discovery_Logo_2018.svg/1200px-Investigation_Discovery_Logo_2018.svg.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=Eurosport"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/17/d187c23d-46da-4a59-8929-7534b7a01c0c.png" width="110px" height="110px"></div></a> 
+        
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=DMAX"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/16/a297d103-9ac7-4a10-8359-1e65abb625cc.png" width="110px" height="110px"></div></a> 
+
+      <a href="https://discovery.varun-iptv.repl.co/play.php?id=TRVL_Channel"> 
+       <div class="cen"> <img class="nt" src="https://ap2-prod-images.disco-api.com/2020/12/05/967c038f-8703-4f64-9446-5a9032c86c87.png" width="110px" height="110px"></div></a> 
+
+ </div>
+ 
+ <div class="nta"> 
+<h4 class="alignleft"></h4>
+<a href="sonyliv.html">
+<h4 class="alignright">more»</h4></a> </div> 
+	<div class="scrollmenu"> 
+	<a href="player.html?varun=https://dai.google.com/linear/hls/event/dBdwOiGaQvy0TA1zOsjV6w/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_HD.png"></div></a> 
+ 
+ <a href="player.html?varun=https://dai.google.com/linear/hls/event/j-YEIDwORxubtP_967VcZg/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_aath.png"></div></a> 
+
+<a href="player.html?varun=https://dai.google.com/linear/hls/event/dhPrGRwDRvuMQtmlzppzQQ/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_Pal.png"></div></a> 
+ 
+ <a href="player.html?varun=https://dai.google.com/linear/hls/event/CrTivkDESWqwvUj3zFEYEA/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_SAB_HD.png"></div></a> 
+
+<a href="player.html?varun=https://dai.google.com/linear/hls/event/gX5rCBf6Q7-D5AWY-sovzQ/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_Wah.png"></div></a> 
+ 
+ <a href="player.html?varun=https://dai.google.com/linear/hls/event/MdQ5Zy-PSraOccXu8jflCg/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_MAX2.png"></div></a> 
+ 
+ <a href="player.html?varun=https://dai.google.com/linear/hls/event/I2phC6tgTDuJngxw9gJgPw/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_Marathi_SD.png"></div></a> 
+ 
+ <a href="player.html?varun=https://dai.google.com/linear/hls/event/x7rXWd2ERZ2tvyQWPmO1HA/master.m3u8"><div class="cen"> <img class="nt" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_Pix_HD.png"></div></a> 
+ 
+</div> 
+   
+   
+   
+   
+<div class="nta"> 
+<h4 class="alignleft">Voot</h4>
+<a href="voot.html">
+<h4 class="alignright">more»</h4></a> </div> 
+	<div class="scrollvoot"> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=144"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_HD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=1368"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_SD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=1370"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Rishtey.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=756"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Bengali_HD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=1369"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Bangla_SD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=757"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Kannada_HD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=1370"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Kannada_SD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=755"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="http://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_Marathi_HD.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=VOOTS25"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="https://imgur.com/yIaXdpe.png" width="110px" height="110px"> 
+    </div></a> 
+   <a href="https://voot.varun-iptv.repl.co/play.php?id=VOOTS26"> 
+    <div class="\&quot;cen\&quot;"> 
+     <img class="in" src="https://imgur.com/yIaXdpe.png" width="110px" height="110px"> 
+    </div></a> </div> -->
+<!-- partial 
+	
+	
+    <footer>
+        <p>Copyright &copy; 2023  <img src="https://i.postimg.cc/vT2qvD6w/1652236607904-removebg.png" alt="logo">  All Rights Reserved.</p>
+    </footer>
+	-->
+	
+	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js'></script>
+
+  <script>
+const body = document.querySelector("body"),
+      nav = document.querySelector("nav"),
+      modeToggle = document.querySelector(".dark-light"),
+      searchToggle = document.querySelector(".searchToggle"),
+      sidebarOpen = document.querySelector(".sidebarOpen"),
+      siderbarClose = document.querySelector(".siderbarClose");
+
+      let getMode = localStorage.getItem("mode");
+          if(getMode && getMode === "dark-mode"){
+            body.classList.add("dark");
+          }
+
+// js code to toggle dark and light mode
+      modeToggle.addEventListener("click" , () =>{
+        modeToggle.classList.toggle("active");
+        body.classList.toggle("dark");
+
+        // js code to keep user selected mode even page refresh or file reopen
+        if(!body.classList.contains("dark")){
+            localStorage.setItem("mode" , "light-mode");
+        }else{
+            localStorage.setItem("mode" , "dark-mode");
+        }
+      });
+
+// js code to toggle search box
+        searchToggle.addEventListener("click" , () =>{
+        searchToggle.classList.toggle("active");
+      });
+ 
+      
+//   js code to toggle sidebar
+sidebarOpen.addEventListener("click" , () =>{
+    nav.classList.add("active");
+});
+
+body.addEventListener("click" , e =>{
+    let clickedElm = e.target;
+
+    if(!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")){
+        nav.classList.remove("active");
+    }
+});
+
+const up = document.querySelector('.up')
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+    up.style.display = "block"
+  } else {
+    up.style.display = "none"
+  }
+  })
+  
+  up.addEventListener('click', () => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0
+})
+
+window.addEventListener('scroll', () => {
+  if (document.body.scrollTop > 1200 || document.documentElement.scrollTop > 1200) {
+    htmlbar.classList.add('activehtml')
+    cssbar.classList.add('activecss')
+    jsbar.classList.add('activejs')
+  }
+})
+
+</script>
+
+
+
+</body>
+</html>
