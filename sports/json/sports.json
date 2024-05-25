@@ -6,7 +6,7 @@
   "group": "Jio+",
   "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
   "key": "616829e81c6f9d14f944ae7c7c5082b1",
-  "kid": "1970addcf9ad5d43ab6d6e3b508986a2"
+  "keyId": "1970addcf9ad5d43ab6d6e3b508986a2"
 },
 
 {
@@ -16,7 +16,7 @@
   "group": "Jio+",
   "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
   "license_key": "616829e81c6f9d14f944ae7c7c5082b1",
-  "kid": "1970addcf9ad5d43ab6d6e3b508986a2"
+  "keyId": "1970addcf9ad5d43ab6d6e3b508986a2"
 }
 
 ]
