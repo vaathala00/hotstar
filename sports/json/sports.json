@@ -1,4 +1,27 @@
 [
+
+    {
+        "license_key": "",
+        "license_key2": "",
+        "channel_id": "",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Star Sports1",
+        "url": "",
+        
+     },
+
+    {
+        "license_key": "1970addcf9ad5d43ab6d6e3b508986a2",
+        "license_key2": "616829e81c6f9d14f944ae7c7c5082b1",
+        "channel_id": "",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Star Sports Hindi",
+        "url": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
+        
+     },
+
     {
         "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
         "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c",
