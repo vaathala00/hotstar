@@ -47,7 +47,7 @@
         "logo": "https://aimages.willow.tv/wlo_logo_200_200.jpg",
         "name": "Willow Cricket HD",
         "url": "https://linear-novi.stvacdn.spectrum.com/LIVE/1131/dash/cenc/WLLOHD_10364/manifest.mpd",
-        "channel_key":{"keys":[{"kty":"oct","kid":"ZlPAXkL8T6yPSdfL+ZSY/g","k":"O4jyz/Ov/vILJlyEC6/AzA"}],"type":"temporary"}
+
      },
     {
         "license_key": "0003f2a72d21efd159d45a3a74decd84",
