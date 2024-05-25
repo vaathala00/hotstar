@@ -11,9 +11,9 @@
     "id": "2",
     "name": "Video 2",
     "logo": "https://example.com/logo2.png",
-    "link": "https://example.com/video2.mpd",
-    "kid": "SomeKeyIdForVideo2",
-    "k": "SomeKeyForVideo2"
+    "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
+    "kid": "ebb38a1ab37655b78316017ba84f8935",
+    "k": "0ac6d4cfd9cd499c06c7c6cab034984a"
   },
   {
     "id": "3",
