@@ -1,4 +1,17 @@
 [
+
+    {
+        "license_key": "",
+        "license_key2": "",
+        "channel_id": "",
+        "group": "Cricket",
+        "logo": "",
+        "name": "",
+        "url": "",
+        "channel_key":{"keys":[{"kty":"oct","kid":"A8Lgry+BWfnwzptdvIZfEA","k":"zYTtE2sMxx+KuM1NT2ouTA"}],"type":"temporary"}
+     },
+
+
     {
         "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
         "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c",
@@ -40,14 +53,13 @@
         "channel_key":{"keys":[{"kty":"oct","kid":"IvvvHBzXJek5fsFkVfCCEA","k":"eupDzZPCSqmDTstJhPf9Wg"}],"type":"temporary"}
      },
     {
-        "license_key": "6653c05e42fc4fac8f49d7cbf99498fe",
-        "license_key2": "3b88f2cff3affef20b265c840bafc0cc",
+
         "channel_id": "828",
         "group": "Cricket",
         "logo": "https://aimages.willow.tv/wlo_logo_200_200.jpg",
         "name": "Willow Cricket HD",
         "url": "https://linear-novi.stvacdn.spectrum.com/LIVE/1131/dash/cenc/WLLOHD_10364/manifest.mpd",
-
+        "channel_key":{"keys":[{"kty":"oct","kid":"ZlPAXkL8T6yPSdfL+ZSY/g","k":"O4jyz/Ov/vILJlyEC6/AzA"}],"type":"temporary"}
      },
     {
         "license_key": "0003f2a72d21efd159d45a3a74decd84",
