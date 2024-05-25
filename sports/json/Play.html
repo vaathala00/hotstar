@@ -541,21 +541,28 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 var data = JSON.parse(xhr.responseText);
                 var videoData = data.find(video => video.id === id);
 
-                jwplayer("myElement").setup({
-                    title: videoData.name,
-                    description: "VaathalaTV",
-                    image: videoData.logo,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    file: videoData.link,
-                    type: "hls",
-                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
+jwplayer("myElement").setup({
+    title: videoData.name,
+    description: "VaathalaTV",
+    image: videoData.logo,
+    aspectratio: '16:9',
+    width: '100%',
+    mute: false,
+    autostart: true,
+    file: videoData.link,
+    type: "mpd", // Set type to "mpd" for DASH stream
+    drm: {
+        clearkey: {
+            keyId: videoData.kid,
+            key: videoData.k
+        }
+    },
+    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
+    sharing: {
+        sites: ['facebook', 'twitter']
+    }
+});
+
             }
         };
         xhr.open('GET', 'sports.json', true);

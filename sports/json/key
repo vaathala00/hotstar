@@ -1,0 +1,545 @@
+[
+
+    {
+        "license_key": "",
+        "license_key2": "",
+        "channel_id": "",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Star Sports1",
+        "url": "",
+        
+     },
+
+    {
+        "license_key": "616829e81c6f9d14f944ae7c7c5082b1",
+        "license_key2": "1970addcf9ad5d43ab6d6e3b508986a2",
+        "channel_id": "200",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Star Sports Hindi",
+        "url": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
+        
+     },
+
+    {
+        "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
+        "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c",
+        "channel_id": "824",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Astro Cricket",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2504/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"A8Lgry+BWfnwzptdvIZfEA","k":"zYTtE2sMxx+KuM1NT2ouTA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
+        "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c",
+        "channel_id": "825",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Astro Cricket Primary",
+        "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_primary.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"A8Lgry+BWfnwzptdvIZfEA","k":"zYTtE2sMxx+KuM1NT2ouTA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "03c2e0af2f8159f9f0ce9b5dbc865f10",
+        "license_key2": "cd84ed136b0cc71f8ab8cd4d4f6a2e4c",
+        "channel_id": "826",
+        "group": "Cricket",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/197_144.png",
+        "name": "Astro Cricket OTT",
+        "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2504/default_ott.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"A8Lgry+BWfnwzptdvIZfEA","k":"zYTtE2sMxx+KuM1NT2ouTA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "22fbef1c1cd725e9397ec16455f08210",
+        "license_key2": "7aea43cd93c24aa9834ecb4984f7fd5a",
+        "channel_id": "827",
+        "group": "Cricket",
+        "logo": "https://te.legra.ph/file/a4161fec63c07a3e5e726.jpg",
+        "name": "Astro Cricket UHD",
+        "url": "https://staging-linearjitp-playback.astro.com.my/dash-wv/linear/1601/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"IvvvHBzXJek5fsFkVfCCEA","k":"eupDzZPCSqmDTstJhPf9Wg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "6653c05e42fc4fac8f49d7cbf99498fe",
+        "license_key2": "3b88f2cff3affef20b265c840bafc0cc",
+        "channel_id": "828",
+        "group": "Cricket",
+        "logo": "https://aimages.willow.tv/wlo_logo_200_200.jpg",
+        "name": "Willow Cricket HD",
+        "url": "https://linear-novi.stvacdn.spectrum.com/LIVE/1131/dash/cenc/WLLOHD_10364/manifest.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"ZlPAXkL8T6yPSdfL+ZSY/g","k":"O4jyz/Ov/vILJlyEC6/AzA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003f2a72d21efd159d45a3a74decd84",
+        "license_key2": "df0ec40586d641f3d4728ab5fd62adc3",
+        "channel_id": "829",
+        "group": "Cricket",
+        "logo": "https://media.info/i/lf/0/1507600280/1134.png",
+        "name": "Sky Sports Cricket",
+        "url": "https://linear003-gb-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_sd/Live/channel(skysportscricket)/manifest_sd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAPypy0h79FZ1Fo6dN7NhA","k":"3w7EBYbWQfPUcoq1/WKtww"}],"type":"temporary"}
+     },
+    {
+        "license_key": "00033a7801c324b97dd9997d15cd1e6d",
+        "license_key2": "da90342266ae32a331a83bd05d6308bd",
+        "channel_id": "830",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/PQjBQK8/c4ht1v6-Tle-Nsx-3x7-FWv-Clx-F24-Vaw-KVHkwu-Lj-GG1h7-G4g-Ftq-QUktfw-Mal-REwh-Us-Ql-NSz8ze-AUw-s176-c.jpg",
+        "name": "Sky Sports Football",
+        "url": "https://linear005-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(sportsfootball50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAM6eAHDJLl92Zl9Fc0ebQ","k":"2pA0ImauMqMxqDvQXWMIvQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003e5d66d7501ff2930c80e9b5609fc",
+        "license_key2": "32661be41b5b713dcd88683cd389af21",
+        "channel_id": "831",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/ctYDYht/05qw-Hae-400x400.jpg",
+        "name": "Sky Sports Premier League",
+        "url": "https://linear010-gb-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_sd/Live/channel(skysportspremierleague)/manifest_sd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAPl1m11Af8pMMgOm1YJ/A","k":"MmYb5BtbcT3NiGg804mvIQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003e68c20290ea35eec1e3bceafa5b5",
+        "license_key2": "bc799e40dd3e4e3257d746ebc036c992",
+        "channel_id": "832",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/8dQ1yxs/download.jpg",
+        "name": "Sky Sports F1",
+        "url": "https://linear004-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(sportsf150)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAPmjCApDqNe7B47zq+ltQ","k":"vHmeQN0+TjJX10brwDbJkg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003276bbe0b7f5c9c05ec201bddf545",
+        "license_key2": "a3546a8bd8d03e6f3ca48629ea45ebb8",
+        "channel_id": "833",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/xDT0qG4/download-1.jpg",
+        "name": "Sky Sports Golf",
+        "url": "https://linear006-gb-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_sd/Live/channel(skysportsgolf)/manifest_sd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAMna74Lf1ycBewgG931RQ","k":"o1Rqi9jQPm88pIYp6kXruA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003c16cd15b85b5fb9e849c67e7a766",
+        "license_key2": "7865ecc481cb767dd4051bc5a5e38095",
+        "channel_id": "834",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/T8zzMwv/sky-sports-main-event.png",
+        "name": "Sky Sports Main Event",
+        "url": "https://linear007-gb-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_sd/Live/channel(skysportsmainevent)/manifest_sd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"eGXsxIHLdn3UBRvFpeOAlQ","k":"AAPBbNFbhbX7noScZ+enZg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0003a6c61c2b2f7f0a9d760ac83c06d8",
+        "license_key2": "7305fa96d356316f2d544bfc78a6922c",
+        "channel_id": "835",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Sky-sports-main-mix.jpg",
+        "name": "Sky Sports Mix",
+        "url": "https://linear032-gb-dash1-prd-ll.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(sportsmix50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAOmxhwrL38KnXYKyDwG2A","k":"cwX6ltNWMW8tVEv8eKaSLA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "00362452ed102000ccea64c311921dc2",
+        "license_key2": "02f27bd6caab7633d3083b94d3958b1c",
+        "channel_id": "836",
+        "logo": "https://www.thesportsdb.com/images/media/tvlogo/Sky_Sport_Uno.png",
+        "group": "Sports",
+        "name": "SKY SPORT Uno",
+        "url": "https://linear301-it-dash1-prd-ll.cdn13.skycdp.com/016a/31023/FHD/skysportuno/master_stereo.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"ADYkUu0QIADM6mTDEZIdwg","k":"AvJ71sqrdjPTCDuU05WLHA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0005f5067d785a42dc5167ba06126ca8",
+        "license_key2": "8f9987d3153d003a23f34994501141d9",
+        "channel_id": "837",
+        "group": "Sports",
+        "logo": "https://tntsports.cl/arte/logo_tntsports_hd.svg",
+        "name": "TNT Sports 1",
+        "url": "https://linear036-ie-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(tnt1sport50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAX1Bn14WkLcUWe6BhJsqA","k":"j5mH0xU9ADoj80mUUBFB2Q"}],"type":"temporary"}
+     },
+    {
+        "license_key": "00034ab4ec2fbf01848ac5157a314d43",
+        "license_key2": "92d1b98a91f3f39285e4b6315608b3ee",
+        "channel_id": "838",
+        "group": "Sports",
+        "logo": "https://tntsports.cl/arte/logo_tntsports_2.svg",
+        "name": "TNT Sports 2",
+        "url": "https://linear037-ie-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(tnt2sport50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AANKtOwvvwGEisUVejFNQw","k":"ktG5ipHz85KF5LYxVgiz7g"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0005d81e9c8dd58b72ebd87d54a78009",
+        "license_key2": "01924a06ecbe6296e756e35acdd7c30e",
+        "channel_id": "839",
+        "group": "Sports",
+        "logo": "https://tntsports.cl/arte/logo_tntsports_3hd.svg",
+        "name": "TNT Sports 3",
+        "url": "https://linear036-ie-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(tnt3sport50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAXYHpyN1Yty69h9VKeACQ","k":"AZJKBuy+YpbnVuNazdfDDg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "00032335f1860c8cf0f5e4510c9619d9",
+        "license_key2": "fa0830e62a308d00d09a916df66ccd1a",
+        "channel_id": "840",
+        "group": "Sports",
+        "logo": "https://media.info/i/lf/600/1690027975/1491.png",
+        "name": "TNT Sports.4",
+        "url": "https://linear037-ie-dash1-prd-ak.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(tnt4sport50)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAMjNfGGDIzw9eRRDJYZ2Q","k":"+ggw5iowjQDQmpFt9mzNGg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "e76ae17d861546be9c238e6582509c2c",
+        "license_key2": "de1a91e2306bf8442236a80477f526e1",
+        "channel_id": "841",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/269ed55c8f182f44bf5fa.jpg",
+        "name": "SSC 1 HD",
+        "url": "https://ssc-1-on-prem-ak.akamaized.net/out/v1/ec938957da2849879f0cfac7e309ff38/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"52rhfYYVRr6cI45lglCcLA","k":"3hqR4jBr+EQiNqgEd/Um4Q"}],"type":"temporary"}
+     },
+    {
+        "license_key": "b8763ccad3d146c2b15f8a77a4d6d733",
+        "license_key2": "ab87f6ae46b2dc187bd94cbb48cfe074",
+        "channel_id": "842",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/a7f6c46c3a551b4cb5adb.jpg",
+        "name": "SSC 2 HD",
+        "url": "https://ssc-2-on-prem-ak.akamaized.net/out/v1/d9a2acf5f809461ca47714440fcbc0f4/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"uHY8ytPRRsKxX4p3pNbXMw","k":"q4f2rkay3Bh72Uy7SM/gdA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "c3af2aa1da4a41cbb37b1dbe43b46782",
+        "license_key2": "b6b74f29f6d1501b989c96aec4dae599",
+        "channel_id": "843",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/75f1ca37dc911defbe0f8.jpg",
+        "name": "SSC 3 HD",
+        "url": "https://ssc-3-on-prem-ak.akamaized.net/out/v1/ad2b1abef05c419aa6a4e6aee6d269a2/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"w68qodpKQcuzex2+Q7Rngg","k":"trdPKfbRUBuYnJauxNrlmQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "2c506baa39a74674874ae2ab8bbc792f",
+        "license_key2": "1fa11c606eea3ba805f3d2efa537b1fa",
+        "channel_id": "844",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/dc7073e15cedcc60c928f.jpg",
+        "name": "SSC 4 HD",
+        "url": "https://ssc-4-on-prem-ak.akamaized.net/out/v1/3e442c7dad1b44b6a0914aa26b62a892/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"LFBrqjmnRnSHSuKri7x5Lw","k":"H6EcYG7qO6gF89LvpTex+g"}],"type":"temporary"}
+     },
+    {
+        "license_key": "150150f30a8140a2bfda5d1b3fbb2d4b",
+        "license_key2": "dad19250368b129f003817b778d65dae",
+        "channel_id": "845",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/c4b83bd89021128acd3b4.jpg",
+        "name": "SSC 5 HD",
+        "url": "https://ssc-5-on-prem-cw-ak.akamaized.net/out/v1/ee54cd9a3f844ceb8249f430733f9c00/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"FQFQ8wqBQKK/2l0bP7stSw","k":"2tGSUDaLEp8AOBe3eNZdrg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0bf5a32868224a6f9f3a749a9ea20eb2",
+        "license_key2": "0ace749c97932aa44434da3a88c1ee69",
+        "channel_id": "846",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/dbf43842373aa70c8693b.jpg",
+        "name": "SSC Extra 1 HD",
+        "url": "https://ssc-extra1-on-prem-cw-ak.akamaized.net/out/v1/d309ac98b822425d9435cca654211498/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"C/WjKGgiSm+fOnSanqIOsg","k":"Cs50nJeTKqRENNo6iMHuaQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "fc98baf530ac49aea60a7bf50929aa91",
+        "license_key2": "f8c40722bb6a0cf822588661740a08bb",
+        "channel_id": "847",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/abcaaa075acb1c4bad599.jpg",
+        "name": "SSC Extra 2 HD",
+        "url": "https://ssc-extra2-on-prem-ak.akamaized.net/out/v1/a525c44d152f4d238aa21af75945e29c/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"/Ji69TCsSa6mCnv1CSmqkQ","k":"+MQHIrtqDPgiWIZhdAoIuw"}],"type":"temporary"}
+     },
+    {
+        "license_key": "9b05d5f11a0b422d86354c34782ed2bc",
+        "license_key2": "82aef319b4cfc71fd48cdd495ee79786",
+        "channel_id": "848",
+        "group": "Sports",
+        "logo": "https://te.legra.ph/file/0c575ad37218aef1ef29e.jpg",
+        "name": "SSC Extra 3 HD",
+        "url": "https://ssc-extra3-on-prem-cw-ak.akamaized.net/out/v1/9d373d000ab64078b131f9d4c18e3502/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"mwXV8RoLQi2GNUw0eC7SvA","k":"gq7zGbTPxx/UjN1JXueXhg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "efda647dad723563b625be8c05ee6110",
+        "license_key2": "6776985938b332164b97b81fe566a34a",
+        "channel_id": "849",
+        "group": "Sports",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ72VAmvKxUnMQg2OiiaqPDTUW2iTVOlm6fg&usqp=CAU",
+        "name": "Astro Arena HD",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2604/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"79pkfa1yNWO2Jb6MBe5hEA","k":"Z3aYWTizMhZLl7gf5WajSg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "22fbef1c1cd725e9397ec16455f08210",
+        "license_key2": "7aea43cd93c24aa9834ecb49",
+        "channel_id": "850",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/308_144.png",
+        "name": "ASTRO SuperSports UHD",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/1601/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"IvvvHBzXJek5fsFkVfCCEA","k":"eupDzZPCSqmDTstJhPf9Wg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0005888b503e9ca2bc49d35ba00df2d9",
+        "license_key2": "74c2df857d2fab7bac13a627db6424fe",
+        "channel_id": "851",
+        "group": "Sports",
+        "logo": "https://cdn.comedy.co.uk/images/channels/tnt_sports_1.jpg",
+        "name": "TNT 1 HD",
+        "url": "https://linear014-ie-dash1-prd-cf.cdn.skycdp.com/016a/Content/DASH_003_hd/Live/channel(tntsport1)/manifest_hd.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"AAWIi1A+nKK8SdNboA3y2Q","k":"dMLfhX0vq3usE6Yn22Qk/g"}],"type":"temporary"}
+     },
+    {
+        "license_key": "2d846f13c5bd43f3a456d9e958447f17",
+        "license_key2": "47e59e0ccb28b0ffa7ce830fd2519539",
+        "channel_id": "852",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/8/82/Espn_deportes.png",
+        "name": "ESPN Deportes HD",
+        "url": "https://cdn.live.vidgo.com/Content/DASH_WV/Live/channel(71914-ESPNDHD)/manifest.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"LYRvE8W9Q/OkVtnpWER/Fw","k":"R+WeDMsosP+nzoMP0lGVOQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "cbc2a0c7a38df0aa3333cd71841d3b0d",
+        "license_key2": "aac61b730e2ac1df23f1e872e7541c1b",
+        "channel_id": "853",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Fox_Sports_1_logo.svg/1280px-Fox_Sports_1_logo.svg.png",
+        "name": "FOX SPORTS 1 HD",
+        "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports/SA_Live_dash_enc_2A/FoxSports.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"y8Kgx6ON8KozM81xhB07DQ","k":"qsYbcw4qwd8j8ehy51QcGw"}],"type":"temporary"}
+     },
+    {
+        "license_key": "c98ddffc470fe449ae1a8d6492116976",
+        "license_key2": "5086d370e840010232cf4532b16e197f",
+        "channel_id": "854",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/2015_Fox_sports_logo.svg/1200px-2015_Fox_sports_logo.svg.png",
+        "name": "FOX SPORTS 2 HD",
+        "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports2HD/SA_Live_dash_enc_2A/FoxSports2HD.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"yY3f/EcP5EmuGo1kkhFpdg","k":"UIbTcOhAAQIyz0UysW4Zfw"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0cbc4d3b4fbd9af512acb2488bb42910",
+        "license_key2": "30528c4ef882954e5707cd1001d66121",
+        "channel_id": "855",
+        "group": "Sports",
+        "logo": "https://seeklogo.com/images/W/WWE-logo-5569E9F466-seeklogo.com.png",
+        "name": "WWE HD",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2603/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"DLxNO0+9mvUSrLJIi7QpEA","k":"MFKMTviClU5XB80QAdZhIQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0fcdb17278e64872ace0a5813519e66e",
+        "license_key2": "1dc66971c304cff2dfe83d523092c2cd",
+        "channel_id": "856",
+        "group": "Sports",
+        "logo": "https://i.postimg.cc/zfZdtZRQ/image.png",
+        "name": "TENNIS CHANNEL",
+        "url": "https://linear-novi.stvacdn.spectrum.com/LIVE/1117/dash/cenc/TENISHD_00224/manifest.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"D82xcnjmSHKs4KWBNRnmbg","k":"HcZpccMEz/Lf6D1SMJLCzQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "9bfeb5068725617dbad6338473da6d10",
+        "license_key2": "06577ffcc4935ba24aff4c4c9dd6846d",
+        "channel_id": "857",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8c/PS_Logo_STACKED_4.png",
+        "name": "PREMIER Sports",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2601/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"m/61BoclYX261jOEc9ptEA","k":"Bld//MSTW6JK/0xMndaEbQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "c0e1804aa1d9fd9c41c41bf0f61a5f10",
+        "license_key2": "758823e4eabb6e4c8c036d073db46b8c",
+        "channel_id": "858",
+        "group": "Sports",
+        "logo": "https://www.lyngsat.com/logo/tv/ss/spotv-kr.png",
+        "name": "SPOTV 1 HD",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5058/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"wOGASqHZ/ZxBxBvw9hpfEA","k":"dYgj5Oq7bkyMA20HPbRrjA"}],"type":"temporary"}
+     },
+    {
+        "license_key": "5efd26da5001363b4d6fa4a9c812ad10",
+        "license_key2": "ed6d67d953d14b026b2602cf8846577e",
+        "channel_id": "859",
+        "group": "Sports",
+        "logo": "https://www.lyngsat.com/logo/tv/ss/spotv-2-kr.png",
+        "name": "SPOTV 2 HD",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5079/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"Xv0m2lABNjtNb6SpyBKtEA","k":"7W1n2VPRSwJrJgLPiEZXfg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "1a655189ab5c49eb235308c2b1a9e710",
+        "license_key2": "3c4508af348844107f5e026a4fd6b16e",
+        "channel_id": "860",
+        "group": "Sports",
+        "logo": "https://i.postimg.cc/28SJpSRQ/Screenshot-2024-01-21-13-30-15-22-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
+        "name": "beIN Sports",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/408/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"GmVRiatcSesjUwjCsannEA","k":"PEUIrzSIRBB/XgJqT9axbg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "39c175581e237eff9559607eb9b23c10",
+        "license_key2": "5102b12aac7756c65dcb46a101d960d3",
+        "channel_id": "861",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Logo_bein_sports_2.png/1200px-Logo_bein_sports_2.png",
+        "name": "beIN Sports 2",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5066/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"OcF1WB4jfv+VWWB+ubI8EA","k":"UQKxKqx3VsZdy0ahAdlg0w"}],"type":"temporary"}
+     },
+    {
+        "license_key": "20c884ef8ed26b2762f8b1a78f2d1910",
+        "license_key2": "042a21bf236ca729b1e343ed6e0a6337",
+        "channel_id": "862",
+        "group": "Sports",
+        "logo": "http://linear-poster.astro.com.my/prod/logo/beIN_SPORTS3_V2.png",
+        "name": "beIN Sports 3",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/2705/default.mpd|X-Forwarded-For=38.54.2.195",
+        "channel_key":{"keys":[{"kty":"oct","kid":"IMiE747Saydi+LGnjy0ZEA","k":"BCohvyNspymx40PtbgpjNw"}],"type":"temporary"}
+     },
+    {
+        "license_key": "ead0335d60401225727a6d531e9c2710",
+        "license_key2": "1ee3b252227c5c2ec9378c833d2e14ff",
+        "channel_id": "863",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/154_144.png",
+        "name": "Astro SuperSport HD 1",
+        "url": "https://staging-linearjitp-playback.astro.com.my/dash-wv/linear/601/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"6tAzXWBAEiVyem1THpwnEA","k":"HuOyUiJ8XC7JN4yDPS4U/w"}],"type":"temporary"}
+     },
+    {
+        "license_key": "8f1da399325247eca6acdd7bafb95fa2",
+        "license_key2": "41f234fb88590af3b0d224111a61bf71",
+        "channel_id": "864",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/138_144.png",
+        "name": "Astro SuperSport HD 2",
+        "url": "https://d3j4fjrwclc3o8.cloudfront.net/CH4/masterCH4.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"jx2jmTJSR+ymrN17r7lfog","k":"QfI0+4hZCvOw0iQRGmG/cQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "0d6d2a1ac8d14e19b17455650770cd99",
+        "license_key2": "ff65174f8ec5d4c88e8d8a21968563cf",
+        "channel_id": "865",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/164_144.png",
+        "name": "Astro SuperSport HD 3",
+        "url": "https://d3j4fjrwclc3o8.cloudfront.net/CH5/masterCH5.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"DW0qGsjRThmxdFVlB3DNmQ","k":"/2UXT47F1MiOjYohloVjzw"}],"type":"temporary"}
+     },
+    {
+        "license_key": "79f4028730acca9ab8b00f26158ddb10",
+        "license_key2": "91febe843c08c7cc523efd827292e40e",
+        "channel_id": "866",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/241_144.png",
+        "name": "Astro SuperSport HD 4",
+        "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2506/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"efQChzCsypq4sA8mFY3bEA","k":"kf6+hDwIx8xSPv2CcpLkDg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "2f3238142348789ed5a99b9a1bd8e010",
+        "license_key2": "438fb62e97278526686d921126343d32",
+        "channel_id": "867",
+        "group": "Sports",
+        "logo": "https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/508_144.png",
+        "name": "ASTRO PREMIER",
+        "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/5128/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"LzI4FCNIeJ7VqZuaG9jgEA","k":"Q4+2LpcnhSZobZIRJjQ9Mg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "efda647dad723563b625be8c05ee6110",
+        "license_key2": "6776985938b332164b97b81fe566a34a",
+        "channel_id": "868",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/6/63/Astro_Arena_2.png",
+        "name": "Astro Arena OTT",
+        "url": "https://linearjitp-playback.astro.com.my/dash-wv/linear/2604/default_ott.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"79pkfa1yNWO2Jb6MBe5hEA","k":"Z3aYWTizMhZLl7gf5WajSg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "ead0335d60401225727a6d531e9c2710",
+        "license_key2": "1ee3b252227c5c2ec9378c833d2e14ff",
+        "channel_id": "869",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/6/63/Astro_Arena_2.png",
+        "name": "Astro Arena 2",
+        "url": "https://linearjitp02-playback.astro.com.my/dash-wv/linear/5057/default.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"6tAzXWBAEiVyem1THpwnEA","k":"HuOyUiJ8XC7JN4yDPS4U/w"}],"type":"temporary"}
+     },
+    {
+        "license_key": "7481d3e3738c46768f138e208fee9076",
+        "license_key2": "e1d428c7f1ca82339a6cfa1d0757428e",
+        "channel_id": "870",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/5/55/Astro_Arena_Bola.png",
+        "name": "Astro Arena Bola",
+        "url": "https://d1fk7kbmz4il3.cloudfront.net/CH1/masterCH1.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"dIHT43OMRnaPE44gj+6Qdg","k":"4dQox/HKgjOabPodB1dCjg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "99685545491d40b493b3a4b263c7245e",
+        "license_key2": "7939e335bf8cbbd6882f9f5c9cdebe19",
+        "channel_id": "871",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/1/17/Astro_Arena_Bola_2.png",
+        "name": "Astro Arena Bola 2",
+        "url": "https://d1fk7kbmz4il3.cloudfront.net/CH5/masterCH5.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"mWhVRUkdQLSTs6SyY8ckXg","k":"eTnjNb+Mu9aIL59cnN6+GQ"}],"type":"temporary"}
+     },
+    {
+        "license_key": "ca4f5ff4e4694d54bdfdc9bd34384290",
+        "license_key2": "1100fe297146f7d024b59944f09e6d1a",
+        "channel_id": "872",
+        "group": "Sports",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Astro_Arena_Bola_3_logo.png/1200px-Astro_Arena_Bola_3_logo.png",
+        "name": "Astro Arena Bola 3",
+        "url": "https://d1fk7kbmz4il3.cloudfront.net/CH3/masterCH3.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"yk9f9ORpTVS9/cm9NDhCkA","k":"EQD+KXFG99AktZlE8J5tGg"}],"type":"temporary"}
+     },
+    {
+        "license_key": "abfc480ae7920a3ebd9e99e7b9a0d3e2",
+        "license_key2": "63a7fe4e7899ba2bc5bbd4307398f3ff",
+        "id": "873",
+        "group": "Sports",
+        "logo": "https://i.ibb.co/zhr5RgC/Cric-streaming-tencric.png",
+        "name": "Ten Cricket",
+        "url": "https://bpcdn.dialog.lk/bpk-tv/Ch065/output/index.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"q/xICueSCj69npnnuaDT4g","k":"Y6f+TniZuivFu9Qwc5jz/w"}],"type":"temporary"}
+    },
+    {
+        "license_key": "3fd52d1e9ba4b180aec12c9295b62c0f",
+        "license_key2": "bb274e33da0c709e62c55d0cba911889",
+        "channel_id": "874",
+        "group": "Sports",
+        "logo": "http://linear-poster.astro.com.my/prod/logo/beIN_Sports_v1.png",
+        "name": "beIN Sports 1",
+        "url": "https://ais-s.ais-vidnt.com/ais/play/origin/live/eds/S0001/DASH/S0001.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"P9UtHpuksYCuwSySlbYsDw","k":"uydOM9oMcJ5ixV0MupEYiQ"}],"type":"temporary"}
+     },
+     {
+        "license_key": "55b47390cf9e4997dae6dac85e057875",
+        "license_key2": "fa39e855543c5d70f30600d59e5e4c1b",
+        "channel_id": "875",
+        "group": "Sports",
+        "logo": "https://i.postimg.cc/9FxsQ1DS/Screenshot-2024-01-21-16-30-00-91-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
+        "name": "Fox Sports 3",
+        "url": "https://chromecast.cvattv.com.ar/live/c3eds/FoxSports3HD/SA_Live_dash_enc_2A/FoxSports3HD.mpd",
+        "channel_key":{"keys":[{"kty":"oct","kid":"VbRzkM+eSZfa5trIXgV4dQ","k":"+jnoVVQ8XXDzBgDVnl5MGw"}],"type":"temporary"}
+     }
+]
