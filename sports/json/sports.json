@@ -17,9 +17,9 @@
   },
   {
     "id": "3",
-    "name": "Video 3",
+    "name": "tamil",
     "logo": "https://example.com/logo3.png",
-    "link": "https://example.com/video3.mpd",
+    "link": "https://cdn3.tamilultra.team/SPTAMHD/tracks-v1/index.m3u8",
     "kid": "SomeKeyIdForVideo3",
     "k": "SomeKeyForVideo3"
   }
