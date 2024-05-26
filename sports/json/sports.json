@@ -1,19 +1,19 @@
 [
   {
     "id": "1",
-    "name": "Video 1",
+    "name": "hindi",
     "logo": "https://example.com/logo1.png",
     "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
-    "kid": "1970addcf9ad5d43ab6d6e3b508986a2",
-    "k": "616829e81c6f9d14f944ae7c7c5082b1"
+    "kid": "69bc7b5441ce54ffac4987ba5d5581cb",
+    "k": "b339f21a424f6c303570c9266faf5a01"
   },
   {
     "id": "2",
-    "name": "Video 2",
+    "name": "english",
     "logo": "https://example.com/logo2.png",
     "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
-    "kid": "ebb38a1ab37655b78316017ba84f8935",
-    "k": "0ac6d4cfd9cd499c06c7c6cab034984a"
+    "kid": "8dff159d12ac501298981368f2c8fe9a",
+    "k": "9361741780b8405f49502279be72cea0"
   },
   {
     "id": "3",
