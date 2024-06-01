@@ -4,22 +4,22 @@
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
     "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
-    "kid": "553decbe83d0552f834798ecec903fa2",
-    "k": "16ca9f30ef99ef4c9bbbdf3b8e64ffb7"
+    "kid": "4ef946fe9ff051d3a301a2bd225b4d02",
+    "k": "d1a15f4efeaa9cd1f7ec7d5833c878a8"
   },
   {
     "id": "2",
     "name": "english",
     "logo": "https://example.com/logo2.png",
     "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
-    "kid": "a8b954f9b6485c1181edc1aa0d93efd1",
-    "k": "1383101410f651362857c34d3ae856df"
+    "kid": "82a89d6426515afbb198ede95a4b919a",
+    "k": "72247d398350f9508f2b6fb4adaa5fd5"
   },
   {
     "id": "3",
     "name": "tamil",
     "logo": "https://example.com/logo3.png",
-    "link": "http://mrsmarts.shop/tm/t_tm_20.php?id=12154",
+    "link": "https://c2ag.short.gy/VF7ZGN",
     "kid": "SomeKeyIdForVideo3",
     "k": "SomeKeyForVideo3"
   }
