@@ -3,7 +3,7 @@
     "id": "1",
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
-    "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
+    "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240530T010000&end=20240606T160000",
     "kid": "4ef946fe9ff051d3a301a2bd225b4d02",
     "k": "d1a15f4efeaa9cd1f7ec7d5833c878a8"
   },
@@ -11,7 +11,7 @@
     "id": "2",
     "name": "english",
     "logo": "https://example.com/logo2.png",
-    "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240525T010000&end=20240531T160000",
+    "link": "https://bpprod5catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240530T010000&end=20240606T160000",
     "kid": "82a89d6426515afbb198ede95a4b919a",
     "k": "72247d398350f9508f2b6fb4adaa5fd5"
   },
@@ -19,7 +19,7 @@
     "id": "3",
     "name": "tamil",
     "logo": "https://example.com/logo3.png",
-    "link": "https://c2ag.short.gy/VF7ZGN",
+    "link": "https://c2ag.short.gy/test.m3u8?token=651f678546ee5cf110de6240396dcde9a3b52ee1-a8b3597fed7e8edf85de6f26db39df06-1717240232-1717238432",
     "kid": "SomeKeyIdForVideo3",
     "k": "SomeKeyForVideo3"
   }
