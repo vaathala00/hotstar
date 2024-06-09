@@ -1,86 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Head content here -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>iTune++</title>
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/manifest.json">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&amp;display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link href="https://songs.watchtvs.live/static/css/main.c28c8648.css" rel="stylesheet">
 </head>
-<body style="font-family: Open Sans, sans-serif; background-image: url('https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&w=3840&h=1030&dpr=1');">
-    <!-- Body content here -->
-    <div class="modal fade" id="iuwelcomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">Sangeet By <a href="#" style="text-decoration: none;" target="_blank">join us on telegram </a></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="pt-3">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Search Song / Album" aria-label="Search Song / Album" autocomplete="off"/>
-                            <button class="btn btn-primary" type="button" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
+<body style="font-family: Raleway, sans-serif;">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        <div class="dark">
+            <div class="bg-light-100 dark:bg-deep-900">
+                <!-- Navigation -->
+                <header>
+                    <nav class="flex flex-wrap items-center justify-between w-full py-2 md:py-3 px-4 text-lg fixed top-0 z-50 dark:text-gray-700 text-gray-400 dark:bg-light-200 bg-deep-900 body-font">
+                        <!-- Removed header logo -->
+                        <span class="hidden ml-3 text-xl md:inline-block">iTune</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" id="menu-button" class="h-6 w-6 cursor-pointer md:hidden block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+                            <ul class="pt-4 space-y-3 md:space-y-0 text-base md:flex md:justify-between md:pt-0">
+                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/">Home</a></li>
+                                <hr class="dark:border-gray-700 border-light-200">
+                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/search">Search</a></li>
+                                <hr class="dark:border-gray-700 border-light-200">
+                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/about">About</a></li>
+                                <hr class="dark:border-gray-700 border-light-200">
+                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/terms">Terms of Use</a></li>
+                                <hr class="dark:border-gray-700 border-light-200">
+                                <li>
+                                    <div class="text-base">
+                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                            <input type="checkbox" name="toggle" id="dark_mode" class="checked:bg-green-700 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked="">
+                                            <label for="dark_mode" class="block h-6 overflow-hidden bg-green-500 rounded-full cursor-pointer"></label>
+                                        </div>
+                                        <span class="font-medium text-sm md:text-base dark:text-gray-900 text-white">Dark Mode</span>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="accordion" id="songsAccordion">
-                        <div class="accordion-item" id="headforSearchItems">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Search Result
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body" id="searchResults">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add other accordion items as needed -->
-                    </div>
+                    </nav>
+                </header>
+                <!-- Search Bar -->
+                <div class="px-4 py-6">
+                    <input type="text" placeholder="Search..." class="border border-gray-300 rounded-md p-2 w-full">
                 </div>
+                <!-- Content Goes Here -->
             </div>
         </div>
     </div>
     <!-- JavaScript -->
-    <!-- Include necessary JavaScript libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
-    <!-- Define API_BASE_URL -->
-    <script>var API_BASE_URL = "https://sangeet.nisomi-codes.workers.dev/";</script>
-    <script>
-        // Function to search for a song
-        function searchSong(query) {
-            $.ajax({
-                url: API_BASE_URL + "search",
-                type: "GET",
-                data: { query: query },
-                success: function(response) {
-                    // Display search results
-                    displaySearchResults(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-        }
-
-        // Function to handle search button click
-        function searchButtonClick() {
-            var query = document.getElementById("searchInput").value;
-            searchSong(query);
-        }
-
-        // Function to display search results
-        function displaySearchResults(results) {
-            var searchResultsDiv = document.getElementById("searchResults");
-            searchResultsDiv.innerHTML = ""; // Clear previous results
-
-            // Loop through results and create HTML elements to display them
-            results.forEach(function(result) {
-                var resultElement = document.createElement("div");
-                resultElement.textContent = result.title; // Assuming the result object has a "title" property
-                searchResultsDiv.appendChild(resultElement);
-            });
-        }
-
-        // Attach event listener to search button
-        document.getElementById("searchButton").addEventListener("click", searchButtonClick);
-    </script>
+    <script defer src="https://songs.watchtvs.live/static/js/main.8cef44a6.js"></script>
 </body>
 </html>
