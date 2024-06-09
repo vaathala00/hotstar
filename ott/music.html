@@ -1,215 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listen High Quality Songs For Free | Sangeet by Vaathala</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
-    <style>
-        element.style {}
-
-        @media (prefers-reduced-motion: no-preference) :root {
-            scroll-behavior: smooth;
-        }
-
-        .multicolortext {
-            background-image: linear-gradient(to left, pink, #40E0D0, #40E0D0, pink, #40E0D0, #40E0D0, rgb(0, 153, 255));
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-    </style>
+    <!-- Head content here -->
 </head>
-
-<body style="background-image: url('https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&w=3840&h=1030&dpr=1');">
-    <div id="jtvh1">
-        <!-- Your content goes here -->
-        <center>
-            <h1><span class="multicolortext"></span></h1>
-            <h2><span class="multicolortext"></span></h2>
-        </center>
-
-        <div class="mhn-player">
-            <div class="album-art"></div>
-            <div class="play-list"></div>
-            <div class="audio"></div>
-            <div class="current-info">
-                <div class="song-title"></div>
-                <div class="song-artist"></div>
-                <div class="song-album"></div>
-            </div>
-            <div class="controls">
-                <a class="toggle-play-list" onclick="showmodal()"><i class="fa fa-bars" aria-hidden="true"></i></a>
-                <div class="duration clearfix">
-                    <span class="pull-left play-position"></span>
-                    <span class="pull-right"><span class="play-current-time">00:00</span> / <span class="play-total-time">00:00</span></span>
+<body style="font-family: Open Sans, sans-serif; background-image: url('https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&w=3840&h=1030&dpr=1');">
+    <!-- Body content here -->
+    <div class="modal fade" id="iuwelcomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">Sangeet By <a href="#" style="text-decoration: none;" target="_blank">join us on telegram </a></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
-                <div class="seek_holder">
-                    <input type="range" class="seek_slider" onchange="seekTo()" min="1" max="100" value="0" data-css="0" />
-                </div>
-
-                <div class="action-button" id="defaultloader">
-                    <img src="https://jio-saavn-x-streamking.pages.dev/musicspinner.svg" style="width: 40px; height: 40px;" />
-                </div>
-
-                <div class="action-button" id="ctrlbtns" style="display: none;" align="left">
-                    <a class="prev" onclick="loadprevsong()" title="Previous Song"><i class="fa fa-step-backward"></i></a>
-                    <a class="play-pause" onclick="playpausesong()"><i class="fa fa-pp"></i></a>
-                    <a class="next" onclick="loadnextsong()" title="Next Song"><i class="fa fa-step-forward"></i></a>
-                    <a class="stop" onclick="downloadsong()" title="Download Song"><i class="fa fa-download" aria-hidden="true"></i></a>
-                    <a class="albummo" onclick="showsongslist()" id="albumsongslistbtn" title="Album Songs List"><i class="fa fa-soundcloud" aria-hidden="true"></i> </a>
-                    <lottie-player src="https://jio-saavn-x-streamking.pages.dev/ltlmusic.json" background="https://jio-saavn-x-streamking.pages.dev/transparent" speed="1.2" id="music_is_playing" loop autoplay></lottie-player>
-                </div>
-            </div>
-        </div>
-
-        <!-- Master Modal -->
-        <div class="modal fade" id="iuwelcomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">Sangeet By <a href="#" style="text-decoration: none;" target="_blank">join us on telegram </a></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="pt-3">
-                            <div class="input-group mb-3">
-                                <input type="text" id="query" name="query" class="w-full bg-slate-400 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 dark:focus:bg-deep-900 focus:bg-light-100 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-700 dark:text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Search Song / Album" aria-label="Search Song / Album" autocomplete="off" />
-                                <button class="btn btn-primary" type="button" onclick="searchSongs()"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
+                <div class="modal-body">
+                    <div class="pt-3">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search Song / Album" aria-label="Search Song / Album" autocomplete="off"/>
+                            <button class="btn btn-primary" type="button" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
-
-                        <div class="accordion" id="songsAccordion">
-                            <div class="accordion-item" id="headforSearchItems">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Search Result
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body" id="sangeet_search_result">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Latest Releases
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body" id="sangeet_latest_releases">
-                                    </div>
+                    </div>
+                    <div class="accordion" id="songsAccordion">
+                        <div class="accordion-item" id="headforSearchItems">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Search Result
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body" id="searchResults">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--//Master Modal -->
-
-
-        <!-- Album Songs List -->
-        <div class="modal fade" id="albumSongsListModal" tabindex="-1" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="albumSongsListModalLabel">Album Songs</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="list-group" id="album_songs_mholder">
-                        </div>
+                        <!-- Add other accordion items as needed -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        var API_BASE_URL = "https://jiosaavn-api-codyandersan.vercel.app/";
-
-        $(document).ready(function () {
-            // Function to fetch latest releases
-            function fetchLatestReleases() {
-                $.ajax({
-                    url: API_BASE_URL + "latest-releases",
-                    method: "GET",
-                    success: function (response) {
-                        // Assuming the response is an array of song objects
-                        displayLatestReleases(response.data);
-                    },
-                    error: function (error) {
-                        console.log("Error fetching latest releases:", error);
-                    }
-                });
-            }
-
-            // Function to display latest releases
-            function displayLatestReleases(releases) {
-                var $latestReleases = $("#sangeet_latest_releases");
-                $latestReleases.empty(); // Clear previous content
-
-                releases.forEach(function (release) {
-                    $latestReleases.append("<p>" + release.title + "</p>"); // Assuming each release has a 'title' property
-                });
-            }
-
-            // Function to search for songs
-            function searchSongs() {
-                var keyword = $("#query").val().trim();
-                if (keyword !== "") {
-                    $.ajax({
-                        url: API_BASE_URL + "search?q=" + keyword,
-                        method: "GET",
-                        success: function (response) {
-                            // Assuming the response is an array of song objects
-                            displaySearchResults(response.data);
-                        },
-                        error: function (error) {
-                            console.log("Error searching for songs:", error);
-                        }
-                    });
-                }
-            }
-
-            // Function to display search results
-            function displaySearchResults(results) {
-                var $searchResults = $("#sangeet_search_result");
-                $searchResults.empty(); // Clear previous content
-
-                results.forEach(function (song) {
-                    $searchResults.append("<p>" + song.title + "</p>"); // Assuming each song has a 'title' property
-                });
-            }
-
-            // Fetch latest releases when the document is ready
-            fetchLatestReleases();
-
-            // Event listener for search input
-            $("#query").on("input", function () {
-                searchSongs();
-            });
-        });
-    </script>
-
+    <!-- JavaScript -->
+    <!-- Include necessary JavaScript libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="https://jio-saavn-x-streamking.pages.dev/sangeetv1_usfth.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Define API_BASE_URL -->
+    <script>var API_BASE_URL = "https://sangeet.nisomi-codes.workers.dev/";</script>
+    <script>
+        // Function to search for a song
+        function searchSong(query) {
+            $.ajax({
+                url: API_BASE_URL + "search",
+                type: "GET",
+                data: { query: query },
+                success: function(response) {
+                    // Display search results
+                    displaySearchResults(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
 
+        // Function to handle search button click
+        function searchButtonClick() {
+            var query = document.getElementById("searchInput").value;
+            searchSong(query);
+        }
+
+        // Function to display search results
+        function displaySearchResults(results) {
+            var searchResultsDiv = document.getElementById("searchResults");
+            searchResultsDiv.innerHTML = ""; // Clear previous results
+
+            // Loop through results and create HTML elements to display them
+            results.forEach(function(result) {
+                var resultElement = document.createElement("div");
+                resultElement.textContent = result.title; // Assuming the result object has a "title" property
+                searchResultsDiv.appendChild(resultElement);
+            });
+        }
+
+        // Attach event listener to search button
+        document.getElementById("searchButton").addEventListener("click", searchButtonClick);
+    </script>
+</body>
 </html>
