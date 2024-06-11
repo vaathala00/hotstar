@@ -572,8 +572,8 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 type: "mpd", // Set type to "mpd" for DASH stream
                 drm: {
                     clearkey: {
-                        keyId: videoData.lic_keyId,
-                        key: videoData.lic_key
+                        keyId:  keys.lic_keyId,
+                        key:  keys.lic_key
                     }
                 },
                 captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
