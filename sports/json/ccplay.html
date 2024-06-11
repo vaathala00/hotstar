@@ -549,16 +549,6 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 }
             }
 
-            // Extract keys from the license URL
-            var licenseUrl = videoData.license_url;
-            var params = licenseUrl.split('?')[1];
-            var keyValuePairs = params.split('&');
-            var keys = {};
-            keyValuePairs.forEach(function(pair) {
-                var keyValuePair = pair.split('=');
-                keys[keyValuePair[0]] = keyValuePair[1];
-            });
-
             // Set up JW Player with the retrieved video data and license keys
             jwplayer("myElement").setup({
                 title: videoData.name,
@@ -572,8 +562,8 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 type: "mpd", // Set type to "mpd" for DASH stream
                 drm: {
                     clearkey: {
-                        keyId:  keys.lic_keyId,
-                        key:  keys.lic_key
+                        keyId: videoData.lic_keyId, // Use the lic_keyId directly from the JSON data
+                        key: videoData.lic_key // Use the lic_key directly from the JSON data
                     }
                 },
                 captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
@@ -586,7 +576,6 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     xhr.open('GET', 'sports.json', true); // Replace 'url_of_your_json_file_here' with the actual URL of your JSON file
     xhr.send();
 </script>
-
 
 </body>
 </html>
