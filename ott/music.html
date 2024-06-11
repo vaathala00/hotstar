@@ -18,6 +18,15 @@
     <!-- Stylesheets -->
     <link href="https://songs.watchtvs.live/static/css/main.c28c8648.css" rel="stylesheet">
 </head>
+
+<style>
+@media (min-width: 768px) {
+    .md\:w-1\/2 {
+        width: 15%;
+    }
+}
+</style>
+
 <body style="font-family: Raleway, sans-serif;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
@@ -55,8 +64,14 @@
                     </nav>
                 </header>
                 <!-- Search Bar -->
-                <div class="px-4 py-6">
-                    <input type="text" placeholder="Search..." class="border border-gray-300 rounded-md p-2 w-full">
+                <div class="container px-5 py-0 mx-auto">
+                    <div class="flex lg:w-4/12 w-full sm:flex-row flex-col mx-auto px-8 sm:px-0 items-end sm:space-x-4 sm:space-y-0 space-y-4">
+                        <div class="relative sm:mb-0 flex-grow w-full">
+                            <label for="query" class="leading-7 text-sm text-black dark:text-gray-400">Try searching for a song or album</label>
+                            <input type="text" id="query" name="query" class="w-full bg-slate-400 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 dark:focus:bg-deep-900 focus:bg-light-100 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-700 dark:text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                        <button id="searchBtn" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Go</button>
+                    </div>
                 </div>
                 <!-- Content Goes Here -->
             </div>
