@@ -1,4 +1,15 @@
 [
+
+  {
+    "id": "78",
+    "name": "hindi",
+    "logo": "https://example.com/logo1.png",
+    "link": "https://allinonereborn.tech/manifest.php?id=24",
+    "license_url": "https://allinonereborn.tech/lic.php?id=78",
+    "manifest_headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    }
+  },
   {
     "id": "1",
     "name": "hindi",

@@ -525,51 +525,46 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
 </script>
 
  <script type="text/javascript">
-    // Function to fetch data from the provided JSON URL
-    function fetchChannelData() {
-        // Replace 'YOUR_JSON_URL_HERE' with the actual JSON URL
-        var jsonUrl = 'https://tplayapi.code-crafters.app/321codecrafters/fetcher.json';
-        
-        // Fetch JSON data
-        fetch(jsonUrl)
-            .then(response => response.json())
-            .then(data => {
-                // Get the channel data from the JSON
-                var channelData = data.data.channels.find(channel => channel.id === '840');
-                
-                // Setup JW Player with channel data
-                setupJWPlayer(channelData);
-            })
-            .catch(error => console.error('Error fetching channel data:', error));
-    }
-    
-    // Function to setup JW Player with channel data
-    function setupJWPlayer(channelData) {
-        jwplayer("myElement").setup({
-            title: channelData.name,
-            description: "VaathalaTV",
-            image: channelData.logo_url,
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            file: channelData.manifest_url,
-            type: "mpd", // Set type to "mpd" for DASH stream
-            drm: {
-                clearkey: {
-                    keyId: channelData.clearkeys[0].base64.keys[0].kid,
-                    key: channelData.clearkeys[0].base64.keys[0].k
-                }
-            },
-            captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-            sharing: {
-                sites: ['facebook', 'twitter']
-            }
-        });
-    }
+// Function to fetch JSON data
+function fetchJSON(callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType("application/json");
+    xhr.open('GET', 'sports.json', true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            callback(xhr.responseText);
+        }
+    };
+    xhr.send(null);
+}
 
-    // Call the function to fetch and setup the player with channel data
-    fetchChannelData();
+// Function to initialize the player
+function initializePlayer() {
+    fetchJSON(function (response) {
+        var data = JSON.parse(response);
+        // Assuming you want to use the first video in the array
+        var video = data[0];
+        var playerInstance = jwplayer("myElement").setup({
+            file: video.link,
+            image: video.logo,
+            title: video.name,
+            width: "100%",
+            aspectratio: "16:9",
+            autostart: true,
+            controls: true,
+            displaytitle: true,
+            stretching: "uniform",
+            abouttext: "Custom About Text",
+            aboutlink: "https://www.example.com/about",
+        });
+    });
+}
+
+// Call the initializePlayer function when the page is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    initializePlayer();
+});
+
 </script>
 
 </body>
