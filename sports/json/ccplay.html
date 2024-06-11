@@ -562,8 +562,8 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 type: "mpd", // Set type to "mpd" for DASH stream
                 drm: {
                     clearkey: {
-                        keyId: videoData.lic_keyId, // Use the lic_keyId directly from the JSON data
-                        key: videoData.lic_key // Use the lic_key directly from the JSON data
+                        keyId: jsonData.lic_keyId, // Use the lic_keyId directly from the JSON data
+                        key: jsonData.lic_key // Use the lic_key directly from the JSON data
                     }
                 },
                 captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
