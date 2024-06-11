@@ -1,16 +1,6 @@
 [
 
   {
-    "id": "78",
-    "name": "hindi",
-    "logo": "https://example.com/logo1.png",
-    "link": "https://allinonereborn.tech/manifest.php?id=24",
-    "license_url": "https://allinonereborn.tech/lic.php?id=78",
-    "manifest_headers": {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-    }
-  },
-  {
     "id": "1",
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
@@ -25,6 +15,15 @@
     "link": "https://allinonereborn.tech/manifest.php?id=78",
     "kid": "044acc529bee552faefe2e1fa174fe3f",
     "k": "98cedf603bf2eaf09a011106ba6a3280"
+  },
+
+  {
+    "id": "willow",
+    "name": "willow",
+    "logo": "https://example.com/logo2.png",
+    "link": "https://linear-novi.stvacdn.spectrum.com/LIVE/5248/bpk-tv/10364/drm/manifest.mpd",
+    "kid": "475d7932b5f352bb92016b75b60c58fa",
+    "k": "ea37faa137ae8f644105c4fcc189a35f"
   },
   {
     "id": "3",
