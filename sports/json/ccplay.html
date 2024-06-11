@@ -523,71 +523,70 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
 <script type="text/javascript">
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 </script>
+ <script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const channelId = urlParams.get('id');
-    const streamUrl = `https://example.com/stream?id=${channelId}`;
-    const licenseUrl = 'https://tplayapi.code-crafters.app/321codecrafters/fetcher.json'; // Replace with your JSON URL
+    var id = getUrlParameter('id');
 
-    fetchLicenseData(licenseUrl)
-      .then(data => {
-        if (typeof data !== 'object' || data === null) {
-          showNotice('Error: Invalid license data.');
-        } else {
-          const playerInstance = jwplayer('player');
-          playerInstance.setup({
-            file: streamUrl,
-            type: 'html5',
-            width: '100%',
-            aspectratio: '16:9',
-            autostart: true,
-            mute: false,
-            primary: 'html5',
-            drm: {
-              clearkey: {
-                keyId: data.lic_keyId,
-                key: data.lic_key
-              }
+    // Load the JSON file and get the video data by ID
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            var videoData = data;
+
+            // Loop through the data array to find the video with the matching ID
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id === id) {
+                    videoData = data[i];
+                    break;
+                }
             }
-          });
+
+            // Extract keys from the license URL
+            var licenseUrl = videoData.license_url;
+            var params = licenseUrl.split('?')[1];
+            var keyValuePairs = params.split('&');
+            var keys = {};
+            keyValuePairs.forEach(function(pair) {
+                var keyValuePair = pair.split('=');
+                keys[keyValuePair[0]] = keyValuePair[1];
+            });
+
+            // Set up JW Player with the retrieved video data and license keys
+            jwplayer("myElement").setup({
+                title: videoData.name,
+                description: "VaathalaTV",
+                image: videoData.logo,
+                aspectratio: '16:9',
+                width: '100%',
+                mute: false,
+                autostart: true,
+                file: videoData.link,
+                type: "mpd", // Set type to "mpd" for DASH stream
+                drm: {
+                    clearkey: {
+                        keyId: videoData.lic_keyId,
+                        key: videoData.lic_key
+                    }
+                },
+                captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
+                sharing: {
+                    sites: ['facebook', 'twitter']
+                }
+            });
         }
-      })
-      .catch(error => {
-        console.error('Error fetching license:', error);
-        showNotice('There was an error fetching the license.');
-      });
-  });
-
-  function fetchLicenseData(url) {
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log('License data:', data);
-        return data;
-      })
-      .catch(error => {
-        console.error('Error fetching license data:', error);
-        throw error;
-      });
-  }
-
-  function showNotice(message) {
-    const noticeContainer = document.createElement('div');
-    const noticeText = document.createTextNode(message);
-
-    noticeContainer.classList.add('notice');
-    noticeContainer.appendChild(noticeText);
-
-    document.body.appendChild(noticeContainer);
-  }
-
-  window.addEventListener('error', function(event) {
-    const errorMessage = 'Error: ' + event.message;
-    showNotice(errorMessage);
-  });
+    };
+    xhr.open('GET', 'url_of_your_json_file_here', true); // Replace 'url_of_your_json_file_here' with the actual URL of your JSON file
+    xhr.send();
 </script>
+
 
 </body>
 </html>
