@@ -1,20 +1,20 @@
 [
 
   {
-    "id": "1",
+    "id": "24",
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
     "link": "https://allinonereborn.tech/manifest.php?id=24",
-    "kid": "3c14a877f2d350f5a95cc5f6a95f50e0",
-    "k": "d732c25609c000ce88645fe30e086355"
+    "kid": "0bd198106bc05718ac42a61547481842",
+    "k": "44b033def833faabd80217c64d8f1ab2"
   },
   {
-    "id": "2",
+    "id": "78",
     "name": "english",
     "logo": "https://example.com/logo2.png",
     "link": "https://allinonereborn.tech/manifest.php?id=78",
-    "kid": "044acc529bee552faefe2e1fa174fe3f",
-    "k": "98cedf603bf2eaf09a011106ba6a3280"
+    "kid": "35b85f4740035d8b99a192a12e2e3cc0",
+    "k": "17f5bf12d99ba7e377e9c4dbd56a7a3d"
   },
 
   {
