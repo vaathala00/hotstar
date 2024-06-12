@@ -161,23 +161,6 @@ font-weight: bold;
 }
 
 
-
-.category-dropdown {
- display: flex;
- justify-content: center;
- margin-bottom: 20px;
-}
-
-.category-dropdown select {
- padding: 12px 20px;
- font-size: 16px;
- border: 1px solid var(--accent-color);
- border-radius: var(--card-border-radius);
- background-color:white;
- color: var(--text-color);
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 </style>
 
 		<link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
@@ -214,28 +197,7 @@ font-weight: bold;
 
 				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
   <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-black bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
-				
-
-<div class="category-dropdown">
-            <select id="category-select">
-<script>
-// Get the dropdown element
-var dropdown = document.getElementById("category-select");
-
-// Add event listener to detect changes
-dropdown.addEventListener("change", function() {
-    // Get the selected value
-    var selectedCategory = dropdown.value;
-    // You can perform any action based on the selected category here
-    console.log("Selected category: " + selectedCategory);
-});
-
-</script>
-                <option value="all">All</option>
-            <option value="Entertainment">Entertainment</option><option value="Kids">Kids</option><option value="Movies">Movies</option><option value="Sports">Sports</option><option value="Knowledge">Knowledge</option><option value="Telugu">Telugu</option><option value="Gujarati">Gujarati</option><option value="None">None</option><option value="Music">Music</option><option value="Bengali">Bengali</option><option value="Marathi">Marathi</option><option value="News">News</option><option value="Punjabi">Punjabi</option><option value="Hindi">Hindi</option><option value="Spiritual">Spiritual</option><option value="Malayalam">Malayalam</option><option value="Tamil">Tamil</option><option value="Odia">Odia</option><option value="Kannada">Kannada</option><option value="Others">Others</option><option value="Lifestyle">Lifestyle</option><option value="Shopping">Shopping</option><option value="English News">English News</option></select>
-        </div>
-
-        
+				        
 <div id="kaya_head"><span class="kayaheadicon" onclick="window.history.back()"><i class="fa-solid fa-arrow-left-long"></i></span>&nbsp;&nbsp; </div>
 
 <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
