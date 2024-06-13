@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Colors HD",
+        "id": "144",
+        "logo": "https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_HD.png",
+        "group": "",
+        "source": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+        "name": "Another Channel",
+        "id": "145",
+        "logo": "https://example.com/another_channel_logo.png",
+        "group": "Entertainment",
+        "source": "https://www.example.com/another_channel"
+    },
+    {
+        "name": "Yet Another Channel",
+        "id": "146",
+        "logo": "https://example.com/yet_another_channel_logo.png",
+        "group": "News",
+        "source": "https://www.example.com/yet_another_channel"
+    }
+]
