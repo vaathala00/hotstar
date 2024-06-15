@@ -16,7 +16,7 @@ $id = $data[1];
 <html lang="en">
 
 <head>
-    <title id="pageTitle"><?php echo $name; ?> | Sony Liv</title>
+    <title id="pageTitle">Default Title | Sony Liv</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="ENJOY FREE LIVE TV">
     <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
@@ -29,18 +29,19 @@ $id = $data[1];
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
 
-    <script>
-        // Get the ID from the URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var id = urlParams.get('id');
+<script>
+// Get the ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id');
 
-        // Update the title with the ID
-        document.getElementById('pageTitle').innerText = id + " | Sony Liv";
-    </script>
+// Update the title with the ID
+document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+</script>
+
 </head>
 
 <body>
-     <style>
+    <style>
         .jw-svg-icon-pause {
             background-image: url("assets/img/jwplay/pause.svg");
         }
@@ -517,17 +518,12 @@ $id = $data[1];
 }
 
     </style>
-
-
-    <!-- Place your HTML content here -->
- 
    <video id="myElement"></video>
   <div class="logo"></div>
 <script type="text/javascript">
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 </script>
-
-    <script type="text/javascript">
+ <script type="text/javascript">
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -537,45 +533,40 @@ $id = $data[1];
         }
 
         var id = getUrlParameter('id');
-
+        
         // Load the m1.json file and get the video data by ID
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.channel_id === id);
+                var videoData = data.find(video => video.id === id);
 
-                jwplayer("myElement").setup({
-                    title: videoData.channel_name,
-                    description: "VaathalaTV",
-                    image: "https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png",
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    file: videoData.channel__url,
-                    type: "mpd", // Set type to "mpd" for DASH stream
-                    drm: {
-                        clearkey: {
-                            keyId: videoData.base64.keys[0].kid,
-                            key: videoData.base64.keys[0].k
-                        }
-                    },
-                    captions: {
-                        color: '#ffb800',
-                        fontSize: 30,
-                        backgroundOpacity: 0
-                    },
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
+jwplayer("myElement").setup({
+    title: videoData.name,
+    description: "VaathalaTV",
+    image: videoData.logo,
+    aspectratio: '16:9',
+    width: '100%',
+    mute: false,
+    autostart: true,
+    file: videoData.link,
+    type: "mpd", // Set type to "mpd" for DASH stream
+    drm: {
+        clearkey: {
+            keyId: videoData.kid,
+            key: videoData.k
+        }
+    },
+    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
+    sharing: {
+        sites: ['facebook', 'twitter']
+    }
+});
 
             }
         };
-        xhr.open('GET', 'https://denver1769.vercel.app/api/get.php?id=78', true);
+        xhr.open('GET', 'test.json', true);
         xhr.send();
     </script>
 </body>
-
 </html>
