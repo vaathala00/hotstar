@@ -11,6 +11,15 @@ $cid = $data[0];
 $name = str_replace('_', ' ', $cid);
 $id = $data[1];
 
+// Fetch and decode keys from the URL
+$keysUrl = 'https://allinonereborn.tech/tplay/lic.php?id=78';
+$response = file_get_contents($keysUrl);
+$keysData = json_decode($response, true);
+
+// Output keys data as JSON
+header('Content-Type: application/json');
+echo json_encode($keysData);
+
 ?>
 
 <html lang="en">
@@ -549,12 +558,12 @@ jwplayer("myElement").setup({
     width: '100%',
     mute: false,
     autostart: true,
-    file: videoData.link,
+    file: https://allinonereborn.tech/tplay/manifest.php?id=24,
     type: "mpd", // Set type to "mpd" for DASH stream
     drm: {
         clearkey: {
-            keyId: videoData.kid,
-            key: videoData.k
+            keyId: videoData.lic_keyId,
+            key: videoData.lic_key
         }
     },
     captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
@@ -565,10 +574,10 @@ jwplayer("myElement").setup({
 
             }
         };
-        xhr.open('GET', 'test.json', true);
+        xhr.open('GET', '', true);
         xhr.send();
     </script>
-<script src="update_keys_in_json.js"></script>
+
 
 </body>
 </html>
