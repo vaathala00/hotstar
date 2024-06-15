@@ -22,12 +22,12 @@ exports.updateSportsJson = async (req, res) => {
         jsonData.k = lic_key;
 
         // Save updated JSON back to sports.json
-        fs.writeFileSync('sports.json', JSON.stringify(jsonData, null, 2));
+        fs.writeFileSync('test.json', JSON.stringify(jsonData, null, 2));
 
         // Respond with success message
-        res.status(200).send(`Updated sports.json with keys data: kid=${lic_keyId}, k=${lic_key}`);
+        res.status(200).send(`Updated test.json with keys data: kid=${lic_keyId}, k=${lic_key}`);
     } catch (error) {
         console.error('Error updating sports.json:', error);
-        res.status(500).send('Error updating sports.json. Check logs for details.');
+        res.status(500).send('Error updating test.json. Check logs for details.');
     }
 };
