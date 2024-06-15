@@ -21,24 +21,92 @@
     <video id="video" controls autoplay></video>
 
     <script>
-        var video = document.getElementById('video');
+     // Function to generate an array of strings
+function _0x575a() {
+    return [
+        '17448dMQEQY',
+        'stener',
+        'ta.m3u8?id',
+        'play',
+        '6962123cTVvKE',
+        'canPlayTyp',
+        'getElement',
+        '6123650ccGlOa',
+        '54IWemcF',
+        'applicatio',
+        '2|3|4|0|1',
+        'Events',
+        '2579846jNHYUL',
+        'addEventLi',
+        'video',
+        'rn.tech/ul',
+        'data',
+        '337024ZYCTSn',
+        'loadedmeta',
+        'src',
+        'attachMedi',
+        '178973xuLYOG',
+        'MANIFEST_P',
+        'ARSED',
+        '6083922gdmYEf',
+        '1629awjcEQ',
+        'isSupporte',
+        'split',
+        'https://al',
+        '=4000',
+        'n/vnd.appl',
+        'e.mpegurl',
+        'ById',
+        'linonerebo',
+        'loadSource'
+    ];
+}
 
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource('https://allinonereborn.tech/ulta.m3u8/?id=4000');
-            hls.attachMedia(video);
+// Function to decrypt a string based on an index
+function _0x5a29(_0x1ec691, _0x5202f2) {
+    var _0x20cc4c = _0x575a();
+    return function (_0x530b2d, _0x57dbf4) {
+        _0x530b2d = _0x530b2d - (0xf01 * -0x1 + -0x1 * -0xd0e + 0x4f * 0xb);
+        var _0x1aef0b = _0x20cc4c[_0x530b2d];
+        return _0x1aef0b;
+    }(_0x1ec691, _0x5202f2);
+}
 
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://allinonereborn.tech/ulta.m3u8/?id=4000';
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        } else {
-            console.error('HLS is not supported on your browser.');
-        }
+// Main logic for handling HLS video
+if (Hls.isSupported()) {
+    var video = document.createElement('video');
+    video.id = 'video';
+    video.style.width = '100%';
+    video.style.height = 'auto';
+    video.controls = true;
+    video.autoplay = true;
+
+    var hls = new Hls();
+    hls.loadSource(_0x5a29('ta.m3u8?id')); // Replace with actual HLS URL
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+    });
+
+    document.body.appendChild(video);
+} else {
+    var video = document.createElement('video');
+    video.id = 'video';
+    video.style.width = '100%';
+    video.style.height = 'auto';
+    video.controls = true;
+    video.autoplay = true;
+
+    video.src = _0x5a29('https://al=4000n/vnd.apple.mpegurlByIdlinonerebo');
+
+    video.addEventListener('loadedmetadata', function () {
+        video.play();
+    });
+
+    document.body.appendChild(video);
+}
+
     </script>
 
 </body>
