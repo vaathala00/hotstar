@@ -1,7 +1,7 @@
 [
-
   {
     "id": "24",
+
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
     "link": "https://allinonereborn.tech/tplay/manifest.php?id=24",
@@ -11,4 +11,4 @@
   }
 ]
 
-<script src="update_keys_in_json.js"></script>
+

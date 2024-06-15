@@ -1,44 +1,33 @@
+const fetch = require('node-fetch');
 const fs = require('fs');
-const fetch = require('node-fetch'); // Assuming you have node-fetch installed (`npm install node-fetch`)
 
-// Function to fetch keys data from URL and extract lic_keyId and lic_key
-async function fetchAndExtractKeys(url) {
+exports.updateSportsJson = async (req, res) => {
+    const keysUrl = 'https://allinonereborn.tech/tplay/lic.php?id=24';
+
     try {
-        const response = await fetch(url);
+        // Fetch keys data
+        const response = await fetch(keysUrl);
         if (!response.ok) {
-            throw new Error(`Failed to fetch keys data from ${url}. Status: ${response.status}`);
+            throw new Error(`Failed to fetch keys data from ${keysUrl}. Status: ${response.status}`);
         }
-        const keys_data = await response.json();
-        const { lic_keyId, lic_key } = keys_data; // Destructure keys_data to get lic_keyId and lic_key
-        return { lic_keyId, lic_key };
-    } catch (error) {
-        console.error('Error fetching or extracting keys data:', error);
-        return { lic_keyId: '', lic_key: '' }; // Return empty values on error
-    }
-}
+        const keysData = await response.json();
+        const { lic_keyId, lic_key } = keysData;
 
-// Function to update keys in JSON data
-async function updateKeysInJSON(filename, url) {
-    try {
-        // Fetch and extract keys data
-        const { lic_keyId, lic_key } = await fetchAndExtractKeys(url);
-
-        // Read existing JSON data from file
-        const jsonString = fs.readFileSync(filename, 'utf8');
-        const json_data = JSON.parse(jsonString);
+        // Read existing sports.json
+        let jsonString = fs.readFileSync('test.json', 'utf8');
+        let jsonData = JSON.parse(jsonString);
 
         // Update JSON data with extracted keys
-        json_data.kid = lic_keyId;
-        json_data.k = lic_key;
+        jsonData.kid = lic_keyId;
+        jsonData.k = lic_key;
 
-        // Save updated JSON back to file
-        fs.writeFileSync(filename, JSON.stringify(json_data, null, 2));
-        console.log(`Updated ${filename} with keys data.`);
+        // Save updated JSON back to sports.json
+        fs.writeFileSync('sports.json', JSON.stringify(jsonData, null, 2));
+
+        // Respond with success message
+        res.status(200).send(`Updated sports.json with keys data: kid=${lic_keyId}, k=${lic_key}`);
     } catch (error) {
-        console.error('Error updating keys in JSON:', error);
+        console.error('Error updating sports.json:', error);
+        res.status(500).send('Error updating sports.json. Check logs for details.');
     }
-}
-
-// Call function to update keys in sports.json
-const keysUrl = 'https://allinonereborn.tech/tplay/lic.php?id=78';
-updateKeysInJSON('test.json', keysUrl);
+};
