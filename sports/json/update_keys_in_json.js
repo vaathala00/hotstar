@@ -1,33 +1,54 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
 
-exports.updateSportsJson = async (req, res) => {
-    const keysUrl = 'https://allinonereborn.tech/tplay/lic.php?id=24';
-
+async function fetchAndExtractKeys(url) {
     try {
-        // Fetch keys data
-        const response = await fetch(keysUrl);
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error(`Failed to fetch keys data from ${keysUrl}. Status: ${response.status}`);
+            throw new Error(`Failed to fetch keys data from ${url}. Status: ${response.status}`);
         }
-        const keysData = await response.json();
-        const { lic_keyId, lic_key } = keysData;
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching keys data:', error);
+        throw error; // Propagate the error up
+    }
+}
 
-        // Read existing sports.json
-        let jsonString = fs.readFileSync('test.json', 'utf8');
+async function updateSportsJson(filename, url) {
+    try {
+        const keysData = await fetchAndExtractKeys(url);
+
+        // Read existing JSON data from file
+        let jsonString = fs.readFileSync(filename, 'utf8');
         let jsonData = JSON.parse(jsonString);
 
         // Update JSON data with extracted keys
-        jsonData.kid = lic_keyId;
-        jsonData.k = lic_key;
+        jsonData.kid = keysData.lic_keyId || '';
+        jsonData.k = keysData.lic_key || '';
 
-        // Save updated JSON back to sports.json
-        fs.writeFileSync('test.json', JSON.stringify(jsonData, null, 2));
+        // Save updated JSON back to file
+        fs.writeFileSync(filename, JSON.stringify(jsonData, null, 2));
 
-        // Respond with success message
-        res.status(200).send(`Updated test.json with keys data: kid=${lic_keyId}, k=${lic_key}`);
+        console.log(`Updated ${filename} with keys data.`);
+        return true; // Return true or a success message if needed
     } catch (error) {
-        console.error('Error updating sports.json:', error);
-        res.status(500).send('Error updating test.json. Check logs for details.');
+        console.error('Error updating test.json:', error);
+        return false; // Return false or handle error appropriately
     }
-};
+}
+
+// Example usage:
+const keysUrl = 'https://allinonereborn.tech/tplay/lic.php?id=24';
+const sportsJsonFile = 'test.json';
+
+updateSportsJson(sportsJsonFile, keysUrl)
+    .then(success => {
+        if (success) {
+            console.log('test.json updated successfully.');
+        } else {
+            console.error('Failed to update test.json.');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating test.json:', error);
+    });
