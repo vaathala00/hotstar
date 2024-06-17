@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ott</title>
-    <!-- Include HLS.js for streaming -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL IN ONE Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.0.0"></script>
     <style>
         body, html {
             margin: 0;
@@ -19,28 +18,19 @@
     </style>
 </head>
 <body>
-    <!-- Video element for playback -->
     <video id="video" controls autoplay></video>
 
     <script>
-        // Check if HLS.js is supported
         if (Hls.isSupported()) {
-            // Initialize HLS.js instance
-            var hls = new Hls();
             var video = document.getElementById('video');
-            
-            // Load the video source
-            hls.loadSource('index.m3u8');
+            var hls = new Hls();
+            hls.loadSource('index.m3u8'); // Replace with your actual HLS stream URL
             hls.attachMedia(video);
-            
-            // When the video metadata is loaded, play the video
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 video.play();
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            // Fallback for browsers that support HLS natively
-            var video = document.getElementById('video');
-            video.src = 'index.m3u8';
+            video.src = 'index.m3u8'; // Fallback for Safari and Edge
             video.addEventListener('loadedmetadata', function() {
                 video.play();
             });
