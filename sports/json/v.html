@@ -24,13 +24,13 @@
         if (Hls.isSupported()) {
             var video = document.getElementById('video');
             var hls = new Hls();
-            hls.loadSource('https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731'); // Replace with your actual HTTPS HLS stream URL
+            hls.loadSource('https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731'); // Replace with your actual HTTPS HLS stream URL
             hls.attachMedia(video);
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                 video.play();
             });
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731'; // Fallback for Safari and Edge
+            video.src = 'https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731'; // Fallback for Safari and Edge
             video.addEventListener('loadedmetadata', function() {
                 video.play();
             });
