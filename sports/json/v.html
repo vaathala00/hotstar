@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALL IN ONE Player</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         body, html {
             margin: 0;
@@ -18,25 +18,45 @@
     </style>
 </head>
 <body>
-    <video id="video" controls autoplay></video>
+    <video id="video" controls></video>
+    <button id="playButton">Play</button>
 
     <script>
         var video = document.getElementById('video');
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource('https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://allinonereborn.tech/doordarshan1.m3u8/?id=23989');
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://allinonereborn.tech/doordarshan1.m3u8/?id=23989';
-            video.addEventListener('loadedmetadata', function() {
-                video.play();
-            });
-        } else {
-            console.error("HLS.js is not supported and video.canPlayType('application/vnd.apple.mpegurl') is false.");
+        var playButton = document.getElementById('playButton');
+
+        playButton.addEventListener('click', function() {
+            playVideo();
+        });
+
+        function playVideo() {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource('https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731');
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play()
+                        .then(function() {
+                            console.log('Video playing');
+                        })
+                        .catch(function(error) {
+                            console.error('Play error:', error);
+                        });
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = 'https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731';
+                video.addEventListener('loadedmetadata', function() {
+                    video.play()
+                        .then(function() {
+                            console.log('Video playing');
+                        })
+                        .catch(function(error) {
+                            console.error('Play error:', error);
+                        });
+                });
+            } else {
+                console.error("HLS.js is not supported and video.canPlayType('application/vnd.apple.mpegurl') is false.");
+            }
         }
     </script>
 </body>
