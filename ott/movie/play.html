@@ -3,77 +3,211 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Movie Player</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Stream | @Movies Tamizhaaas - Ini Oru Kadhal Seivom (2024) Tamil HQ .mkv</title>
+    <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/plyr.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        /* Add your custom styles here */
+        /* Additional CSS styles */
         .player-container {
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .download-btn {
-            display: block;
-            text-align: center;
+        .downloadBtn {
             margin-top: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="player-container">
-        <video id="player" controls crossorigin>
-            <!-- Video source -->
-            <source src="" type="video/mp4">
-            <!-- Fallback for browsers that don't support the <video> element -->
-            Your browser does not support the video tag.
-        </video>
-        <a id="downloadBtn" class="download-btn" href="" download>Download Video</a>
+    <nav>
+        <div class="nleft">
+            <a href="#">
+                <h3 id="heading" style="z-index: 100;" class="magnet title">FILE STREAM</h3>
+            </a>
+        </div>
+        <div class="home-btn magnet about-btn wlcm abt-chnl contact-btn"></div>
+    </nav>
+
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <div class="player-container">
+                    <video id="player" class="player" controls crossorigin>
+                        <!-- Fallback for browsers that don't support the <video> element -->
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="file-name">
+                    <h4 style="display: inline;">File Name: </h4>
+                    <p style="display: inline;" id="fileName"></p><br><br>
+                    <h4 style="display: inline;">File Size: </h4>
+                    <p style="display: inline;">2.01 GiB</p>
+                </div>
+                <div class="downloadBtn">
+                    <button class="magnet" onclick="copyStreamLink()">
+                        <img src="https://i.ibb.co/CM4Y586/link.png" alt="Copy Link">copy link
+                    </button>
+                    <button class="magnet" onclick="streamDownload()">
+                        <img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">download video
+                    </button>
+                    <button class="magnet" onclick="vlc_player()">
+                        <img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">watch in VLC PLAYER
+                    </button>
+                    <button class="magnet" onclick="mx_player()">
+                        <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">watch in MX PLAYER
+                    </button>
+                    <button class="magnet" onclick="playit_player()">
+                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">watch in PLAYit
+                    </button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <center>
+                <div class="copyright">
+                    <h5 class="text-center">
+                        Copyright © <script type="text/JavaScript">var theDate = new Date()
+                            document.write(theDate.getFullYear())</script> | All Rights Reserved.
+                    </h5>
+                </div>
+            </center>
+        </footer>
     </div>
 
-    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
-    // Load JSON data
-    fetch('movies.json')
-        .then(response => response.json())
-        .then(data => {
-            // Find the movie object with id 1 (assuming your JSON may have multiple movies)
-            const movie = data.find(movie => movie.id === 1);
+        document.addEventListener("DOMContentLoaded", function () {
+            const player = new Plyr('#player', {
+                controls: [
+                    'play-large',
+                    'rewind',
+                    'play',
+                    'fast-forward',
+                    'progress',
+                    'duration',
+                    'current-time',
+                    'captions',
+                    'settings',
+                    'pip',
+                    'airplay',
+                    'fullscreen'
+                ],
+            });
 
-            if (movie) {
-                // Initialize Plyr player
-                const player = new Plyr('#player', {
-                    controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'],
+            // Load JSON data
+            fetch('movies.json') // Replace with your JSON file path
+                .then(response => response.json())
+                .then(data => {
+                    // Find the movie object with id 1
+                    const movie = data.find(movie => movie.id === 1);
+
+                    if (movie) {
+                        // Set video source
+                        const source = {
+                            type: 'video',
+                            sources: [{
+                                src: movie.video,
+                                type: 'video/mp4',
+                            }],
+                        };
+
+                        // Update player source
+                        player.source = source;
+
+                        // Update file name display
+                        const fileName = document.getElementById('fileName');
+                        fileName.textContent = movie.title;
+
+                        // Update download button link
+                        const downloadBtn = document.querySelector('.downloadBtn button:nth-child(2)');
+                        downloadBtn.setAttribute('onclick', `window.location.href='${movie.download}'`);
+                    } else {
+                        console.error('Movie with id 1 not found in JSON data.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
                 });
-
-                // Source for the video
-                const source = {
-                    type: 'video',
-                    sources: [{
-                        src: movie.video,
-                        type: 'video/mp4',
-                    }],
-                };
-
-                player.source = source;
-
-                // Update download button href
-                const downloadBtn = document.getElementById('downloadBtn');
-                downloadBtn.href = movie.download;
-
-                console.log('Video source:', movie.video); // Log video source for debugging
-                console.log('Download link:', movie.download); // Log download link for debugging
-
-            } else {
-                console.error('Movie with id 1 not found in JSON data.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
         });
-});
 
+        // Function to copy stream link
+        function copyStreamLink() {
+            const videolink = window.location.href;
+            const streamlink = videolink.replace("/watch/", "/dl/");
+            const linkToCopy = streamlink.toLowerCase();
+
+            if (!navigator.clipboard) {
+                navigator.clipboard = {
+                    writeText: function (text) {
+                        return new Promise((resolve, reject) => {
+                            try {
+                                const textArea = document.createElement("textarea");
+                                textArea.value = text;
+                                document.body.appendChild(textArea);
+                                textArea.focus();
+                                textArea.select();
+                                document.execCommand('copy');
+                                document.body.removeChild(textArea);
+                                resolve();
+                            } catch (err) {
+                                reject(err);
+                            }
+                        });
+                    }
+                };
+            }
+
+            navigator.clipboard.writeText(linkToCopy)
+                .then(() => {
+                    console.log('Stream link copied to clipboard!');
+                    alert('Stream link copied successfully!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy link: ', err);
+                    alert('Failed to copy link. Please try manually.');
+                });
+        }
+
+        // Function to initiate download
+        function streamDownload() {
+            const videolink = window.location.href;
+            const streamlink = videolink.replace("/watch/", "/dl/");
+            window.location.href = streamlink;
+        }
+
+        // Other player functions (VLC, MX Player, PLAYit) remain unchanged
+        function vlc_player() {
+            const openstreamlink = streamlink;
+            const openVlc = `vlc://${openstreamlink}`;
+            window.location.href = openVlc;
+        }
+
+        function mx_player() {
+            const openstreamlink = streamlink;
+            const openMx = `intent:${openstreamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
+            window.location.href = openMx;
+        }
+
+        function playit_player() {
+            const openstreamlink = streamlink;
+            const openPlayit = `playit://playerv2/video?url=${openstreamlink}`;
+            window.location.href = openPlayit;
+        }
     </script>
 </body>
 
