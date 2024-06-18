@@ -33,43 +33,44 @@
 
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Load JSON data
-            fetch('movies.json') // Replace with your JSON file path
-                .then(response => response.json())
-                .then(data => {
-                    // Find the movie object with id 2 (assuming your JSON may have multiple movies)
-                    const movie = data.find(movie => movie.id === 2);
+       document.addEventListener("DOMContentLoaded", function () {
+    // Load JSON data
+    fetch('movies.json')
+        .then(response => response.json())
+        .then(data => {
+            // Find the movie object with id 1 (assuming your JSON may have multiple movies)
+            const movie = data.find(movie => movie.id === 1);
 
-                    if (movie) {
-                        // Initialize Plyr player
-                        const player = new Plyr('#player', {
-                            controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'],
-                        });
-
-                        // Source for the video
-                        const source = {
-                            type: 'video',
-                            sources: [{
-                                src: movie.video,
-                                type: 'video/mp4',
-                            }],
-                        };
-
-                        player.source = source;
-
-                        // Update download button href
-                        const downloadBtn = document.getElementById('downloadBtn');
-                        downloadBtn.href = movie.download; // Assuming movie.download is the path to download
-
-                    } else {
-                        console.error('Movie with id 2 not found in JSON data.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
+            if (movie) {
+                // Initialize Plyr player
+                const player = new Plyr('#player', {
+                    controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'],
                 });
+
+                // Source for the video
+                const source = {
+                    type: 'video',
+                    sources: [{
+                        src: movie.video,
+                        type: 'video/mp4',
+                    }],
+                };
+
+                player.source = source;
+
+                // Update download button href
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.href = movie.download;
+
+            } else {
+                console.error('Movie with id 1 not found in JSON data.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
+});
+
     </script>
 </body>
 
