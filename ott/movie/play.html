@@ -2,128 +2,78 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Movies Website</title>
+    <title id="pageTitle">Default Title | Sony Liv</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="ENJOY FREE LIVE TV">
+    <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
+    <meta name="author" content="Vaathala">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script src="main/assets/js/jwplayer.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
+    <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
+
     <style>
-        /* Add your custom styles here */
-        .movie-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            margin: 10px;
-            padding: 15px;
-            width: 300px;
-            display: inline-block;
-            vertical-align: top;
-            background-color: #f9f9f9;
+        /* Add your CSS styles here */
+        .jw-svg-icon-pause {
+            background-image: url("assets/img/jwplay/pause.svg");
         }
 
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .movie-card .title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .movie-card .description {
-            margin-top: 5px;
-            color: #666;
-        }
-
-        .movie-card .player-container {
-            margin-top: 10px;
-        }
-
-        .movie-card .download-btn {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-        }
+        /* Your other styles... */
     </style>
+
 </head>
 
 <body>
-    <div id="movieList"></div>
+    <div class="logo"></div>
+    <video id="myElement"></video>
 
-    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Load JSON data
-            fetch('movies.json') // Replace with your JSON file path
-                .then(response => response.json())
-                .then(data => {
-                    // Generate movie cards
-                    const movieListElement = document.getElementById('movieList');
-                    data.forEach(movie => {
-                        const movieCard = createMovieCard(movie);
-                        movieListElement.appendChild(movieCard);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
+    <script type="text/javascript">
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+
+        // Function to get URL parameter by name
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        var id = getUrlParameter('id');
+
+        // Load the JSON data and find the video by ID
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var videoData = data.find(video => video.id === id);
+
+                // Setup JWPlayer with the video data
+                jwplayer("myElement").setup({
+                    title: videoData.title,
+                    description: videoData.description,
+                    image: videoData.image,
+                    aspectratio: '16:9',
+                    width: '100%',
+                    mute: false,
+                    autostart: true,
+                    file: videoData.video,
+                    type: "mp4",
+                    captions: {
+                        color: '#ffb800',
+                        fontSize: 30,
+                        backgroundOpacity: 0
+                    },
+                    sharing: {
+                        sites: ['facebook', 'twitter']
+                    }
                 });
-
-            // Function to create movie card HTML
-            function createMovieCard(movie) {
-                const card = document.createElement('div');
-                card.classList.add('movie-card');
-
-                // Image
-                const img = document.createElement('img');
-                img.src = movie.image;
-                card.appendChild(img);
-
-                // Title
-                const title = document.createElement('div');
-                title.classList.add('title');
-                title.textContent = movie.title;
-                card.appendChild(title);
-
-                // Description
-                const description = document.createElement('div');
-                description.classList.add('description');
-                description.textContent = movie.description;
-                card.appendChild(description);
-
-                // Video Player
-                const playerContainer = document.createElement('div');
-                playerContainer.classList.add('player-container');
-                const videoElement = document.createElement('video');
-                videoElement.id = `player_${movie.id}`; // Ensure each player has a unique ID
-                playerContainer.appendChild(videoElement);
-                card.appendChild(playerContainer);
-
-                // Setup Plyr player
-                const player = new Plyr(`#player_${movie.id}`, {
-                    controls: ['play', 'progress', 'mute', 'volume', 'fullscreen'],
-                });
-
-                // Source for the video
-                const source = {
-                    type: 'video',
-                    sources: [{
-                        src: movie.video,
-                        type: 'video/mp4',
-                    }],
-                };
-
-                player.source = source;
-
-                // Download Button
-                const downloadBtn = document.createElement('a');
-                downloadBtn.classList.add('download-btn');
-                downloadBtn.href = movie.download;
-                downloadBtn.textContent = 'Download';
-                card.appendChild(downloadBtn);
-
-                return card;
             }
-        });
+        };
+        xhr.open('GET', 'movies.json', true); // Assuming your JSON file is named 'movies.json'
+        xhr.send();
     </script>
 </body>
 
