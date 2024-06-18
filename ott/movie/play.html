@@ -1,4 +1,39 @@
-document.addEventListener("DOMContentLoaded", function () {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Player</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <style>
+        /* Add your custom styles here */
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="player-container">
+        <video id="player" controls crossorigin>
+            <!-- Video source -->
+            <source src="" type="video/mp4">
+            <!-- Fallback for browsers that don't support the <video> element -->
+            Your browser does not support the video tag.
+        </video>
+        <a id="downloadBtn" class="download-btn" href="" download>Download Video</a>
+    </div>
+
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
     // Load JSON data
     fetch('movies.json')
         .then(response => response.json())
@@ -38,3 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Error fetching data:', error);
         });
 });
+
+    </script>
+</body>
+
+</html>
