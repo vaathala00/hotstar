@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALL IN ONE Player</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.0.0"></script>
     <style>
         body, html {
             margin: 0;
@@ -18,46 +16,27 @@
     </style>
 </head>
 <body>
-    <video id="video" controls></video>
-    <button id="playButton">Play</button>
+    <video id="video" controls="" autoplay="" src="blob:https://vaathala00.github.io/fb3c5c31-6570-4b79-aa15-cc8d25545211"></video>
 
     <script>
         var video = document.getElementById('video');
-        var playButton = document.getElementById('playButton');
-
-        playButton.addEventListener('click', function() {
-            playVideo();
-        });
-
-        function playVideo() {
-            if (Hls.isSupported()) {
-                var hls = new Hls();
-                hls.loadSource('https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731');
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play()
-                        .then(function() {
-                            console.log('Video playing');
-                        })
-                        .catch(function(error) {
-                            console.error('Play error:', error);
-                        });
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = 'https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://sansat.net:25461/02027092234115/BROF45SRPZJFXGG/93731';
-                video.addEventListener('loadedmetadata', function() {
-                    video.play()
-                        .then(function() {
-                            console.log('Video playing');
-                        })
-                        .catch(function(error) {
-                            console.error('Play error:', error);
-                        });
-                });
-            } else {
-                console.error("HLS.js is not supported and video.canPlayType('application/vnd.apple.mpegurl') is false.");
-            }
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource('https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://allinonereborn.tech/doordarshan1.m3u8/?id=23989');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'https://allinonereborn.in/doordarshan.m3u8/ts.php?ts=https://allinonereborn.tech/doordarshan1.m3u8/?id=23989';
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        } else {
+            console.error("HLS.js is not supported and video.canPlayType('application/vnd.apple.mpegurl') is false.");
         }
     </script>
-</body>
-</html>
+
+
+</body></html>
