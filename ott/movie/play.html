@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Stream | @Movies Tamizhaaas - Ini Oru Kadhal Seivom (2024) Tamil HQ .mkv</title>
+    <title>File Stream | @Movies Tamizhaaas</title>
     <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
@@ -51,7 +50,6 @@
         }
     </style>
 </head>
-
 <body>
     <nav>
         <div class="nleft">
@@ -115,138 +113,131 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const player = new Plyr('#player', {
-            controls: [
-                'play-large',
-                'rewind',
-                'play',
-                'fast-forward',
-                'progress',
-                'duration',
-                'current-time',
-                'captions',
-                'settings',
-                'pip',
-                'airplay',
-                'fullscreen'
-            ],
-        });
-
-        // Function to get URL parameter by name
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
-
-        // Load JSON data
-        fetch('movies.json') // Replace with your JSON file path
-            .then(response => response.json())
-            .then(data => {
-                // Get the ID from the URL parameter
-                var id = getUrlParameter('id');
-
-                // Find the movie object with the corresponding ID
-                const movie = data.find(movie => movie.id === parseInt(id));
-
-                if (movie) {
-                    // Set video source
-                    const source = {
-                        type: 'video',
-                        sources: [{
-                            src: movie.video,
-                            type: 'video/mp4',
-                        }],
-                    };
-
-                    // Update player source
-                    player.source = source;
-
-                    // Update file name display
-                    const fileName = document.getElementById('fileName');
-                    fileName.textContent = movie.title;
-
-                    // Update download button link
-                    const downloadBtn = document.querySelector('.downloadBtn button:nth-child(2)');
-                    downloadBtn.setAttribute('onclick', `window.location.href='${movie.download}'`);
-                } else {
-                    console.error('Movie with ID ' + id + ' not found in JSON data.');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+        document.addEventListener("DOMContentLoaded", function () {
+            const player = new Plyr('#player', {
+                controls: [
+                    'play-large',
+                    'rewind',
+                    'play',
+                    'fast-forward',
+                    'progress',
+                    'duration',
+                    'current-time',
+                    'captions',
+                    'settings',
+                    'pip',
+                    'airplay',
+                    'fullscreen'
+                ],
             });
-    });
 
-    // Function to copy stream link
-    function copyStreamLink() {
-        const videolink = window.location.href;
-        const streamlink = videolink.replace("/watch/", "/dl/");
-        const linkToCopy = streamlink.toLowerCase();
+            // Function to copy stream link
+            function copyStreamLink() {
+                const videolink = window.location.href;
+                const streamlink = videolink.replace("/watch/", "/dl/");
+                const linkToCopy = streamlink.toLowerCase();
 
-        if (!navigator.clipboard) {
-            navigator.clipboard = {
-                writeText: function (text) {
-                    return new Promise((resolve, reject) => {
-                        try {
-                            const textArea = document.createElement("textarea");
-                            textArea.value = text;
-                            document.body.appendChild(textArea);
-                            textArea.focus();
-                            textArea.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(textArea);
-                            resolve();
-                        } catch (err) {
-                            reject(err);
+                if (!navigator.clipboard) {
+                    navigator.clipboard = {
+                        writeText: function (text) {
+                            return new Promise((resolve, reject) => {
+                                try {
+                                    const textArea = document.createElement("textarea");
+                                    textArea.value = text;
+                                    document.body.appendChild(textArea);
+                                    textArea.focus();
+                                    textArea.select();
+                                    document.execCommand('copy');
+                                    document.body.removeChild(textArea);
+                                    resolve();
+                                } catch (err) {
+                                    reject(err);
+                                }
+                            });
                         }
-                    });
+                    };
                 }
-            };
-        }
 
-        navigator.clipboard.writeText(linkToCopy)
-            .then(() => {
-                console.log('Stream link copied to clipboard!');
-                alert('Stream link copied successfully!');
-            })
-            .catch(err => {
-                console.error('Failed to copy link: ', err);
-                alert('Failed to copy link. Please try manually.');
-            });
-    }
+                navigator.clipboard.writeText(linkToCopy)
+                    .then(() => {
+                        console.log('Stream link copied to clipboard!');
+                        alert('Stream link copied successfully!');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy link: ', err);
+                        alert('Failed to copy link. Please try manually.');
+                    });
+            }
 
-    // Function to initiate download
-    function streamDownload() {
-        const videolink = window.location.href;
-        const streamlink = videolink.replace("/watch/", "/dl/");
-        window.location.href = streamlink;
-    }
+            // Function to initiate download
+            function streamDownload() {
+                const videolink = window.location.href;
+                const streamlink = videolink.replace("/watch/", "/dl/");
+                window.location.href = streamlink;
+            }
 
-    // Other player functions (VLC, MX Player, PLAYit) remain unchanged
-    function vlc_player() {
-        const openstreamlink = streamlink;
-        const openVlc = `vlc://${openstreamlink}`;
-        window.location.href = openVlc;
-    }
+            // Other player functions (VLC, MX Player, PLAYit) remain unchanged
+            function vlc_player() {
+                const openstreamlink = streamlink;
+                const openVlc = `vlc://${openstreamlink}`;
+                window.location.href = openVlc;
+            }
 
-    function mx_player() {
-        const openstreamlink = streamlink;
-        const openMx = `intent:${openstreamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
-        window.location.href = openMx;
-    }
+            function mx_player() {
+                const openstreamlink = streamlink;
+                const openMx = `intent:${openstreamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
+                window.location.href = openMx;
+            }
 
-    function playit_player() {
-        const openstreamlink = streamlink;
-        const openPlayit = `playit://playerv2/video?url=${openstreamlink}`;
-        window.location.href = openPlayit;
-    }
-</script>
+            function playit_player() {
+                const openstreamlink = streamlink;
+                const openPlayit = `playit://playerv2/video?url=${openstreamlink}`;
+                window.location.href = openPlayit;
+            }
 
+            // Load JSON data
+            fetch('movies.json') // Replace with your JSON file path
+                .then(response => response.json())
+                .then(data => {
+                    // Loop through each movie object
+                    data.forEach(movie => {
+                        // Create a button dynamically for each movie
+                        const button = document.createElement('button');
+                        button.textContent = movie.title;
+                        button.classList.add('magnet');
+                        button.onclick = function () {
+                            // Set video source
+                            const source = {
+                                type: 'video',
+                                sources: [{
+                                    src: movie.video,
+                                    type: 'video/mp4',
+                                }],
+                            };
+
+                            // Update player source
+                            player.source = source;
+
+                            // Update file name display
+                            const fileName = document.getElementById('fileName');
+                            fileName.textContent = movie.title;
+
+                            // Update download button link
+                            const downloadBtn = document.querySelector('.downloadBtn button:nth-child(2)');
+                            downloadBtn.setAttribute('onclick', `window.location.href='${movie.download}'`);
+
+                            // Scroll to player section
+                            document.getElementById('main').scrollIntoView({ behavior: 'smooth' });
+                        };
+
+                        // Append button to downloadBtn container
+                        document.querySelector('.downloadBtn').appendChild(button);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
     </script>
 </body>
-
 </html>
