@@ -12,7 +12,7 @@
     "title": "Movie 2",
     "image": "path/to/movie2.jpg",
     "description": "Description of Movie 2.",
-    "video": "path/to/movie2.mp4",
+    "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     "download": "path/to/movie2_download.mp4"
   },
   {
