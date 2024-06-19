@@ -1,33 +1,102 @@
-function createVideoPlayer(videoData) {
-    const videoContainer = document.getElementById('video-container');
-    const videoCard = document.createElement('div');
-    videoCard.classList.add('video-card');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .video-card {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .video-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .video-card h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container" id="video-container">
+        <!-- Videos will be dynamically added here -->
+    </div>
 
-    const videoTitle = document.createElement('h3');
-    videoTitle.textContent = videoData.title;
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+    <script>
+        async function fetchMovies() {
+            try {
+                const response = await fetch('movies.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movies.json');
+                }
+                const movies = await response.json();
+                return movies;
+            } catch (error) {
+                console.error('Error fetching movies.json:', error.message);
+                return [];
+            }
+        }
 
-    const videoImage = document.createElement('img');
-    videoImage.src = videoData.image;
-    videoImage.alt = videoData.title;
+        function createVideoPlayer(videoData) {
+            const videoContainer = document.getElementById('video-container');
+            const videoCard = document.createElement('div');
+            videoCard.classList.add('video-card');
 
-    const videoDescription = document.createElement('p');
-    videoDescription.textContent = videoData.description;
+            const videoTitle = document.createElement('h3');
+            videoTitle.textContent = videoData.title;
 
-    const videoPlayer = document.createElement('video');
-    videoPlayer.setAttribute('playsinline', '');
-    videoPlayer.setAttribute('controls', '');
-    videoPlayer.innerHTML = `
-        <source src="${videoData.link}" type="video/mp4">
-        Your browser does not support HTML5 video.
-    `;
+            const videoImage = document.createElement('img');
+            videoImage.src = videoData.image;
+            videoImage.alt = videoData.title;
 
-    videoCard.appendChild(videoTitle);
-    videoCard.appendChild(videoImage);
-    videoCard.appendChild(videoDescription);
-    videoCard.appendChild(videoPlayer);
+            const videoDescription = document.createElement('p');
+            videoDescription.textContent = videoData.description;
 
-    videoContainer.appendChild(videoCard);
+            const videoPlayer = document.createElement('video');
+            videoPlayer.setAttribute('playsinline', '');
+            videoPlayer.setAttribute('controls', '');
+            videoPlayer.innerHTML = `
+                <source src="${videoData.link}" type="video/mp4">
+                Your browser does not support HTML5 video.
+            `;
 
-    // Initialize Plyr for this video
-    const player = new Plyr(videoPlayer);
-}
+            videoCard.appendChild(videoTitle);
+            videoCard.appendChild(videoImage);
+            videoCard.appendChild(videoDescription);
+            videoCard.appendChild(videoPlayer);
+
+            videoContainer.appendChild(videoCard);
+
+            const player = new Plyr(videoPlayer);
+        }
+
+        async function initializeVideoPlayers() {
+            const movies = await fetchMovies();
+            movies.forEach(video => {
+                createVideoPlayer(video);
+            });
+        }
+
+        initializeVideoPlayers();
+    </script>
+</body>
+</html>
