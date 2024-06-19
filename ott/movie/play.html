@@ -68,7 +68,7 @@
                 <div class="downloadBtn">
                         <a id="download-link" class="download-btn" href="#" download>Download Video</a>
 
-        <a id="openInVLCButton" class="open-in-vlc" href="#">Open in VLC</a>
+        <a id="openInVLCButton" class="open-in-vlc" href="#" onclick="vlc_player();">Open in VLC</a>
 
 
                 </div>
@@ -130,6 +130,15 @@
                 downloadLink.href = videoData.download;
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
+
+              // Update vlc link
+                function vlc_player() {
+                const downloadLink = document.getElementById('openInVLCButton');
+                openInVLCButton.href = videoData.download;
+                openInVLCButton.setAttribute('download', videoData.title + '.mp4');
+                window.location.href = openVlc;
+            }
+
                
 
             // Get id parameter from URL
