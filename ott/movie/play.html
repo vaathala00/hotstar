@@ -11,11 +11,32 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        .player-wrapper {
+            position: relative;
+        }
+        .download-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <div id="player-container">
-        <!-- Video player will be loaded here -->
+    <div class="player-wrapper">
+        <div id="player-container">
+            <!-- Video player will be loaded here -->
+        </div>
+        <button class="download-button" id="downloadButton">Download</button>
     </div>
 
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
@@ -62,6 +83,12 @@
 
                         // Update page title with the video title
                         document.getElementById('pageTitle').innerText = videoData.title + " | Sony Liv";
+
+                        // Download button functionality
+                        var downloadButton = document.getElementById('downloadButton');
+                        downloadButton.addEventListener('click', function() {
+                            window.location.href = videoData.download;
+                        });
                     } else {
                         console.error('Video with id ' + id + ' not found.');
                     }
