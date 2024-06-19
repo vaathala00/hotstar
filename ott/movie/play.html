@@ -66,7 +66,7 @@
                     <p style="display: inline;" id="fileSize"></p>
                 </div>
                 <div class="downloadBtn">
-                        <a id="download-link" class="download-btn" href="#" download>Download Video</a>
+<a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">Download Video</a>
 
         <a id="openInVLCButton" class="open-in-vlc" href="#" onclick="vlc_player();">Open in VLC</a>
 
@@ -88,14 +88,13 @@
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
 
- function showDownloadDialog(event) {
+    function showDownloadDialog(event) {
         event.preventDefault(); // Prevent the default link behavior (optional)
 
-        // Example using a custom modal
         const downloadLink = event.currentTarget;
         const downloadTitle = downloadLink.getAttribute('download');
-        
-        // Customize your modal dialog here
+
+        // Display a confirmation dialog using a custom modal or alert
         if (confirm(`Your download of "${downloadTitle}" is about to start. Do you want to proceed?`)) {
             // Proceed with download if user confirms
             window.location.href = downloadLink.href;
