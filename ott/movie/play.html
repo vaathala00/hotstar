@@ -68,7 +68,7 @@
                 <div class="downloadBtn">
                         <a id="download-link" class="download-btn" href="#" download>Download Video</a>
 
-       <a <button id="openInVLCButton" class="open-in-vlc">Open in VLC</button> vlc</a>
+        <a id="openInVLCButton" class="open-in-vlc" href="#">Open in VLC</a>
 
 
                 </div>
@@ -149,11 +149,16 @@
 
     <script>
 
-                const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
-                const openInVLCButton = document.getElementById('openInVLCButton');
-                openInVLCButton.addEventListener('click', function() {
-                    window.open(vlcUrl);
-                });
+                    const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
+                    const openInVLCButton = document.getElementById('openInVLCButton');
+                    openInVLCButton.addEventListener('click', function(event) {
+                        event.preventDefault(); // Prevent default anchor behavior
+                        console.log('Button clicked!');
+                        window.open(vlcUrl);
+                    });
+                } catch (error) {
+                    console.error('Error initializing button:', error.message);
+                }
             }
 
 
