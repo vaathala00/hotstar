@@ -524,42 +524,45 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 </script>
  <script type="text/javascript">
-        // Function to get URL parameter by name
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+      <script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    var id = getUrlParameter('id');
+
+    // Load the movies.json file and get the video data by ID
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            var videoData = data.find(video => video.id == id); // Convert id to number if necessary
+
+            jwplayer("myElement").setup({
+                title: videoData.title,
+                description: videoData.description,
+                image: videoData.image,
+                aspectratio: '16:9',
+                width: '100%',
+                mute: false,
+                autostart: true,
+                file: videoData.video,
+                type: "hls",
+                captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
+                sharing: {
+                    sites: ['facebook', 'twitter']
+                }
+            });
         }
+    };
+    xhr.open('GET', 'movies.json', true);
+    xhr.send();
+</script>
 
-        var id = getUrlParameter('id');
-        
-        // Load the m1.json file and get the video data by ID
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.id === id);
-
-                jwplayer("myElement").setup({
-                    title: videoData.name,
-                    description: "VaathalaTV",
-                    image: videoData.logo,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    file: videoData.video,
-                    type: "hls",
-                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
-            }
-        };
-        xhr.open('GET', 'movies.json', true);
-        xhr.send();
     </script>
 </body>
 </html>
