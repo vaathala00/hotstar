@@ -33,6 +33,18 @@
         .video-card h3 {
             margin-top: 0;
         }
+        .download-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -45,6 +57,7 @@
                 <!-- Plyr will inject HTML5 video source here -->
                 Your browser does not support HTML5 video.
             </video>
+            <a id="download-link" class="download-btn" href="#" download>Download Video</a>
         </div>
     </div>
 
@@ -87,6 +100,11 @@
                 source.src = videoData.link;
                 source.type = 'video/mp4';
                 document.getElementById('player').appendChild(source);
+
+                // Update download link
+                const downloadLink = document.getElementById('download-link');
+                downloadLink.href = videoData.download;
+                downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
 
             // Get id parameter from URL
