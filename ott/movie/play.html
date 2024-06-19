@@ -131,13 +131,6 @@
             }
                
 
-                const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
-                const openInVLCButton = document.getElementById('openInVLCButton');
-                openInVLCButton.addEventListener('click', function() {
-                    window.open(vlcUrl);
-                });
-            }
-
             // Get id parameter from URL
             function getUrlParameter(name) {
                 name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -152,5 +145,19 @@
 
 
     </script>
+
+
+    <script>
+
+                const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
+                const openInVLCButton = document.getElementById('openInVLCButton');
+                openInVLCButton.addEventListener('click', function() {
+                    window.open(vlcUrl);
+                });
+            }
+
+
+    </script>
+
 </body>
 </html>
