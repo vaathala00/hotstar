@@ -65,12 +65,12 @@
                 }
             }
 
-            async function initializeVideoPlayer() {
+            async function initializeVideoPlayerById(id) {
                 const movies = await fetchMovies();
-                const videoData = movies.find(video => video.id === 1); // Assuming you want to display video with id 1
+                const videoData = movies.find(video => video.id == id);
 
                 if (!videoData) {
-                    console.error('Video data not found');
+                    console.error('Video data not found for id ' + id);
                     return;
                 }
 
@@ -89,7 +89,16 @@
                 document.getElementById('player').appendChild(source);
             }
 
-            initializeVideoPlayer();
+            // Get id parameter from URL
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            var id = getUrlParameter('id');
+            initializeVideoPlayerById(id);
         });
     </script>
 </body>
