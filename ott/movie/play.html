@@ -27,6 +27,20 @@
         .download-btn:hover {
             background-color: #0056b3;
         }
+
+        .open-in-vlc {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: px;
+            margin-top: 10px;
+        }
+        .open-in-vlc:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -54,6 +68,7 @@
                 <div class="downloadBtn">
                         <a id="download-link" class="download-btn" href="#" download>Download Video</a>
 
+       <a <button id="openInVLCButton" class="open-in-vlc">Open in VLC</button> vlc</a>
 
 
                 </div>
@@ -115,6 +130,13 @@
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
                
+
+                const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
+                const openInVLCButton = document.getElementById('openInVLCButton');
+                openInVLCButton.addEventListener('click', function() {
+                    window.open(vlcUrl);
+                });
+            }
 
             // Get id parameter from URL
             function getUrlParameter(name) {
