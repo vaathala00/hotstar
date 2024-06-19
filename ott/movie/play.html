@@ -156,5 +156,27 @@
 
     </script>
 
+<script>
+    function showDownloadDialog(event) {
+        event.preventDefault(); // Prevent the default link behavior (optional)
+
+        // Example using a custom modal
+        const downloadLink = event.currentTarget;
+        const downloadTitle = downloadLink.getAttribute('download');
+        
+        // Customize your modal dialog here
+        if (confirm(`Your download of "${downloadTitle}" is about to start. Do you want to proceed?`)) {
+            // Proceed with download if user confirms
+            window.location.href = downloadLink.href;
+        } else {
+            // Optionally handle if the user cancels the download
+            console.log('Download cancelled by user.');
+        }
+    }
+
+    // Ensure the rest of your script for initializing the page and handling other functionalities follows here
+</script>
+
+
 </body>
 </html>
