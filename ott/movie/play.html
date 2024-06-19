@@ -1,98 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
-    <!-- Plyr CSS -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
-    <style>
-        /* Optional custom styles */
-        .player-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .video-card {
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .video-card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="player-container" id="video-container">
-        <!-- Videos will be dynamically added here -->
-    </div>
+function createVideoPlayer(videoData) {
+    const videoContainer = document.getElementById('video-container');
+    const videoCard = document.createElement('div');
+    videoCard.classList.add('video-card');
 
-    <!-- Plyr JS -->
-    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
-    <script>
-        // Function to fetch JSON data from movies.json
-        async function fetchMovies() {
-            try {
-                const response = await fetch('movies.json');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movies.json');
-                }
-                const movies = await response.json();
-                return movies;
-            } catch (error) {
-                console.error('Error fetching movies.json:', error.message);
-                return [];
-            }
-        }
+    const videoTitle = document.createElement('h3');
+    videoTitle.textContent = videoData.title;
 
-        // Function to create video players
-        function createVideoPlayer(videoData) {
-            const videoContainer = document.getElementById('video-container');
-            const videoCard = document.createElement('div');
-            videoCard.classList.add('video-card');
+    const videoImage = document.createElement('img');
+    videoImage.src = videoData.image;
+    videoImage.alt = videoData.title;
 
-            const videoTitle = document.createElement('h3');
-            videoTitle.textContent = videoData.title;
+    const videoDescription = document.createElement('p');
+    videoDescription.textContent = videoData.description;
 
-            const videoImage = document.createElement('img');
-            videoImage.src = videoData.image;
-            videoImage.alt = videoData.title;
+    const videoPlayer = document.createElement('video');
+    videoPlayer.setAttribute('playsinline', '');
+    videoPlayer.setAttribute('controls', '');
+    videoPlayer.innerHTML = `
+        <source src="${videoData.link}" type="video/mp4">
+        Your browser does not support HTML5 video.
+    `;
 
-            const videoDescription = document.createElement('p');
-            videoDescription.textContent = videoData.description;
+    videoCard.appendChild(videoTitle);
+    videoCard.appendChild(videoImage);
+    videoCard.appendChild(videoDescription);
+    videoCard.appendChild(videoPlayer);
 
-            const videoPlayer = document.createElement('video');
-            videoPlayer.setAttribute('playsinline', '');
-            videoPlayer.setAttribute('controls', '');
-            videoPlayer.innerHTML = `
-                <source src="${videoData.link}" type="video/mp4">
-                Your browser does not support HTML5 video.
-            `;
+    videoContainer.appendChild(videoCard);
 
-            videoCard.appendChild(videoTitle);
-            videoCard.appendChild(videoImage);
-            videoCard.appendChild(videoDescription);
-            videoCard.appendChild(videoPlayer);
-
-            videoContainer.appendChild(videoCard);
-
-            // Initialize Plyr for this video
-            const player = new Plyr(videoPlayer);
-        }
-
-        // Fetch movies.json and create video players
-        async function initializeVideoPlayers() {
-            const movies = await fetchMovies();
-            movies.forEach(video => {
-                createVideoPlayer(video);
-            });
-        }
-
-        // Call initializeVideoPlayers to start loading and creating video players
-        initializeVideoPlayers();
-    </script>
-</body>
-</html>
+    // Initialize Plyr for this video
+    const player = new Plyr(videoPlayer);
+}
