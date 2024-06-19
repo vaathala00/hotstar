@@ -88,24 +88,25 @@
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
 
+
     function showDownloadDialog(event) {
         event.preventDefault(); // Prevent the default link behavior (optional)
 
         const downloadLink = event.currentTarget;
         const downloadTitle = downloadLink.getAttribute('download');
+        const downloadLocation = 'your phone\'s download storage'; // Example location message
 
         // Display a confirmation dialog using a custom modal or alert
-        if (confirm(`Your download of "${downloadTitle}" is about to start. Do you want to proceed?`)) {
+        if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
             // Proceed with download if user confirms
             window.location.href = downloadLink.href;
-
-            // Provide additional feedback about download location
-            alert(`Your download "${downloadTitle}" will be saved to your device's download storage.`);
         } else {
             // Optionally handle if the user cancels the download
             console.log('Download cancelled by user.');
         }
     }
+
+
 
     // Ensure the rest of your script for initializing the page and handling other functionalities follows here
 
