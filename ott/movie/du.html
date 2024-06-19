@@ -47,9 +47,9 @@
 
                 <div class="file-name">
                     <h4 style="display: inline;">File Name: </h4>
-                    <p style="display: inline;" id="myDiv"></p><br><br>
-                    <h4 style="display: inline;">File Size: </h4>
-                    <p style="display: inline;">2.01 GiB</p>
+                    <p style="display: inline;" id="fileName"></p><br><br>
+                    <h4 style="display: inline;">File Description : </h4>
+                    <p style="display: inline;" id="fileSize"></p>
                 </div>
                 <div class="downloadBtn">
                         <a id="download-link" class="download-btn" href="#" download>Download Video</a>
@@ -102,12 +102,19 @@
                 source.type = 'video/mp4';
                 document.getElementById('player').appendChild(source);
 
+
+                // Update file name
+                document.getElementById('fileName').textContent = videoData.title;
+
+                // Update file discription
+                document.getElementById('fileSize').textContent = videoData.description;
+
                // Update download link
                 const downloadLink = document.getElementById('download-link');
                 downloadLink.href = videoData.download;
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
-
+               
 
             // Get id parameter from URL
             function getUrlParameter(name) {
