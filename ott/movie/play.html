@@ -5,52 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Default Title | Sony Liv</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .player-container {
-            position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-        }
-        .plyr__video-wrapper {
-            height: 100%;
-            width: 100%;
-        }
-        .plyr--full-ui {
-            background-color: #000;
-            color: #fff;
-        }
-        .plyr__controls {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .plyr__control--overlaid {
-            background-color: transparent;
-        }
-    </style>
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="player-container">
-            <video id="player" controls crossorigin playsinline poster="" style="width: 100%; height: 100%;">
-                <!-- Video player will be loaded here -->
-                Your browser does not support HTML5 video.
-            </video>
-        </div>
-        <div class="video-info">
-            <h2 id="videoTitle">Default Title</h2>
-            <p id="videoDescription">Video description goes here.</p>
-        </div>
+    <div id="player-container">
+        <!-- Video player will be loaded here -->
     </div>
 
-    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to get URL parameter by name
@@ -73,7 +34,7 @@
 
                     if (videoData) {
                         // Initialize Plyr for video player
-                        const player = new Plyr('#player', {
+                        const player = new Plyr('#player-container', {
                             controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
                             autoplay: true,
                             poster: videoData.image,
@@ -92,10 +53,8 @@
                             },
                         });
 
-                        // Update video title and description
+                        // Update page title with the video title
                         document.getElementById('pageTitle').innerText = videoData.title + " | Sony Liv";
-                        document.getElementById('videoTitle').innerText = videoData.title;
-                        document.getElementById('videoDescription').innerText = videoData.description;
                     } else {
                         console.error('Video with id ' + id + ' not found.');
                     }
