@@ -3,18 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Stream | @Movies Tamizhaaas  - Ini Oru Kadhal Seivom (2024) Tamil HQ .mkv</title>
-    <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/plyr.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-
-<style>
+    <title>Rathnam Video Player</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .player-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .video-card {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .video-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .video-card h3 {
+            margin-top: 0;
+        }
         .download-btn {
             display: inline-block;
             padding: 8px 16px;
@@ -29,45 +47,18 @@
         }
     </style>
 </head>
-
 <body>
-    <nav>
-        <div class="nleft">
-            <a href="#">
-                <h3 id="heading" style="z-index: 100;" class="magnet title">FILE STREAM</h3>
-            </a>
+    <div class="player-container">
+        <div class="video-card" id="video-card">
+            <h3 id="video-title"></h3>
+            <img id="video-image" src="" alt="">
+            <p id="video-description"></p>
+            <video id="player" playsinline controls>
+                <!-- Plyr will inject HTML5 video source here -->
+                Your browser does not support HTML5 video.
+            </video>
+            <a id="download-link" class="download-btn" href="#" download>Download Video</a>
         </div>
-        <div class="home-btn magnet about-btn wlcm abt-chnl contact-btn"></div>
-    </nav>
-
-    <div class="outer">
-        <div class="inner">
-            <div class="main" id="main">
-                <video id="player" class="player" playsinline controls width="100%"></video>
-
-                <div class="file-name">
-                    <h4 style="display: inline;">File Name: </h4>
-                    <p style="display: inline;" id="fileName"></p><br><br>
-                    <h4 style="display: inline;">File Description : </h4>
-                    <p style="display: inline;" id="fileSize"></p>
-                </div>
-                <div class="downloadBtn">
-                        <a id="download-link" class="download-btn" href="#" download>Download Video</a>
-
-
-
-                </div>
-            </div>
-        </div>
-        <footer>
-            <center>
-                <div class="copyright">
-                    <h5 class="text-center">
-                         <script type="text/JavaScript">document.write(new Date().getFullYear())</script> |.
-                    </h5>
-                </div>
-            </center>
-        </footer>
     </div>
 
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
@@ -96,25 +87,25 @@
                     return;
                 }
 
+                const videoTitleElem = document.getElementById('video-title');
+                const videoImageElem = document.getElementById('video-image');
+                const videoDescriptionElem = document.getElementById('video-description');
                 const player = new Plyr('#player');
+
+                videoTitleElem.textContent = videoData.title;
+                videoImageElem.src = videoData.image;
+                videoDescriptionElem.textContent = videoData.description;
+
                 const source = document.createElement('source');
                 source.src = videoData.link;
                 source.type = 'video/mp4';
                 document.getElementById('player').appendChild(source);
 
-
-                // Update file name
-                document.getElementById('fileName').textContent = videoData.title;
-
-                // Update file discription
-                document.getElementById('fileSize').textContent = videoData.description;
-
-               // Update download link
+                // Update download link
                 const downloadLink = document.getElementById('download-link');
                 downloadLink.href = videoData.download;
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
-               
 
             // Get id parameter from URL
             function getUrlParameter(name) {
@@ -127,8 +118,6 @@
             var id = getUrlParameter('id');
             initializeVideoPlayerById(id);
         });
-
-
     </script>
 </body>
 </html>
