@@ -111,6 +111,20 @@
                     return;
                 }
 
+
+            const vlcUrl = `vlc://open?url=${encodeURIComponent(videoData.link)}`;
+            const openInVLCButton = document.getElementById('openInVLCButton');
+            openInVLCButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default anchor behavior
+                console.log('Button clicked!');
+                window.open(vlcUrl);
+            });
+
+    } catch (error) {
+            console.error('Error initializing button:', error.message);
+        }
+    }
+
     const player = new Plyr('#player');
     const source = document.createElement('source');
     source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
