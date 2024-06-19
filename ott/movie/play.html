@@ -96,11 +96,11 @@
                     return;
                 }
 
-                const player = new Plyr('#player');
-                const source = document.createElement('source');
-                source.src = videoData.link;
-                source.type = 'video/mp4';
-                document.getElementById('player').appendChild(source);
+    const player = new Plyr('#player');
+    const source = document.createElement('source');
+    source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
+    source.type = 'video/mp4';
+    document.getElementById('player').appendChild(source);
 
 
                 // Update file name
