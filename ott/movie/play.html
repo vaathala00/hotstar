@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Player</title>
+    <title>Rathnam Video Player</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.9/plyr.css" />
     <style>
         body {
@@ -36,67 +36,61 @@
     </style>
 </head>
 <body>
-    <div class="player-container" id="video-container">
-        <!-- Videos will be dynamically added here -->
+    <div class="player-container">
+        <div class="video-card" id="video-card">
+            <h3 id="video-title"></h3>
+            <img id="video-image" src="" alt="">
+            <p id="video-description"></p>
+            <video id="player" playsinline controls>
+                <!-- Plyr will inject HTML5 video source here -->
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
     </div>
 
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
-        async function fetchMovies() {
-            try {
-                const response = await fetch('movies.json');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movies.json');
+        document.addEventListener('DOMContentLoaded', function () {
+            async function fetchMovies() {
+                try {
+                    const response = await fetch('movies.json');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch movies.json');
+                    }
+                    const movies = await response.json();
+                    return movies;
+                } catch (error) {
+                    console.error('Error fetching movies.json:', error.message);
+                    return [];
                 }
-                const movies = await response.json();
-                return movies;
-            } catch (error) {
-                console.error('Error fetching movies.json:', error.message);
-                return [];
             }
-        }
 
-        function createVideoPlayer(videoData) {
-            const videoContainer = document.getElementById('video-container');
-            const videoCard = document.createElement('div');
-            videoCard.classList.add('video-card');
+            async function initializeVideoPlayer() {
+                const movies = await fetchMovies();
+                const videoData = movies.find(video => video.id === 1); // Assuming you want to display video with id 1
 
-            const videoTitle = document.createElement('h3');
-            videoTitle.textContent = videoData.title;
+                if (!videoData) {
+                    console.error('Video data not found');
+                    return;
+                }
 
-            const videoImage = document.createElement('img');
-            videoImage.src = videoData.image;
-            videoImage.alt = videoData.title;
+                const videoTitleElem = document.getElementById('video-title');
+                const videoImageElem = document.getElementById('video-image');
+                const videoDescriptionElem = document.getElementById('video-description');
+                const player = new Plyr('#player');
 
-            const videoDescription = document.createElement('p');
-            videoDescription.textContent = videoData.description;
+                videoTitleElem.textContent = videoData.title;
+                videoImageElem.src = videoData.image;
+                videoDescriptionElem.textContent = videoData.description;
 
-            const videoPlayer = document.createElement('video');
-            videoPlayer.setAttribute('playsinline', '');
-            videoPlayer.setAttribute('controls', '');
-            videoPlayer.innerHTML = `
-                <source src="${videoData.link}" type="video/mp4">
-                Your browser does not support HTML5 video.
-            `;
+                const source = document.createElement('source');
+                source.src = videoData.link;
+                source.type = 'video/mp4';
+                document.getElementById('player').appendChild(source);
+            }
 
-            videoCard.appendChild(videoTitle);
-            videoCard.appendChild(videoImage);
-            videoCard.appendChild(videoDescription);
-            videoCard.appendChild(videoPlayer);
-
-            videoContainer.appendChild(videoCard);
-
-            const player = new Plyr(videoPlayer);
-        }
-
-        async function initializeVideoPlayers() {
-            const movies = await fetchMovies();
-            movies.forEach(video => {
-                createVideoPlayer(video);
-            });
-        }
-
-        initializeVideoPlayers();
+            initializeVideoPlayer();
+        });
     </script>
 </body>
 </html>
