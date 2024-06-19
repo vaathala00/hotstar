@@ -1,47 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Default Title | Sony Liv</title>
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
-    <style>
-        /* Optional custom styles */
-        #player-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .player-wrapper {
-            position: relative;
-        }
-        .download-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: #007bff;
-            color: #fff;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .download-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>File Stream | MG MovieGalleryMark Antony 2023 Tamil 1080p AMZN WEB DL DD+5 1 H.mkv</title>
+    <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/plyr.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-    <div class="player-wrapper">
-        <div id="player-container">
-            <!-- Video player will be loaded here -->
+    <nav>
+        <div class="nleft">
+            <a href="#">
+                <h3 id="heading" style="z-index: 100;" class="magnet title">FILE STREAM</h3>
+            </a>
         </div>
-        <button class="download-button" id="downloadButton">Download</button>
+        <div class="home-btn magnet about-btn wlcm abt-chnl contact-btn"></div>
+    </nav>
+
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <video id="player" class="player" playsinline controls width="100%"></video>
+                <div class="player"></div>
+                <div class="file-name">
+                    <h4 style="display: inline;">File Name: </h4>
+                    <p style="display: inline;" id="myDiv">MG MovieGalleryMark Antony 2023 Tamil 1080p AMZN WEB DL DD+5 1
+                        H.mkv</p><br><br>
+                    <h4 style="display: inline;">File Size: </h4>
+                    <p style="display: inline;">3.4 GiB</p>
+                </div>
+                <div class="downloadBtn">
+                    <button class="magnet" onclick="copyStreamLink()">
+                        <img src="https://i.ibb.co/CM4Y586/link.png" alt="Copy Link">copy link
+                    </button>
+                    <button class="magnet" onclick="streamDownload()">
+                        <img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">download video
+                    </button>
+                    <button class="magnet" onclick="vlc_player()">
+                        <img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">watch in VLC PLAYER
+                    </button>
+                    <button class="magnet" onclick="mx_player()">
+                        <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">watch in MX PLAYER
+                    </button>
+                    <button class="magnet" onclick="playit_player()">
+                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">watch in PLAYit
+                    </button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <center>
+                <div class="copyright">
+                    <h5 class="text-center">
+                        Copyright ©
+                        <script type="text/JavaScript">
+                            var theDate = new Date()
+                            document.write(theDate.getFullYear())
+                        </script> | All Rights Reserved.</h5>
+                </div>
+            </center>
+        </footer>
     </div>
 
-    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/automat/controlkit.js@master/bin/controlKit.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sheryjs/dist/Shery.js"></script>
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function () {
+            const moviesUrl = 'movies.json'; // Replace with your JSON file path
+            const response = await fetch(moviesUrl);
+            const data = await response.json();
+
             // Function to get URL parameter by name
             function getUrlParameter(name) {
                 name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -50,53 +91,88 @@
                 return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
             }
 
-            // Load the JSON data asynchronously
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var data = JSON.parse(xhr.responseText);
-                    var id = parseInt(getUrlParameter('id')); // Get the id from URL parameter
+            // Load the selected video data
+            var id = parseInt(getUrlParameter('id')) || 1; // Default to id 1 if no id parameter
+            var videoData = data.find(video => video.id === id);
 
-                    // Find the video data corresponding to the id
-                    var videoData = data.find(video => video.id === id);
+            if (videoData) {
+                // Initialize Plyr for video player
+                const player = new Plyr('#player', {
+                    controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+                    autoplay: true,
+                    poster: videoData.image,
+                    sources: [{
+                        src: videoData.link,
+                        type: 'video/mp4',
+                    }],
+                    captions: {
+                        active: true,
+                        update: true,
+                    },
+                    fullscreen: {
+                        enabled: true,
+                        fallback: true,
+                        iosNative: true
+                    },
+                });
 
-                    if (videoData) {
-                        // Initialize Plyr for video player
-                        const player = new Plyr('#player-container', {
-                            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-                            autoplay: true,
-                            poster: videoData.image,
-                            sources: [{
-                                src: videoData.link,
-                                type: 'video/mp4',
-                            }],
-                            captions: {
-                                active: true,
-                                update: true,
-                            },
-                            fullscreen: {
-                                enabled: true,
-                                fallback: true,
-                                iosNative: true
-                            },
-                        });
+                // Update file name display
+                document.getElementById('myDiv').textContent = videoData.title;
 
-                        // Update page title with the video title
-                        document.getElementById('pageTitle').innerText = videoData.title + " | Sony Liv";
+                // Update page title with the video title
+                document.title = 'File Stream | ' + videoData.title;
 
-                        // Download button functionality
-                        var downloadButton = document.getElementById('downloadButton');
-                        downloadButton.addEventListener('click', function() {
-                            window.location.href = videoData.download;
-                        });
-                    } else {
-                        console.error('Video with id ' + id + ' not found.');
-                    }
-                }
-            };
-            xhr.open('GET', 'movies.json', true); // Replace 'movies.json' with your JSON file path
-            xhr.send();
+                // Download button functionality
+                var downloadBtn = document.querySelector('.downloadBtn button:nth-child(2)');
+                downloadBtn.onclick = function () {
+                    window.location.href = videoData.download;
+                };
+
+                // Copy link button functionality
+                var copyLinkBtn = document.querySelector('.downloadBtn button:nth-child(1)');
+                copyLinkBtn.onclick = function () {
+                    copyStreamLink();
+                };
+
+                // Other player buttons functionality (VLC, MX Player, etc.)
+                // Add your logic here for each player button click
+            } else {
+                console.error('Video with id ' + id + ' not found.');
+            }
         });
+
+        // Function to copy stream link
+        function copyStreamLink() {
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = document.getElementById("myDiv").textContent;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert("Link Copied!");
+        }
+
+        // Function to handle download button click
+        function streamDownload() {
+            var link = document.getElementById('myDiv').textContent;
+            window.location.href = link;
+        }
+
+        // Function for VLC player
+        function vlc_player() {
+            window.location.href = 'intent://com.mxtech.videoplayer.ad/4K+MX+Player+Pro+Patch++Latest+Version.apk#Intent;scheme=https;package=com.mxtech.videoplayer.ad;end'
+        }
+
+        // Function for MX Player
+        function mx_player() {
+            window.location.href = 'intent://com.mxtech.videoplayer.ad/4K+MX+Player+Pro+Patch++Latest+Version.apk#Intent;scheme=https;package=com.mxtech.videoplayer.ad;end'
+        }
+
+        // Function for PLAYit
+        function playit_player() {
+            window.location.href = 'intent://com.mxtech.videoplayer.ad/4K+MX+Player+Pro+Patch++Latest+Version.apk#Intent;scheme=https;package=com.mxtech.videoplayer.ad;end'
+        }
     </script>
 </body>
+
 </html>
