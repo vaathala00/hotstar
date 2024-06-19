@@ -1,17 +1,24 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Default Title | Sony Liv</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
-    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <style>
+        /* Optional custom styles */
+        #player-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <div id="player-container">
         <!-- Video player will be loaded here -->
     </div>
 
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Function to get URL parameter by name
@@ -39,7 +46,7 @@
                             autoplay: true,
                             poster: videoData.image,
                             sources: [{
-                                src: videoData.video,
+                                src: videoData.link,
                                 type: 'video/mp4',
                             }],
                             captions: {
