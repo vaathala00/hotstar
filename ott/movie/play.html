@@ -15,18 +15,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-        .download-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .download-btn:hover {
-            background-color: #0056b3;
-        }
+
+.download-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center; /* Center text and image */
+    width: 200px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    line-height: 40px; /* Ensure vertical alignment */
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
+.download-btn img {
+    height: 20px; /* Adjust height to desired size */
+    margin-right: 8px; /* Add spacing between image and text */
+    vertical-align: middle; /* Align image vertically with text */
+}
+
 
         .open-in-vlc {
             display: inline-block;
