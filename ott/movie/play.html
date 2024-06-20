@@ -249,17 +249,18 @@ watch in PLAYit
     }
 
     // Function to handle MX Player integration
-    function mx_player(streamlink) {
-        try {
-            // Construct the custom URL scheme for MX Player
-            const openMXPlayer = `mxplayer://${encodeURIComponent(streamlink)}`;
-            // Attempt to open the link in MX Player
-            window.location.href = openMXPlayer;
-        } catch (error) {
-            console.error('Failed to open in MX Player:', error);
-            alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
-        }
+function mx_player(streamlink) {
+    try {
+        // Construct the intent URI for MX Player
+        const mxIntentUri = `intent://play/${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
+
+        // Attempt to open the link using the intent URI
+        window.location.href = mxIntentUri;
+    } catch (error) {
+        console.error('Failed to open in MX Player:', error);
+        alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
     }
+}
 
     // Function to handle VLC integration
     function vlc_player(streamlink) {
