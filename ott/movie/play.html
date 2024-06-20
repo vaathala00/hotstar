@@ -187,6 +187,16 @@
                 }
 
 
+    // Validate videoData.link before copying
+    if (videoData && typeof videoData.link === 'string' && videoData.link.trim() !== '') {
+        copyStreamLink(videoData.link);
+    } else {
+        console.error('Invalid videoData.link:', videoData.link);
+        // Optionally handle the error (e.g., display an error message to the user)
+    }
+
+    // Initialize Plyr video player
+
     const player = new Plyr('#player');
     const source = document.createElement('source');
     source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
@@ -259,9 +269,14 @@ function copyStreamLink(streamLink) {
     // Remove the temporary input
     document.body.removeChild(tempInput);
 
-    // Optionally provide user feedback
-    alert('Stream link copied to clipboard: ' + lowerCaseStreamLink);
+    // Provide additional UI feedback
+    const copyLinkButton = document.getElementById('copyStreamLink');
+    copyLinkButton.textContent = 'Link Copied!'; // Example of UI update
+
+    // Log success to console
+    console.log('Stream link copied to clipboard:', lowerCaseStreamLink);
 }
+
 
 
 
