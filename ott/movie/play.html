@@ -186,15 +186,6 @@
                     return;
                 }
 
-
-    // Validate videoData.link before copying
-    if (videoData && typeof videoData.link === 'string' && videoData.link.trim() !== '') {
-        copyStreamLink(videoData.link);
-    } else {
-        console.error('Invalid videoData.link:', videoData.link);
-        // Optionally handle the error (e.g., display an error message to the user)
-    }
-
     // Initialize Plyr video player
 
     const player = new Plyr('#player');
@@ -251,34 +242,34 @@ function vlc_player(streamlink) {
 
 
 function copyStreamLink(streamLink) {
-    // Convert streamLink to lowercase explicitly
-    const lowerCaseStreamLink = streamLink.toLowerCase();
+    const linkToCopy = streamLink.toLowerCase();
 
-    // Create a temporary input element
-    const tempInput = document.createElement('input');
-    tempInput.value = lowerCaseStreamLink;
-    document.body.appendChild(tempInput);
-
-    // Select the text inside the input
-    tempInput.select();
-    tempInput.setSelectionRange(0, 99999); // For mobile devices
-
-    // Copy the text to clipboard
-    document.execCommand('copy');
-
-    // Remove the temporary input
-    document.body.removeChild(tempInput);
-
-    // Provide additional UI feedback
-    const copyLinkButton = document.getElementById('copyStreamLink');
-    copyLinkButton.textContent = 'Link Copied!'; // Example of UI update
-
-    // Log success to console
-    console.log('Stream link copied to clipboard:', lowerCaseStreamLink);
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(linkToCopy)
+            .then(() => {
+                alert('Stream link copied to clipboard: ' + linkToCopy);
+            })
+            .catch(err => {
+                console.error('Error copying to clipboard:', err);
+                // Optionally handle the error
+            });
+    } else {
+        // Fallback for browsers that do not support navigator.clipboard
+        try {
+            const textArea = document.createElement("textarea");
+            textArea.value = linkToCopy;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Stream link copied to clipboard: ' + linkToCopy);
+        } catch (err) {
+            console.error('Error copying to clipboard:', err);
+            // Optionally handle the error
+        }
+    }
 }
-
-
-
 
             // Get id parameter from URL
             function getUrlParameter(name) {
