@@ -108,7 +108,7 @@
                 <div class="downloadBtn">
 <a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">Download Video</a>
 
-        <a id="openInVLCButton" class="open-in-vlc" href="#" onclick="vlc_player();">Open in VLC</a>
+        <a id="openInVLCButton" class="open-in-vlc" onclick="vlc_player()">Open in VLC</a>
 
 
                 </div>
@@ -189,12 +189,13 @@
                 document.getElementById('fileSize').textContent = videoData.description;
 
 
-                // Update vlc link
-                const openInVLCButton = document.getElementById('openInVLCButton');
-                openInVLCButton.href = videoData.download;
-                squareImage.alt = " "; // Update alt text as needed
 
-
+        // Update vlc link
+        const openInVLCButton = document.getElementById('openInVLCButton');
+        openInVLCButton.addEventListener('click', function() {
+            vlc_player(videoData.link);
+        });
+                
                 // Update square image
                 const squareImage = document.getElementById('squareImage');
                 squareImage.src = videoData.image;
@@ -205,6 +206,12 @@
                 downloadLink.href = videoData.download;
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
+
+    function vlc_player() {
+    const openstreamlink = streamlink;
+    const openVlc = `vlc://${openstreamlink}`;
+    window.location.href = openVlc;
+  }
 
 
             // Get id parameter from URL
