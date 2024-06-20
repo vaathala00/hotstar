@@ -215,10 +215,34 @@ function vlc_player(streamlink) {
         const openVlcMobile = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(streamlink)}`;
         window.location.href = openVlcMobile;
     } else {
-        // For desktop (PC and Mac), provide instructions to the user
-        alert('To open this stream in VLC on your desktop, please follow these steps:\n\n1. Open VLC Media Player.\n2. Navigate to Media -> Open Network Stream.\n3. Paste the following URL into the Network URL field:\n\n' + streamlink + '\n\n4. Click on Play.');
+        // For desktop (PC and Mac), attempt to open VLC using a fallback method
+        const isWindows = navigator.platform.toLowerCase().indexOf('win') > -1;
+        const isMac = navigator.platform.toLowerCase().indexOf('mac') > -1;
+
+        if (isWindows) {
+            // For Windows, attempt to open VLC using a command
+            try {
+                const shell = new ActiveXObject('WScript.Shell');
+                shell.run(`vlc "${streamlink}"`);
+            } catch (error) {
+                console.error('Failed to open VLC on Windows:', error);
+                alert('Failed to open VLC. Please open VLC and enter the network stream URL manually:\n\n' + streamlink);
+            }
+        } else if (isMac) {
+            // For Mac, attempt to open VLC using a shell command
+            try {
+                window.location.href = `file:///Applications/VLC.app/Contents/MacOS/VLC "${streamlink}"`;
+            } catch (error) {
+                console.error('Failed to open VLC on Mac:', error);
+                alert('Failed to open VLC. Please open VLC and enter the network stream URL manually:\n\n' + streamlink);
+            }
+        } else {
+            // Generic fallback for other desktop platforms
+            alert('To open this stream in VLC on your desktop, please open VLC manually and enter the following network stream URL:\n\n' + streamlink);
+        }
     }
 }
+
 
 
 
