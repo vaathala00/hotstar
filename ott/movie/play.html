@@ -241,7 +241,7 @@ function vlc_player(streamlink) {
 
 
 function copyStreamLink(streamLink) {
-    // Convert streamLink to lowercase
+    // Convert streamLink to lowercase explicitly
     const lowerCaseStreamLink = streamLink.toLowerCase();
 
     // Create a temporary input element
@@ -262,6 +262,7 @@ function copyStreamLink(streamLink) {
     // Optionally provide user feedback
     alert('Stream link copied to clipboard: ' + lowerCaseStreamLink);
 }
+
 
 
             // Get id parameter from URL
