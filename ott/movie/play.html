@@ -208,23 +208,18 @@
             }
 
 function vlc_player(streamlink) {
-    try {
-        const userAgent = navigator.userAgent.toLowerCase();
+    const userAgent = navigator.userAgent.toLowerCase();
 
-        if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1 || userAgent.indexOf('android') > -1) {
-            // For mobile devices (iOS and Android), use the vlc-x-callback:// protocol
-            const openVlcMobile = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(streamlink)}`;
-            window.location.href = openVlcMobile;
-        } else {
-            // For desktop (PC and Mac), use the regular vlc:// protocol
-            const openVlcDesktop = `vlc://${streamlink}`;
-            window.location.href = openVlcDesktop;
-        }
-    } catch (error) {
-        console.error('Failed to open in VLC:', error);
-        alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
+    if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1 || userAgent.indexOf('android') > -1) {
+        // For mobile devices, use the vlc-x-callback:// protocol
+        const openVlcMobile = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(streamlink)}`;
+        window.location.href = openVlcMobile;
+    } else {
+        // For desktop (PC and Mac), provide instructions to the user
+        alert('To open this stream in VLC on your desktop, please follow these steps:\n\n1. Open VLC Media Player.\n2. Navigate to Media -> Open Network Stream.\n3. Paste the following URL into the Network URL field:\n\n' + streamlink + '\n\n4. Click on Play.');
     }
 }
+
 
 
 
