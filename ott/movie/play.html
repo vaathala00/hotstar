@@ -252,7 +252,7 @@ watch in PLAYit
 function mx_player(streamlink) {
     try {
         // Construct the intent URI for MX Player
-        const mxIntentUri = `intent://play/${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
+        const mxIntentUri = `intent:${streamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
 
         // Attempt to open the link using the intent URI
         window.location.href = mxUrl;
