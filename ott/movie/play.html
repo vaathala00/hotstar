@@ -239,39 +239,25 @@ function vlc_player(streamlink) {
 }
 
 
-// Function to copy the link
-function copyStreamLink(link) {
+function copyStreamLink(streamLink) {
     // Create a temporary input element
-    var tempInput = document.createElement('input');
-    tempInput.value = link;
+    const tempInput = document.createElement('input');
+    tempInput.value = streamLink;
     document.body.appendChild(tempInput);
-    
-    // Select the input field
+
+    // Select the text inside the input
     tempInput.select();
     tempInput.setSelectionRange(0, 99999); // For mobile devices
 
-    // Copy the text inside the input field
+    // Copy the text to clipboard
     document.execCommand('copy');
 
     // Remove the temporary input
     document.body.removeChild(tempInput);
 
-    // Optionally, provide some feedback to the user
-    alert('Link copied to clipboard: ' + link);
+    // Optionally provide user feedback
+    alert('Stream link copied to clipboard: ' + streamLink);
 }
-
-// Add event listener to the link
-document.addEventListener('DOMContentLoaded', function() {
-    var copyStreamLinkButton = document.getElementById('copyStreamLink');
-    copyStreamLinkButton.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default action of <a> tag
-        var videoData = {
-            link: 'https://example.com/video' // Replace with your actual video link
-        };
-        copyStreamLink(videoData.link);
-    });
-});
-
 
             // Get id parameter from URL
             function getUrlParameter(name) {
