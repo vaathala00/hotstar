@@ -47,9 +47,9 @@
 
 .square-image {
     width: 80px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    height: 109px; /* Adjust size as needed */
     margin-right: 20px; /* Space between image and file details */
-    margin-top: -100px;
+    margin-top: -109px;
 
 }
 
@@ -72,7 +72,7 @@
 
 .file-name {
 
-  margin-left: 80px;
+  margin-left: 85px;
 }
 
     </style>
@@ -189,6 +189,10 @@
                 document.getElementById('fileSize').textContent = videoData.description;
 
 
+                // Update vlc link
+                const openInVLCButton = document.getElementById('openInVLCButton');
+                openInVLCButton.href = videoData.download;
+                squareImage.alt = " "; // Update alt text as needed
 
 
                 // Update square image
@@ -202,15 +206,6 @@
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
 
-              // Update vlc link
-                function vlc_player() {
-                const downloadLink = document.getElementById('openInVLCButton');
-                openInVLCButton.href = videoData.download;
-                openInVLCButton.setAttribute('download', videoData.title + '.mp4');
-                window.location.href = openVlc;
-            }
-
-               
 
             // Get id parameter from URL
             function getUrlParameter(name) {
@@ -226,6 +221,48 @@
 
 
     </script>
+
+<script>
+function openInVLC() {
+    // Fetch JSON data asynchronously
+    fetch('movies.json') // Replace with your JSON endpoint URL
+        .then(response => response.json())
+        .then(data => {
+            // Assuming data is an array of objects (for example, from your JSON)
+            if (data.length > 0) {
+                // Update streamUrl with the first item's 'link' property
+                var streamUrl = data[0].link;
+                
+                // Check if the device is mobile (based on user agent or other detection)
+                var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+                // Construct the VLC URL with the stream URL
+                var vlcUrl = 'vlc://' + streamUrl;
+
+                if (isMobile) {
+                    alert('Attempting to open VLC with the network stream URL.');
+                    // On mobile, you can't directly launch VLC via vlc://, so inform the user
+                    alert('Please open the VLC app and enter the following network stream URL manually: ' + streamUrl);
+                } else {
+                    // Attempt to open VLC using the vlc:// protocol
+                    try {
+                        window.location.href = vlcUrl;
+                    } catch (error) {
+                        console.error('Failed to open in VLC:', error);
+                        alert('Please open VLC and enter the network stream URL manually: ' + streamUrl);
+                    }
+                }
+            } else {
+                console.error('No data found in JSON.');
+                alert('Failed to fetch stream URL. Please try again later.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching JSON:', error);
+            alert('Failed to fetch stream URL. Please try again later.');
+        });
+}
+</script>
 
 </body>
 </html>
