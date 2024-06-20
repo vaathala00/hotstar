@@ -107,21 +107,33 @@
 
                 <div class="downloadBtn">
 
+ 
+<a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">
+<img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">
+Download Video
+</a> 
 
-<a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">Download Video</a>
+<a id="openInVLCButton" class="download-btn" onclick="vlc_player()">
+<img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">
+Open in VLC
+</a>
 
-<a id="openInVLCButton" class="download-btn" onclick="vlc_player()">Open in VLC</a>
+<a id="copyStreamLink" class="download-btn" onclick="copyStreamLink()">
+<img src="https://i.ibb.co/CM4Y586/link.png" alt="Copy Link">
+copy link
+</a>
 
-<a id="copyStreamLink" class="download-btn" onclick="copyStreamLink()">copy link</a>
+<a id="mx_player" class="download-btn" onclick="mx_player()">
+<img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">
+watch in MX PLAYER
+</a>
 
+<!-- 
+<a id="playit_player" class="download-btn" onclick="playit_player()">
+<img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">
+watch in PLAYit
+</a> -->
 
-                    <button class="magnet" onclick="mx_player()">
-                        <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">watch in MX PLAYER
-                    </button>
-
-                    <button class="magnet" onclick="playit_player()">
-                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">watch in PLAYit
-                    </button>
 
                 </div>
             </div>
@@ -213,6 +225,12 @@
               openInVLCButton.addEventListener('click', function() {
               vlc_player(videoData.link);
         });
+
+             // Update mx link
+             const mxPlayerLink = document.getElementById('mx_player');
+             mxPlayerLink.addEventListener('click', function() {
+             mx_player(videoData.link); 
+        });
                 
                 // Update square image
                 const squareImage = document.getElementById('squareImage');
@@ -225,6 +243,19 @@
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
 
+
+
+function mx_player(streamlink) {
+    const packageName = 'com.mxtech.videoplayer.ad'; // Package name of MX PLAYER
+    const openMx = `intent:${streamlink}#Intent;package=${packageName};end`;
+
+    try {
+        window.location.href = openMx;
+    } catch (error) {
+        console.error('Failed to open in MX PLAYER:', error);
+        alert('Failed to open MX PLAYER. Please make sure MX PLAYER is installed on your device.');
+    }
+}
 
 
 function vlc_player(streamlink) {
