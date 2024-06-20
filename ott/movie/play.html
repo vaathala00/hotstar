@@ -200,11 +200,12 @@
                 // Update file discription
                 document.getElementById('fileSize').textContent = videoData.description;
 
-               // copy Stream link
-               const copyStreamLink = document.getElementById('copyStreamLink');
-               copyStreamLink.addEventListener('click', function() {
+               // Update copy link button
+               const copyStreamLinkButton = document.getElementById('copyStreamLink');
+               copyStreamLinkButton.addEventListener('click', function() {
                copyStreamLink(videoData.link);
-        });
+             });
+
 
               // Update vlc link
               const openInVLCButton = document.getElementById('openInVLCButton');
