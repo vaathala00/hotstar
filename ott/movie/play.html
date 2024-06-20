@@ -252,10 +252,10 @@ watch in PLAYit
 function mx_player(streamlink) {
     try {
         // Construct the intent URI for MX Player
-        const mxIntentUri = `intent:${streamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
+        const mxIntentUri = `intent:${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
 
         // Attempt to open the link using the intent URI
-        window.location.href = mxUrl;
+        window.location.href = mxIntentUri;
     } catch (error) {
         console.error('Failed to open in MX Player:', error);
         alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
