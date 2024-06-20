@@ -250,16 +250,9 @@ watch in PLAYit
 
     // Function to handle MX Player integration
 function mx_player(streamlink) {
-    try {
-        const mxIntentUri = `intent:${streamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
-
-        // Attempt to open the link using the intent URI
-        window.location.href = mxIntentUri;
-    } catch (error) {
-        console.error('Failed to open in MX Player:', error);
-        alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
+    const mxUrl = `intent:${streamlink}#Intent;package=com.mxtech.videoplayer.ad;end`;
+        window.location.href = mxUrl;
     }
-}
 
     // Function to handle VLC integration
     function vlc_player(streamlink) {
