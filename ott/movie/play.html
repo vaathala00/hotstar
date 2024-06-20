@@ -41,6 +41,40 @@
         .open-in-vlc:hover {
             background-color: #0056b3;
         }
+
+
+
+
+.square-image {
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+    margin-right: 20px; /* Space between image and file details */
+    margin-top: -73px;
+
+}
+
+.square-image img {
+    width: 100%; /* Make sure the image fills its container */
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 5px; /* Rounded corners for aesthetics */
+}
+
+.file-details {
+    flex: 1; /* Take remaining space */
+}
+
+.file-details h4,
+.file-details p {
+    margin: 0; /* Remove default margins */
+    margin-bottom: 5px; /* Add space between items */
+}
+
+.file-name {
+
+  margin-left: 80px;
+}
+
     </style>
 </head>
 
@@ -65,6 +99,12 @@
                     <h4 style="display: inline;">File Description : </h4>
                     <p style="display: inline;" id="fileSize"></p>
                 </div>
+<!-- Square Image -->
+    <div class="square-image">
+        <img id="squareImage" src="" alt="Square Image">
+    </div>
+
+
                 <div class="downloadBtn">
 <a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">Download Video</a>
 
@@ -147,6 +187,11 @@
 
                 // Update file discription
                 document.getElementById('fileSize').textContent = videoData.description;
+
+                // Update square image
+                const squareImage = document.getElementById('squareImage');
+                squareImage.src = videodata.image;
+                squareImage.alt = "Square Image"; // Update alt text as needed
 
                // Update download link
                 const downloadLink = document.getElementById('download-link');
