@@ -163,9 +163,9 @@ watch in PLAYit
     </div>
 
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
-    <script>
-
-
+    
+<script>
+    // Function to handle download confirmation dialog
     function showDownloadDialog(event) {
         event.preventDefault(); // Prevent the default link behavior (optional)
 
@@ -183,152 +183,138 @@ watch in PLAYit
         }
     }
 
-
-
-    // Ensure the rest of your script for initializing the page and handling other functionalities follows here
-
-        document.addEventListener('DOMContentLoaded', function () {
-            async function fetchMovies() {
-                try {
-                    const response = await fetch('movies.json');
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch movies.json');
-                    }
-                    const movies = await response.json();
-                    return movies;
-                } catch (error) {
-                    console.error('Error fetching movies.json:', error.message);
-                    return [];
-                }
-            }
-
-            async function initializeVideoPlayerById(id) {
-                const movies = await fetchMovies();
-                const videoData = movies.find(video => video.id == id);
-
-                if (!videoData) {
-                    console.error('Video data not found for id ' + id);
-                    return;
-                }
-
-    // Initialize Plyr video player
-
-    const player = new Plyr('#player');
-    const source = document.createElement('source');
-    source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
-    source.type = 'video/mp4';
-    document.getElementById('player').appendChild(source);
-
-
-                // Update file name
-                document.getElementById('fileName').textContent = videoData.title;
-
-                // Update file discription
-                document.getElementById('fileSize').textContent = videoData.description;
-
-               // Update copy link button
-               const copyStreamLinkButton = document.getElementById('copyStreamLink');
-               copyStreamLinkButton.addEventListener('click', function() {
-               copyStreamLink(videoData.link);
-             });
-
-
-              // Update vlc link
-              const openInVLCButton = document.getElementById('openInVLCButton');
-              openInVLCButton.addEventListener('click', function() {
-              vlc_player(videoData.link);
-        });
-
-             // Update mx link
-             const mxPlayerLink = document.getElementById('mx_player');
-             mxPlayerLink.addEventListener('click', function() {
-             mx_player(videoData.link); 
-        });
-                
-                // Update square image
-                const squareImage = document.getElementById('squareImage');
-                squareImage.src = videoData.image;
-                squareImage.alt = "Square Image"; // Update alt text as needed
-
-               // Update download link
-                const downloadLink = document.getElementById('download-link');
-                downloadLink.href = videoData.download;
-                downloadLink.setAttribute('download', videoData.title + '.mp4');
-            }
-
-
-
-function mx_player(streamlink) {
-    try {
-        // Construct the custom URL scheme for MX Player
-        const openMXPlayer = `mxplayer://${streamlink}`;
-        
-        // Attempt to open the link in MX Player
-        window.location.href = openMXPlayer;
-    } catch (error) {
-        console.error('Failed to open in MX Player:', error);
-        alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
-    }
-}
-
-
-
-function vlc_player(streamlink) {
-    try {
-        const openVlc = vlc://${streamlink};
-        window.location.href = openVlc;
-    } catch (error) {
-        console.error('Failed to open in VLC:', error);
-        alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
-    }
-}
-
-
-function copyStreamLink(streamLink) {
-    const linkToCopy = streamLink.toLowerCase();
-
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(linkToCopy)
-            .then(() => {
-                alert('Stream link copied to clipboard: ' + linkToCopy);
-            })
-            .catch(err => {
-                console.error('Error copying to clipboard:', err);
-                // Optionally handle the error
-            });
-    } else {
-        // Fallback for browsers that do not support navigator.clipboard
+    // Function to fetch movies data asynchronously
+    async function fetchMovies() {
         try {
-            const textArea = document.createElement("textarea");
-            textArea.value = linkToCopy;
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            alert('Stream link copied to clipboard: ' + linkToCopy);
-        } catch (err) {
-            console.error('Error copying to clipboard:', err);
-            // Optionally handle the error
+            const response = await fetch('movies.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch movies.json');
+            }
+            const movies = await response.json();
+            return movies;
+        } catch (error) {
+            console.error('Error fetching movies.json:', error.message);
+            return [];
         }
     }
-}
 
-            // Get id parameter from URL
-            function getUrlParameter(name) {
-                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                var results = regex.exec(location.search);
-                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            }
+    // Function to initialize video player and related content by ID
+    async function initializeVideoPlayerById(id) {
+        const movies = await fetchMovies();
+        const videoData = movies.find(video => video.id == id);
 
-            var id = getUrlParameter('id');
-            initializeVideoPlayerById(id);
+        if (!videoData) {
+            console.error('Video data not found for id ' + id);
+            return;
+        }
+
+        // Initialize Plyr video player
+        const player = new Plyr('#player');
+        const source = document.createElement('source');
+        source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
+        source.type = 'video/mp4';
+        document.getElementById('player').appendChild(source);
+
+        // Update file name and description
+        document.getElementById('fileName').textContent = videoData.title;
+        document.getElementById('fileSize').textContent = videoData.description;
+
+        // Update copy stream link button
+        const copyStreamLinkButton = document.getElementById('copyStreamLink');
+        copyStreamLinkButton.addEventListener('click', function() {
+            copyStreamLink(videoData.link);
         });
 
+        // Update open in VLC button
+        const openInVLCButton = document.getElementById('openInVLCButton');
+        openInVLCButton.addEventListener('click', function() {
+            vlc_player(videoData.link);
+        });
 
-    </script>
+        // Update watch in MX Player button
+        const mxPlayerLink = document.getElementById('mx_player');
+        mxPlayerLink.addEventListener('click', function() {
+            mx_player(videoData.link);
+        });
 
+        // Update square image
+        const squareImage = document.getElementById('squareImage');
+        squareImage.src = videoData.image;
+        squareImage.alt = "Square Image"; // Update alt text as needed
 
+        // Update download link
+        const downloadLink = document.getElementById('download-link');
+        downloadLink.href = videoData.download;
+        downloadLink.setAttribute('download', videoData.title + '.mp4');
+    }
+
+    // Function to handle MX Player integration
+    function mx_player(streamlink) {
+        try {
+            // Construct the custom URL scheme for MX Player
+            const openMXPlayer = `mxplayer://${encodeURIComponent(streamlink)}`;
+            // Attempt to open the link in MX Player
+            window.location.href = openMXPlayer;
+        } catch (error) {
+            console.error('Failed to open in MX Player:', error);
+            alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
+        }
+    }
+
+    // Function to handle VLC integration
+    function vlc_player(streamlink) {
+        try {
+            const openVlc = `vlc://${streamlink}`;
+            // Attempt to open the link in VLC
+            window.location.href = openVlc;
+        } catch (error) {
+            console.error('Failed to open in VLC:', error);
+            alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
+        }
+    }
+
+    // Function to copy stream link to clipboard
+    function copyStreamLink(streamLink) {
+        const linkToCopy = streamLink.toLowerCase();
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(linkToCopy)
+                .then(() => {
+                    alert('Stream link copied to clipboard: ' + linkToCopy);
+                })
+                .catch(err => {
+                    console.error('Error copying to clipboard:', err);
+                });
+        } else {
+            // Fallback for browsers that do not support navigator.clipboard
+            try {
+                const textArea = document.createElement("textarea");
+                textArea.value = linkToCopy;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Stream link copied to clipboard: ' + linkToCopy);
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
+            }
+        }
+    }
+
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        const results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Event listener for when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const id = getUrlParameter('id');
+        initializeVideoPlayerById(id);
+    });
+</script>
 </body>
 </html>
