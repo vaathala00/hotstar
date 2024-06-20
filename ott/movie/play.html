@@ -106,10 +106,22 @@
 
 
                 <div class="downloadBtn">
+
+
 <a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">Download Video</a>
 
-        <a id="openInVLCButton" class="open-in-vlc" onclick="vlc_player()">Open in VLC</a>
+<a id="openInVLCButton" class="download-btn" onclick="vlc_player()">Open in VLC</a>
 
+<a id="copyStreamLink" class="download-btn" onclick="copyStreamLink()">copy link</a>
+
+
+                    <button class="magnet" onclick="mx_player()">
+                        <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">watch in MX PLAYER
+                    </button>
+
+                    <button class="magnet" onclick="playit_player()">
+                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">watch in PLAYit
+                    </button>
 
                 </div>
             </div>
@@ -188,12 +200,16 @@
                 // Update file discription
                 document.getElementById('fileSize').textContent = videoData.description;
 
+               // copy Stream link
+               const copyStreamLink = document.getElementById('copyStreamLink');
+               copyStreamLink.addEventListener('click', function() {
+               copyStreamLink(videoData.link);
+        });
 
-
-        // Update vlc link
-        const openInVLCButton = document.getElementById('openInVLCButton');
-        openInVLCButton.addEventListener('click', function() {
-            vlc_player(videoData.link);
+              // Update vlc link
+              const openInVLCButton = document.getElementById('openInVLCButton');
+              openInVLCButton.addEventListener('click', function() {
+              vlc_player(videoData.link);
         });
                 
                 // Update square image
@@ -207,6 +223,8 @@
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
 
+
+
 function vlc_player(streamlink) {
     const userAgent = navigator.userAgent.toLowerCase();
 
@@ -215,37 +233,44 @@ function vlc_player(streamlink) {
         const openVlcMobile = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(streamlink)}`;
         window.location.href = openVlcMobile;
     } else {
-        // For desktop (PC and Mac), attempt to open VLC using a fallback method
-        const isWindows = navigator.platform.toLowerCase().indexOf('win') > -1;
-        const isMac = navigator.platform.toLowerCase().indexOf('mac') > -1;
-
-        if (isWindows) {
-            // For Windows, attempt to open VLC using a command
-            try {
-                const shell = new ActiveXObject('WScript.Shell');
-                shell.run(`vlc "${streamlink}"`);
-            } catch (error) {
-                console.error('Failed to open VLC on Windows:', error);
-                alert('Failed to open VLC. Please open VLC and enter the network stream URL manually:\n\n' + streamlink);
-            }
-        } else if (isMac) {
-            // For Mac, attempt to open VLC using a shell command
-            try {
-                window.location.href = `file:///Applications/VLC.app/Contents/MacOS/VLC "${streamlink}"`;
-            } catch (error) {
-                console.error('Failed to open VLC on Mac:', error);
-                alert('Failed to open VLC. Please open VLC and enter the network stream URL manually:\n\n' + streamlink);
-            }
-        } else {
-            // Generic fallback for other desktop platforms
-            alert('To open this stream in VLC on your desktop, please open VLC manually and enter the following network stream URL:\n\n' + streamlink);
-        }
+        // For desktop (PC and Mac), provide instructions to the user
+        alert('To open this stream in VLC on your desktop, please follow these steps:\n\n1. Open VLC Media Player.\n2. Navigate to Media -> Open Network Stream.\n3. Paste the following URL into the Network URL field:\n\n' + streamlink + '\n\n4. Click on Play.');
     }
 }
 
 
+// Function to copy the link
+function copyStreamLink(link) {
+    // Create a temporary input element
+    var tempInput = document.createElement('input');
+    tempInput.value = link;
+    document.body.appendChild(tempInput);
+    
+    // Select the input field
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
 
+    // Copy the text inside the input field
+    document.execCommand('copy');
 
+    // Remove the temporary input
+    document.body.removeChild(tempInput);
+
+    // Optionally, provide some feedback to the user
+    alert('Link copied to clipboard: ' + link);
+}
+
+// Add event listener to the link
+document.addEventListener('DOMContentLoaded', function() {
+    var copyStreamLinkButton = document.getElementById('copyStreamLink');
+    copyStreamLinkButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default action of <a> tag
+        var videoData = {
+            link: 'https://example.com/video' // Replace with your actual video link
+        };
+        copyStreamLink(videoData.link);
+    });
+});
 
 
             // Get id parameter from URL
