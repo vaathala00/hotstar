@@ -207,11 +207,16 @@
                 downloadLink.setAttribute('download', videoData.title + '.mp4');
             }
 
-    function vlc_player() {
-    const openstreamlink = streamlink;
-    const openVlc = `vlc://${openstreamlink}`;
-    window.location.href = openVlc;
-  }
+function vlc_player(streamlink) {
+    try {
+        const openVlc = `vlc://${streamlink}`;
+        window.location.href = openVlc;
+    } catch (error) {
+        console.error('Failed to open in VLC:', error);
+        alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
+    }
+}
+
 
 
             // Get id parameter from URL
