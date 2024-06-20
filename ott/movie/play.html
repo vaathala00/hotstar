@@ -255,7 +255,7 @@ function mx_player(streamlink) {
         const mxIntentUri = `intent://play/${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
 
         // Attempt to open the link using the intent URI
-        window.location.href = mxIntentUri;
+        window.location.href = mxUrl;
     } catch (error) {
         console.error('Failed to open in MX Player:', error);
         alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
