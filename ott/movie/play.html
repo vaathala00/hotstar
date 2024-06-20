@@ -259,28 +259,27 @@ watch in PLAYit
 
 
 function mx_player(streamlink) {
-    const packageName = 'com.mxtech.videoplayer.ad'; // Package name of MX PLAYER
-    const openMx = `intent:${streamlink}#Intent;package=${packageName};end`;
-
     try {
-        window.location.href = openMx;
+        // Construct the custom URL scheme for MX Player
+        const openMXPlayer = `mxplayer://${encodeURIComponent(streamlink)}`;
+        
+        // Attempt to open the link in MX Player
+        window.location.href = openMXPlayer;
     } catch (error) {
-        console.error('Failed to open in MX PLAYER:', error);
-        alert('Failed to open MX PLAYER. Please make sure MX PLAYER is installed on your device.');
+        console.error('Failed to open in MX Player:', error);
+        alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
     }
 }
 
 
-function vlc_player(streamlink) {
-    const userAgent = navigator.userAgent.toLowerCase();
 
-    if (userAgent.indexOf('iphone') > -1 || userAgent.indexOf('ipad') > -1 || userAgent.indexOf('ipod') > -1 || userAgent.indexOf('android') > -1) {
-        // For mobile devices, use the vlc-x-callback:// protocol
-        const openVlcMobile = `vlc-x-callback://x-callback-url/stream?url=${encodeURIComponent(streamlink)}`;
-        window.location.href = openVlcMobile;
-    } else {
-        // For desktop (PC and Mac), provide instructions to the user
-        alert('To open this stream in VLC on your desktop, please follow these steps:\n\n1. Open VLC Media Player.\n2. Navigate to Media -> Open Network Stream.\n3. Paste the following URL into the Network URL field:\n\n' + streamlink + '\n\n4. Click on Play.');
+function vlc_player(streamlink) {
+    try {
+        const openVlc = vlc://${streamlink};
+        window.location.href = openVlc;
+    } catch (error) {
+        console.error('Failed to open in VLC:', error);
+        alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
     }
 }
 
