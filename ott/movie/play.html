@@ -102,7 +102,7 @@
                         <h4 style="display: inline;">File Description : </h4>
                         <p style="display: inline;" id="fileSize"></p>
                     </div>
-                   </div>
+                 </div>
 
                 <div class="downloadBtn">
                     <a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">
@@ -125,7 +125,7 @@
                         Watch in MX PLAYER
                     </a> -->
 
-                    <a id="playit" class="download-btn" onclick="playit_player(videoData.link)">
+                    <a id="playit" class="download-btn" onclick="playit_player()">
                     <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="PLAYit">
                      Watch in PLAYit
                     </a>
@@ -218,6 +218,13 @@
                 mx_player(videoData.link);
             });
 
+            // Update open in playit button
+            const playitButton = document.getElementById('playitButton');
+            playitButton.addEventListener('click', function() {
+                playit_player(videoData.link);
+            });
+
+
             // Update square image
             const squareImage = document.getElementById('squareImage');
             squareImage.src = videoData.image;
@@ -229,12 +236,12 @@
             downloadLink            .setAttribute('download', videoData.title + '.mp4');
         }
 
-
+}
 
 // Function to handle Playit integration
 function playit_player(streamlink) {
     try {
-        const piUrl = `playit://playerv2/video?url=${encodeURIComponent(streamlink)}&title=`;
+        const piUrl = `playit://playerv2/video?url=${encodeURIComponent(streamlink)}`;
         window.location.href = piUrl;
     } catch (error) {
         console.error('Failed to open in PlayIt:', error);
