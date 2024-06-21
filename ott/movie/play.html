@@ -197,42 +197,26 @@
             document.getElementById('fileSize').textContent = videoData.description;
 
             // Update copy stream link button
-            const copyStreamLinkButton = document.getElementById('copyStreamLink');
-            copyStreamLinkButton.addEventListener('click', function() {
-                copyStreamLink(videoData.link);
-            });
+                const copyStreamLinkButton = document.getElementById('copyStreamLink');
+                copyStreamLinkButton.addEventListener('click', () => copyStreamLink(videoData.link));
 
-            // Update open in VLC button
-            const openInVLCButton = document.getElementById('openInVLCButton');
-            openInVLCButton.addEventListener('click', function() {
-                vlc_player(videoData.link);
-            });
+                const openInVLCButton = document.getElementById('openInVLCButton');
+                openInVLCButton.addEventListener('click', () => vlc_player(videoData.link));
 
-            // Update watch in MX Player button
-            const mxPlayerButton = document.getElementById('mx_player');
-            mxPlayerButton.addEventListener('click', function() {
-                mx_player(videoData.link);
-            });
+                const playit_playerButton = document.getElementById('playit_player');
+                playit_playerButton.addEventListener('click', () => playit_player(videoData.link));
 
-            // Update open in playit button
-            const playit_playerButton = document.getElementById('playit_player');
-            playit_playerButton.addEventListener('click', function() {
-                playit_player(videoData.link);
-            });
+                const squareImage = document.getElementById('squareImage');
+                squareImage.src = videoData.image;
+                squareImage.alt = 'Square Image';
 
-
-            // Update square image
-            const squareImage = document.getElementById('squareImage');
-            squareImage.src = videoData.image;
-            squareImage.alt = "Square Image"; // Update alt text as needed
-
-       
-            // Update download link
-            const downloadLink = document.getElementById('download-link');
-            downloadLink.href = videoData.download;
-            downloadLink.setAttribute('download', videoData.title + '.mp4');
+                const downloadLink = document.getElementById('download-link');
+                downloadLink.href = videoData.download;
+                downloadLink.setAttribute('download', `${videoData.title}.mp4`);
+            } catch (error) {
+                console.error('Error initializing video player:', error.message);
+            }
         }
-
 
 
 // Function to handle Playit integration
