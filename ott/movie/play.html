@@ -125,7 +125,7 @@
                         Watch in MX PLAYER
                     </a> -->
 
-                   <a id="playit_player" class="download-btn" onclick="playit_player()">
+                   <a id="playit" class="download-btn" onclick="playit_player()">
                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">
                        watch in PLAYit
                    </a> 
@@ -219,8 +219,8 @@
             });
 
             // Update watch in Playit button
-            const playit_playerButton = document.getElementById('playit_player');
-            playit_playerButton.addEventListener('click', function() {
+            const playitButton = document.getElementById('playit');
+            playitButton.addEventListener('click', function() {
                 playit_player(videoData.link);
             });
 
