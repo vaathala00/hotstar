@@ -120,10 +120,15 @@
                         Copy Link
                     </a>
 
-                    <a id="mx_player" class="download-btn" onclick="mx_player()">
+                   <!-- <a id="mx_player" class="download-btn" onclick="mx_player()">
                         <img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">
                         Watch in MX PLAYER
-                    </a>
+                    </a> -->
+
+                   <a id="playit_player" class="download-btn" onclick="playit_player()">
+                       <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">
+                       watch in PLAYit
+                   </a> 
                 </div>
             </div>
         </div>
@@ -213,6 +218,12 @@
                 mx_player(videoData.link);
             });
 
+            // Update watch in Playit button
+            const playit_playerButton = document.getElementById('playit_player');
+            playit_playerButton.addEventListener('click', function() {
+                playit_player(videoData.link);
+            });
+
             // Update square image
             const squareImage = document.getElementById('squareImage');
             squareImage.src = videoData.image;
@@ -224,7 +235,17 @@
             downloadLink            .setAttribute('download', videoData.title + '.mp4');
         }
 
-        // Function to handle MX Player integration
+// Function to handle Playit integration
+function playit_player(streamlink) {
+    try {
+        const piUrl = `playit://playerv2/video?url=${encodeURIComponent(streamlink)}&title=`;
+        window.location.href = piUrl;
+    } catch (error) {
+        console.error('Failed to open in PlayIt:', error);
+        alert('Failed to open PlayIt. Please check if PlayIt is installed and try again.');
+    }
+}
+// Function to handle MX Player integration
         function mx_player(streamlink) {
             try {
                 const mxIntentUri = `intent:${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
