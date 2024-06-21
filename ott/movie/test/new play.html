@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Stream |</title>
+    <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/proavipatil/data@main/fs/src/plyr.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+.download-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center; /* Center text and image */
+    width: 200px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    line-height: 40px; /* Ensure vertical alignment */
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
+.download-btn img {
+    height: 20px; /* Adjust height to desired size */
+    margin-right: 8px; /* Add spacing between image and text */
+    vertical-align: middle; /* Align image vertically with text */
+}
+
+
+        .open-in-vlc {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: px;
+            margin-top: 10px;
+        }
+        .open-in-vlc:hover {
+            background-color: #0056b3;
+        }
+
+
+
+
+.square-image {
+    width: 80px; /* Adjust size as needed */
+    height: 109px; /* Adjust size as needed */
+    margin-right: 20px; /* Space between image and file details */
+    margin-top: -109px;
+
+}
+
+.square-image img {
+    width: 100%; /* Make sure the image fills its container */
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the container */
+    border-radius: 5px; /* Rounded corners for aesthetics */
+}
+
+.file-details {
+    flex: 1; /* Take remaining space */
+}
+
+.file-details h4,
+.file-details p {
+    margin: 0; /* Remove default margins */
+    margin-bottom: 5px; /* Add space between items */
+}
+
+.file-name {
+
+  margin-left: 85px;
+}
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nleft">
+            <a href="#">
+                <h3 id="heading" style="z-index: 100;" class="magnet title">FILE STREAM</h3>
+            </a>
+        </div>
+        <div class="home-btn magnet about-btn wlcm abt-chnl contact-btn"></div>
+    </nav>
+
+    <div class="outer">
+        <div class="inner">
+            <div class="main" id="main">
+                <video id="player" class="player" playsinline controls width="100%"></video>
+
+                <div class="file-name">
+                    <h4 style="display: inline;">File Name: </h4>
+                    <p style="display: inline;" id="fileName"></p><br><br>
+                    <h4 style="display: inline;">File Description : </h4>
+                    <p style="display: inline;" id="fileSize"></p>
+                </div>
+
+<!-- Square Image -->
+    <div class="square-image">
+        <img id="squareImage" src="" alt="Square Image">
+    </div>
+
+
+                <div class="downloadBtn">
+
+ 
+<a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event)">
+<img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">
+Download Video
+</a> 
+
+<a id="openInVLCButton" class="download-btn" onclick="vlc_player()">
+<img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">
+Open in VLC
+</a>
+
+<a id="copyStreamLink" class="download-btn" onclick="copyStreamLink()">
+<img src="https://i.ibb.co/CM4Y586/link.png" alt="Copy Link">
+copy link
+</a>
+
+<a id="mx_player" class="download-btn" onclick="mx_player()">
+<img src="https://i.ibb.co/41WvtQ3/mx.png" alt="">
+watch in MX PLAYER
+</a>
+
+<!-- 
+<a id="playit_player" class="download-btn" onclick="playit_player()">
+<img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="">
+watch in PLAYit
+</a> -->
+
+
+                </div>
+            </div>
+        </div>
+        <footer>
+            <center>
+                <div class="copyright">
+                    <h5 class="text-center">
+                         <script type="text/JavaScript">document.write(new Date().getFullYear())</script> |.
+                    </h5>
+                </div>
+            </center>
+        </footer>
+    </div>
+
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+    
+<script>
+    // Function to handle download confirmation dialog
+    function showDownloadDialog(event) {
+        event.preventDefault(); // Prevent the default link behavior (optional)
+
+        const downloadLink = event.currentTarget;
+        const downloadTitle = downloadLink.getAttribute('download');
+        const downloadLocation = 'your phone\'s download storage'; // Example location message
+
+        // Display a confirmation dialog using a custom modal or alert
+        if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
+            // Proceed with download if user confirms
+            window.location.href = downloadLink.href;
+        } else {
+            // Optionally handle if the user cancels the download
+            console.log('Download cancelled by user.');
+        }
+    }
+
+    // Function to fetch movies data asynchronously
+    async function fetchMovies() {
+        try {
+            const response = await fetch('movies.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch movies.json');
+            }
+            const movies = await response.json();
+            return movies;
+        } catch (error) {
+            console.error('Error fetching movies.json:', error.message);
+            return [];
+        }
+    }
+
+    // Function to initialize video player and related content by ID
+    async function initializeVideoPlayerById(id) {
+        const movies = await fetchMovies();
+        const videoData = movies.find(video => video.id == id);
+
+        if (!videoData) {
+            console.error('Video data not found for id ' + id);
+            return;
+        }
+
+        // Initialize Plyr video player
+        const player = new Plyr('#player');
+        const source = document.createElement('source');
+        source.src = videoData.link.replace('.mkv', '.mp4'); // Assuming link is adjusted
+        source.type = 'video/mp4';
+        document.getElementById('player').appendChild(source);
+
+        // Update file name and description
+        document.getElementById('fileName').textContent = videoData.title;
+        document.getElementById('fileSize').textContent = videoData.description;
+
+        // Update copy stream link button
+        const copyStreamLinkButton = document.getElementById('copyStreamLink');
+        copyStreamLinkButton.addEventListener('click', function() {
+            copyStreamLink(videoData.link);
+        });
+
+        // Update open in VLC button
+        const openInVLCButton = document.getElementById('openInVLCButton');
+        openInVLCButton.addEventListener('click', function() {
+            vlc_player(videoData.link);
+        });
+
+        // Update watch in MX Player button
+        const mxPlayerButton = document.getElementById('mx_player');
+        mxPlayerButton.addEventListener('click', function() {
+            mx_player(videoData.link);
+        });
+
+        // Update square image
+        const squareImage = document.getElementById('squareImage');
+        squareImage.src = videoData.image;
+        squareImage.alt = "Square Image"; // Update alt text as needed
+
+        // Update download link
+        const downloadLink = document.getElementById('download-link');
+        downloadLink.href = videoData.download;
+        downloadLink.setAttribute('download', videoData.title + '.mp4');
+    }
+
+    // Function to handle MX Player integration
+function mx_player(streamlink) {
+    try {
+        const mxIntentUri = `intent:${encodeURIComponent(streamlink)}#Intent;package=com.mxtech.videoplayer.ad;end`;
+        window.location.href = mxIntentUri;
+    } catch (error) {
+        console.error('Failed to open in MX Player:', error);
+        alert('Failed to open MX Player. Please make sure MX Player is installed and try again.');
+    }
+}
+
+
+
+    // Function to handle VLC integration
+    function vlc_player(streamlink) {
+        try {
+            const openVlc = `vlc://${streamlink}`;
+            // Attempt to open the link in VLC
+            window.location.href = openVlc;
+        } catch (error) {
+            console.error('Failed to open in VLC:', error);
+            alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
+        }
+    }
+
+    // Function to copy stream link to clipboard
+    function copyStreamLink(streamLink) {
+        const linkToCopy = streamLink.toLowerCase();
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(linkToCopy)
+                .then(() => {
+                    alert('Stream link copied to clipboard: ' + linkToCopy);
+                })
+                .catch(err => {
+                    console.error('Error copying to clipboard:', err);
+                });
+        } else {
+            // Fallback for browsers that do not support navigator.clipboard
+            try {
+                const textArea = document.createElement("textarea");
+                textArea.value = linkToCopy;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Stream link copied to clipboard: ' + linkToCopy);
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
+            }
+        }
+    }
+
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        const results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Event listener for when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const id = getUrlParameter('id');
+        initializeVideoPlayerById(id);
+    });
+</script>
+</body>
+</html>
