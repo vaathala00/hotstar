@@ -118,8 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (iframe) {
         var doc = iframe.contentDocument || iframe.contentWindow.document;
         if (doc) {
-            // Remove ads by manipulating the DOM inside the iframe
-            // Example: Remove all elements with class 'ad' within the iframe
+            // Example: Remove all elements with a class name 'ad' within the iframe
             var adElements = doc.getElementsByClassName('ad');
             for (var i = adElements.length - 1; i >= 0; i--) {
                 adElements[i].parentNode.removeChild(adElements[i]);
@@ -131,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('iframe-container element not found');
     }
 });
+
 
 
 
