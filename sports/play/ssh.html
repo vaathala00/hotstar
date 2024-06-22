@@ -24,7 +24,7 @@
    <!--   <video src="images/vid-1.mp4" loop controls class="main-video"></video> -->
 
 <div class="my-iframe" id="iframe-container">
-      <iframe src="https://crichd.site/cn1/?c=starhindi" allowfullscreen></iframe>
+      <iframe src="https://stream.crichd.vip/update/star1hi.php" allowfullscreen></iframe>
     </div>
 
       <h5 class="main-vid-title"></h5>
@@ -47,7 +47,7 @@
          <h3 class="list-title">zoombie walking animation</h3>
       </div> -->
 
-<iframe width="350px" height="450px" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&amp;embed_domain=vicky1111000.github.io" ></iframe>
+<iframe  width="350px" height="450px" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&amp;embed_domain=vicky1111000.github.io" ></iframe>
 
    <!-- <ul id="channel-list">
         <li data-src="video.html"> 
@@ -111,6 +111,29 @@
           currentIframe = iframeContainer.firstChild;
         }
       });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var iframe = document.getElementById('iframe-container');
+    if (iframe) {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        if (doc) {
+            // Remove ads by manipulating the DOM inside the iframe
+            // Example: Remove all elements with class 'ad' within the iframe
+            var adElements = doc.getElementsByClassName('ad');
+            for (var i = adElements.length - 1; i >= 0; i--) {
+                adElements[i].parentNode.removeChild(adElements[i]);
+            }
+        } else {
+            console.error('Failed to access iframe content document');
+        }
+    } else {
+        console.error('iframe-container element not found');
+    }
+});
+
+
+
     </script>
 
 
