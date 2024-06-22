@@ -113,26 +113,22 @@
       });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    var iframe = document.getElementById('iframe-container');
-    if (iframe) {
-        var doc = iframe.contentDocument || iframe.contentWindow.document;
-        if (doc) {
-            // Example: Remove all elements with a class name 'ad' within the iframe
-            var adElements = doc.getElementsByClassName('ad');
-            for (var i = adElements.length - 1; i >= 0; i--) {
-                adElements[i].parentNode.removeChild(adElements[i]);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to block scripts from a specific domain
+            function blockScriptsFromDomain(domain) {
+                var scripts = document.getElementsByTagName('script');
+                for (var i = 0; i < scripts.length; i++) {
+                    var script = scripts[i];
+                    if (script.src && script.src.includes(domain)) {
+                        script.parentNode.removeChild(script);
+                        console.log('Blocked script from domain:', domain);
+                    }
+                }
             }
-        } else {
-            console.error('Failed to access iframe content document');
-        }
-    } else {
-        console.error('iframe-container element not found');
-    }
-});
 
-
-
+            // Call the function to block scripts from 'youradexchange.com'
+            blockScriptsFromDomain('youradexchange.com');
+        });
 
     </script>
 
