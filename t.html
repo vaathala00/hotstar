@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Video Player</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #video-container {
+            max-width: 800px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        #video {
+            width: 100%;
+            height: auto;
+        }
+        .error-message {
+            text-align: center;
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" controls autoplay></video>
+        <div id="error-message" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var video = document.getElementById('video');
+            var errorMessage = document.getElementById('error-message');
+
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource('https://allinonereborn.in/jiobe143.m3u8/ts.php?ts=');
+                hls.attachMedia(video);
+
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+
+                hls.on(Hls.Events.ERROR, function(event, data) {
+                    if (data.fatal) {
+                        switch(data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                errorMessage.innerText = 'Network error occurred. Please check your internet connection.';
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                errorMessage.innerText = 'Media error occurred. Please try again later.';
+                                break;
+                            default:
+                                errorMessage.innerText = 'An unexpected error occurred. Please try again later.';
+                                break;
+                        }
+                        errorMessage.style.display = 'block';
+                    }
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = 'https://allinonereborn.in/jiobe143.m3u8/?id=363';
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            } else {
+                errorMessage.innerText = 'HLS is not supported in your browser.';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
