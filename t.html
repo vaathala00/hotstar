@@ -16,7 +16,7 @@
             font-family: Arial, sans-serif;
         }
         #video-container {
-            max-width: 800px;
+            max-width: 1000px;
             border: 1px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -48,11 +48,14 @@
 
             if (Hls.isSupported()) {
                 var hls = new Hls();
-                hls.loadSource('https://allinonereborn.in/jiobe143.m3u8/ts.php?ts=');
+                hls.loadSource('https://allinonereborn.in/jiobe143.m3u8/ts.php?ts=https://allinonereborn.in/jiobe143.m3u8/?id=363');
                 hls.attachMedia(video);
 
                 hls.on(Hls.Events.MANIFEST_PARSED, function() {
                     video.play();
+                    video.requestFullscreen().catch(function(error) {
+                        console.log('Error attempting to enable full-screen mode:', error.message);
+                    });
                 });
 
                 hls.on(Hls.Events.ERROR, function(event, data) {
@@ -75,6 +78,9 @@
                 video.src = 'https://allinonereborn.in/jiobe143.m3u8/?id=363';
                 video.addEventListener('loadedmetadata', function() {
                     video.play();
+                    video.requestFullscreen().catch(function(error) {
+                        console.log('Error attempting to enable full-screen mode:', error.message);
+                    });
                 });
             } else {
                 errorMessage.innerText = 'HLS is not supported in your browser.';
