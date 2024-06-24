@@ -1,0 +1,55 @@
+[
+
+  {
+    "id": "24",
+    "name": "hindi",
+    "logo": "https://example.com/logo1.png",
+    "link": "https://bpprod3catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/xxx.mpd",
+    "kid": "e207c2241f225fd7b6c625d6ac33eb47",
+    "k": "54038b196ed90ef2ca121db46e9453ae"
+  },
+  {
+    "id": "78",
+    "name": "english",
+    "logo": "https://example.com/logo2.png",
+    "link": "https://bpprod2catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/xxx.mpd",
+    "kid": "b9f9f09481655bceae5bb2c979e1a20b",
+    "k": "621de8f23a5822c9b5c491de0d9457c8"
+  },
+
+  {
+    "id": "willow",
+    "name": "willow",
+    "logo": "https://example.com/logo2.png",
+    "link": "https://linear-novi.stvacdn.spectrum.com/LIVE/5248/bpk-tv/10364/drm/manifest.mpd",
+    "kid": "475d7932b5f352bb92016b75b60c58fa",
+    "k": "ea37faa137ae8f644105c4fcc189a35f"
+  },
+
+  {
+    "id": "hindi",
+    "name": "prime",
+    "logo": "https://example.com/logo2.png",
+    "link": "https://aba5sdmaaaaaaaamibyasmmfoav3v.otte.live.cf.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/dmmqe7ssji/out/v1/3775f3d149f34a7a81d8cd7d58118e40/cenc.mpd",
+    "kid": "1105b85e6db6214e686e462206ed86ec",
+    "k": "59d851187354b65fa2d14829046893ef"
+  },
+
+  {
+    "id": "english",
+    "name": "prime",
+    "logo": "https://example.com/logo2.png",
+    "link": "https://aba5sdmaaaaaaaamkycwliah6buj4.otte.live.cf.ww.aiv-cdn.net/pdx-nitro/live/clients/dash/enc/tgcrfjcgia/out/v1/7296f026409c4e9ba8844a238628f9ad/cenc.mpd",
+    "kid": "d1badeadb11f16bbd0ad7d47914d939e",
+    "k": "bd52d185d3537c4c1759db6d66f90f31"
+  },
+
+  {
+    "id": "3",
+    "name": "tamil",
+    "logo": "",
+    "link": "https://allinonereborn.tech/doordarshan.m3u8/?id=23989",
+    "kid": "SomeKeyIdForVideo3",
+    "k": "SomeKeyForVideo3"
+  }
+]
