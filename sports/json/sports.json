@@ -5,16 +5,16 @@
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
     "link": "https://bpprod3catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/xxx.mpd",
-    "kid": "bd5c3fdf06775c8792b479f63b892754",
-    "k": "98e2aa0c59110aee2d3eabe1933f66e6"
+    "kid": "e207c2241f225fd7b6c625d6ac33eb47",
+    "k": "54038b196ed90ef2ca121db46e9453ae"
   },
   {
     "id": "78",
     "name": "english",
     "logo": "https://example.com/logo2.png",
     "link": "https://bpprod2catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240615T203838&end=20240623T203838",
-    "kid": "6f33cf34ed0e55e7a4b9b75eb5965a5b",
-    "k": "152d2cceb2ccd8f6d3df3950eb0201ef"
+    "kid": "b9f9f09481655bceae5bb2c979e1a20b",
+    "k": "621de8f23a5822c9b5c491de0d9457c8"
   },
 
   {
