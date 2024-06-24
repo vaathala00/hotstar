@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M3U8 Playlist Extractor</title>
     <script>
-        async function fetchM3U8Playlist(url) {
+async function fetchM3U8Playlist(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -24,8 +24,7 @@ window.onload = function() {
     const url = 'https://sansat.net:88/02027092234115/BROF45SRPZJFXGG/100125';
     fetchM3U8Playlist(url);
 };
-
-    </script>
+ </script>
 </head>
 <body>
     <h1>M3U8 Playlist Content</h1>
