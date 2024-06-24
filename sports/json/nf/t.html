@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cric X Hype</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    #player {
+      position: absolute;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <script src="assets/KB5zFt7A.js"></script>
+  <script src="assets/jwpsrv.js" async></script>
+  <script src="assets/vast.js" async></script>
+  <script>
+    const playerInstance = jwplayer("player").setup({
+      controls: true,
+      displaytitle: true,
+      autoplay: true,
+      displaydescription: true,
+      abouttext: "Video Player By CricXHype",
+      aboutlink: "https://telegram.me/CricketxHype",
+      skin: {
+        name: "netflix"
+      },
+      logo: {
+        file: "https://cxh.pages.dev/CXH.png",
+        link: "https://telegram.me/CricketxHype"
+      },
+      captions: {
+        color: "#FFF",
+        fontSize: 14,
+        backgroundOpacity: 0,
+        edgeStyle: "raised"
+      },
+      playlist: [
+        {
+          image: "",
+          sources: [
+            {
+              file: "https://bpprod2catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/xxx.mpd",
+              type: "dash",
+              label: "1080p",
+              default: true,
+              drm: {
+                "clearkey": {
+                  "keyId": "b9f9f09481655bceae5bb2c979e1a20b",
+                  "key": "621de8f23a5822c9b5c491de0d9457c8"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      advertising: {
+        client: "vast",
+        schedule: [
+          {
+            offset: "pre",
+            tag: ""
+          }
+        ]
+      }
+    });
+
+    playerInstance.on("ready", function () {
+      const playerContainer = playerInstance.getContainer();
+      const buttonContainer = playerContainer.querySelector(".jw-button-container");
+      const spacer = buttonContainer.querySelector(".jw-spacer");
+      const timeSlider = playerContainer.querySelector(".jw-slider-time");
+      buttonContainer.replaceChild(timeSlider, spacer);
+
+      // Add custom download button
+      const iconPath = ""; // Define your icon path here
+      const tooltipText = "Download Video";
+      const buttonId = "download-video-button";
+      playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
+
+      function buttonClickAction() {
+        const playlistItem = playerInstance.getPlaylistItem();
+        const anchor = document.createElement("a");
+        anchor.setAttribute("href", playlistItem.file);
+        anchor.setAttribute("download", playlistItem.file.split("/").pop());
+        anchor.style.display = "none";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+      }
+
+      // Detect adblock
+      playerInstance.on("adBlock", () => {
+        const modal = document.querySelector("div.modal");
+        modal.style.display = "flex";
+        document.getElementById("close").addEventListener("click", () => location.reload());
+      });
+
+      // Forward 10 seconds button
+      const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
+      const forwardContainer = rewindContainer.cloneNode(true);
+      const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
+      forwardDisplayButton.style.transform = "scaleX(-1)";
+      forwardDisplayButton.ariaLabel = "Forward 10 Seconds";
+      const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
+      nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+
+      // Hide default next button
+      playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
+
+      // Add onclick handlers for forward buttons
+      [forwardDisplayButton].forEach((button) => {
+        button.onclick = () => {
+          playerInstance.seek(playerInstance.getPosition() + 10);
+        };
+      });
+    });
+  </script>
+
+  <noscript>You must enable JavaScript to see this text.</noscript>
+</body
