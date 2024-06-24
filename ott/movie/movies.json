@@ -1,6 +1,31 @@
 [
 
     {
+        "id": "Chathuram",
+        "title": "Chathuram",
+        "image": "https://m.media-amazon.com/images/M/MV5BZDA1MTkwYjktYThkYy00NmFiLTliYTgtYmFiN2MxNDU1Y2QzXkEyXkFqcGdeQXVyMTUwMDIwNDc2._V1_.jpg",
+        "description": "Drama\\Romance\\Thriller, 2h 00m. Directed by Sidharth Bharathan. Stars: Swasika Vijay, Roshan Mathew, Alencier Ley Lopez.",
+        "link": "https://dl.kpsbots.workers.dev/dl/6678cc5066099c1caa98baa8",
+        "download": "https://dl.kpsbots.workers.dev/dl/6678cc5066099c1caa98baa8"
+    },
+    {
+        "id": "Sriranga Neethulu",
+        "title": "Sriranga Neethulu",
+        "image": "https://m.media-amazon.com/images/M/MV5BMDYwMTFlMmYtMGY3Yy00ZGFkLWE1M2UtYTdmM2UzNDU0MmEwXkEyXkFqcGdeQXVyMTY3ODM2MjU0._V1_QL75_UX820_.jpg",
+        "description": "Drama, 2h 2m. Directed by Praveen Kumar VSS. Stars: Viraj Ashwin, Srinivas Avasarala, Tanikella Bharani.",
+        "link": "https://dl.kpsbots.workers.dev/dl/6678ca1d66099c1caa98baa7",
+        "download": "https://dl.kpsbots.workers.dev/dl/6678ca1d66099c1caa98baa7"
+    },
+    {
+        "id": "Sugarless",
+        "title": "Sugarless",
+        "image": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/sugarless-et00332003-1655989832.jpg",
+        "description": "Comedy, 2h 10m. Directed by Shashidhar K.M. Stars: Pruthvi Ambaar, Dattanna, Naveen D. Padil.",
+        "link": "https://dl.kpsbots.workers.dev/dl/6678c90966099c1caa98baa5",
+        "download": "https://dl.kpsbots.workers.dev/dl/6678c90966099c1caa98baa5"
+    },
+
+    {
         "id": "Aranmanai 4",
         "title": "Aranmanai 4",
         "image": "https://m.media-amazon.com/images/M/MV5BNTRmY2M4ODYtYTlhNy00YWJkLWExMjUtOTgwZWNlNTkwMzBjXkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_FMjpg_UX1000_.jpg",
