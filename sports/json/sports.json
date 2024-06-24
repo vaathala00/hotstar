@@ -4,7 +4,7 @@
     "id": "24",
     "name": "hindi",
     "logo": "https://example.com/logo1.png",
-    "link": "https://allinonereborn.in/tplay/manifest.php?id=24",
+    "link": "https://bpprod3catchup.akamaized.net/bpk-tv/irdeto_com_Channel_252/output/manifest.mpd?begin=20240616T020118&end=20240626T020118",
     "kid": "e207c2241f225fd7b6c625d6ac33eb47",
     "k": "54038b196ed90ef2ca121db46e9453ae"
   },
@@ -12,7 +12,7 @@
     "id": "78",
     "name": "english",
     "logo": "https://example.com/logo2.png",
-    "link": "https://allinonereborn.in/tplay/manifest.php?id=78",
+    "link": "https://bpprod2catchup.akamaized.net/bpk-tv/irdeto_com_Channel_250/output/manifest.mpd?begin=20240616T020032&end=20240626T020032",
     "kid": "b9f9f09481655bceae5bb2c979e1a20b",
     "k": "621de8f23a5822c9b5c491de0d9457c8"
   },
