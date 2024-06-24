@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U8 Playlist Extractor</title>
+    <script>
+        // Function to fetch and display M3U8 playlist content
+        async function fetchM3U8Playlist(url) {
+            try {
+                const response = await fetch(url);
+                const playlistText = await response.text();
+                
+                // Display the playlist content
+                document.getElementById('playlistContent').textContent = playlistText;
+            } catch (error) {
+                console.error('Error fetching M3U8 playlist:', error);
+            }
+        }
+
+        // Function to trigger fetching when the page loads
+        window.onload = function() {
+            const url = 'http://sansat.net:88/02027092234115/BROF45SRPZJFXGG/100125';
+            fetchM3U8Playlist(url);
+        };
+    </script>
+</head>
+<body>
+    <h1>M3U8 Playlist Content</h1>
+    <pre id="playlistContent"></pre>
+</body>
+</html>
