@@ -37,91 +37,82 @@
     }
 
     // Function to initialize JW Player
-    function initializePlayer(videoData) {
-      const playerInstance = jwplayer("player").setup({
-        title: videoData.name,
-        description: "VaathalaTV", // Sample description
-        image: videoData.logo,
-        aspectratio: '16:9',
-        width: '100%',
-        mute: false,
-        autostart: true,
-
-skin: {
-        name: "netflix"
-      },
-      logo: {
-        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-        link: "https://telegram.me/vaathala1"
-      },
-      captions: {
-        color: "#FFF",
-        fontSize: 14,
-        backgroundOpacity: 0,
-        edgeStyle: "raised"
-      },
-
-        playlist: [{
-          sources: [{
-            file: videoData.link,
-            type: "hls", // Set type to "mpd" for DASH stream
-
-          }]
-        }],
-        captions: {
-          color: '#ffb800',
-          fontSize: 30,
-          backgroundOpacity: 0
-        },
-        sharing: {
-          sites: ['facebook', 'twitter']
-        }
-      });
-
-      // Add custom download button
-      const iconPath = ""; // Define your icon path here
-      const tooltipText = "Download Video";
-      const buttonId = "download-video-button";
-      playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
-
-      function buttonClickAction() {
-        const playlistItem = playerInstance.getPlaylistItem();
-        const anchor = document.createElement("a");
-        anchor.setAttribute("href", playlistItem.file);
-        anchor.setAttribute("download", playlistItem.file.split("/").pop());
-        anchor.style.display = "none";
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-      }
-
-      // Forward 10 seconds button
-      playerInstance.on("ready", function () {
-        const playerContainer = playerInstance.getContainer();
-        const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
-        const forwardContainer = rewindContainer.cloneNode(true);
-        const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
-        forwardDisplayButton.style.transform = "scaleX(-1)";
-        forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
-        const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
-        nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
-
-        // Hide default next button
-        playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
-
-        // Add onclick handler for forward button
-        forwardDisplayButton.onclick = function () {
-          playerInstance.seek(playerInstance.getPosition() + 10);
-        };
-      });
-
-      // Detect adblock
-      playerInstance.on("adBlock", () => {
-        const modal = document.querySelector("div.modal");
-        modal.style.display = "flex";
-        document.getElementById("close").addEventListener("click", () => location.reload());
-      });
+function initializePlayer(videoData) {
+  const playerInstance = jwplayer("player").setup({
+    title: videoData.name,
+    description: "VaathalaTV", // Sample description
+    image: videoData.logo,
+    aspectratio: '16:9',
+    width: '100%',
+    autostart: true,
+    skin: {
+      name: "netflix"
+    },
+    logo: {
+      file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+      link: "https://telegram.me/vaathala1"
+    },
+    captions: {
+      color: "#FFF",
+      fontSize: 14,
+      backgroundOpacity: 0,
+      edgeStyle: "raised"
+    },
+    playlist: [{
+      sources: [{
+        file: videoData.link, // HLS stream URL
+        type: "hls" // Set type to "hls" for HLS stream
+      }]
+    }],
+    sharing: {
+      sites: ['facebook', 'twitter']
     }
+  });
+
+  // Add custom download button
+  const iconPath = ""; // Define your icon path here
+  const tooltipText = "Download Video";
+  const buttonId = "download-video-button";
+  playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
+
+  function buttonClickAction() {
+    const playlistItem = playerInstance.getPlaylistItem();
+    const anchor = document.createElement("a");
+    anchor.setAttribute("href", playlistItem.file);
+    anchor.setAttribute("download", playlistItem.file.split("/").pop());
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
+  // Forward 10 seconds button
+  playerInstance.on("ready", function () {
+    const playerContainer = playerInstance.getContainer();
+    const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
+    const forwardContainer = rewindContainer.cloneNode(true);
+    const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
+    forwardDisplayButton.style.transform = "scaleX(-1)";
+    forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
+    const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
+    nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+
+    // Hide default next button
+    playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
+
+    // Add onclick handler for forward button
+    forwardDisplayButton.onclick = function () {
+      playerInstance.seek(playerInstance.getPosition() + 10);
+    };
+  });
+
+  // Detect adblock
+  playerInstance.on("adBlock", () => {
+    const modal = document.querySelector("div.modal");
+    modal.style.display = "flex";
+    document.getElementById("close").addEventListener("click", () => location.reload());
+  });
+}
 
     // Fetch and load video data from JSON
     var id = getUrlParameter('id');
