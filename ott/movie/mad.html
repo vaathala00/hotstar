@@ -138,9 +138,9 @@
                             Download Video
                         </a>
                         <div id="download-options" class="dropdown-content">
-                            <a id="download-dropdown" >1080p</a>
-                            <a id="720p" >720p</a>
-                            <a id="480" >480p</a>
+                            <a id="download-dropdown" download onclick="showDownloadDialog(event)">1080p</a>
+                            <a id="720p" download onclick="showDownloadDialog(event)">720p</a>
+                            <a id="480" download onclick="showDownloadDialog(event)">480p</a>
                         </div>
                     </div>
 
@@ -175,6 +175,22 @@
 
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
     <script>
+
+// Function to handle download confirmation dialog
+        function showDownloadDialog(event) {
+            event.preventDefault();
+            const downloadLink = event.currentTarget;
+            const downloadTitle = downloadLink.getAttribute('download');
+            const downloadLocation = 'your phone\'s download storage'; // Example location message
+
+            if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
+                window.location.href = downloadLink.href;
+            } else {
+                console.log('Download cancelled by user.');
+            }
+        }
+
+
         // Function to toggle dropdown visibility
         function toggleDropdown() {
             document.getElementById("download-options").classList.toggle("show");
@@ -236,7 +252,7 @@
 
     const link720p = document.getElementById('720p');
     if (link720p) {
-        link720p.href = videoData.download;
+        link720p.href = videoData.720p;
         link720p.setAttribute('download', `${videoData.title}-720p.mp4`);
     } else {
         console.error('Element with id "720p" not found');
@@ -244,7 +260,7 @@
 
     const link480p = document.getElementById('480');
     if (link480p) {
-        link480p.href = videoData.download; // Assuming the same download link
+        link480p.href = videoData.480p; // Assuming the same download link
         link480p.setAttribute('download', `${videoData.title}-480p.mp4`);
     } else {
         console.error('Element with id "480" not found');
