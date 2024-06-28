@@ -1,6 +1,56 @@
 [
 
   {
+    "id": "jog-101",
+    "title": "Jog 101",
+    "image": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xxlarge/jog-101-et00342841-1709211141.jpg",
+    "description": "IMDb 7.7 2024 ‧ Crime ‧ 1h 47m Director Vijay Kannadiga| Writers Suman Jadugar ‧ Vijay Kannadiga| Stars Vijay Raghavendra ‧ Tejaswini Shekar ‧ Rajesh Nataranga",
+    "link": "https://dl.kpsbots.workers.dev/dl/667e928a2f12161d458a6b86",
+    "download": "https://dl.kpsbots.workers.dev/dl/667e928a2f12161d458a6b86",
+    "720p": "https://dl.kpsbots.workers.dev/dl/667e98452f12161d458a6b92",
+    "480p": "https://dl.kpsbots.workers.dev/dl/667e98452f12161d458a6b93"
+  },
+  {
+    "id": "pagalariyaan",
+    "title": "Pagalariyaan",
+    "image": "https://i.postimg.cc/zvTGgxnN/GN6249-CXw-AAY-26-1.jpg",
+    "description": "IMDb 8.4 2024 ‧ Thriller ‧ 1h 51m Director Murugan| Writers Vignesh Gunasekar ‧ Kishor Kumar ‧ Murugan| Stars Vetri Sudley ‧ Akshaya Kandamuthan ‧ Sai Dheena",
+    "link": "https://dl.kpsbots.workers.dev/dl/667e91122f12161d458a6b84",
+    "download": "https://dl.kpsbots.workers.dev/dl/667e91122f12161d458a6b84",
+    "720p": "https://dl.kpsbots.workers.dev/dl/667e98172f12161d458a6b90",
+    "480p": "https://dl.kpsbots.workers.dev/dl/667e98182f12161d458a6b91"
+  },
+  {
+    "id": "unarvugal-thodarkadhai",
+    "title": "Unarvugal Thodarkadhai",
+    "image": "https://m.media-amazon.com/images/M/MV5BNjViNjY2MmYtOTU3Yi00YjkxLThhYjItOTIwYmZhMTUyZTc0XkEyXkFqcGdeQXVyMTM5NzM4Mjgx._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 9.4 2024 ‧ Romance ‧ 1h 50m Director Balu Sharma| Writers Balakumaran Murugesan ‧ Balu Sharma| Stars Adams ‧ Attul ‧ Kiran Dev",
+    "link": "https://dl.kpsbots.workers.dev/dl/667e8e5d2f12161d458a6b82",
+    "download": "https://dl.kpsbots.workers.dev/dl/667e8e5d2f12161d458a6b82",
+    "720p": "https://dl.kpsbots.workers.dev/dl/667e97ec2f12161d458a6b8e",
+    "480p": "https://dl.kpsbots.workers.dev/dl/667e97ed2f12161d458a6b8f"
+  },
+  {
+    "id": "inga-naan-thaan-kingu",
+    "title": "Inga Naan Thaan Kingu",
+    "image": "https://m.media-amazon.com/images/M/MV5BNmM3ZTE4NzEtMDIyZC00ZTEyLThkMWEtNTU1YWJiMDNjYjhkXkEyXkFqcGdeQXVyNDkzNDYzMjQ@._V1_.jpg",
+    "description": "IMDb 5.9 2024 ‧ Comedy ‧ 2h 12m Director N. Anand| Writer Ezhisur Aravindhan| Stars Attul ‧ Chandrasekar Koneru ‧ Lollu Sabha Maaran",
+    "link": "https://dl.kpsbots.workers.dev/dl/667e8d182f12161d458a6b81",
+    "download": "https://dl.kpsbots.workers.dev/dl/667e8d182f12161d458a6b81",
+    "720p": "https://dl.kpsbots.workers.dev/dl/667e97b82f12161d458a6b8c",
+    "480p": "https://dl.kpsbots.workers.dev/dl/667e97b82f12161d458a6b8d"
+  },
+  {
+    "id": "padikkadha-pakkangal",
+    "title": "Padikkadha Pakkangal",
+    "image": "https://m.media-amazon.com/images/M/MV5BZmU0NDA4ZWEtMzg2ZS00Y2NmLWIyNDEtZjRmMDdlZTE5OGQ2XkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 8.4 2024 ‧ Horror ‧ 1h 46m Director Selvam Mathapan| Writer Selvam Mathapan| Stars Yaashika Aanand ‧ Eereen Adhikary ‧ Aadhav Balaji",
+    "link": "https://dl.kpsbots.workers.dev/dl/667e8c272f12161d458a6b80",
+    "download": "https://dl.kpsbots.workers.dev/dl/667e8c272f12161d458a6b80",
+    "720p": "https://dl.kpsbots.workers.dev/dl/667e97632f12161d458a6b8a",
+    "480p": "https://dl.kpsbots.workers.dev/dl/667e97632f12161d458a6b8b"
+  },
+  {
         "id": "Guruvayoor_Ambalanadayil",
         "title": "Guruvayoor Ambalanadayil",
         "image": "https://m.media-amazon.com/images/M/MV5BZWEzY2QwN2EtZTZkYy00YWNhLWEyYjEtZjVkMDA2NzVkNDI5XkEyXkFqcGdeQXVyMTUwMDg3OTQy._V1_.jpg",
