@@ -192,19 +192,7 @@
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
 
    <script>
-        // Function to handle download confirmation dialog
-        function showDownloadDialog(event) {
-            event.preventDefault();
-            const downloadLink = event.currentTarget;
-            const downloadTitle = downloadLink.getAttribute('download');
-            const downloadLocation = 'your phone\'s download storage'; // Example location message
-
-            if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
-                window.location.href = downloadLink.href;
-            } else {
-                console.log('Download cancelled by user.');
-            }
-        }
+     
 
         // Function to fetch movies data asynchronously
         async function fetchMovies() {
