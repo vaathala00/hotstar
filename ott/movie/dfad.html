@@ -320,6 +320,65 @@
             const id = getUrlParameter('id');
             initializeVideoPlayerById(id);
         });
+
+
+// Toggle dropdown visibility
+function toggleDropdown() {
+    const dropdownContent = document.getElementById('dropdown-content');
+    dropdownContent.classList.toggle('show');
+}
+
+// Function to handle download based on selected quality
+function showDownloadDialog(event, quality) {
+    event.preventDefault();
+    const downloadLink = document.getElementById('download-btn');
+    const downloadTitle = 'Your Video'; // Replace with actual title
+    const downloadLocation = 'your phone\'s download storage'; // Example location message
+
+    // Set the download link based on selected quality
+    const baseUrl = 'https://example.com/videos/';
+    let videoQuality = '';
+
+    switch (quality) {
+        case '480p':
+            videoQuality = 'video_480p.mp4';
+            break;
+        case '720p':
+            videoQuality = 'video_720p.mp4';
+            break;
+        case '1080p':
+            videoQuality = 'video_1080p.mp4';
+            break;
+        default:
+            videoQuality = 'video_default.mp4'; // Default or fallback video quality
+            break;
+    }
+
+    downloadLink.href = baseUrl + videoQuality;
+    downloadLink.setAttribute('download', `${downloadTitle}_${quality}.mp4`);
+
+    if (confirm(`Your download of "${downloadTitle} (${quality})" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
+        window.location.href = downloadLink.href;
+    } else {
+        console.log('Download cancelled by user.');
+    }
+
+    // Close dropdown after selection
+    toggleDropdown();
+}
+
+// Close dropdown when clicking outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.download-btn')) {
+        const dropdowns = document.getElementsByClassName('dropdown-content');
+        for (let dropdown of dropdowns) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
     </script>
 </body>
 </html>
