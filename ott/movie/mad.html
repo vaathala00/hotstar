@@ -234,13 +234,21 @@
                 squareImage.src = videoData.image;
                 squareImage.alt = 'Square Image';
 
-                const 720pLink = document.getElementById('720p');
-                720pLink.href = videoData.download;
-                720pLink.setAttribute('download', `${videoData.title}.mp4`);
+    const link720p = document.getElementById('720p');
+    if (link720p) {
+        link720p.href = videoData.download;
+        link720p.setAttribute('download', `${videoData.title}-720p.mp4`);
+    } else {
+        console.error('Element with id "720p" not found');
+    }
 
-                const 480pLink = document.getElementById('480p');
-                480pLink.href = videoData.download;
-                480pLink.setAttribute('download', `${videoData.title}.mp4`);
+    const link480p = document.getElementById('480');
+    if (link480p) {
+        link480p.href = videoData.download; // Assuming the same download link
+        link480p.setAttribute('download', `${videoData.title}-480p.mp4`);
+    } else {
+        console.error('Element with id "480" not found');
+    }
 
                 const downloadLink = document.getElementById('download-dropdown');
                 downloadLink.href = videoData.download;
