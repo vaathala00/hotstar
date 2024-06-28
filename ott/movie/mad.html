@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Stream </title>
+    <title>File Stream</title>
     <link rel="icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="https://i.ibb.co/8scgKpf/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://unpkg.com/sheryjs/dist/Shery.css" />
@@ -12,10 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;700&display=swap" rel="stylesheet">
-   
+
  <script src="https://cdn.tailwindcss.com"></script> 
 
     <style>
+    
+
         .download-btn {
             display: inline-block;
             padding: 8px 16px;
@@ -24,10 +26,11 @@
             text-decoration: none;
             border-radius: 5px;
             margin-top: 10px;
-            text-align: center; /* Center text and image */
-            width: 200px; /* Adjust the width as needed */
-            height: 40px; /* Adjust the height as needed */
-            line-height: 40px; /* Ensure vertical alignment */
+            text-align: center;
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
         }
 
         .download-btn:hover {
@@ -35,82 +38,71 @@
         }
 
         .download-btn img {
-            height: 20px; /* Adjust height to desired size */
-            margin-right: 8px; /* Add spacing between image and text */
-            vertical-align: middle; /* Align image vertically with text */
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
         }
-
 
         .file-name {
-            display: flex; /* Use flexbox for layout */
-            align-items: center; /* Center items vertically */
-            padding: 10px; /* Add padding around the entire block */
-            border: 1px solid #ccc; /* Optional: Add border for visual separation */
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
         }
 
-
-
-.square-image {
-    width: 100%; /* Adjust relative size as needed */
-    max-width: 120px; /* Maximum width */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 20px; /* Space between image and file details */
-}
+        .square-image {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            margin-right: 20px;
+        }
 
         .square-image img {
-            width: 100%; /* Make sure the image fills its container */
+            width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensure the image covers the container */
-            border-radius: 5px; /* Rounded corners for aesthetics */
+            object-fit: cover;
+            border-radius: 5px;
         }
 
         .file-details {
-            flex: 1 1 auto; /* Grow as much as possible, based on available space */
+            flex: 1 1 auto;
         }
 
         .file-details h4,
         .file-details p {
-            margin: 0; /* Remove default margins */
-            margin-bottom: 5px; /* Add space between items */
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block !important; /* Use !important to override inline styles */
         }
 
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
-.dropdown-arrow {
-    margin-left: 5px;
-}
-
     </style>
 </head>
-
 <body>
     <nav>
         <div class="nleft">
@@ -127,7 +119,6 @@
                 <video id="player" class="player" playsinline controls width="100%"></video>
 
                 <div class="file-name">
-                    <!-- Square Image -->
                     <div class="square-image">
                         <img id="squareImage" src="" alt="Square Image">
                     </div>
@@ -138,23 +129,20 @@
                         <h4 style="display: inline;">File Description : </h4>
                         <p style="display: inline;" id="fileSize"></p>
                     </div>
-                 </div>
-
+                </div>
 
                 <div class="downloadBtn">
-
-
-                    <a id="download-link" class="download-btn" href="#" download onclick="showDownloadDialog(event) onclick="toggleDropdown()">
-                        <img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">
-<span class="dropdown-arrow">&#9660;</span>
-                        Download Video
- <div id="dropdown-content" class="dropdown-content">
-        <a href="#" onclick="showDownloadDialog(event, '480p')">480p</a>
-        <a href="#" onclick="showDownloadDialog(event, '720p')">720p</a>
-        <a href="#" onclick="showDownloadDialog(event, '1080p')">1080p</a>
-    </div>
-                    </a>
-
+                    <div class="dropdown">
+                        <a id="download-dropdown" class="download-btn" href="#" onclick="toggleDropdown()">
+                            <img style="height: 30px;" src="https://i.ibb.co/RjzYttX/dl.png" alt="">
+                            Download Video
+                        </a>
+                        <div id="download-options" class="dropdown-content">
+                            <a href="#" onclick="downloadVideo('1080p')">1080p</a>
+                            <a href="#" onclick="downloadVideo('720p')">720p</a>
+                            <a href="#" onclick="downloadVideo('480p')">480p</a>
+                        </div>
+                    </div>
 
                     <a id="openInVLCButton" class="download-btn" onclick="vlc_player()">
                         <img src="https://i.ibb.co/px6fQs1/vlc.png" alt="">
@@ -167,32 +155,38 @@
                     </a>
 
                     <a id="playit_player" class="download-btn" onclick="playit_player()">
-                    <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="PLAYit">
-                     Watch in PLAYit
+                        <img src="https://i.postimg.cc/RVGWYJFF/playit.png" alt="PLAYit">
+                        Watch in PLAYit
                     </a>
                 </div>
             </div>
         </div>
-     </div>
-</div>
-
-
-
-        <footer>
-            <center>
-                <div class="copyright">
-                    <h5 class="text-center">
-                        <script type="text/JavaScript">document.write(new Date().getFullYear())</script> | File Stream
-                    </h5>
-                </div>
-            </center>
-        </footer>
     </div>
 
-    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+    <footer>
+        <center>
+            <div class="copyright">
+                <h5 class="text-center">
+                    <script type="text/JavaScript">document.write(new Date().getFullYear())</script> | File Stream
+                </h5>
+            </div>
+        </center>
+    </footer>
 
-   <script>
-     
+    <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
+    <script>
+        // Function to toggle dropdown visibility
+        function toggleDropdown() {
+            document.getElementById("download-options").classList.toggle("show");
+        }
+
+        // Function to handle download based on selected quality
+        function downloadVideo(quality) {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'your_video_url_' + quality + '.mp4'; // Replace with actual video URLs
+            downloadLink.setAttribute('download', 'video_' + quality + '.mp4'); // Replace with appropriate filenames
+            downloadLink.click();
+        }
 
         // Function to fetch movies data asynchronously
         async function fetchMovies() {
@@ -240,7 +234,7 @@
                 squareImage.src = videoData.image;
                 squareImage.alt = 'Square Image';
 
-                const downloadLink = document.getElementById('download-link');
+                const downloadLink = document.getElementById('download-dropdown');
                 downloadLink.href = videoData.download;
                 downloadLink.setAttribute('download', `${videoData.title}.mp4`);
             } catch (error) {
@@ -308,66 +302,6 @@
             const id = getUrlParameter('id');
             initializeVideoPlayerById(id);
         });
-
-
-// Toggle dropdown visibility
-function toggleDropdown() {
-    const dropdownContent = document.getElementById('dropdown-content');
-    dropdownContent.classList.toggle('show');
-}
-
-// Function to handle download based on selected quality
-function showDownloadDialog(event, quality) {
-    event.preventDefault();
-    const downloadLink = document.getElementById('download-btn');
-    const downloadTitle = 'Your Video'; // Replace with actual title
-    const downloadLocation = 'your phone\'s download storage'; // Example location message
-
-    // Set the download link based on selected quality
-    const baseUrl = 'https://example.com/videos/';
-    let videoQuality = '';
-
-    switch (quality) {
-        case '480p':
-            videoQuality = 'video_480p.mp4';
-            break;
-        case '720p':
-            videoQuality = 'video_720p.mp4';
-            break;
-        case '1080p':
-            videoQuality = 'video_1080p.mp4';
-            break;
-        default:
-            videoQuality = 'video_default.mp4'; // Default or fallback video quality
-            break;
-    }
-
-    downloadLink.href = baseUrl + videoQuality;
-    downloadLink.setAttribute('download', `${downloadTitle}_${quality}.mp4`);
-
-    if (confirm(`Your download of "${downloadTitle} (${quality})" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
-        window.location.href = downloadLink.href;
-    } else {
-        console.log('Download cancelled by user.');
-    }
-
-    // Close dropdown after selection
-    toggleDropdown();
-}
-
-// Close dropdown when clicking outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.download-btn')) {
-        const dropdowns = document.getElementsByClassName('dropdown-content');
-        for (let dropdown of dropdowns) {
-            if (dropdown.classList.contains('show')) {
-                dropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
     </script>
 </body>
 </html>
-
