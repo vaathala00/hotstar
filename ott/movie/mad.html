@@ -174,166 +174,164 @@
     </footer>
 
     <script src="https://cdn.plyr.io/3.6.9/plyr.js"></script>
-    <script>
+   <script>
+    // Function to handle download confirmation dialog
+    function showDownloadDialog(event) {
+        event.preventDefault();
+        const downloadLink = event.currentTarget;
+        const downloadTitle = downloadLink.getAttribute('download');
+        const downloadLocation = 'your phone\'s download storage'; // Example location message
 
-// Function to handle download confirmation dialog
-        function showDownloadDialog(event) {
-            event.preventDefault();
-            const downloadLink = event.currentTarget;
-            const downloadTitle = downloadLink.getAttribute('download');
-            const downloadLocation = 'your phone\'s download storage'; // Example location message
-
-            if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
-                window.location.href = downloadLink.href;
-            } else {
-                console.log('Download cancelled by user.');
-            }
+        if (confirm(`Your download of "${downloadTitle}" is about to start. It will be saved in ${downloadLocation}. Do you want to proceed?`)) {
+            window.location.href = downloadLink.href;
+        } else {
+            console.log('Download cancelled by user.');
         }
-
-
-        // Function to toggle dropdown visibility
-        function toggleDropdown() {
-            document.getElementById("download-options").classList.toggle("show");
-        }
-
-        // Function to handle download based on selected quality
-        function downloadVideo(quality) {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = 'your_video_url_' + quality + '.mp4'; // Replace with actual video URLs
-            downloadLink.setAttribute('download', 'video_' + quality + '.mp4'); // Replace with appropriate filenames
-            downloadLink.click();
-        }
-
-        // Function to fetch movies data asynchronously
-        async function fetchMovies() {
-            try {
-                const response = await fetch('movies.json');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch movies.json');
-                }
-                return await response.json();
-            } catch (error) {
-                console.error('Error fetching movies.json:', error.message);
-                return [];
-            }
-        }
-
-        // Function to initialize video player and related content by ID
-        async function initializeVideoPlayerById(id) {
-            try {
-                const movies = await fetchMovies();
-                const videoData = movies.find(video => video.id == id);
-
-                if (!videoData) {
-                    throw new Error(`Video data not found for id ${id}`);
-                }
-
-                const player = new Plyr('#player');
-                const source = document.createElement('source');
-                source.src = videoData.link.replace('.mkv', '.mp4');
-                source.type = 'video/mp4';
-                document.getElementById('player').appendChild(source);
-
-                document.getElementById('fileName').textContent = videoData.title;
-                document.getElementById('fileSize').textContent = videoData.description;
-
-                const copyStreamLinkButton = document.getElementById('copyStreamLink');
-                copyStreamLinkButton.addEventListener('click', () => copyStreamLink(videoData.link));
-
-                const openInVLCButton = document.getElementById('openInVLCButton');
-                openInVLCButton.addEventListener('click', () => vlc_player(videoData.link));
-
-                const playit_playerButton = document.getElementById('playit_player');
-                playit_playerButton.addEventListener('click', () => playit_player(videoData.link));
-
-                const squareImage = document.getElementById('squareImage');
-                squareImage.src = videoData.image;
-                squareImage.alt = 'Square Image';
-
-    const link720p = document.getElementById('720p');
-    if (link720p) {
-        link720p.href = videoData.720p;
-        link720p.setAttribute('download', `${videoData.title}-720p.mp4`);
-    } else {
-        console.error('Element with id "720p" not found');
     }
 
-    const link480p = document.getElementById('480');
-    if (link480p) {
-        link480p.href = videoData.480p; // Assuming the same download link
-        link480p.setAttribute('download', `${videoData.title}-480p.mp4`);
-    } else {
-        console.error('Element with id "480" not found');
+    // Function to toggle dropdown visibility
+    function toggleDropdown() {
+        document.getElementById("download-options").classList.toggle("show");
     }
 
-                const downloadLink = document.getElementById('download-dropdown');
-                downloadLink.href = videoData.download;
-                downloadLink.setAttribute('download', `${videoData.title}.mp4`);
-            } catch (error) {
-                console.error('Error initializing video player:', error.message);
+    // Function to handle download based on selected quality
+    function downloadVideo(quality) {
+        const downloadLink = document.createElement('a');
+        downloadLink.href = 'your_video_url_' + quality + '.mp4'; // Replace with actual video URLs
+        downloadLink.setAttribute('download', 'video_' + quality + '.mp4'); // Replace with appropriate filenames
+        downloadLink.click();
+    }
+
+    // Function to fetch movies data asynchronously
+    async function fetchMovies() {
+        try {
+            const response = await fetch('movies.json');
+            if (!response.ok) {
+                throw new Error('Failed to fetch movies.json');
             }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching movies.json:', error.message);
+            return [];
         }
+    }
 
-        // Function to handle Playit integration
-        function playit_player(streamlink) {
-            try {
-                const piUrl = `playit://playerv2/video?url=${encodeURIComponent(streamlink)}`;
-                window.location.href = piUrl;
-            } catch (error) {
-                console.error('Failed to open in PlayIt:', error);
-                alert('Failed to open PlayIt. Please check if PlayIt is installed and try again.');
+    // Function to initialize video player and related content by ID
+    async function initializeVideoPlayerById(id) {
+        try {
+            const movies = await fetchMovies();
+            const videoData = movies.find(video => video.id == id);
+
+            if (!videoData) {
+                throw new Error(`Video data not found for id ${id}`);
             }
-        }
 
-        // Function to handle VLC integration
-        function vlc_player(streamlink) {
-            try {
-                const openVlc = `vlc://${streamlink}`;
-                window.location.href = openVlc;
-            } catch (error) {
-                console.error('Failed to open in VLC:', error);
-                alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
-            }
-        }
+            const player = new Plyr('#player'); // Assuming Plyr is a video player library
+            const source = document.createElement('source');
+            source.src = videoData.link.replace('.mkv', '.mp4');
+            source.type = 'video/mp4';
+            document.getElementById('player').appendChild(source);
 
-        // Function to copy stream link to clipboard
-        function copyStreamLink(streamLink) {
-            const linkToCopy = streamLink.toLowerCase();
+            document.getElementById('fileName').textContent = videoData.title;
+            document.getElementById('fileSize').textContent = videoData.description;
 
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(linkToCopy)
-                    .then(() => alert(`Stream link copied to clipboard: ${linkToCopy}`))
-                    .catch(err => console.error('Error copying to clipboard:', err));
+            const copyStreamLinkButton = document.getElementById('copyStreamLink');
+            copyStreamLinkButton.addEventListener('click', () => copyStreamLink(videoData.link));
+
+            const openInVLCButton = document.getElementById('openInVLCButton');
+            openInVLCButton.addEventListener('click', () => vlc_player(videoData.link));
+
+            const playit_playerButton = document.getElementById('playit_player');
+            playit_playerButton.addEventListener('click', () => playit_player(videoData.link));
+
+            const squareImage = document.getElementById('squareImage');
+            squareImage.src = videoData.image;
+            squareImage.alt = 'Square Image';
+
+            const link720p = document.getElementById('720p');
+            if (link720p) {
+                link720p.href = videoData['720p'];
+                link720p.setAttribute('download', `${videoData.title}-720p.mp4`);
             } else {
-                try {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = linkToCopy;
-                    document.body.appendChild(textArea);
-                    textArea.focus();
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    alert(`Stream link copied to clipboard: ${linkToCopy}`);
-                } catch (err) {
-                    console.error('Error copying to clipboard:', err);
-                }
+                console.error('Element with id "720p" not found');
+            }
+
+            const link480p = document.getElementById('480');
+            if (link480p) {
+                link480p.href = videoData['480p']; // Assuming the same download link
+                link480p.setAttribute('download', `${videoData.title}-480p.mp4`);
+            } else {
+                console.error('Element with id "480" not found');
+            }
+
+            const downloadLink = document.getElementById('download-dropdown');
+            downloadLink.href = videoData.download;
+            downloadLink.setAttribute('download', `${videoData.title}.mp4`);
+        } catch (error) {
+            console.error('Error initializing video player:', error.message);
+        }
+    }
+
+    // Function to handle Playit integration
+    function playit_player(streamlink) {
+        try {
+            const piUrl = `playit://playerv2/video?url=${encodeURIComponent(streamlink)}`;
+            window.location.href = piUrl;
+        } catch (error) {
+            console.error('Failed to open in PlayIt:', error);
+            alert('Failed to open PlayIt. Please check if PlayIt is installed and try again.');
+        }
+    }
+
+    // Function to handle VLC integration
+    function vlc_player(streamlink) {
+        try {
+            const openVlc = `vlc://${streamlink}`;
+            window.location.href = openVlc;
+        } catch (error) {
+            console.error('Failed to open in VLC:', error);
+            alert('Failed to open VLC. Please open VLC and enter the network stream URL manually.');
+        }
+    }
+
+    // Function to copy stream link to clipboard
+    function copyStreamLink(streamLink) {
+        const linkToCopy = streamLink.toLowerCase();
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(linkToCopy)
+                .then(() => alert(`Stream link copied to clipboard: ${linkToCopy}`))
+                .catch(err => console.error('Error copying to clipboard:', err));
+        } else {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = linkToCopy;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert(`Stream link copied to clipboard: ${linkToCopy}`);
+            } catch (err) {
+                console.error('Error copying to clipboard:', err);
             }
         }
+    }
 
-        // Function to get URL parameter by name
-        function getUrlParameter(name) {
-            const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
-            const results = regex.exec(window.location.href);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
+        const results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
 
-        // Event listener when DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            const id = getUrlParameter('id');
-            initializeVideoPlayerById(id);
-        });
-    </script>
+    // Event listener when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const id = getUrlParameter('id');
+        initializeVideoPlayerById(id);
+    });
+</script>
 </body>
 </html>
