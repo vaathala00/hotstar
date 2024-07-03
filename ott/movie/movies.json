@@ -1,5 +1,47 @@
 [
 
+ {
+    "id": "garudan-2024",
+    "title": "Garudan",
+    "image": "https://m.media-amazon.com/images/M/MV5BMzU3ZjQwOWQtYzljNi00NzRjLWE0MDgtMGRmZmI5MTcwNjdjXkEyXkFqcGdeQXVyMTUzNTgzNzM0._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 7.7 2024 Action 2h 13m Director R.S. Durai Senthilkumar| Writers R.S. Durai Senthilkumar ‧ Vetrimaaran| Stars Soori ‧ Shivada Nair ‧ Samuthirakani",
+    "link": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac4",
+    "download": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac4",
+    "720p": "https://dl.kpsbots.workers.dev/dl/6684ac0a9da2873a41520acb",
+    "480p": "https://dl.kpsbots.workers.dev/dl/6684ac0a9da2873a41520acc"
+  },
+  {
+    "id": "geethanjali-malli-vachindi-2024",
+    "title": "Geethanjali Malli Vachindi",
+    "image": "https://m.media-amazon.com/images/M/MV5BNTY0NjBmMjctNzZkZS00OTIxLTlmZGUtMjhiOTNmYWIxMmE5XkEyXkFqcGdeQXVyMTU4NDUzMjAx._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 5.0 2024 Horror\\Comedy 2h 24m Director Shiva Thurlapati| Writers Bhanu Bhogavarapu ‧ Nandu Savirigana ‧ Kona Venkat| Stars Anjali ‧ Srinivasa Reddy ‧ Satyam Rajesh",
+    "link": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac5",
+    "download": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac5"
+  },
+  {
+    "id": "kaliyugam-pattanamlo-2024",
+    "title": "Kaliyugam Pattanamlo",
+    "image": "https://m.media-amazon.com/images/M/MV5BMWFhYWIzNmEtZjUyZi00MGFhLWFkNDMtZmI2ZWY5YjUwZWU1XkEyXkFqcGdeQXVyMTA1ODY1NzY3._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 8.1 2024 Crime 2h 30m Director Ramakhanth Reddy| Writer Ramakhanth Reddy| Stars Vishva Karthikeya ‧ Ayushi Patel ‧ Chitra Shukla",
+    "link": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac2",
+    "download": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac2"
+  },
+  {
+    "id": "yaaruda-mahesh-2013",
+    "title": "Yaaruda Mahesh",
+    "image": "https://m.media-amazon.com/images/M/MV5BMTY4MzgyNjc3OV5BMl5BanBnXkFtZTgwMzI5Nzg0NDE@._V1_.jpg",
+    "description": "IMDb 5.6 2013 Comedy\\Drama\\Romance 2h 12m Director R. Madhan Kumar| Stars Srinath Alnath ‧ Dimple Chopda ‧ Jagan",
+    "link": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac3",
+    "download": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac3"
+  },
+  {
+    "id": "pasi-enkira-desiyanooi-2024",
+    "title": "Pasi Enkira Desiyanooi",
+    "image": "https://m.media-amazon.com/images/M/MV5BMTM2ZDFkYzMtZjAzNS00YjZiLWE2MDUtM2M2OWI1OTNhN2IyXkEyXkFqcGdeQXVyMTc5ODY2NjUw._V1_FMjpg_UX1000_.jpg",
+    "description": "IMDb 9.3 2024 Documentory\\Drama 1h 13m Director Sakthivel Thangamani| Writer Sakthivel Thangamani| Stars Ganesan Kaliamoorthy ‧ Sakthivel Thangamani ‧ Karuppu Jegan",
+    "link": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac6",
+    "download": "https://dl.kpsbots.workers.dev/dl/6684a93c9da2873a41520ac6"
+  },
   {
     "id": "jog-101",
     "title": "Jog 101",
