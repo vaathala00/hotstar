@@ -130,7 +130,32 @@
             blockScriptsFromDomain('https://youradexchange.com/script/suurl5.php');
         });
 
+
     </script>
+
+<script>
+    // Function to unmute the media inside the iframe
+    function autoUnmuteInsideIframe() {
+        // Access the iframe element
+        var iframe = document.getElementById('my-Frame');
+
+        // Ensure the iframe is loaded
+        iframe.onload = function() {
+            // Access the content window of the iframe
+            var iframeWindow = iframe.contentWindow;
+            if (iframeWindow) {
+                // Access the unmute function inside the iframe document
+                iframeWindow.WSUnmute();
+            }
+        };
+    }
+
+    // Automatically call autoUnmuteInsideIframe when the parent window loads
+    window.onload = function() {
+        autoUnmuteInsideIframe();
+    };
+</script>
+
 
 
 </body>
