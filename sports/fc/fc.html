@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC</title>
+
+<link href="https://a.nel.cloudflare.com//report//v4?s=tnwX%2FFJFxw1BPCojL13dgWZApbcLKqr6hKwt0cRyeYcmWQV%2F8zBJB8dO9AayQKkP72JMTxBK6jpTyGULUgeS9b%2B0kjkvIKVxG3DQl%2BizWpNw5QIubKJiMI89nsME4SbGvyaK44zsR5Eu9bihEqX3EWRmO7dp%22}],%22group%22:%22cf-nel%22,%22max_age%22:604800" rel="stylesheet">
+
+
+    <style>
+        /* General body styles */
+        body {
+            background-color: #1F0C50; /* Set main background color */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            font-family: Arial, sans-serif; /* Choose a common font */
+        }
+
+        /* Header styles */
+        header {
+            background-color: #0D012F;
+            color: #fff;
+            padding: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 65px; /* Adjust the width of the logo */
+            height: auto;
+            margin-right: 10px; /* Add some margin */
+        }
+
+        .site-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        /* Floating iframe styles */
+        .floating-iframe {
+            position: fixed;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Centering trick */
+            width: 80%; /* Adjust width as needed */
+            max-width: 90%; /* Limit maximum width */
+            height: 80%; /* Adjust height as needed */
+            border: none; /* Remove border */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            z-index: 1000; /* Ensure iframe appears above other content */
+            overflow: hidden; /* Prevent iframe content from overflowing */
+            background-color: #1F0C50; /* Change background color */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-iframe {
+                width: 90%; /* Adjust width for smaller screens */
+                max-width: 90%; /* Maintain maximum width */
+                height: 70%; /* Adjust height for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-iframe {
+                width: 95%; /* Further adjust width for smaller screens */
+                max-width: 95%; /* Maintain maximum width */
+                height: 60%; /* Further adjust height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo" class="logo-img">
+            <h1 class="site-title"></h1>
+        </div>
+        <!-- You can add other header elements here -->
+    </header>
+
+    <!-- Floating iframe -->
+    <div class="floating-iframe">
+        <!-- Placeholder iframe content -->
+        <iframe src="https://fancode.allsport.games" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+</body>
+</html>
