@@ -1,83 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <title>iTune++</title>
-    <!-- Favicons -->
-    <link rel="icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/favicons/manifest.json">
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <link rel="shortcut icon" href="/favicons/favicon.ico">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&amp;display=swap" rel="stylesheet">
-    <!-- Stylesheets -->
-    <link href="https://songs.watchtvs.live/static/css/main.c28c8648.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+
+<link href="https://fancode.allsport.games/favicon.ico" rel="stylesheet">
+
+
+    <style>
+        /* General body styles */
+        body {
+            background-color: #1F0C50; /* Set main background color */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            font-family: Arial, sans-serif; /* Choose a common font */
+        }
+
+        /* Header styles */
+        header {
+            background-color: #0D012F;
+            color: #fff;
+            padding: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 65px; /* Adjust the width of the logo */
+            height: auto;
+            margin-right: 10px; /* Add some margin */
+        }
+
+        .site-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        /* Floating iframe styles */
+        .floating-iframe {
+            position: fixed;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Centering trick */
+            width: 80%; /* Adjust width as needed */
+            max-width: 90%; /* Limit maximum width */
+            height: 80%; /* Adjust height as needed */
+            border: none; /* Remove border */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            z-index: 1000; /* Ensure iframe appears above other content */
+            overflow: hidden; /* Prevent iframe content from overflowing */
+            background-color: #1F0C50; /* Change background color */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-iframe {
+                width: 90%; /* Adjust width for smaller screens */
+                max-width: 90%; /* Maintain maximum width */
+                height: 70%; /* Adjust height for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-iframe {
+                width: 95%; /* Further adjust width for smaller screens */
+                max-width: 95%; /* Maintain maximum width */
+                height: 60%; /* Further adjust height for smaller screens */
+            }
+        }
+    </style>
 </head>
-
-<style>
-@media (min-width: 768px) {
-    .md\:w-1\/2 {
-        width: 15%;
-    }
-}
-</style>
-
-<body style="font-family: Raleway, sans-serif;">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
-        <div class="dark">
-            <div class="bg-light-100 dark:bg-deep-900">
-                <!-- Navigation -->
-                <header>
-                    <nav class="flex flex-wrap items-center justify-between w-full py-2 md:py-3 px-4 text-lg fixed top-0 z-50 dark:text-gray-700 text-gray-400 dark:bg-light-200 bg-deep-900 body-font">
-                        <!-- Removed header logo -->
-                        <span class="hidden ml-3 text-xl md:inline-block">iTune</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" id="menu-button" class="h-6 w-6 cursor-pointer md:hidden block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
-                            <ul class="pt-4 space-y-3 md:space-y-0 text-base md:flex md:justify-between md:pt-0">
-                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/">Home</a></li>
-                                <hr class="dark:border-gray-700 border-light-200">
-                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/search">Search</a></li>
-                                <hr class="dark:border-gray-700 border-light-200">
-                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/about">About</a></li>
-                                <hr class="dark:border-gray-700 border-light-200">
-                                <li><a class="mr-5 hover:text-white hover:dark:text-black cursor-pointer" href="#/terms">Terms of Use</a></li>
-                                <hr class="dark:border-gray-700 border-light-200">
-                                <li>
-                                    <div class="text-base">
-                                        <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                            <input type="checkbox" name="toggle" id="dark_mode" class="checked:bg-green-700 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" checked="">
-                                            <label for="dark_mode" class="block h-6 overflow-hidden bg-green-500 rounded-full cursor-pointer"></label>
-                                        </div>
-                                        <span class="font-medium text-sm md:text-base dark:text-gray-900 text-white">Dark Mode</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </header>
-                <!-- Search Bar -->
-                <div class="container px-5 py-0 mx-auto">
-                    <div class="flex lg:w-4/12 w-full sm:flex-row flex-col mx-auto px-8 sm:px-0 items-end sm:space-x-4 sm:space-y-0 space-y-4">
-                        <div class="relative sm:mb-0 flex-grow w-full">
-                            <label for="query" class="leading-7 text-sm text-black dark:text-gray-400">Try searching for a song or album</label>
-                            <input type="text" id="query" name="query" class="w-full bg-slate-400 dark:bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-green-500 dark:focus:bg-deep-900 focus:bg-light-100 focus:ring-2 focus:ring-green-900 text-base outline-none text-gray-700 dark:text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                        </div>
-                        <button id="searchBtn" class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Go</button>
-                    </div>
-                </div>
-                <!-- Content Goes Here -->
-            </div>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.jiosaavn.com/corporate/_i/brand-guide/jiosaavn-logo-icon.png" alt="Logo" class="logo-img">
+            <h1 class="site-title"></h1>
         </div>
+        <!-- You can add other header elements here -->
+    </header>
+
+    <!-- Floating iframe -->
+    <div class="floating-iframe">
+        <!-- Placeholder iframe content -->
+        <iframe src="https://songs.watchtvs.live/" width="100%" height="100%" frameborder="0"></iframe>
     </div>
-    <!-- JavaScript -->
-    <script defer src="https://songs.watchtvs.live/static/js/main.8cef44a6.js"></script>
 </body>
 </html>
