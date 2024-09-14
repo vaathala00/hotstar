@@ -10,98 +10,17 @@
       position: absolute;
       width: 100% !important;
       height: 100% !important;
-      display: none; /* Initially hidden, shown only if .m3u8 link is used */
     }
-    
-    .floating-btn {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .sidebar {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 350px; /* Increased width */
-      height: 100%;
-      background-color: #fff;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      overflow-y: auto;
-      z-index: 1000;
-    }
-
-    .sidebar.open {
-      transform: translateX(0);
-    }
-
-    .sidebar-header {
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sidebar-content {
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100% - 60px);
-    }
-
-    .close-btn {
-      background: #ff0000;
-      border: none;
-      color: white;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .youtube-chat {
+    #youtube-player {
       width: 100%;
       height: 100%;
-      border: none;
-      display: none; /* Initially hidden, shown only if YouTube embed link is used */
+      display: none; /* Hide YouTube player initially */
     }
   </style>
 </head>
 <body>
   <div id="player"></div>
-
-  <!-- Floating button -->
-  <button class="floating-btn" id="toggle-sidebar">☰</button>
-
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <span>Live Chat</span>
-      <button class="close-btn" id="close-sidebar">&times;</button>
-    </div>
-    <div class="sidebar-content">
-      <!-- Embed YouTube Live Chat -->
-      <iframe class="youtube-chat" id="youtube-chat" src="" allowfullscreen></iframe>
-    </div>
-  </div>
+  <div id="youtube-player"></div>
 
   <!-- JW Player scripts -->
   <script src="assets/KB5zFt7A.js"></script>
@@ -113,7 +32,7 @@
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
   </script>
 
-  <!-- Script to initialize JW Player and load video data -->
+  <!-- Script to initialize JW Player and handle YouTube embed -->
   <script type="text/javascript">
     // Function to get URL parameter by name
     function getUrlParameter(name) {
@@ -123,18 +42,20 @@
       return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-    // Function to initialize JW Player or YouTube embed
+    // Function to initialize JW Player
     function initializePlayer(videoData) {
-      const playerElement = document.getElementById("player");
-      const youtubeChatElement = document.getElementById("youtube-chat");
-      
-      if (videoData.link.includes("youtube.com/embed/")) {
-        // Handle YouTube embed
-        youtubeChatElement.src = videoData.link;
-        youtubeChatElement.style.display = "block";
-        playerElement.style.display = "none";
+      if (videoData.link.includes("youtube.com")) {
+        // If the link is a YouTube embed link
+        document.getElementById('player').style.display = 'none';
+        document.getElementById('youtube-player').style.display = 'block';
+        var youtubeIframe = document.createElement('iframe');
+        youtubeIframe.src = videoData.link;
+        youtubeIframe.frameborder = "0";
+        youtubeIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        youtubeIframe.allowfullscreen = true;
+        document.getElementById('youtube-player').appendChild(youtubeIframe);
       } else {
-        // Handle HLS stream with JW Player
+        // If the link is an .m3u8 link
         const playerInstance = jwplayer("player").setup({
           title: videoData.name,
           description: "VaathalaTV", // Sample description
@@ -156,19 +77,14 @@
             backgroundOpacity: 0,
             edgeStyle: "raised"
           },
-          playlist: [ {
-            sources: [ {
+          playlist: [{
+            sources: [{
               file: videoData.link,
-              type: "hls", // Set type to "mpd" for DASH stream
-            } ]
-          } ],
-          captions: {
-            color: '#ffb800',
-            fontSize: 30,
-            backgroundOpacity: 0
-          },
+              type: "hls" // Set type to "mpd" for DASH stream
+            }]
+          }],
           sharing: {
-            sites: [ 'facebook', 'twitter' ]
+            sites: ['facebook', 'twitter']
           }
         });
 
@@ -215,10 +131,6 @@
           modal.style.display = "flex";
           document.getElementById("close").addEventListener("click", () => location.reload());
         });
-
-        // Show JW Player and hide YouTube chat
-        playerElement.style.display = "block";
-        youtubeChatElement.style.display = "none";
       }
     }
 
@@ -244,15 +156,6 @@
     };
     xhr.open('GET', 'boss.json', true);
     xhr.send();
-
-    // Toggle sidebar functionality
-    document.getElementById('toggle-sidebar').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.toggle('open');
-    });
-
-    document.getElementById('close-sidebar').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.remove('open');
-    });
   </script>
 
   <!-- Noscript fallback -->
