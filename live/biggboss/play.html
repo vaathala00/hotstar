@@ -37,7 +37,7 @@
       position: fixed;
       right: 0;
       top: 0;
-      width: 250px;
+      width: 350px; /* Increased width */
       height: 100%;
       background-color: #fff;
       box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -61,6 +61,10 @@
 
     .sidebar-content {
       padding: 15px;
+      display: flex;
+      justify-content: center; /* Center the iframe horizontally */
+      align-items: center; /* Center the iframe vertically */
+      height: calc(100% - 60px); /* Adjust height to leave space for header */
     }
 
     .close-btn {
@@ -76,8 +80,8 @@
 
     /* Style the YouTube chat iframe */
     .youtube-chat {
-      width: 100%;
-      height: 100%;
+      width: 100%; /* Set to full width of the sidebar */
+      height: 100%; /* Set to full height of the sidebar-content */
       border: none;
     }
   </style>
@@ -143,19 +147,19 @@
           backgroundOpacity: 0,
           edgeStyle: "raised"
         },
-        playlist: [{
-          sources: [{
+        playlist: [ {
+          sources: [ {
             file: videoData.link,
             type: "hls", // Set type to "mpd" for DASH stream
-          }]
-        }],
+          } ]
+        } ],
         captions: {
           color: '#ffb800',
           fontSize: 30,
           backgroundOpacity: 0
         },
         sharing: {
-          sites: ['facebook', 'twitter']
+          sites: [ 'facebook', 'twitter' ]
         }
       });
 
