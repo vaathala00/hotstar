@@ -10,9 +10,9 @@
       position: absolute;
       width: 100% !important;
       height: 100% !important;
-      display: none; /* Initially hidden, shown only if .m3u8 link is used */
     }
     
+    /* Floating button styles */
     .floating-btn {
       position: fixed;
       right: 20px;
@@ -32,6 +32,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
+    /* Sidebar styles */
     .sidebar {
       position: fixed;
       right: 0;
@@ -61,9 +62,9 @@
     .sidebar-content {
       padding: 15px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100% - 60px);
+      justify-content: center; /* Center the iframe horizontally */
+      align-items: center; /* Center the iframe vertically */
+      height: calc(100% - 60px); /* Adjust height to leave space for header */
     }
 
     .close-btn {
@@ -77,11 +78,11 @@
       cursor: pointer;
     }
 
+    /* Style the YouTube chat iframe */
     .youtube-chat {
-      width: 100%;
-      height: 100%;
+      width: 100%; /* Set to full width of the sidebar */
+      height: 100%; /* Set to full height of the sidebar-content */
       border: none;
-      display: none; /* Initially hidden, shown only if YouTube embed link is used */
     }
   </style>
 </head>
@@ -99,7 +100,7 @@
     </div>
     <div class="sidebar-content">
       <!-- Embed YouTube Live Chat -->
-      <iframe class="youtube-chat" id="youtube-chat" src="" allowfullscreen></iframe>
+      <iframe class="youtube-chat" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -123,103 +124,88 @@
       return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 
-    // Function to initialize JW Player or YouTube embed
+    // Function to initialize JW Player
     function initializePlayer(videoData) {
-      const playerElement = document.getElementById("player");
-      const youtubeChatElement = document.getElementById("youtube-chat");
-      
-      if (videoData.link.includes("youtube.com/embed/")) {
-        // Handle YouTube embed
-        youtubeChatElement.src = videoData.link;
-        youtubeChatElement.style.display = "block";
-        playerElement.style.display = "none";
-      } else {
-        // Handle HLS stream with JW Player
-        const playerInstance = jwplayer("player").setup({
-          title: videoData.name,
-          description: "VaathalaTV", // Sample description
-          image: videoData.logo,
-          aspectratio: '16:9',
-          width: '100%',
-          mute: false,
-          autostart: true,
-          skin: {
-            name: "netflix"
-          },
-          logo: {
-            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-            link: "https://telegram.me/vaathala1"
-          },
-          captions: {
-            color: "#FFF",
-            fontSize: 14,
-            backgroundOpacity: 0,
-            edgeStyle: "raised"
-          },
-          playlist: [ {
-            sources: [ {
-              file: videoData.link,
-              type: "hls", // Set type to "mpd" for DASH stream
-            } ]
-          } ],
-          captions: {
-            color: '#ffb800',
-            fontSize: 30,
-            backgroundOpacity: 0
-          },
-          sharing: {
-            sites: [ 'facebook', 'twitter' ]
-          }
-        });
-
-        // Add custom download button
-        const iconPath = ""; // Define your icon path here
-        const tooltipText = "Download Video";
-        const buttonId = "download-video-button";
-        playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
-
-        function buttonClickAction() {
-          const playlistItem = playerInstance.getPlaylistItem();
-          const anchor = document.createElement("a");
-          anchor.setAttribute("href", playlistItem.file);
-          anchor.setAttribute("download", playlistItem.file.split("/").pop());
-          anchor.style.display = "none";
-          document.body.appendChild(anchor);
-          anchor.click();
-          document.body.removeChild(anchor);
+      const playerInstance = jwplayer("player").setup({
+        title: videoData.name,
+        description: "VaathalaTV", // Sample description
+        image: videoData.logo,
+        aspectratio: '16:9',
+        width: '100%',
+        mute: false,
+        autostart: true,
+        skin: {
+          name: "netflix"
+        },
+        logo: {
+          file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+          link: "https://telegram.me/vaathala1"
+        },
+        captions: {
+          color: "#FFF",
+          fontSize: 14,
+          backgroundOpacity: 0,
+          edgeStyle: "raised"
+        },
+        playlist: [ {
+          sources: [ {
+            file: videoData.link,
+            type: "hls", // Set type to "mpd" for DASH stream
+          } ]
+        } ],
+        captions: {
+          color: '#ffb800',
+          fontSize: 30,
+          backgroundOpacity: 0
+        },
+        sharing: {
+          sites: [ 'facebook', 'twitter' ]
         }
+      });
 
-        // Forward 10 seconds button
-        playerInstance.on("ready", function () {
-          const playerContainer = playerInstance.getContainer();
-          const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
-          const forwardContainer = rewindContainer.cloneNode(true);
-          const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
-          forwardDisplayButton.style.transform = "scaleX(-1)";
-          forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
-          const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
-          nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+      // Add custom download button
+      const iconPath = ""; // Define your icon path here
+      const tooltipText = "Download Video";
+      const buttonId = "download-video-button";
+      playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
 
-          // Hide default next button
-          playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
-
-          // Add onclick handler for forward button
-          forwardDisplayButton.onclick = function () {
-            playerInstance.seek(playerInstance.getPosition() + 10);
-          };
-        });
-
-        // Detect adblock
-        playerInstance.on("adBlock", () => {
-          const modal = document.querySelector("div.modal");
-          modal.style.display = "flex";
-          document.getElementById("close").addEventListener("click", () => location.reload());
-        });
-
-        // Show JW Player and hide YouTube chat
-        playerElement.style.display = "block";
-        youtubeChatElement.style.display = "none";
+      function buttonClickAction() {
+        const playlistItem = playerInstance.getPlaylistItem();
+        const anchor = document.createElement("a");
+        anchor.setAttribute("href", playlistItem.file);
+        anchor.setAttribute("download", playlistItem.file.split("/").pop());
+        anchor.style.display = "none";
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
       }
+
+      // Forward 10 seconds button
+      playerInstance.on("ready", function () {
+        const playerContainer = playerInstance.getContainer();
+        const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
+        const forwardContainer = rewindContainer.cloneNode(true);
+        const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
+        forwardDisplayButton.style.transform = "scaleX(-1)";
+        forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
+        const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
+        nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+
+        // Hide default next button
+        playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
+
+        // Add onclick handler for forward button
+        forwardDisplayButton.onclick = function () {
+          playerInstance.seek(playerInstance.getPosition() + 10);
+        };
+      });
+
+      // Detect adblock
+      playerInstance.on("adBlock", () => {
+        const modal = document.querySelector("div.modal");
+        modal.style.display = "flex";
+        document.getElementById("close").addEventListener("click", () => location.reload());
+      });
     }
 
     // Fetch and load video data from JSON
