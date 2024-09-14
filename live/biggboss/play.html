@@ -6,15 +6,18 @@
   <title>Live</title>
   <link rel="stylesheet" href="assets/style.css">
   <style>
-    #player {
+    /* Ensure the player takes up the full viewport */
+    #player, #youtube-player {
       position: absolute;
-      width: 100% !important;
-      height: 100% !important;
-    }
-    #youtube-player {
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      display: none; /* Hide YouTube player initially */
+      overflow: hidden;
+    }
+    /* Hide YouTube player initially */
+    #youtube-player {
+      display: none;
     }
   </style>
 </head>
@@ -53,15 +56,20 @@
         youtubeIframe.frameborder = "0";
         youtubeIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
         youtubeIframe.allowfullscreen = true;
+        youtubeIframe.style.width = "100%";
+        youtubeIframe.style.height = "100%";
         document.getElementById('youtube-player').appendChild(youtubeIframe);
       } else {
         // If the link is an .m3u8 link
+        document.getElementById('youtube-player').style.display = 'none';
+        document.getElementById('player').style.display = 'block';
         const playerInstance = jwplayer("player").setup({
           title: videoData.name,
           description: "VaathalaTV", // Sample description
           image: videoData.logo,
           aspectratio: '16:9',
           width: '100%',
+          height: '100%',
           mute: false,
           autostart: true,
           skin: {
