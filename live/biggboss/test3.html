@@ -22,7 +22,7 @@
             position: relative;
         }
 
-        .player {
+        #player {
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
@@ -126,7 +126,7 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            top: 10px;
+            top: 5px;
             right: 10px;
             cursor: pointer;
             z-index: 1001; /* Ensure it's above other content */
@@ -220,7 +220,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="video-wrapper"  id="player"></div>
+        <div id="player"></div>
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -243,13 +243,16 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
-    <!-- JW Player scripts -->
-    <script src="https://cdn.jwplayer.com/libraries/your-library-id.js"></script> <!-- Update with correct JW Player library URL -->
+  <!-- JW Player scripts -->
+  <script src="assets/KB5zFt7A.js"></script>
+  <script src="assets/jwpsrv.js" async></script>
+  <script src="assets/vast.js" async></script>
 
-    <!-- JW Player license key -->
-    <script type="text/javascript">
-        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-    </script>
+
+  <!-- JW Player license key -->
+  <script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+  </script>
 
     <script>
         // Function to get URL parameter by name
