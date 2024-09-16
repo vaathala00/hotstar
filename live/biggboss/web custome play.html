@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* Ensure the player takes up the full viewport */
+    #player, #youtube-player {
+      position: absolute;
+
+      width: 100%;
+      height: 100%;
+
+    }
+    /* Hide YouTube player initially */
+    #youtube-player {
+      display: none;
+    }
+
+
+  /* Floating button styles */
+    .floating-btn {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 350px; /* Increased width */
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-content {
+      padding: 15px;
+      display: flex;
+      justify-content: center; /* Center the iframe horizontally */
+      align-items: center; /* Center the iframe vertically */
+      height: calc(100% - 60px); /* Adjust height to leave space for header */
+    }
+
+    .close-btn {
+      background: #ff0000;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Style the YouTube chat iframe */
+    .youtube-chat {
+      width: 100%; /* Set to full width of the sidebar */
+      height: 100%; /* Set to full height of the sidebar-content */
+      border: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+  <div id="youtube-player"></div>
+
+
+  <!-- Floating button -->
+  <button class="floating-btn" id="toggle-sidebar">☰</button>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span>Live Chat</span>
+      <button class="close-btn" id="close-sidebar">&times;</button>
+    </div>
+    <div class="sidebar-content">
+      <!-- Embed YouTube Live Chat -->
+      <iframe class="youtube-chat" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allowfullscreen ></iframe>
+    </div>
+  </div>
+
+  <!-- JW Player scripts -->
+  <script src="assets/KB5zFt7A.js"></script>
+  <script src="assets/jwpsrv.js" async></script>
+  <script src="assets/vast.js" async></script>
+
+
+  <!-- JW Player license key -->
+  <script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+  </script>
+
+  <!-- Script to initialize JW Player and handle YouTube embed -->
+  <script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Function to initialize JW Player
+    function initializePlayer(videoData) {
+      if (videoData.link.includes("youtube.com")) {
+        // If the link is a YouTube embed link
+        document.getElementById('player').style.display = 'none';
+        document.getElementById('youtube-player').style.display = 'block';
+        var youtubeIframe = document.createElement('iframe');
+        youtubeIframe.src = videoData.link;
+        youtubeIframe.frameborder = "0";
+        youtubeIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        youtubeIframe.allowfullscreen = true;
+        youtubeIframe.style.width = "100%";
+        youtubeIframe.style.height = "100%";
+        document.getElementById('youtube-player').appendChild(youtubeIframe);
+      } else {
+        // If the link is an .m3u8 link
+        document.getElementById('youtube-player').style.display = 'none';
+        document.getElementById('player').style.display = 'block';
+        const playerInstance = jwplayer("player").setup({
+          title: videoData.name,
+          description: "VaathalaTV", // Sample description
+          image: videoData.logo,
+          aspectratio: '16:9',
+          width: '100%',
+          mute: false,
+          autostart: true,
+          skin: {
+            name: "netflix"
+          },
+          logo: {
+            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+            link: "https://telegram.me/vaathala1"
+          },
+          captions: {
+            color: "#FFF",
+            fontSize: 14,
+            backgroundOpacity: 0,
+            edgeStyle: "raised"
+          },
+          playlist: [{
+            sources: [{
+              file: videoData.link,
+              type: "hls" // Set type to "mpd" for DASH stream
+            }]
+          }],
+          sharing: {
+            sites: ['facebook', 'twitter']
+          }
+        });
+
+        // Add custom download button
+        const iconPath = ""; // Define your icon path here
+        const tooltipText = "Download Video";
+        const buttonId = "download-video-button";
+        playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
+
+        function buttonClickAction() {
+          const playlistItem = playerInstance.getPlaylistItem();
+          const anchor = document.createElement("a");
+          anchor.setAttribute("href", playlistItem.file);
+          anchor.setAttribute("download", playlistItem.file.split("/").pop());
+          anchor.style.display = "none";
+          document.body.appendChild(anchor);
+          anchor.click();
+          document.body.removeChild(anchor);
+        }
+
+        // Forward 10 seconds button
+        playerInstance.on("ready", function () {
+          const playerContainer = playerInstance.getContainer();
+          const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
+          const forwardContainer = rewindContainer.cloneNode(true);
+          const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
+          forwardDisplayButton.style.transform = "scaleX(-1)";
+          forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
+          const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
+          nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
+
+          // Hide default next button
+          playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
+
+          // Add onclick handler for forward button
+          forwardDisplayButton.onclick = function () {
+            playerInstance.seek(playerInstance.getPosition() + 10);
+          };
+        });
+
+        // Detect adblock
+        playerInstance.on("adBlock", () => {
+          const modal = document.querySelector("div.modal");
+          modal.style.display = "flex";
+          document.getElementById("close").addEventListener("click", () => location.reload());
+        });
+      }
+    }
+
+    // Fetch and load video data from JSON
+    var id = getUrlParameter('id');
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          var videoData = data.find(function(video) {
+            return video.id === id;
+          });
+          if (videoData) {
+            initializePlayer(videoData);
+          } else {
+            console.error('Video data not found for ID: ' + id);
+          }
+        } else {
+          console.error('Failed to load video data. Status code: ' + xhr.status);
+        }
+      }
+    };
+    xhr.open('GET', 'boss.json', true);
+    xhr.send();
+
+// Toggle sidebar functionality
+    document.getElementById('toggle-sidebar').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    document.getElementById('close-sidebar').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('open');
+    });
+
+  </script>
+
+  <!-- Noscript fallback -->
+  <noscript>You must enable JavaScript to see this text.</noscript>
+</body>
+</html>
