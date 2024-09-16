@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Live</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+<style>
+ /* Floating button styles */
+    .floating-btn {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 9999; /* Ensure it's on top */
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 350px; /* Increased width */
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      z-index: 10000;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-content {
+      padding: 15px;
+      display: flex;
+      justify-content: center; /* Center the iframe horizontally */
+      align-items: center; /* Center the iframe vertically */
+      height: calc(100% - 60px); /* Adjust height to leave space for header */
+    }
+
+    .close-btn {
+      background: #ff0000;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Style the YouTube chat iframe */
+    .youtube-chat {
+      width: 100%; /* Set to full width of the sidebar */
+      height: 100%; /* Set to full height of the sidebar-content */
+      border: none;
+    }
+</style>
+</head>
+<body>
+   
+<div class="container">
+   <div class="main-video-container">
+      <div class="my-iframe" id="iframe-container">
+         <iframe src="https://vaathala00.github.io/hotstar/sports/json/Play?id=78" allowfullscreen scrolling="no"></iframe>
+      </div>
+      <h5 class="main-vid-title"></h5>
+      <a href="https://t.me/vaathala1" target="_blank"><img
+         src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
+   </div>
+
+   <!-- Floating button -->
+   <button class="floating-btn" id="toggle-sidebar">☰</button>
+
+   <!-- Sidebar -->
+   <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+         <span>Live Chat</span>
+         <button class="close-btn" id="close-sidebar">&times;</button>
+      </div>
+      <div class="sidebar-content">
+         <!-- Embed YouTube Live Chat -->
+         <iframe class="youtube-chat" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allowfullscreen ></iframe>
+      </div>
+   </div>
+</div>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+<script type="text/javascript">
+  atOptions = {
+    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
+</script>
+
+<script>
+  // Floating button drag and drop functionality
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  const button = document.getElementById('toggle-sidebar');
+
+  button.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - button.getBoundingClientRect().left;
+    offsetY = e.clientY - button.getBoundingClientRect().top;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
+
+  function onMouseMove(e) {
+    if (isDragging) {
+      const x = e.clientX - offsetX;
+      const y = e.clientY - offsetY;
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    }
+  }
+
+  function onMouseUp() {
+    isDragging = false;
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+</script>
+
+<script>
+  // Toggle sidebar functionality
+  document.getElementById('toggle-sidebar').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+
+  document.getElementById('close-sidebar').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.remove('open');
+  });
+</script>
+
+</body>
+</html>

@@ -1,173 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Live</title>
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-
-<style>
- /* Floating button styles */
-    .floating-btn {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 9999; /* Ensure it's on top */
-    }
-
-    /* Sidebar styles */
-    .sidebar {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 350px; /* Increased width */
-      height: 100%;
-      background-color: #fff;
-      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      overflow-y: auto;
-      z-index: 10000;
-    }
-
-    .sidebar.open {
-      transform: translateX(0);
-    }
-
-    .sidebar-header {
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sidebar-content {
-      padding: 15px;
-      display: flex;
-      justify-content: center; /* Center the iframe horizontally */
-      align-items: center; /* Center the iframe vertically */
-      height: calc(100% - 60px); /* Adjust height to leave space for header */
-    }
-
-    .close-btn {
-      background: #ff0000;
-      border: none;
-      color: white;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    /* Style the YouTube chat iframe */
-    .youtube-chat {
-      width: 100%; /* Set to full width of the sidebar */
-      height: 100%; /* Set to full height of the sidebar-content */
-      border: none;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video and Live Chat Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px;
+            position: relative;
+        }
+        .video-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .video-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #80808080;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .info-box .logo {
+            width: 80px; /* Adjust size as needed */
+            height: 80px; /* Adjust size as needed */
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info-box .info-content {
+            flex-grow: 1;
+        }
+        .info-box .info-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .info-box .info-content p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #555;
+        }
+        .info-box .info-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .info-box .info-content a:hover {
+            background-color: #0056b3;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 350px;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000; /* Ensure it's on top of other content */
+            background: #fff; /* Ensure the chat box has a white background */
+            overflow: hidden; /* Prevent content overflow */
+        }
+        .chat-container iframe {
+            width: 100%;
+            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
+            border: none;
+            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+        }
+        .chat-close {
+            width: 40px;
+            height: 40px;
+            background-color: #f44336; /* Red background */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above other content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-close:before {
+            content: '×'; /* Unicode multiplication sign */
+            font-size: 24px;
+        }
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above the chat box */
+            user-select: none; /* Prevent text selection during drag */
+        }
+        .chat-toggle:after {
+            content: "Chat";
+            font-size: 14px;
+        }
+        .chat-toggle.open:after {
+            content: "Close";
+        }
+        .telegram-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1001; /* Ensure it's above other content */
+        }
+        .telegram-link img {
+            width: 50px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .video-wrapper {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .video-wrapper iframe {
+                height: 250px; /* Adjust height for small screens */
+            }
+            .info-box {
+                width: calc(100% - 40px);
+                font-size: 14px; /* Adjust font size for small screens */
+                flex-direction: column; /* Stack logo and content vertically */
+                align-items: center; /* Center items */
+                gap: 10px; /* Reduce gap between logo and content */
+                padding: 10px; /* Reduce padding */
+                box-sizing: border-box; /* Ensure padding does not affect width */
+            }
+            .info-box .logo {
+                width: 60px; /* Adjust size for small screens */
+                height: 60px; /* Adjust size for small screens */
+            }
+            .info-box .info-content {
+                text-align: center; /* Center text on small screens */
+            }
+            .chat-container {
+                width: calc(100% - 40px);
+                height: 400px;
+            }
+            .chat-toggle {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .telegram-link {
+                bottom: 10px;
+                left: 10px;
+            }
+            .telegram-link img {
+                width: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-   
-<div class="container">
-   <div class="main-video-container">
-      <div class="my-iframe" id="iframe-container">
-         <iframe src="https://vaathala00.github.io/hotstar/sports/json/Play?id=78" allowfullscreen scrolling="no"></iframe>
-      </div>
-      <h5 class="main-vid-title"></h5>
-      <a href="https://t.me/vaathala1" target="_blank"><img
-         src="https://www.nicepng.com/png/detail/61-613714_enter-now-button-png.png" height="35" width="135"></a>
-   </div>
+    <div class="container">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/Ase7jBEG2S4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="info-box">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+            </div>
+            <div class="info-content">
+                <h2>Join Us on Telegram</h2>
+              <!--  <p>Stay updated with the latest news and updates from our community.</p> -->
+                <a href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+            </div>
+        </div>
+        <div class="chat-container" id="chatBox">
+            <button class="chat-close" id="chatClose"></button>
+            <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
+        </div>
+        <button class="chat-toggle" id="chatToggle"></button>
+    </div>
+    <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
+    </a>
+    <script>
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
+            } else {
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
+        });
 
-   <!-- Floating button -->
-   <button class="floating-btn" id="toggle-sidebar">☰</button>
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
+            document.getElementById('chatToggle').classList.remove('open');
+        });
 
-   <!-- Sidebar -->
-   <div class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-         <span>Live Chat</span>
-         <button class="close-btn" id="close-sidebar">&times;</button>
-      </div>
-      <div class="sidebar-content">
-         <!-- Embed YouTube Live Chat -->
-         <iframe class="youtube-chat" src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allowfullscreen ></iframe>
-      </div>
-   </div>
-</div>
+        // Make the chat toggle button draggable
+        const chatToggle = document.getElementById('chatToggle');
+        let isDragging = false;
+        let offsetX, offsetY;
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+        chatToggle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
 
-<script type="text/javascript">
-  atOptions = {
-    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
-</script>
-
-<script>
-  // Floating button drag and drop functionality
-  let isDragging = false;
-  let offsetX, offsetY;
-
-  const button = document.getElementById('toggle-sidebar');
-
-  button.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - button.getBoundingClientRect().left;
-    offsetY = e.clientY - button.getBoundingClientRect().top;
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
-  function onMouseMove(e) {
-    if (isDragging) {
-      const x = e.clientX - offsetX;
-      const y = e.clientY - offsetY;
-      button.style.left = `${x}px`;
-      button.style.top = `${y}px`;
-    }
-  }
-
-  function onMouseUp() {
-    isDragging = false;
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', onMouseUp);
-  }
-</script>
-
-<script>
-  // Toggle sidebar functionality
-  document.getElementById('toggle-sidebar').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('open');
-  });
-
-  document.getElementById('close-sidebar').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.remove('open');
-  });
-</script>
-
+        function handleMouseMove(e) {
+            if (isDragging) {
+                chatToggle.style.left = `${e.clientX - offsetX}px`;
+                chatToggle.style.top = `${e.clientY - offsetY}px`;
+            }
+        }
+    </script>
 </body>
 </html>
