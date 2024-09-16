@@ -271,7 +271,7 @@
             } else {
                 // If the link is an .m3u8 link
                 document.getElementById('videoIframe').style.display = 'none';
-                document.getElementById('player').style.display = 'block';
+                document.getElementById('player').style.display = '';
                 const playerInstance = jwplayer("player").setup({
                     title: videoData.name,
                     description: "VaathalaTV", // Sample description
