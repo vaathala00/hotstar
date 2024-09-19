@@ -7,8 +7,8 @@
 
     <link rel="stylesheet" href="assets/style.css">
 
-    <style>
-        body {
+   <style>
+ body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -24,12 +24,14 @@
             margin: 20px;
             position: relative;
         }
+
         #player {
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
             position: relative;
         }
+
         .video-wrapper {
             width: 100%;
             max-width: 800px;
@@ -47,7 +49,7 @@
             max-width: 800px;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(128, 128, 128, 0.5);
+            background: #80808080;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -57,8 +59,8 @@
             position: relative;
         }
         .info-box .logo {
-            width: 80px;
-            height: 80px;
+            width: 80px; /* Adjust size as needed */
+            height: 80px; /* Adjust size as needed */
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
@@ -106,20 +108,20 @@
             bottom: 20px;
             right: 20px;
             display: none;
-            z-index: 1000;
-            background: #fff;
-            overflow: hidden;
+            z-index: 1000; /* Ensure it's on top of other content */
+            background: #fff; /* Ensure the chat box has a white background */
+            overflow: hidden; /* Prevent content overflow */
         }
         .chat-container iframe {
             width: 100%;
-            height: calc(100% - 40px);
+            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
             border: none;
-            border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
         }
         .chat-close {
             width: 40px;
             height: 40px;
-            background-color: #f44336;
+            background-color: #f44336; /* Red background */
             color: white;
             border: none;
             border-radius: 50%;
@@ -130,11 +132,11 @@
             top: 5px;
             right: 10px;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1001; /* Ensure it's above other content */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .chat-close:before {
-            content: '×';
+            content: '×'; /* Unicode multiplication sign */
             font-size: 24px;
         }
         .chat-toggle {
@@ -152,8 +154,8 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1001;
-            user-select: none;
+            z-index: 1001; /* Ensure it's above the chat box */
+            user-select: none; /* Prevent text selection during drag */
         }
         .chat-toggle:after {
             content: "Chat";
@@ -166,10 +168,10 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 1001;
+            z-index: 1001; /* Ensure it's above other content */
         }
         .telegram-link img {
-            width: 50px;
+            width: 50px; /* Adjust size as needed */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -181,23 +183,23 @@
                 margin-bottom: 10px;
             }
             .video-wrapper iframe {
-                height: 250px;
+                height: 250px; /* Adjust height for small screens */
             }
             .info-box {
                 width: calc(100% - 40px);
-                font-size: 14px;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                padding: 10px;
-                box-sizing: border-box;
+                font-size: 14px; /* Adjust font size for small screens */
+                flex-direction: column; /* Stack logo and content vertically */
+                align-items: center; /* Center items */
+                gap: 10px; /* Reduce gap between logo and content */
+                padding: 10px; /* Reduce padding */
+                box-sizing: border-box; /* Ensure padding does not affect width */
             }
             .info-box .logo {
-                width: 60px;
-                height: 60px;
+                width: 60px; /* Adjust size for small screens */
+                height: 60px; /* Adjust size for small screens */
             }
             .info-box .info-content {
-                text-align: center;
+                text-align: center; /* Center text on small screens */
             }
             .chat-container {
                 width: calc(100% - 40px);
@@ -218,6 +220,7 @@
             }
         }
     </style>
+
 </head>
 <body>
     <div class="container">
