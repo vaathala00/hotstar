@@ -1,58 +1,47 @@
-{
-    "streams": {
-        "tamil_4k": {
-            "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsban_190924/master.m3u8",
-            "name": "Tamil 4K",
-            "logo": "https://example.com/logo_tamil.png"
-        },
-
-        "spt": {
-            "link": "https://example.com/spt.mp4",
-            "name": "Star Sports Tamil",
-            "logo": "https://example.com/logo_spt.png"
-        },
-        "hindi_4k": {
-            "link": "https://example.com/hindi_4k.mp4",
-            "name": "Hindi 4K",
-            "logo": "https://example.com/logo_hindi.png"
-        },
-        "english_4k": {
-            "link": "https://example.com/english_4k.mp4",
-            "name": "English 4K",
-            "logo": "https://example.com/logo_english.png"
-        },
-        "telugu_4k": {
-            "link": "https://example.com/telugu_4k.mp4",
-            "name": "Telugu 4K",
-            "logo": "https://example.com/logo_telugu.png"
-        },
-        "malayalam_4k": {
-            "link": "https://example.com/malayalam_4k.mp4",
-            "name": "Malayalam 4K",
-            "logo": "https://example.com/logo_malayalam.png"
-        },
-        "kannada_4k": {
-            "link": "https://example.com/kannada_4k.mp4",
-            "name": "Kannada 4K",
-            "logo": "https://example.com/logo_kannada.png"
-        },
-        "insiders_cam": {
-            "link": "https://example.com/insiders_cam.mp4",
-            "name": "Insiders Cam",
-            "logo": "https://example.com/logo_insiders.png"
-        },
-        "split_cam": {
-            "link": "https://example.com/split_cam.mp4",
-            "name": "Split Cam",
-            "logo": "https://example.com/logo_split.png"
-
-        },
-        "default":{ 
-
-                "tamil": "tamil_4k",
-                "hindi": "hindi_4k"
- 
-
-        }
+[
+    {
+        "id": "tamil_4k",
+        "name": "Tamil 4K Stream",
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsban_190924/master.m3u8"
+    },
+    {
+        "id": "spt",
+        "name": "Star Sports Tamil",
+        "link": "https://your-link-to-star-sports-tamil-stream.m3u8"
+    },
+    {
+        "id": "hindi_4k",
+        "name": "Hindi 4K Stream",
+        "link": "https://prod-sports-hin-cf.jiocinema.com/hls/live/2100320/uhd_akamai_ctv_avc_hin_indvsban_1909241/master.m3u8"
+    },
+    {
+        "id": "english_4k",
+        "name": "English 4K Stream",
+        "link": "https://your-link-to-english-4k-stream.m3u8"
+    },
+    {
+        "id": "telugu_4k",
+        "name": "Telugu 4K Stream",
+        "link": "https://your-link-to-telugu-4k-stream.m3u8"
+    },
+    {
+        "id": "malayalam_4k",
+        "name": "Malayalam 4K Stream",
+        "link": "https://your-link-to-malayalam-4k-stream.m3u8"
+    },
+    {
+        "id": "kannada_4k",
+        "name": "Kannada 4K Stream",
+        "link": "https://your-link-to-kannada-4k-stream.m3u8"
+    },
+    {
+        "id": "insiders_cam",
+        "name": "Insiders Cam",
+        "link": "https://your-link-to-insiders-cam-stream.m3u8"
+    },
+    {
+        "id": "split_cam",
+        "name": "Split Cam",
+        "link": "https://your-link-to-split-cam-stream.m3u8"
     }
-}
+]
