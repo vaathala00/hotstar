@@ -1,0 +1,56 @@
+[
+    {
+        "id": "tamil_4k",
+        "name": "Tamil 4K Stream",
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsban_190924/master.m3u8",
+        "logo": "https://example.com/images/tamil_logo.png"
+    },
+    {
+        "id": "spt",
+        "name": "Star Sports Tamil",
+        "link": "https://www.youtube.com/embed/example1",
+        "logo": "https://example.com/images/spt_logo.png"
+    },
+    {
+        "id": "hindi_4k",
+        "name": "Hindi 4K Stream",
+        "link": "https://example.com/path/to/hindi_4k.m3u8",
+        "logo": "https://example.com/images/hindi_logo.png"
+    },
+    {
+        "id": "english_4k",
+        "name": "English 4K Stream",
+        "link": "https://www.youtube.com/embed/example2",
+        "logo": "https://example.com/images/english_logo.png"
+    },
+    {
+        "id": "telugu_4k",
+        "name": "Telugu 4K Stream",
+        "link": "https://example.com/path/to/telugu_4k.m3u8",
+        "logo": "https://example.com/images/telugu_logo.png"
+    },
+    {
+        "id": "malayalam_4k",
+        "name": "Malayalam 4K Stream",
+        "link": "https://www.youtube.com/embed/example3",
+        "logo": "https://example.com/images/malayalam_logo.png"
+    },
+    {
+        "id": "kannada_4k",
+        "name": "Kannada 4K Stream",
+        "link": "https://example.com/path/to/kannada_4k.m3u8",
+        "logo": "https://example.com/images/kannada_logo.png"
+    },
+    {
+        "id": "insiders_cam",
+        "name": "Insiders Cam",
+        "link": "https://www.youtube.com/embed/example4",
+        "logo": "https://example.com/images/insiders_logo.png"
+    },
+    {
+        "id": "split_cam",
+        "name": "Split Cam",
+        "link": "https://example.com/path/to/split_cam.m3u8",
+        "logo": "https://example.com/images/split_logo.png"
+    }
+]

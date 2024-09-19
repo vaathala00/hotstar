@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+ body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px;
+            position: relative;
+        }
+
+        #player {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .video-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #80808080;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .info-box .logo {
+            width: 80px; /* Adjust size as needed */
+            height: 80px; /* Adjust size as needed */
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-box .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .info-box .info-content {
+            flex-grow: 1;
+        }
+        .info-box .info-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .info-box .info-content p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #555;
+        }
+        .info-box .info-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .info-box .info-content a:hover {
+            background-color: #0056b3;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 350px;
+            height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000; /* Ensure it's on top of other content */
+            background: #fff; /* Ensure the chat box has a white background */
+            overflow: hidden; /* Prevent content overflow */
+        }
+        .chat-container iframe {
+            width: 100%;
+            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
+            border: none;
+            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+        }
+        .chat-close {
+            width: 40px;
+            height: 40px;
+            background-color: #f44336; /* Red background */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above other content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .chat-close:before {
+            content: '×'; /* Unicode multiplication sign */
+            font-size: 24px;
+        }
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above the chat box */
+            user-select: none; /* Prevent text selection during drag */
+        }
+        .chat-toggle:after {
+            content: "Chat";
+            font-size: 14px;
+        }
+        .chat-toggle.open:after {
+            content: "Close";
+        }
+        .telegram-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1001; /* Ensure it's above other content */
+        }
+        .telegram-link img {
+            width: 50px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .video-wrapper {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .video-wrapper iframe {
+                height: 250px; /* Adjust height for small screens */
+            }
+            .info-box {
+                width: calc(100% - 40px);
+                font-size: 14px; /* Adjust font size for small screens */
+                flex-direction: column; /* Stack logo and content vertically */
+                align-items: center; /* Center items */
+                gap: 10px; /* Reduce gap between logo and content */
+                padding: 10px; /* Reduce padding */
+                box-sizing: border-box; /* Ensure padding does not affect width */
+            }
+            .info-box .logo {
+                width: 60px; /* Adjust size for small screens */
+                height: 60px; /* Adjust size for small screens */
+            }
+            .info-box .info-content {
+                text-align: center; /* Center text on small screens */
+            }
+            .chat-container {
+                width: calc(100% - 40px);
+                height: 400px;
+            }
+            .chat-toggle {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            .telegram-link {
+                bottom: 10px;
+                left: 10px;
+            }
+            .telegram-link img {
+                width: 40px;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Change Stream/Language:</h1>
+        <select id="languageSelector" onchange="changeStream(this.value)">
+            <option value="tamil_4k">Tamil 4K</option>
+            <option value="spt">Star Sports Tamil</option>
+            <option value="hindi_4k">Hindi 4K</option>
+            <option value="english_4k">English 4K</option>
+            <option value="telugu_4k">Telugu 4K</option>
+            <option value="malayalam_4k">Malayalam 4K</option>
+            <option value="kannada_4k">Kannada 4K</option>
+            <option value="insiders_cam">Insiders Cam</option>
+            <option value="split_cam">Split Cam</option>
+        </select>
+
+        <div class="video-wrapper" id="videoWrapper">
+            <iframe id="videoIframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="chat-container" id="chatBox">
+            <button class="chat-close" id="chatClose">×</button>
+            <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=yourdomain.com" allow="microphone; camera"></iframe>
+        </div>
+        <button class="chat-toggle" id="chatToggle">Chat</button>
+    </div>
+
+    <script>
+        function initializePlayer(videoData) {
+            const videoWrapper = document.getElementById('videoWrapper');
+            const videoIframe = document.getElementById('videoIframe');
+
+            // Clear previous sources
+            videoIframe.style.display = 'none'; // Hide iframe
+            videoWrapper.innerHTML = ''; // Clear previous content
+
+            // Check if the source is an .m3u8 link
+            if (videoData.link.endsWith('.m3u8')) {
+                const video = document.createElement('video');
+                video.controls = true;
+                video.autoplay = true;
+                videoWrapper.appendChild(video);
+
+                const hls = new Hls();
+                hls.loadSource(videoData.link);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else {
+                // If it's an embed link
+                videoIframe.src = videoData.link; // Set the source for embedding
+                videoIframe.style.display = 'block'; // Show iframe
+            }
+        }
+
+        function changeStream(selectedValue) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        const data = JSON.parse(xhr.responseText);
+                        const videoData = data.find(video => video.id === selectedValue);
+                        if (videoData) {
+                            initializePlayer(videoData);
+                        } else {
+                            console.error('Video data not found for ID: ' + selectedValue);
+                        }
+                    } else {
+                        console.error('Failed to load video data. Status code: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('GET', 'boss.json', true);
+            xhr.send();
+        }
+
+        // Chat toggle functionality
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
+        });
+
+        // Initialize the default stream
+        changeStream('tamil_4k');
+    </script>
+</body>
+</html>
