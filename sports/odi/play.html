@@ -54,46 +54,6 @@
             box-sizing: border-box;
             position: relative;
         }
-        .info-box .logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .info-box .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .info-box .info-content {
-            flex-grow: 1;
-        }
-        .info-box .info-content h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #333;
-        }
-        .info-box .info-content p {
-            margin: 5px 0 0;
-            font-size: 16px;
-            color: #555;
-        }
-        .info-box .info-content a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .info-box .info-content a:hover {
-            background-color: #0056b3;
-        }
         .chat-container {
             width: 100%;
             max-width: 350px;
@@ -104,36 +64,9 @@
             bottom: 20px;
             right: 20px;
             display: none;
-            z-index: 1000;
-            background: #fff;
-            overflow: hidden;
-        }
-        .chat-container iframe {
-            width: 100%;
-            height: calc(100% - 40px);
-            border: none;
-            border-radius: 8px 8px 0 0;
-        }
-        .chat-close {
-            width: 40px;
-            height: 40px;
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .chat-close:before {
-            content: '×';
-            font-size: 24px;
+            z-index: 1000; 
+            background: #fff; 
+            overflow: hidden; 
         }
         .chat-toggle {
             position: fixed;
@@ -145,29 +78,21 @@
             color: white;
             border: none;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1001;
-            user-select: none;
-        }
-        .chat-toggle:after {
-            content: "Chat";
-            font-size: 14px;
-        }
-        .chat-toggle.open:after {
-            content: "Close";
+            z-index: 1001; 
+            user-select: none; 
         }
         .telegram-link {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 1001;
+            z-index: 1001; 
         }
         .telegram-link img {
-            width: 50px;
+            width: 50px; 
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -177,24 +102,6 @@
             .video-wrapper {
                 max-width: 100%;
                 margin-bottom: 10px;
-            }
-            .video-wrapper iframe {
-                height: 250px;
-            }
-            .info-box {
-                width: calc(100% - 40px);
-                font-size: 14px;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                padding: 10px;
-            }
-            .info-box .logo {
-                width: 60px;
-                height: 60px;
-            }
-            .info-box .info-content {
-                text-align: center;
             }
             .chat-container {
                 width: calc(100% - 40px);
@@ -210,9 +117,6 @@
                 bottom: 10px;
                 left: 10px;
             }
-            .telegram-link img {
-                width: 40px;
-            }
         }
     </style>
 </head>
@@ -223,17 +127,9 @@
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="info-box">
-            <h2>Change Stream/Language:</h2>
+            <h100>Change Stream/Langu:  </h100>
             <select id="languageSelector" onchange="changeStream(this.value)">
-                <option value="tamil_4k" selected>Tamil 4K</option>
-                <option value="spt">Star Sports Tamil</option>
-                <option value="hindi_4k">Hindi 4K</option>
-                <option value="english_4k">English 4K</option>
-                <option value="telugu_4k">Telugu 4K</option>
-                <option value="malayalam_4k">Malayalam 4K</option>
-                <option value="kannada_4k">Kannada 4K</option>
-                <option value="insiders_cam">Insiders Cam</option>
-                <option value="split_cam">Split Cam</option>
+                <!-- Options will be populated dynamically -->
             </select>
         </div>
 
@@ -248,104 +144,57 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a> 
 
-    <!-- JW Player scripts -->
     <script src="assets/KB5zFt7A.js"></script>
     <script src="assets/jwpsrv.js" async></script>
     <script src="assets/vast.js" async></script>
 
-    <!-- JW Player license key -->
     <script type="text/javascript">
-        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJM8FZSk0CpY06RHW0/9lO/ZC06yMkF0pBMX';
-    </script>
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 
-    <script>
-        function initializePlayer(videoData) {
-            const videoIframe = document.getElementById('videoIframe');
-            videoIframe.src = videoData.link;
+        // Fetch video data from JSON
+        fetch('boss.json')
+            .then(response => response.json())
+            .then(data => {
+                populateLanguageOptions(data);
+                // Set the default stream when data is loaded
+                const defaultLanguage = document.getElementById('languageSelector').value;
+                changeStream(defaultLanguage, data);
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
 
-            // Update player and info
-            const infoBox = document.querySelector('.info-box .info-content');
-            infoBox.innerHTML = `
-                <div class="logo">
-                    <img src="${videoData.logo}" alt="${videoData.name} Logo">
-                </div>
-                <div class="info-content">
-                    <h2>${videoData.name}</h2>
-                    <p>Now Streaming...</p>
-                    <a href="${videoData.link}" target="_blank">Watch Live</a>
-                </div>
-            `;
+        function populateLanguageOptions(data) {
+            const languageSelector = document.getElementById('languageSelector');
+            data.forEach(video => {
+                const option = document.createElement('option');
+                option.value = video.id; // Use video ID as the value
+                option.textContent = video.name; // Use video name as the display text
+                languageSelector.appendChild(option);
+            });
         }
 
-         document.addEventListener('DOMContentLoaded', function() {
-        // Fetch the sports data on page load
-        fetch('sports.json')
-            .then(response => response.json())
-            .then(data => {
-                const defaultStreamKey = data.streams.default.tamil; // Set default language
-                const defaultStream = data.streams[defaultStreamKey];
-                
-                if (defaultStream) {
-                    initializePlayer(defaultStream);
-                } else {
-                    console.error('Default stream not found');
-                }
-            })
-            .catch(error => console.error('Error fetching sports data:', error));
-    });
+        function changeStream(languageId, data) {
+            const selectedVideo = data.find(video => video.id === languageId);
+            if (selectedVideo) {
+                const videoIframe = document.getElementById('videoIframe');
+                videoIframe.src = selectedVideo.link; // Set the iframe source to the selected video link
+            }
+        }
 
-    function initializePlayer(videoData) {
-        const videoIframe = document.getElementById('videoIframe');
-        videoIframe.src = videoData.link;
-
-        // Update info box with video details
-        const infoBox = document.querySelector('.info-box');
-        infoBox.innerHTML = `
-            <div class="logo">
-                <img src="${videoData.logo}" alt="${videoData.name} Logo">
-            </div>
-            <div class="info-content">
-                <h2>${videoData.name}</h2>
-                <p>Now Streaming...</p>
-                <a href="${videoData.link}" target="_blank">Watch Live</a>
-            </div>
-        `;
-    }
-
-    function changeStream(language) {
-        fetch('sports.json')
-            .then(response => response.json())
-            .then(data => {
-                const videoData = data.streams[language];
-                if (videoData) {
-                    initializePlayer(videoData);
-                } else {
-                    console.error('Stream not found for language:', language);
-                }
-            })
-            .catch(error => console.error('Error fetching sports data:', error));
-    }
-
-    // Chat toggle functionality
-    document.getElementById('chatToggle').addEventListener('click', function () {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-        this.classList.toggle('open');
-    });
-
-    document.getElementById('chatClose').addEventListener('click', function () {
-        document.getElementById('chatBox').style.display = 'none';
-        document.getElementById('chatToggle').classList.remove('open');
-    });
-
-        document.getElementById('chatToggle').addEventListener('click', function () {
+        document.getElementById('chatToggle').addEventListener('click', function() {
             const chatBox = document.getElementById('chatBox');
-            chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-            this.classList.toggle('open');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
+            } else {
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
         });
 
-        document.getElementById('chatClose').addEventListener('click', function () {
-            document.getElementById('chatBox').style.display = 'none';
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
             document.getElementById('chatToggle').classList.remove('open');
         });
     </script>
