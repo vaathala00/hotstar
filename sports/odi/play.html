@@ -151,12 +151,13 @@
     <script type="text/javascript">
         jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 
+        let playerInstance;
+
         // Fetch video data from JSON
-        fetch('sports.json')
+        fetch('boss.json')
             .then(response => response.json())
             .then(data => {
                 populateLanguageOptions(data);
-                // Set the default stream when data is loaded
                 const defaultLanguage = document.getElementById('languageSelector').value;
                 changeStream(defaultLanguage, data);
             })
@@ -175,8 +176,18 @@
         function changeStream(languageId, data) {
             const selectedVideo = data.find(video => video.id === languageId);
             if (selectedVideo) {
-                const videoIframe = document.getElementById('videoIframe');
-                videoIframe.src = selectedVideo.link; // Set the iframe source to the selected video link
+                if (!playerInstance) {
+                    playerInstance = jwplayer("player").setup({
+                        file: selectedVideo.link,
+                        width: '100%',
+                        height: '450px',
+                        autostart: true,
+                        aspectratio: '16:9',
+                    });
+                } else {
+                    playerInstance.load({ file: selectedVideo.link });
+                    playerInstance.play(true); // Automatically play the selected stream
+                }
             }
         }
 
