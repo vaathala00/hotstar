@@ -225,7 +225,7 @@
         <div class="info-box">
             <h2>Change Stream/Language:</h2>
             <select id="languageSelector" onchange="changeStream(this.value)">
-                <option value="tamil_4k">Tamil 4K</option>
+                <option value="tamil_4k" selected>Tamil 4K</option>
                 <option value="spt">Star Sports Tamil</option>
                 <option value="hindi_4k">Hindi 4K</option>
                 <option value="english_4k">English 4K</option>
@@ -277,19 +277,66 @@
             `;
         }
 
-        function changeStream(language) {
-            fetch('sports.json')
-                .then(response => response.json())
-                .then(data => {
-                    const videoData = data.streams[language];
-                    if (videoData) {
-                        initializePlayer(videoData);
-                    } else {
-                        console.error('Stream not found for language:', language);
-                    }
-                })
-                .catch(error => console.error('Error fetching sports data:', error));
-        }
+         document.addEventListener('DOMContentLoaded', function() {
+        // Fetch the sports data on page load
+        fetch('sports.json')
+            .then(response => response.json())
+            .then(data => {
+                const defaultStreamKey = data.streams.default.tamil; // Set default language
+                const defaultStream = data.streams[defaultStreamKey];
+                
+                if (defaultStream) {
+                    initializePlayer(defaultStream);
+                } else {
+                    console.error('Default stream not found');
+                }
+            })
+            .catch(error => console.error('Error fetching sports data:', error));
+    });
+
+    function initializePlayer(videoData) {
+        const videoIframe = document.getElementById('videoIframe');
+        videoIframe.src = videoData.link;
+
+        // Update info box with video details
+        const infoBox = document.querySelector('.info-box');
+        infoBox.innerHTML = `
+            <div class="logo">
+                <img src="${videoData.logo}" alt="${videoData.name} Logo">
+            </div>
+            <div class="info-content">
+                <h2>${videoData.name}</h2>
+                <p>Now Streaming...</p>
+                <a href="${videoData.link}" target="_blank">Watch Live</a>
+            </div>
+        `;
+    }
+
+    function changeStream(language) {
+        fetch('sports.json')
+            .then(response => response.json())
+            .then(data => {
+                const videoData = data.streams[language];
+                if (videoData) {
+                    initializePlayer(videoData);
+                } else {
+                    console.error('Stream not found for language:', language);
+                }
+            })
+            .catch(error => console.error('Error fetching sports data:', error));
+    }
+
+    // Chat toggle functionality
+    document.getElementById('chatToggle').addEventListener('click', function () {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+        this.classList.toggle('open');
+    });
+
+    document.getElementById('chatClose').addEventListener('click', function () {
+        document.getElementById('chatBox').style.display = 'none';
+        document.getElementById('chatToggle').classList.remove('open');
+    });
 
         document.getElementById('chatToggle').addEventListener('click', function () {
             const chatBox = document.getElementById('chatBox');

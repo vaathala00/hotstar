@@ -5,6 +5,7 @@
             "name": "Tamil 4K",
             "logo": "https://example.com/logo_tamil.png"
         },
+
         "spt": {
             "link": "https://example.com/spt.mp4",
             "name": "Star Sports Tamil",
@@ -44,6 +45,14 @@
             "link": "https://example.com/split_cam.mp4",
             "name": "Split Cam",
             "logo": "https://example.com/logo_split.png"
+
+        },
+        "default":{ 
+
+                "tamil": "tamil_4k",
+                "hindi": "hindi_4k"
+ 
+
         }
     }
 }
