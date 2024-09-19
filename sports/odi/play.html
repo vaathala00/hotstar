@@ -152,14 +152,15 @@
         jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
 
         let playerInstance;
+        let videoData;
 
         // Fetch video data from JSON
         fetch('sports.json')
             .then(response => response.json())
             .then(data => {
-                populateLanguageOptions(data);
-                const defaultLanguage = document.getElementById('languageSelector').value;
-                changeStream(defaultLanguage, data);
+                videoData = data;
+                populateLanguageOptions(videoData);
+                changeStream(videoData[0].id); // Set default stream to first language
             })
             .catch(error => console.error('Error fetching JSON:', error));
 
@@ -173,8 +174,8 @@
             });
         }
 
-        function changeStream(languageId, data) {
-            const selectedVideo = data.find(video => video.id === languageId);
+        function changeStream(languageId) {
+            const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
                 if (!playerInstance) {
                     playerInstance = jwplayer("player").setup({
