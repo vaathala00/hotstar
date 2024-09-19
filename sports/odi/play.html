@@ -34,12 +34,6 @@
             margin-bottom: 20px;
             position: relative;
         }
-        .video-wrapper iframe {
-            width: 100%;
-            height: 450px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
         .info-box {
             width: 100%;
             max-width: 800px;
@@ -178,16 +172,33 @@
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
                 if (!playerInstance) {
-                    playerInstance = jwplayer("player").setup({
-                        file: selectedVideo.link,
-                        width: '100%',
-                        height: '450px',
-                        autostart: true,
-                        aspectratio: '16:9',
-                    });
+                    // Initialize JW Player for .m3u8 links
+                    if (selectedVideo.link.endsWith('.m3u8')) {
+                        playerInstance = jwplayer("player").setup({
+                            file: selectedVideo.link,
+                            width: '100%',
+                            height: '450px',
+                            autostart: true,
+                            aspectratio: '16:9',
+                        });
+                    } else {
+                        // For embed links, set iframe source
+                        document.getElementById('videoIframe').src = selectedVideo.link;
+                        document.getElementById('videoIframe').style.display = 'block';
+                        document.getElementById('player').style.display = 'none';
+                    }
                 } else {
-                    playerInstance.load({ file: selectedVideo.link });
-                    playerInstance.play(true); // Automatically play the selected stream
+                    if (selectedVideo.link.endsWith('.m3u8')) {
+                        playerInstance.load({ file: selectedVideo.link });
+                        playerInstance.play(true); // Automatically play the selected stream
+                        document.getElementById('player').style.display = 'block';
+                        document.getElementById('videoIframe').style.display = 'none';
+                    } else {
+                        // Change the iframe source for embed links
+                        document.getElementById('videoIframe').src = selectedVideo.link;
+                        document.getElementById('videoIframe').style.display = 'block';
+                        document.getElementById('player').style.display = 'none';
+                    }
                 }
             }
         }
