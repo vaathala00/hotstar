@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live </title>
+    <title>Live</title>
 
-  <link rel="stylesheet" href="assets/style.css">
-
+    <link rel="stylesheet" href="assets/style.css">
 
     <style>
- body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,14 +24,12 @@
             margin: 20px;
             position: relative;
         }
-
         #player {
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
             position: relative;
         }
-
         .video-wrapper {
             width: 100%;
             max-width: 800px;
@@ -50,7 +47,7 @@
             max-width: 800px;
             margin-bottom: 20px;
             padding: 15px;
-            background: #80808080;
+            background: rgba(128, 128, 128, 0.5);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -60,8 +57,8 @@
             position: relative;
         }
         .info-box .logo {
-            width: 80px; /* Adjust size as needed */
-            height: 80px; /* Adjust size as needed */
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
@@ -109,20 +106,20 @@
             bottom: 20px;
             right: 20px;
             display: none;
-            z-index: 1000; /* Ensure it's on top of other content */
-            background: #fff; /* Ensure the chat box has a white background */
-            overflow: hidden; /* Prevent content overflow */
+            z-index: 1000;
+            background: #fff;
+            overflow: hidden;
         }
         .chat-container iframe {
             width: 100%;
-            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
+            height: calc(100% - 40px);
             border: none;
-            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+            border-radius: 8px 8px 0 0;
         }
         .chat-close {
             width: 40px;
             height: 40px;
-            background-color: #f44336; /* Red background */
+            background-color: #f44336;
             color: white;
             border: none;
             border-radius: 50%;
@@ -133,11 +130,11 @@
             top: 5px;
             right: 10px;
             cursor: pointer;
-            z-index: 1001; /* Ensure it's above other content */
+            z-index: 1001;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .chat-close:before {
-            content: '×'; /* Unicode multiplication sign */
+            content: '×';
             font-size: 24px;
         }
         .chat-toggle {
@@ -155,8 +152,8 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1001; /* Ensure it's above the chat box */
-            user-select: none; /* Prevent text selection during drag */
+            z-index: 1001;
+            user-select: none;
         }
         .chat-toggle:after {
             content: "Chat";
@@ -169,10 +166,10 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 1001; /* Ensure it's above other content */
+            z-index: 1001;
         }
         .telegram-link img {
-            width: 50px; /* Adjust size as needed */
+            width: 50px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -184,23 +181,23 @@
                 margin-bottom: 10px;
             }
             .video-wrapper iframe {
-                height: 250px; /* Adjust height for small screens */
+                height: 250px;
             }
             .info-box {
                 width: calc(100% - 40px);
-                font-size: 14px; /* Adjust font size for small screens */
-                flex-direction: column; /* Stack logo and content vertically */
-                align-items: center; /* Center items */
-                gap: 10px; /* Reduce gap between logo and content */
-                padding: 10px; /* Reduce padding */
-                box-sizing: border-box; /* Ensure padding does not affect width */
+                font-size: 14px;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+                box-sizing: border-box;
             }
             .info-box .logo {
-                width: 60px; /* Adjust size for small screens */
-                height: 60px; /* Adjust size for small screens */
+                width: 60px;
+                height: 60px;
             }
             .info-box .info-content {
-                text-align: center; /* Center text on small screens */
+                text-align: center;
             }
             .chat-container {
                 width: calc(100% - 40px);
@@ -229,32 +226,19 @@
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="info-box">
-            <!-- <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
-            </div>
-            <div class="info-content">
-               <h2>Join Us on Telegram</h2>
-                <a href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">Join Telegram</a> -->
-
-  <h100>Change Stream/Langu:  </h100>
-           <select id="languageSelector" onchange="changeStream (this.value)">
-               <option value="tamil_4k">Tamil 4K</option>
-               <option value="spt">Star Sports Tamil</option>
-               <option value="hindi_4k">Hindi 4K</option>
-               <option value="english_4k">English 4K</option>
-               <option value="telugu_4k">Telugu 4K</option>
-               <option value="malayalam_4k">Malayalam 4K</option>
-               <option value="kannada_4k">Kannada 4K</option>
-               <option value="insiders_cam">Insiders Cam </option>
-               <option value="split_cam">Splt Cam </option>
-
-               <!-- Add more options as needed -->
-           </select>
-
-            </div>
+            <h2>Change Stream/Language:</h2>
+            <select id="languageSelector" onchange="changeStream(this.value)">
+                <option value="tamil_4k">Tamil 4K</option>
+                <option value="spt">Star Sports Tamil</option>
+                <option value="hindi_4k">Hindi 4K</option>
+                <option value="english_4k">English 4K</option>
+                <option value="telugu_4k">Telugu 4K</option>
+                <option value="malayalam_4k">Malayalam 4K</option>
+                <option value="kannada_4k">Kannada 4K</option>
+                <option value="insiders_cam">Insiders Cam</option>
+                <option value="split_cam">Split Cam</option>
+            </select>
         </div>
-
-
 
         <div class="chat-container" id="chatBox">
             <button class="chat-close" id="chatClose"></button>
@@ -263,24 +247,21 @@
         <button class="chat-toggle" id="chatToggle"></button>
     </div>
 
-     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
+    <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
-    </a> 
+    </a>
 
+    <!-- JW Player scripts -->
+    <script src="assets/KB5zFt7A.js"></script>
+    <script src="assets/jwpsrv.js" async></script>
+    <script src="assets/vast.js" async></script>
 
+    <!-- JW Player license key -->
+    <script type="text/javascript">
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+    </script>
 
-  <!-- JW Player scripts -->
-  <script src="assets/KB5zFt7A.js"></script>
-  <script src="assets/jwpsrv.js" async></script>
-  <script src="assets/vast.js" async></script>
-
-
-  <!-- JW Player license key -->
-  <script type="text/javascript">
-    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-  </script>
-
-
+    <script>
         let playerInstance;
         let videoData;
 
@@ -337,8 +318,7 @@
                     }
                 }
             }
-        
-}
+        }
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
