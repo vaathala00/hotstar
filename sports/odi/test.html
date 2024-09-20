@@ -18,6 +18,8 @@
             align-items: center;
             overflow-x: hidden;
         }
+
+
         .container {
             width: 100%;
             max-width: 1200px;
@@ -49,7 +51,7 @@
             max-width: 800px;
             margin-bottom: 20px;
             padding: 15px;
-            background: #80808080;
+            background: #f2f2f2;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -178,6 +180,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
+
+
+
         @media (max-width: 600px) {
             .video-wrapper {
                 max-width: 100%;
@@ -221,7 +226,36 @@
                 width: 40px;
             }
         }
+
+
     </style>
+
+<style> 
+
+.top-center {
+            position: fixed;
+            top: 525px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white; /* White text color */
+            font-size: 20px; /* Increase font size for visibility */
+  z-index: -100; 
+        }
+
+ @media (max-width: 600px) {
+
+.top-center {
+            position: fixed;
+            top: 307px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white; /* White text color */
+            font-size: 20px; /* Increase font size for visibility */
+  z-index: -100; 
+        }
+
+
+</style>
 
 </head>
 <body>
@@ -230,7 +264,11 @@
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+
+
         <div class="info-box">
+
+
              <h100>Change Stream/Langu:  </h100>
             <select id="languageSelector" onchange="changeStream(this.value)">
                 <!-- Options will be populated dynamically -->
@@ -247,6 +285,9 @@
     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
+
+<p class="top-center">Scroll down to change the language.</p>
+
 
     <!-- JW Player scripts -->
     <script src="assets/KB5zFt7A.js"></script>
