@@ -275,7 +275,9 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
+<div class="scroll-instruction" id="scrollInstruction">
 <p class="top-center">Scroll down to change the language.</p>
+</div>
 
 
     <!-- JW Player scripts -->
@@ -366,6 +368,7 @@
             document.getElementById('chatToggle').classList.remove('open');
         });
 
+
         // Make the chat toggle button draggable
         const chatToggle = document.getElementById('chatToggle');
         let isDragging = false;
@@ -389,5 +392,18 @@
             }
         }
     </script>
+
+<script> 
+
+// Hide the instruction after 5 seconds
+    setTimeout(() => {
+        const instruction = document.getElementById('scrollInstruction');
+        instruction.style.display = 'none';
+    }, 20000);
+
+
+
+</script>
+
 </body>
 </html>
