@@ -2,7 +2,7 @@
     {
         "id": "tamil_4k",
         "name": "Tamil 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109711/hd_akamai_iosmob_avc_tam_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109709/uhd_akamai_ctv_avc_tam_indvsban_210924/master.m3u8"
     },
     {
         "id": "spt",
@@ -22,26 +22,26 @@
     {
         "id": "telugu_4k",
         "name": "Telugu 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109717/hd_akamai_iosmob_avc_tel_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109715/uhd_akamai_ctv_avc_tel_indvsban_210924/master.m3u8"
     },
     {
         "id": "malayalam_4k",
         "name": "Bhojpuri 4K Stream",
-        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109761/hd_akamai_iosmob_avc_bhoj_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live//2109758/uhd_akamai_ctv_avc_bhoj_indvsban_210924/master.m3u8"
     },
     {
         "id": "kannada_4k",
         "name": "Kannada 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109723/hd_akamai_iosmob_avc_kan_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109721/uhd_akamai_ctv_avc_kan_indvsban_210924/master.m3u8"
     },
     {
         "id": "insiders_cam",
         "name": "Odia 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109699/hd_akamai_iosmob_avc_odia_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109697/uhd_akamai_ctv_avc_odia_indvsban_210924/master.m3u8"
     },
     {
         "id": "split_cam",
         "name": "Bengali 4K Stream",
-        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109773/hd_akamai_iosmob_avc_ben_indvsban_210924/master.m3u8"
+        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109771/uhd_akamai_ctv_avc_ben_indvsban_210924/master.m3u8"
     }
 ]

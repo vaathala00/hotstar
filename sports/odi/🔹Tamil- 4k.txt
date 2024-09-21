@@ -1,0 +1,23 @@
+🔹Tamil:- 4k
+https://prod-sports-south-gm.jiocinema.com/hls/live/2109709/uhd_akamai_ctv_avc_tam_indvsban_210924/master.m3u8
+
+🔹Hindi:- 4K
+https://prod-sports-hin-cf.jiocinema.com/hls/live/2100320/uhd_akamai_ctv_avc_hin_indvsban_210924/master.m3u8
+
+🔹English:-4K
+https://prod-sports-eng-cf.jiocinema.com/hls/live/2100305/uhd_akamai_ctv_avc_eng_indvsban_210924/master.m3u8
+
+🔹Kannada:-4k
+https://prod-sports-south-gm.jiocinema.com/hls/live/2109721/uhd_akamai_ctv_avc_kan_indvsban_210924/master.m3u8
+
+🔹Telugu:-4k
+https://prod-sports-south-gm.jiocinema.com/hls/live/2109715/uhd_akamai_ctv_avc_tel_indvsban_210924/master.m3u8
+
+🔹Bengali:-4k
+https://prod-sports-north-gm.jiocinema.com/hls/live/2109771/uhd_akamai_ctv_avc_ben_indvsban_210924/master.m3u8
+
+🔹Odia:-4k
+https://prod-sports-south-gm.jiocinema.com/hls/live/2109697/uhd_akamai_ctv_avc_odia_indvsban_210924/master.m3u8
+
+🔹Bhojpuri:-4k
+https://prod-sports-north-gm.jiocinema.com/hls/live//2109758/uhd_akamai_ctv_avc_bhoj_indvsban_210924/master.m3u8
