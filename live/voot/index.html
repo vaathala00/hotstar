@@ -115,13 +115,13 @@ font-weight: bold;
         try {
             const response = await fetch(url);
             const jsonData = await response.json();
-            if (!jsonData || jsonData.length === 0) {
-                console.error('No JSON data available');
+            if (!jsonData || !jsonData.channels || jsonData.channels.length === 0) {
+                console.error('No channel data available');
                 return;
             }
 
             const listContainer = document.getElementById('listContainer');
-            jsonData.forEach(function(item) {
+            jsonData.channels.forEach(function(item) { // Access the 'channels' array
                 const anchor = document.createElement('a');
                 anchor.href = `Play.html?id=${item.channel_id}`; // Updated to match your JSON structure
 
