@@ -37,7 +37,7 @@
 
         @media (min-width: 1200px) {
             .my-iframe iframe {
-                height: 500px;
+                height: 452px;
             }
         }
 
@@ -192,7 +192,7 @@
 
         @media (max-width: 600px) {
             .my-iframe iframe {
-                height: 4620px;
+                height: 250px;
             }
 
             .info-box {
