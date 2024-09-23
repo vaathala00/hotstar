@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Live TV Channels</h1>
+    </header>
+    <main>
+        <ul id="channel-list">
+            <!-- Channel items will be injected here -->
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 JioCinema</p>
+    </footer>
+
+    <script>
+        const channelList = document.getElementById('channel-list');
+        
+        // Fetch channel data from the provided JSON URL
+        fetch('https://play.denver1769.in/jc/JC.json')
+            .then(response => response.json())
+            .then(data => {
+                data.channels.forEach(channel => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <img src="${channel.logo}" alt="${channel.name}" />
+                        <a href="player.html?url=${encodeURIComponent(channel.link)}">${channel.name}</a>
+                    `;
+                    channelList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching the channel data:', error);
+            });
+    </script>
+</body>
+</html>
