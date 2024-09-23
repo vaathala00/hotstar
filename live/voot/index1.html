@@ -21,22 +21,34 @@
 
     <script>
         const channelList = document.getElementById('channel-list');
-        
+
         // Fetch channel data from the provided JSON URL
-        fetch('https://play.denver1769.in/jc/JC.json')
-            .then(response => response.json())
+        fetch('https://cors-anywhere.herokuapp.com/https://play.denver1769.in/jc/JC.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                data.channels.forEach(channel => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        <img src="${channel.logo}" alt="${channel.name}" />
-                        <a href="player.html?url=${encodeURIComponent(channel.link)}">${channel.name}</a>
-                    `;
-                    channelList.appendChild(listItem);
-                });
+                if (data.channels && Array.isArray(data.channels)) {
+                    data.channels.forEach(channel => {
+                        if (channel.name && channel.link && channel.logo) {
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `
+                                <img src="${channel.logo}" alt="${channel.name}" />
+                                <a href="player.html?url=${encodeURIComponent(channel.link)}">${channel.name}</a>
+                            `;
+                            channelList.appendChild(listItem);
+                        }
+                    });
+                } else {
+                    throw new Error('Invalid JSON structure');
+                }
             })
             .catch(error => {
                 console.error('Error fetching the channel data:', error);
+                channelList.innerHTML = '<li>Error loading channels. Please try again later.</li>';
             });
     </script>
 </body>
