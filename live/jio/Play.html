@@ -226,7 +226,7 @@
     <div class="container">
         <div id="player"></div>
         <div class="video-wrapper" id="videoWrapper">
-            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen scrolling="no" ></iframe>
         </div>
         <div class="info-box">
             <div class="logo">
@@ -277,7 +277,7 @@
                 document.getElementById('player').style.display = 'none';
                 const videoWrapper = document.getElementById('videoWrapper');
                 const videoIframe = document.getElementById('videoIframe');
-                iframe.style.overflow = 'hidden';
+               
                 videoIframe.src = videoData.link;
             } else {
                 // If the link is an .m3u8 link
