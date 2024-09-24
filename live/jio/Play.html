@@ -424,18 +424,25 @@
 
         iframe.onload = function() {
             const interval = setInterval(function() {
-                // Query the anchor element with the class 'btn btn-danger'
-                const watchLiveButton = iframe.contentWindow.document.querySelector('a.btn.btn-danger');
-                
-                if (watchLiveButton) {
-                    // Simulate a click on the button
-                    watchLiveButton.click();
-                    clearInterval(interval); // Stop polling once the button is clicked
+                try {
+                    // Query for the anchor element that contains the text 'WATCH LIVE'
+                    const watchLiveButton = Array.from(iframe.contentWindow.document.querySelectorAll('a.btn.btn-danger'))
+                        .find(button => button.textContent.trim() === 'WATCH LIVE');
+
+                    if (watchLiveButton) {
+                        // Simulate a click on the button
+                        watchLiveButton.click();
+                        clearInterval(interval); // Stop polling once the button is clicked
+                    }
+                } catch (e) {
+                    console.error('Error accessing iframe content:', e);
+                    clearInterval(interval); // Stop if there's an error
                 }
             }, 1000); // Check every second
         };
     };
 </script>
+
 
 </body>
 </html>
