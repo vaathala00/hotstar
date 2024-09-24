@@ -417,5 +417,21 @@
             }
         }
     </script>
+
+<script>
+    window.onload = function() {
+        const iframe = document.getElementById('videoIframe');
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+        // Use a timeout to ensure the iframe is fully loaded
+        iframe.onload = function() {
+            const watchLiveButton = iframeDocument.querySelector('.btn.btn-danger');
+            if (watchLiveButton) {
+                watchLiveButton.click();
+            }
+        };
+    };
+</script>
+
 </body>
 </html>
