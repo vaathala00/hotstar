@@ -277,6 +277,7 @@
                 document.getElementById('player').style.display = 'none';
                 const videoWrapper = document.getElementById('videoWrapper');
                 const videoIframe = document.getElementById('videoIframe');
+                iframe.style.overflow = 'hidden';
                 videoIframe.src = videoData.link;
             } else {
                 // If the link is an .m3u8 link
