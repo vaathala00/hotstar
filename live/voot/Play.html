@@ -539,7 +539,7 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.channel_id === id);
+                var videoData = data.find(video => video.id === id);
 
                 jwplayer("myElement").setup({
                     title: videoData.name,
