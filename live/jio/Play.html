@@ -418,37 +418,6 @@
         }
     </script>
 
-<script>
-function clickButtonInIframe(iframeId, buttonText, intervalTime = 1000) {
-    const iframe = document.getElementById(iframeId);
-
-    iframe.onload = function() {
-        const interval = setInterval(function() {
-            try {
-                // Query for the anchor element that contains the specified button text
-                const watchLiveButton = Array.from(iframe.contentWindow.document.querySelectorAll('a.btn.btn-danger'))
-                    .find(button => button.textContent.trim() === buttonText);
-
-                if (watchLiveButton) {
-                    // Simulate a click on the button
-                    watchLiveButton.click();
-                    console.log(`Clicked the button: ${buttonText}`);
-                    clearInterval(interval); // Stop polling once the button is clicked
-                }
-            } catch (e) {
-                console.error('Error accessing iframe content:', e);
-                clearInterval(interval); // Stop if there's an error
-            }
-        }, intervalTime); // Check every specified interval
-    };
-}
-
-// Usage
-window.onload = function() {
-    clickButtonInIframe('videoIframe', 'WATCH LIVE');
-};
-
-</script>
 
 
 </body>
