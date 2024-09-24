@@ -421,14 +421,18 @@
 <script>
     window.onload = function() {
         const iframe = document.getElementById('videoIframe');
-        const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
 
-        // Use a timeout to ensure the iframe is fully loaded
         iframe.onload = function() {
-            const watchLiveButton = iframeDocument.querySelector('.btn.btn-danger');
-            if (watchLiveButton) {
-                watchLiveButton.click();
-            }
+            const interval = setInterval(function() {
+                // Query the anchor element with the class 'btn btn-danger'
+                const watchLiveButton = iframe.contentWindow.document.querySelector('a.btn.btn-danger');
+                
+                if (watchLiveButton) {
+                    // Simulate a click on the button
+                    watchLiveButton.click();
+                    clearInterval(interval); // Stop polling once the button is clicked
+                }
+            }, 1000); // Check every second
         };
     };
 </script>
