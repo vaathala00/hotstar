@@ -539,17 +539,17 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.match_id === id);
+                var videoData = data.find(video => video.id === id);
 
                 jwplayer("myElement").setup({
-                    title: videoData.match_name,
+                    title: videoData.name,
                     description: "VaathalaTV",
-                    image: videoData.banner,
+                    image: videoData.logo,
                     aspectratio: '16:9',
                     width: '100%',
                     mute: false,
                     autostart: true,
-                    file: videoData.stream_link,
+                    file: videoData.link,
                     type: "hls",
                     captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
                     sharing: {
@@ -558,7 +558,7 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 });
             }
         };
-        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.open('GET', 'sony.json', true);
         xhr.send();
     </script>
 </body>

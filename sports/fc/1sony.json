@@ -1,0 +1,195 @@
+[
+    {
+        "id": "1",
+        "name": "SET HD",
+        "logo": "https://images.slivcdn.com/videoasset_images/sethd_23oct_portrait_thumb_rev.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009246&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "2",
+        "name": "Sony SAB HD",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_sabhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009248&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "3",
+        "name": "Sony PAL",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_pal_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009273&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "4",
+        "name": "Sony YAY",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_yay_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000001971&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "5",
+        "name": "Sony Marathi",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_marathi_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009259&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "6",
+        "name": "Sony AATH",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_aath_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009255&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "7",
+        "name": "Sony MAX HD",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_maxhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009247&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "8",
+        "name": "Sony MAX",
+        "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX.png",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009249&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "9",
+        "name": "Sony WAH",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_wah_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009253&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "10",
+        "name": "Sony MAX2",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_max2_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000044878&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "11",
+        "name": "Sony PIX HD",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_pixhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009258&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "12",
+        "name": "Sony BBC Earth HD",
+        "logo": "https://images.slivcdn.com/videoasset_images/sony_bbchd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "http://mrsmarttv.shop/tmp/sliv.php?id=1000009252&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "13",
+        "name": "Sony TEN 1 HD",
+        "logo": "https://images.slivcdn.com/portrait_thumb/Sony_TEN1HD_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "https://thenayeemparvez.xyz/sliv/stream.php?id=sony-ten-1&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "14",
+        "name": "Sony TEN 2 HD",
+        "logo": "https://te.legra.ph/file/3f3e37a29023ebc5f7a58.jpg",
+        "group": "SonyLIV",
+        "link": "https://thenayeemparvez.xyz/sliv/stream.php?id=sony-ten-2&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "15",
+        "name": "Sony TEN 3 HD",
+        "logo": "https://te.legra.ph/file/5a30b2345a1504755373c.jpg",
+        "group": "SonyLIV",
+        "link": "https://thenayeemparvez.xyz/sliv/stream.php?id=sony-ten-3&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "16",
+        "name": "Sony TEN 4 HD",
+        "logo": "https://images.slivcdn.com/portrait_thumb/Sony_TEN4HD_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
+        "group": "SonyLIV",
+        "link": "https://thenayeemparvez.xyz/sliv/stream.php?id=sony-ten-4&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+    {
+        "id": "17",
+        "name": "Sony TEN 5 HD",
+        "logo": "https://te.legra.ph/file/6087c17737937a5d4ac53.jpg",
+        "group": "SonyLIV",
+        "link": "https://thenayeemparvez.xyz/sliv/stream.php?id=sony-ten-5&e=.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+
+    {
+        "id": "18",
+        "name": "Sony Crackle",
+        "logo": "https://te.legra.ph/file/135c3b6a04e2e757ed883.jpg",
+        "group": "SonyLIV",
+        "link": "https://crackle-plex.amagi.tv/playlist720p.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    },
+
+    
+    {
+        "id": "23",
+        "name": "Sony Kal",
+        "logo": "https://te.legra.ph/file/9ccabbc4d908e83780a96.jpg",
+        "group": "SonyLIV",
+        "link": "https://spt-sonykal-1-us.lg.wurl.tv/playlist_4300k.m3u8",
+        "license_key": "",
+        "k": "",
+        "kid": ""
+    }
+]
