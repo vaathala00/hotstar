@@ -533,32 +533,44 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
         }
 
         var id = getUrlParameter('id');
-        
-        // Load the m1.json file and get the video data by ID
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.match_id === id);
 
-                jwplayer("myElement").setup({
-                    title: videoData.match_name,
-                    description: "VaathalaTV",
-                    image: videoData.banner,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    file: videoData.stream_link,
-                    type: "hls",
-                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                    sharing: {
-                        sites: ['facebook', 'twitter']
+        // Load the JSON data from the provided URL
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    // Access the matches array from the fetched data
+                    var matches = data.matches;
+                    var videoData = matches.find(video => video.match_id == id); // Assuming match_id corresponds to the video ID
+
+                    if (videoData) {
+                        jwplayer("myElement").setup({
+                            title: videoData.match_name,
+                            description: "Video Description", // Update as needed
+                            image: videoData.banner, // Assuming this is the logo or thumbnail
+                            aspectratio: '16:9',
+                            width: '100%',
+                            height: '100%',
+                            mute: false,
+                            autostart: true,
+                            file: videoData.stream_lin, // Assuming this is the URL for HLS streaming
+                            type: "hls",
+                            captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
+                            sharing: {
+                                sites: ['facebook', 'twitter']
+                            }
+                        });
+                        document.querySelector('.loading-text').style.display = 'none'; // Hide loading text
+                    } else {
+                        alert("Video not found.");
                     }
-                });
+                } else {
+                    alert("Error loading video data.");
+                }
             }
         };
-        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true); // Updated URL
         xhr.send();
     </script>
 </body>
