@@ -353,30 +353,26 @@
             }
         }
 
-       // Fetch and load video data from JSON
-const id = getUrlParameter('id');
-console.log('ID from URL:', id); // Debugging log
-
-const xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            const data = JSON.parse(xhr.responseText);
-            console.log('Fetched video data:', data); // Debugging log
-            const videoData = data.find(video => video.match_id.toString() === id);
-            if (videoData) {
-                initializePlayer(videoData);
-            } else {
-                console.error('Video data not found for ID:', id);
+        // Fetch and load video data from JSON
+        const id = getUrlParameter('match_id');
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    const videoData = data.find(video => video.match_id === id);
+                    if (videoData) {
+                        initializePlayer(videoData);
+                    } else {
+                        console.error('Video data not found for ID: ' + id);
+                    }
+                } else {
+                    console.error('Failed to load video data. Status code: ' + xhr.status);
+                }
             }
-        } else {
-            console.error('Failed to load video data. Status code:', xhr.status, xhr.statusText);
-        }
-    }
-};
-xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-xhr.send();
-
+        };
+        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.send();
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
