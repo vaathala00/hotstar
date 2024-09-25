@@ -353,26 +353,30 @@
             }
         }
 
-        // Fetch and load video data from JSON
-        const id = getUrlParameter('match_id');
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    const data = JSON.parse(xhr.responseText);
-                    const videoData = data.find(video => video.match_id === id);
-                    if (videoData) {
-                        initializePlayer(videoData);
-                    } else {
-                        console.error('Video data not found for ID: ' + id);
-                    }
+        const id = getUrlParameter('id'); // Ensure you're using the correct parameter
+const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            try {
+                const data = JSON.parse(xhr.responseText);
+                const videoData = data.matches.find(video => video.match_id === Number(id)); // Fixed this line
+                if (videoData) {
+                    initializePlayer(videoData);
                 } else {
-                    console.error('Failed to load video data. Status code: ' + xhr.status);
+                    console.error('Video data not found for ID: ' + id);
                 }
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
             }
-        };
-        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-        xhr.send();
+        } else {
+            console.error('Failed to load video data. Status code: ' + xhr.status);
+        }
+    }
+};
+xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+xhr.send();
+
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
