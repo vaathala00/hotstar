@@ -542,9 +542,9 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 var videoData = data.find(video => video.match_id === id);
 
                 jwplayer("myElement").setup({
-                    title: videoData.name,
+                    title: videoData.match_name,
                     description: "VaathalaTV",
-                    image: videoData.logo,
+                    image: videoData.banner,
                     aspectratio: '16:9',
                     width: '100%',
                     mute: false,
