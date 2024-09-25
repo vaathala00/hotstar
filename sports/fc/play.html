@@ -256,7 +256,7 @@
         jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
     </script>
 
-    <script>
+   <script>
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -266,94 +266,80 @@
         }
 
         // Function to initialize the video player
-        // Function to initialize the video player
-function initializePlayer(videoData) {
-    console.log('Initializing player with the following data:', videoData);
-
-    // Check if there's a valid link for standard video platforms
-    if (videoData.link && (videoData.link.includes("youtube.com") || 
-                            videoData.link.includes("vimeo.com") || 
-                            videoData.link.includes("dailymotion.com"))) {
-        // Handle video links
-        document.getElementById('player').style.display = 'none';
-        const videoIframe = document.getElementById('videoIframe');
-        videoIframe.src = videoData.link;
-        console.log('Video link set for iframe:', videoData.link);
-    } else if (videoData.stream_link) {
-        // Handle HLS stream
-        document.getElementById('videoIframe').style.display = 'none';
-        document.getElementById('player').style.display = '';
-
-        const playerInstance = jwplayer("player").setup({
-            title: videoData.event_name,  // Changed to use event_name
-            description: videoData.match_name,  // Changed to use match_name
-            image: videoData.banner || videoData.logo,  // Use banner if available
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            skin: {
-                name: "netflix"
-            },
-            logo: {
-                file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                link: "https://telegram.me/vaathala1"
-            },
-            captions: {
-                color: "#FFF",
-                fontSize: 14,
-                backgroundOpacity: 0,
-                edgeStyle: "raised"
-            },
-            playlist: [{
-                sources: [{
-                    file: videoData.stream_link,
-                    type: "hls"
-                }]
-            }],
-            sharing: {
-                sites: ['facebook', 'twitter']
+        function initializePlayer(videoData) {
+            if (videoData.link && (videoData.link.includes("youtube.com") || 
+                videoData.link.includes("vimeo.com") || 
+                videoData.link.includes("dailymotion.com"))) {
+                // Handle video links
+                document.getElementById('player').style.display = 'none';
+                const videoIframe = document.getElementById('videoIframe');
+                videoIframe.src = videoData.link;
+            } else if (videoData.stream_link) {
+                // Handle HLS stream
+                document.getElementById('videoIframe').style.display = 'none';
+                document.getElementById('player').style.display = '';
+                const playerInstance = jwplayer("player").setup({
+                    title: videoData.name,
+                    description: "VaathalaTV",
+                    image: videoData.logo,
+                    aspectratio: '16:9',
+                    width: '100%',
+                    mute: false,
+                    autostart: true,
+                    skin: {
+                        name: "netflix"
+                    },
+                    logo: {
+                        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                        link: "https://telegram.me/vaathala1"
+                    },
+                    captions: {
+                        color: "#FFF",
+                        fontSize: 14,
+                        backgroundOpacity: 0,
+                        edgeStyle: "raised"
+                    },
+                    playlist: [{
+                        sources: [{
+                            file: videoData.stream_link,
+                            type: "hls"
+                        }]
+                    }],
+                    sharing: {
+                        sites: ['facebook', 'twitter']
+                    }
+                });
+            } else {
+                console.error('No valid link found in videoData:', videoData);
             }
-        });
+        }
 
- // Error handling
-playerInstance.on('error', function(event) {
-    console.error('JW Player encountered an error:', event);
-});
-
-
-// Fetch and load video data from JSON
-const id = getUrlParameter('id');
-const xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            try {
-                const data = JSON.parse(xhr.responseText);
-                console.log('Fetched data:', data);
-                const videoData = data.matches.find(video => video.match_id === parseInt(id));
-                
-                if (videoData) {
-                    console.log('Found video data:', videoData);
-                    if (videoData.stream_link) {
-                        initializePlayer(videoData);
-                    } else {
-                        console.error('Stream link not found for videoData:', videoData);
+        // Fetch and load video data from JSON
+        const id = getUrlParameter('id');
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        console.log('Fetched data:', data);
+                        const videoData = data.matches.find(video => video.match_id === parseInt(id));
+                        if (videoData) {
+                            console.log('Found video data:', videoData);
+                            initializePlayer(videoData);
+                        } else {
+                            console.error('Video data not found for ID: ' + id);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing JSON data:', error);
                     }
                 } else {
-                    console.error('Video data not found for ID: ' + id);
+                    console.error('Failed to load video data. Status code: ' + xhr.status);
                 }
-            } catch (error) {
-                console.error('Error parsing JSON data:', error);
             }
-        } else {
-            console.error('Failed to load video data. Status code: ' + xhr.status);
-        }
-    }
-};
-xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-xhr.send();
-
+        };
+        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.send();
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
