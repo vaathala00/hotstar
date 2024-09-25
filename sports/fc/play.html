@@ -1,264 +1,529 @@
-<!DOCTYPE html>
+<?php
+
+// Copyright 2021-2024 SnehTV, Inc.
+// Licensed under MIT (https://github.com/mitthu786/TS-JioTV/blob/main/LICENSE)
+// Created By : TechieSneh
+
+error_reporting(0);
+$data = base64_decode($_REQUEST['data']);
+$data = explode('=?=', $data);
+$cid = $data[0];
+$name = str_replace('_', ' ', $cid);
+$id = $data[1];
+
+?>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live </title>
+    <title id="pageTitle">Default Title | Sony Liv</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="ENJOY FREE LIVE TV">
+    <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
+    <meta name="author" content="Vaathala">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <script src="main/assets/js/jwplayer.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
+    <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
 
-  <link rel="stylesheet" href="assets/style.css">
+<script>
+// Get the ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id');
 
+// Update the title with the ID
+document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+</script>
 
+</head>
+
+<body>
     <style>
- body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px;
-            position: relative;
+        .jw-svg-icon-pause {
+            background-image: url("assets/img/jwplay/pause.svg");
         }
 
-        #player {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            position: relative;
+        [class~=jw-svg-icon-pause] path,
+        [class~=jw-svg-icon-replay] path,
+        [class~=jw-svg-icon-next] path,
+        .jw-state-paused .jw-svg-icon-play path,
+        [class~=jw-svg-icon-volume-0] path,
+        [class~=jw-svg-icon-buffer] path,
+        [class~=jw-svg-icon-volume-100] path,
+        [class~=jw-svg-icon-rewind] path {
+            display: none;
         }
 
-        .video-wrapper {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            position: relative;
+        html {
+            font-family: Poppins;
         }
-        .video-wrapper iframe {
-            width: 100%;
-            height: 450px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        [class~=jw-svg-icon-fullscreen-on],
+        [class~=jw-svg-icon-fullscreen-off],
+        .jw-svg-icon-pause,
+        [class~=jw-svg-icon-cc-off],
+        .jw-svg-icon-close,
+        [class~=jw-state-paused] [class~=jw-svg-icon-play],
+        .jw-svg-icon-rewind,
+        .jw-svg-icon-volume-100,
+        [class~=jw-svg-icon-replay],
+        [class~=jw-svg-icon-playlist],
+        [class~=jw-svg-icon-buffer],
+        [class~=jw-svg-icon-quality-100],
+        [class~=jw-svg-icon-volume-0],
+        [class~=jw-svg-icon-settings],
+        [class~=jw-svg-icon-next] {
+            background-size: contain;
         }
-        .info-box {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #80808080;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-sizing: border-box;
-            position: relative;
+
+        [class~=jw-svg-icon-quality-100],
+        [class~=jw-svg-icon-replay],
+        .jw-svg-icon-pause,
+        .jw-svg-icon-rewind,
+        [class~=jw-svg-icon-buffer],
+        [class~=jw-svg-icon-fullscreen-on],
+        .jw-svg-icon-close,
+        [class~=jw-svg-icon-playlist],
+        [class~=jw-svg-icon-cc-off],
+        .jw-svg-icon-volume-100,
+        [class~=jw-state-paused] [class~=jw-svg-icon-play],
+        [class~=jw-svg-icon-next],
+        [class~=jw-svg-icon-settings],
+        [class~=jw-svg-icon-fullscreen-off],
+        [class~=jw-svg-icon-volume-0] {
+            background-repeat: no-repeat;
         }
-        .info-box .logo {
-            width: 80px; /* Adjust size as needed */
-            height: 80px; /* Adjust size as needed */
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+        [class~=jw-svg-icon-buffer] {
+            background-image: url("assets/img/jwplay/buffer.svg");
         }
-        .info-box .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+        html {
+            background: #000;
         }
-        .info-box .info-content {
-            flex-grow: 1;
+
+        [class~=jw-icon-playback]:hover [class~=jw-svg-icon-pause] {
+            background-image: url("assets/img/jwplay/pause-hover.svg");
         }
-        .info-box .info-content h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #333;
+
+        [class~=jw-icon-replay]:hover [class~=jw-svg-icon-replay] {
+            background-image: url("assets/img/jwplay/replay-hover.svg");
         }
-        .info-box .info-content p {
-            margin: 5px 0 0;
-            font-size: 16px;
-            color: #555;
+
+        [class~=jw-svg-icon-replay] {
+            background-image: url("assets/img/jwplay/replay.svg");
         }
-        .info-box .info-content a {
+
+        .jw-svg-icon-rewind {
+            background-image: url("assets/img/jwplay/rewind.svg");
+        }
+
+        .loading-text span:nth-child(1),
+        .loading-text span:nth-child(4),
+        [class~=loading-text] span:nth-child(2),
+        [class~=loading-text] span:nth-child(3) {
+            filter: blur(0px);
+        }
+
+        [class~=jw-state-paused] [class~=jw-svg-icon-play] {
+            background-image: url("assets/img/jwplay/play.svg");
+        }
+
+        .jw-state-paused .jw-icon-playback:hover .jw-svg-icon-play {
+            background-image: url("assets/img/jwplay/play-hover.svg");
+        }
+
+        [class~=jw-svg-icon-next] {
+            background-image: url("assets/img/jwplay/next.svg");
+        }
+
+        html {
+            margin-left: 0;
+        }
+
+        .loading-text span:nth-child(1) {
+            animation: blur-text 1.5s 0s infinite linear alternate;
+        }
+
+        [class~=jw-icon-rewind]:hover [class~=jw-svg-icon-rewind] {
+            background-image: url("assets/img/jwplay/rewind-hover.svg");
+        }
+
+        [class~=jw-icon-next]:hover [class~=jw-svg-icon-next] {
+            background-image: url("assets/img/jwplay/next-hover.svg");
+        }
+
+        .jw-svg-icon-volume-100 {
+            background-image: url("assets/img/jwplay/volume-on.svg");
+        }
+
+        html {
+            margin-bottom: 0;
+        }
+
+        .jw-icon-volume:hover .jw-svg-icon-volume-100 {
+            background-image: url("assets/img/jwplay/volume-on-hover.svg");
+        }
+
+        [class~=jw-svg-icon-volume-0] {
+            background-image: url("assets/img/jwplay/volume-off.svg");
+        }
+
+        [class~=jw-svg-icon-cc-off] {
+            background-image: url("assets/img/jwplay/captions.svg");
+        }
+
+        [class~=loading-text] span:nth-child(2) {
+            animation: blur-text 1.5s .2s infinite linear alternate;
+        }
+
+        [class~=jw-icon-volume]:hover [class~=jw-svg-icon-volume-0] {
+            background-image: url("assets/img/jwplay/volume-off-hover.svg");
+        }
+
+        html {
+            margin-right: 0;
+        }
+
+        [class~=jw-svg-icon-playlist] {
+            background-image: url("assets/img/jwplay/playlist.svg");
+        }
+
+        [class~=loading-text] span:nth-child(3) {
+            animation: blur-text 1.5s .4s infinite linear alternate;
+        }
+
+        html {
+            margin-top: 0;
+        }
+
+        [class~=jw-svg-icon-close] path,
+        .jw-svg-icon-cc-off path,
+        [class~=jw-svg-icon-playlist] path,
+        [class~=jw-svg-icon-quality-100] path,
+        [class~=jw-svg-icon-fullscreen-off] path,
+        [class~=jw-svg-icon-settings] path,
+        [class~=jw-svg-icon-fullscreen-on] path {
+            display: none;
+        }
+
+        [class~=jw-icon-cc-off]:hover [class~=jw-svg-icon-cc-off] {
+            background-image: url("assets/img/jwplay/captions-hover.svg");
+        }
+
+        [class~=jw-svg-icon-settings] {
+            background-image: url("assets/img/jwplay/settings.svg");
+        }
+
+        [class~=jw-svg-icon-quality-100] {
+            background-image: url("assets/img/jwplay/quality.svg");
+        }
+
+        [class~=jw-playlist-btn]:hover [class~=jw-svg-icon-playlist] {
+            background-image: url("assets/img/jwplay/playlist-hover.svg");
+        }
+
+        #myElement {
+            position: reletive;
+        }
+
+        .jw-svg-icon-close {
+            background-image: url("assets/img/jwplay/close.svg");
+        }
+
+        [class~=jw-icon-settings]:hover [class~=jw-svg-icon-settings] {
+            background-image: url("assets/img/jwplay/settings-hover.svg");
+        }
+
+        [class~=jw-svg-icon-fullscreen-on] {
+            background-image: url("assets/img/jwplay/fullscreen-on.svg");
+        }
+
+        .jw-settings-quality:hover .jw-svg-icon-quality-100 {
+            background-image: url("assets/img/jwplay/quality-hover.svg");
+        }
+
+        [class~=jw-settings-close]:hover [class~=jw-svg-icon-close] {
+            background-image: url("assets/img/jwplay/close-hover.svg");
+        }
+
+        #myElement {
+            width: 100% !important;
+        }
+
+        html {
+            padding-left: 0;
+        }
+
+        .loading-text span:nth-child(4) {
+            animation: blur-text 1.5s .6s infinite linear alternate;
+        }
+
+        [class~=loading-text] span:nth-child(7),
+        [class~=loading-text] span:nth-child(6),
+        [class~=loading-text] span:nth-child(8),
+        [class~=loading-text] span:nth-child(5) {
+            filter: blur(0px);
+        }
+
+        html {
+            padding-bottom: 0;
+        }
+
+        #myElement {
+            height: 100% !important;
+        }
+
+        [class~=loading-text] span {
             display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+        }
+
+        [class~=loading-text] span {
+            margin-left: .052083333in;
+        }
+
+        [class~=loading-text] span:nth-child(5) {
+            animation: blur-text 1.5s .8s infinite linear alternate;
+        }
+
+        [class~=jw-svg-icon-fullscreen-off] {
+            background-image: url("assets/img/jwplay/fullscreen-off.svg");
+        }
+
+        [class~=loading-text] span:nth-child(6) {
+            animation: blur-text 1.5s 1s infinite linear alternate;
+        }
+
+        [class~=loading] {
+            position: fixed;
+        }
+
+        [class~=loading],
+        .loading-text {
+            top: 0;
+        }
+
+        [class~=loading-text] span {
+            margin-bottom: 0;
+        }
+
+        html {
+            padding-right: 0;
+        }
+
+        [class~=jw-icon-fullscreen]:hover [class~=jw-svg-icon-fullscreen-on] {
+            background-image: url("assets/img/jwplay/fullscreen-on-hover.svg");
+        }
+
+        .loading-text,
+        [class~=loading] {
+            left: 0;
+        }
+
+        [class~=loading],
+        .loading-text {
+            width: 100%;
+        }
+
+        [class~=loading] {
+            height: 100%;
+        }
+
+        [class~=loading] {
+            background: #000;
+        }
+
+        [class~=loading] {
+            z-index: 9999;
+        }
+
+        .loading-text {
+            position: absolute;
+        }
+
+        [class~=loading-text] span {
+            margin-right: .052083333in;
+        }
+
+        html {
+            padding-top: 0;
+        }
+
+        [class~=loading-text] span {
+            margin-top: 0;
+        }
+
+        [class~=loading-text] span {
+            font-size: 37.5pt;
+        }
+
+        [class~=loading-text] span {
             font-weight: bold;
+        }
+
+        [class~=loading-text] span {
+            color: #ffffff;
+        }
+
+        .loading-text {
+            bottom: 0;
+        }
+
+        [class~=loading-text] span {
+            font-family: "Quattrocento Sans", sans-serif;
+        }
+
+        .loading-text {
+            right: 0;
+        }
+
+        [class~=jw-icon-fullscreen]:hover [class~=jw-svg-icon-fullscreen-off] {
+            background-image: url("assets/img/jwplay/fullscreen-off-hover.svg");
+        }
+
+        .loading-text {
+            margin-left: auto;
+        }
+
+        .loading-text {
+            margin-bottom: auto;
+        }
+
+        .loading-text {
+            margin-right: auto;
+        }
+
+        .loading-text {
+            margin-top: auto;
+        }
+
+        .loading-text {
             text-align: center;
         }
-        .info-box .info-content a:hover {
-            background-color: #0056b3;
+
+        [class~=loading-text] span:nth-child(7) {
+            animation: blur-text 1.5s 1.2s infinite linear alternate;
         }
-        .chat-container {
-            width: 100%;
-            max-width: 350px;
-            height: 500px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            z-index: 1000; /* Ensure it's on top of other content */
-            background: #fff; /* Ensure the chat box has a white background */
-            overflow: hidden; /* Prevent content overflow */
+
+        .loading-text {
+            height: 100px;
         }
-        .chat-container iframe {
-            width: 100%;
-            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
-            border: none;
-            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+
+        .loading-text {
+            line-height: 1.041666667in;
         }
-        .chat-close {
-            width: 40px;
-            height: 40px;
-            background-color: #f44336; /* Red background */
-            color: white;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+
+        [class~=loading-text] span:nth-child(8) {
+            animation: blur-text 1.5s 1.4s infinite linear alternate;
+        }
+
+        @keyframes blur-text {
+            0% {
+                filter: blur(0px);
+            }
+
+            100% {
+                filter: blur(4px);
+            }
+        }
+
+        [class~=scrollbar-track-y] {
+            background: #131720 !important;
+        }
+
+        [class~=scrollbar-track-y] {
+            top: .625pc !important;
+        }
+
+        [class~=scrollbar-track-y],
+        [class~=scrollbar-track-x] {
+            bottom: 10px !important;
+        }
+
+        [class~=scrollbar-track-y] {
+            height: auto !important;
+        }
+
+        [class~=scrollbar-track-y],
+        .scrollbar-thumb-y {
+            width: 4px !important;
+        }
+
+        .scrollbar-thumb-y,
+        [class~=scrollbar-track-x],
+        [class~=scrollbar-thumb-x],
+        [class~=scrollbar-track-y] {
+            border-radius: .041666667in !important;
+        }
+
+        #videoContainer {
             position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-            z-index: 1001; /* Ensure it's above other content */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .chat-close:before {
-            content: '×'; /* Unicode multiplication sign */
-            font-size: 24px;
+
+        [class~=scrollbar-track-x],
+        [class~=scrollbar-track-y] {
+            right: 7.5pt !important;
         }
-        .chat-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1001; /* Ensure it's above the chat box */
-            user-select: none; /* Prevent text selection during drag */
+
+        [class~=scrollbar-track-y],
+        [class~=scrollbar-track-x] {
+            overflow: hidden;
         }
-        .chat-toggle:after {
-            content: "Chat";
-            font-size: 14px;
+
+        .scrollbar-thumb-y {
+            background: #000000 !important;
         }
-        .chat-toggle.open:after {
-            content: "Close";
+
+        [class~=scrollbar-track-x] {
+            background: #131720 !important;
         }
-        .telegram-link {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1001; /* Ensure it's above other content */
+
+        [class~=scrollbar-track-x] {
+            left: 10px !important;
         }
-        .telegram-link img {
-            width: 50px; /* Adjust size as needed */
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
+
+        [class~=scrollbar-track-x],
+        [class~=scrollbar-thumb-x] {
+            height: 4px !important;
         }
-        @media (max-width: 600px) {
-            .video-wrapper {
-                max-width: 100%;
-                margin-bottom: 10px;
-            }
-            .video-wrapper iframe {
-                height: 250px; /* Adjust height for small screens */
-            }
-            .info-box {
-                width: calc(100% - 40px);
-                font-size: 14px; /* Adjust font size for small screens */
-                flex-direction: column; /* Stack logo and content vertically */
-                align-items: center; /* Center items */
-                gap: 10px; /* Reduce gap between logo and content */
-                padding: 10px; /* Reduce padding */
-                box-sizing: border-box; /* Ensure padding does not affect width */
-            }
-            .info-box .logo {
-                width: 60px; /* Adjust size for small screens */
-                height: 60px; /* Adjust size for small screens */
-            }
-            .info-box .info-content {
-                text-align: center; /* Center text on small screens */
-            }
-            .chat-container {
-                width: calc(100% - 40px);
-                height: 400px;
-            }
-            .chat-toggle {
-                bottom: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .telegram-link {
-                bottom: 10px;
-                left: 10px;
-            }
-            .telegram-link img {
-                width: 40px;
-            }
+
+        [class~=scrollbar-track-x] {
+            width: auto !important;
         }
+
+        [class~=scrollbar-thumb-x] {
+            background: #000000 !important;
+        }
+
+        #videoContainer {
+            width: 100% !important;
+        }
+
+        #videoContainer {
+            height: 100% !important;
+        }
+
+.logo {
+  position: absolute;
+  top: 77px; /* Adjust the top position as needed */
+  left: 30px; /* Adjust the left position as needed */
+  width: 95px; /* Set the width of the logo */
+  height: 35px; /* Set the height of the logo */
+  background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat;
+  background-size: contain;
+  z-index: 0; /* Ensure the logo is on top of the iframe */
+}
+
     </style>
-</head>
-<body>
-    <div class="container">
-        <div id="player"></div>
-        <div class="video-wrapper" id="videoWrapper">
-            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="info-box">
-            <div class="logo">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
-            </div>
-            <div class="info-content">
-                <h2>Join Us on Telegram</h2>
-                <a href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">Join Telegram</a>
-            </div>
-        </div>
-        <div class="chat-container" id="chatBox">
-            <button class="chat-close" id="chatClose"></button>
-            <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
-        </div>
-        <button class="chat-toggle" id="chatToggle"></button>
-    </div>
-    <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
-    </a>
-
-  <!-- JW Player scripts -->
-  <script src="assets/KB5zFt7A.js"></script>
-  <script src="assets/jwpsrv.js" async></script>
-  <script src="assets/vast.js" async></script>
-
-
-  <!-- JW Player license key -->
-  <script type="text/javascript">
+   <video id="myElement"></video>
+  <div class="logo"></div>
+<script type="text/javascript">
     jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-  </script>
-
-    <script>
+</script>
+ <script type="text/javascript">
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -267,158 +532,34 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Function to initialize the video player
-        function initializePlayer(videoData) {
-          if (videoData.link.includes("youtube.com") || 
-                videoData.link.includes("vimeo.com") || 
-          videoData.link.includes("dailymotion.com") || 
-            videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
-                // If the link is a YouTube embed link
-                document.getElementById('player').style.display = 'none';
-                const videoWrapper = document.getElementById('videoWrapper');
-                const videoIframe = document.getElementById('videoIframe');
-                videoIframe.src = videoData.link;
-            } else (videoData.stream_link) {
-                // If the link is an .m3u8 link
-                document.getElementById('videoIframe').style.display = 'none';
-                document.getElementById('player').style.display = '';
-                const playerInstance = jwplayer("player").setup({
-                    title: videoData.event_name,
-                    description: "VaathalaTV", // Sample description
-                    image:videoData.banner,
+        var id = getUrlParameter('id');
+        
+        // Load the m1.json file and get the video data by ID
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var videoData = data.find(video => video.match_id === id);
+
+                jwplayer("myElement").setup({
+                    title: videoData.name,
+                    description: "VaathalaTV",
+                    image: videoData.logo,
                     aspectratio: '16:9',
                     width: '100%',
                     mute: false,
                     autostart: true,
-                    skin: {
-                        name: "netflix"
-                    },
-                    logo: {
-                        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                        link: "https://telegram.me/vaathala1"
-                    },
-                    captions: {
-                        color: "#FFF",
-                        fontSize: 14,
-                        backgroundOpacity: 0,
-                        edgeStyle: "raised"
-                    },
-                    playlist: [{
-                        sources: [{
-                            file:videoData.stream_link,
-                            type: "hls" // Set type to "mpd" for DASH stream
-                        }]
-                    }],
+                    file: videoData.stream_link,
+                    type: "hls",
+                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
                     sharing: {
                         sites: ['facebook', 'twitter']
                     }
                 });
-
-                // Add custom download button
-                const iconPath = ""; // Define your icon path here
-                const tooltipText = "Download Video";
-                const buttonId = "download-video-button";
-                playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
-
-                function buttonClickAction() {
-                    const playlistItem = playerInstance.getPlaylistItem();
-                    const anchor = document.createElement("a");
-                    anchor.setAttribute("href", playlistItem.file);
-                    anchor.setAttribute("download", playlistItem.file.split("/").pop());
-                    anchor.style.display = "none";
-                    document.body.appendChild(anchor);
-                    anchor.click();
-                    document.body.removeChild(anchor);
-                }
-
-                // Forward 10 seconds button
-                playerInstance.on("ready", function () {
-                    const playerContainer = playerInstance.getContainer();
-                    const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
-                    const forwardContainer = rewindContainer.cloneNode(true);
-                    const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
-                    forwardDisplayButton.style.transform = "scaleX(-1)";
-                    forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
-                    const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
-                    nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
-
-                    // Hide default next button
-                    playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
-
-                    // Add onclick handler for forward button
-                    forwardDisplayButton.onclick = function () {
-                        playerInstance.seek(playerInstance.getPosition() + 10);
-                    };
-                });
             }
-        }
-
-        const id = getUrlParameter('id'); // Ensure you're using the correct parameter
-const xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            try {
-                const data = JSON.parse(xhr.responseText);
-                const videoData = data.matches.find(video => video.match_id === Number(id)); // Fixed this line
-                if (videoData) {
-                    initializePlayer(videoData);
-                } else {
-                    console.error('Video data not found for ID: ' + id);
-                }
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-            }
-        } else {
-            console.error('Failed to load video data. Status code: ' + xhr.status);
-        }
-    }
-};
-xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-xhr.send();
-
-
-        // Chat toggle functionality
-        document.getElementById('chatToggle').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            const chatToggle = document.getElementById('chatToggle');
-            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'block';
-                chatToggle.classList.add('open');
-            } else {
-                chatBox.style.display = 'none';
-                chatToggle.classList.remove('open');
-            }
-        });
-
-        document.getElementById('chatClose').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.style.display = 'none';
-            document.getElementById('chatToggle').classList.remove('open');
-        });
-
-        // Make the chat toggle button draggable
-        const chatToggle = document.getElementById('chatToggle');
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        chatToggle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-            document.addEventListener('mousemove', handleMouseMove);
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-                document.removeEventListener('mousemove', handleMouseMove);
-            });
-        });
-
-        function handleMouseMove(e) {
-            if (isDragging) {
-                chatToggle.style.left = `${e.clientX - offsetX}px`;
-                chatToggle.style.top = `${e.clientY - offsetY}px`;
-            }
-        }
+        };
+        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.send();
     </script>
 </body>
 </html>
