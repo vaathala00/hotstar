@@ -316,11 +316,10 @@ function initializePlayer(videoData) {
             }
         });
 
-        console.log('JW Player initialized with stream link:', videoData.stream_link);
-    } else {
-        console.error('No valid link found in videoData:', videoData);
-    }
-}
+ // Error handling
+playerInstance.on('error', function(event) {
+    console.error('JW Player encountered an error:', event);
+});
 
 
         // Fetch and load video data from JSON
