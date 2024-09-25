@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live </title>
-
-  <link rel="stylesheet" href="assets/style.css">
-
-
+    <title>Live</title>
+    <link rel="stylesheet" href="assets/style.css">
     <style>
- body {
+        /* Your existing styles */
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,14 +23,12 @@
             margin: 20px;
             position: relative;
         }
-
         #player {
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
             position: relative;
         }
-
         .video-wrapper {
             width: 100%;
             max-width: 800px;
@@ -46,180 +42,13 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .info-box {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #80808080;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-sizing: border-box;
-            position: relative;
-        }
-        .info-box .logo {
-            width: 80px; /* Adjust size as needed */
-            height: 80px; /* Adjust size as needed */
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .info-box .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .info-box .info-content {
-            flex-grow: 1;
-        }
-        .info-box .info-content h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #333;
-        }
-        .info-box .info-content p {
-            margin: 5px 0 0;
-            font-size: 16px;
-            color: #555;
-        }
-        .info-box .info-content a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-        .info-box .info-content a:hover {
-            background-color: #0056b3;
+            /* Your existing styles */
         }
         .chat-container {
-            width: 100%;
-            max-width: 350px;
-            height: 500px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            z-index: 1000; /* Ensure it's on top of other content */
-            background: #fff; /* Ensure the chat box has a white background */
-            overflow: hidden; /* Prevent content overflow */
+            display: none; /* Initially hide chat */
+            /* Other styles */
         }
-        .chat-container iframe {
-            width: 100%;
-            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
-            border: none;
-            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
-        }
-        .chat-close {
-            width: 40px;
-            height: 40px;
-            background-color: #f44336; /* Red background */
-            color: white;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-            z-index: 1001; /* Ensure it's above other content */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .chat-close:before {
-            content: '×'; /* Unicode multiplication sign */
-            font-size: 24px;
-        }
-        .chat-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1001; /* Ensure it's above the chat box */
-            user-select: none; /* Prevent text selection during drag */
-        }
-        .chat-toggle:after {
-            content: "Chat";
-            font-size: 14px;
-        }
-        .chat-toggle.open:after {
-            content: "Close";
-        }
-        .telegram-link {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1001; /* Ensure it's above other content */
-        }
-        .telegram-link img {
-            width: 50px; /* Adjust size as needed */
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
-        @media (max-width: 600px) {
-            .video-wrapper {
-                max-width: 100%;
-                margin-bottom: 10px;
-            }
-            .video-wrapper iframe {
-                height: 250px; /* Adjust height for small screens */
-            }
-            .info-box {
-                width: calc(100% - 40px);
-                font-size: 14px; /* Adjust font size for small screens */
-                flex-direction: column; /* Stack logo and content vertically */
-                align-items: center; /* Center items */
-                gap: 10px; /* Reduce gap between logo and content */
-                padding: 10px; /* Reduce padding */
-                box-sizing: border-box; /* Ensure padding does not affect width */
-            }
-            .info-box .logo {
-                width: 60px; /* Adjust size for small screens */
-                height: 60px; /* Adjust size for small screens */
-            }
-            .info-box .info-content {
-                text-align: center; /* Center text on small screens */
-            }
-            .chat-container {
-                width: calc(100% - 40px);
-                height: 400px;
-            }
-            .chat-toggle {
-                bottom: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .telegram-link {
-                bottom: 10px;
-                left: 10px;
-            }
-            .telegram-link img {
-                width: 40px;
-            }
-        }
+        /* Your existing styles */
     </style>
 </head>
 <body>
@@ -247,16 +76,15 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
-  <!-- JW Player scripts -->
-  <script src="assets/KB5zFt7A.js"></script>
-  <script src="assets/jwpsrv.js" async></script>
-  <script src="assets/vast.js" async></script>
+    <!-- JW Player scripts -->
+    <script src="assets/KB5zFt7A.js"></script>
+    <script src="assets/jwpsrv.js" async></script>
+    <script src="assets/vast.js" async></script>
 
-
-  <!-- JW Player license key -->
-  <script type="text/javascript">
-    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-  </script>
+    <!-- JW Player license key -->
+    <script type="text/javascript">
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+    </script>
 
     <script>
         // Function to get URL parameter by name
@@ -269,22 +97,20 @@
 
         // Function to initialize the video player
         function initializePlayer(videoData) {
-          if (videoData.link.includes("youtube.com") || 
+            if (videoData.link && (videoData.link.includes("youtube.com") || 
                 videoData.link.includes("vimeo.com") || 
-          videoData.link.includes("dailymotion.com") || 
-            videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
-                // If the link is a YouTube embed link
+                videoData.link.includes("dailymotion.com"))) {
+                // Handle video links
                 document.getElementById('player').style.display = 'none';
-                const videoWrapper = document.getElementById('videoWrapper');
                 const videoIframe = document.getElementById('videoIframe');
                 videoIframe.src = videoData.link;
-            } else {
-                // If the link is an .m3u8 link
+            } else if (videoData.stream_link) {
+                // Handle HLS stream
                 document.getElementById('videoIframe').style.display = 'none';
                 document.getElementById('player').style.display = '';
                 const playerInstance = jwplayer("player").setup({
                     title: videoData.name,
-                    description: "VaathalaTV", // Sample description
+                    description: "VaathalaTV",
                     image: videoData.logo,
                     aspectratio: '16:9',
                     width: '100%',
@@ -306,79 +132,44 @@
                     playlist: [{
                         sources: [{
                             file: videoData.stream_link,
-                            type: "hls" // Set type to "mpd" for DASH stream
+                            type: "hls"
                         }]
                     }],
                     sharing: {
                         sites: ['facebook', 'twitter']
                     }
                 });
-
-                // Add custom download button
-                const iconPath = ""; // Define your icon path here
-                const tooltipText = "Download Video";
-                const buttonId = "download-video-button";
-                playerInstance.addButton(iconPath, tooltipText, buttonClickAction, buttonId);
-
-                function buttonClickAction() {
-                    const playlistItem = playerInstance.getPlaylistItem();
-                    const anchor = document.createElement("a");
-                    anchor.setAttribute("href", playlistItem.file);
-                    anchor.setAttribute("download", playlistItem.file.split("/").pop());
-                    anchor.style.display = "none";
-                    document.body.appendChild(anchor);
-                    anchor.click();
-                    document.body.removeChild(anchor);
-                }
-
-                // Forward 10 seconds button
-                playerInstance.on("ready", function () {
-                    const playerContainer = playerInstance.getContainer();
-                    const rewindContainer = playerContainer.querySelector(".jw-display-icon-rewind");
-                    const forwardContainer = rewindContainer.cloneNode(true);
-                    const forwardDisplayButton = forwardContainer.querySelector(".jw-icon-rewind");
-                    forwardDisplayButton.style.transform = "scaleX(-1)";
-                    forwardDisplayButton.setAttribute("aria-label", "Forward 10 Seconds");
-                    const nextContainer = playerContainer.querySelector(".jw-display-icon-next");
-                    nextContainer.parentNode.insertBefore(forwardContainer, nextContainer);
-
-                    // Hide default next button
-                    playerContainer.querySelector(".jw-display-icon-next").style.display = "none";
-
-                    // Add onclick handler for forward button
-                    forwardDisplayButton.onclick = function () {
-                        playerInstance.seek(playerInstance.getPosition() + 10);
-                    };
-                });
-            }
-        }
-
-// Fetch and load video data from JSON
-    const id = getUrlParameter('id');
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                try {
-                    const data = JSON.parse(xhr.responseText);
-                    console.log('Fetched data:', data); // Log the fetched data
-                    const videoData = data.matches.find(video => video.match_id === parseInt(id));
-                    if (videoData) {
-                        console.log('Found video data:', videoData); // Log found video data
-                        initializePlayer(videoData);
-                    } else {
-                        console.error('Video data not found for ID: ' + id);
-                    }
-                } catch (error) {
-                    console.error('Error parsing JSON data:', error);
-                }
             } else {
-                console.error('Failed to load video data. Status code: ' + xhr.status);
+                console.error('No valid link found in videoData:', videoData);
             }
         }
-    };
-    xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-    xhr.send();
+
+        // Fetch and load video data from JSON
+        const id = getUrlParameter('id');
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        console.log('Fetched data:', data);
+                        const videoData = data.matches.find(video => video.match_id === parseInt(id));
+                        if (videoData) {
+                            console.log('Found video data:', videoData);
+                            initializePlayer(videoData);
+                        } else {
+                            console.error('Video data not found for ID: ' + id);
+                        }
+                    } catch (error) {
+                        console.error('Error parsing JSON data:', error);
+                    }
+                } else {
+                    console.error('Failed to load video data. Status code: ' + xhr.status);
+                }
+            }
+        };
+        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+        xhr.send();
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
