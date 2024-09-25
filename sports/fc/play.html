@@ -353,26 +353,32 @@
             }
         }
 
-        // Fetch and load video data from JSON
-        const id = getUrlParameter('id');
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
+// Fetch and load video data from JSON
+    const id = getUrlParameter('id');
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
                     const data = JSON.parse(xhr.responseText);
-                    const videoData = data.find(video => video.match_id === id);
+                    console.log('Fetched data:', data); // Log the fetched data
+                    const videoData = data.matches.find(video => video.match_id === parseInt(id));
                     if (videoData) {
+                        console.log('Found video data:', videoData); // Log found video data
                         initializePlayer(videoData);
                     } else {
                         console.error('Video data not found for ID: ' + id);
                     }
-                } else {
-                    console.error('Failed to load video data. Status code: ' + xhr.status);
+                } catch (error) {
+                    console.error('Error parsing JSON data:', error);
                 }
+            } else {
+                console.error('Failed to load video data. Status code: ' + xhr.status);
             }
-        };
-        xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-        xhr.send();
+        }
+    };
+    xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+    xhr.send();
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
