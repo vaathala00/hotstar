@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jio+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="https://www.jiotv.com/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            align-items: center;
+            justify-content: center;
+            margin: 0 12px;
+            height: 100%;
+            background-color: #1F0C50;
+        }
+
+        .box-shadow {
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+        }
+
+        #title {
+            font-family: 'Gloock', serif;
+            font-weight: bold;
+            font-size: 28px;
+            color: #e61271;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        header {
+            background-color: #0D012F;
+            color: #fff;
+            padding: 20px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 65px;
+            height: auto;
+            margin-right: 0px;
+        }
+
+        .site-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        #kaya_head {
+            font-weight: bold;
+            color: #FFFFFF;
+            font-size: 25px;
+            text-transform: uppercase;
+            font-family: 'Tilt Warp', sans-serif;
+        }
+
+        /* Add styles for .box1 and .card */
+        .box1 {
+            margin: 10px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
+    <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo" class="logo-img">
+            <h1 class="site-title"></h1> <!-- Added site title -->
+        </div>
+    </header>
+
+    <main>
+        <div style="margin: 25px;">
+            <input type="search" id="searchInput" class="relative w-full block mx-4 rounded-l border border-solid border-neutral-300 bg-black bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search">
+        </div>
+
+        <div id="kaya_head">
+            <span class="kayaheadicon" onclick="window.history.back()">
+                <i class="fa-solid fa-arrow-left-long"></i>
+            </span>&nbsp;&nbsp;
+        </div>
+
+        <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto">
+            <!-- Dynamic content will be injected here -->
+        </div>
+
+        <!-- Loader placeholder -->
+        <div id="loader" style="display: none;">Loading...</div>
+    </main>
+
+    <script>
+        async function generateHtmlFromJson(url) {
+            document.getElementById('loader').style.display = 'block'; // Show loader
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const jsonData = await response.json();
+
+                const listContainer = document.getElementById('listContainer');
+                jsonData.matches.forEach(item => {
+                    const anchor = document.createElement('a');
+                    anchor.href = `play.html?id=${item.match_id}`; // Using match_id for URL
+
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('box1');
+
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    const image = document.createElement('img');
+                    image.src = item.team_1_flag; // Change to the appropriate image URL
+                    image.classList.add('h-28', 'mt-5', 'm-auto');
+
+                    const title = document.createElement('h2');
+                    title.textContent = item.match_name; // Title of the match
+
+                    const descriptionText = document.createElement('p');
+                    descriptionText.textContent = item.event_name; // Event name
+
+                    card.appendChild(image);
+                    card.appendChild(title);
+                    card.appendChild(descriptionText);
+                    anchor.appendChild(card);
+                    cardDiv.appendChild(anchor);
+                    listContainer.appendChild(cardDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching or parsing JSON:', error);
+            } finally {
+                document.getElementById('loader').style.display = 'none'; // Hide loader
+            }
+        }
+
+        generateHtmlFromJson('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', filterData);
+        function filterData() {
+            const updatedSearchValue = this.value.toLowerCase();
+            const boxes = document.querySelectorAll('.box1');
+            boxes.forEach(box => {
+                const title = box.querySelector('h2').textContent.toLowerCase();
+                const description = box.querySelector('p').textContent.toLowerCase();
+                box.style.display = (title.includes(updatedSearchValue) || description.includes(updatedSearchValue)) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
