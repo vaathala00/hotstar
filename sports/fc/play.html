@@ -278,7 +278,7 @@
                 const videoWrapper = document.getElementById('videoWrapper');
                 const videoIframe = document.getElementById('videoIframe');
                 videoIframe.src = videoData.link;
-            } else {
+            } else (videoData.stream_link) {
                 // If the link is an .m3u8 link
                 document.getElementById('videoIframe').style.display = 'none';
                 document.getElementById('player').style.display = '';
