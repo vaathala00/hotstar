@@ -12,6 +12,7 @@
             margin: 0 12px;
             height: 100%;
             background-color: #1F0C50;
+            color: white;
         }
         .box-shadow {
             background-color: #f8f8f8;
@@ -40,11 +41,17 @@
             width: 100%;
             height: auto;
         }
+        input[type="search"] {
+            padding: 10px;
+            width: 80%;
+            margin: 20px auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1 style="color: white;">SONY LIV</h1>
+        <h1>SONY LIV</h1>
     </header>
     <main>
         <input type="search" id="searchInput" placeholder="Search" />
@@ -72,13 +79,18 @@
                 sportsData.forEach(item => {
                     const cardDiv = document.createElement('div');
                     cardDiv.classList.add('card');
-                    cardDiv.innerHTML = `
+
+                    // Create an anchor element
+                    const anchor = document.createElement('a');
+                    anchor.href = `play.html?id=${item.id}`; // Set the link with match ID
+                    anchor.innerHTML = `
                         <img src="${item.logo}" alt="${item.name}" />
                         <div class="box-shadow">
                             <h2>${item.name}</h2>
                             <p>${item.group}</p>
                         </div>
                     `;
+                    cardDiv.appendChild(anchor);
                     listContainer.appendChild(cardDiv);
                 });
 
