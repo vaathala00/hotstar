@@ -1,208 +1,112 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>VOOT</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="https://seeklogo.com/images/V/voot-logo-5D5F7FA20C-seeklogo.com.png?w=40&q=high">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-		<link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
-		<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
-		
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
-		<link rel="stylesheet" href="style.css">
-
-		<style>
-			body {
-			      /* display: flex; */
-			      align-items: center;
-			      justify-content: center;
-			      margin: 0 12px;
-			      height: 100%;
-			      background-color: #1F0C50;
-			
-			    }
-			
-			    .box-shadow {
-			      font-family: sans-serif;
-			      font-weight: 600;
-			      background-color: #2ecc71;
-			      color: white;
-			      padding: 10px;
-			      border-radius: 4px;
-			      box-shadow: 2px 2px 20px 23px #7fecad;
-			      background-color: #f8f8f8;
-			      padding: 20px;
-			      border-radius: 10px;
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			      text-align: center;
-			      font-family: 'Arial', sans-serif;
-			      font-size: 15px;
-			      color: #333;
-			    }
-			
-			    #title {
-			      font-family: 'Gloock', serif;
-			      font-weight: bold;
-			      font-size: 28px;
-			      color: #e61271;
-			      text-align: center;
-			      text-transform: uppercase;
-			      letter-spacing: 4px;
-			      margin: 20px 0;
-			      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-			      background-color: #f1f1f1;
-			      padding: 10px 20px;
-			      border-radius: 10px;
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			    }
-			
-			    a. {
-			      text-decoration: none !important;
-			    }
-
-
-header {
-  background-color: #0D012F;
-  color: #fff;
-  padding: 20px 20px;
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  width: 65px; /* Adjust the width of the logo */
-  height: auto;
-  margin-right: 0px;
-}
-
-.site-title {
-font-weight: bold;
-font-size: 18px;
-  margin: 0;
-}
-
-#kaya_head {
-font-weight: bold;
-  color: #FFFFFF;
-  font-size: 25px;
-  text-transform: uppercase;
-  font-family: 'Tilt Warp', sans-serif;
-}
-
-		</style>
-
-
-    <script>
-async function generateHtmlFromJson(url) {
-    try {
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricHub Live Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
         }
-
-        const jsonData = await response.json();
-        
-        // Access the matches array
-        if (!jsonData.matches || jsonData.matches.length === 0) {
-            console.error('No match data available');
-            return;
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
-
-        const listContainer = document.getElementById('listContainer');
-        
-        jsonData.matches.forEach(function(item) {
-            const anchor = document.createElement('a');
-            anchor.href = `play.html?id=${item.match_id}`;
-            const cardDiv = document.createElement('div');
-            cardDiv.classList.add('box1');
-
-            const card = document.createElement('div');
-            card.classList.add('card', 'bg-gray-100', 'rounded-xl', 'shadow-lg', 'mb-4', 'flex', 'flex-col');
-
-            const image = document.createElement('img');
-            image.src = item.banner;
-            image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-
-            const title = document.createElement('h2');
-            title.classList.add('text-center', 'text-sm', 'font-bold');
-            title.textContent = item.match_name;
-
-            const description = document.createElement('div');
-            description.classList.add('mb-5', 'opacity-100');
-
-            const descriptionText = document.createElement('p');
-            descriptionText.classList.add('text-xs', 'text-center');
-            descriptionText.textContent = item.event_catagory;
-
-            description.appendChild(title);
-            description.appendChild(descriptionText);
-            card.appendChild(image);
-            card.appendChild(description);
-            anchor.appendChild(card);
-            cardDiv.appendChild(anchor);
-            listContainer.appendChild(cardDiv);
-        });
-    } catch (error) {
-        console.error('Error fetching or parsing JSON:', error);
-    }
-}
+        #telegram-banner {
+            display: none;
+            background: #0078ff;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+        #player {
+            margin-top: 60px; /* Space for the Telegram banner */
+        }
+        marquee {
+            background: #0078ff;
+            color: white;
+            padding: 10px;
+        }
+    </style>
 
 
-        // Call the function with the correct URL
-        generateHtmlFromJson('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
+    <!-- JW Player scripts -->
+    <script src="assets/KB5zFt7A.js"></script>
+    <script src="assets/jwpsrv.js" async></script>
+    <script src="assets/vast.js" async></script>
+
+
+    <script type="text/javascript">
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg=='; // Your JW Player key
     </script>
-
 </head>
-
 <body>
-    <header>
-        <div class="logo">
-            <img src="https://seeklogo.com/images/V/voot-logo-5D5F7FA20C-seeklogo.com.png" alt="Logo" class="logo-img">
-        </div>
-    </header>
+    <div id="loading" class="loading">
+        <div class="loading-text">Loading CricHub...</div>
+    </div>
 
-    <main>
-        <div id="kaya_head">
-            <span class="kayaheadicon" onclick="window.history.back()"><i class="fa-solid fa-arrow-left-long"></i></span>
-            &nbsp;&nbsp; 
-        </div>
+    <div id="telegram-banner">
+        <h2>Join CricHub Telegram Channel</h2>
+        <button onclick="window.open('https://t.me/+_AupOjqXiLNlNmY1', '_blank')">Join</button>
+        <button class="cancel-button" onclick="document.getElementById('telegram-banner').style.display='none'">Cancel</button>
+    </div>
 
-        <div class="flex flex-row mb-3" style="margin: 25px;">
-            <input type="search" id="searchInput" placeholder="Search" class="w-full block rounded-l border border-solid border-neutral-300 bg-black px-3 py-1.5 text-base font-normal text-neutral-700 outline-none">
-        </div>
+    <div id="player"></div>
 
-        <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto">
-    </main>
+    <marquee behavior="scroll" direction="left">
+        "JOIN CricHub TELEGRAM CHANNEL FOR ALL SPORTS LIVE LINKS"🔗❤️
+    </marquee>
 
     <script>
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', filterData);
+        // Get the video URL from the query parameters
+        var urlParams = new URLSearchParams(window.location.search);
+        var maxvalue = urlParams.get("videoUrl");
 
-        function filterData() {
-            const updatedSearchValue = searchInput.value.toLowerCase();
-            const boxes = document.querySelectorAll('.box1');
+        // Set up the JW Player
+        var playerInstance = jwplayer("player").setup({
+            file: maxvalue || 'https://example.com/path/to/default/video.m3u8', // Default URL if none provided
+            width: "100%",
+            height: "auto",
+            primary: "html5",
+            // Adding quality options
+            sources: [
+                { file: maxvalue, label: "360p", type: "application/x-mpegURL" },
+                { file: maxvalue, label: "480p", type: "application/x-mpegURL" },
+                { file: maxvalue, label: "720p", type: "application/x-mpegURL" },
+                { file: maxvalue, label: "1080p", type: "application/x-mpegURL" },
+            ],
+            aspectratio: "16:9",
+            controls: true,
+            autostart: false,
+            stretching: "uniform",
+        });
 
-            boxes.forEach((box) => {
-                const titleText = box.querySelector('h2').textContent.toLowerCase();
-                const descriptionText = box.querySelector('p').textContent.toLowerCase();
+        // Hide loading screen and show the video player once loaded
+        playerInstance.on('ready', function() {
+            document.getElementById('loading').style.display = 'none';
+        });
 
-                box.style.display = (titleText.includes(updatedSearchValue) || descriptionText.includes(updatedSearchValue)) ? 'block' : 'none';
-            });
-        }
+        // Show Telegram banner on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('telegram-banner').style.display = 'block';
+        });
     </script>
 </body>
-
 </html>
