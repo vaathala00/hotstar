@@ -266,6 +266,7 @@
         }
 
        // Function to initialize the video player
+    // Function to initialize the video player
     function initializePlayer(videoData) {
         if (videoData.stream_link) {
             document.getElementById('videoIframe').style.display = 'none';
@@ -298,28 +299,24 @@
     }
 
     // Fetch the JSON data from the provided URL
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                try {
-                    const data = JSON.parse(xhr.responseText);
-                    const matchData = data.matches[0]; // Assuming you want the first match
-                    if (matchData) {
-                        initializePlayer(matchData);
-                    } else {
-                        console.error('No match data found');
-                    }
-                } catch (error) {
-                    console.error('Error parsing JSON data:', error);
-                }
-            } else {
-                console.error('Failed to load video data. Status code: ' + xhr.status);
+    fetch('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
             }
-        }
-    };
-    xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
-    xhr.send();
+            return response.json();
+        })
+        .then(data => {
+            const matchData = data.matches[0]; // Assuming you want the first match
+            if (matchData) {
+                initializePlayer(matchData);
+            } else {
+                console.error('No match data found');
+            }
+        })
+        .catch(error => {
+            console.error('Failed to load JSON data:', error);
+        });
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
