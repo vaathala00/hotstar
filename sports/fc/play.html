@@ -354,38 +354,62 @@
         }
 
        // Fetch and load video data from JSON
-// Function to get URL parameters
-function getUrlParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
 // Fetch and load match data from JSON
-const matchId = getUrlParameter('id');
+const id = getUrlParameter('id'); // Assuming this function retrieves the match_id
+const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            const matchData = data.matches.find(match => match.match_id === parseInt(id));
 
-async function fetchMatchData() {
-    try {
-        const response = await fetch('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-
-        const data = await response.json();
-        const matchData = data.matches.find(match => match.match_id === parseInt(matchId)); // Use match_id for comparison
-
-        if (matchData) {
-            initializePlayer(matchData); // Function to initialize video player with match data
+            if (matchData) {
+                console.log(matchData); // Log the match data to check its structure
+                initializePlayer(matchData);
+            } else {
+                console.error('Match data not found for ID: ' + id);
+            }
         } else {
-            console.error('Match data not found for ID: ' + matchId);
+            console.error('Failed to load match data. Status code: ' + xhr.status);
         }
-    } catch (error) {
-        console.error('Failed to load match data:', error);
+    }
+};
+xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+xhr.send();
+
+function initializePlayer(matchData) {
+    if (!matchData || typeof matchData !== 'object') {
+        console.error('Invalid match data provided');
+        return;
+    }
+
+    // Destructure properties from matchData
+    const { match_name, stream_link, team_1, team_2, team_1_flag, team_2_flag } = matchData;
+
+    // Check for stream link
+    if (!stream_link) {
+        console.error('Stream link not available for match:', match_name);
+        return;
+    }
+
+    // Initialize video player
+    const videoPlayer = document.getElementById('videoPlayer');
+    if (videoPlayer) {
+        videoPlayer.src = stream_link; // Use the stream link here
+        videoPlayer.play(); // Play the video
+    } else {
+        console.error('Video player element not found');
+    }
+
+    // Display team names and flags
+    const teamsDisplay = document.getElementById('teamsDisplay');
+    if (teamsDisplay) {
+        teamsDisplay.innerHTML = `
+            <img src="${team_1_flag}" alt="${team_1} Flag" width="30" height="20"> ${team_1} vs 
+            <img src="${team_2_flag}" alt="${team_2} Flag" width="30" height="20"> ${team_2}
+        `;
     }
 }
-
-// Call the fetch function
-fetchMatchData();
 
 
 
