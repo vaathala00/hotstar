@@ -354,30 +354,39 @@
         }
 
        // Fetch and load video data from JSON
-const id = getUrlParameter('id');
+// Function to get URL parameters
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
 
-async function fetchVideoData() {
+// Fetch and load match data from JSON
+const matchId = getUrlParameter('id');
+
+async function fetchMatchData() {
     try {
         const response = await fetch('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
-
+        
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
 
         const data = await response.json();
-        const videoData = data.matches.find(video => video.match_id === parseInt(id)); // Use match_id for comparison
+        const matchData = data.matches.find(match => match.match_id === parseInt(matchId)); // Use match_id for comparison
 
-        if (videoData) {
-            initializePlayer(videoData);
+        if (matchData) {
+            initializePlayer(matchData); // Function to initialize video player with match data
         } else {
-            console.error('Video data not found for ID: ' + id);
+            console.error('Match data not found for ID: ' + matchId);
         }
     } catch (error) {
-        console.error('Failed to load video data:', error);
+        console.error('Failed to load match data:', error);
     }
 }
 
-fetchVideoData();
+// Call the fetch function
+fetchMatchData();
+
 
 
         // Chat toggle functionality
