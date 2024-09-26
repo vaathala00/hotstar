@@ -1,42 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch and Download JSON</title>
+    <title>SONY LIV</title>
+    <link rel="shortcut icon" href="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high">
+    <style>
+        body {
+            align-items: center;
+            justify-content: center;
+            margin: 0 12px;
+            height: 100%;
+            background-color: #1F0C50;
+        }
+        .box-shadow {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 15px;
+            color: #333;
+        }
+        #listContainer {
+            margin: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fetch and Download Sports Data</h1>
-    <button id="fetchButton">Fetch and Download JSON</button>
-
+    <header>
+        <h1 style="color: white;">SONY LIV</h1>
+    </header>
+    <main>
+        <input type="search" id="searchInput" placeholder="Search" />
+        <button id="updateButton">Update Sports Data</button>
+        <div id="listContainer"></div>
+    </main>
+    
     <script>
-        document.getElementById('fetchButton').addEventListener('click', async () => {
+        async function fetchAndDisplayData() {
             const url = 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json';
-
             try {
                 const response = await fetch(url);
-                const data = await response.json();
-
-                const sportsData = data.matches.map(match => ({
+                const jsonData = await response.json();
+                const sportsData = jsonData.matches.map(match => ({
                     id: match.match_id,
                     group: match.event_catagory,
-                    language: '',
                     logo: match.banner,
                     name: match.match_name,
                     link: match.stream_link
                 }));
 
-                // Create a Blob and download it as JSON
+                // Display the fetched data
+                const listContainer = document.getElementById('listContainer');
+                listContainer.innerHTML = ''; // Clear existing content
+                sportsData.forEach(item => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('card');
+                    cardDiv.innerHTML = `
+                        <img src="${item.logo}" alt="${item.name}" />
+                        <div class="box-shadow">
+                            <h2>${item.name}</h2>
+                            <p>${item.group}</p>
+                        </div>
+                    `;
+                    listContainer.appendChild(cardDiv);
+                });
+
+                // Save the data as JSON
                 const blob = new Blob([JSON.stringify(sportsData, null, 2)], { type: 'application/json' });
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
                 link.download = 'sports.json';
-                link.click();
-                URL.revokeObjectURL(link.href);  // Clean up
+                link.innerText = 'Download sports.json';
+                listContainer.appendChild(link);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        });
+        }
+
+        // Set up the event listener for the button
+        document.getElementById('updateButton').addEventListener('click', fetchAndDisplayData);
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', filterData);
+
+        function filterData() {
+            const updatedSearchValue = searchInput.value.toLowerCase();
+            const boxes = document.querySelectorAll('.card');
+
+            boxes.forEach((box) => {
+                const titleText = box.querySelector('h2').textContent.toLowerCase();
+                if (titleText.includes(updatedSearchValue)) {
+                    box.style.display = 'block'; // Show matching box
+                } else {
+                    box.style.display = 'none'; // Hide non-matching box
+                }
+            });
+        }
     </script>
 </body>
 </html>
