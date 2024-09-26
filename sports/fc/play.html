@@ -328,16 +328,19 @@
                             console.log('Found video data:', videoData);
                             initializePlayer(videoData);
                         } else {
-                            console.error('Video data not found for ID: ' + id);
-                        }
-                    } catch (error) {
-                        console.error('Error parsing JSON data:', error);
-                    }
-                } else {
-                    console.error('Failed to load video data. Status code: ' + xhr.status);
+                    console.error('Video data not found for ID: ' + id);
+                    alert('Video data not found. Please check the ID.');
                 }
+            } catch (error) {
+                console.error('Error parsing JSON data:', error);
+                alert('Failed to load video data. Please try again later.');
             }
-        };
+        } else {
+            console.error('Failed to load video data. Status code: ' + xhr.status);
+            alert('Failed to load video data. Please check your connection.');
+        }
+    }
+};
         xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
         xhr.send();
 
