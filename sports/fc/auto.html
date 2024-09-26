@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch and Download JSON</title>
+</head>
+<body>
+    <h1>Fetch and Download Sports Data</h1>
+    <button id="fetchButton">Fetch and Download JSON</button>
+
+    <script>
+        document.getElementById('fetchButton').addEventListener('click', async () => {
+            const url = 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json';
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const sportsData = data.matches.map(match => ({
+                    id: match.match_id,
+                    group: match.event_catagory,
+                    language: '',
+                    logo: match.banner,
+                    name: match.match_name,
+                    link: match.stream_link
+                }));
+
+                // Create a Blob and download it as JSON
+                const blob = new Blob([JSON.stringify(sportsData, null, 2)], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'sports.json';
+                link.click();
+                URL.revokeObjectURL(link.href);  // Clean up
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    </script>
+</body>
+</html>
