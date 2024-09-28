@@ -4,7 +4,7 @@
 
 	<head>
 		
-		<title>FC</title>
+		<title>VOOT</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +13,10 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
-		<link rel="shortcut icon" href="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9?w=40&q=high">
+		<link rel="shortcut icon" href="https://seeklogo.com/images/V/voot-logo-5D5F7FA20C-seeklogo.com.png?w=40&q=high">
 		<link rel="stylesheet" href="style.css">
 		<!-- ===== Boxicons CSS ===== -->
 		<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<style>
@@ -110,80 +109,59 @@ font-weight: bold;
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css">
 
-<script>
-    // Function to generate HTML from JSON data
-    async function generateHtmlFromJson(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-
-            const jsonData = await response.json();
-            console.log('Fetched JSON data:', jsonData); // Log the fetched data
-
-            if (!jsonData || !Array.isArray(jsonData)) {
-                console.error('No valid JSON data available');
-                return;
-            }
-
-            const listContainer = document.getElementById('listContainer');
-            if (!listContainer) {
-                console.error('listContainer element not found');
-                return;
-            }
-
-            jsonData.forEach(function(item) {
-                if (!item.id || !item.logo || !item.name || !item.link) {
-                    console.warn('Missing data in item:', item);
+ <script>
+        // Function to generate HTML from JSON data
+        async function generateHtmlFromJson(url) {
+            try {
+                const response = await fetch(url);
+                const jsonData = await response.json();
+                if (!jsonData) {
+                    console.error('No JSON data available');
                     return;
                 }
 
-                const anchor = document.createElement('a');
-                anchor.href = `play.html?id=${item.id}`; // URL for each match
-                anchor.target = '_blank'; // Open in new tab (optional)
+                const listContainer = document.getElementById('listContainer');
+                jsonData.forEach(function(item) {
+                    const anchor = document.createElement('a');
+                    anchor.href = `Play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item
 
-                const cardDiv = document.createElement('div');
-                cardDiv.classList.add('box1'); // Add the appropriate class
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('box1'); // Add the appropriate class
 
-                const card = document.createElement('div');
-                card.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'shadow-lg', 'h-48', 'mb-4', 'flex', 'flex-col');
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-48', 'mb-4', 'flex', 'flex-col');
 
-                const image = document.createElement('img');
-                image.src = item.logo; // Use logo as image source
-                image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-                image.alt = item.name || 'Match image'; // Add alt text for accessibility
+                    const image = document.createElement('img');
+                    image.src = item.logo; // Assuming the JSON contains the image URL for each item
+                    image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
 
-                const title = document.createElement('h2');
-                title.classList.add('text-center', 'text-sm', 'font-bold');
-                title.textContent = item.name; // Match title
+                    const title = document.createElement('h2');
+                    title.classList.add('text-center', 'text-sm', 'font-bold');
+                    title.textContent = item.name; // Assuming the JSON contains the title for each item
 
-                const description = document.createElement('div');
-                description.classList.add('mb-5', 'opacity-100');
-                const descriptionText = document.createElement('p');
-                descriptionText.classList.add('text-xs', 'text-center');
-                descriptionText.textContent = item.link; // You may want to adjust this
+                    const description = document.createElement('div');
+                    description.classList.add('mb-5', 'opacity-100');
+                    const descriptionText = document.createElement('p');
+                    descriptionText.classList.add('text-xs', 'text-center');
+                    descriptionText.textContent = item.group; // Assuming the JSON contains the description for each item
 
-                description.appendChild(title);
-                description.appendChild(descriptionText);
+                    description.appendChild(title);
+                    description.appendChild(descriptionText);
 
-                card.appendChild(image);
-                card.appendChild(description);
-                anchor.appendChild(card);
-                cardDiv.appendChild(anchor);
-                listContainer.appendChild(cardDiv);
-            });
-        } catch (error) {
-            console.error('Error fetching or parsing JSON:', error);
+                    card.appendChild(image);
+                    card.appendChild(description);
+                    anchor.appendChild(card);
+                    cardDiv.appendChild(anchor);
+                    listContainer.appendChild(cardDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching or parsing JSON:', error);
+            }
         }
-    }
 
-    // Call the function with the URL of your JSON data
-    generateHtmlFromJson('https://play.denver1769.in/jc/feed.php?.m3u8.json');
-</script>
-
-
-
+        // Call the function with the URL of your JSON data
+        generateHtmlFromJson('voot.json');
+    </script>
 
 	</head>
 
@@ -202,8 +180,8 @@ font-weight: bold;
 
 <header>
     <div class="logo">
-      <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo" class="logo-img">
-     <h1 class="site-title"></h1>
+      <img src="https://seeklogo.com/images/V/voot-logo-5D5F7FA20C-seeklogo.com.png" alt="Logo" class="logo-img">
+      <h1 class="site-title"></h1>
     </div>
   </header>
 
@@ -217,6 +195,8 @@ font-weight: bold;
 <!-- bg-transparent -->
 
 <div id="kaya_head"><span class="kayaheadicon" onclick="window.history.back()"><i class="fa-solid fa-arrow-left-long"></i></span>&nbsp;&nbsp; </div>
+
+
 
 <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
 				
