@@ -3,110 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricHub Live Stream</title>
+    <title>Live Matches</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
-            text-align: center;
+            margin: 0;
+            padding: 20px;
         }
         .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-        }
-        #telegram-banner {
-            display: none;
-            background: #0078ff;
-            color: white;
-            padding: 10px;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-        #player {
-            margin-top: 60px; /* Space for the Telegram banner */
-        }
-        marquee {
-            background: #0078ff;
-            color: white;
-            padding: 10px;
+            height: 100vh;
         }
     </style>
 
 
-    <!-- JW Player scripts -->
+       <!-- JW Player scripts -->
     <script src="assets/KB5zFt7A.js"></script>
     <script src="assets/jwpsrv.js" async></script>
     <script src="assets/vast.js" async></script>
 
-
     <script type="text/javascript">
-        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg=='; // Your JW Player key
+        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
     </script>
+
 </head>
 <body>
-    <div id="loading" class="loading">
-        <div class="loading-text">Loading CricHub...</div>
-    </div>
 
-    <div id="telegram-banner">
-        <h2>Join CricHub Telegram Channel</h2>
-        <button onclick="window.open('https://t.me/+_AupOjqXiLNlNmY1', '_blank')">Join</button>
-        <button class="cancel-button" onclick="document.getElementById('telegram-banner').style.display='none'">Cancel</button>
-    </div>
+<div id="loading" class="loading">
+    <div class="loading-text">Loading CricHub...</div>
+</div>
 
-    <div id="player"></div>
+<div id="player"></div>
 
-    <marquee behavior="scroll" direction="left">
-        "JOIN CricHub TELEGRAM CHANNEL FOR ALL SPORTS LIVE LINKS"🔗❤️
-    </marquee>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var maxvalue = urlParams.get("videoUrl") || 'https://dai.google.com/linear/hls/event/YHe5VBsATn2iuqaEIR0MYQ/master.m3u8';
 
-    <script>
-        // Get the video URL from the query parameters
-        var urlParams = new URLSearchParams(window.location.search);
-        var maxvalue = urlParams.get("videoUrl");
+    var playerInstance = jwplayer("player").setup({
+        file: maxvalue,
+        width: "100%",
+        height: "auto",
+        primary: "html5",
+        aspectratio: "16:9",
+        controls: true,
+        autostart: false,
+    });
 
-        // Set up the JW Player
-        var playerInstance = jwplayer("player").setup({
-            file: maxvalue || 'https://example.com/path/to/default/video.m3u8', // Default URL if none provided
-            width: "100%",
-            height: "auto",
-            primary: "html5",
-            // Adding quality options
-            sources: [
-                { file: maxvalue, label: "360p", type: "application/x-mpegURL" },
-                { file: maxvalue, label: "480p", type: "application/x-mpegURL" },
-                { file: maxvalue, label: "720p", type: "application/x-mpegURL" },
-                { file: maxvalue, label: "1080p", type: "application/x-mpegURL" },
-            ],
-            aspectratio: "16:9",
-            controls: true,
-            autostart: false,
-            stretching: "uniform",
-        });
+    playerInstance.on('ready', function() {
+        document.getElementById('loading').style.display = 'none';
+    });
+</script>
 
-        // Hide loading screen and show the video player once loaded
-        playerInstance.on('ready', function() {
-            document.getElementById('loading').style.display = 'none';
-        });
-
-        // Show Telegram banner on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('telegram-banner').style.display = 'block';
-        });
-    </script>
 </body>
 </html>
