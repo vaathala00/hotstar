@@ -345,45 +345,58 @@
         }
     }
 
-    // Chat toggle functionality
-    document.getElementById('chatToggle').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
-    });
-
-    document.getElementById('chatClose').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.style.display = 'none';
-    });
-
-    // Make the chat toggle button draggable
-    const chatToggle = document.getElementById('chatToggle');
-    let isDragging = false;
-    let offsetX, offsetY;
-
-    chatToggle.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-        offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            document.removeEventListener('mousemove', handleMouseMove);
+           // Chat toggle functionality
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
+            } else {
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
         });
-    });
 
-    function handleMouseMove(e) {
-        if (isDragging) {
-            chatToggle.style.left = `${e.clientX - offsetX}px`;
-            chatToggle.style.top = `${e.clientY - offsetY}px`;
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
+            document.getElementById('chatToggle').classList.remove('open');
+        });
+
+
+        // Make the chat toggle button draggable
+        const chatToggle = document.getElementById('chatToggle');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatToggle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
+
+        function handleMouseMove(e) {
+            if (isDragging) {
+                chatToggle.style.left = ${e.clientX - offsetX}px;
+                chatToggle.style.top = ${e.clientY - offsetY}px;
+            }
         }
-    }
+    </script>
 
-    // Hide the instruction after 20 seconds
+<script> 
+
+// Hide the instruction after 5 seconds
     setTimeout(() => {
         const instruction = document.getElementById('scrollInstruction');
         instruction.style.display = 'none';
     }, 20000);
+
 </script>
 
 
