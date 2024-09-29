@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Iframe Example</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            position: relative; /* For positioning the button */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .back-button {
+            position: fixed;
+            bottom: 20px; /* Distance from the bottom */
+            left: 20px; /* Distance from the left */
+            background-color: #007bff; /* Button color */
+            color: white; /* Text color */
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000; /* Ensure it's on top */
+        }
+        .back-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <iframe src="https://pcmirror.cc/home?utm_source=home_page" title="Fullscreen Iframe Example"></iframe>
+  <!--  <button class="back-button" onclick="goBack()">Back</button> -->
+
+    <script>
+        function goBack() {
+            // Check if there is a history entry to go back to
+            if (window.history.length > 1) {
+                window.history.back(); // Go back to the previous page in history
+            } else {
+                // Optionally redirect if there is no history
+                window.location.href = "https://your-default-url.com"; // Replace with your fallback URL
+            }
+        }
+    </script>
+</body>
+</html>
