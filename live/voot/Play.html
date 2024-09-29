@@ -556,33 +556,15 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
                 // For .m3u8 links
                 videoIframe.style.display = 'none';
                 videoElement.style.display = 'block';
-                videoElement.src = videoData.link;
+                videoElement.src = videoData.link; // Set the source for HLS
                 videoElement.load();
                 videoElement.play();
             } else {
                 // For embed links (YouTube, Vimeo, etc.)
                 videoElement.style.display = 'none';
                 videoIframe.style.display = 'block';
-                videoIframe.src = videoData.link;
+                videoIframe.src = videoData.link; // Set the source for the embed link
             }
-
-            // Optionally set up JW Player if desired for HLS links
-            jwplayer("myElement").setup({
-                title: videoData.name,
-                description: "VaathalaTV",
-                image: videoData.logo,
-                aspectratio: '16:9',
-                width: '100%',
-                mute: false,
-                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Your key here
-                autostart: true,
-                file: videoData.link,
-                type: "hls",
-                captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
-                sharing: {
-                    sites: ['facebook', 'twitter']
-                }
-            });
 
             // Show the video wrapper
             videoWrapper.style.display = 'block';
@@ -591,6 +573,3 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     xhr.open('GET', 'voot.json', true);
     xhr.send();
 </script>
-
-</body>
-</html>
