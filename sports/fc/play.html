@@ -368,47 +368,49 @@
 </script>
 
 
-        // Chat toggle functionality
-        document.getElementById('chatToggle').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            const chatToggle = document.getElementById('chatToggle');
-            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'block';
-                chatToggle.classList.add('open');
-            } else {
-                chatBox.style.display = 'none';
-                chatToggle.classList.remove('open');
-            }
-        });
-
-        document.getElementById('chatClose').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.style.display = 'none';
-            document.getElementById('chatToggle').classList.remove('open');
-        });
-
-        // Make the chat toggle button draggable
+        <script>
+    // Chat toggle functionality
+    document.getElementById('chatToggle').addEventListener('click', function() {
+        const chatBox = document.getElementById('chatBox');
         const chatToggle = document.getElementById('chatToggle');
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        chatToggle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-            document.addEventListener('mousemove', handleMouseMove);
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-                document.removeEventListener('mousemove', handleMouseMove);
-            });
-        });
-
-        function handleMouseMove(e) {
-            if (isDragging) {
-                chatToggle.style.left = `${e.clientX - offsetX}px`;
-                chatToggle.style.top = `${e.clientY - offsetY}px`;
-            }
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+            chatToggle.classList.add('open');
+        } else {
+            chatBox.style.display = 'none';
+            chatToggle.classList.remove('open');
         }
-    </script>
+    });
+
+    document.getElementById('chatClose').addEventListener('click', function() {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.style.display = 'none';
+        document.getElementById('chatToggle').classList.remove('open');
+    });
+
+    // Draggable chat toggle logic
+    const chatToggle = document.getElementById('chatToggle');
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    chatToggle.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+        offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.removeEventListener('mousemove', handleMouseMove);
+        });
+    });
+
+    function handleMouseMove(e) {
+        if (isDragging) {
+            chatToggle.style.left = `${e.clientX - offsetX}px`;
+            chatToggle.style.top = `${e.clientY - offsetY}px`;
+        }
+    }
+</script>
+
 </body>
 </html>
