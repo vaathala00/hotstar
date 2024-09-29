@@ -518,47 +518,79 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
 }
 
     </style>
-   <video id="myElement"></video>
-  <div class="logo"></div>
 
- <script type="text/javascript">
-        // Function to get URL parameter by name
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        }
 
-        var id = getUrlParameter('id');
-        
-        // Load the m1.json file and get the video data by ID
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.id === id);
+  <video id="myElement" controls style="display: none;"></video>
+<iframe id="videoIframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
+<div class="logo"></div>
+<div id="videoWrapper"></div>
 
-                jwplayer("myElement").setup({
-                    title: videoData.name,
-                    description: "VaathalaTV",
-                    image: videoData.logo,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                    autostart: true,
-                    file: videoData.link,
-                    type: "hls",
-                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
+<script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        const results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    const id = getUrlParameter('id');
+
+    // Load the voot.json file and get the video data by ID
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            const videoData = data.find(video => video.id === id);
+
+            if (!videoData) {
+                console.error('Video not found');
+                return;
             }
-        };
-        xhr.open('GET', 'voot.json', true);
-        xhr.send();
-    </script>
+
+            const videoWrapper = document.getElementById('videoWrapper');
+            const videoElement = document.getElementById('myElement');
+            const videoIframe = document.getElementById('videoIframe');
+
+            if (videoData.link.endsWith('.m3u8')) {
+                // For .m3u8 links
+                videoIframe.style.display = 'none';
+                videoElement.style.display = 'block';
+                videoElement.src = videoData.link;
+                videoElement.load();
+                videoElement.play();
+            } else {
+                // For embed links (YouTube, Vimeo, etc.)
+                videoElement.style.display = 'none';
+                videoIframe.style.display = 'block';
+                videoIframe.src = videoData.link;
+            }
+
+            // Optionally set up JW Player if desired for HLS links
+            jwplayer("myElement").setup({
+                title: videoData.name,
+                description: "VaathalaTV",
+                image: videoData.logo,
+                aspectratio: '16:9',
+                width: '100%',
+                mute: false,
+                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Your key here
+                autostart: true,
+                file: videoData.link,
+                type: "hls",
+                captions: { color: '#ffb800', fontSize: 30, backgroundOpacity: 0 },
+                sharing: {
+                    sites: ['facebook', 'twitter']
+                }
+            });
+
+            // Show the video wrapper
+            videoWrapper.style.display = 'block';
+        }
+    };
+    xhr.open('GET', 'voot.json', true);
+    xhr.send();
+</script>
+
 </body>
 </html>
