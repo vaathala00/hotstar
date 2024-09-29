@@ -520,56 +520,58 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     </style>
 
 
-  <video id="myElement" controls style="display: none;"></video>
-<iframe id="videoIframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
-<div class="logo"></div>
-<div id="videoWrapper"></div>
+ <video id="myElement" controls style="display: none;"></video>
+    <iframe id="videoIframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
+    <div class="logo"></div>
+    <div id="videoWrapper" style="display: none;"></div>
 
-<script type="text/javascript">
-    // Function to get URL parameter by name
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        const results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-
-    const id = getUrlParameter('id');
-
-    // Load the voot.json file and get the video data by ID
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            const data = JSON.parse(xhr.responseText);
-            const videoData = data.find(video => video.id === id);
-
-            if (!videoData) {
-                console.error('Video not found');
-                return;
-            }
-
-            const videoWrapper = document.getElementById('videoWrapper');
-            const videoElement = document.getElementById('myElement');
-            const videoIframe = document.getElementById('videoIframe');
-
-            if (videoData.link.endsWith('.m3u8')) {
-                // For .m3u8 links
-                videoIframe.style.display = 'none';
-                videoElement.style.display = 'block';
-                videoElement.src = videoData.link; // Set the source for HLS
-                videoElement.load();
-                videoElement.play();
-            } else {
-                // For embed links (YouTube, Vimeo, etc.)
-                videoElement.style.display = 'none';
-                videoIframe.style.display = 'block';
-                videoIframe.src = videoData.link; // Set the source for the embed link
-            }
-
-            // Show the video wrapper
-            videoWrapper.style.display = 'block';
+    <script type="text/javascript">
+        // Function to get URL parameter by name
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
-    };
-    xhr.open('GET', 'voot.json', true);
-    xhr.send();
-</script>
+
+        const videoId = getUrlParameter('id');
+
+        // Load the voot.json file and get the video data by ID
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                const videoData = data.find(video => video.id === videoId);
+
+                if (!videoData) {
+                    console.error('Video not found');
+                    return;
+                }
+
+                const videoWrapper = document.getElementById('videoWrapper');
+                const videoElement = document.getElementById('myElement');
+                const videoIframe = document.getElementById('videoIframe');
+
+                if (videoData.link.endsWith('.m3u8')) {
+                    // For .m3u8 links
+                    videoIframe.style.display = 'none';
+                    videoElement.style.display = 'block';
+                    videoElement.src = videoData.link; // Set the source for HLS
+                    videoElement.load();
+                    videoElement.play();
+                } else {
+                    // For embed links (YouTube, Vimeo, etc.)
+                    videoElement.style.display = 'none';
+                    videoIframe.style.display = 'block';
+                    videoIframe.src = videoData.link; // Set the source for the embed link
+                }
+
+                // Show the video wrapper
+                videoWrapper.style.display = 'block';
+            }
+        };
+        xhr.open('GET', 'voot.json', true);
+        xhr.send();
+    </script>
+</body>
+</html>
