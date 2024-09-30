@@ -102,6 +102,14 @@
             height: auto;
             border-radius: 8px;
         }
+
+.jw-button.jw-button-color-change-language {
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    background-color: transparent; /* Ensure it's not hidden by a background */
+}
+
+
     </style>
 </head>
 <body>
@@ -169,19 +177,22 @@
                             file: selectedVideo.logo || "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
                             link: "https://telegram.me/vaathala1"
                         },
-                        events: {
-                            onReady: function() {
-                                this.addButton(
-                                    "https://cdn.iconscout.com/icon/premium/png-256-thumb/language-1710723-1451870.png",
-                                    "Change Language",
-                                    function() {
-                                        const languageSelector = document.getElementById('languageSelector');
-                                        languageSelector.style.display = languageSelector.style.display === 'none' ? 'block' : 'none';
-                                    },
-                                    "change-language"
-                                );
-                            }
-                        }
+                       events: {
+    onReady: function() {
+        console.log("Adding language change button...");
+        this.addButton(
+            "https://cdn.iconscout.com/icon/premium/png-256-thumb/language-1710723-1451870.png",
+            "Change Language",
+            function() {
+                const languageSelector = document.getElementById('languageSelector');
+                languageSelector.style.display = languageSelector.style.display === 'none' ? 'block' : 'none';
+            },
+            "change-language"
+        );
+        console.log("Button added.");
+    }
+}
+
                     });
                 } else {
                     playerInstance.load({ file: selectedVideo.link });
