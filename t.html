@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M3U to JSON Converter</title>
+</head>
+<body>
+    <h1>M3U to JSON Converter</h1>
+    <button id="convertButton">Convert M3U</button>
+    <button id="downloadButton" style="display:none;">Download JSON</button>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('convertButton').onclick = async function() {
+            const response = await fetch('https://vaathala00.github.io/hotstar/tp.m3u');
+            const text = await response.text();
+
+            const lines = text.split('\n');
+            const result = [];
+            let currentItem = {};
+
+            for (let line of lines) {
+                line = line.trim();
+
+                if (line.startsWith('#EXTINF:')) {
+                    const info = line.split(',');
+                    const tvgIdMatch = info[0].match(/tvg-id=(\S+)/);
+                    const logoMatch = info[0].match(/tvg-logo="([^"]+)"/);
+                    const groupMatch = info[0].match(/group-title="([^"]+)"/);
+
+                    currentItem = {
+                        id: tvgIdMatch ? tvgIdMatch[1] : "",
+                        name: info[1] ? info[1].trim() : "",
+                        logo: logoMatch ? logoMatch[1] : "",
+                        group: groupMatch ? groupMatch[1] : "",
+                        link: "",
+                        license_key: "",
+                        k: "",
+                        kid: ""
+                    };
+                } else if (line.startsWith('#KODIPROP:inputstream.adaptive.license_key=')) {
+                    const keyMatch = line.match(/=(.+)/);
+                    if (keyMatch) {
+                        currentItem.link = keyMatch[1].trim();
+                    }
+                } else if (line.startsWith('http')) {
+                    if (currentItem.name) {
+                        currentItem.link = line;
+                        result.push(currentItem);
+                    }
+                }
+            }
+
+            const jsonOutput = JSON.stringify(result, null, 2);
+            document.getElementById('output').textContent = jsonOutput;
+
+            // Prepare download functionality
+            const blob = new Blob([jsonOutput], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const downloadButton = document.getElementById('downloadButton');
+            downloadButton.style.display = 'inline-block';
+            downloadButton.onclick = function() {
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'converted_playlist.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url); // Clean up
+            };
+        };
+    </script>
+</body>
+</html>
