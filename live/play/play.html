@@ -25,7 +25,7 @@ $id = $data[1];
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
-    <script src="main/assets/js/jwplayer.js"></script>
+    <script src="assets/js/jwplayer.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
 
@@ -42,6 +42,15 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
 
 <body>
     <style>
+
+ #myElement,
+    #videoIframe {
+        width: 100% !important;
+        height: 100% !important;
+        display: block; /* Ensures both elements are block level */
+    }
+
+
         .jw-svg-icon-pause {
             background-image: url("assets/img/jwplay/pause.svg");
         }
@@ -518,44 +527,56 @@ document.getElementById('pageTitle').innerText = id + " | Sony Liv";
 }
 
     </style>
-   <video id="myElement"></video>
-  <div class="logo"></div>
-<script type="text/javascript">
-    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-</script>
- <script type="text/javascript">
+
+
+ <video id="myElement" controls style="display: none;"></video>
+    <iframe id="videoIframe" style="display: none;" frameborder="0" allowfullscreen></iframe>
+    <div class="logo"></div>
+    <div id="videoWrapper" style="display: none;"></div>
+
+    <script type="text/javascript">
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        var id = getUrlParameter('id');
-        
-        // Load the m1.json file and get the video data by ID
-        var xhr = new XMLHttpRequest();
+        const videoId = getUrlParameter('id');
+
+        // Load the voot.json file and get the video data by ID
+        const xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.id === id);
+                const data = JSON.parse(xhr.responseText);
+                const videoData = data.find(video => video.id === videoId);
 
-                jwplayer("myElement").setup({
-                    title: videoData.name,
-                    description: "VaathalaTV",
-                    image: videoData.logo,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    file: videoData.link,
-                    type: "hls",
-                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
+                if (!videoData) {
+                    console.error('Video not found');
+                    return;
+                }
+
+                const videoWrapper = document.getElementById('videoWrapper');
+                const videoElement = document.getElementById('myElement');
+                const videoIframe = document.getElementById('videoIframe');
+
+                if (videoData.link.endsWith('.m3u8')) {
+                    // For .m3u8 links
+                    videoIframe.style.display = 'none';
+                    videoElement.style.display = 'block';
+                    videoElement.src = videoData.link; // Set the source for HLS
+                    videoElement.load();
+                    videoElement.play();
+                } else {
+                    // For embed links (YouTube, Vimeo, etc.)
+                    videoElement.style.display = 'none';
+                    videoIframe.style.display = 'block';
+                    videoIframe.src = videoData.link; // Set the source for the embed link
+                }
+
+                // Show the video wrapper
+                videoWrapper.style.display = 'block';
             }
         };
         xhr.open('GET', 'tp.json', true);
