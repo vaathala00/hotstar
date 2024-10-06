@@ -303,12 +303,19 @@
                         backgroundOpacity: 0,
                         edgeStyle: "raised"
                     },
-                    playlist: [{
-                        sources: [{
+                   playlist: [{
+                         sources: [{
                             file: videoData.link,
-                            type: "hls" // Set type to "mpd" for DASH stream
-                        }]
-                    }],
+                            type: "mpd" // Set type to "mpd" for DASH stream
+                            }],
+                            drm: {
+                         clearkey: {
+                            keyId: videoData.kid,
+                              key: videoData.k
+                                   }
+                                }
+                           }],
+
                     sharing: {
                         sites: ['facebook', 'twitter']
                     }
