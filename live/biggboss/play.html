@@ -308,18 +308,18 @@
                         backgroundOpacity: 0,
                         edgeStyle: "raised"
                     },
-        playlist: [{
-            sources: [{
-                file: videoData.link,
-                type: "hls"
-            }],
-            drm: {
-                clearkey: {
-                    keyId: videoData.kid, // Your ClearKey ID
-                    key: videoData.k      // Your ClearKey
+    playlist: [{
+                sources: [{
+                    file: videoData.link,
+                    type: videoData.link.endsWith('.m3u8') ? 'hls' : 'mpd' // Dynamically determine type
+                }],
+                drm: {
+                    clearkey: {
+                        keyId: videoData.kid,
+                        key: videoData.k
+                    }
                 }
-            }
-        }],
+            }],
 
                     sharing: {
                         sites: ['facebook', 'twitter']
