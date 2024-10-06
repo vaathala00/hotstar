@@ -20,9 +20,6 @@
             overflow-x: hidden;
         }
 
-.VideoPlayer_streamBtn_LdbB4 {
-    display: none !important;
-}
 
         .container {
             width: 100%;
@@ -272,46 +269,47 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Function to initialize the video player
-        function initializePlayer(videoData) {
-          if (videoData.link.includes("player.twitch.tv") || 
-                videoData.link.includes("live.vkplay.ru") || 
-          videoData.link.includes("dailymotion.com") || 
-            videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
-                // If the link is a YouTube embed link
-                document.getElementById('player').style.display = 'none';
-                const videoWrapper = document.getElementById('videoWrapper');
-                const videoIframe = document.getElementById('videoIframe');
-                videoIframe.src = videoData.link;
-            } else {
-                // If the link is an .m3u8 link
-                document.getElementById('videoIframe').style.display = 'none';
-                document.getElementById('player').style.display = '';
-                const playerInstance = jwplayer("player").setup({
-                    title: videoData.name,
-                    description: "VaathalaTV", // Sample description
-                    image: videoData.logo,
-                    aspectratio: '16:9',
-                    width: '100%',
-                    mute: false,
-                    autostart: true,
-                    skin: {
-                        name: "netflix"
-                    },
-                    logo: {
-                        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                        link: "https://telegram.me/vaathala1"
-                    },
-                    captions: {
-                        color: "#FFF",
-                        fontSize: 14,
-                        backgroundOpacity: 0,
-                        edgeStyle: "raised"
-                    },
-    playlist: [{
+// Function to initialize the video player
+function initializePlayer(videoData) {
+    const playerElement = document.getElementById('player');
+    const videoIframe = document.getElementById('videoIframe');
+
+    if (videoData.link.includes("youtube.com") || 
+        videoData.link.includes("player.twitch.tv") || 
+        videoData.link.includes("live.vkplay.ru") || 
+        videoData.link.includes("dailymotion.com") || 
+        videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
+        // For embed links
+        playerElement.style.display = 'none';
+        videoIframe.style.display = '';
+        videoIframe.src = videoData.link;
+    } else {
+        // For HLS/DASH
+        videoIframe.style.display = 'none';
+        playerElement.style.display = '';
+        const playerInstance = jwplayer("player").setup({
+            title: videoData.name,
+            description: "VaathalaTV",
+            image: videoData.logo,
+            aspectratio: '16:9',
+            width: '100%',
+            mute: false,
+            autostart: true,
+            skin: { name: "netflix" },
+            logo: {
+                file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                link: "https://telegram.me/vaathala1"
+            },
+            captions: {
+                color: "#FFF",
+                fontSize: 14,
+                backgroundOpacity: 0,
+                edgeStyle: "raised"
+            },
+            playlist: [{
                 sources: [{
                     file: videoData.link,
-                    type: videoData.link.endsWith('.m3u8') ? 'hls' : 'mpd' // Dynamically determine type
+                    type: videoData.link.endsWith('.m3u8') ? 'hls' : (videoData.link.endsWith('.mpd') ? 'mpd' : '')
                 }],
                 drm: {
                     clearkey: {
@@ -320,17 +318,12 @@
                     }
                 }
             }],
+            sharing: { sites: ['facebook', 'twitter'] }
+        });
 
-                    sharing: {
-                        sites: ['facebook', 'twitter']
-                    }
-                });
-
-playerInstance.on('error', function(event) {
-        console.error('Error occurred:', event.message);
-        // Implement fallback or user notification
-    });
-}
+        playerInstance.on('error', function(event) {
+            console.error('Error occurred:', event.message);
+        });
 
                 // Add custom download button
                 const iconPath = ""; // Define your icon path here
