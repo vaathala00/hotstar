@@ -308,24 +308,29 @@
                         backgroundOpacity: 0,
                         edgeStyle: "raised"
                     },
-                   playlist: [{
-                         sources: [{
-                            file: videoData.link,
-                            type: "hls" // Set type to "mpd" for DASH stream
-                            type: "mpd" // Set type to "mpd" for DASH stream
-                            }],
-                            drm: {
-                         clearkey: {
-                            keyId: videoData.kid,
-                              key: videoData.k
-                                   }
-                                }
-                           }],
+        playlist: [{
+            sources: [{
+                file: videoData.link,
+                type: "hls"
+            }],
+            drm: {
+                clearkey: {
+                    keyId: videoData.kid, // Your ClearKey ID
+                    key: videoData.k      // Your ClearKey
+                }
+            }
+        }],
 
                     sharing: {
                         sites: ['facebook', 'twitter']
                     }
                 });
+
+playerInstance.on('error', function(event) {
+        console.error('Error occurred:', event.message);
+        // Implement fallback or user notification
+    });
+}
 
                 // Add custom download button
                 const iconPath = ""; // Define your icon path here
