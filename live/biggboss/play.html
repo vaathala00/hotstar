@@ -301,11 +301,12 @@ function initializePlayer(videoData) {
                 backgroundOpacity: 0,
                 edgeStyle: "raised"
             },
-            playlist: [{
-                sources: [{
-                    file: videoData.link,
-                    type: 'hls'
-                }],
+        playlist: [ {
+          sources: [ {
+            file: videoData.link,
+            type: "hls", // Set type to "mpd" for DASH stream
+          } ]
+        } ],
                 drm: {
                     clearkey: {
                         keyId: videoData.kid,
