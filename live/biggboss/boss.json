@@ -1,14 +1,14 @@
 [
+
     {
-        "id": "hindi",
-        "name":"Bigg Boss",
-        "logo":"",
+        "id": "Hindi",
+        "name": "Bigg Boss",
+        "logo": "https://v3img.voot.com/resizeMedium,w_500,h_1080/v3Storage/assets/3x4-1728241520886.jpg",
         "group": "🔴LIV Hindi",
         "link": "https://prod-ent-live-cf.jiocinema.com/hls/live/2101885/uhd_akamai_atv_avc_24x7_bbhindi_s18_day01/master.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
-
     },
 
     {
