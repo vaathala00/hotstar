@@ -2,9 +2,9 @@
     {
         "id": "hindi",
         "name":"Bigg Boss",
-        "logo":"https://v3img.voot.com/resizeMedium,w_256,h_341/v3Storage/assets/3x4-1728224989051.jpg",
-        "group":"🔴LIV Hindi",
-        "link":"https://prod-ent-live-cf.jiocinema.com/hls/live/2101885/uhd_akamai_atv_avc_24x7_bbhindi_s18_day01/master.m3u8",
+        "logo":"",
+        "group": "🔴LIV Hindi",
+        "link": "https://prod-ent-live-cf.jiocinema.com/hls/live/2101885/uhd_akamai_atv_avc_24x7_bbhindi_s18_day01/master.m3u8",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -16,7 +16,7 @@
         "name": "Bigg Boss S8",
         "logo": "https://i.postimg.cc/2y5Ym0vN/Screenshot-12.png",
         "group": "🔴LIV Tamil",
-        "link": "https://live.vkplay.ru/app/embed/1bbtamilbulbta08",
+        "link": "https://live.vkplay.ru/app/embed/1bbtamilbulbta08?autoplay=1",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -27,7 +27,7 @@
         "name": "Bigg Boss S8t",
         "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpMUAHiZ4VumfW5bnSzUbbt8it-DNIvAgYYQ&s/embed",
         "group": "🔴LIV Telugu",
-        "link": "https://live.vkplay.ru/app/embed/38bbtamilbulbta07",
+        "link": "https://live.vkplay.ru/app/embed/38bbtamilbulbta07?autoplay=1",
         "license_key": "https://links-macha-official.dj-tm.x10.bz/BIGG_BOSS-TELUGU_2024(SEASON-8)/bbts8_star-maa-hd(tata)-temp_webplyr.php/embed",
         "k": "",
         "kid": ""
