@@ -304,7 +304,7 @@ function initializePlayer(videoData) {
             playlist: [{
                 sources: [{
                     file: videoData.link,
-                    type: videoData.link.endsWith('.m3u8') ? 'hls' : (videoData.link.endsWith('.mpd') ? 'mpd' : '')
+                    type: 'hls'
                 }],
                 drm: {
                     clearkey: {
