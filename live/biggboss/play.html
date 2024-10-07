@@ -263,59 +263,57 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-// Function to initialize the video player
-function initializePlayer(videoData) {
-    const playerElement = document.getElementById('player');
-    const videoIframe = document.getElementById('videoIframe');
+        // Function to initialize the video player
+        function initializePlayer(videoData) {
+            const playerElement = document.getElementById('player');
+            const videoIframe = document.getElementById('videoIframe');
 
-    if (videoData.link.includes("youtube.com") || 
-        videoData.link.includes("player.twitch.tv") || 
-        videoData.link.includes("live.vkplay.ru") || 
-        videoData.link.includes("dailymotion.com") || 
-        videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
-        // For embed links
-        playerElement.style.display = 'none';
-        videoIframe.style.display = '';
-        videoIframe.src = videoData.link;
-    } else {
-        // For HLS/DASH
-        videoIframe.style.display = 'none';
-        playerElement.style.display = '';
-        const playerInstance = jwplayer("player").setup({
-            title: videoData.name,
-            description: "VaathalaTV",
-            image: videoData.logo,
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-            skin: { name: "netflix" },
-            logo: {
-                file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                link: "https://telegram.me/vaathala1"
-            },
-            captions: {
-                color: "#FFF",
-                fontSize: 14,
-                backgroundOpacity: 0,
-                edgeStyle: "raised"
-            },
-        playlist: [ {
-          sources: [ {
-            file: videoData.link,
-            type: "hls", // Set type to "mpd" for DASH stream
-          } ]
-        } ],
-                drm: {
-                    clearkey: {
-                        keyId: videoData.kid,
-                        key: videoData.k
-                    }
-                }
-            }],
-            sharing: { sites: ['facebook', 'twitter'] }
-        });
+            if (videoData.link.includes("youtube.com") || 
+                videoData.link.includes("player.twitch.tv") || 
+                videoData.link.includes("live.vkplay.ru") || 
+                videoData.link.includes("dailymotion.com") || 
+                videoData.link.includes("links-macha-official.dj-tm.x10.bz")) {
+                playerElement.style.display = 'none';
+                videoIframe.style.display = '';
+                videoIframe.src = videoData.link;
+            } else {
+                videoIframe.style.display = 'none';
+                playerElement.style.display = '';
+                const playerInstance = jwplayer("player").setup({
+                    title: videoData.name,
+                    description: "VaathalaTV",
+                    image: videoData.logo,
+                    aspectratio: '16:9',
+                    width: '100%',
+                    mute: false,
+                    autostart: true,
+                    key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                    skin: { name: "netflix" },
+                    logo: {
+                        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                        link: "https://telegram.me/vaathala1"
+                    },
+                    captions: {
+                        color: "#FFF",
+                        fontSize: 14,
+                        backgroundOpacity: 0,
+                        edgeStyle: "raised"
+                    },
+                    playlist: [{
+                        sources: [{
+                            file: videoData.link,
+                            type: "hls", // Set type to "mpd" for DASH stream
+                        }]
+                    }],
+                    drm: {
+                        clearkey: {
+                            keyId: videoData.kid,
+                            key: videoData.k
+                        }
+                    },
+                    sharing: { sites: ['facebook', 'twitter'] }
+                });
+
 
 
                 // Add custom download button
@@ -359,24 +357,23 @@ function initializePlayer(videoData) {
 
         // Fetch and load video data from JSON
         const id = getUrlParameter('id');
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    const data = JSON.parse(xhr.responseText);
-                    const videoData = data.find(video => video.id === id);
-                    if (videoData) {
-                        initializePlayer(videoData);
-                    } else {
-                        console.error('Video data not found for ID: ' + id);
-                    }
-                } else {
-                    console.error('Failed to load video data. Status code: ' + xhr.status);
+        fetch('boss.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
                 }
-            }
-        };
-        xhr.open('GET', 'boss.json', true);
-        xhr.send();
+                return response.json();
+            })
+            .then(data => {
+                const videoData = data.find(video => video.id === id);
+                if (videoData) {
+                    initializePlayer(videoData);
+                } else {
+                    console.error('Video data not found for ID: ' + id);
+                }
+            })
+            .catch(error => console.error('Fetch error: ', error));
+
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
