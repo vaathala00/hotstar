@@ -4,7 +4,7 @@
         "name": "SET HD",
         "logo": "https://images.slivcdn.com/videoasset_images/sethd_23oct_portrait_thumb_rev.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SETHD&id=2011671",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SETHD&id=2011671",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -14,7 +14,7 @@
         "name": "Sony SAB HD",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_sabhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SABHD&id=2011749",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SABHD&id=2011749",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -24,7 +24,7 @@
         "name": "Sony PAL",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_pal_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyPalSD&id=2011741",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyPalSD&id=2011741",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -34,7 +34,7 @@
         "name": "Sony YAY",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_yay_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyYaySD&id=2011746",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyYaySD&id=2011746",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -44,7 +44,7 @@
         "name": "Sony Marathi",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_marathi_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyMarathi&id=2011740",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyMarathi&id=2011740",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -54,7 +54,7 @@
         "name": "Sony AATH",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_aath_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyAathSD&id=2011641",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyAathSD&id=2011641",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -64,7 +64,7 @@
         "name": "Sony MAX HD",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_maxhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyMaxhd&id=2011670",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyMaxhd&id=2011670",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -74,7 +74,7 @@
         "name": "Sony MAX",
         "logo": "https://sonypicturesnetworks.com/images/logos/Sony_MAX.png",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyMaxSD&id=2011745",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyMaxSD&id=2011745",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -84,7 +84,7 @@
         "name": "Sony WAH",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_wah_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyWah&id=2011906",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyWah&id=2011906",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -94,7 +94,7 @@
         "name": "Sony MAX2",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_max2_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=MAX2&id=2011908",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=MAX2&id=2011908",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -104,7 +104,7 @@
         "name": "Sony PIX HD",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_pixhd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=PIXHD&id=2011748",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=PIXHD&id=2011748",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -114,7 +114,7 @@
         "name": "Sony BBC Earth HD",
         "logo": "https://images.slivcdn.com/videoasset_images/sony_bbchd_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SonyBBCEarthHD&id=2011907",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SonyBBCEarthHD&id=2011907",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -124,7 +124,7 @@
         "name": "Sony TEN 1 HD",
         "logo": "https://images.slivcdn.com/portrait_thumb/Sony_TEN1HD_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=TEN1HD&id=2011747",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=TEN1HD&id=2011747",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -134,7 +134,7 @@
         "name": "Sony TEN 2 HD",
         "logo": "https://te.legra.ph/file/3f3e37a29023ebc5f7a58.jpg",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=TEN2HD&id=2020434",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=TEN2HD&id=2020434",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -144,7 +144,7 @@
         "name": "Sony TEN 3 HD",
         "logo": "https://te.legra.ph/file/5a30b2345a1504755373c.jpg",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=TEN3HD&id=2020591",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=TEN3HD&id=2020591",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -154,7 +154,7 @@
         "name": "Sony TEN 4 HD",
         "logo": "https://images.slivcdn.com/portrait_thumb/Sony_TEN4HD_23oct_portrait_thumb.jpg?h=494&w=344&t=c_fill&q=low&fr=webp",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=ten4hd&id=2020589",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=ten4hd&id=2020589",
         "license_key": "",
         "k": "",
         "kid": ""
@@ -164,7 +164,7 @@
         "name": "Sony TEN 5 HD",
         "logo": "https://te.legra.ph/file/6087c17737937a5d4ac53.jpg",
         "group": "SonyLIV",
-        "link": "https://allinonereborn.in/sonylive.m3u8?ch=SONYSIXHD&id=2020593",
+        "link": "https://cors-anywhere.herokuapp.com/https://allinonereborn.in/sonylive.m3u8?ch=SONYSIXHD&id=2020593",
         "license_key": "",
         "k": "",
         "kid": ""
