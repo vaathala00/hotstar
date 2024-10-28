@@ -101,6 +101,13 @@ body {
   white-space: nowrap;
 }
 
+.navigation {
+  height: px; /* Set your desired height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
 /* --------- curve outside ---------- */
 .navigation ul li:hover a::before,
 .navigation ul li.hovered a::before {
