@@ -20,35 +20,38 @@
         h2 {
             margin: 10px 0;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 2rem; /* Increased font size for better visibility */
         }
         #player-container {
             width: 100%;
             max-width: 900px; 
-            height: 70vh;
+            height: 70vh; /* Adjust height for larger screens */
             background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
         }
- #video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        #player {
+            width: 100%;  /* Full width */
+            height: 100%; /* Full height */
         }
 
-  /* Responsive design for smaller screens */
+        /* Responsive design */
         @media (max-width: 600px) {
             h2 {
-                font-size: 1rem;
+                font-size: 1.5rem; /* Adjusted for smaller screens */
             }
             #player-container {
-                max-width: 100%;
-                height: 60vh; /* Adjusts player height for smaller screens */
+                height: 50vh; /* Adjusted height for smaller screens */
             }
         }
-
+        
+        @media (min-width: 601px) and (max-width: 900px) {
+            #player-container {
+                height: 60vh; /* Adjust height for medium-sized screens */
+            }
+        }
     </style>
 </head>
 <body>
