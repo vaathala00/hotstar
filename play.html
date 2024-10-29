@@ -51,7 +51,14 @@
 
         // Function to determine if the stream is DRM or HLS
         function setupPlayer(url) {
+            let licenseUrl = ""; // Default to empty string
+
             if (url.includes('.mpd')) { // Check if it's a DASH (DRM) stream
+                // Check if the useLicense parameter is set to "empty"
+                if (urlParams.get("useLicense") === "empty") {
+                    licenseUrl = ""; // Set to empty if specified
+                }
+
                 jwp.setup({
                     width: "100%",
                     height: "100%",
@@ -62,7 +69,7 @@
                     ],
                     drm: {
                         clearkey: {
-                            licenseUrl: "81546df3f41c4a6dbc9a4efc7f2fb626" // Example license
+                            licenseUrl: licenseUrl // Set license URL based on condition
                         }
                     },
                     primary: "html5"
