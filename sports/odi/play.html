@@ -1,0 +1,50 @@
+captions: {
+                            color: "#FFF",
+                            fontSize: 14,
+                            backgroundOpacity: 0,
+                            edgeStyle: "raised"
+                        },
+                        sharing: {
+                            sites: ['facebook', 'twitter']
+                        }
+                    });
+
+                    // Add custom language button
+                    playerInstance.on('ready', function() {
+                        playerInstance.addButton(
+                            'https://i.postimg.cc/1R7w0Fvp/language-svgrepo-com.png', // Replace with your language icon path
+                            'Change Language',
+                            function() {
+                                changeStream(languageSelector.value);
+                            },
+                            'languageButton'
+                        );
+                    });
+                } else {
+                    playerInstance.load({ file: selectedVideo.link });
+                    playerInstance.play(true); // Automatically play the selected stream
+                }
+            }
+        }
+
+        // Chat toggle functionality
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
+            } else {
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
+        });
+
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
+            document.getElementById('chatToggle').classList.remove('open');
+        });
+    </script>
+</body>
+</html>
