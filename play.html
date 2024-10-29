@@ -24,20 +24,10 @@
             font-size: 2rem; /* Increased font size for better visibility */
             z-index: 10; /* Ensures heading is above the player */
         }
-        #player-container {
-            position: absolute; /* Make it full screen */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
         #player {
             width: 100%;  /* Full width */
             height: 100%; /* Full height */
+            background-color: black; /* Ensures a black background for the video */
         }
     </style>
 </head>
@@ -45,9 +35,7 @@
 
     <!-- <h2 id="channelName"></h2> -->
 
-    <div id="player-container">
-        <div id="player"></div>
-    </div>
+    <video id="player" controls></video>
 
     <script>
         // Get URL parameters from the current page
@@ -56,7 +44,7 @@
         var channelName = urlParams.get("name") || "Channel Not Provided";
 
         // Set the channel name
-        document.getElementById("channelName").textContent = channelName;
+        // document.getElementById("channelName").textContent = channelName;
 
         // Setup JW Player
         var jwp = jwplayer('player');
@@ -70,12 +58,6 @@
             ],
             primary: "html5"
         });
-
-        // Enable full screen functionality
-        jwp.on('ready', function() {
-            jwp.setFullscreen(true);
-        });
     </script>
-
 </body>
 </html>
