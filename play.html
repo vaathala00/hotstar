@@ -33,8 +33,20 @@
         // Get URL parameters from the current page
         var urlParams = new URLSearchParams(window.location.search);
         var streamUrl = urlParams.get("url");
-        var licenseUrl = urlParams.get("license"); // Get license URL from parameters
         var channelName = urlParams.get("name") || "Channel Not Provided";
+
+        // Extract DRM License from URL
+        var drmLicense = '';
+        var drmKey = '';
+        if (streamUrl) {
+            var drmParts = streamUrl.split("drmLicense=");
+            if (drmParts.length > 1) {
+                var drmInfo = drmParts[1].split(":");
+                drmLicense = drmInfo[0]; // First part is the license
+                drmKey = drmInfo[1]; // Second part is the keyId
+                streamUrl = drmParts[0]; // Remove the drmLicense part from the stream URL
+            }
+        }
 
         // Setup JW Player
         var jwp = jwplayer('player');
@@ -52,7 +64,8 @@
                     ],
                     drm: {
                         clearkey: {
-                            licenseUrl: licenseUrl || "" // Use provided license URL or empty
+                            key: drmLicense || "", // Use the extracted license key
+                            keyId: drmKey || "" // Use the extracted keyId
                         }
                     },
                     primary: "html5"
