@@ -18,22 +18,14 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
-        h2 {
-            margin: 10px 0;
-            text-align: center;
-            font-size: 2rem; /* Increased font size for better visibility */
-            z-index: 10; /* Ensures heading is above the player */
-        }
         #player {
             width: 100%;  /* Full width */
             height: 100%; /* Full height */
-            background-color: black; /* Ensures a black background for the video */
+            background-color: black; /* Black background for video */
         }
     </style>
 </head>
 <body>
-
-    <!-- <h2 id="channelName"></h2> -->
 
     <video id="player" controls></video>
 
@@ -41,24 +33,15 @@
         // Get URL parameters from the current page
         var urlParams = new URLSearchParams(window.location.search);
         var streamUrl = urlParams.get("url");
+        var licenseUrl = urlParams.get("license"); // Get license URL from parameters
         var channelName = urlParams.get("name") || "Channel Not Provided";
-
-        // Set the channel name
-        // document.getElementById("channelName").textContent = channelName;
 
         // Setup JW Player
         var jwp = jwplayer('player');
 
         // Function to determine if the stream is DRM or HLS
         function setupPlayer(url) {
-            let licenseUrl = ""; // Default to empty string
-
             if (url.includes('.mpd')) { // Check if it's a DASH (DRM) stream
-                // Check if the useLicense parameter is set to "empty"
-                if (urlParams.get("useLicense") === "empty") {
-                    licenseUrl = ""; // Set to empty if specified
-                }
-
                 jwp.setup({
                     width: "100%",
                     height: "100%",
@@ -69,7 +52,7 @@
                     ],
                     drm: {
                         clearkey: {
-                            licenseUrl: licenseUrl // Set license URL based on condition
+                            licenseUrl: licenseUrl || "" // Use provided license URL or empty
                         }
                     },
                     primary: "html5"
