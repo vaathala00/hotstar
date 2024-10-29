@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>VT</title>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" href="https://cdn.jwplayer.com/libraries/2hYhY7Zq.css">
+    <script src="https://cdn.jwplayer.com/libraries/2hYhY7Zq.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -32,12 +33,6 @@
             align-items: center;
             position: relative;
         }
-        #video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
         /* Responsive design for smaller screens */
         @media (max-width: 600px) {
             h2 {
@@ -55,13 +50,10 @@
     <h2 id="channelName"></h2>
 
     <div id="player-container">
-        <video id="video" controls autoplay></video>
+        <div id="jw-player"></div>
     </div>
 
     <script>
-        // Select the video element from the document
-        var video = document.getElementById("video");
-
         // Get URL parameters from the current page
         var urlParams = new URLSearchParams(window.location.search);
         var channelUrl = urlParams.get("url");
@@ -70,54 +62,15 @@
         // Set the channel name or a default message
         document.getElementById("channelName").textContent = channelName || "Channel Not Provided";
 
-        // Function to play the channel
+        // Function to play the channel using JW Player
         function playChannel(url) {
-            // Check if HLS is supported
-            if (Hls.isSupported()) {
-                var hls = new Hls({
-                    maxBufferLength: 20,
-                    maxMaxBufferLength: 40,
-                    maxBufferSize: 3000000, // Example buffer size in bytes
-                    lowLatencyMode: false,
-                    autoStartLoad: true
-                });
-
-                // Load the stream URL
-                hls.loadSource(url);
-                // Attach the HLS instance to the video element
-                hls.attachMedia(video);
-                
-                // Play the video when metadata is loaded
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play();
-                });
-
-                // Handle errors
-                hls.on(Hls.Events.ERROR, function(event, data) {
-                    if (data.fatal) {
-                        switch (data.fatal) {
-                            case Hls.ErrorTypes.NETWORK_ERROR:
-                                console.error("Network error encountered, trying to recover...");
-                                hls.startLoad();
-                                break;
-                            case Hls.ErrorTypes.MEDIA_ERROR:
-                                console.error("Media error encountered, trying to recover...");
-                                hls.recoverMediaError();
-                                break;
-                            case Hls.ErrorTypes.OTHER_ERROR:
-                                console.error("Fatal error encountered, destroying HLS instance.");
-                                hls.destroy();
-                                break;
-                        }
-                    }
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // If HLS is not supported, try playing the stream directly
-                video.src = url;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play();
-                });
-            }
+            jwplayer("jw-player").setup({
+                file: url,
+                width: "100%",
+                height: "100%",
+                autostart: true,
+                controls: true
+            });
         }
 
         // Window load event
