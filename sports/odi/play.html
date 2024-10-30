@@ -220,6 +220,39 @@
                 width: 40px;
             }
         }
+
+        #languageSelector {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 16px;
+            z-index: 10; /* Ensure it's above other player elements */
+        }
+        .language-selector-container img {
+            width: 20px; /* Adjust icon size */
+            margin-right: 5px; /* Space between icon and dropdown */
+        }
+        #languageSelector {
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 16px;
+        }        .language-selector-container img {
+            width: 20px; /* Adjust icon size */
+            margin-right: 5px; /* Space between icon and dropdown */
+        }
+        #languageSelector {
+            border: none;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
     </style>
 
 <style> 
@@ -244,13 +277,13 @@
         <div id="player"></div>
 
 
-        <div class="info-box">
+       <!--  <div class="info-box">
 
              <h100>Change Stream/Language:</h100>
             <select id="languageSelector" onchange="changeStream(this.value)">
                 <!-- Options will be populated dynamically -->
             </select>
-        </div>
+        </div> -->
 
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -262,7 +295,7 @@
             <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
         </div>
         <button class="chat-toggle" id="chatToggle"></button>
-    </div>
+    </div> 
 
     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
@@ -279,71 +312,85 @@
     <script src="assets/vast.js" ></script>
 
    <script>
-let playerInstance;
-let videoData;
+        let playerInstance;
+        let videoData;
 
-// Fetch video data from JSON
-fetch('sports.json')
-    .then(response => response.json())
-    .then(data => {
-        videoData = data;
-        populateLanguageOptions(videoData);
-        changeStream(videoData[0].id); // Set default stream to first language
-    })
-    .catch(error => console.error('Error fetching JSON:', error));
+        // Fetch video data from JSON
+        fetch('sports.json')
+            .then(response => response.json())
+            .then(data => {
+                videoData = data;
+                changeStream(videoData[0].id); // Set default stream to first language
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
 
-function populateLanguageOptions(data) {
-    const languageSelector = document.getElementById('languageSelector');
-    data.forEach(video => {
-        const option = document.createElement('option');
-        option.value = video.id; // Use video ID as the value
-        option.textContent = video.name; // Use video name as the display text
-        languageSelector.appendChild(option);
-    });
-}
-
-function changeStream(languageId) {
-    const selectedVideo = videoData.find(video => video.id === languageId);
-    if (selectedVideo) {
-        if (!playerInstance) {
-            // Initialize JW Player
-            playerInstance = jwplayer("player").setup({
-                file: selectedVideo.link,
-                width: '100%',
-                height: '450px',
-                autostart: true,
-                aspectratio: '16:9',
-                mute: false,
-                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                skin: { name: "netflix" },
-                logo: {
-                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                    link: "https://telegram.me/vaathala1"
-                },
-                captions: {
-                    color: "#FFF",
-                    fontSize: 14,
-                    backgroundOpacity: 0,
-                    edgeStyle: "raised",
-                    // You can add your caption tracks here if available
-                    tracks: videoData.map(video => ({
-                        file: `path/to/captions/${video.id}.vtt`, // Update this to your actual captions URLs
-                        label: video.name,
-                        default: video.id === languageId // Default track based on selection
-                    }))
-                },
-                sharing: {
-                    sites: ['facebook', 'twitter']
+        function changeStream(languageId) {
+            const selectedVideo = videoData.find(video => video.id === languageId);
+            if (selectedVideo) {
+                if (!playerInstance) {
+                    // Initialize JW Player
+                    playerInstance = jwplayer("player").setup({
+                        file: selectedVideo.link,
+                        width: '100%',
+                        height: '450px',
+                        autostart: true,
+                        aspectratio: '16:9',
+                        mute: false,
+                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                        skin: { name: "netflix" },
+                        logo: {
+                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                            link: "https://telegram.me/vaathala1"
+                        },
+                        sharing: {
+                            sites: ['facebook', 'twitter']
+                        },
+                        events: {
+                            onReady: function() {
+                                addLanguageSelector(); // Call function to add language selector
+                            }
+                        }
+                    });
+                } else {
+                    playerInstance.load({ file: selectedVideo.link });
+                    playerInstance.play(true); // Automatically play the selected stream
                 }
-            });
-        } else {
-            playerInstance.load({ file: selectedVideo.link });
-            playerInstance.play(true); // Automatically play the selected stream
+            }
         }
-    }
-}
 
-// Chat toggle functionality and other functionalities remain unchanged...
+        function addLanguageSelector() {
+            // Create language selector container
+            const languageSelectorContainer = document.createElement('div');
+            languageSelectorContainer.className = 'language-selector-container';
+
+            // Create icon element
+            const icon = document.createElement('img');
+            icon.src = 'https://i.postimg.cc/FzfdpCBS/translate.png'; // Icon URL
+            icon.alt = 'Translate Icon';
+            languageSelectorContainer.appendChild(icon);
+
+            // Create language selector element
+            const languageSelector = document.createElement('select');
+            languageSelector.id = 'languageSelector';
+            languageSelector.onchange = function() {
+                changeStream(this.value);
+            };
+
+            // Populate options
+            videoData.forEach(video => {
+                const option = document.createElement('option');
+                option.value = video.id;
+                option.textContent = video.name;
+                languageSelector.appendChild(option);
+            });
+
+            // Append selector to the container
+            languageSelectorContainer.appendChild(languageSelector);
+
+            // Append container to the player
+            const playerContainer = document.getElementById('player');
+            playerContainer.appendChild(languageSelectorContainer);
+        }
 
 
         // Chat toggle functionality
