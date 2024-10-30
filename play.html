@@ -72,19 +72,19 @@
         var streamUrl = urlParams.get("url");
         var channelName = urlParams.get("name") || "Channel Not Provided";
 
-        // Extract DRM License from URL
-    // Extract DRM License from URL
-var drmLicense = '';
+// Extract DRM keys from the URL parameters
 var drmKey = '';
-if (streamUrl) {
-    var keys = urlParams.get("keys");
-    if (keys) {
-        var keyParts = keys.split(":");
-        drmLicense = keyParts[0]; // First part is the key
-        drmKey = keyParts[1]; // Second part is the keyId
+var drmLicense = '';
+var keys = urlParams.get("keys");
+if (keys) {
+    var keyParts = keys.split(":");
+    if (keyParts.length === 2) {
+        drmKey = keyParts[0]; // First part is the key
+        drmLicense = keyParts[1]; // Second part is the keyId
+    } else {
+        console.error("Invalid keys format");
     }
 }
-
 
         // Setup JW Player
         var jwp = jwplayer('player');
