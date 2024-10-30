@@ -234,16 +234,16 @@
   z-index: -100; 
         }
 
-  #translateIcon {
+        #translateIcon {
             z-index: 10; /* Ensure the icon is above the player */
             opacity: 0.8; /* Slightly transparent */
             cursor: pointer; /* Change cursor on hover */
             margin-left: 10px; /* Space from other controls */
+            width: 30px; /* Set the width of the icon */
         }
         #translateIcon:hover {
             opacity: 1; /* Fully opaque on hover */
         }
-
 
 </style>
 
@@ -349,12 +349,10 @@
                         translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
                         translateIcon.alt = "Translate";
                         translateIcon.id = "translateIcon"; // Set ID for styling
+                        translateIcon.style.width = "30px"; // Set the width of the icon
 
-                        // Find the share button and insert the translate icon after it
-                        const shareButton = controlsContainer.querySelector('.jw-icon-share'); // Select the share button
-                        if (shareButton) {
-                            shareButton.parentNode.insertBefore(translateIcon, shareButton.nextSibling); // Insert the icon after the share button
-                        }
+                        // Append the icon to the controls container
+                        controlsContainer.appendChild(translateIcon);
 
                         // Add click event listener for the icon
                         translateIcon.addEventListener('click', function() {
