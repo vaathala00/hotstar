@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Video Player</title>
+
+    <!-- JW Player -->
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
+    <!-- Shaka Player -->
+    <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/3.2.0/shaka-player.compiled.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/shaka-player/3.2.0/controls.css">
+
     <style>
         body, html {
             margin: 0;
@@ -12,22 +18,25 @@
             height: 100%;
             width: 100%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
-        #player {
+        #jw-player, #shaka-player {
             width: 100%;
             height: 100%;
             background-color: black;
+            display: none; /* Initially hide both players */
         }
     </style>
 </head>
 <body>
 
-    <div id="player"></div>
+    <div id="jw-player"></div>
+    <div data-shaka-player-container id="shaka-player">
+        <video id="video" data-shaka-player autoplay style="width: 100%; height: 100%;"></video>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -46,50 +55,76 @@
             }
         }
 
-        const jwp = jwplayer('player');
-
-        function setupPlayer(url) {
-            if (url && url.includes('.mpd')) {
-                // Setup for DASH (MPD)
-                jwp.setup({
-                    width: "100%",
-                    height: "100%",
-                    title: channelName,
-                    sources: [
-                        { file: url, type: "mpd" }
-                    ],
-                    drm: {
-                        clearkey: drmConfig
-                    },
-                    primary: "html5",
-                    error: function(event) {
-                        console.error("Error occurred while loading MPD stream:", event.message);
-                        alert("An error occurred while loading the MPD stream. Please check the URL and keys.");
-                    }
-                });
-            } else if (url && url.includes('.m3u8')) {
-                // Setup for HLS
-                jwp.setup({
-                    width: "100%",
-                    height: "100%",
-                    title: channelName,
-                    sources: [
-                        { file: url, type: "hls" }
-                    ],
-                    primary: "html5",
-                    error: function(event) {
-                        console.error("Error occurred while loading HLS stream:", event.message);
-                        alert("An error occurred while loading the HLS stream. Please check the URL.");
-                    }
-                });
-            } else {
-                console.error("Unsupported stream format or no URL provided");
-                alert("Unsupported stream format or no URL provided.");
-            }
+        // Function to setup JW Player for HLS
+        function setupJWPlayer(url) {
+            jwplayer('jw-player').setup({
+                width: "100%",
+                height: "100%",
+                title: channelName,
+                sources: [
+                    { file: url, type: "hls" }
+                ],
+                primary: "html5",
+                error: function(event) {
+                    console.error("JW Player Error:", event.message);
+                }
+            });
+            document.getElementById('jw-player').style.display = 'block'; // Show JW Player
         }
 
-        // Initialize the player with the provided stream URL
-        setupPlayer(streamUrl);
+        // Function to setup Shaka Player for DASH (MPD)
+        async function setupShakaPlayer(url) {
+            const video = document.getElementById('video');
+            const ui = video['ui'];
+            const controls = ui.getControls();
+            const player = controls.getPlayer();
+
+            player.configure({
+                drm: {
+                    clearKeys: drmConfig
+                }
+            });
+
+            // Attach player and UI to the window for console access
+            window.player = player;
+            window.ui = ui;
+
+            // Listen for error events
+            player.addEventListener('error', onPlayerErrorEvent);
+            controls.addEventListener('error', onUIErrorEvent);
+
+            // Load the manifest
+            try {
+                await player.load(url);
+                console.log('The video has now been loaded!');
+            } catch (error) {
+                onPlayerError(error);
+            }
+            document.getElementById('shaka-player').style.display = 'block'; // Show Shaka Player
+        }
+
+        // Check the stream URL to determine which player to use
+        if (streamUrl && streamUrl.includes('.m3u8')) {
+            setupJWPlayer(streamUrl); // HLS
+        } else if (streamUrl && streamUrl.includes('.mpd')) {
+            setupShakaPlayer(streamUrl); // DASH (MPD)
+        } else {
+            console.error("Unsupported stream format or no URL provided");
+            alert("Unsupported stream format or no URL provided.");
+        }
+
+        // Error handling functions
+        function onPlayerErrorEvent(errorEvent) {
+            onPlayerError(errorEvent.detail);
+        }
+
+        function onPlayerError(error) {
+            console.error('Error code', error.code, 'object', error);
+        }
+
+        function onUIErrorEvent(errorEvent) {
+            onPlayerError(errorEvent.detail);
+        }
     </script>
 </body>
 </html>
