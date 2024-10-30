@@ -307,14 +307,6 @@
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
                         const language = selectedVideo.name.split(" ")[0]; // Extract language from name
-
-        // Set up captions
-        const captionsConfig = selectedVideo.captions ? {
-            file: selectedVideo.captions,
-            label: language,
-            kind: 'captions'
-        } : null; // Use the captions URL if it exists
-
                 if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
