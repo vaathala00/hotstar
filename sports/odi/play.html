@@ -279,66 +279,72 @@
     <script src="assets/vast.js" ></script>
 
    <script>
-        let playerInstance;
-        let videoData;
+let playerInstance;
+let videoData;
 
-        // Fetch video data from JSON
-        fetch('sports.json')
-            .then(response => response.json())
-            .then(data => {
-                videoData = data;
-                populateLanguageOptions(videoData);
-                changeStream(videoData[0].id); // Set default stream to first language
-            })
-            .catch(error => console.error('Error fetching JSON:', error));
+// Fetch video data from JSON
+fetch('sports.json')
+    .then(response => response.json())
+    .then(data => {
+        videoData = data;
+        populateLanguageOptions(videoData);
+        changeStream(videoData[0].id); // Set default stream to first language
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
 
-        function populateLanguageOptions(data) {
-            const languageSelector = document.getElementById('languageSelector');
-            data.forEach(video => {
-                const option = document.createElement('option');
-                option.value = video.id; // Use video ID as the value
-                option.textContent = video.name; // Use video name as the display text
-                languageSelector.appendChild(option);
-            });
-            languageSelector.addEventListener('change', (e) => changeStream(e.target.value));
-        }
+function populateLanguageOptions(data) {
+    const languageSelector = document.getElementById('languageSelector');
+    data.forEach(video => {
+        const option = document.createElement('option');
+        option.value = video.id; // Use video ID as the value
+        option.textContent = video.name; // Use video name as the display text
+        languageSelector.appendChild(option);
+    });
+}
 
-        function changeStream(languageId) {
-            const selectedVideo = videoData.find(video => video.id === languageId);
-            if (selectedVideo) {
-                        const language = selectedVideo.name.split(" ")[0]; // Extract language from name
-                if (!playerInstance) {
-                    // Initialize JW Player
-                    playerInstance = jwplayer("player").setup({
-                        file: selectedVideo.link,
-                        width: '100%',
-                        height: '450px',
-                        autostart: true,
-                        aspectratio: '16:9',
-                        mute: false,
-                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                        skin: { name: "netflix" },
-                        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                            link: "https://telegram.me/vaathala1"
-                        },
-                        captions: {
-                            color: "#FFF",
-                            fontSize: 14,
-                            backgroundOpacity: 0,
-                            edgeStyle: "raised"
-                            language: language // Set language for captions
-                        },
-                        sharing: {
-                            sites: ['facebook', 'twitter']
-                        }
-                    });
-                } else {
-                    playerInstance.load({ file: selectedVideo.link });
-                    playerInstance.play(true); // Automatically play the selected stream
+function changeStream(languageId) {
+    const selectedVideo = videoData.find(video => video.id === languageId);
+    if (selectedVideo) {
+        if (!playerInstance) {
+            // Initialize JW Player
+            playerInstance = jwplayer("player").setup({
+                file: selectedVideo.link,
+                width: '100%',
+                height: '450px',
+                autostart: true,
+                aspectratio: '16:9',
+                mute: false,
+                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                skin: { name: "netflix" },
+                logo: {
+                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                    link: "https://telegram.me/vaathala1"
+                },
+                captions: {
+                    color: "#FFF",
+                    fontSize: 14,
+                    backgroundOpacity: 0,
+                    edgeStyle: "raised",
+                    // You can add your caption tracks here if available
+                    tracks: videoData.map(video => ({
+                        file: `path/to/captions/${video.id}.vtt`, // Update this to your actual captions URLs
+                        label: video.name,
+                        default: video.id === languageId // Default track based on selection
+                    }))
+                },
+                sharing: {
+                    sites: ['facebook', 'twitter']
                 }
-            }
+            });
+        } else {
+            playerInstance.load({ file: selectedVideo.link });
+            playerInstance.play(true); // Automatically play the selected stream
         }
+    }
+}
+
+// Chat toggle functionality and other functionalities remain unchanged...
+
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
