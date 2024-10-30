@@ -33,52 +33,56 @@
         // Get URL parameters from the current page
         var urlParams = new URLSearchParams(window.location.search);
         var streamUrl = urlParams.get("url");
-        var drmKey = urlParams.get("key");
-        var drmKeyId = urlParams.get("keyid");
         var channelName = urlParams.get("name") || "Channel Not Provided";
+
+        // Extract DRM License from URL
+        var drmLicense = '';
+        var drmKey = '';
+        if (streamUrl) {
+            var drmParts = streamUrl.split("drmLicense=");
+            if (drmParts.length > 1) {
+                var drmInfo = drmParts[1].split(":");
+                drmLicense = drmInfo[0]; // First part is the license
+                drmKey = drmInfo[1]; // Second part is the keyId
+                streamUrl = drmParts[0]; // Remove the drmLicense part from the stream URL
+            }
+        }
 
         // Setup JW Player
         var jwp = jwplayer('player');
 
         // Function to determine if the stream is DRM or HLS
         function setupPlayer(url) {
-            if (url && url.includes('.mpd')) { // Check if it's a DASH (DRM) stream
+            if (url.includes('.mpd')) { // Check if it's a DASH (DRM) stream
                 jwp.setup({
                     width: "100%",
                     height: "100%",
                     title: channelName,
+                    key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
                     sources: [
                         {file: url, type: "mpd"} // Specify type as mpd for DRM
                     ],
                     drm: {
                         clearkey: {
-                            // Assuming keys are provided in hex format
-                            [drmKey]: drmKeyId // Use the key from URL
+                            key: drmLicense || "", // Use the extracted license key
+                            keyId: drmKey || "" // Use the extracted keyId
                         }
                     },
-                    primary: "html5",
-                    error: function(event) {
-                        console.error("Error occurred while loading stream:", event.message);
-                        alert("An error occurred while loading the video. Please check the stream URL and keys.");
-                    }
+                    primary: "html5"
                 });
-            } else if (url && url.includes('.m3u8')) { // Check if it's an HLS stream
+            } else if (url.includes('.m3u8')) { // Check if it's an HLS stream
                 jwp.setup({
                     width: "100%",
                     height: "100%",
                     title: channelName,
+                    key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
                     sources: [
                         {file: url, type: "hls"} // Specify type as hls
                     ],
-                    primary: "html5",
-                    error: function(event) {
-                        console.error("Error occurred while loading HLS stream:", event.message);
-                        alert("An error occurred while loading the HLS stream. Please check the URL.");
-                    }
+                    primary: "html5"
                 });
             } else {
-                console.error("Unsupported stream format or no URL provided");
-                alert("Unsupported stream format or no URL provided.");
+                console.error("Unsupported stream format");
             }
         }
 
