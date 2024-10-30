@@ -220,40 +220,6 @@
                 width: 40px;
             }
         }
-
-               .language-selector-container {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 4px;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            z-index: 10; /* Ensure it’s above other player elements */
-        }
-
-        .language-selector-container img {
-            width: 20px; /* Adjust icon size */
-            margin-right: 5px; /* Space between icon and dropdown */
-        }
-        #languageSelector {
-            border: none;
-            border-radius: 4px;
-            padding: 5px;
-            font-size: 16px;
-        }        .language-selector-container img {
-            width: 20px; /* Adjust icon size */
-            margin-right: 5px; /* Space between icon and dropdown */
-        }
-        #languageSelector {
-            border: none;
-            border-radius: 4px;
-            padding: 5px;
-            font-size: 16px;
-        }
-
     </style>
 
 <style> 
@@ -268,7 +234,16 @@
   z-index: -100; 
         }
 
- 
+  #translateIcon {
+            z-index: 10; /* Ensure the icon is above the player */
+            opacity: 0.8; /* Slightly transparent */
+            cursor: pointer; /* Change cursor on hover */
+            margin-left: 10px; /* Space from other controls */
+        }
+        #translateIcon:hover {
+            opacity: 1; /* Fully opaque on hover */
+        }
+
 
 </style>
 
@@ -278,13 +253,13 @@
         <div id="player"></div>
 
 
-       <!--  <div class="info-box">
+        <div class="info-box">
 
              <h100>Change Stream/Language:</h100>
             <select id="languageSelector" onchange="changeStream(this.value)">
                 <!-- Options will be populated dynamically -->
             </select>
-        </div> -->
+        </div>
 
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -296,7 +271,7 @@
             <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
         </div>
         <button class="chat-toggle" id="chatToggle"></button>
-    </div> 
+    </div>
 
     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
@@ -313,7 +288,7 @@
     <script src="assets/vast.js" ></script>
 
    <script>
-        let playerInstance;
+       let playerInstance;
         let videoData;
 
         // Fetch video data from JSON
@@ -321,9 +296,20 @@
             .then(response => response.json())
             .then(data => {
                 videoData = data;
+                populateLanguageOptions(videoData);
                 changeStream(videoData[0].id); // Set default stream to first language
             })
             .catch(error => console.error('Error fetching JSON:', error));
+
+        function populateLanguageOptions(data) {
+            const languageSelector = document.getElementById('languageSelector');
+            data.forEach(video => {
+                const option = document.createElement('option');
+                option.value = video.id;
+                option.textContent = video.name;
+                languageSelector.appendChild(option);
+            });
+        }
 
         function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
@@ -343,14 +329,35 @@
                             file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
                             link: "https://telegram.me/vaathala1"
                         },
+                        captions: {
+                            color: "#FFF",
+                            fontSize: 14,
+                            backgroundOpacity: 0,
+                            edgeStyle: "raised"
+                        },
                         sharing: {
                             sites: ['facebook', 'twitter']
-                        },
-                        events: {
-                            onReady: function() {
-                                addLanguageSelector(); // Call function to add language selector
-                            }
                         }
+                    });
+
+                    // Listen for player ready event to add the translate icon
+                    playerInstance.on('ready', function() {
+                        const controlsContainer = document.querySelector('.jw-controlbar'); // Select the JW Player controls container
+
+                        // Create the translate icon element
+                        const translateIcon = document.createElement('img');
+                        translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
+                        translateIcon.alt = "Translate";
+                        translateIcon.id = "translateIcon"; // Set ID for styling
+                        translateIcon.style.width = "30px"; // Set the width of the icon
+
+                        // Append the icon to the controls container
+                        controlsContainer.appendChild(translateIcon);
+
+                        // Add click event listener for the icon
+                        translateIcon.addEventListener('click', function() {
+                            alert('Translate icon clicked!'); // Replace with your functionality
+                        });
                     });
                 } else {
                     playerInstance.load({ file: selectedVideo.link });
@@ -358,41 +365,6 @@
                 }
             }
         }
-
-        function addLanguageSelector() {
-            // Create language selector container
-            const languageSelectorContainer = document.createElement('div');
-            languageSelectorContainer.className = 'language-selector-container';
-
-            // Create icon element
-            const icon = document.createElement('img');
-            icon.src = 'https://i.postimg.cc/FzfdpCBS/translate.png'; // Icon URL
-            icon.alt = 'Translate Icon';
-            languageSelectorContainer.appendChild(icon);
-
-            // Create language selector element
-            const languageSelector = document.createElement('select');
-            languageSelector.id = 'languageSelector';
-            languageSelector.onchange = function() {
-                changeStream(this.value);
-            };
-
-            // Populate options
-            videoData.forEach(video => {
-                const option = document.createElement('option');
-                option.value = video.id;
-                option.textContent = video.name;
-                languageSelector.appendChild(option);
-            });
-
-            // Append selector to the container
-            languageSelectorContainer.appendChild(languageSelector);
-
-            // Append container to the player
-            const playerContainer = document.getElementById('player');
-            playerContainer.appendChild(languageSelectorContainer);
-        }
-
 
         // Chat toggle functionality
         document.getElementById('chatToggle').addEventListener('click', function() {
@@ -435,14 +407,7 @@
                 chatToggle.style.top = (e.clientY - offsetY) + 'px';
             }
         }
-
-        // Hide the instruction after 20 seconds
-        setTimeout(() => {
-            const instruction = document.getElementById('scrollInstruction');
-            instruction.style.display = 'none';
-        }, 20000);
     </script>
-
 
 </body>
 </html>
