@@ -221,18 +221,19 @@
             }
         }
 
-        #languageSelector {
+               .language-selector-container {
             position: absolute;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             background-color: rgba(255, 255, 255, 0.8);
-            border: none;
             border-radius: 4px;
             padding: 5px;
-            font-size: 16px;
-            z-index: 10; /* Ensure it's above other player elements */
+            display: flex;
+            align-items: center;
+            z-index: 10; /* Ensure it’s above other player elements */
         }
+
         .language-selector-container img {
             width: 20px; /* Adjust icon size */
             margin-right: 5px; /* Space between icon and dropdown */
