@@ -27,18 +27,26 @@
 </head>
 <body>
 
-    <video id="player" controls></video>
+    <div id="player"></div>
 
     <script>
         // Get URL parameters from the current page
-        var urlParams = new URLSearchParams(window.location.search);
-        var streamUrl = urlParams.get("url");
-        var drmKey = urlParams.get("key");
-        var drmKeyId = urlParams.get("keyid");
-        var channelName = urlParams.get("name") || "Channel Not Provided";
+        const urlParams = new URLSearchParams(window.location.search);
+        const streamUrl = urlParams.get("url");
+        const keysParam = urlParams.get('keys');
+        const channelName = urlParams.get("name") || "Channel Not Provided";
+
+        // Parse keys
+        let drmConfig = {};
+        if (keysParam) {
+            const keyPairs = keysParam.split(':');
+            if (keyPairs.length === 2) {
+                drmConfig[keyPairs[0]] = keyPairs[1]; // keyId: key
+            }
+        }
 
         // Setup JW Player
-        var jwp = jwplayer('player');
+        const jwp = jwplayer('player');
 
         // Function to determine if the stream is DRM or HLS
         function setupPlayer(url) {
@@ -48,13 +56,10 @@
                     height: "100%",
                     title: channelName,
                     sources: [
-                        {file: url, type: "mpd"} // Specify type as mpd for DRM
+                        { file: url, type: "mpd" } // Specify type as mpd for DRM
                     ],
                     drm: {
-                        clearkey: {
-                            // Assuming keys are provided in hex format
-                            [drmKey]: drmKeyId // Use the key from URL
-                        }
+                        clearkey: drmConfig // Use parsed DRM keys
                     },
                     primary: "html5",
                     error: function(event) {
@@ -68,7 +73,7 @@
                     height: "100%",
                     title: channelName,
                     sources: [
-                        {file: url, type: "hls"} // Specify type as hls
+                        { file: url, type: "hls" } // Specify type as hls
                     ],
                     primary: "html5",
                     error: function(event) {
