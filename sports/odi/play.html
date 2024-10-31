@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live </title>
-
-  <link rel="stylesheet" href="assets/style.css">
-
+    <title>Live Stream</title>
+    <link rel="stylesheet" href="assets/style.css">
 
     <style>
- body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,14 +23,12 @@
             margin: 20px;
             position: relative;
         }
-
         #player {
             width: 100%;
             max-width: 800px;
             margin-bottom: 20px;
             position: relative;
         }
-
         .video-wrapper {
             width: 100%;
             max-width: 800px;
@@ -57,11 +53,10 @@
             align-items: center;
             gap: 15px;
             box-sizing: border-box;
-            position: relative;
         }
         .info-box .logo {
-            width: 80px; /* Adjust size as needed */
-            height: 80px; /* Adjust size as needed */
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
@@ -109,20 +104,20 @@
             bottom: 20px;
             right: 20px;
             display: none;
-            z-index: 1000; /* Ensure it's on top of other content */
-            background: #fff; /* Ensure the chat box has a white background */
-            overflow: hidden; /* Prevent content overflow */
+            z-index: 1000;
+            background: #fff;
+            overflow: hidden;
         }
         .chat-container iframe {
             width: 100%;
-            height: calc(100% - 40px); /* Adjust height to accommodate the close button */
+            height: calc(100% - 40px);
             border: none;
-            border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+            border-radius: 8px 8px 0 0;
         }
         .chat-close {
             width: 40px;
             height: 40px;
-            background-color: #f44336; /* Red background */
+            background-color: #f44336;
             color: white;
             border: none;
             border-radius: 50%;
@@ -133,11 +128,11 @@
             top: 5px;
             right: 10px;
             cursor: pointer;
-            z-index: 1001; /* Ensure it's above other content */
+            z-index: 1001;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .chat-close:before {
-            content: '×'; /* Unicode multiplication sign */
+            content: '×';
             font-size: 24px;
         }
         .chat-toggle {
@@ -155,8 +150,8 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1001; /* Ensure it's above the chat box */
-            user-select: none; /* Prevent text selection during drag */
+            z-index: 1001;
+            user-select: none;
         }
         .chat-toggle:after {
             content: "Chat";
@@ -169,243 +164,203 @@
             position: fixed;
             bottom: 20px;
             left: 20px;
-            z-index: 1001; /* Ensure it's above other content */
+            z-index: 1001;
         }
         .telegram-link img {
-            width: 50px; /* Adjust size as needed */
+            width: 50px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
-        @media (max-width: 600px) {
-            .video-wrapper {
-                max-width: 100%;
-                margin-bottom: 10px;
-            }
-            .video-wrapper iframe {
-                height: 250px; /* Adjust height for small screens */
-            }
-            .info-box {
-                width: calc(100% - 40px);
-                font-size: 14px; /* Adjust font size for small screens */
-                flex-direction: column; /* Stack logo and content vertically */
-                align-items: center; /* Center items */
-                gap: 10px; /* Reduce gap between logo and content */
-                padding: 10px; /* Reduce padding */
-                box-sizing: border-box; /* Ensure padding does not affect width */
-            }
-            .info-box .logo {
-                width: 60px; /* Adjust size for small screens */
-                height: 60px; /* Adjust size for small screens */
-            }
-            .info-box .info-content {
-                text-align: center; /* Center text on small screens */
-            }
-            .chat-container {
-                width: calc(100% - 40px);
-                height: 400px;
-            }
-            .chat-toggle {
-                bottom: 10px;
-                right: 10px;
-                width: 40px;
-                height: 40px;
-            }
-            .telegram-link {
-                bottom: 10px;
-                left: 10px;
-            }
-            .telegram-link img {
-                width: 40px;
-            }
+        #languageDropdown {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-    </style>
-
-<style> 
-
-.top-center {
-            position: fixed;
-            top: 516px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white; /* White text color */
-            font-size: 20px; /* Increase font size for visibility */
-  z-index: -100; 
-        }
-
         #translateIcon {
-            z-index: 10; /* Ensure the icon is above the player */
-            opacity: 0.8; /* Slightly transparent */
-            cursor: pointer; /* Change cursor on hover */
-            margin-left: 10px; /* Space from other controls */
-            width: 30px; /* Set the width of the icon */
+            z-index: 10;
+            opacity: 0.8;
+            cursor: pointer;
+            margin-left: 10px;
+            width: 30px;
         }
         #translateIcon:hover {
-            opacity: 1; /* Fully opaque on hover */
+            opacity: 1;
         }
-
-</style>
-
+    </style>
 </head>
 <body>
     <div class="container">
         <div id="player"></div>
-
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-
-    <img id="translateIcon" src="https://i.postimg.cc/FzfdpCBS/translate.png" alt="Translate" style="cursor: pointer;">
-    <select id="languageSelector" style="display: none;" onchange="changeStream(this.value)">
-        <!-- Options will be populated dynamically -->
-    </select>
-
-
-        <div class="chat-container" id="chatBox">
-            <button class="chat-close" id="chatClose"></button>
-            <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
+        <!-- Dropdown for languages -->
+        <div id="languageDropdown">
+            <select id="languageSelector" onchange="changeStream(this.value)">
+                <!-- Options will be populated dynamically -->
+            </select>
         </div>
-        <button class="chat-toggle" id="chatToggle"></button>
     </div>
 
+    <div class="chat-container" id="chatBox">
+        <button class="chat-close" id="chatClose"></button>
+        <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
+    </div>
+    <button class="chat-toggle" id="chatToggle"></button>
     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
-<!-- div class="scroll-instruction" id="scrollInstruction">
-<p class="top-center">Scroll down to change the language.</p>
-</div> -->
-
-
     <!-- JW Player scripts -->
-    <script src="assets/KB5zFt7A.js" ></script>
-    <script src="assets/jwpsrv.js" ></script>
-    <script src="assets/vast.js" ></script>
+    <script src="assets/KB5zFt7A.js"></script>
+    <script src="assets/jwpsrv.js"></script>
+    <script src="assets/vast.js"></script>
 
-   <script>
-let playerInstance;
-let videoData;
+    <script>
+        let playerInstance;
+        let videoData;
 
-// Fetch video data from JSON
-fetch('sports.json')
-    .then(response => response.json())
-    .then(data => {
-        videoData = data;
-        populateLanguageOptions(videoData);
-        changeStream(videoData[0].id); // Set default stream to first language
-    })
-    .catch(error => console.error('Error fetching JSON:', error));
+        // Fetch video data from JSON
+        fetch('sports.json')
+            .then(response => response.json())
+            .then(data => {
+                videoData = data;
+                populateLanguageOptions(videoData);
+                changeStream(videoData[0].id); // Set default stream to first language
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
 
-function populateLanguageOptions(data) {
-    const languageSelector = document.getElementById('languageSelector');
-    data.forEach(video => {
-        const option = document.createElement('option');
-        option.value = video.id;
-        option.textContent = video.name;
-        languageSelector.appendChild(option);
-    });
-}
-
-function changeStream(languageId) {
-    const selectedVideo = videoData.find(video => video.id === languageId);
-    if (selectedVideo) {
-        if (!playerInstance) {
-            // Initialize JW Player
-            playerInstance = jwplayer("player").setup({
-                file: selectedVideo.link,
-                width: '100%',
-                height: '450px',
-                autostart: true,
-                aspectratio: '16:9',
-                mute: false,
-                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                skin: { name: "netflix" },
-                logo: {
-                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                    link: "https://telegram.me/vaathala1"
-                },
-                captions: {
-                    color: "#FFF",
-                    fontSize: 14,
-                    backgroundOpacity: 0,
-                    edgeStyle: "raised"
-                },
-                sharing: {
-                    sites: ['facebook', 'twitter']
-                }
+        function populateLanguageOptions(data) {
+            const languageSelector = document.getElementById('languageSelector');
+            data.forEach(video => {
+                const option = document.createElement('option');
+                option.value = video.id;
+                option.textContent = video.name;
+                languageSelector.appendChild(option);
             });
-
-            // Listen for player ready event to add the translate icon
-            playerInstance.on('ready', function() {
-                const controlsContainer = document.querySelector('.jw-controlbar'); // Select the JW Player controls container
-
-                // Create the translate icon element
-                const translateIcon = document.createElement('img');
-                translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
-                translateIcon.alt = "Translate";
-                translateIcon.id = "translateIcon"; // Set ID for styling
-                translateIcon.style.width = "30px"; // Set the width of the icon
-
-                // Append the icon to the controls container
-                controlsContainer.appendChild(translateIcon);
-
-                // Add click event listener for the icon
-                translateIcon.addEventListener('click', function() {
-                    const languageSelector = document.getElementById('languageSelector');
-                    languageSelector.style.display = languageSelector.style.display === 'none' ? 'block' : 'none'; // Toggle visibility
-                });
-            });
-        } else {
-            playerInstance.load({ file: selectedVideo.link });
-            playerInstance.play(true); // Automatically play the selected stream
         }
-    }
-}
 
-// Chat toggle functionality
-document.getElementById('chatToggle').addEventListener('click', function() {
-    const chatBox = document.getElementById('chatBox');
-    const chatToggle = document.getElementById('chatToggle');
-    if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-        chatBox.style.display = 'block';
-        chatToggle.classList.add('open');
-    } else {
-        chatBox.style.display = 'none';
-        chatToggle.classList.remove('open');
-    }
-});
+        function changeStream(languageId) {
+            const selectedVideo = videoData.find(video => video.id === languageId);
+            if (selectedVideo) {
+                if (!playerInstance) {
+                    // Initialize JW Player
+                    playerInstance = jwplayer("player").setup({
+                        file: selectedVideo.link,
+                        width: '100%',
+                        height: '450px',
+                        autostart: true,
+                        aspectratio: '16:9',
+                        mute: false,
+                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
+                        skin: { name: "netflix" },
+                        logo: {
+                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                            link: "https://telegram.me/vaathala1"
+                        },
+                        captions: {
+                            color: "#FFF",
+                            fontSize: 14,
+                            backgroundOpacity: 0,
+                            edgeStyle: "raised"
+                        },
+                        sharing: {
+                            sites: ['facebook', 'twitter']
+                        }
+                    });
 
-document.getElementById('chatClose').addEventListener('click', function() {
-    const chatBox = document.getElementById('chatBox');
-    chatBox.style.display = 'none';
-    document.getElementById('chatToggle').classList.remove('open');
-});
+                    playerInstance.on('ready', function() {
+                        // Add translate icon in JW Player controls
+                        const controlsContainer = document.querySelector('.jw-controlbar');
+                        
+                        // Create the translate icon element
+                        const translateIcon = document.createElement('img');
+                        translateIcon.id = "translateIcon"; // Add ID for the translate icon
+                        translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
+                        translateIcon.alt = "Translate";
+                        translateIcon.style.width = "30px";
+                        translateIcon.style.cursor = "pointer";
+                        translateIcon.style.marginLeft = "10px";
 
-// Make the chat toggle button draggable
-const chatToggle = document.getElementById('chatToggle');
-let isDragging = false;
-let offsetX, offsetY;
+                        // Append the icon to the controls container
+                        controlsContainer.appendChild(translateIcon);
 
-chatToggle.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-    offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-    });
-});
+                        // Add click event listener for the icon
+                        translateIcon.addEventListener('click', function(event) {
+                            event.stopPropagation(); // Prevent event from bubbling up
+                            const dropdown = document.getElementById('languageDropdown');
+                            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 
-function handleMouseMove(e) {
-    if (isDragging) {
-        chatToggle.style.left = (e.clientX - offsetX) + 'px';
-        chatToggle.style.top = (e.clientY - offsetY) + 'px';
-    }
-}
+                            // Position the dropdown relative to the translate icon
+                            const rect = translateIcon.getBoundingClientRect();
+                            dropdown.style.top = `${rect.bottom}px`;
+                            dropdown.style.left = `${rect.left}px`;
+                        });
+                    });
+                } else {
+                    playerInstance.load({ file: selectedVideo.link });
+                    playerInstance.play(true);
+                }
+            }
+        }
 
+        // Chat toggle functionality
+        document.getElementById('chatToggle').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
+            } else {
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
+        });
+
+        document.getElementById('chatClose').addEventListener('click', function() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.style.display = 'none';
+            document.getElementById('chatToggle').classList.remove('open');
+        });
+
+        // Close dropdown on clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('languageDropdown');
+            const translateIcon = document.getElementById('translateIcon');
+            if (!translateIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // Make the chat toggle button draggable
+        const chatToggle = document.getElementById('chatToggle');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatToggle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
+
+        function handleMouseMove(e) {
+            if (isDragging) {
+                chatToggle.style.left = (e.clientX - offsetX) + 'px';
+                chatToggle.style.top = (e.clientY - offsetY) + 'px';
+            }
+        }
     </script>
 </body>
 </html>
