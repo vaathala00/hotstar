@@ -173,14 +173,22 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
-        #languageDropdown {
-            display: none;
+        .dropdown {
             position: absolute;
+            top: 10px;
+            right: 10px;
             background: white;
             border: 1px solid #ccc;
             border-radius: 5px;
+            display: none;
             z-index: 100;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown select {
+            border: none;
+            background: none;
+            padding: 5px;
+            cursor: pointer;
         }
         #translateIcon {
             z-index: 10;
@@ -199,13 +207,6 @@
         <div id="player"></div>
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-        <!-- Dropdown for languages -->
-        <div id="languageDropdown">
-            <select id="languageSelector" onchange="changeStream(this.value)">
-                <!-- Options will be populated dynamically -->
-            </select>
         </div>
     </div>
 
@@ -238,13 +239,23 @@
             .catch(error => console.error('Error fetching JSON:', error));
 
         function populateLanguageOptions(data) {
-            const languageSelector = document.getElementById('languageSelector');
+            const dropdown = document.createElement('div');
+            dropdown.classList.add('dropdown');
+            const select = document.createElement('select');
+            select.id = 'languageSelector';
+            select.onchange = function() {
+                changeStream(this.value);
+            };
+
             data.forEach(video => {
                 const option = document.createElement('option');
                 option.value = video.id;
                 option.textContent = video.name;
-                languageSelector.appendChild(option);
+                select.appendChild(option);
             });
+
+            dropdown.appendChild(select);
+            document.getElementById('player').appendChild(dropdown);
         }
 
         function changeStream(languageId) {
@@ -259,50 +270,35 @@
                         autostart: true,
                         aspectratio: '16:9',
                         mute: false,
-                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
-                        skin: { name: "netflix" },
-                        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                            link: "https://telegram.me/vaathala1"
-                        },
-                        captions: {
-                            color: "#FFF",
-                            fontSize: 14,
-                            backgroundOpacity: 0,
-                            edgeStyle: "raised"
-                        },
-                        sharing: {
-                            sites: ['facebook', 'twitter']
+                        key: "YOUR_JWPLAYER_KEY",
+                        advertising: {
+                            client: "vast",
+                            tag: "YOUR_AD_TAG"
                         }
                     });
 
                     playerInstance.on('ready', function() {
-                        // Add translate icon in JW Player controls
-                        const controlsContainer = document.querySelector('.jw-controlbar');
-                        
-                        // Create the translate icon element
+                        // Create translate icon element
                         const translateIcon = document.createElement('img');
-                        translateIcon.id = "translateIcon"; // Add ID for the translate icon
-                        translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
+                        translateIcon.id = "translateIcon";
+                        translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png";
                         translateIcon.alt = "Translate";
                         translateIcon.style.width = "30px";
                         translateIcon.style.cursor = "pointer";
-                        translateIcon.style.marginLeft = "10px";
 
-                        // Append the icon to the controls container
+                        // Append the translate icon to JW Player controls
+                        const controlsContainer = document.querySelector('.jw-controlbar');
                         controlsContainer.appendChild(translateIcon);
 
-                        // Add click event listener for the icon
+                        // Add click event listener for translate icon
                         translateIcon.addEventListener('click', function(event) {
-                            event.stopPropagation(); // Prevent event from bubbling up
-                            const dropdown = document.getElementById('languageDropdown');
+                            const dropdown = document.querySelector('.dropdown');
                             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-
-                            // Position the dropdown relative to the translate icon
-                            const rect = translateIcon.getBoundingClientRect();
-                            dropdown.style.top = `${rect.bottom}px`;
-                            dropdown.style.left = `${rect.left}px`;
                         });
+
+                        // Append dropdown to JW Player controls
+                        const dropdown = document.querySelector('.dropdown');
+                        controlsContainer.appendChild(dropdown);
                     });
                 } else {
                     playerInstance.load({ file: selectedVideo.link });
@@ -332,7 +328,7 @@
 
         // Close dropdown on clicking outside
         document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('languageDropdown');
+            const dropdown = document.querySelector('.dropdown');
             const translateIcon = document.getElementById('translateIcon');
             if (!translateIcon.contains(event.target) && !dropdown.contains(event.target)) {
                 dropdown.style.display = 'none';
