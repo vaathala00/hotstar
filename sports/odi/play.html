@@ -252,18 +252,15 @@
     <div class="container">
         <div id="player"></div>
 
-
-        <div class="info-box">
-
-             <h100>Change Stream/Language:</h100>
-            <select id="languageSelector" onchange="changeStream(this.value)">
-                <!-- Options will be populated dynamically -->
-            </select>
-        </div>
-
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+
+
+    <img id="translateIcon" src="https://i.postimg.cc/FzfdpCBS/translate.png" alt="Translate" style="cursor: pointer;">
+    <select id="languageSelector" style="display: none;" onchange="changeStream(this.value)">
+        <!-- Options will be populated dynamically -->
+    </select>
 
 
         <div class="chat-container" id="chatBox">
@@ -288,125 +285,127 @@
     <script src="assets/vast.js" ></script>
 
    <script>
-        let playerInstance;
-        let videoData;
+let playerInstance;
+let videoData;
 
-        // Fetch video data from JSON
-        fetch('sports.json')
-            .then(response => response.json())
-            .then(data => {
-                videoData = data;
-                populateLanguageOptions(videoData);
-                changeStream(videoData[0].id); // Set default stream to first language
-            })
-            .catch(error => console.error('Error fetching JSON:', error));
+// Fetch video data from JSON
+fetch('sports.json')
+    .then(response => response.json())
+    .then(data => {
+        videoData = data;
+        populateLanguageOptions(videoData);
+        changeStream(videoData[0].id); // Set default stream to first language
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
 
-        function populateLanguageOptions(data) {
-            const languageSelector = document.getElementById('languageSelector');
-            data.forEach(video => {
-                const option = document.createElement('option');
-                option.value = video.id;
-                option.textContent = video.name;
-                languageSelector.appendChild(option);
-            });
-        }
+function populateLanguageOptions(data) {
+    const languageSelector = document.getElementById('languageSelector');
+    data.forEach(video => {
+        const option = document.createElement('option');
+        option.value = video.id;
+        option.textContent = video.name;
+        languageSelector.appendChild(option);
+    });
+}
 
-        function changeStream(languageId) {
-            const selectedVideo = videoData.find(video => video.id === languageId);
-            if (selectedVideo) {
-                if (!playerInstance) {
-                    // Initialize JW Player
-                    playerInstance = jwplayer("player").setup({
-                        file: selectedVideo.link,
-                        width: '100%',
-                        height: '450px',
-                        autostart: true,
-                        aspectratio: '16:9',
-                        mute: false,
-                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                        skin: { name: "netflix" },
-                        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                            link: "https://telegram.me/vaathala1"
-                        },
-                        captions: {
-                            color: "#FFF",
-                            fontSize: 14,
-                            backgroundOpacity: 0,
-                            edgeStyle: "raised"
-                        },
-                        sharing: {
-                            sites: ['facebook', 'twitter']
-                        }
-                    });
-
-                    // Listen for player ready event to add the translate icon
-                    playerInstance.on('ready', function() {
-                        const controlsContainer = document.querySelector('.jw-controlbar'); // Select the JW Player controls container
-
-                        // Create the translate icon element
-                        const translateIcon = document.createElement('img');
-                        translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
-                        translateIcon.alt = "Translate";
-                        translateIcon.id = "translateIcon"; // Set ID for styling
-                        translateIcon.style.width = "30px"; // Set the width of the icon
-
-                        // Append the icon to the controls container
-                        controlsContainer.appendChild(translateIcon);
-
-                        // Add click event listener for the icon
-                        translateIcon.addEventListener('click', function() {
-                            alert('Translate icon clicked!'); // Replace with your functionality
-                        });
-                    });
-                } else {
-                    playerInstance.load({ file: selectedVideo.link });
-                    playerInstance.play(true); // Automatically play the selected stream
+function changeStream(languageId) {
+    const selectedVideo = videoData.find(video => video.id === languageId);
+    if (selectedVideo) {
+        if (!playerInstance) {
+            // Initialize JW Player
+            playerInstance = jwplayer("player").setup({
+                file: selectedVideo.link,
+                width: '100%',
+                height: '450px',
+                autostart: true,
+                aspectratio: '16:9',
+                mute: false,
+                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                skin: { name: "netflix" },
+                logo: {
+                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                    link: "https://telegram.me/vaathala1"
+                },
+                captions: {
+                    color: "#FFF",
+                    fontSize: 14,
+                    backgroundOpacity: 0,
+                    edgeStyle: "raised"
+                },
+                sharing: {
+                    sites: ['facebook', 'twitter']
                 }
-            }
-        }
-
-        // Chat toggle functionality
-        document.getElementById('chatToggle').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            const chatToggle = document.getElementById('chatToggle');
-            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'block';
-                chatToggle.classList.add('open');
-            } else {
-                chatBox.style.display = 'none';
-                chatToggle.classList.remove('open');
-            }
-        });
-
-        document.getElementById('chatClose').addEventListener('click', function() {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.style.display = 'none';
-            document.getElementById('chatToggle').classList.remove('open');
-        });
-
-        // Make the chat toggle button draggable
-        const chatToggle = document.getElementById('chatToggle');
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        chatToggle.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-            document.addEventListener('mousemove', handleMouseMove);
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-                document.removeEventListener('mousemove', handleMouseMove);
             });
-        });
 
-        function handleMouseMove(e) {
-            if (isDragging) {
-                chatToggle.style.left = (e.clientX - offsetX) + 'px';
-                chatToggle.style.top = (e.clientY - offsetY) + 'px';
-            }
+            // Listen for player ready event to add the translate icon
+            playerInstance.on('ready', function() {
+                const controlsContainer = document.querySelector('.jw-controlbar'); // Select the JW Player controls container
+
+                // Create the translate icon element
+                const translateIcon = document.createElement('img');
+                translateIcon.src = "https://i.postimg.cc/FzfdpCBS/translate.png"; // Your icon URL
+                translateIcon.alt = "Translate";
+                translateIcon.id = "translateIcon"; // Set ID for styling
+                translateIcon.style.width = "30px"; // Set the width of the icon
+
+                // Append the icon to the controls container
+                controlsContainer.appendChild(translateIcon);
+
+                // Add click event listener for the icon
+                translateIcon.addEventListener('click', function() {
+                    const languageSelector = document.getElementById('languageSelector');
+                    languageSelector.style.display = languageSelector.style.display === 'none' ? 'block' : 'none'; // Toggle visibility
+                });
+            });
+        } else {
+            playerInstance.load({ file: selectedVideo.link });
+            playerInstance.play(true); // Automatically play the selected stream
         }
+    }
+}
+
+// Chat toggle functionality
+document.getElementById('chatToggle').addEventListener('click', function() {
+    const chatBox = document.getElementById('chatBox');
+    const chatToggle = document.getElementById('chatToggle');
+    if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+        chatBox.style.display = 'block';
+        chatToggle.classList.add('open');
+    } else {
+        chatBox.style.display = 'none';
+        chatToggle.classList.remove('open');
+    }
+});
+
+document.getElementById('chatClose').addEventListener('click', function() {
+    const chatBox = document.getElementById('chatBox');
+    chatBox.style.display = 'none';
+    document.getElementById('chatToggle').classList.remove('open');
+});
+
+// Make the chat toggle button draggable
+const chatToggle = document.getElementById('chatToggle');
+let isDragging = false;
+let offsetX, offsetY;
+
+chatToggle.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+    offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', handleMouseMove);
+    });
+});
+
+function handleMouseMove(e) {
+    if (isDragging) {
+        chatToggle.style.left = (e.clientX - offsetX) + 'px';
+        chatToggle.style.top = (e.clientY - offsetY) + 'px';
+    }
+}
+
     </script>
 </body>
 </html>
