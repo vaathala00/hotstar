@@ -7,14 +7,7 @@
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
+    
             background-color: #f4f4f4;
         }
         h2 {
@@ -24,8 +17,7 @@
         }
         #player {
             width: 100%;
-            max-width: 900px; 
-            height: 70vh;
+            height: 100%; /* Set height to 100% */
             background-color: black;
         }
 
@@ -58,20 +50,17 @@
         jwp.setup({
             width: "100%",
             height: "100%",
-            primary: "html5",
+            title: channelName || "Live Stream", // Add title to the player
             key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
             sources: [
-                {
-                    file: channelUrl, 
-                    label: "Live Stream",
-                    default: true
-                }
+                {file: channelUrl, type: "mp4", label: "Live Stream", default: true}
             ],
+            image: "https://example.com/thumbnail.jpg", // Replace with your thumbnail URL
             sharing: {
                 heading: "Share",
-                sites: ["facebook", "twitter", "linkedin", "email"]
+                sites: ["facebook", "twitter", "googleplus", "tumblr", "pinterest", "reddit", "linkedin", "email"]
             },
-            image: "https://example.com/thumbnail.jpg" // Replace with your thumbnail URL
+            primary: "html5"
         });
     </script>
 
