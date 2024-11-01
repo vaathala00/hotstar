@@ -7,7 +7,6 @@
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
     <style>
         body, html {
-    
             background-color: #f4f4f4;
         }
         h2 {
@@ -17,7 +16,7 @@
         }
         #player {
             width: 100%;
-            height: 100%; /* Set height to 100% */
+            height: 100%;
             background-color: black;
         }
 
@@ -27,7 +26,7 @@
                 font-size: 1rem;
             }
             #player {
-                height: 60vh; /* Adjusts player height for smaller screens */
+                height: 60vh;
             }
         }
     </style>
@@ -43,6 +42,9 @@
         const channelUrl = urlParams.get("url");
         const channelName = urlParams.get("name");
 
+        console.log("Channel URL:", channelUrl);
+        console.log("Channel Name:", channelName);
+
         document.getElementById("channelName").textContent = channelName || "Channel Not Provided";
 
         // Initialize JW Player
@@ -50,7 +52,7 @@
         jwp.setup({
             width: "100%",
             height: "100%",
-            title: channelName || "Live Stream", // Add title to the player
+            title: channelName || "Live Stream",
             key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
             sources: [
                 {file: channelUrl, type: "mp4", label: "Live Stream", default: true}
@@ -61,6 +63,11 @@
                 sites: ["facebook", "twitter", "googleplus", "tumblr", "pinterest", "reddit", "linkedin", "email"]
             },
             primary: "html5"
+        });
+
+        // Error handling
+        jwp.on('error', function(event) {
+            console.error("Error:", event);
         });
     </script>
 
