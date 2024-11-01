@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Allinone Live Tv</title>
+    <title>VT</title>
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
     <style>
-        body, html {
-            background-color: #f4f4f4;
-        }
+html,body{padding:0;margin:0;height:100%}
+#player{width:100%;height:100%;overflow:hidden;background-color:#000}
+
         h2 {
             margin: 10px 0;
             text-align: center;
@@ -16,7 +16,7 @@
         }
         #player {
             width: 100%;
-            height: 100%;
+            height: 100%; /* Set height to 100% */
             background-color: black;
         }
 
@@ -26,14 +26,14 @@
                 font-size: 1rem;
             }
             #player {
-                height: 60vh;
+                height: 60vh; /* Adjusts player height for smaller screens */
             }
         }
     </style>
 </head>
 <body>
 
-    <h2 id="channelName"></h2>
+    <!--<h2 id="channelName"></h2> -->
 
     <div id="player"></div>
 
@@ -42,9 +42,6 @@
         const channelUrl = urlParams.get("url");
         const channelName = urlParams.get("name");
 
-        console.log("Channel URL:", channelUrl);
-        console.log("Channel Name:", channelName);
-
         document.getElementById("channelName").textContent = channelName || "Channel Not Provided";
 
         // Initialize JW Player
@@ -52,22 +49,20 @@
         jwp.setup({
             width: "100%",
             height: "100%",
-            title: channelName || "Live Stream",
-            key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
+            primary: "html5",
+            title: channelName || "Live Stream", // Add title to the player
             sources: [
-                {file: channelUrl, type: "mp4", label: "Live Stream", default: true}
+                {
+                    file: channelUrl, 
+                    label: "Live Stream",
+                    default: true
+                }
             ],
-            image: "https://example.com/thumbnail.jpg", // Replace with your thumbnail URL
             sharing: {
                 heading: "Share",
-                sites: ["facebook", "twitter", "googleplus", "tumblr", "pinterest", "reddit", "linkedin", "email"]
+                sites: ["facebook", "twitter", "linkedin", "email"]
             },
-            primary: "html5"
-        });
-
-        // Error handling
-        jwp.on('error', function(event) {
-            console.error("Error:", event);
+            image: "https://example.com/thumbnail.jpg" // Replace with your thumbnail URL
         });
     </script>
 
