@@ -24,6 +24,12 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const channelUrl = urlParams.get("url");
+        const channelName = urlParams.get("name") || "Live Stream"; // Use the name parameter or default to "Live Stream"
+
+if (!channelUrl) {
+    alert('No stream URL provided. Please check the link.');
+    throw new Error('Stream URL is missing');
+}
 
         // Initialize JW Player
         const jwp = jwplayer('player');
@@ -32,7 +38,7 @@
             height: "100%",
             primary: "html5",
             key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=",
-            title: channelName || "Live Stream", // Add title to the playe
+            title: channelName, // Use the name parameter as the title
             sources: [
                 {
                     file: channelUrl, 
