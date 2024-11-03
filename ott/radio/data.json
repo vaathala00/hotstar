@@ -1,17 +1,37 @@
 [
-    {
-        "name": "Radio mirchi tamil",
-        "url": "https://tamil.crabdance.com:8002/1",
-        "thumbnail": "https://economictimes.indiatimes.com/thumb/msid-95436080,width-1200,height-900,resizemode-4,imgsize-28496/1.jpg?from=mdr"
-    },
-    {
-        "name": "Radio city",
-        "url": "https://tamil.crabdance.com:8002/5",
-        "thumbnail": "https://exchange4media.gumlet.io/news-photo/110434-RadioCity.webp?w=400&dpr=2.6"
-    },
-    {
-        "name": "Hello FM",
-        "url": "https://tamil.crabdance.com:8002/3",
-        "thumbnail": "https://the-media-ant.mo.cloudinary.net/medias/5bf66e73d630777bc61540ff/1565809296740/cdd80fbb467e89ae0e39dc3896dc78fb.png?tx=w_750"
-    }
+   {
+       "name": "Radio mirchi tamil",
+       "url": "https://tamil.crabdance.com:8002/1",
+       "thumbnail": "https://economictimes.indiatimes.com/thumb/msid-95436080,width-1200,height-900,resizemode-4,imgsize-28496/1.jpg?from=mdr"
+   },
+   {
+       "name": "Radio city",
+       "url": "https://tamil.crabdance.com:8002/5",
+       "thumbnail": "https://exchange4media.gumlet.io/news-photo/110434-RadioCity.webp?w=400&dpr=2.6"
+   },
+   {
+       "name": "Hello FM",
+       "url": "https://tamil.crabdance.com:8002/3",
+       "thumbnail": "https://the-media-ant.mo.cloudinary.net/medias/5bf66e73d630777bc61540ff/1565809296740/cdd80fbb467e89ae0e39dc3896dc78fb.png?tx=w_750"
+   },
+   {
+       "name": "Bif FM",
+       "url": "https://tamil.crabdance.com:8002/4",
+       "thumbnail": "https://i.ytimg.com/vi/JeJ_sWZFLRM/mqdefault.jpg"
+   },
+   {
+       "name": "Sooriyan",
+       "url": "https://radio.lotustechnologieslk.net:8006/;",
+       "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/51/Sooriyan_FM_logo.png"
+   },
+   {
+       "name": "FM Gold Chennai",
+       "url": "https://air.pc.cdn.bitgravity.com/air/live/pbaudio021/chunklist.m3u8",
+       "thumbnail": "https://i.ytimg.com/vi/JeJ_sWZFLRM/mqdefault.jpg"
+   },
+   {
+       "name": "Sooriyan",
+       "url": "https://radio.lotustechnologieslk.net:8006/;",
+       "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/51/Sooriyan_FM_logo.png"
+   }
 ]

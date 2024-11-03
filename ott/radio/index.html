@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Live Audio Player</title>
+    <meta name="description" content="Live audio streaming application">
+    <meta name="keywords" content="audio, streaming">
+    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .audio-container {
+            width: 100%;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .channel-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+            border: 2px solid #00FFFF;
+            border-radius: 10px;
+            background-color: #222;
+            margin: 20px 0;
+            height: 300px;
+            width: 90%;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .channel-thumbnail {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 90px;
+            height: 115px;
+            border: 1px solid #00ffff;
+            text-align: center;
+            background-color: #16697A;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .channel-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .channel-thumbnail img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            padding: 10px;
+        }
+
+        .channel-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            color: #f0f0f0;
+            font-size: 14px;
+            padding: 5px 0;
+        }
+
+        .container-search {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 5px;
+            background-color: #222;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #liveSearch {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #333;
+            border: 1px solid #16697A;
+            border-radius: 20px;
+            font-size: 16px;
+            color: #f0f0f0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-options {
+            margin-top: 20px;
+            display: inline-block;
+            border: 2px solid #00FFFF;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .player-options a {
+            color: #00FFFF;
+            text-decoration: none;
+            margin: 0 10px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .player-options img {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        #liveSearch::placeholder {
+            color: #999;
+        }
+
+        #liveSearch:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #444;
+        }
+
+        .sticky-player {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background-color: #111;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .container-channels {
+            text-align: center;
+        }
+    </style>
+</head>
+
+    <center>
+        <marquee class="notice-movies" scrollamount="3" style="border: 2px solid #00FFFF; margin-top: 3px; background: #000; color: white; position: relative; padding: 1px; overflow: hidden;">
+            
+        </marquee>
+    </center>
+
+<body>
+    <div class="sticky-player" style="display: none;">
+        <div style="display: flex; align-items: center;">
+            <img id="playingThumbnail" src="" alt="Playing Thumbnail" style="width: 100px; height: auto; border-radius: 8px; margin-right: 10px;">
+            <h4 id="playingChannelName" style="color: #00FFFF; margin: 0;"></h4>
+        </div>
+        <audio controls id="stickyPlayerElement"></audio>
+    </div>
+
+
+
+    <div class="container-search">
+        <input type="text" id="liveSearch" placeholder="Search for a channel...">
+    </div>
+
+   <!-- <center>
+        <div class="player-options" id="playerOptions">
+            <h3 style="color: #00FFFF; font-size: 19px;">Open in External Player</h3>
+            <a id="vlcLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/QM0f4M5h/vlc-webp-512-512.webp" alt="VLC Icon">
+            </a>
+            <a id="potplayerLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/FFMXgPNG/potplayer-webp-256-256.webp" alt="PotPlayer">
+            </a>
+            <a id="iinaLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/g0t2YvR5/iina-webp-670-670.webp" alt="IINA">
+            </a>
+            <a id="nplayerLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/52nx3wP0/nplayer-webp-630-630.webp" alt="NPlayer">
+            </a>
+            <a id="omniplayerLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/pdSPNPMM/omniplayer-webp-512-512.webp" alt="OmniPlayer">
+            </a>
+            <a id="figplayerLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/yYTB1mCP/figplayer-webp-512-512.webp" alt="FigPlayer">
+            </a>
+            <a id="infuseLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/T3bGB809/infuse-webp-256-256.webp" alt="Infuse">
+            </a>
+            <a id="mxplayerLink" href="#" target="_blank">
+                <img src="https://i.postimg.cc/0QmRLmC7/mxplayer-webp-512-512.webp" alt="MX Player">
+            </a>
+        </div>
+    </center> -->
+
+    <div class="container-channels">
+        <center>
+            <div class="channel-box" id="channelsContainer">
+                <!-- Channel thumbnails will be injected here by JavaScript -->
+            </div>
+        </center>
+    </div>
+
+    <footer style="text-align: center; margin-top: 20px; padding: 10px; background-color: #000;">
+        <span></span>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Fetching channel data
+            $.getJSON('data.json', function (data) {
+                $.each(data, function (index, channel) {
+                    const channelHTML = `
+                        <div class="channel-thumbnail" data-channel-name="${channel.name}" data-thumbnail="${channel.thumbnail}" onclick="playChannel('${channel.url}', '${channel.thumbnail}', '${channel.name}')">
+                            <img src="${channel.thumbnail}" alt="${channel.name}">
+                            <div class="channel-name">${channel.name}</div>
+                        </div>
+                    `;
+                    $('#channelsContainer').append(channelHTML);
+                });
+            });
+
+            // Search functionality
+            $('#liveSearch').on('keyup', function () {
+                const searchValue = $(this).val().toLowerCase();
+                $('.channel-thumbnail').each(function () {
+                    const channelName = $(this).data('channel-name').toLowerCase();
+                    $(this).toggle(channelName.includes(searchValue));
+                });
+            });
+        });
+
+        function playChannel(url, thumbnail, name) {
+            $('#stickyPlayerElement').attr('src', url);
+            $('#stickyPlayerElement')[0].play();
+            $('#playingThumbnail').attr('src', thumbnail);
+            $('#playingChannelName').text(name);
+            $('.sticky-player').show();
+            // Update external player links
+            $('#vlcLink').attr('href', `vlc://${url}`);
+            $('#potplayerLink').attr('href', `potplayer://${url}`);
+            $('#iinaLink').attr('href', `iina://${url}`);
+            $('#nplayerLink').attr('href', `nplayer://${url}`);
+            $('#omniplayerLink').attr('href', `omniplayer://${url}`);
+            $('#figplayerLink').attr('href', `figplayer://${url}`);
+            $('#infuseLink').attr('href', `infuse://${url}`);
+            $('#mxplayerLink').attr('href', `mxplayer://${url}`);
+        }
+    </script>
+</body>
+
+</html>
