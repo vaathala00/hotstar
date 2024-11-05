@@ -210,6 +210,23 @@
             $('#playingThumbnail').attr('src', thumbnail);
             $('#playingChannelName').text(name);
             $('.sticky-player').show();
+
+            // Set media session metadata for lock screen control
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: name,
+                    artist: 'Live Stream',
+                    artwork: [
+                        { src: thumbnail, sizes: '512x512', type: 'image/jpeg' }
+                    ]
+                });
+
+                // Add custom controls for play/pause, next/previous track if needed
+                navigator.mediaSession.setActionHandler('play', () => player.play());
+                navigator.mediaSession.setActionHandler('pause', () => player.pause());
+                navigator.mediaSession.setActionHandler('seekbackward', () => player.currentTime -= 10);
+                navigator.mediaSession.setActionHandler('seekforward', () => player.currentTime += 10);
+            }
         }
     </script>
 </body>
