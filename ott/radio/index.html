@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,6 +10,14 @@
     <meta name="keywords" content="audio, streaming">
     <link rel="shortcut icon" type="image/x-icon" href="">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css">
+    
+    <!-- Meta tags for iOS background audio and lock screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Live Audio Player">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta property="og:image" content="URL_TO_YOUR_IMAGE_THUMBNAIL">
+    <meta name="theme-color" content="#121212">
 
     <style>
         * {
@@ -122,31 +131,16 @@
         .container-channels {
             text-align: center;
         }
-
-        #liveSearch::placeholder {
-            color: #999;
-        }
-
-        #liveSearch:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px #444;
-        }
     </style>
 </head>
 
 <body>
-    <center>
-        <marquee class="notice-movies" scrollamount="3" style="border: 2px solid #00FFFF; margin-top: 3px; background: #000; color: white; position: relative; padding: 1px; overflow: hidden;">
-            <!-- Insert any notifications here -->
-        </marquee>
-    </center>
-
     <div class="sticky-player" style="display: none;">
         <div style="display: flex; align-items: center;">
             <img id="playingThumbnail" src="" alt="Playing Thumbnail" style="width: 100px; height: auto; border-radius: 8px; margin-right: 10px;">
             <h4 id="playingChannelName" style="color: #00FFFF; margin: 0;"></h4>
         </div>
-        <audio controls id="stickyPlayerElement" preload="auto"></audio>
+        <audio controls id="stickyPlayerElement"></audio>
     </div>
 
     <div class="container-search">
@@ -193,25 +187,25 @@
 
         function playChannel(url, thumbnail, name) {
             const player = $('#stickyPlayerElement')[0];
-            
-            // Handle mobile data connection and data-saving mode
+
+            // Check for mobile data connection to alert users
             if (navigator.connection && navigator.connection.saveData) {
                 alert("You are on a mobile network. Data usage might be restricted.");
             }
 
             // Set audio source and play
             player.src = url;
-            player.load(); // Ensure the audio source is reloaded
+            player.load();
             player.play().catch(function (error) {
                 alert("Error playing audio. Please check your connection.");
             });
 
-            // Update player UI with the current channel info
+            // Update the UI with the current channel info
             $('#playingThumbnail').attr('src', thumbnail);
             $('#playingChannelName').text(name);
             $('.sticky-player').show();
 
-            // Set media session metadata for lock screen control
+            // iOS-specific handling for background audio
             if ('mediaSession' in navigator) {
                 navigator.mediaSession.metadata = new MediaMetadata({
                     title: name,
@@ -221,13 +215,21 @@
                     ]
                 });
 
-                // Add custom controls for play/pause, next/previous track if needed
+                // Add play/pause handlers for iOS lock screen
                 navigator.mediaSession.setActionHandler('play', () => player.play());
                 navigator.mediaSession.setActionHandler('pause', () => player.pause());
                 navigator.mediaSession.setActionHandler('seekbackward', () => player.currentTime -= 10);
                 navigator.mediaSession.setActionHandler('seekforward', () => player.currentTime += 10);
             }
+
+            // Keep audio playing in the background on iOS
+            if (player.paused) {
+                player.play().catch(function (error) {
+                    console.error("Failed to play audio:", error);
+                });
+            }
         }
     </script>
 </body>
+
 </html>
