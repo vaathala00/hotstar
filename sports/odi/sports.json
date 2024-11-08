@@ -1,47 +1,47 @@
-[
+[ 
     {
         "id": "tamil_4k",
         "name": "Tamil 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109709/uhd_akamai_ctv_avc_tam_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109679/uhd__akamai__ctv__avc__ssaispot__indvssa__tam__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "spt",
         "name": "Telugu 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109715/uhd_akamai_ctv_avc_tel_savsind_081124/master.m3u8"
+        "link": ""
     },
     {
         "id": "hindi_4k",
         "name": "Hindi 4K Stream",
-        "link": "https://prod-sports-hin-cf.jiocinema.com/hls/live/2100320/uhd_akamai_ctv_avc_hin_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-hin-cf.jiocinema.com/hls/live/2100324/uhd__akamai__ctv__avc__ssaispot__indvssa__hin__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "english_4k",
         "name": "English 4K Stream",
-        "link": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2100305/uhd_akamai_ctv_avc_eng_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-eng-cf.jiocinema.com/hls/live/2112598/uhd__akamai__ctv__avc__ssaispot__indvssa__eng__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "telugu_4k",
         "name": "Telugu 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109715/uhd_akamai_ctv_avc_tel_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109685/uhd__akamai__ctv__avc__ssaispot__indvssa__tel__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "malayalam_4k",
         "name": "Bhojpuri 4K Stream",
-        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live//2109758/uhd_akamai_ctv_avc_bhoj_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109729/uhd__akamai__ctv__avc__ssaispot__indvssa__bhoj__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "kannada_4k",
         "name": "Kannada 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109721/uhd_akamai_ctv_avc_kan_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109691/uhd__akamai__ctv__avc__ssaispot__indvssa__kan__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "insiders_cam",
         "name": "Odia 4K Stream",
-        "link": "https://prod-sports-south-gm.jiocinema.com/hls/live/2109697/uhd_akamai_ctv_avc_odia_savsind_081124/master.m3u8"
+        "link": "https://prod-sports-south-cf.jiocinema.com/hls/live/2109514/uhd__akamai__ctv__avc__ssaispot__indvssa__odia__m1__081124__dbeedb71-c6de-484c-8b7e-51cbb61645b4/master.m3u8"
     },
     {
         "id": "split_cam",
         "name": "Bengali 4K Stream",
-        "link": "https://prod-sports-north-gm.jiocinema.com/hls/live/2109771/uhd_akamai_ctv_avc_ben_savsind_081124/master.m3u8"
+        "link": ""
     }
 ]
