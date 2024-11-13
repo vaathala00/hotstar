@@ -306,7 +306,8 @@
   function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
-                if (!playerInstance) {
+                      const streamTitle = `${selectedVideo.name} Stream`;
+                 if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
                         file: selectedVideo.link,
