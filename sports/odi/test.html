@@ -303,11 +303,9 @@
             languageSelector.addEventListener('change', (e) => changeStream(e.target.value));
         }
 
-        function changeStream(languageId) {
-                // Set the video stream title dynamically based on the selected language
-                const streamTitle = `${selectedVideo.name} Stream`; // For example, "Tamil Stream"
-
-                // Initialize JW Player or update the existing player
+  function changeStream(languageId) {
+            const selectedVideo = videoData.find(video => video.id === languageId);
+            if (selectedVideo) {
                 if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
