@@ -298,7 +298,6 @@
                 const option = document.createElement('option');
                 option.value = video.id; // Use video ID as the value
                 option.textContent = video.name; // Use video name as the display text
-                const streamTitle = selectedVideo.name;
                 languageSelector.appendChild(option);
             });
             languageSelector.addEventListener('change', (e) => changeStream(e.target.value));
@@ -307,7 +306,7 @@
   function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
-                      const streamTitle = selectedVideo.name;
+                      const streamTitle = video.name;
                  if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
