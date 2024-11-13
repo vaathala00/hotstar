@@ -306,7 +306,7 @@
   function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
-                      const streamTitle = `${selectedVideo.name} Stream`;
+                      const streamTitle = selectedVideo.name;
                  if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
@@ -318,8 +318,8 @@
                         mute: false,
                         key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
                         skin: { name: "netflix" },
-                        description: "You're Watching",
                         title: "streamTitle",
+                        description: "You're Watching",
                         logo: {
                             file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
                             link: "https://telegram.me/vaathala1"
