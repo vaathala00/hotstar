@@ -383,7 +383,7 @@ html {
 }
 
 /*
-Amplia a imagem e adiciona transições.
+Amplia a imagem e adiciona transiÃ§Ãµes.
 */
 .jwplayer.jw-skin-netflix .jw-preview {
   width: calc(100% + 5rem);
@@ -404,7 +404,7 @@ Deslizar a imagem em -4rem.
 }
 
 /*
-Mudar a cor da barra de controle e alterar a cor do ícone em idle.
+Mudar a cor da barra de controle e alterar a cor do Ã­cone em idle.
 */
 .jwplayer.jw-skin-netflix .jw-display {
   padding-bottom: 4.5rem;
@@ -462,7 +462,7 @@ Toltips mais perto da barra, alterar cores e remover sombras.
 }
 
 /*
-Tooltip timeslider e botões de qualidade e legenda.
+Tooltip timeslider e botÃµes de qualidade e legenda.
 */
 .jwplayer.jw-skin-netflix .jw-settings-topbar-buttons .jw-tooltip-captions,
 .jwplayer.jw-skin-netflix .jw-settings-topbar-buttons .jw-tooltip-quality,
@@ -594,7 +594,7 @@ Tamanho e cor da slider.
 }
 
 /*
-Cor do menu de configurações.
+Cor do menu de configuraÃ§Ãµes.
 */
 .jwplayer.jw-skin-netflix .jw-settings-menu {
   background-color: var(--bg-black);
@@ -632,7 +632,7 @@ Cor do menu de configurações.
 }
 
 /*
-Ícone Taxas de Reprodução e configurações de legendas.
+Ãcone Taxas de ReproduÃ§Ã£o e configuraÃ§Ãµes de legendas.
 */
 
 .jw-svg-icon-playback-rate path {
@@ -657,7 +657,7 @@ Player responsivo jw8.
 }
 
 /*
-Animações do botão.
+AnimaÃ§Ãµes do botÃ£o.
  */
 @keyframes scaling {
   from {
@@ -669,14 +669,14 @@ Animações do botão.
 }
 
 /*
-ícones do player.
+Ã­cones do player.
  */
 .jw-svg-icon-buffer {
   color: var(--bg-red);
 }
 
 /*
-ícone de Play
+Ã­cone de Play
  */
 .jw-state-paused .jw-svg-icon-play path {
   display: none;
@@ -693,7 +693,7 @@ Animações do botão.
 }
 
 /*
-ícone de Puase.
+Ã­cone de Puase.
  */
 .jw-svg-icon-pause path {
   display: none;
@@ -710,7 +710,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Configuração.
+Ãcone de ConfiguraÃ§Ã£o.
  */
 .jw-svg-icon-settings path {
   display: none;
@@ -727,7 +727,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Qualidade.
+Ãcone de Qualidade.
  */
 .jw-svg-icon-quality-100 path {
   display: none;
@@ -744,7 +744,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Fechar.
+Ãcone de Fechar.
  */
 .jw-svg-icon-close path {
   display: none;
@@ -761,7 +761,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Legenda.
+Ãcone de Legenda.
  */
 .jw-svg-icon-cc-off path {
   display: none;
@@ -806,7 +806,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Volume.
+Ãcone de Volume.
  */
 .jw-svg-icon-volume-100 path {
   display: none;
@@ -851,7 +851,7 @@ Animações do botão.
 }
 
 /*
-Ícone de Tela Cheia.
+Ãcone de Tela Cheia.
  */
 .jw-svg-icon-fullscreen-on path {
   display: none;
@@ -909,7 +909,7 @@ Icone de Share.
 }
 
 /* 
-ícone de áudio.
+Ã­cone de Ã¡udio.
 */
 .jwplayer.jw-skin-netflix .jw-svg-icon-audio-tracks path {
   display: none;
@@ -929,7 +929,7 @@ Icone de Share.
 }
 
 /*
-Ícone de picture in picture.
+Ãcone de picture in picture.
 */
 .jw-svg-icon-pip-on path {
   display: none;
