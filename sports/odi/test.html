@@ -304,8 +304,10 @@
         }
 
         function changeStream(languageId) {
-            const selectedVideo = videoData.find(video => video.id === languageId);
-            if (selectedVideo) {
+                // Set the video stream title dynamically based on the selected language
+                const streamTitle = `${selectedVideo.name} Stream`; // For example, "Tamil Stream"
+
+                // Initialize JW Player or update the existing player
                 if (!playerInstance) {
                     // Initialize JW Player
                     playerInstance = jwplayer("player").setup({
@@ -328,27 +330,23 @@
                             edgeStyle: "raised"
                         },
 
+
+                        sharing: {
+                            sites: ['facebook', 'twitter']
+                        },
+
 playlist: [
     {
       title: "",
       description: "You're Watching",
       image: "https://i.ytimg.com/vi/_cMxraX_5RE/maxresdefault.jpg",
 
-      sources: [
-        {
-          file:
-            "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/74/Sprite_Fright_-_Open_Movie_by_Blender_Studio.webm/Sprite_Fright_-_Open_Movie_by_Blender_Studio.webm.1080p.vp9.webm",
-          label: "tamil",
-          kind: "captions"
-        }
+     
+                       }
+                 ]
 
-}
-      ],
+         });
 
-                        sharing: {
-                            sites: ['facebook', 'twitter']
-                        }
-                    });
                 } else {
                     playerInstance.load({ file: selectedVideo.link });
                     playerInstance.play(true); // Automatically play the selected stream
