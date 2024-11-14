@@ -283,7 +283,7 @@
         let videoData;
 
         // Fetch video data from JSON
-        fetch('sports.json')
+        fetch('https://vaathala00.github.io/hotstar/sports/odi/sports.json')
             .then(response => response.json())
             .then(data => {
                 videoData = data;
@@ -320,23 +320,28 @@
                         skin: { name: "netflix" },
                         title: "Tamil 4K Stream",
                         description: "You're Watching",
+                        captions: video.captions,
                         logo: {
                             file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
                             link: "https://telegram.me/vaathala1"
                         },
+                        
                         captions: {
+                            tracks: selectedVideo.captions.map(caption => ({
+                                file: caption.file,
+                                label: caption.label,
+                                kind: caption.kind,
+                                default: caption.default || false // Set default if available
+                            })),
                             color: "#FFF",
                             fontSize: 14,
                             backgroundOpacity: 0,
                             edgeStyle: "raised"
                         },
-
-
                         sharing: {
                             sites: ['facebook', 'twitter']
-                        }      
-
-         });
+                        }
+                    });
 
                 } else {
                     playerInstance.load({ file: selectedVideo.link });
