@@ -235,10 +235,10 @@
         }
 
  
-/* Container for the label and select dropdown */
+/* Container for the label, separator, and select dropdown */
 .language-selector-container {
     display: flex;
-    align-items: center; /* Align label, separator, and select box horizontally */
+    align-items: center;  /* Align label, separator, and select box horizontally */
     gap: 10px;  /* Space between the elements */
 }
 
@@ -294,15 +294,15 @@
     background-color: #444;
 }
 
-/* Responsive Design for Small Screens */
+/* Make sure the layout remains horizontal on smaller screens */
 @media (max-width: 600px) {
     .language-selector-container {
-        flex-direction: column; /* Stack vertically on smaller screens */
-        align-items: center;
+        flex-direction: row;  /* Keep the elements in a row on smaller screens */
+        align-items: center;  /* Align items horizontally */
     }
 
     #languageSelector {
-        max-width: 100%; /* Full width on smaller screens */
+        max-width: 250px; /* Limit the width of the select box */
     }
 }
 
