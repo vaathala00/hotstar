@@ -235,6 +235,77 @@
         }
 
  
+/* Container for the label and select dropdown */
+.language-selector-container {
+    display: flex;
+    align-items: center; /* Align label, separator, and select box horizontally */
+    gap: 10px;  /* Space between the elements */
+}
+
+/* Style for the label */
+.language-label {
+    font-size: 14px;
+    color: #f1f1f1;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Separator styling (the pipe |) */
+.separator {
+    font-size: 16px; /* Slightly larger font for emphasis */
+    color: #f1f1f1;  /* Same color as the label */
+    margin: 0 10px;  /* Add some space around the separator */
+}
+
+/* Style for the select dropdown */
+#languageSelector {
+    background-color: #333;
+    color: #f1f1f1;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect for the select box */
+#languageSelector:hover {
+    background-color: #555;
+    transform: translateY(-1px);
+}
+
+/* Focus effect for better accessibility */
+#languageSelector:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+/* Style the options inside the select dropdown */
+#languageSelector option {
+    background-color: #222;
+    color: #f1f1f1;
+    padding: 8px;
+}
+
+/* Hover effect for options */
+#languageSelector option:hover {
+    background-color: #444;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 600px) {
+    .language-selector-container {
+        flex-direction: column; /* Stack vertically on smaller screens */
+        align-items: center;
+    }
+
+    #languageSelector {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}
+
 
 </style>
 
@@ -246,10 +317,13 @@
 
         <div class="info-box">
 
-             <h100>Change Stream/Language:</h100>
-            <select id="languageSelector" onchange="changeStream(this.value)">
-                <!-- Options will be populated dynamically -->
-            </select>
+<div class="language-selector-container">
+    <label for="languageSelector" class="language-label">Change Stream/Language:</label>
+    <select id="languageSelector" onchange="changeStream(this.value)">
+        <!-- Options will be populated dynamically -->
+    </select>
+</div>
+
         </div>
 
         <div class="video-wrapper" id="videoWrapper">
