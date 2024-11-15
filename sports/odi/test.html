@@ -380,12 +380,6 @@
   function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
-          // Update the title and description in the DOM
-        const titleElement = document.querySelector('.info-box .info-content h2');
-        const descriptionElement = document.querySelector('.info-box .info-content p');
-
-        titleElement.textContent = selectedVideo.title;  // Update title in DOM
-        descriptionElement.textContent = selectedVideo.description;  // Update description in DOM
 
                  if (!playerInstance) {
                     // Initialize JW Player
