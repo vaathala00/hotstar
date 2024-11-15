@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amita">
+  <link rel="shortcut icon" href="https://t4.ftcdn.net/jpg/03/02/12/83/360_F_302128359_q6aCwgAvdYZBPF4XSwxXddLPE0h3Kor1.jpg">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+
+:root {
+  --body-color: #ffffff;
+  --nav-color: #2770ff;
+  --side-nav: #010718;
+  --text-color: #FFF;
+  --search-bar: #F2F2F2;
+  --search-text: #010718;
+   --font-color: #000;
+   --more-color: #EBFF0049;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  height: 100vh;
+  background-color: var(--body-color);
+    font-family: Amita, cursive;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+body.dark {
+  --body-color: #18191A;
+  --nav-color: #242526;
+  --side-nav: #242526;
+  --text-color: #CCC;
+  --search-bar: #242526;
+  --font-color: #fff;
+}
+body.dark nav {
+  border: 1px solid #393838;
+}
+body.dark .search-field input {
+  color: var(--text-color);
+}
+body.dark .search-field i {
+  color: var(--text-color);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 55px;
+  width: 100%;
+  background-color: var(--nav-color);
+  z-index: 100;
+  box-shadow: 0 6px 6px 0 rgb(0,0,0,.4);
+}
+nav .nav-bar {
+  position: relative;
+  height: 100%;
+  max-width: 1000px;
+  width: 100%;
+  background-color: var(--nav-color);
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav .nav-bar .sidebarOpen {
+  color: var(--text-color);
+  font-size: 25px;
+  padding: 5px;
+  cursor: pointer;
+  display: none;
+}
+nav .nav-bar .logo a {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.menu .logo-toggle {
+  display: none;
+}
+
+.nav-bar .nav-links {
+  display: flex;
+  align-items: center;
+}
+.nav-bar .nav-links li {
+  margin: 0 5px;
+  list-style: none;
+}
+.nav-bar .darkLight-searchBox {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li a {
+  position: relative;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: Amita, cursive;
+  padding: 10px;
+}
+.nav-links li a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.nav-links li:hover a::before {
+  opacity: 1;
+}
+
+.darkLight-searchBox .dark-light {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+.darkLight-searchBox .searchToggle {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+}
+
+.dark-light i {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dark-light i.sun {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.searchToggle i {
+  position: absolute;
+  color: var(--text-color);
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.searchToggle i.cancel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dark-light.active i.sun {
+  opacity: 1;
+  pointer-events: auto;
+}
+.dark-light.active i.moon {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.searchToggle.active i.cancel {
+  opacity: 1;
+  pointer-events: auto;
+}
+.searchToggle.active i.search {
+  opacity: 0;
+  pointer-events: none;
+}
+.searchToggle.active ~ .search-field {
+  bottom: -74px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.searchBox {
+  position: relative;
+}
+.searchBox .search-field {
+  position: absolute;
+  bottom: -60px;
+  right: 5px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  background-color: var(--nav-color);
+  padding: 3px;
+  border-radius: 6px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.search-field::before {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: -4px;
+  height: 12px;
+  width: 12px;
+  background-color: var(--nav-color);
+  transform: rotate(-45deg);
+  z-index: -1;
+}
+.search-field input {
+  height: 100%;
+  width: 100%;
+  padding: 0 45px 0 15px;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: Amita, cursive;
+  font-weight: 400;
+  color: var(--search-text);
+  background-color: var(--search-bar);
+}
+.search-field i {
+  position: absolute;
+  color: var(--nav-color);
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+@media (max-width: 790px) {
+  nav .nav-bar .sidebarOpen {
+    display: block;
+  }
+
+  .menu {
+    position: fixed;
+    font-family: Amita, cursive;
+    height: 100%;
+    width: 320px;
+    left: -100%;
+    top: 0;
+    padding: 20px;
+    background-color: var(--nav-color);
+    z-index: 100;
+    transition: all 0.4s ease;
+    box-shadow: 12px 0 12px -6px rgba(0, 0, 0, 0.2);
+  }
+  .menu .logo-toggle {
+    display: block;
+    width: 100%;
+    font-family: Amita, cursive;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav.active .menu {
+    left: 0%;
+  }
+  nav.active .nav-bar .navLogo a {
+    opacity: 0;
+    font-family: Amita, cursive;
+    transition: all 0.3s ease;
+  }
+
+  .logo-toggle .siderbarClose {
+  	font-family: Amita, cursive;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .nav-bar .nav-links {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .nav-links li a {
+    display: block;
+    font-family: Amita, cursive;
+    margin-top: 20px;
+  }
+}
+
+	.alignleft {
+  float: left;
+  margin-left: 5px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: Amita, cursive;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.alignright {
+  float: right;
+  margin-right: 10px;
+  background-color: var(--bg-color);
+  color: #0099cc;
+  font-size: 15px;
+  font-family: Amita, cursive;
+  font-weight: normal;
+}
+h4 {
+  margin-left: 5px;
+  color: #0099cc;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.nta {
+  overflow: hidden;
+  background-color: var(--bg-color);
+}
+.cent {
+  font-size: auto;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+div.scrollmenu::-webkit-scrollbar {
+  display: none;
+}
+div.scrollmenu {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+  height: 130px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);"
+}
+
+div.scrollmenu a:hover {
+	filter: blur(3px);
+  transform: scale(0.97);
+  background-color: var(--bg-color);
+}
+div.scrollvoot::-webkit-scrollbar {
+  display: none;
+}
+div.scrollvoot {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.scrollvoot a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 4px;
+  text-decoration: none;
+  height: 130px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.scrollvoot a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cen {
+  text-align: center;
+  width: 205px;
+}
+
+.nt {
+  width: 205px; 
+   border-radius: 15px; 
+   height: 123px ; 
+}
+div.scrollme::-webkit-scrollbar {
+  display: none;
+}
+div.scrollme {
+  background-color: var(--bg-color);
+  overflow: auto;
+
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.scrollme a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 255px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.scrollme a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cean {
+  text-align: center;
+  width: 365px;
+}
+.net {
+  width: 365px;
+  border-radius: 15px;
+  height: 230px;
+}
+.in{ 
+   width: 205px; 
+   border-radius: 5px; 
+   height: 110px ; 
+} 
+div.ott::-webkit-scrollbar {
+  display: none;
+}
+div.ott {
+  background-color: var(--bg-color);
+  overflow: auto;
+  white-space: nowrap;
+  overflow-y: hidden;
+}
+div.ott a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 110px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+div.ott a:hover {
+  background-color: var(--bg-color);
+  filter: blur(3px);
+  transform: scale(0.97);
+}
+.cn {
+  text-align: center;
+  width: 205px;
+}
+.nit {
+  width: 205px; 
+   border-radius: 15px; 
+   height: 110px ; 
+}
+
+       .nature:hover { 
+filter: blur(3px);
+  transform: scale(0.97);
+  }
+.nature{
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+box-shadow: 2px 2px 5px rgba(0,0,0, .3); 
+	}
+	
+	.up {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: 15px;
+  background-color: #2770ff;
+  border: 2px solid #490a3d; 
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  z-index: 999999;
+}
+
+
+
+footer {
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    background: var(--nav-color);
+    color: var(--font-color);
+}
+
+footer p {
+    padding: 25px 20px;
+    text-align: center;
+}
+
+footer img {
+    width: 45px;
+    margin-bottom: -10px;
+}
+
+html{
+
+    scroll-behavior: smooth;
+
+}
+
+.live-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.nature:hover {
+  filter: none;
+}
+
+div.scrollmenu a:hover,
+div.scrollme a:hover,
+div.scrollvoot a:hover,
+div.ott a:hover {
+  filter: none;
+}
+
+
+.channel {
+position: absolute;
+top: -23px;
+left: -209px;
+font-family: Arial, sans-serif;
+ font-size: 16px; /* Set the font size */
+  font-weight: bold; /* Set the font weight to bold */
+  color: #fff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #673AB7;
+    padding: 1px 7px 1px 7px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    box-shadow: 1px 0px 2px 0px black;
+}
+
+.aligncenter {
+  margin-left: 5px;
+  color: #0099cc;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: Arial, cursive;
+}
+
+<!-- yt -->
+
+.vit {
+  border-radius: 10px; /* Adjust the value to change the roundness of the corners */
+
+}
+
+div.ytt a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 110px;
+  margin: 10px;
+  border-radius: 15px;
+  
+}
+
+
+  </style>
+
+</head>
+<body>
+
+  <nav>
+    <div class="nav-bar">
+      <span class="logo navLogo"><a href="#">Sports</a></span>
+
+      <!-- Dark/Light mode toggle -->
+      <div class="darkLight-searchBox">
+        <div class="dark-light">
+          <i class='bx bx-moon moon'></i>
+          <i class='bx bx-sun sun'></i>
+        </div>
+
+        <!-- Search box -->
+        <div class="searchBox">
+          <div class="searchToggle">
+            <i class='bx bx-x cancel'></i>
+            <i class='bx bx-search search'></i>
+          </div>
+
+          <div class="search-field">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <i class='bx bx-search' id="searchIcon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <i class="uil uil-angle-up up" id="scrollToTopBtn"></i>
+
+  <br><br>
+
+  <!-- Embedded cricket live stream -->
+  <iframe src="https://bwidget.crictimes.org/" style="width:100%; min-height: 210px;" frameborder="0" scrolling="no"></iframe>
+
+  <!-- Live Cricket Section -->
+  <div class="nta">
+    <h4 class="alignleft">Live Cricket ⮞</h4>
+  </div>
+  <div class="ott">
+    <a href="odi/test"><div class="cn">
+      <img class="nit" src="https://v3img.voot.com/v3Storage/assets/sa_vs_ind_promo_horizontal_carousel-1730012294462.jpg">
+      <span class="channel">T20i</span> <span class="live-tag">Live</span>
+    </div></a>
+
+    <a href="play/t20"><div class="cn">
+      <img class="nit" src="https://www.newagebd.com/files/records/news/202208/179821_191.jpg">
+      <span class="channel">T20 WOMEN'S</span> <span class="live-tag">Live</span>
+    </div></a>
+
+    <a href="fc/index"><div class="cn">
+      <img class="nit" src="https://cdn-prod.dreamsports.group/wp-content/uploads/2021/05/08054043/5ec7bd164133673.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png">
+      <span class="channel">FC</span> <span class="live-tag">Live</span>
+    </div></a>
+  </div>
+
+  <div class="nta">
+    <h4 class="alignleft">Sports ⮞</h4>
+  </div>
+  <div class="ott">
+    <a href="play/sptel"><div class="cn">
+      <img class="nit" src="https://i.postimg.cc/qBFDFvYH/Telugu-HD.png">
+      <br><span class="aligncenter">Telugu</span>
+    </div></a>
+
+    <a href="play/sst"><div class="cn">
+      <img class="nit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU">
+      <br><span class="aligncenter">Tamil</span>
+    </div></a>
+
+    <a href="play/ssh"><div class="cn">
+      <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h">
+      <br><span class="aligncenter">Hindi</span>
+    </div></a>
+
+    <a href="play/sse"><div class="cn">
+      <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h">
+      <br><span class="aligncenter">English</span>
+    </div></a>
+  </div>
+
+
+<div class="nta"> 
+<h4 class="alignleft">more ⮞</h4>
+<a href="#">
+<h4 class="alignright"></h4></a> </div> 
+<div class="scrollmenu"> 
+ 
+	 <a href="https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=13"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg">  <br> <span class="aligncenter">Sony 1</span> </div></a> 
+
+		<a href="https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=14"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg">  <br> <span class="aligncenter">Sony 2</span> </div></a> 
+
+	<a href="https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=15"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg">  <br> <span class="aligncenter">Sony 3</span> </div></a> 
+ 
+        <a href="https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=16"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg">  <br> <span class="aligncenter">Sony 4</span> </div></a> 
+ 
+        <a href="https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=17"><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg">  <br> <span class="aligncenter">Sony 5</span> </div></a> 
+ 
+</div>
+
+
+  <!-- Scroll to top functionality -->
+  <script>
+  const body = document.querySelector("body"),
+    modeToggle = document.querySelector(".dark-light"),
+    searchInput = document.getElementById("searchInput"),
+    searchIcon = document.getElementById("searchIcon"),
+    cancelIcon = document.querySelector(".cancel"),
+    scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  // Toggle Dark/Light mode
+  modeToggle.addEventListener("click", () => {
+    modeToggle.classList.toggle("active");
+    body.classList.toggle("dark");
+    localStorage.setItem("mode", body.classList.contains("dark") ? "dark-mode" : "light-mode");
+  });
+
+  // Toggle the search box visibility
+  searchIcon.addEventListener("click", () => {
+    if (searchInput.style.display === 'none' || !searchInput.style.display) {
+      // Show the search field
+      searchInput.style.display = 'block';
+      searchInput.focus();
+      cancelIcon.style.display = 'block'; // Show cancel button
+    } else {
+      let query = searchInput.value.trim();
+      if (query) {
+        alert("Searching for: " + query);  // Replace this with actual search logic
+        // Optionally: Redirect to search results page (e.g., location.href = "/search?q=" + query)
+      }
+    }
+  });
+
+  // Cancel search functionality
+  cancelIcon.addEventListener("click", () => {
+    searchInput.value = "";  // Clear the input
+    searchInput.style.display = 'none';  // Hide the input field
+    cancelIcon.style.display = 'none';  // Hide cancel button
+  });
+
+  // Scroll to top button visibility
+  window.addEventListener('scroll', () => {
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+      scrollToTopBtn.style.display = "block";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  });
+
+  // Scroll to top functionality
+  scrollToTopBtn.addEventListener('click', () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
+</script>
+
+
+</body>
+</html>
