@@ -356,7 +356,7 @@
         let videoData;
 
         // Fetch video data from JSON
-        fetch('sports.json')
+        fetch('https://vaathala00.github.io/hotstar/sports/odi/sports.json')
             .then(response => response.json())
             .then(data => {
                 videoData = data;
@@ -407,7 +407,9 @@
 
                         sharing: {
                             sites: ['facebook', 'twitter']
-                        }      
+                        },
+,
+                pictureInPicture: true
 
          });
 
