@@ -1,65 +1,68 @@
-{
-  "live_cricket": [
+[
     {
-      "channel_name": "Test",
-      "image": "https://i.postimg.cc/L6XJXKwW/image.webp",
-      "link": "odi/test",
-      "live_tag": "Live"
+        "name": "Test",
+        "image": "https://i.postimg.cc/L6XJXKwW/image.webp",
+        "live": true,
+        "type": "Live Cricket"
     },
     {
-      "channel_name": "FC",
-      "image": "https://cdn-prod.dreamsports.group/wp-content/uploads/2021/05/08054043/5ec7bd164133673.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png",
-      "link": "fc/index",
-      "live_tag": "Live"
+        "name": "FC",
+        "image": "https://cdn-prod.dreamsports.group/wp-content/uploads/2021/05/08054043/5ec7bd164133673.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png",
+        "live": true,
+        "type": "Live Cricket"
+    },
+    {
+        "name": "Telugu",
+        "image": "https://i.postimg.cc/qBFDFvYH/Telugu-HD.png",
+        "live": false,
+        "type": "Sports"
+    },
+    {
+        "name": "Tamil",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU",
+        "live": false,
+        "type": "Sports"
+    },
+    {
+        "name": "Hindi",
+        "image": "https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h",
+        "live": false,
+        "type": "Sports"
+    },
+    {
+        "name": "English",
+        "image": "https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h",
+        "live": false,
+        "type": "Sports"
+    },
+    {
+        "name": "Sony 1",
+        "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg",
+        "live": false,
+        "type": "More"
+    },
+    {
+        "name": "Sony 2",
+        "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg",
+        "live": false,
+        "type": "More"
+    },
+    {
+        "name": "Sony 3",
+        "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg",
+        "live": false,
+        "type": "More"
+    },
+    {
+        "name": "Sony 4",
+        "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg",
+        "live": false,
+        "type": "More"
+    },
+    {
+        "name": "Sony 5",
+        "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg",
+        "live": false,
+        "type": "More"
     }
-  ],
-  "sports": [
-    {
-      "channel_name": "Telugu",
-      "image": "https://i.postimg.cc/qBFDFvYH/Telugu-HD.png",
-      "link": "play/sptel"
-    },
-    {
-      "channel_name": "Tamil",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU",
-      "link": "play/sst"
-    },
-    {
-      "channel_name": "Hindi",
-      "image": "https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h",
-      "link": "play/ssh"
-    },
-    {
-      "channel_name": "English",
-      "image": "https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h",
-      "link": "play/sse"
-    }
-  ],
-  "more": [
-    {
-      "channel_name": "Sony 1",
-      "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg",
-      "link": "https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=13"
-    },
-    {
-      "channel_name": "Sony 2",
-      "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg",
-      "link": "https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=14"
-    },
-    {
-      "channel_name": "Sony 3",
-      "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg",
-      "link": "https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=15"
-    },
-    {
-      "channel_name": "Sony 4",
-      "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg",
-      "link": "https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=16"
-    },
-    {
-      "channel_name": "Sony 5",
-      "image": "https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg",
-      "link": "https://vaathala00.github.io/hotstar/live/sony-liv/Play.html?id=17"
-    }
-  ]
-}
+]
