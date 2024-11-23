@@ -20,7 +20,7 @@
             overflow: hidden;
         }
 
-        #player {
+        #jwplayerDiv {
             width: 100%;
             max-width: 800px;
             height: 450px;
@@ -30,6 +30,11 @@
 <body>
 
 <div id="jwplayerDiv"></div>
+
+    <!-- JW Player scripts -->
+    <script src="assets/KB5zFt7A.js" ></script>
+    <script src="assets/jwpsrv.js" ></script>
+    <script src="assets/vast.js" ></script>
 
 <script>
   // Fetch the sports.json file
@@ -42,8 +47,14 @@
       // Setup JW Player with dynamic data
       jwplayer("jwplayerDiv").setup({
         file: stream.link, // Video file URL from the JSON
+        skin: { name: "netflix" },
         title: stream.title, // Title from JSON
         description: stream.description, // Description from JSON
+        logo: {
+                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                            link: "https://telegram.me/vaathala1"
+                        },
+
         image: stream.logo, // Logo image (thumbnail) from JSON
         drm: {
           clearkey: {
