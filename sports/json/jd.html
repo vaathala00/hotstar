@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live</title>
+
+    <!-- JW Player Styles -->
+    <style>
+        /* Make sure the body takes full height */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .container {
+            width: 100%;
+            height: 100%; /* Full height */
+            max-width: 100%;
+            position: relative;
+        }
+
+        #player {
+            width: 100%;
+            height: 100%; /* Full height */
+            position: relative;
+        }
+
+        /* JW Player Styles */
+        .video-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%; /* Full height */
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="player"></div>
+        <div class="video-wrapper" id="videoWrapper">
+            <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- JW Player scripts -->
+    <script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
+
+    <script>
+        let playerInstance;
+        let videoData;
+
+        // Fetch video data from JSON
+        fetch('https://vaathala00.github.io/hotstar/sports/json/sports.json')
+            .then(response => response.json())
+            .then(data => {
+                videoData = data;
+                changeStream(videoData[0].id); // Set default stream to first language
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+
+        function changeStream(languageId) {
+            const selectedVideo = videoData.find(video => video.id === languageId);
+            if (selectedVideo) {
+
+                if (!playerInstance) {
+                    // Initialize JW Player
+                    playerInstance = jwplayer("player").setup({
+                        file: selectedVideo.link,
+                        width: '100%',
+                        height: '100%',
+                        autostart: true,
+                        aspectratio: '16:9',
+                        mute: false,
+                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                        skin: { name: "netflix" },
+                        title: selectedVideo.title,
+                        description: selectedVideo.description,
+                        logo: {
+                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+                            link: "https://telegram.me/vaathala1"
+                        },
+                        captions: {
+                            color: "#FFF",
+                            fontSize: 14,
+                            backgroundOpacity: 0,
+                            edgeStyle: "raised"
+                        },
+
+                        sharing: {
+                            sites: ['facebook', 'twitter']
+                        }
+                    });
+
+                } else {
+                    playerInstance.load({ file: selectedVideo.link });
+                    playerInstance.play(true); // Automatically play the selected stream
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

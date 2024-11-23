@@ -4,8 +4,8 @@
   "name": "Criclife2",
   "logo": "https://example.com/logo.png",
   "link": "https://live2.shoq.com.pk/live/eds/Criclife2/DASH/Criclife2.mpd",
-  "kid": "4301796d6d67374043c4a43c18dff7ea",
-  "k": "96a3dc8766317aa169149a604928ebb6",
+  "kid": "96a3dc8766317aa169149a604928ebb6",
+  "k": "4301796d6d67374043c4a43c18dff7ea",
   "title": "Criclife2 Live Stream",
   "description": "You're Watching"
 },
@@ -13,9 +13,9 @@
   "id": "2",
   "name": "Nitro Live Stream",
   "logo": "https://example.com/logo.png",
-  "link": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd?%7CdrmScheme=clearkey&drmLicense=ae26845bd33038a9c0774a0981007294:63ac662dde310cfb4cc6f9b43b34196d",
-  "kid": "sampleKid9876543210",
-  "k": "sampleKKey1234567890",
+  "link": "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/wf8usag51e/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd",
+  "kid": "ae26845bd33038a9c0774a0981007294",
+  "k": "63ac662dde310cfb4cc6f9b43b34196d",
   "title": "TNT Live Stream",
   "description": "You're Watching"
  }
