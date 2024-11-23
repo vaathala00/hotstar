@@ -42,6 +42,11 @@
 
         // Fetch the video data from the JSON file
         var id = getUrlParameter('id'); // Get the "id" from the URL (e.g., ?id=1)
+        
+        if (!id) {
+            console.error("No video ID provided in the URL.");
+            return;  // Exit if ID is missing
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
