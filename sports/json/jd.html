@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live</title>
+  <link rel="stylesheet" href="assets/style.css">
+
 
     <!-- JW Player Styles -->
     <style>
@@ -58,61 +60,81 @@
     </div>
 
     <!-- JW Player scripts -->
-    <script src="https://cdn.jwplayer.com/libraries/KB5zFt7A.js"></script>
+    <script src="assets/KB5zFt7A.js" ></script>
+    <script src="assets/jwpsrv.js" ></script>
+    <script src="assets/vast.js" ></script>
 
-    <script>
-        let playerInstance;
-        let videoData;
+   <script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
-        // Fetch video data from JSON
-        fetch('https://vaathala00.github.io/hotstar/sports/json/sports.json')
-            .then(response => response.json())
-            .then(data => {
-                videoData = data;
-                changeStream(videoData[0].id); // Set default stream to first language
-            })
-            .catch(error => console.error('Error fetching JSON:', error));
+    var id = getUrlParameter('id'); // Get the "id" from the URL
 
-        function changeStream(languageId) {
-            const selectedVideo = videoData.find(video => video.id === languageId);
-            if (selectedVideo) {
+    // Load the sports.json file and get the video data by ID
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);  // Parse the JSON data
+            var videoData = data.find(video => video.id === id);  // Find the video by ID
 
-                if (!playerInstance) {
-                    // Initialize JW Player
-                    playerInstance = jwplayer("player").setup({
-                        file: selectedVideo.link,
-                        width: '100%',
-                        height: '100%',
-                        autostart: true,
-                        aspectratio: '16:9',
-                        mute: false,
-                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                        skin: { name: "netflix" },
-                        title: selectedVideo.title,
-                        description: selectedVideo.description,
-                        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                            link: "https://telegram.me/vaathala1"
-                        },
-                        captions: {
-                            color: "#FFF",
-                            fontSize: 14,
-                            backgroundOpacity: 0,
-                            edgeStyle: "raised"
-                        },
-
-                        sharing: {
-                            sites: ['facebook', 'twitter']
+            // Check if the videoData exists
+            if (videoData) {
+                jwplayer("myElement").setup({
+                    title: videoData.name,  // Use the video's name for the title
+                    description: "VaathalaTV",  // Use a static description
+                    image: videoData.logo,  // Add the logo or thumbnail URL here
+                    aspectratio: '16:9',  // Set aspect ratio for the video
+                    width: '100%',  // Set the player width to 100%
+                    mute: false,  // Start with sound enabled
+                    autostart: true,  // Start the video automatically
+                    file: videoData.link,  // The URL of the video file (DASH stream)
+                    key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // JW Player key (Replace it with your own)
+                    skin: { name: "netflix" },  // Use the "netflix" skin for the player
+                    logo: {
+                        file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",  // Set your logo URL
+                        link: "https://telegram.me/vaathala1"  // Link for the logo
+                    },
+                    type: "mpd",  // Set the type to "mpd" for DASH stream
+                    drm: {
+                        clearkey: {
+                            keyId: videoData.kid,  // Use the keyId from the JSON
+                            key: videoData.k  // Use the key from the JSON
                         }
-                    });
-
-                } else {
-                    playerInstance.load({ file: selectedVideo.link });
-                    playerInstance.play(true); // Automatically play the selected stream
-                }
+                    },
+                    captions: {
+                        color: '#ffb800',  // Set the caption text color
+                        fontSize: 30,  // Set the font size for captions
+                        backgroundOpacity: 0  // Set background opacity to 0 (transparent)
+                    },
+                    sharing: {
+                        sites: ['facebook', 'twitter']  // Enable sharing to Facebook and Twitter
+                    }
+                });
+            } else {
+                console.error("Video data with id " + id + " not found.");
             }
         }
-    </script>
+    };
+    xhr.open('GET', 'https://vaathala00.github.io/hotstar/sports/json/sports.json', true);  // Load the sports.json file
+    xhr.send();
+</script>
+
+<script>
+    // Toggle sidebar functionality
+    document.getElementById('toggle-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+
+    document.getElementById('close-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('open');
+    });
+</script>
+
 
 </body>
 </html>
