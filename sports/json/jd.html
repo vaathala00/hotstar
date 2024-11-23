@@ -9,8 +9,9 @@
 
     <style>
         body {
-                        height: 100%;
-          
+            height: 100%;
+            margin: 0;
+            background-color: #121212; /* Black background to avoid white screen */
         }
 
         #jwplayerDiv {
@@ -28,20 +29,32 @@
   const urlParams = new URLSearchParams(window.location.search);
   const selectedStreamIds = urlParams.getAll('id'); // Returns an array of selected IDs
 
+  console.log("Selected Stream IDs:", selectedStreamIds); // Debugging
+
   if (selectedStreamIds.length === 0) {
     console.error("No stream IDs provided in the URL.");
+    document.body.innerHTML = "<h2>No stream ID provided in the URL. Please check your URL parameters.</h2>"; // Fallback message
     return;
   }
 
   // Fetch the sports.json file
   fetch('sports.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch sports.json");
+      }
+      return response.json();
+    })
     .then(data => {
-      // Loop through all the provided IDs
+      console.log("Fetched sports.json data:", data); // Debugging
+
+      // Check if the data contains the selected streams
       selectedStreamIds.forEach(streamId => {
         const stream = data.find(item => item.id == streamId);
 
         if (stream) {
+          console.log("Setting up JW Player for stream ID:", streamId); // Debugging
+
           // Setup JW Player with dynamic data for the selected stream
           jwplayer("jwplayerDiv").setup({
             file: stream.link, // Video file URL from the JSON
@@ -67,6 +80,7 @@
     })
     .catch(error => {
       console.error("Error fetching or parsing the sports.json file:", error);
+      document.body.innerHTML = "<h2>Error loading stream. Please check the console for details.</h2>"; // Fallback message
     });
 </script>
 
