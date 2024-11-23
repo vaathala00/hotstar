@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Stream</title>
   <link rel="stylesheet" href="assets/style.css">
-<script src="https://content.jwplatform.com/libraries/Z79JsmAO.js"></script>
+   <script src="https://content.jwplatform.com/libraries/Z79JsmAO.js"></script>
 
     <style>
         body {
@@ -29,78 +29,35 @@
 </head>
 <body>
 
-    <div id="player"></div>
+<div id="jwplayerDiv"></div>
 
-    <script type="text/javascript">
-        // Function to get URL parameter by name
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+<script>
+  // Fetch the sports.json file
+  fetch('sports.json')
+    .then(response => response.json())
+    .then(data => {
+      // Assuming we want to display the first item in the array (index 0)
+      const stream = data[0]; // Choose the stream you want to display (could be dynamic)
+
+      // Setup JW Player with dynamic data
+      jwplayer("jwplayerDiv").setup({
+        file: stream.link, // Video file URL from the JSON
+        title: stream.title, // Title from JSON
+        description: stream.description, // Description from JSON
+        image: stream.logo, // Logo image (thumbnail) from JSON
+        drm: {
+          clearkey: {
+            key: stream.k,
+            keyId: stream.kid
+          }
         }
+      });
+    })
+    .catch(error => {
+      console.error("Error fetching or parsing the sports.json file:", error);
+    });
+</script>
 
-        // Fetch the video data from the JSON file
-        var id = getUrlParameter('id'); // Get the "id" from the URL (e.g., ?id=1)
-        
-        if (!id) {
-            console.error("No video ID provided in the URL.");
-            // Return early to prevent further execution
-            // However, since we're not in a function, we should avoid `return`.
-            // Instead, we can add a conditional check here and exit or skip further execution.
-            return;  // Exit if ID is missing
-        }
-
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);  // Parse the JSON response
-                var videoData = data.find(video => video.id === id);  // Find the video by ID
-
-                if (videoData) {
-                    // Set up the JW Player with the video data and DRM support
-                    jwplayer("player").setup({
-                        title: videoData.name,  // Use the video's name for the title
-                        description: videoData.description,  // Use the video's description
-                        image: videoData.logo,  // Thumbnail image for the video
-                        aspectratio: '16:9',  // Set aspect ratio for the player
-                        width: '100%',  // Set the player width to 100%
-                        height: '100%',  // Set the player height to 100%
-                        mute: false,  // Start with sound enabled
-                        autostart: true,  // Start the video automatically
-                        file: videoData.link,  // The video URL (DASH stream)
-                        key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                        skin: { name: "netflix" },  // Use the Netflix skin
-                        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",  // Custom logo image
-                            link: "https://telegram.me/vaathala1"  // Link for the logo
-                        },
-                        type: "mpd",  // Specify the type as "mpd" for DASH streaming
-                        drm: {
-                            clearkey: {
-                                keyId: videoData.kid,  // Use the 'kid' from JSON
-                                key: videoData.k  // Use the 'k' (key) from JSON
-                            }
-                        },
-                        captions: {
-                            color: '#FFB800',  // Caption text color
-                            fontSize: 24,  // Font size for captions
-                            backgroundOpacity: 0  // Transparent background for captions
-                        },
-                        sharing: {
-                            sites: ['facebook', 'twitter']  // Enable sharing to Facebook and Twitter
-                        }
-                    });
-                } else {
-                    console.error("Video data with id " + id + " not found.");
-                }
-            }
-        };
-
-        // Load the JSON file containing video data (Replace with your actual JSON URL)
-        xhr.open('GET', 'sports.json', true);  // Your JSON URL here
-        xhr.send();
-    </script>
 
 </body>
 </html>
