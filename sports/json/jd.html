@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Stream</title>
-  <link rel="stylesheet" href="assets/style.css">
-   <script src="https://content.jwplatform.com/libraries/Z79JsmAO.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://content.jwplatform.com/libraries/Z79JsmAO.js"></script>
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+                        height: 100%;
+          
         }
 
         #jwplayerDiv {
             width: 100%;
-            max-width: 800px;
-            height: 450px;
+            height: 100%;
         }
     </style>
 </head>
@@ -31,36 +23,45 @@
 
 <div id="jwplayerDiv"></div>
 
-    <!-- JW Player scripts -->
-    <script src="assets/KB5zFt7A.js" ></script>
-    <script src="assets/jwpsrv.js" ></script>
-    <script src="assets/vast.js" ></script>
-
 <script>
+  // Get all 'id' parameters from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedStreamIds = urlParams.getAll('id'); // Returns an array of selected IDs
+
+  if (selectedStreamIds.length === 0) {
+    console.error("No stream IDs provided in the URL.");
+    return;
+  }
+
   // Fetch the sports.json file
   fetch('sports.json')
     .then(response => response.json())
     .then(data => {
-      // Assuming we want to display the first item in the array (index 0)
-      const stream = data[0]; // Choose the stream you want to display (could be dynamic)
+      // Loop through all the provided IDs
+      selectedStreamIds.forEach(streamId => {
+        const stream = data.find(item => item.id == streamId);
 
-      // Setup JW Player with dynamic data
-      jwplayer("jwplayerDiv").setup({
-        file: stream.link, // Video file URL from the JSON
-        skin: { name: "netflix" },
-        title: stream.title, // Title from JSON
-        description: stream.description, // Description from JSON
-        logo: {
-                            file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-                            link: "https://telegram.me/vaathala1"
-                        },
-
-        image: stream.logo, // Logo image (thumbnail) from JSON
-        drm: {
-          clearkey: {
-            key: stream.k,
-            keyId: stream.kid
-          }
+        if (stream) {
+          // Setup JW Player with dynamic data for the selected stream
+          jwplayer("jwplayerDiv").setup({
+            file: stream.link, // Video file URL from the JSON
+            skin: { name: "netflix" },
+            title: stream.title, // Title from JSON
+            description: stream.description, // Description from JSON
+            logo: {
+              file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
+              link: "https://telegram.me/vaathala1"
+            },
+            image: stream.logo, // Logo image (thumbnail) from JSON
+            drm: {
+              clearkey: {
+                key: stream.k,
+                keyId: stream.kid
+              }
+            }
+          });
+        } else {
+          console.error("Stream not found for the given ID:", streamId);
         }
       });
     })
@@ -68,7 +69,6 @@
       console.error("Error fetching or parsing the sports.json file:", error);
     });
 </script>
-
 
 </body>
 </html>
