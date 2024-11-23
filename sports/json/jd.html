@@ -45,6 +45,9 @@
         
         if (!id) {
             console.error("No video ID provided in the URL.");
+            // Return early to prevent further execution
+            // However, since we're not in a function, we should avoid `return`.
+            // Instead, we can add a conditional check here and exit or skip further execution.
             return;  // Exit if ID is missing
         }
 
