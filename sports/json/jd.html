@@ -72,7 +72,7 @@
         var results = regex.exec(location.search);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
-
+document.addEventListener('DOMContentLoaded', function () {
     var id = getUrlParameter('id'); // Get the "id" from the URL
 
     // Load the sports.json file and get the video data by ID
