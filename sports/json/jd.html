@@ -24,64 +24,71 @@
 
 <div id="jwplayerDiv"></div>
 
-<script>
-  // Get all 'id' parameters from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedStreamIds = urlParams.getAll('id'); // Returns an array of selected IDs
+<script type="text/javascript">
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
-  console.log("Selected Stream IDs:", selectedStreamIds); // Debugging
+    var id = getUrlParameter('id');
+    
+    // If the id parameter is missing or invalid, show an error and exit
+    if (!id) {
+        console.error("No 'id' parameter found in the URL.");
+        document.body.innerHTML = "<h2>No stream ID provided in the URL. Please check your URL parameters.</h2>";
+        return;
+    }
 
-  if (selectedStreamIds.length === 0) {
-    console.error("No stream IDs provided in the URL.");
-    document.body.innerHTML = "<h2>No stream ID provided in the URL. Please check your URL parameters.</h2>"; // Fallback message
-    return;
-  }
+    // Load the sports.json file and get the video data by ID
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            var videoData = data.find(video => video.id === id);
 
-  // Fetch the sports.json file
-  fetch('sports.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch sports.json");
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log("Fetched sports.json data:", data); // Debugging
-
-      // Check if the data contains the selected streams
-      selectedStreamIds.forEach(streamId => {
-        const stream = data.find(item => item.id == streamId);
-
-        if (stream) {
-          console.log("Setting up JW Player for stream ID:", streamId); // Debugging
-
-          // Setup JW Player with dynamic data for the selected stream
-          jwplayer("jwplayerDiv").setup({
-            file: stream.link, // Video file URL from the JSON
-            skin: { name: "netflix" },
-            title: stream.title, // Title from JSON
-            description: stream.description, // Description from JSON
-            logo: {
-              file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png",
-              link: "https://telegram.me/vaathala1"
-            },
-            image: stream.logo, // Logo image (thumbnail) from JSON
-            drm: {
-              clearkey: {
-                key: stream.k,
-                keyId: stream.kid
-              }
+            // If videoData is not found, show an error message
+            if (!videoData) {
+                console.error("No video found with the ID:", id);
+                document.body.innerHTML = "<h2>Stream not found. Please check the ID.</h2>";
+                return;
             }
-          });
-        } else {
-          console.error("Stream not found for the given ID:", streamId);
+
+            // Setup JW Player
+            jwplayer("jwplayerDiv").setup({
+                title: videoData.name,
+                description: "VaathalaTV",
+                image: videoData.logo,  // Use logo as thumbnail if needed
+                aspectratio: '16:9',
+                width: '100%',
+                mute: false,
+                autostart: true,
+                file: videoData.link, // Video file URL from the JSON
+                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
+                skin: { name: "netflix" },
+                logo: {
+                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png", 
+                    link: "https://telegram.me/vaathala1"
+                },
+                type: "mpd", // Set type to "mpd" for DASH stream
+                drm: {
+                    clearkey: {
+                        keyId: videoData.kid,
+                        key: videoData.k
+                    }
+                },
+                captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
+                sharing: {
+                    sites: ['facebook', 'twitter']
+                }
+            });
         }
-      });
-    })
-    .catch(error => {
-      console.error("Error fetching or parsing the sports.json file:", error);
-      document.body.innerHTML = "<h2>Error loading stream. Please check the console for details.</h2>"; // Fallback message
-    });
+    };
+
+    xhr.open('GET', 'sports.json', true);
+    xhr.send();
 </script>
 
 </body>
