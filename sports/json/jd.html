@@ -26,35 +26,59 @@
     <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
     <script type="text/javascript">
-        // Fetch the sports.json file and initialize JWPlayer with the data
-        fetch('sports.json')
-            .then(response => response.json())
-            .then(data => {
-                // Select the first stream from the array as an example
-                const stream = data[0];
+        // Function to get URL parameter by name (e.g., 'id')
+        function getUrlParameter(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
 
-                // Configure JWPlayer using the data from the JSON
-                jwplayer("jwplayerDiv").setup({
-                    file: stream.link,
-                    title: stream.title,
-                    description: stream.description,
-                    image: stream.logo, // Optional, for logo image
-                    position: 'bottom',
-                    autostart: true,
-                    stretching: "",
-                    width: "100%",
-                    type: "dash",
-                    drm: {
-                        clearkey: {
-                            keyId: stream.kid,
-                            key: stream.k
-                        }
+        // Get the 'id' parameter from the URL
+        var id = getUrlParameter('id');
+
+        // Check if 'id' is provided in the URL
+        if (id) {
+            // Create a new XMLHttpRequest to fetch the JSON data
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Parse the JSON response
+                    var data = JSON.parse(xhr.responseText);
+                    
+                    // Find the video data based on the 'id' from the URL
+                    var videoData = data.find(video => video.id === id);
+
+                    // If a matching video is found
+                    if (videoData) {
+                        // Setup JWPlayer with the video data
+                        jwplayer("jwplayerDiv").setup({
+                            file: videoData.link,
+                            title: videoData.title,
+                            description: videoData.description,
+                            image: videoData.logo, // Optional, for logo image
+                            position: 'bottom',
+                            autostart: true,
+                            stretching: "",
+                            width: "100%",
+                            type: "dash",
+                            drm: {
+                                clearkey: {
+                                    keyId: videoData.kid,
+                                    key: videoData.k
+                                }
+                            }
+                        });
+                    } else {
+                        console.error("Video with the given ID not found");
                     }
-                });
-            })
-            .catch(error => {
-                console.error("Error loading sports.json:", error);
-            });
+                }
+            };
+
+            // Send the request to fetch the m1.json file
+            xhr.open("GET", "https://example.com/sports/json/m1.json", true); // Replace with your actual URL
+            xhr.send();
+        } else {
+            console.error("ID parameter not found in the URL");
+        }
     </script>
 
     <script type="text/javascript">
