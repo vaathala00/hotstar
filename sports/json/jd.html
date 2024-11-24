@@ -26,29 +26,24 @@
     <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
     <script type="text/javascript">
-        // Function to get URL parameter by name (e.g., 'id')
+
+        // Function to get URL parameter by name
         function getUrlParameter(name) {
-            var urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Get the 'id' parameter from the URL
         var id = getUrlParameter('id');
+        
+        // Load the m1.json file and get the video data by ID
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var videoData = data.find(video => video.id === id);
 
-        // Check if 'id' is provided in the URL
-        if (id) {
-            // Create a new XMLHttpRequest to fetch the JSON data
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Parse the JSON response
-                    var data = JSON.parse(xhr.responseText);
-                    
-                    // Find the video data based on the 'id' from the URL
-                    var videoData = data.find(video => video.id === id);
-
-                    // If a matching video is found
-                    if (videoData) {
                         // Setup JWPlayer with the video data
                         jwplayer("jwplayerDiv").setup({
                             file: videoData.link,
@@ -74,10 +69,11 @@
             };
 
             // Send the request to fetch the m1.json file
-            xhr.open("GET", "sports.json", true); // Replace with your actual URL
-            xhr.send();
+        xhr.open('GET', 'sports.json', true);
+        xhr.send();
         } else {
             console.error("ID parameter not found in the URL");
+      document.body.innerHTML += "<p>ID parameter missing in URL.</p>";
         }
     </script>
 
