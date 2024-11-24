@@ -47,48 +47,41 @@
                 var data = JSON.parse(xhr.responseText);
                 var videoData = data.find(video => video.id === id);
 
-                        // Setup JWPlayer with the video data
-                        jwplayer("jwplayerDiv").setup({
-                            file: videoData.link,
-                            title: videoData.title,
-                            description: videoData.description,
-                            image: videoData.logo, // Optional, for logo image
-                            position: 'bottom',
-                            autostart: true,
-                            stretching: "",
-                            width: "100%",
-                            type: "dash",
-                            drm: {
-                                clearkey: {
-                                    keyId: videoData.kid,
-                                    key: videoData.k
-                                }
+                if (videoData) {
+                    // Setup JWPlayer with the video data
+                    jwplayer("jwplayerDiv").setup({
+                        file: videoData.link,
+                        title: videoData.title,
+                        description: videoData.description,
+                        image: videoData.logo, // Optional, for logo image
+                        position: 'bottom',
+                        autostart: true,
+                        stretching: "",
+                        width: "100%",
+                        type: "dash",
+                        drm: {
+                            clearkey: {
+                                keyId: videoData.kid,
+                                key: videoData.k
                             }
-                        });
-                    } else {
-                        console.error("Video with the given ID not found");
-                    }
+                        }
+                    });
+                } else {
+                    console.error("Video with the given ID not found");
                 }
-            };
+            }
+        };
 
-            // Send the request to fetch the m1.json file
+        // Send the request to fetch the m1.json file
         xhr.open('GET', 'sports.json', true);
         xhr.send();
-        } else {
+
+        // If the ID parameter is missing, show an error message
+        if (!id) {
             console.error("ID parameter not found in the URL");
-      document.body.innerHTML += "<p>ID parameter missing in URL.</p>";
+            document.body.innerHTML += "<p>ID parameter missing in URL.</p>";
         }
     </script>
 
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '701fef7de243c4e8e91e6e6b3a2fea1e',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-        };
-    </script>
-    <script type="text/javascript" src="//eltontry.com/701fef7de243c4e8e91e6e6b3a2fea1e/invoke.js"></script>
 </body>
 </html>
