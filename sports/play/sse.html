@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,51 +10,136 @@
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="css/style.css">
 
+<style>
+
+    /* Info Box */
+
+
+
+  .info-box .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+   .info-box .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .info-box .info-content {
+            flex-grow: 1;
+        }
+
+  .info-box .info-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+.info-box .info-content p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+ .info-box .info-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+ .info-box .info-content a:hover {
+            background-color: #0056b3;
+        }
+
+
+/* Default styles (for larger screens) */
+.info-box {
+  width: 100%;
+  max-width: 800px; /* Adjust the max-width for larger screens */
+  background: #80808080;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+ padding-left: 30px; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-sizing: border-box;
+ transform: translateX(200px); /* Move the box to the left */
+}
+
+/* Media query for small screens (max-width: 600px) */
+@media (max-width: 600px) {
+  .info-box {
+    max-width: 800px; /* You can adjust this for smaller screens */
+ transform: translateX(-10px); /* Move the box to the left */
+
+  }
+}
+
+
+</style>
 
 </head>
+
 <body>
     <div class="container">
         <div class="main-video-container">
             <div class="my-iframe" id="iframe-container">
-                <iframe src="video/speng" scrolling="no" allowfullscreen></iframe>
+                <iframe src="https://vaathala00.github.io/hotstar/sports/json/jd?id=2" scrolling="no" allowfullscreen></iframe>
             </div>
         </div>
 
+ <div class="info-box">
+
         <ul id="channel-list">
-            <li data-src="video/speng"> 
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Tamil Channel" class="channel-icon">
+            <li data-src="https://vaathala00.github.io/hotstar/sports/json/jd?id=2">
+                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
+                    alt="Tamil Channel" class="channel-icon">
                 Server 1
             </li>
             <li data-src="video.html">
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="English Channel" class="channel-icon">
+                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
+                    alt="English Channel" class="channel-icon">
                 Server 2
             </li>
-           <!-- <li data-src="video.html">
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Hindi Channel" class="channel-icon">
-                Hindi
-            </li>
-            <li data-src="https://www.youtube.com/embed/9bFXteG6020" >
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg" alt="Telugu Channel" class="channel-icon">
-                Telugu
-            </li> -->
         </ul>
     </div>
 
+</div> <!-- infobox -->
+
+    <!-- Chat Box -->
     <div class="chat-container" id="chatBox">
         <button class="chat-close" id="chatClose"></button>
-        <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
+        <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"
+            allow="microphone; camera"></iframe>
     </div>
+
     <button class="chat-toggle" id="chatToggle"></button>
 
+    <!-- Telegram Link -->
     <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
     <!-- Custom JS file link -->
     <script src="js/script.js"></script>
+
     <script>
         // Chat toggle functionality
-        document.getElementById('chatToggle').addEventListener('click', function() {
+        document.getElementById('chatToggle').addEventListener('click', function () {
             const chatBox = document.getElementById('chatBox');
             const chatToggle = document.getElementById('chatToggle');
             if (chatBox.style.display === 'none' || chatBox.style.display === '') {
@@ -65,7 +151,7 @@
             }
         });
 
-        document.getElementById('chatClose').addEventListener('click', function() {
+        document.getElementById('chatClose').addEventListener('click', function () {
             const chatBox = document.getElementById('chatBox');
             chatBox.style.display = 'none';
             document.getElementById('chatToggle').classList.remove('open');
@@ -93,44 +179,24 @@
                 chatToggle.style.top = `${e.clientY - offsetY}px`;
             }
         }
+
+        // Channel list functionality for dynamic video change
+        const channelList = document.getElementById("channel-list");
+        const iframeContainer = document.getElementById("iframe-container");
+        let currentIframe = null;
+
+        channelList.addEventListener("click", (event) => {
+            if (event.target.tagName === "LI") {
+                const src = event.target.getAttribute("data-src");
+                iframeContainer.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
+                if (currentIframe !== null) {
+                    currentIframe.remove();
+                }
+                currentIframe = iframeContainer.firstChild;
+            }
+        });
     </script>
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-
-
-<script type="text/javascript">
-  atOptions = {
-    'key' : 'bb187e8aeac3efe41ca91f0087af0374',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-  document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + ':"></scr' + 'ipt>');
-</script>
-
-<!-- channel list -->
-
-    <script>
-      const channelList = document.getElementById("channel-list");
-      const iframeContainer = document.getElementById("iframe-container");
-      let currentIframe = null;
-
-      channelList.addEventListener("click", (event) => {
-        if (event.target.tagName === "LI") {
-          const src = event.target.getAttribute("data-src");
-          iframeContainer.innerHTML = `<iframe src="${src}" allowfullscreen></iframe>`;
-          if (currentIframe !== null) {
-            currentIframe.remove();
-          }
-          currentIframe = iframeContainer.firstChild;
-        }
-      });
-
-    </script>
-
 
 </body>
+
 </html>
