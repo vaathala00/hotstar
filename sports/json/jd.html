@@ -2,94 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Prime Video</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Stream</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <script src="https://content.jwplatform.com/libraries/Z79JsmAO.js"></script>
-
     <style>
         body {
-            height: 100%;
-            margin: 0;
-            background-color: #121212; /* Black background to avoid white screen */
+            margin: 0px;
         }
 
-        #jwplayerDiv {
-            width: 100%;
-            height: 100%;
+        .jwplayer {
+            position: absolute !important;
+        }
+
+        .jwplayer.jw-flag-aspect-mode {
+            min-height: 100%;
+            max-height: 100%;
         }
     </style>
 </head>
 <body>
+    <div id="jwplayerDiv"></div>
 
-<div id="jwplayerDiv"></div>
+    <script src="//content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
-<script type="text/javascript">
-    // Function to get URL parameter by name
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
+    <script type="text/javascript">
+        // Fetch the sports.json file and initialize JWPlayer with the data
+        fetch('sports.json')
+            .then(response => response.json())
+            .then(data => {
+                // Select the first stream from the array as an example
+                const stream = data[0];
 
-    var id = getUrlParameter('id');
-    
-    // If the id parameter is missing or invalid, show an error and exit
-    if (!id) {
-        console.error("No 'id' parameter found in the URL.");
-        document.body.innerHTML = "<h2>No stream ID provided in the URL. Please check your URL parameters.</h2>";
-        return;
-    }
-
-    // Load the sports.json file and get the video data by ID
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            var videoData = data.find(video => video.id === id);
-
-            // If videoData is not found, show an error message
-            if (!videoData) {
-                console.error("No video found with the ID:", id);
-                document.body.innerHTML = "<h2>Stream not found. Please check the ID.</h2>";
-                return;
-            }
-
-            // Setup JW Player
-            jwplayer("jwplayerDiv").setup({
-                title: videoData.name,
-                description: "VaathalaTV",
-                image: videoData.logo,  // Use logo as thumbnail if needed
-                aspectratio: '16:9',
-                width: '100%',
-                mute: false,
-                autostart: true,
-                file: videoData.link, // Video file URL from the JSON
-                key: "cLGMn8T20tGvW+0eXPhq4NNmLB57TrscPjd1IyJF84o=", // Add your key here
-                skin: { name: "netflix" },
-                logo: {
-                    file: "https://i.postimg.cc/2yNvT7Qk/slazzer-edit-image-1.png", 
-                    link: "https://telegram.me/vaathala1"
-                },
-                type: "mpd", // Set type to "mpd" for DASH stream
-                drm: {
-                    clearkey: {
-                        keyId: videoData.kid,
-                        key: videoData.k
+                // Configure JWPlayer using the data from the JSON
+                jwplayer("jwplayerDiv").setup({
+                    file: stream.link,
+                    title: stream.title,
+                    description: stream.description,
+                    image: stream.logo, // Optional, for logo image
+                    position: 'bottom',
+                    autostart: true,
+                    stretching: "",
+                    width: "100%",
+                    type: "dash",
+                    drm: {
+                        clearkey: {
+                            keyId: stream.kid,
+                            key: stream.k
+                        }
                     }
-                },
-                captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
-                sharing: {
-                    sites: ['facebook', 'twitter']
-                }
+                });
+            })
+            .catch(error => {
+                console.error("Error loading sports.json:", error);
             });
-        }
-    };
+    </script>
 
-    xhr.open('GET', 'sports.json', true);
-    xhr.send();
-</script>
-
+    <script type="text/javascript">
+        atOptions = {
+            'key' : '701fef7de243c4e8e91e6e6b3a2fea1e',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+        };
+    </script>
+    <script type="text/javascript" src="//eltontry.com/701fef7de243c4e8e91e6e6b3a2fea1e/invoke.js"></script>
 </body>
 </html>
