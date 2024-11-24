@@ -40,5 +40,16 @@
         "k": "1aace05f58d8edef9697fd52cb09f441",
         "title": "TNT Live Stream",
         "description": "You're Watching"
+    },
+
+    {
+        "id": "5",
+        "name": "astro",
+        "logo": "https://example.com/logo.png",
+        "link": "https://linear05-playback.sooka.my/CH2/masterCH2.mpd",
+        "kid": "4a267ba09b3a43969364ee77f76dd622",
+        "k": "5b00d4341e90b3022b5e57139ae8ab16",
+        "title": "TNT Live Stream",
+        "description": "You're Watching"
     }
 ]
