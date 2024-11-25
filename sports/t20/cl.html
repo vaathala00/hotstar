@@ -220,6 +220,19 @@
                 width: 40px;
             }
         }
+
+ /* View Count Box */
+#viewCount {
+  margin-top: 0px;
+  font-size: 11px;
+  color: #333;
+  font-weight: bold;
+  padding: 0px;
+  border: 0px solid #ddd;
+  border-radius: 0px;
+  display: inline-block;
+}
+
     </style>
 
 <style> 
@@ -312,10 +325,11 @@
 </head>
 <body>
     <div class="container">
-        <div id="player"></div>
+       
 
 
         <div class="info-box">
+<p id="viewCount"> Views</p>
 
 <div class="language-selector-container">
     <label for="languageSelector" class="language-label">Change Stream/Language:</label>
@@ -467,6 +481,26 @@
             instruction.style.display = 'none';
         }, 20000);
     </script>
+
+<script>
+    // Check if the pageViews key exists in localStorage
+    let views = localStorage.getItem('pageViews');
+
+    // If not, initialize it to 0
+    if (!views) {
+      views = 0;
+    }
+
+    // Increment the views
+    views++;
+
+    // Save the updated views count back to localStorage
+    localStorage.setItem('pageViews', views);
+
+    // Display the updated count on the page
+        document.getElementById('viewCount').innerText = views + ' Views';
+  </script>
+  
 
 
 </body>
