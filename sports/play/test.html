@@ -112,14 +112,14 @@
         </div>
 
         <div class="info-box">
-<span id="counterDisplay"></span>
+
 <!-- Supercounters widget added here -->
 <div class="counter-widget">
     <center>
-        <span id="counterDisplay"></span>
+        <span id="counterDisplay">Loading...</span>
         <script type="text/javascript">
             function refreshCounter() {
-                // Remove the previous counter display (if any)
+                // Get the container where the counter is displayed
                 var counterContainer = document.getElementById("counterDisplay");
                 
                 // Dynamically load the counter script
@@ -127,27 +127,33 @@
                 script.type = "text/javascript";
                 script.src = "//widget.supercounters.com/ssl/online_t.js";
 
-                // When the script is loaded, update the counter display
+                // Once the script is loaded, call the counter function to update the value
                 script.onload = function () {
-                    // Clear the previous content
-                    counterContainer.innerHTML = ""; 
-                    // Call the counter function and insert the value in the container
+                    // Update the counter display with the latest value
                     sc_online_t(1703136, "Views", "#333");
                 };
-                
-                // Append the new script tag
+
+                // Remove any existing script before adding the new one
+                var existingScript = document.getElementById("supercounter-script");
+                if (existingScript) {
+                    existingScript.remove();
+                }
+
+                // Add the new script to the page
+                script.id = "supercounter-script"; 
                 document.body.appendChild(script);
             }
 
-            // Refresh every 20 seconds
+            // Refresh the counter every 20 seconds
             setInterval(refreshCounter, 20000);
 
-            // Initial load
+            // Initial load of the counter
             window.onload = refreshCounter;
         </script>
         <br>
     </center>
 </div>
+
 
 
             <!-- Channel list goes here -->
