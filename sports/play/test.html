@@ -113,32 +113,40 @@
 
         <div class="info-box">
 
+<!-- Supercounters widget added here -->
+<div class="counter-widget">
+    <center>
+        <script type="text/javascript">
+            function refreshCounter() {
+                // Remove the previous script if it exists
+                var existingScript = document.getElementById("supercounter-script");
+                if (existingScript) {
+                    existingScript.remove();
+                }
 
-                      <!-- Supercounters widget added here -->
-            <div class="counter-widget">
-                <center>
-                    <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
-                    <script type="text/javascript">
-                        // Function to refresh the counter widget
-                        function refreshCounter() {
-                            var counterDiv = document.querySelector('.counter-widget');
-                            counterDiv.innerHTML = `
-                                <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
-                                <script type="text/javascript">
-                                    // Call the Supercounters function with Views in bold and color #333
-                                    sc_online_t(1703136, "<strong style='color: #333;'>Views</strong>", "#333");
-                                </script><script>
-                            `;
-                        }
+                // Create and append a new script to refresh the counter
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.id = "supercounter-script";
+                script.src = "//widget.supercounters.com/ssl/online_t.js";
+                document.body.appendChild(script);
 
-                        // Refresh the counter every 30 seconds (30000 milliseconds)
-                        setInterval(refreshCounter, 30000); 
+                // Once the script is loaded, call the counter function again
+                script.onload = function () {
+                    sc_online_t(1703136, "Views", "#333");
+                };
+            }
 
-                        // Initial call to load the counter on page load
-                        window.onload = refreshCounter;
-                    </script>
-                </center>
-            </div>
+            // Refresh every 20 seconds
+            setInterval(refreshCounter, 20000);
+
+            // Initial load
+            window.onload = refreshCounter;
+        </script>
+        <br>
+    </center>
+</div>
+
 
 
             <!-- Channel list goes here -->
