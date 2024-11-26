@@ -10,129 +10,56 @@
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="css/style.css">
 
-<style>
-
-    /* Info Box */
-
-
-
-  .info-box .logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-   .info-box .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .info-box .info-content {
-            flex-grow: 1;
-        }
-
-  .info-box .info-content h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #333;
-        }
-
-.info-box .info-content p {
-            margin: 5px 0 0;
-            font-size: 16px;
-            color: #555;
-        }
-
- .info-box .info-content a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-
- .info-box .info-content a:hover {
-            background-color: #0056b3;
-        }
-
-
-/* Default styles (for larger screens) */
-.info-box {
-  width: 100%;
-  max-width: 800px; /* Adjust the max-width for larger screens */
-  background: #80808080;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 15px;
- padding-left: 30px; 
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  box-sizing: border-box;
- transform: translateX(200px); /* Move the box to the left */
-}
-
-/* Media query for small screens (max-width: 600px) */
-@media (max-width: 600px) {
-  .info-box {
-    max-width: 800px; /* You can adjust this for smaller screens */
- transform: translateX(-10px); /* Move the box to the left */
-
-  }
-}
-
-
-</style>
-
 </head>
 
 <body>
     <div class="container">
-        <div class="main-video-container">
+        <!-- <div class="main-video-container"> -->
             <div class="my-iframe" id="iframe-container">
                 <iframe src="https://vaathala00.github.io/hotstar/play?url=https://kyni.us/stream.php?url=https://kyni.us/m3u8.php/star1in.m3u8&name=vt" scrolling="no" allowfullscreen></iframe>
             </div>
         </div>
 
- <div class="info-box">
+        <div class="info-box">
 
-        <ul id="channel-list">
-            <li data-src="https://vaathala00.github.io/hotstar/play?url=https://kyni.us/stream.php?url=https://kyni.us/m3u8.php/star1in.m3u8&name=vt">
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
-                    alt="" class="channel-icon">
-                Server 1
-            </li>
-            <li data-src="video.html">
-                <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
-                    alt="" class="channel-icon">
-                Server 2
-            </li>
-        </ul>
+            <!-- Counter Widget -->
+            <div id="counter-container">
+                <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
+                <script type="text/javascript">
+                    sc_online_t(1703136, "Views", "f0f0f0");
+                </script>
+            </div>
+
+            <!-- Channel list goes here -->
+            <ul id="channel-list">
+                <li data-src="https://vaathala00.github.io/hotstar/play?url=https://kyni.us/stream.php?url=https://kyni.us/m3u8.php/star1in.m3u8&name=vt">
+                    <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
+                        alt="Tamil Channel" class="channel-icon">
+                    Server 1
+                </li>
+                <li data-src="video.html">
+                    <img src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg"
+                        alt="English Channel" class="channel-icon">
+                    Server 2
+                </li>
+            </ul>
+        </div> <!-- infobox -->
+
+        <!-- Chat Box (Optional) -->
+        <div class="chat-container" id="chatBox">
+            <button class="chat-close" id="chatClose"></button>
+            <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"
+                allow="microphone; camera"></iframe>
+        </div>
+
+        <button class="chat-toggle" id="chatToggle"></button>
+
+        <!-- Telegram Link -->
+        <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
+        </a>
+
     </div>
-
-</div> <!-- infobox -->
-
-    <!-- Chat Box -->
-    <div class="chat-container" id="chatBox">
-        <button class="chat-close" id="chatClose"></button>
-        <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"
-            allow="microphone; camera"></iframe>
-    </div>
-
-    <button class="chat-toggle" id="chatToggle"></button>
-
-    <!-- Telegram Link -->
-    <a class="telegram-link" href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
-    </a>
 
     <!-- Custom JS file link -->
     <script src="js/script.js"></script>
@@ -157,7 +84,8 @@
             document.getElementById('chatToggle').classList.remove('open');
         });
 
-        // Make the chat toggle button draggable
+
+// Make the chat toggle button draggable
         const chatToggle = document.getElementById('chatToggle');
         let isDragging = false;
         let offsetX, offsetY;
@@ -180,6 +108,9 @@
             }
         }
 
+
+
+
         // Channel list functionality for dynamic video change
         const channelList = document.getElementById("channel-list");
         const iframeContainer = document.getElementById("iframe-container");
@@ -195,6 +126,31 @@
                 currentIframe = iframeContainer.firstChild;
             }
         });
+    </script>
+
+<script type="text/javascript">
+        function refreshViews() {
+            // Find and remove the existing counter (if any)
+            const counterContainer = document.getElementById("counter-container");
+
+            // Clear previous counter content
+            counterContainer.innerHTML = '';
+
+            // Add new counter script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "//widget.supercounters.com/ssl/online_t.js";
+            counterContainer.appendChild(script);
+
+            // Initialize the new counter
+            const initScript = document.createElement('script');
+            initScript.type = 'text/javascript';
+            initScript.innerHTML = 'sc_online_t(1703136, "Views", "f0f0f0");';
+            counterContainer.appendChild(initScript);
+        }
+
+        // Refresh the Views number every 20 seconds (20000 milliseconds)
+        setInterval(refreshViews, 20000);
     </script>
 
 </body>
