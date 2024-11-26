@@ -16,6 +16,7 @@
 
 
 
+
   .info-box .logo {
             width: 80px;
             height: 80px;
@@ -115,9 +116,10 @@
         </div>
 
 
+
+
  <div class="info-box">
  
-<p id="viewCount"> Views</p>
 
         <ul id="channel-list">
             <li data-src="https://vaathala00.github.io/hotstar/sports/json/jd?id=2">
@@ -212,24 +214,6 @@
         });
     </script>
 
-<script>
-    // Check if the pageViews key exists in localStorage
-    let views = localStorage.getItem('pageViews');
-
-    // If not, initialize it to 0
-    if (!views) {
-      views = 0;
-    }
-
-    // Increment the views
-    views++;
-
-    // Save the updated views count back to localStorage
-    localStorage.setItem('pageViews', views);
-
-    // Display the updated count on the page
-        document.getElementById('viewCount').innerText = views + ' Views';
-  </script>
 
 </body>
 
