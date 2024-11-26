@@ -193,15 +193,29 @@
     </script>
 
 <script type="text/javascript">
-    function refreshViews() {
-        // Call the counter function again to refresh the "Views" number
-        sc_online_t(1703136, "Views", "#333");
-    }
+        function refreshViews() {
+            // Find and remove the existing counter (if any)
+            const counterContainer = document.getElementById("counter-container");
 
-    // Refresh the Views number every 20 seconds (20000 milliseconds)
-    setInterval(refreshViews, 20000);
-</script>
+            // Clear previous counter content
+            counterContainer.innerHTML = '';
 
+            // Add new counter script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "//widget.supercounters.com/ssl/online_t.js";
+            counterContainer.appendChild(script);
+
+            // Initialize the new counter
+            const initScript = document.createElement('script');
+            initScript.type = 'text/javascript';
+            initScript.innerHTML = 'sc_online_t(1703136, "Views", "#333");';
+            counterContainer.appendChild(initScript);
+        }
+
+        // Refresh the Views number every 20 seconds (20000 milliseconds)
+        setInterval(refreshViews, 20000);
+    </script>
 
 </body>
 
