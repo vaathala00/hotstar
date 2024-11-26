@@ -114,26 +114,27 @@
         <div class="info-box">
 
 
-            <!-- Supercounters widget added here -->
+                      <!-- Supercounters widget added here -->
             <div class="counter-widget">
                 <center>
                     <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
                     <script type="text/javascript">
+                        // Function to refresh the counter widget
                         function refreshCounter() {
-                            // Clear the existing script and reload it
                             var counterDiv = document.querySelector('.counter-widget');
                             counterDiv.innerHTML = `
                                 <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
                                 <script type="text/javascript">
+                                    // Call the Supercounters function with Views in bold and color #333
                                     sc_online_t(1703136, "<strong style='color: #333;'>Views</strong>", "#333");
-                                </script>
+                                </script><script>
                             `;
                         }
 
-                        // Call refreshCounter every 30 seconds
-                        setInterval(refreshCounter, 30000);  // 30000 milliseconds = 30 seconds
+                        // Refresh the counter every 30 seconds (30000 milliseconds)
+                        setInterval(refreshCounter, 30000); 
 
-                        // Initial call to display the counter on page load
+                        // Initial call to load the counter on page load
                         window.onload = refreshCounter;
                     </script>
                 </center>
