@@ -26,7 +26,7 @@
             <div id="counter-container">
                 <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
                 <script type="text/javascript">
-                    sc_online_t(1703136, "Views", "f0f0f0");
+                    sc_online_t(1703136, "👁", "f0f0f0");
                 </script>
             </div>
 
@@ -83,6 +83,33 @@
             chatBox.style.display = 'none';
             document.getElementById('chatToggle').classList.remove('open');
         });
+
+
+// Make the chat toggle button draggable
+        const chatToggle = document.getElementById('chatToggle');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatToggle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
+
+        function handleMouseMove(e) {
+            if (isDragging) {
+                chatToggle.style.left = `${e.clientX - offsetX}px`;
+                chatToggle.style.top = `${e.clientY - offsetY}px`;
+            }
+        }
+
+
+
 
         // Channel list functionality for dynamic video change
         const channelList = document.getElementById("channel-list");
