@@ -14,7 +14,13 @@
 
     /* Info Box */
 
-
+        /* Counter Widget Positioning */
+        #counter-container {
+            position: absolute;
+            top: 1px; /* Adjust for top padding */
+            right: 10px; /* Adjust for right padding */
+            z-index: 10; /* Ensure the widget is on top */
+        }
 
 
   .info-box .logo {
@@ -88,20 +94,14 @@
  transform: translateX(-10px); /* Move the box to the left */
 
   }
-}
+#counter-container {
+                top: 1px;
+                right: 10px; /* Maintain widget positioning on smaller screens */
+            }
+        }
 
 
- /* View Count Box */
-#viewCount {
-  margin-top: 0px;
-  font-size: 11px;
-  color: #333;
-  font-weight: bold;
-  padding: 0px;
-  border: 0px solid #ddd;
-  border-radius: 0px;
-  display: inline-block;
-}
+
 
 </style>
 
@@ -120,6 +120,13 @@
 
  <div class="info-box">
  
+            <!-- Counter Widget -->
+            <div id="counter-container">
+                <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
+                <script type="text/javascript">
+                    sc_online_t(1703136, "Views", "170ddb");
+                </script>
+            </div>
 
         <ul id="channel-list">
             <li data-src="https://vaathala00.github.io/hotstar/sports/json/jd?id=2">
@@ -213,6 +220,32 @@
             }
         });
     </script>
+
+<script type="text/javascript">
+        function refreshViews() {
+            // Find and remove the existing counter (if any)
+            const counterContainer = document.getElementById("counter-container");
+
+            // Clear previous counter content
+            counterContainer.innerHTML = '';
+
+            // Add new counter script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "//widget.supercounters.com/ssl/online_t.js";
+            counterContainer.appendChild(script);
+
+            // Initialize the new counter
+            const initScript = document.createElement('script');
+            initScript.type = 'text/javascript';
+            initScript.innerHTML = 'sc_online_t(1703136, "Views", "#333");';
+            counterContainer.appendChild(initScript);
+        }
+
+        // Refresh the Views number every 20 seconds (20000 milliseconds)
+        setInterval(refreshViews, 10000);
+    </script>
+
 
 
 </body>
