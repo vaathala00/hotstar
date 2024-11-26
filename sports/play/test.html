@@ -29,7 +29,7 @@
         }
 
         /* Counter Widget Positioning */
-        .counter-widget {
+        #counter-container {
             position: absolute;
             top: 1px; /* Adjust for top padding */
             right: 10px; /* Adjust for right padding */
@@ -113,48 +113,13 @@
 
         <div class="info-box">
 
-<!-- Supercounters widget added here -->
-<div class="counter-widget">
-    <center>
-        <span id="counterDisplay">Loading...</span>
-        <script type="text/javascript">
-            function refreshCounter() {
-                // Get the container where the counter is displayed
-                var counterContainer = document.getElementById("counterDisplay");
-                
-                // Dynamically load the counter script
-                var script = document.createElement("script");
-                script.type = "text/javascript";
-                script.src = "//widget.supercounters.com/ssl/online_t.js";
-
-                // Once the script is loaded, call the counter function to update the value
-                script.onload = function () {
-                    // Update the counter display with the latest value
+            <!-- Counter Widget -->
+            <div id="counter-container">
+                <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
+                <script type="text/javascript">
                     sc_online_t(1703136, "Views", "#333");
-                };
-
-                // Remove any existing script before adding the new one
-                var existingScript = document.getElementById("supercounter-script");
-                if (existingScript) {
-                    existingScript.remove();
-                }
-
-                // Add the new script to the page
-                script.id = "supercounter-script"; 
-                document.body.appendChild(script);
-            }
-
-            // Refresh the counter every 20 seconds
-            setInterval(refreshCounter, 20000);
-
-            // Initial load of the counter
-            window.onload = refreshCounter;
-        </script>
-        <br>
-    </center>
-</div>
-
-
+                </script>
+            </div>
 
             <!-- Channel list goes here -->
             <ul id="channel-list">
@@ -226,6 +191,17 @@
             }
         });
     </script>
+
+<script type="text/javascript">
+    function refreshViews() {
+        // Call the counter function again to refresh the "Views" number
+        sc_online_t(1703136, "Views", "#333");
+    }
+
+    // Refresh the Views number every 20 seconds (20000 milliseconds)
+    setInterval(refreshViews, 20000);
+</script>
+
 
 </body>
 
