@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRM Live Video Player</title>
+    <link rel="shortcut icon" href="https://drmlive.in/Player.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #1f1f1f;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            width: 95%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* Form and Input Styles */
+        form {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            border-radius: 8px;
+            padding: 0 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-group i {
+            color: #ccc;
+            font-size: 1.2rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: transparent;
+            color: #fff;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .input-group input::placeholder {
+            color: #aaa;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 15px;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Video Player Styles */
+        #player {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            background: #000;
+            height: 400px;
+        }
+
+        /* Telegram Button Styles */
+        .telegram-toggle {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background-color: #0088cc;
+            color: #fff;
+            padding: 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .telegram-toggle:hover {
+            background-color: #007ab8;
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.7);
+        }
+
+        .telegram-toggle img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Telegram Join Button -->
+    <a href="https://t.me/+_RiCu2cz5TkxZmU1" class="telegram-toggle">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+        Join Telegram
+    </a>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>DRM Live Video Player</h1>
+
+        <!-- Video Player Section -->
+        <div id="player"></div>
+
+        <!-- Video Form -->
+        <form id="videoForm" onsubmit="playVideo(event);">
+            <!-- MPD or HLS Link Input -->
+            <div class="input-group">
+                <i class="fas fa-link"></i>
+                <input type="text" id="link" name="link" placeholder="Enter MPD or HLS link" required>
+            </div>
+
+            <!-- Clear Key Input -->
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="text" id="clearKeyPair" name="clearKeyPair" placeholder="Enter Clear Key ID and Key (e.g., keyId:key)">
+            </div>
+
+            <!-- Widevine License URL Input -->
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="text" id="widevineLicenseUrl" name="widevineLicenseUrl" placeholder="Enter Widevine License URL (optional)">
+            </div>
+
+            <!-- ClearKey URL Input -->
+            <div class="input-group">
+                <i class="fas fa-link"></i>
+                <input type="text" id="clearKeyUrl" name="clearKeyUrl" placeholder="Enter ClearKey URL (optional)">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Play Video</button>
+        </form>
+    </div>
+
+    <!-- JWPlayer Script -->
+    <script src="//ssl.p.jwpcdn.com/player/v/8.25.1/jwplayer.js"></script>
+    <script>
+        // Set JWPlayer license key
+        jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+
+        // Play video function on form submit
+        async function playVideo(event) {
+            event.preventDefault();
+            
+            const link = document.getElementById('link').value;
+            const clearKeyPair = document.getElementById('clearKeyPair').value;
+            const widevineLicenseUrl = document.getElementById('widevineLicenseUrl').value;
+            const clearKeyUrl = document.getElementById('clearKeyUrl').value;
+
+            // Validate link
+            if (!link) {
+                alert("Please provide a valid MPD or HLS link.");
+                return;
+            }
+
+            let clearKeyKid = null;
+            let clearKey = null;
+
+            // Extract ClearKey from input if provided
+            if (clearKeyPair) {
+                const [keyId, key] = clearKeyPair.split(':');
+                if (keyId && key) {
+                    clearKeyKid = keyId;
+                    clearKey = key;
+                } else {
+                    alert("Please provide a valid Clear Key pair in the format keyId:key");
+                    return;
+                }
+            }
+
+            // If ClearKey URL is provided, fetch ClearKey data
+            if (clearKeyUrl) {
+                try {
+                    const response = await fetch(clearKeyUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.keys && data.keys.length > 0) {
+                            const keyData = data.keys[0];
+                            clearKeyKid = base64ToHex(keyData.kid);
+                            clearKey = base64ToHex(keyData.k);
+                        } else {
+                            alert("Invalid response from ClearKey URL.");
+                            return;
+                        }
+                    } else {
+                        alert("Failed to fetch ClearKey information. Please check the ClearKey URL.");
+                        return;
+                    }
+                } catch (error) {
+                    console.error("Error fetching ClearKey data:", error);
+                    alert("An error occurred while fetching the ClearKey data.");
+                    return;
+                }
+            }
+
+            // Set up player with the provided data
+            setupPlayer(link, clearKeyKid, clearKey, widevineLicenseUrl);
+        }
+
+        // Setup the JWPlayer instance with DRM settings
+        function setupPlayer(link, clearKeyKid, clearKey, widevineLicenseUrl) {
+            const playerInstance = jwplayer("player");
+
+            const source = {
+                file: link,
+                default: false
+            };
+
+            // Check if the link is MPD or HLS and set DRM options
+            if (link.includes('.mpd')) {
+                source.type = "dash";
+                if (clearKeyKid && clearKey) {
+                    source.drm = { clearkey: { keyId: clearKeyKid, key: clearKey } };
+                }
+                if (widevineLicenseUrl) {
+                    source.drm = source.drm || {};
+                    source.drm.widevine = { url: widevineLicenseUrl };
+                }
+            } else if (link.includes('.m3u8')) {
+                source.type = "hls";
+                if (clearKeyKid && clearKey) {
+                    source.drm = { clearkey: { keyId: clearKeyKid, key: clearKey } };
+                }
+            } else {
+                alert("Unsupported link format. Please provide a valid MPD or HLS link.");
+                return;
+            }
+
+            // Initialize the player with DRM options
+            playerInstance.setup({
+                playlist: [{ sources: [source] }],
+                width: "100%",
+                aspectratio: "16:9",
+                autostart: true,
+                cast: { appid: 'CC1AD845' }
+            });
+        }
+
+        // Helper function to convert base64 to hex
+        function base64ToHex(base64) {
+            const raw = atob(base64.replace(/-/g, '+').replace(/_/g, '/'));
+            let result = '';
+            for (let i = 0; i < raw.length; i++) {
+                const hex = raw.charCodeAt(i).toString(16);
+                result += (hex.length === 1 ? '0' : '') + hex;
+            }
+            return result;
+        }
+    </script>
+</body>
+
+</html>
