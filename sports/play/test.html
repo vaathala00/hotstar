@@ -99,6 +99,19 @@
             }
         }
 
+
+ /* Prevent links and styles from appearing */
+    #counter-container a {
+        pointer-events: none; /* Disable link clicks */
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+    }
+
+    #counter-container span {
+        color: inherit; /* Make sure text has the same color */
+        font-weight: bold; /* Avoid bold styles */
+    }
+
     </style>
 
 </head>
@@ -117,7 +130,7 @@
             <div id="counter-container">
                 <script type="text/javascript" src="//widget.supercounters.com/ssl/online_t.js"></script>
                 <script type="text/javascript">
-                    sc_online_t(1703136, "Views", "170ddb");
+                    sc_online_t(1703136, "Views", "f0f0f0");
                 </script>
             </div>
 
