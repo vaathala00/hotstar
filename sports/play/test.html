@@ -112,29 +112,31 @@
         </div>
 
         <div class="info-box">
-
+<span id="counterDisplay"></span>
 <!-- Supercounters widget added here -->
 <div class="counter-widget">
     <center>
+        <span id="counterDisplay"></span>
         <script type="text/javascript">
             function refreshCounter() {
-                // Remove the previous script if it exists
-                var existingScript = document.getElementById("supercounter-script");
-                if (existingScript) {
-                    existingScript.remove();
-                }
-
-                // Create and append a new script to refresh the counter
+                // Remove the previous counter display (if any)
+                var counterContainer = document.getElementById("counterDisplay");
+                
+                // Dynamically load the counter script
                 var script = document.createElement("script");
                 script.type = "text/javascript";
-                script.id = "supercounter-script";
                 script.src = "//widget.supercounters.com/ssl/online_t.js";
-                document.body.appendChild(script);
 
-                // Once the script is loaded, call the counter function again
+                // When the script is loaded, update the counter display
                 script.onload = function () {
+                    // Clear the previous content
+                    counterContainer.innerHTML = ""; 
+                    // Call the counter function and insert the value in the container
                     sc_online_t(1703136, "Views", "#333");
                 };
+                
+                // Append the new script tag
+                document.body.appendChild(script);
             }
 
             // Refresh every 20 seconds
@@ -146,7 +148,6 @@
         <br>
     </center>
 </div>
-
 
 
             <!-- Channel list goes here -->
