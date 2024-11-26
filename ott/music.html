@@ -1,31 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music</title>
-
-<link href="https://fancode.allsport.games/favicon.ico" rel="stylesheet">
-
-
+    <link href="https://fancode.allsport.games/favicon.ico" rel="stylesheet">
     <style>
         /* General body styles */
         body {
             background-color: #1F0C50; /* Set main background color */
             margin: 0; /* Remove default margin */
             padding: 0; /* Remove default padding */
-            font-family: Arial, sans-serif; /* Choose a common font */
+            font-family: 'Roboto', sans-serif; /* Modern font */
+            color: #fff; /* White text */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         /* Header styles */
         header {
             background-color: #0D012F;
             color: #fff;
-            padding: 20px 20px;
+            padding: 20px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -34,48 +33,83 @@
         }
 
         .logo-img {
-            width: 65px; /* Adjust the width of the logo */
+            width: 65px; /* Logo size */
             height: auto;
-            margin-right: 10px; /* Add some margin */
+            margin-right: 10px; /* Space between logo and title */
         }
 
         .site-title {
             font-weight: bold;
-            font-size: 18px;
-            margin: 0;
+            font-size: 20px;
+            letter-spacing: 1px;
         }
 
         /* Floating iframe styles */
         .floating-iframe {
             position: fixed;
-            top: 56%; /* Center vertically */
+            top: 50%; /* Center vertically */
             left: 50%; /* Center horizontally */
             transform: translate(-50%, -50%); /* Centering trick */
-            width: 100%; /* Adjust width as needed */
-            max-width: 100%; /* Limit maximum width */
-            height: 80%; /* Adjust height as needed */
-            border: none; /* Remove border */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
-            z-index: 1000; /* Ensure iframe appears above other content */
-            overflow: hidden; /* Prevent iframe content from overflowing */
-            background-color: #1F0C50; /* Change background color */
+            width: 90%; /* Default width */
+            height: 80%; /* Default height */
+            border: none; /* No border */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Soft shadow */
+            z-index: 1000;
+            overflow: hidden; /* Hide overflow */
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: absolute;
+            top: 20px; /* Position at the top-right of iframe */
+            right: 20px; /* Position at the right */
+            background: linear-gradient(145deg, #FF5733, #FF3B1F); /* Gradient background */
+            color: #fff;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 50px; /* Round button */
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Soft shadow */
+            transition: all 0.3s ease; /* Smooth transition */
+            z-index: 1100;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(145deg, #FF3B1F, #FF5733); /* Reverse gradient on hover */
+            transform: translateY(-4px); /* Slight lift on hover */
+        }
+
+        .back-button:active {
+            transform: translateY(2px); /* Slight dip on click */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer shadow on click */
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .floating-iframe {
-                width: 90%; /* Adjust width for smaller screens */
-                max-width: 90%; /* Maintain maximum width */
-                height: 70%; /* Adjust height for smaller screens */
+                width: 85%; /* Slightly smaller width on tablet */
+                height: 70%; /* Adjust height for tablets */
+            }
+
+            .back-button {
+                font-size: 14px;
+                padding: 10px 14px;
             }
         }
 
         @media (max-width: 480px) {
             .floating-iframe {
-                width: 100%; /* Further adjust width for smaller screens */
-                max-width: 100%; /* Maintain maximum width */
-                height: 110%; /* Further adjust height for smaller screens */
+                width: 100%; /* Full width on mobile */
+                height: 110%; /* Height adjustments for small screens */
+            }
+
+            .back-button {
+                font-size: 12px;
+                padding: 8px 12px;
+                top: 10px;
+                right: 10px;
             }
         }
     </style>
@@ -84,14 +118,15 @@
     <header>
         <div class="logo">
             <img src="https://www.jiosaavn.com/corporate/design/images/jiosaavn-header-icon.svg" alt="Logo" class="logo-img">
-            <h1 class="site-title"></h1>
+            <h1 class="site-title">Music</h1>
         </div>
-        <!-- You can add other header elements here -->
+        <!-- Optional additional header elements -->
     </header>
 
-    <!-- Floating iframe -->
+    <!-- Floating iframe with back button -->
     <div class="floating-iframe">
-        <!-- Placeholder iframe content -->
+        <!-- Back button positioned at the top-right of the iframe -->
+        <button class="back-button" onclick="window.history.back();">Back</button>
         <iframe src="https://songs.watchtvs.live/" width="100%" height="100%" frameborder="0"></iframe>
     </div>
 </body>
