@@ -12,6 +12,14 @@
     <!-- Custom CSS file link -->
     <link rel="stylesheet" href="css/style.css">
 
+<style>
+.info-box i  {
+  margin-right: 4px;
+  font-size: 10px;
+
+
+</style>
+
 </head>
 
 <body>
@@ -138,6 +146,14 @@
 
             // Clear previous counter content
             counterContainer.innerHTML = '';
+
+       // Create and append the arrow icon
+        const arrowIcon = document.createElement('i');
+        arrowIcon.classList.add('fas', 'fa-arrow-up');
+        arrowIcon.style.color = 'white';  // Add any style you want
+
+        // Add the arrow icon to the container
+        counterContainer.appendChild(arrowIcon);
 
             // Add new counter script
             const script = document.createElement('script');
