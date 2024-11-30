@@ -182,6 +182,12 @@ body {
 
 /* Counter Widget Positioning */
 
+.info-box i {
+    margin-right: 4px;
+    font-size: 10px;
+  }
+
+  
 #counter-container span {
     margin-left: 2px;
 }
