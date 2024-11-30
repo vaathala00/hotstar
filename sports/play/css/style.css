@@ -181,11 +181,19 @@ body {
 
 
 /* Counter Widget Positioning */
+
+#counter-container span {
+    margin-left: 2px;
+}
+
         #counter-container {
             position: absolute;
             top: -19px; /* Adjust for top padding */
             right: 10px; /* Adjust for right padding */
             z-index: 10; /* Ensure the widget is on top */
+            font-size: 12px;
+            gap: 4px;
+           
         }
 
 /* Prevent links and styles from appearing */
