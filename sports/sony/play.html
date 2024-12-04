@@ -317,8 +317,8 @@
 
     // Function to initialize the video player
     function initializePlayer(videoData) {
-        const proxyUrl = 'https://sliv-live.drmlive.in/';
-        const videoLink = proxyUrl + videoData.video_url;
+      
+        const videoLink = videoData.video_url;
         document.getElementById('player').style.display = 'none';
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
