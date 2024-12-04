@@ -314,6 +314,7 @@
 
     // Function to initialize the video player
     function initializePlayer(videoData) {
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         const videoLink = videoData.video_url;
         document.getElementById('player').style.display = 'none';
         const videoWrapper = document.getElementById('videoWrapper');
