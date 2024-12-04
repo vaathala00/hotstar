@@ -314,7 +314,7 @@
 
     // Function to initialize the video player
     function initializePlayer(videoData) {
-        const videoLink = videoData.stream_link;
+        const videoLink = videoData.video_url;
         document.getElementById('player').style.display = 'none';
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
@@ -324,9 +324,9 @@
             videoIframe.style.display = 'none';
             document.getElementById('player').style.display = '';
             const playerInstance = jwplayer("player").setup({
-                title: videoData.match_name,
+                title: videoData.event_name,
                 description: "VaathalaTV", // Sample description
-                image: videoData.banner,
+                image: videoData.src,
                 aspectratio: '16:9',
                 width: '100%',
                 mute: false,
