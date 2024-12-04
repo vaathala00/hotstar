@@ -262,7 +262,10 @@
 </head>
 <body>
     <div class="container">
-        <div id="player"></div>
+        <div id="player">
+    <source src="" type="application/x-mpegURL">
+</div>
+
         <div class="video-wrapper" id="videoWrapper">
             <iframe id="videoIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -314,8 +317,8 @@
 
     // Function to initialize the video player
     function initializePlayer(videoData) {
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
-        const videoLink = proxyUrl + encodeURIComponent(videoData.video_url);
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const videoLink = proxyUrl + videoData.video_url;
         document.getElementById('player').style.display = 'none';
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
