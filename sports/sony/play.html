@@ -258,6 +258,40 @@
         font-weight: bold; /* Avoid bold styles */
     }
 
+
+
+/* Style for the "Copy Link" button */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 30px; /* Makes it rounded */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none; /* Remove underline */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    user-select: none; /* Prevent text selection */
+}
+
+.download-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.download-btn img {
+    width: 18px; /* Small icon size */
+    height: 18px; /* Small icon size */
+    margin-right: 8px; /* Space between image and text */
+    object-fit: contain; /* Maintain aspect ratio */
+}
+
+.download-btn span {
+    text-transform: capitalize; /* Capitalize text */
+}
+
     </style>
 </head>
 <body>
@@ -285,9 +319,13 @@
             <div class="logo">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
             </div>
+
             <div class="info-content">
                 <h2>Join Us on Telegram</h2>
-                <a href="https://t.me/vaathala1" target="_blank" rel="noopener noreferrer">Join Telegram</a>
+<a id="copyStreamLink" class="download-btn" onclick="copyStreamLink()">
+    <img src="https://i.ibb.co/CM4Y586/link.png" alt="Copy Link">
+    Copy Link
+</a>
             </div>
         </div>
         <div class="chat-container" id="chatBox">
@@ -307,6 +345,8 @@
 
 
    <script>
+
+let currentVideoLink = ''; // Global variable to store the current video link
 
  // Function to intercept network requests and modify URLs
     function interceptNetworkRequests(token) {
@@ -336,8 +376,8 @@ interceptNetworkRequests();
 
     // Function to initialize the video player
     function initializePlayer(videoData) {
-      
         const videoLink = videoData.video_url;
+        currentVideoLink = videoLink; // Store the video link globally
         document.getElementById('player').style.display = 'none';
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
@@ -519,6 +559,38 @@ interceptNetworkRequests();
 
         // Refresh the Views number every 20 seconds (20000 milliseconds)
         setInterval(refreshViews, 20000);
+
+
+
+   
+// Function to copy the stream link to the clipboard
+function copyStreamLink() {
+    if (!currentVideoLink) {
+        alert('Stream link is not available!');
+        return;
+    }
+
+    // Create a temporary input element to hold the stream link
+    const tempInput = document.createElement('input');
+    tempInput.value = currentVideoLink; // Set the value to the stored video link
+
+    // Append the input to the body
+    document.body.appendChild(tempInput);
+
+    // Select the input value
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
+
+    // Execute the copy command
+    document.execCommand('copy');
+
+    // Remove the temporary input from the DOM
+    document.body.removeChild(tempInput);
+
+    // Alert the user that the link has been copied (optional)
+    alert('Stream link copied to clipboard!');
+}
+
     </script>
 
 
