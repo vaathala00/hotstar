@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>VT Stream Player</title>
+    <title>VT Stream Player with DRM</title>
     <script src="https://ssl.p.jwpcdn.com/player/v/8.22.0/jwplayer.js"></script>
     <style>
         html, body { padding: 0; margin: 0; height: 100%; }
@@ -23,9 +23,9 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const streamUrl = urlParams.get("url");  // Now using "url" instead of "mpd"
-        const key = urlParams.get("key");
-        const kid = urlParams.get("kid");
+        const streamUrl = urlParams.get("url");  // Get the URL parameter for the stream
+        const key = urlParams.get("key");  // Get the key parameter
+        const kid = urlParams.get("kid");  // Get the kid parameter
         const channelName = urlParams.get("name") || "Live Stream"; // Use the name parameter or default to "Live Stream"
 
         if (!streamUrl || !key || !kid) {
@@ -33,10 +33,10 @@
             throw new Error('Missing parameters: url, key, or kid');
         }
 
-        // Construct the full stream URL
+        // Construct the full stream URL with the key and kid as query parameters
         const fullStreamUrl = `${streamUrl}?key=${key}&kid=${kid}`;
 
-        // Initialize JW Player
+        // Initialize JW Player with DRM support (ClearKey)
         const jwp = jwplayer('player');
         jwp.setup({
             width: "100%",
@@ -51,6 +51,12 @@
                     default: true
                 }
             ],
+            drm: {
+                clearKey: {
+                    keySystem: "com.widevine.alpha", // Widevine ClearKey system
+                    url: "https://example.com/drm/clearkey"  // Replace with your DRM license server URL if you have one
+                }
+            },
             sharing: {
                 heading: "Share",
                 sites: ["facebook", "twitter", "linkedin", "email"]
