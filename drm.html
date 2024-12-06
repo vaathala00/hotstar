@@ -33,9 +33,7 @@
             throw new Error('Missing parameters: url, key, or kid');
         }
 
-        // Construct the full stream URL with the key and kid as query parameters
-        const fullStreamUrl = `${streamUrl}?key=${key}&kid=${kid}`;
-
+        
         // Initialize JW Player with ClearKey DRM support
         const jwp = jwplayer('player');
         jwp.setup({
@@ -46,15 +44,15 @@
             title: channelName, // Use the name parameter as the title
             sources: [
                 {
-                    file: fullStreamUrl, 
+                    file: streamUrl, 
                     label: "Live Stream",
                     default: true
                 }
             ],
             drm: {
-                clearKey: {
-                    key: key,  // ClearKey DRM key (use the one from URL)
-                    kid: kid   // ClearKey key ID (use the one from URL)
+                clearkey: {
+                    kid: kid,
+                    key: key
                 }
             },
             sharing: {
