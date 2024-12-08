@@ -14,7 +14,7 @@
         "id": "2",
         "name": "willow",
         "logo": "https://example.com/logo.png",
-        "link": "https://thingproxy.freeboard.io/fetch/https://dfwlive-v1-c1p3-sponsored.s.llnwi.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8",
+        "link": "https://cors-proxy.cooks.fyi/https://dfwlive-v1-c1p3-sponsored.s.llnwi.net/Content/HLS.cps/Live/channel(WILLHD-3291.dfw.1080)/index.m3u8",
         "kid": "59ed8dc9d4a48857ef8e5865919496cc",
         "k": "0d3680bd8b349deda8b7fdd1da71b7f8",
         "title": "Criclife2 Live Stream",
