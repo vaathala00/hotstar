@@ -51,5 +51,17 @@
         "k": "c593c2eeea62742285b99e4d87b1c84a",
         "title": "TNT Live Stream",
         "description": "You're Watching"
+    },
+
+ {
+        "id": "6",
+        "name": "sky",
+        "logo": "https://example.com/logo.png",
+        "link": "https://linear-s.media.skyone.co.nz/sky-sport-2.mpd",
+        "kid": "ef909acce1f53f5db2a1cdafd2e90000",
+        "k": "aba1269d685f474fbddf97ce2b45c725",
+        "title": "TNT Live Stream",
+        "description": "You're Watching"
     }
+
 ]
