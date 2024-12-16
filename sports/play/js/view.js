@@ -41,3 +41,14 @@
     // Refresh the counters every 20 seconds (20000 milliseconds)
     setInterval(refreshCounters, 20000);
 
+
+
+  // Load external HTML content into the body
+        fetch('view.body.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('content-placeholder').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading view.html:', error);
+            });
