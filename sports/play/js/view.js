@@ -44,11 +44,11 @@
 
 
   // Load external HTML content into the body
-        fetch('view.body.html')
+        fetch('view.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('content-placeholder').innerHTML = data;
             })
             .catch(error => {
-                console.error('Error loading view.html:', error);
+                console.error('Error loading views:', error);
             });
