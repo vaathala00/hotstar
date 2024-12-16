@@ -66,6 +66,7 @@
 
     <!-- Custom JS file link -->
     <script src="js/script.js"></script>
+    <script src="js/view.js"></script>
 
     <script>
         // Chat toggle functionality
@@ -129,41 +130,6 @@
                 currentIframe = iframeContainer.firstChild;
             }
         });
-    </script>
-
-<script type="text/javascript">
-        function refreshViews() {
-            // Find and remove the existing counter (if any)
-            const counterContainer = document.getElementById("counter-container");
-
-            // Clear previous counter content
-            counterContainer.innerHTML = '';
-
-       // Create and append the arrow icon
-        const arrowIcon = document.createElement('i');
-        arrowIcon.classList.add('fas', 'fa-arrow-up');
-        arrowIcon.style.color = 'white';  // Add any style you want
-        arrowIcon.style.marginRight = '4px';  // Apply margin-right directly
-        arrowIcon.style.fontSize = '10px';   // Apply font-size directly
-
-        // Add the arrow icon to the container
-        counterContainer.appendChild(arrowIcon);
-
-            // Add new counter script
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = "//widget.supercounters.com/ssl/online_t.js";
-            counterContainer.appendChild(script);
-
-            // Initialize the new counter
-            const initScript = document.createElement('script');
-            initScript.type = 'text/javascript';
-            initScript.innerHTML = 'sc_online_t(1703136, "Views", "f0f0f0");';
-            counterContainer.appendChild(initScript);
-        }
-
-        // Refresh the Views number every 20 seconds (20000 milliseconds)
-        setInterval(refreshViews, 20000);
     </script>
 
 </body>
