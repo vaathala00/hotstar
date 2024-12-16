@@ -33,7 +33,7 @@
     </span>
 
     <!-- Separator (|) -->
-    <span style="margin: 0 10px;">|</span>
+<span style="margin: 0 10px; color: white;">|</span>
 
     <!-- Live Counter -->
     <span id="live-counter">
@@ -167,7 +167,7 @@
 
 <script type="text/javascript">
     function refreshCounters() {
-        // Find and remove the existing counter (if any)
+        // Find the counter container
         const counterContainer = document.getElementById("counter-container");
 
         // Clear previous counter content
@@ -184,6 +184,13 @@
         visitsInitScript.type = 'text/javascript';
         visitsInitScript.innerHTML = 'sc_text_hit(1705275, "Visits", "170ddb");'; 
         counterContainer.appendChild(visitsInitScript);
+
+        // Add the separator (|) in white color between the counters
+        const separator = document.createElement('span');
+        separator.style.margin = '0 10px';
+        separator.style.color = 'white';  // White color for the separator
+        separator.textContent = '|';  // The separator
+        counterContainer.appendChild(separator);
 
         // Add new Live counter script
         const liveScript = document.createElement('script');
