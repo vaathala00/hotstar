@@ -13,14 +13,10 @@
         counterContainer.appendChild(visitsScript);
 
         // Initialize the new Visits counter
-    const visitIds = [1705275, 1705294];  // Add more IDs as needed
-    visitIds.forEach(id => {
         const visitsInitScript = document.createElement('script');
         visitsInitScript.type = 'text/javascript';
-        visitsInitScript.innerHTML = `sc_text_hit(${id}, "Visits", "f0f0f0");`; 
+        visitsInitScript.innerHTML = 'sc_text_hit(1705275, "Visits", "f0f0f0");'; 
         counterContainer.appendChild(visitsInitScript);
-
-  });
 
         // Add the separator (|) in white color between the counters
         const separator = document.createElement('span');
