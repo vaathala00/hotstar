@@ -203,7 +203,7 @@
         }
     }
 
-    if (streamUrl && streamUrl !== "undefined") {
+    if (streamUrl && streamUrl !== "undefined" && streamUrl !== "") {
         initializePlayer(streamUrl);
     } else {
         alert("Invalid stream URL. Please check and try again.");
