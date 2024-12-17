@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web by StevoSure</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c; /* Dark background */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 4px;
+            text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Telegram button styles */
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px; /* Increased space from above elements */
+            margin-bottom: 40px; /* Increased space below the button */
+            padding: 8px 16px; /* Smaller padding for a smaller button */
+            background: linear-gradient(135deg, #0088cc, #005d99); /* Blue gradient */
+            color: white;
+            font-weight: bold;
+            border-radius: 20px; /* Slightly smaller radius */
+            font-size: 14px; /* Smaller font size */
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            box-shadow: 0px 4px 10px rgba(0, 136, 204, 0.4);
+        }
+
+        .telegram-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 136, 204, 0.6);
+        }
+
+        .telegram-btn img {
+            width: 20px; /* Smaller logo size */
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        /* Input and select styles */
+        #search-input,
+        #group-select {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 25px;
+            border: 1px solid #555;
+            background-color: #333;
+            color: white;
+            outline: none;
+        }
+
+        #search-input::placeholder {
+            color: #777;
+        }
+
+        /* Channel list spacing */
+        #channel-list {
+            margin-top: 20px; /* Adds space above the channel list */
+        }
+
+        /* Button styles for pagination */
+        .page-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .page-btn:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        .page-btn:disabled {
+            background-color: #777;
+            cursor: not-allowed;
+        }
+
+        /* Credits styling */
+        .credits {
+            margin: 10px 0;
+            font-size: 14px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UNKNOWN PLAYLISTS - TATA PLAY LIVE WEB</h1>
+        <div class="credits">
+            Website coded by - STEVOSURE
+        </div>
+        <input type="text" id="search-input" placeholder="Search Channels...">
+        <select id="group-select">
+            <option value="all">All Groups</option>
+        </select>
+        <a href="https://t.me/unknownXplaylists" class="telegram-btn" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
+            Join Our Telegram Channel
+        </a>
+        <div id="channel-list"></div>
+        <div id="pagination-controls">
+            <button id="prev-page" class="page-btn">Previous</button>
+            <span id="page-info"></span>
+            <button id="next-page" class="page-btn">Next</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
