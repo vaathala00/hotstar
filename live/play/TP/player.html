@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playing Channel...</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
@@ -125,89 +124,90 @@
 </head>
 <body>
     <div id="videoContainer">
-        <h1 id="channel-name">Live Stream</h1>
+        <h1 id="channel-name">null</h1>
         <div class="video-container" style="position: relative;">
             <div id="liveIndicator">LIVE</div>
             <video id="player" playsinline controls></video>
             <div class="loader" id="loader"></div>
         </div>
         <div class="button-container">
-            <a href="https://t.me/s/vaathala1" class="btn" target="_blank">Join Telegram</a>
-            <a href="" class="btn btn-secondary" target="_blank">Soon...</a>
+            <a href="https://t.me/s/unknownXplaylists" class="btn" target="_blank">Join Telegram</a>
+            <a href="https://unknown-playlists-tp.netlify.app/" class="btn btn-secondary" target="_blank">More Channels...</a>
         </div>
     </div>
     <div class="footer">
-        Website made by - <a href="https://t.me/vaathala1" target="_blank">vaathala</a>
+        Website made by - <a href="https://t.me/StevoSure" target="_blank">StevoSure</a>
     </div>
+    
     <script>
-    const params = new URLSearchParams(window.location.search);
-    const streamUrl = decodeURIComponent(params.get('url'));
-    const channelName = decodeURIComponent(params.get('name')) || "Live Stream";
-    document.getElementById('channel-name').innerText = channelName;
+        const params = new URLSearchParams(window.location.search);
+        const streamUrl = decodeURIComponent(params.get('url'));
+        const channelName = decodeURIComponent(params.get('name')) || "Live Stream";
+        document.getElementById('channel-name').innerText = channelName;
 
-    const loader = document.getElementById('loader');
-    const playerElement = document.getElementById('player');
+        const loader = document.getElementById('loader');
+        const playerElement = document.getElementById('player');
 
-    function initializePlayer(sourceUrl) {
-        const player = new Plyr(playerElement, {
-            autoplay: true,
-            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
-            settings: ['captions', 'quality', 'speed', 'audio'],
-            muted: false
-        });
-
-        if (Hls.isSupported() && sourceUrl) {
-            const hls = new Hls({
-                maxBufferLength: 30, // Adjust buffer length to preload enough video
-                maxBufferSize: 60 * 1024 * 1024, // Max buffer size in bytes
-                startPosition: -1, // Start at live position (-1 means auto-detect)
-                liveSyncDurationCount: 3 // Keep the buffer close to live edge
+        function initializePlayer(sourceUrl) {
+            const player = new Plyr(playerElement, {
+                autoplay: true,
+                controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
+                settings: ['captions', 'quality', 'speed', 'audio'],
+                muted: false
             });
 
-            hls.loadSource(sourceUrl);
-            hls.attachMedia(player.media);
+            if (Hls.isSupported() && sourceUrl) {
+                const hls = new Hls({
+                    maxBufferLength: 30, // Adjust buffer length to preload enough video
+                    maxBufferSize: 60 * 1024 * 1024, // Max buffer size in bytes
+                    startPosition: -1, // Start at live position (-1 means auto-detect)
+                    liveSyncDurationCount: 3 // Keep the buffer close to live edge
+                });
 
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                console.log("HLS Manifest parsed. Starting playback...");
+                hls.loadSource(sourceUrl);
+                hls.attachMedia(player.media);
+
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    console.log("HLS Manifest parsed. Starting playback...");
+                    loader.style.display = 'none';
+
+                    // Auto-play starts when buffer is ready
+                    if (player.media.readyState < 4) {
+                        console.log("Waiting for buffer...");
+                        hls.on(Hls.Events.BUFFER_CREATED, () => {
+                            player.play().catch(err => console.error("Autoplay error:", err));
+                        });
+                    }
+                });
+
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error(`HLS.js Error: ${data.details}`);
+                    if (data.details === "bufferStalledError") {
+                        console.warn("Buffer stalled! Attempting recovery...");
+                        hls.startLoad(); // Restart loading
+                    }
+                });
+
+                player.on('playing', () => {
+                    console.log("Playback started successfully.");
+                });
+
+                player.on('ended', () => {
+                    console.log("Playback ended.");
+                });
+            } else if (sourceUrl) {
+                playerElement.src = sourceUrl;
                 loader.style.display = 'none';
-
-                // Auto-play starts when buffer is ready
-                if (player.media.readyState < 4) {
-                    console.log("Waiting for buffer...");
-                    hls.on(Hls.Events.BUFFER_CREATED, () => {
-                        player.play().catch(err => console.error("Autoplay error:", err));
-                    });
-                }
-            });
-
-            hls.on(Hls.Events.ERROR, (event, data) => {
-                console.error(`HLS.js Error: ${data.details}`);
-                if (data.details === "bufferStalledError") {
-                    console.warn("Buffer stalled! Attempting recovery...");
-                    hls.startLoad(); // Restart loading
-                }
-            });
-
-            player.on('playing', () => {
-                console.log("Playback started successfully.");
-            });
-
-            player.on('ended', () => {
-                console.log("Playback ended.");
-            });
-        } else if (sourceUrl) {
-            playerElement.src = sourceUrl;
-            loader.style.display = 'none';
-        } else {
-            alert("Your browser does not support HLS streaming or the source URL is invalid.");
+            } else {
+                alert("Your browser does not support HLS streaming or the source URL is invalid.");
+            }
         }
-    }
 
-    if (streamUrl && streamUrl !== "undefined" && streamUrl !== "") {
-        initializePlayer(streamUrl);
-    } else {
-        alert("Invalid stream URL. Please check and try again.");
-    }
-</script>
+        if (streamUrl && streamUrl !== "undefined") {
+            initializePlayer(streamUrl);
+        } else {
+            alert("Invalid stream URL. Please check and try again.");
+        }
+    </script>
 </body>
 </html>
