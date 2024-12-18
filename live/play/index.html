@@ -125,14 +125,15 @@ font-weight: bold;
                 jsonData.forEach(function(item) {
                     const anchor = document.createElement('a');
 
-            const modifiedLink = item.link.replace(/^https:\/\//, 'http://');
-            anchor.href = modifiedLink;
+const modifiedLink = item.link.replace(/^https:\/\//, 'http://') + '?forceHttp=true';
+anchor.href = modifiedLink;
 
-    // Add an event listener to handle the click
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent the default action of the link (navigation)
-        window.location.href = modifiedLink;  // Programmatically navigate to the modified link
-    });
+anchor.addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent the default navigation
+    const modifiedLink = anchor.href.replace(/^https:\/\//, 'http://');
+    window.location.href = modifiedLink;  // Redirect to the modified link
+});
+
 
                    <!-- anchor.href = item.link.replace(/^https:\/\//, 'http://');   `play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item -->
 
