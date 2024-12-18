@@ -140,6 +140,14 @@
     </div>
     
     <script>
+
+        // Force the page to load as HTTP instead of HTTPS
+        if (window.location.protocol === 'https:') {
+            window.location.href = window.location.href.replace('https://', 'http://');
+        }
+
+
+
         const params = new URLSearchParams(window.location.search);
         const streamUrl = decodeURIComponent(params.get('url'));
         const channelName = decodeURIComponent(params.get('name')) || "Live Stream";
