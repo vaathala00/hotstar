@@ -124,7 +124,7 @@ font-weight: bold;
                 const listContainer = document.getElementById('listContainer');
                 jsonData.forEach(function(item) {
                     const anchor = document.createElement('a');
-                    anchor.href = `play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item
+                    anchor.href = item.link; <!--  `play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item -->
 
                     const cardDiv = document.createElement('div');
                     cardDiv.classList.add('box1'); // Add the appropriate class
