@@ -128,6 +128,12 @@ font-weight: bold;
             const modifiedLink = item.link.replace(/^https:\/\//, 'http://');
             anchor.href = modifiedLink;
 
+    // Add an event listener to handle the click
+    anchor.addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent the default action of the link (navigation)
+        window.location.href = modifiedLink;  // Programmatically navigate to the modified link
+    });
+
                    <!-- anchor.href = item.link.replace(/^https:\/\//, 'http://');   `play.html?id=${item.id}`; // Assuming the JSON contains the URL for each item -->
 
                     const cardDiv = document.createElement('div');
