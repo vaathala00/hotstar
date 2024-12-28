@@ -352,9 +352,9 @@ let currentVideoLink = ''; // Global variable to store the current video link
         XMLHttpRequest.prototype.open = function(method, url) {
             // Check if the URL matches the patterns to be intercepted
             if (url.startsWith('https://sonydaimenew.akamaized.net/')) {
-                url = url.replace('sonydaimenew.akamaized.net', 'sliv-live.drmlive.in');
+                url = url.replace('sonydaimenew.akamaized.net', 'https://maxplay-tv.fun/fan.php/');
             } else if (url.startsWith('https://sonypartnersdaimenew.akamaized.net/')) {
-                url = url.replace('sonypartnersdaimenew.akamaized.net', 'sliv-live.drmlive.in');
+                url = url.replace('sonypartnersdaimenew.akamaized.net', 'https://maxplay-tv.fun/fan.php/');
             }
             // Call the original open method with the potentially modified URL
             return originalOpen.apply(this, arguments);
