@@ -1,0 +1,145 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: 	#E0E0E0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family : Verdana,Tahoma, sans-serif;
+}
+
+.box{
+    width: 380px;
+    height: 500px;
+    background-color:white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 8% auto 0;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.box img{
+	width:100px;
+    margin-top:-50px ;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+.header {
+	width: 300px;
+    height: 50px;
+    text-transform: uppercase;
+	display: inline-flex;
+    padding-top: 20px;
+    padding-bottom: 0;
+	justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header a {
+    font-size: 20px;
+    text-decoration: none;
+    color: #707070;
+	display: inline-flex;
+    padding-left: 25px;
+    padding-right: 25px;
+	justify-content: center;
+    cursor:pointer;
+}
+
+.header .active {
+    color: #59ca92;
+	font-weight: bold;
+	position: relative;
+}
+
+.header .active:after {
+	position: absolute;
+    border: none;
+	content: "";
+}
+
+#errorMsg{
+    color:red;
+    text-align: center;
+    font-size: 12px;
+    padding-bottom: 20px;
+
+}
+
+.content{
+    display: inline-flex;
+    overflow: hidden;
+}
+
+form {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+	flex-shrink: 0;
+	flex-direction: column;
+	transition: right 0.5s;
+}
+
+.login a{
+    text-decoration: none;
+    color: #D8D8D8;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.extend form {
+	right: 100%;
+}
+
+input[type=text], input[type=password], input[type=email]{
+	display:block;
+    position: relative;
+	border: 2px solid #D0D0D0;
+	padding: 12px;
+    margin-bottom: 15px;
+    width: 100%;
+ 	box-sizing: border-box;
+    font-size: 17px;
+    outline: none;
+    border-radius: 10px;
+}
+
+input[type=submit]{
+    display:block;
+    position: relative;
+    border: 2px solid #2cabe3;
+    padding: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 15px;
+    background-color:#2a52be;
+    text-align:center;
+    font-size: 20px;
+    color: #ffffff;
+	cursor:pointer;
+    outline: none;
+}
+	
+input[type=submit]:hover{
+	 background-color:#318CE7;
+     color: #000000;
+}
+input[type=checkbox]{
+    background-color:#df80ff;
+}
+#check{
+    margin-top: 10px;
+    text-align: left;
+    color: 	#707070;
+    font-size: 15px;
+}
+#tick{
+    margin-top: 25px;
+}
