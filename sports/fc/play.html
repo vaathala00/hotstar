@@ -320,6 +320,8 @@
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
 
+const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(videoLink);
+
         // If the link is an HLS link
         if (videoLink.includes(".m3u8")) {
             videoIframe.style.display = 'none';
@@ -348,7 +350,7 @@
                 },
                 playlist: [{
                     sources: [{
-                        file: "https://maxplay-tv.fun/fan.php/" + videoLink,
+                        file: "https://maxplay-tv.fun/fan.php/" + encodeURIComponent(videoLink),
                         type: "hls" // Set type to "mpd" for DASH stream
                     }]
                 }],
