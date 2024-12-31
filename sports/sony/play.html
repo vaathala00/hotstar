@@ -344,6 +344,17 @@
 
    <script>
 
+function interceptNetworkRequests(token) {
+    const originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+        if (url.startsWith('https://sonydaimenew.akamaized.net/')) {
+            url = url.replace('sonydaimenew.akamaized.net', 'sliv-live.drmlive.in');
+        } else if (url.startsWith('https://sonypartnersdaimenew.akamaized.net/')) {
+            url = url.replace('sonypartnersdaimenew.akamaized.net', 'sliv-live.drmlive.in');
+        }
+        return originalOpen.apply(this, arguments);
+    };
+}
 
     // Function to get URL parameter by name
     function getUrlParameter(name) {
