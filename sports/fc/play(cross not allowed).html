@@ -320,12 +320,7 @@
         const videoWrapper = document.getElementById('videoWrapper');
         const videoIframe = document.getElementById('videoIframe');
 
-            const m3u8PlayerUrl = "https://m3u8player.org/player.html?url=" + encodeURIComponent(videoLink);
-
-            // Display the iframe with the external M3U8 player
-            videoIframe.src = m3u8PlayerUrl;
-            videoIframe.style.display = 'block';
-        }
+const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(videoLink);
 
         // If the link is an HLS link
         if (videoLink.includes(".m3u8")) {
