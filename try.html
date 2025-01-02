@@ -33,6 +33,10 @@
 
         // Initialize JW Player
         const jwp = jwplayer('player');
+        
+        let bufferStartTime = null;  // Track when buffering starts
+        const bufferThreshold = 10;  // Buffer threshold in seconds
+
         jwp.setup({
             width: "100%",
             height: "100%",
@@ -61,10 +65,22 @@
             },
             events: {
                 onBuffer: function() {
-                    console.log("Buffering...");
+                    if (bufferStartTime === null) {
+                        bufferStartTime = Date.now(); // Capture the time when buffering starts
+                    }
+
+                    const bufferDuration = (Date.now() - bufferStartTime) / 1000; // Calculate buffer duration in seconds
+
+                    if (bufferDuration > bufferThreshold) {
+                        console.log("Buffering too long, reloading the page...");
+                        location.reload(); // Refresh the page if buffering exceeds threshold
+                    } else {
+                        console.log("Buffering... " + bufferDuration.toFixed(2) + "s");
+                    }
                 },
                 onPlay: function() {
                     console.log("Video started playing!");
+                    bufferStartTime = null; // Reset the buffer start time when playback starts
                 },
                 onError: function(event) {
                     console.error('Error occurred:', event);
