@@ -33,7 +33,7 @@
       }
     </style>
   </head>
-  <script type='text/javascript' src='https://eltontry.com/09/f1/e9/09f1e956c711aea6a898d5abbb78d092.js'></script>
+  <script type='text/javascript' src=''></script>
   <body>
     <!-- Video Player -->
     <div id="player-container">
@@ -48,7 +48,7 @@
       window.onload = function () {
         var playerInstance = jwplayer("player");
         var source = {
-          file: "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
+          file: "https://cors-anywhere.herokuapp.com/https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
           default: true,
           onXhrOpen: function (xhr, url) {
             xhr.setRequestHeader(
