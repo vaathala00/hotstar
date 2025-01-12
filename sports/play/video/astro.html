@@ -33,7 +33,6 @@
       }
     </style>
   </head>
-  <script type='text/javascript' src=''></script>
   <body>
     <!-- Video Player -->
     <div id="player-container">
@@ -47,23 +46,27 @@
 
       window.onload = function () {
         var playerInstance = jwplayer("player");
+        
+        // The source configuration for DASH
         var source = {
-          file: "https://cors-anywhere.herokuapp.com/https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
+          file: "https://d1yws6emo43ny.cloudfront.net/CH5/masterCH5.mpd",
           default: true,
-          onXhrOpen: function (xhr, url) {
+          type: "dash",
+          drm: {
+            clearkey: {
+              keyId: "a8eb0f152c6e429ca7a53f399aadf257",
+              key: "c593c2eeea62742285b99e4d87b1c84a"
+            }
+          },
+          onXhrOpen: function(xhr, url) {
             xhr.setRequestHeader(
               'Authorization',
               'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3bXZlciI6Miwid21pZGZtdCI6ImFzY2lpIiwid21pZHR5cCI6MSwid21rZXl2ZXIiOjEsIndtaWRsZW4iOjUxMiwid21pZCI6IllXRmxNVGN6WmpjdE5HSTBOaTAwWVdOaUxUaGlNVEF0T1RGalpEa3dNamd5TTJaaSIsIndtb3BpZCI6MzIsImV4cCI6MTczNjIyODk0NCwiaWF0IjoxNzM1NjI0OTQ0fQ.7Z9RuN1PL4034GKL7IwceYQ3ROi9vR7vyTKvBwyT4Aw'
             );
-          },
+          }
         };
-        source.type = "dash";
-        source.drm = {
-          clearkey: {
-            keyId: "a8eb0f152c6e429ca7a53f399aadf257",
-            key: "c593c2eeea62742285b99e4d87b1c84a",
-          },
-        };
+
+        // Setup the player
         playerInstance.setup({
           playlist: [
             {
