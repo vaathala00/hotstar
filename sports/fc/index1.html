@@ -144,11 +144,11 @@ font-weight: bold;
                 const image = document.createElement('img');
                 image.src = item.banner; // Banner image for the match
                 image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-                image.alt = item.src || 'Match image'; // Add alt text for accessibility
+                image.alt = item.match_name || 'Match image'; // Add alt text for accessibility
 
                 const title = document.createElement('h2');
                 title.classList.add('text-center', 'text-sm', 'font-bold');
-                title.textContent = item.title; // Match title
+                title.textContent = item.match_name; // Match title
 
                 const description = document.createElement('div');
                 description.classList.add('mb-5', 'opacity-100');
@@ -171,7 +171,7 @@ font-weight: bold;
     }
 
     // Call the function with the URL of your JSON data
-    generateHtmlFromJson('https://github.com/drmlive/fancode-live-events/blob/main/fancode.json');
+    generateHtmlFromJson('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json');
 </script>
 
 
@@ -232,7 +232,6 @@ font-weight: bold;
 
     // Get all box elements
     const boxes = document.querySelectorAll('.box1');
-
 
     boxes.forEach((box) => {
       const h2Text = box.querySelector('h2').textContent.toLowerCase();
