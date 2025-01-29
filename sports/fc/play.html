@@ -315,7 +315,7 @@
 
         // Function to initialize the video player
         function initializePlayer(videoData) {
-            const videoLink = videoData.stream_link;
+            const videoLink = videoData.adfree_url;
             document.getElementById('player').style.display = 'none';
             const videoWrapper = document.getElementById('videoWrapper');
             const videoIframe = document.getElementById('videoIframe');
@@ -345,7 +345,7 @@
             }
         }
     };
-    xhr.open('GET', 'https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json', true);
+    xhr.open('GET', 'https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json', true);
     xhr.send();
 </script>
 
