@@ -83,6 +83,27 @@
         "k": "987fa0a5b220393daec0f9232e042b6c",
         "title": "Criclife2 Live Stream",
         "description": "You're Watching"
+    },
+    {
+        "id": "9",
+        "name": "sph",
+        "logo": "https://example.com/logo.png",
+        "link": "https://rftv.wtf/ch.mpd?id=24",
+        "kid": "24fe8f3887e0550db02ca596fd480175",
+        "k": "79a62f3a5f3fa324f4de420d370a05b5",
+        "title": "Criclife2 Live Stream",
+        "description": "You're Watching"
+    },
+    {
+        "id": "10",
+        "name": "spe",
+        "logo": "https://example.com/logo.png",
+        "link": "https://bpcdncs2.dialog.lk/bpk-token/2aa@3n3xdna4v5ourqi4d3l0c0ph0apl5qv0kc23d4ba/GlobalManifest.mpd",
+        "kid": "79b340b2b5f7c3c89951daabde7cdf97",
+        "k": "3e22bc39d22a7f8c3516f6b58b144668",
+        "title": "Criclife2 Live Stream",
+        "description": "You're Watching"
     }
+
 
 ]
