@@ -26,15 +26,22 @@
             margin: 0 12px;
             height: 100%;
             background-color: #1F0C50;
-            font-family: 'Arial', sans-serif;
         }
 
         .box-shadow {
+            font-family: sans-serif;
+            font-weight: 600;
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 2px 2px 20px 23px #7fecad;
             background-color: #f8f8f8;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
+            font-family: 'Arial', sans-serif;
             font-size: 15px;
             color: #333;
         }
@@ -53,6 +60,10 @@
             padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        a {
+            text-decoration: none !important;
         }
 
         header {
@@ -88,60 +99,18 @@
             font-family: 'Tilt Warp', sans-serif;
         }
 
-        .card:hover {
-            transform: scale(1.05);
-            transition: transform 0.2s ease-in-out;
-            cursor: pointer;
-        }
-
-        .card {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            background-color: #fff;
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-        }
-
-        .card-content {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .card-content h2 {
-            font-weight: bold;
-            font-size: 18px;
-            color: #333;
-        }
-
-        .card-content p {
-            font-size: 14px;
-            color: #666;
-        }
-
         .status {
             margin-bottom: 10px;
             font-size: 14px;
             font-weight: bold;
-            color: #ff6347; /* You can change this color */
+            color: #ff6347;
         }
 
         .start-time {
             margin-top: 10px;
             font-size: 14px;
             font-weight: bold;
-            color: #4CAF50; /* You can change this color */
-        }
-
-        #listContainer {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            color: #4CAF50;
         }
 
         .search-container {
@@ -156,14 +125,22 @@
             border-radius: 10px;
             border: 1px solid #ccc;
         }
+
+
+
     </style>
+
+    <link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
+    <script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
         <div class="logo">
             <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo" class="logo-img">
-            <h1 class="site-title">Live Matches</h1>
+            <h1 class="site-title"></h1>
         </div>
     </header>
 
@@ -172,85 +149,108 @@
             <input type="search" id="searchInput" class="search-input" placeholder="Search for matches..." />
         </div>
 
-        <div id="kaya_head">
-            <span class="kayaheadicon" onclick="window.history.back()">
-                <i class="fa-solid fa-arrow-left-long"></i>
-            </span>
-            &nbsp;&nbsp;Live Cricket Matches
-        </div>
 
-        <div id="listContainer"></div>
+        <div id="kaya_head">
+
+            <span class="kayaheadicon" onclick="window.history.back()">
+<i class="fa-solid fa-arrow-left-long"></i>
+                </span>
+            &nbsp;&nbsp; </div>
+
+        <div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto"></div>
     </main>
+
+
+
+    <script type="text/javascript" src="channel.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
         // Function to generate HTML from JSON data
-        async function generateHtmlFromJson(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-
-                const jsonData = await response.json();
-                if (!jsonData || !Array.isArray(jsonData.matches)) {
-                    console.error('No valid JSON data available');
-                    return;
-                }
-
-                // Set the page title dynamically
-                document.getElementById('kaya_head').textContent = `Live Cricket Matches - ${jsonData.matches[0].event_name}`;
-
-                const listContainer = document.getElementById('listContainer');
-                jsonData.matches.forEach(function (item) {
-                    if (!item.match_id || !item.src || !item.match_name || !item.event_category) {
-                        console.warn('Missing data in item:', item);
-                        return;
-                    }
-
-                    const anchor = document.createElement('a');
-                    anchor.href = `play.html?id=${item.match_id}`;
-
-                    const cardDiv = document.createElement('div');
-                    cardDiv.classList.add('card');
-
-                    const image = document.createElement('img');
-                    image.src = item.src;
-                    image.alt = item.title || 'Match Image';
-
-                    const cardContent = document.createElement('div');
-                    cardContent.classList.add('card-content');
-
-                    const title = document.createElement('h2');
-                    title.textContent = item.match_name;
-
-                    const description = document.createElement('p');
-                    description.textContent = item.event_category;
-
-                    // Create status element
-                    const status = document.createElement('div');
-                    status.classList.add('status');
-                    status.textContent = item.status || 'Status: Not Available'; // If status is missing, display this
-
-                    // Create start time element
-                    const startTime = document.createElement('div');
-                    startTime.classList.add('start-time');
-                    startTime.textContent = `Start Time: ${item.startTime || 'Not Available'}`; // If start time is missing, display this
-
-                    cardContent.appendChild(status);
-                    cardContent.appendChild(title);
-                    cardContent.appendChild(description);
-                    cardContent.appendChild(startTime);
-
-                    cardDiv.appendChild(image);
-                    cardDiv.appendChild(cardContent);
-                    anchor.appendChild(cardDiv);
-
-                    listContainer.appendChild(anchor);
-                });
-            } catch (error) {
-                console.error('Error fetching or parsing JSON:', error);
-            }
+async function generateHtmlFromJson(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
+
+        const jsonData = await response.json();
+        if (!jsonData || !Array.isArray(jsonData.matches)) {
+            console.error('No valid JSON data available');
+            return;
+        }
+
+        // Set the page title dynamically
+        document.getElementById('kaya_head').textContent = `Live Cricket Matches - ${jsonData.matches[0].event_name}`;
+
+        const listContainer = document.getElementById('listContainer');
+        jsonData.matches.forEach(function (item) {
+            if (!item.match_id || !item.src || !item.match_name || !item.event_category) {
+                console.warn('Missing data in item:', item);
+                return;
+            }
+
+            const anchor = document.createElement('a');
+            anchor.href = `play.html?id=${item.match_id}`;
+
+            const box1Div = document.createElement('div');
+            box1Div.classList.add('box1');
+
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-49', 'mb-4', 'flex', 'flex-col');
+
+            cardDiv.style.position = 'relative'; // Ensure the cardDiv has relative positioning
+
+            const image = document.createElement('img');
+            image.src = item.src;
+            image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
+            image.alt = item.match_name;
+
+            // Create status element (Red color, positioned top right on the image)
+            const status = document.createElement('div');
+            status.classList.add('text-xs', 'absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'p-1'); // Positioned at top right of image
+status.style.color = '#f87171';
+            status.style.paddingRight = '5px'; // Optional padding to ensure it doesn't touch the edge
+            status.style.paddingTop = '5px'; // Optional padding for positioning
+            status.textContent = item.status || 'Status: Not Available';
+
+            const cardContent = document.createElement('div');
+            cardContent.classList.add('mb-5', 'opacity-100');
+
+            const title = document.createElement('h2');
+            title.classList.add('text-center', 'text-sm', 'font-bold');
+            title.textContent = item.match_name;
+
+            const description = document.createElement('p');
+            description.classList.add('text-xs', 'text-center');
+            description.textContent = item.event_category;
+
+            // Create start time element
+            const startTime = document.createElement('div');
+            startTime.classList.add('text-xs', 'text-center'); // Smaller size for start time
+            startTime.style.color = '#4caf50';
+            startTime.textContent = `Start Time: ${item.startTime || 'Not Available'}`;
+
+            // Append elements to card content
+            cardContent.appendChild(title);
+            cardContent.appendChild(description);
+            cardContent.appendChild(startTime);
+
+            // Append status element on top of the image
+            cardDiv.appendChild(image);
+            cardDiv.appendChild(status); // Add status on top of the image
+            cardDiv.appendChild(cardContent);
+            box1Div.appendChild(cardDiv);
+            anchor.appendChild(box1Div);
+
+            listContainer.appendChild(anchor);
+        });
+    } catch (error) {
+        console.error('Error fetching or parsing JSON:', error);
+    }
+}
+
+
 
         // Call the function with the URL of your JSON data
         generateHtmlFromJson('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json');
