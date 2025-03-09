@@ -28,6 +28,9 @@
         var video = document.getElementById('video');
         var videoUrl = 'https://ssh101stream.ssh101.com/akamaissh101/ssh101/tultrabbtamil/chunks.m3u8';
 
+        var bufferingTimeout;
+        var bufferDelayThreshold = 5000; // 5 seconds before considering buffering as an issue
+
         // Function to reload the video source
         function reloadStream() {
             console.log('Reloading stream...');
@@ -62,6 +65,28 @@
 
             hls.on(Hls.Events.LEVEL_SWITCHED, function(event, data) {
                 console.log('Switched to level:', data.level); // Log level changes
+            });
+
+            // Detect when the stream is buffering
+            hls.on(Hls.Events.BUFFER_FLUSHING, function(event, data) {
+                console.log('Buffering detected...');
+
+                // Start a timeout to trigger a refresh if buffering takes too long
+                if (bufferingTimeout) {
+                    clearTimeout(bufferingTimeout);
+                }
+
+                bufferingTimeout = setTimeout(function () {
+                    console.log('Buffering too long, refreshing stream...');
+                    reloadStream(); // Reload the video stream after 5 seconds of buffering
+                }, bufferDelayThreshold);
+            });
+
+            // Reset buffering timeout when buffering ends
+            hls.on(Hls.Events.BUFFER_APPENDING, function(event, data) {
+                if (bufferingTimeout) {
+                    clearTimeout(bufferingTimeout); // Reset timeout when data is appended to the buffer
+                }
             });
 
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
