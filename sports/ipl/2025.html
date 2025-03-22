@@ -16,7 +16,7 @@
     <div class="container">
         <!-- <div class="main-video-container"> -->
             <div class="my-iframe" id="iframe-container">
-                <iframe src="https://cdn.crichdplays.ru/embed2.php?id=starsp" scrolling="no" allowfullscreen></iframe>
+                <iframe src="https://cdn.crichdplays.ru/embed2.php?id=starsp" sandbox="allow-scripts" scrolling="no" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -150,6 +150,15 @@
             }
         });
     </script>
+
+
+<script>
+    window.onload = function() {
+        const iframe = document.getElementById('myIframe');
+        iframe.removeAttribute('sandbox'); // This removes the sandbox attribute automatically
+        console.log('Sandbox removed from iframe automatically');
+    };
+</script>
 
 </body>
 
