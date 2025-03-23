@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JW Player - M3U8 Stream</title>
+    <script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script> <!-- Replace 'your-jwplayer-key' with your actual JW Player key -->
+</head>
+<body>
+
+    <div id="player"></div>
+
+<script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+</script>
+
+    <script>
+        jwplayer("player").setup({
+            file: "https://vkvsd63.okcdn.ru/cmaf/7966929783340/sig/9UkVMO3MPCY/srcIp/172.69.178.235/urls/45.136.22.58/expires/1743195272733/clientType/13/srcAg/CHROME/fromCache/1/mid/9319446489900/id/7966929783340/get/hls_9319446489900.OnURj29hmec.m3u8",
+            type: "hls",
+            width: "100%",
+            height: "100%",
+            aspectratio: "16:9",
+            autostart: true
+        });
+    </script>
+
+</body>
+</html>
