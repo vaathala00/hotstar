@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JW Player - M3U8 Stream</title>
+    <script src="https://content.jwplatform.com/libraries/IDzF9Zmk.js"></script> <!-- Replace 'your-jwplayer-key' with your actual JW Player key -->
+</head>
+<body>
+
+    <div id="player"></div>
+
+<script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
+</script>
+
+    <script>
+        jwplayer("player").setup({
+            file: "https://v18tataplaysyndication.akamaized.net/bpk-tv/Sports18_1_HD_voot_MOB/output03/index.m3u8?hdnea=exp=1742749026~acl=/*~hmac=4d47ad393702da7b1085850817406714215f121aa44d0c21c45f29e05249cbb3",
+            type: "hls",
+            width: "100%",
+            height: "100%",
+            aspectratio: "16:9",
+            autostart: true
+        });
+    </script>
+
+</body>
+</html>
