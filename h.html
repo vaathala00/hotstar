@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allinone_Reborn</title>
+    <style>
+        /* Global styles with animated gradient background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            height: 100%;
+            overflow: auto;
+            background: linear-gradient(90deg, #ff6f61, #ff8c42, #ffca3a, #8ac926, #1982c4, #6a4c93, #ff61a6);
+            background-size: 800% 800%;
+            animation: gradientAnimation 20s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Title Styling with Gradient */
+        .title-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff6f61, #1e88e5, #4caf50);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .author {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #D32F2F;
+            margin-top: 5px;
+        }
+
+        /* Search and category section styling */
+        .search-category-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Search bar styling */
+        .search-input {
+            padding: 12px;
+            font-size: 18px;
+            width: 300px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .search-input:focus {
+            border-color: #388E3C;
+            box-shadow: 0 0 5px rgba(72, 177, 72, 0.5);
+        }
+
+        /* Category selector */
+        .category-selector {
+            padding: 12px;
+            font-size: 18px;
+            width: 200px;
+            border: 2px solid #4CAF50;
+            border-radius: 25px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        /* Join Telegram button styling */
+        .join-telegram {
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .join-telegram:hover {
+            background-color: #007bb5;
+        }
+
+        /* Channel grid container */
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+        }
+
+        /* Each channel box styling */
+        .channel-grid div {
+            text-align: center;
+            cursor: pointer;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            transition: 0.3s;
+            background-color: #fff;
+        }
+
+        /* Hover effect */
+        .channel-grid div:hover {
+            background-color: #81C784;
+            transform: scale(1.08);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Channel logo styling */
+        .channel-grid img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Channel name styling */
+        .channel-grid p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Responsive Design: Adjust for mobile devices */
+        @media (max-width: 768px) {
+            .search-category-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input, .category-selector, .join-telegram {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .main-title {
+                font-size: 36px;
+            }
+
+            .author {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title Section -->
+    <div class="title-container">
+        <h1 class="main-title">ALL IN ONE LIVE TV</h1>
+        <p class="author">Created by AMIT</p>
+    </div>
+
+    <!-- Search Bar, Category Selector, and Join Telegram Button -->
+    <div class="search-category-container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search channels...">
+        <select class="category-selector" id="categorySelect"></select>
+        <a href="https://t.me/allinone_reborn" target="_blank" class="join-telegram">Join Telegram</a>
+    </div>
+
+    <!-- Channel Grid -->
+    <div class="channel-grid" id="channelGrid"></div>
+
+    <script>
+        function _0x3366(_0x16dee8,_0x16cf8e){const _0x455a2f=_0x3894();return _0x3366=function(_0x49abe7,_0x5d577a){_0x49abe7=_0x49abe7-(0x1*-0x1f4d+0x1*-0x19ed+0x9*0x677);let _0x26edba=_0x455a2f[_0x49abe7];return _0x26edba;},_0x3366(_0x16dee8,_0x16cf8e);}function _0x3894(){const _0x33c3d6=['dUgMP','qvYAE','filter','src','textConten','ent','xlNdc','appendChil','71898fGpGoQ','7907XaVkqL','categorySe','toLowerCas','addEventLi','https://vi','div','No+Logo','jIUyI','phUrH','mFAYH','0x75?text=','name','hyeEo','87akRRfL','url','forEach','img','wOKEq','KvMdH','lect','_blank','concat','option','fTbLP','click','HMbaj','&name=','8RhJgID','a.placehol','wZriD','8lLiYHL','channels','categories','apBpP','iffET','open','RfgGL','cuKod','json','TJNXD','value','225WdARog','gequQ','getElement','searchInpu','All\x20Channe','HyGTX','der.com/15','stener','then','30540zqgkvk','player.htm','BGCLx','channelGri','4090051vCyiRb','956770TLxhre','PqHtZ','logo','6809tSumXF','input','channels2.','text','innerHTML','includes','82768kPkNTJ','createElem','l?url=','1917171Xuvfzc','alt','Hhcth','ById','change'];_0x3894=function(){return _0x33c3d6;};return _0x3894();}const _0x2a50da=_0x3366;(function(_0x3f2f01,_0xa7f963){const _0x18d95d=_0x3366,_0xcf3f2d=_0x3f2f01();while(!![]){try{const _0x22c989=parseInt(_0x18d95d(0x125))/(0xa77+0x10*0x23a+-0x2e16)*(-parseInt(_0x18d95d(0x143))/(-0x2425*-0x1+-0x22*0xd3+-0x81d))+parseInt(_0x18d95d(0x132))/(0x1*-0x12ca+0x2c*-0x56+-0x1*-0x2195)*(-parseInt(_0x18d95d(0x114))/(0x40b+-0x1b5*0x1+0xb*-0x36))+-parseInt(_0x18d95d(0xfd))/(-0x1cf3+-0x3*-0x2ed+0x1431)*(parseInt(_0x18d95d(0x124))/(0x2*-0x4fd+-0x582*0x1+0x31a*0x5))+parseInt(_0x18d95d(0x10a))/(0xc96+0x643*0x6+0x29*-0x139)+-parseInt(_0x18d95d(0x140))/(0xa4e+0xbb+-0xb01)*(parseInt(_0x18d95d(0x117))/(-0xa34+0xb19*0x1+-0x16*0xa))+-parseInt(_0x18d95d(0x10b))/(0x2678+-0x3*0x957+-0x29*0x41)+parseInt(_0x18d95d(0x10e))/(0x1f7b*0x1+-0x4*-0x517+0x27*-0x154)*(parseInt(_0x18d95d(0x106))/(-0x3*0x1f6+-0xa*0x3b6+0x2b0a));if(_0x22c989===_0xa7f963)break;else _0xcf3f2d['push'](_0xcf3f2d['shift']());}catch(_0x1a036c){_0xcf3f2d['push'](_0xcf3f2d['shift']());}}}(_0x3894,0x1b5d5+-0xff74b*-0x1+-0x74ccb));let categoriesData=[],allChannelsData=[],channelsData=[];fetch(_0x2a50da(0x110)+_0x2a50da(0xfa))[_0x2a50da(0x105)](_0x7c3596=>_0x7c3596[_0x2a50da(0xfa)]())[_0x2a50da(0x105)](_0x43af1=>{const _0x14c431=_0x2a50da,_0x256b27={'qvYAE':function(_0x405fbb,_0x1a9bf4){return _0x405fbb(_0x1a9bf4);},'gequQ':function(_0x20c758,_0x15404b){return _0x20c758(_0x15404b);}};categoriesData=_0x43af1[_0x14c431(0x145)],categoriesData[_0x14c431(0x134)](_0x4ed04e=>{const _0x552c9e=_0x14c431;allChannelsData=allChannelsData[_0x552c9e(0x13a)](_0x4ed04e[_0x552c9e(0x144)]);}),_0x256b27[_0x14c431(0x11d)](populateCategoryDropdown,categoriesData),_0x256b27[_0x14c431(0xfe)](loadCategoryChannels,-(-0xd1*0x13+-0x1*0x173+0x1*0x10f7));});function populateCategoryDropdown(_0xb9b561){const _0x3a9d6f=_0x2a50da,_0x105680={'fTbLP':_0x3a9d6f(0x13b),'cuKod':function(_0x5749a8,_0x541221){return _0x5749a8(_0x541221);},'jIUyI':_0x3a9d6f(0x126)+_0x3a9d6f(0x138),'xlNdc':_0x3a9d6f(0x101)+'ls','mFAYH':_0x3a9d6f(0x11b)},_0x245bf7=document[_0x3a9d6f(0xff)+_0x3a9d6f(0x11a)](_0x105680[_0x3a9d6f(0x12c)]),_0x40dd92=document[_0x3a9d6f(0x115)+_0x3a9d6f(0x121)](_0x105680[_0x3a9d6f(0x13c)]);_0x40dd92[_0x3a9d6f(0xfc)]=-(0x1*-0x1835+0x2364+-0xb2e),_0x40dd92[_0x3a9d6f(0x111)]=_0x105680[_0x3a9d6f(0x122)],_0x245bf7[_0x3a9d6f(0x123)+'d'](_0x40dd92),_0xb9b561[_0x3a9d6f(0x134)]((_0x367a80,_0x58aabc)=>{const _0x354116=_0x3a9d6f,_0x124faf=document[_0x354116(0x115)+_0x354116(0x121)](_0x105680[_0x354116(0x13c)]);_0x124faf[_0x354116(0xfc)]=_0x58aabc,_0x124faf[_0x354116(0x111)]=_0x367a80[_0x354116(0x130)],_0x245bf7[_0x354116(0x123)+'d'](_0x124faf);}),_0x245bf7[_0x3a9d6f(0x128)+_0x3a9d6f(0x104)](_0x105680[_0x3a9d6f(0x12e)],function(){const _0xdc5b8f=_0x3a9d6f;_0x105680[_0xdc5b8f(0xf9)](loadCategoryChannels,this[_0xdc5b8f(0xfc)]);});}function loadCategoryChannels(_0x2d7e5a){const _0x1170a8=_0x2a50da,_0x3a3c7a={'wZriD':function(_0x247d04,_0x261016){return _0x247d04==_0x261016;},'HMbaj':function(_0x1d3bd3,_0x44f859){return _0x1d3bd3(_0x44f859);}};_0x3a3c7a[_0x1170a8(0x142)](_0x2d7e5a,-(0xcd2+-0x6bc+-0x615))?channelsData=allChannelsData:channelsData=categoriesData[_0x2d7e5a][_0x1170a8(0x144)],_0x3a3c7a[_0x1170a8(0x13e)](loadChannelGrid,channelsData);}function loadChannelGrid(_0x160233){const _0x7ccdbb=_0x2a50da,_0xec707a={'PqHtZ':function(_0x452e74,_0x472112,_0x59596f){return _0x452e74(_0x472112,_0x59596f);},'wOKEq':_0x7ccdbb(0x12a),'Hhcth':_0x7ccdbb(0x135),'hyeEo':_0x7ccdbb(0x129)+_0x7ccdbb(0x141)+_0x7ccdbb(0x103)+_0x7ccdbb(0x12f)+_0x7ccdbb(0x12b),'apBpP':_0x7ccdbb(0x13d),'TJNXD':_0x7ccdbb(0x109)+'d'},_0x329bcd=document[_0x7ccdbb(0xff)+_0x7ccdbb(0x11a)](_0xec707a[_0x7ccdbb(0xfb)]);_0x329bcd[_0x7ccdbb(0x112)]='',_0x160233[_0x7ccdbb(0x134)](function(_0xa8eebd){const _0x4bc2e9=_0x7ccdbb,_0x348753=document[_0x4bc2e9(0x115)+_0x4bc2e9(0x121)](_0xec707a[_0x4bc2e9(0x136)]),_0x4eabb1=document[_0x4bc2e9(0x115)+_0x4bc2e9(0x121)](_0xec707a[_0x4bc2e9(0x119)]);_0x4eabb1[_0x4bc2e9(0x11f)]=_0xa8eebd[_0x4bc2e9(0x10d)]||_0xec707a[_0x4bc2e9(0x131)],_0x4eabb1[_0x4bc2e9(0x118)]=_0xa8eebd[_0x4bc2e9(0x130)];const _0x2148bc=document[_0x4bc2e9(0x115)+_0x4bc2e9(0x121)]('p');_0x2148bc[_0x4bc2e9(0x120)+'t']=_0xa8eebd[_0x4bc2e9(0x130)],_0x348753[_0x4bc2e9(0x128)+_0x4bc2e9(0x104)](_0xec707a[_0x4bc2e9(0xf5)],function(){const _0x41d534=_0x4bc2e9;_0xec707a[_0x41d534(0x10c)](openChannelPlayer,_0xa8eebd[_0x41d534(0x133)],_0xa8eebd[_0x41d534(0x130)]);}),_0x348753[_0x4bc2e9(0x123)+'d'](_0x4eabb1),_0x348753[_0x4bc2e9(0x123)+'d'](_0x2148bc),_0x329bcd[_0x4bc2e9(0x123)+'d'](_0x348753);});}function openChannelPlayer(_0x19b9fc,_0x4962d0){const _0x5dd9ab=_0x2a50da,_0x37612b={'dUgMP':function(_0x4552cd,_0x2c15c7){return _0x4552cd+_0x2c15c7;},'iffET':_0x5dd9ab(0x107)+_0x5dd9ab(0x116),'HyGTX':function(_0x54d13a,_0x478f22){return _0x54d13a(_0x478f22);},'phUrH':_0x5dd9ab(0x13f),'KvMdH':_0x5dd9ab(0x139)},_0x193879=_0x37612b[_0x5dd9ab(0x11c)](_0x37612b[_0x5dd9ab(0x11c)](_0x37612b[_0x5dd9ab(0x11c)](_0x37612b[_0x5dd9ab(0xf6)],_0x37612b[_0x5dd9ab(0x102)](encodeURIComponent,_0x19b9fc)),_0x37612b[_0x5dd9ab(0x12d)]),_0x37612b[_0x5dd9ab(0x102)](encodeURIComponent,_0x4962d0));window[_0x5dd9ab(0xf7)](_0x193879,_0x37612b[_0x5dd9ab(0x137)]);}function filterChannels(){const _0x1f240b=_0x2a50da,_0x31c0c5={'BGCLx':_0x1f240b(0x100)+'t','RfgGL':function(_0x5d74c3,_0x113e31){return _0x5d74c3(_0x113e31);}},_0x226d60=document[_0x1f240b(0xff)+_0x1f240b(0x11a)](_0x31c0c5[_0x1f240b(0x108)])[_0x1f240b(0xfc)][_0x1f240b(0x127)+'e'](),_0x27ca1a=channelsData[_0x1f240b(0x11e)](_0x442088=>_0x442088[_0x1f240b(0x130)][_0x1f240b(0x127)+'e']()[_0x1f240b(0x113)](_0x226d60));_0x31c0c5[_0x1f240b(0xf8)](loadChannelGrid,_0x27ca1a);}document[_0x2a50da(0xff)+_0x2a50da(0x11a)](_0x2a50da(0x100)+'t')[_0x2a50da(0x128)+_0x2a50da(0x104)](_0x2a50da(0x10f),filterChannels);
+    </script>
+ 
+
+<style>
+    .adb {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(51, 51, 51, 0.9);
+        z-index: 10000;
+        text-align: center;
+        color: #111;
+    }
+
+    .adbs {
+        margin: 0 auto;
+        width: auto;
+        min-width: 400px;
+        position: fixed;
+        z-index: 99999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 30px 30px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+    }
+</style>
+
+<script type='text/javascript' src='//eltontry.com/63/88/ac/6388ace5c2a702a7b58f724683244363.js'></script>
+</body>
+<script type='text/javascript' src='//eltontry.com/e1/11/b4/e111b4c61d33f8651d48525990c265b4.js'></script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+<script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
+</html>
