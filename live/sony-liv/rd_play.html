@@ -1,0 +1,199 @@
+<html lang="en">
+<head>
+    <title id="pageTitle">Default Title | Sony Liv</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="ENJOY FREE LIVE TV">
+    <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
+    <meta name="author" content="Vaathala">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
+    <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
+    <script>
+    // Get the ID from the URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var id = urlParams.get('id');
+
+    // Update the title with the ID
+    document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #131720;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .box {
+            background-color: #212d39;
+            padding: 20px;
+            border-radius: 8px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat;
+            background-size: contain;
+            width: 160px;
+            height: 50px;
+            margin: 0 auto 15px;
+        }
+
+        .channel-info {
+            margin: 20px 0;
+        }
+
+        .channel-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .channel-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .info-box {
+            background-color: #1b2530;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+        }
+
+        .play-now-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #ffb800;
+            color: #131720;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .play-now-btn:hover {
+            background-color: #f59e00;
+        }
+
+        .browser-select {
+            padding: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #1b2530;
+            color: white;
+            border: none;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #1c80ff;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            background-color: #0061b2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="logo"></div>
+            <div class="channel-info">
+                <div class="channel-name" id="channelName">Channel Name</div>
+                <div class="channel-logo" id="channelLogo"></div>
+            </div>
+            <div class="info-box">
+                <p><strong>Info:</strong></p>
+                <p>Download HLS extension to enjoy live streams.</p>
+                <!-- Browser Select Dropdown and Download Button -->
+                <select id="browserSelect" class="browser-select">
+                    <option value="chrome">Chrome</option>
+                    <option value="firefox">Firefox</option>
+                    <option value="safari">Safari (Native Support)</option>
+                </select>
+                <a href="#" id="downloadBtn" class="download-btn">Download Extension</a>
+            </div>
+            <a href="" id="playNowButton" class="play-now-btn">Play Now</a>
+        </div>
+    </div>
+
+<script type="text/javascript">
+        // Fetch JSON data and populate the page content
+        var id = new URLSearchParams(window.location.search).get('id');
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var videoData = data.find(video => video.id === id);
+
+                if (videoData) {
+                    // Set the channel name and logo
+                    document.getElementById('channelName').innerText = videoData.name;
+                    document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
+                    
+                    // Set the Play Now link
+                    document.getElementById('playNowButton').setAttribute('href', videoData.link);
+                }
+            }
+        };
+        xhr.open('GET', 'm3u_sony.json', true);
+        xhr.send();
+    </script>
+
+    <script type="text/javascript">
+        // Handle the download button click based on the selected browser
+        document.getElementById("downloadBtn").addEventListener("click", function() {
+            var selectedBrowser = document.getElementById("browserSelect").value;
+            var downloadLink = "";
+
+            // Determine the correct download link based on the selected browser
+            if (selectedBrowser === "chrome") {
+                downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
+            } else if (selectedBrowser === "firefox") {
+                downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
+            } else if (selectedBrowser === "safari") {
+                downloadLink = "https://www.apple.com/safari/"; // Safari (native support)
+            }
+
+            // Redirect to the corresponding download link
+            if (downloadLink) {
+                window.open(downloadLink, "_blank");
+            }
+        });
+    </script>
+</body>
+
+</html>
