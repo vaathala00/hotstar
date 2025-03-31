@@ -20,7 +20,7 @@
     document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     </script>
     <style>
-        body {
+                body {
             font-family: Arial, sans-serif;
             background-color: #131720;
             color: white;
@@ -96,6 +96,7 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            margin-right: 10px; /* Adds spacing between the buttons */
         }
 
         .play-now-btn:hover {
@@ -150,55 +151,63 @@
                 </select>
                 <a href="#" id="downloadBtn" class="download-btn">Download Extension</a>
             </div>
-            <a href="" id="playNowButton" class="play-now-btn">Play Now</a>
+            <!-- Two "Play Now" buttons next to each other -->
+            <div style="display: flex; justify-content: center;">
+                <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
+                <!-- Added data-package and data-title for button 2 -->
+                <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
+            </div>
         </div>
     </div>
 
 <script type="text/javascript">
-        // Fetch JSON data and populate the page content
-        var id = new URLSearchParams(window.location.search).get('id');
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.id === id);
+    // Fetch JSON data and populate the page content
+    var id = new URLSearchParams(window.location.search).get('id');
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            var videoData = data.find(video => video.id === id);
 
-                if (videoData) {
-                    // Set the channel name and logo
-                    document.getElementById('channelName').innerText = videoData.name;
-                    document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
-                    
-                    // Set the Play Now link
-                    document.getElementById('playNowButton').setAttribute('href', videoData.link);
-                }
+            if (videoData) {
+                // Set the channel name and logo
+                document.getElementById('channelName').innerText = videoData.name;
+                document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
+                
+                // Set the Play Now link for button 1
+                document.getElementById('playNowButton1').setAttribute('href', videoData.link);
+
+                // Set the Play Now link for button 2 as an intent URL using data-package and data-title
+                var intentUrl = 'intent:' + videoData.link + '#Intent;package=' + document.getElementById('playNowButton2').getAttribute('data-package') + ';S.title=' + document.getElementById('playNowButton2').getAttribute('data-title') + ';end';
+                document.getElementById('playNowButton2').setAttribute('href', intentUrl);
             }
-        };
-        xhr.open('GET', 'm3u_sony.json', true);
-        xhr.send();
-    </script>
+        }
+    };
+    xhr.open('GET', 'm3u_sony.json', true);
+    xhr.send();
+</script>
 
-    <script type="text/javascript">
-        // Handle the download button click based on the selected browser
-        document.getElementById("downloadBtn").addEventListener("click", function() {
-            var selectedBrowser = document.getElementById("browserSelect").value;
-            var downloadLink = "";
+<script type="text/javascript">
+    // Handle the download button click based on the selected browser
+    document.getElementById("downloadBtn").addEventListener("click", function() {
+        var selectedBrowser = document.getElementById("browserSelect").value;
+        var downloadLink = "";
 
-            // Determine the correct download link based on the selected browser
-            if (selectedBrowser === "chrome") {
-                downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
-            } else if (selectedBrowser === "firefox") {
-                downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
-            } else if (selectedBrowser === "safari") {
-                downloadLink = "https://www.apple.com/safari/"; // Safari (native support)
-            }
+        // Determine the correct download link based on the selected browser
+        if (selectedBrowser === "chrome") {
+            downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
+        } else if (selectedBrowser === "firefox") {
+            downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
+        } else if (selectedBrowser === "safari") {
+            downloadLink = "https://www.apple.com/safari/"; // Safari (native support)
+        }
 
-            // Redirect to the corresponding download link
-            if (downloadLink) {
-                window.open(downloadLink, "_blank");
-            }
-        });
-    </script>
+        // Redirect to the corresponding download link
+        if (downloadLink) {
+            window.open(downloadLink, "_blank");
+        }
+    });
+</script>
 </body>
-
 </html>
