@@ -50,7 +50,6 @@
             width: 160px;
             height: 50px;
             margin: 0 auto 15px;
-            border-radius: 15px; /* Add this line to make the edges curved */
         }
 
         .channel-info {
@@ -64,13 +63,18 @@
         }
 
         .channel-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background-size: cover; /* Ensures the logo fills the container */
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%; /* Makes the logo circular */
+    border: 3px solid #fff; /* Adds a border around the logo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a soft shadow effect */
+    padding: 10px; /* Adds some space inside the logo */
+}
+
 
         .info-box {
             background-color: #1b2530;
