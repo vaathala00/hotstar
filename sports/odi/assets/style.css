@@ -1,16 +1,16 @@
-#counter-container {
-    margin-top: -16px; /* Add space above the counter to separate it from the video */
+
+
+        #counter-container {
+
+   margin-top: -16px; /* Add space above the counter to separate it from the video */
     display: flex;
     justify-content: flex-end; /* Align the counter to the right */
     gap: 10px; /* Space between elements */
-    background-color: rgba(0, 0, 0, 0.7); /* Dark background for readability */
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: white;
-    font-family: Arial, sans-serif;
     font-size: 11px;
-    margin-right: 150px; 
+    margin-right: 150px;
+
 }
 
 #counter-container span {
@@ -34,3 +34,10 @@
     margin-bottom: 20px;
     position: relative;
 }
+
+/* Prevent links and styles from appearing */
+    #counter-container a {
+        pointer-events: none; /* Disable link clicks */
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color */
+    }
