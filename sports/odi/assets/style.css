@@ -1,4 +1,6 @@
-
+#counter-container span {
+    margin-left: 2px;
+}
 
         #counter-container {
 
@@ -13,17 +15,11 @@
 
 }
 
-#counter-container span {
-    display: inline-block;
-    color: white;
-}
+    #counter-container span {
+        color: inherit; /* Make sure text has the same color */
+        font-weight: bold; /* Avoid bold styles */
+    }
 
-#counter-container .separator {
-    margin: 0 10px;
-    color: white;
-    display: inline-block; /* Make sure the separator stays inline */
-
-}
 
 .video-wrapper {
     position: relative;
@@ -44,9 +40,3 @@
         color: inherit; /* Inherit text color */
     }
 
-p {
-    margin: 0;
-    padding: 0;
-    color: white; /* Example color */
-    font-size: 11px; /* Example font size */
-}
