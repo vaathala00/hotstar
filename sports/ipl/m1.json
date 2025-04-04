@@ -69,6 +69,37 @@
     "title": "Punjabi 4K Stream",
     "description": "You're Watching"
   },
+
+  {
+    "id": "batter_cam",
+    "name": "Batter Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM01_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+
+  {
+    "id": "hero_cam",
+    "name": "Hero Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM02_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "stump_cam",
+    "name": "Stump Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM03_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "Filed_cam",
+    "name": "Filed View Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM03_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+
   {
     "id": "t20i_cricket_bhojpuri",
     "name": "Bhojpuri 4k Stream",

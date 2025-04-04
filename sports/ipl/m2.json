@@ -1,0 +1,110 @@
+[
+  {
+    "id": "t20i_cricket_tamil",
+    "name": "Tamil 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TAM_IDC_MOB/Fallback/index.m3u8",
+    "title": "Tamil 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_hindi",
+    "name": "Hindi 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_HIN_IDC_MOB/Fallback/index.m3u8",
+    "title": "Hindi 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_english",
+    "name": "English 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_ENG_IDC_MOB/Fallback/index.m3u8",
+    "title": "English 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_gujarati",
+    "name": "Gujarati 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Guj_IDC_MOB/Fallback/index.m3u8",
+    "title": "Gujarati 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_telugu",
+    "name": "Telugu 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_TEL_IDC_MOB/Fallback/index.m3u8",
+    "title": "Telugu 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_odia",
+    "name": "Odia 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_HAR_IDC_MOB/Fallback/index.m3u8",
+    "title": "Odia 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_kannada",
+    "name": "Kannada 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_KAN_IDC_MOB/Fallback/index.m3u8",
+    "title": "Kannada 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_bengali",
+    "name": "Bengali 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_BEN_IDC_MOB/Fallback/index.m3u8",
+    "title": "Bengali 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_malayalam",
+    "name": "Malayalam 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Mal_IDC_MOB/Fallback/index.m3u8",
+    "title": "Malayalam 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "t20i_cricket_punjabi",
+    "name": "Punjabi 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Punj_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+
+  {
+    "id": "batter_cam",
+    "name": "Batter Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM01_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+
+  {
+    "id": "hero_cam",
+    "name": "Hero Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM02_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "stump_cam",
+    "name": "Stump Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM03_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+  {
+    "id": "Filed_cam",
+    "name": "Filed View Cam",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_CAM03_IDC_MOB/Fallback/index.m3u8",
+    "title": "Punjabi 4K Stream",
+    "description": "You're Watching"
+  },
+
+  {
+    "id": "t20i_cricket_bhojpuri",
+    "name": "Bhojpuri 4k Stream",
+    "link": "https://prod-ent-live-gm.jiocinema.com/bpk-tv/JS_M1_IPL25_Bhoj_IDC_MOB/Fallback/index.m3u8",
+    "title": "Bhojpuri 4K Stream",
+    "description": "You're Watching"
+  }
+]
