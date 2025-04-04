@@ -1,5 +1,5 @@
 #counter-container {
-    margin-top: 10px; /* Add space above the counter to separate it from the video */
+    margin-top: -16px; /* Add space above the counter to separate it from the video */
     display: flex;
     justify-content: flex-end; /* Align the counter to the right */
     gap: 10px; /* Space between elements */
@@ -9,8 +9,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: white;
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    margin-right: 185px; 
+    font-size: 11px;
+    margin-right: 150px; 
 }
 
 #counter-container span {
