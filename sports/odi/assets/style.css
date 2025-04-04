@@ -21,6 +21,8 @@
 #counter-container .separator {
     margin: 0 10px;
     color: white;
+    display: inline-block; /* Make sure the separator stays inline */
+
 }
 
 .video-wrapper {
