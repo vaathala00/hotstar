@@ -18,12 +18,11 @@
         visitsInitScript.innerHTML = 'sc_text_hit(1705275, "Visits", "f0f0f0");'; 
         counterContainer.appendChild(visitsInitScript);
 
-        // Add the separator (|) in white color between the counters
-        const separator = document.createElement('span');
-        separator.style.margin = '0 10px';
-        separator.style.color = 'white';  // White color for the separator
-        separator.textContent = '|';  // The separator
-        counterContainer.appendChild(separator);
+// Add the separator (|) in white color between the counters
+    const separator = document.createElement('span');
+    separator.classList.add('separator'); // Make sure it uses the .separator styling
+    separator.textContent = '|';  // The separator
+    counterContainer.appendChild(separator);
 
         // Add new Live counter script
         const liveScript = document.createElement('script');

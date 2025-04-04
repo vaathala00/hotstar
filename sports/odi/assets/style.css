@@ -11,15 +11,21 @@
     padding: 10px;
     color: white;
     font-size: 11px;
+    z-index: 10; /* Ensure the widget is on top */
     margin-right: 150px;
 
 }
 
-    #counter-container span {
-        color: inherit; /* Make sure text has the same color */
-        font-weight: bold; /* Avoid bold styles */
-    }
+   #counter-container span {
+    display: inline-block;
+    color: white;
+}
 
+#counter-container .separator {
+    margin: 0 10px;
+    color: white;
+    display: inline-block; /* Make sure the separator stays inline */
+}
 
 .video-wrapper {
     position: relative;
