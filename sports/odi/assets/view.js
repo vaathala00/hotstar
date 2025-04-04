@@ -12,11 +12,6 @@
         visitsScript.src = "//widget.supercounters.com/ssl/texthit.js";
         counterContainer.appendChild(visitsScript);
 
-        // Initialize the new Visits counter
-        const visitsInitScript = document.createElement('script');
-        visitsInitScript.type = 'text/javascript';
-        visitsInitScript.innerHTML = 'sc_text_hit(1705275, "Visits", "f0f0f0");'; 
-        counterContainer.appendChild(visitsInitScript);
 
 // Add the separator (|) in white color between the counters
     const separator = document.createElement('span');
