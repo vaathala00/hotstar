@@ -4,7 +4,8 @@
     "name": "Tamil 4k Stream",
     "link": "https://psplay.site/ipl_all/play.php?url=https://psplayflix.site/2025/ps_ipl-liv.m3u8?ps=tam",
     "title": "Tamil 4K Stream",
-    "description": "You're Watching"
+    "description": "You're Watching",
+    "type": "iframe"  
   },
   {
     "id": "t20i_cricket_hindi",
