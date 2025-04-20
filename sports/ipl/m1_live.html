@@ -400,6 +400,15 @@
         function changeStream(languageId) {
             const selectedVideo = videoData.find(video => video.id === languageId);
             if (selectedVideo) {
+const playerDiv = document.getElementById("player");
+        const iframeWrapper = document.getElementById("videoWrapper");
+        const videoIframe = document.getElementById("videoIframe");
+
+        if (selectedVideo.type === "hls") {
+            playerDiv.style.display = "block";
+            iframeWrapper.style.display = "none";
+
+
                 if (!playerInstance) {
                     playerInstance = jwplayer("player").setup({
                         file: selectedVideo.link,
@@ -429,6 +438,12 @@
                     playerInstance.load({ file: selectedVideo.link });
                     playerInstance.play(true);
                 }
+          } else if (selectedVideo.type === "iframe") {
+            playerDiv.style.display = "none";
+            iframeWrapper.style.display = "block";
+            videoIframe.src = selectedVideo.link;
+               }
+
             }
         }
 
