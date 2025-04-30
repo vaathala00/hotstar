@@ -1,23 +1,44 @@
+<?php
 
+// Copyright 2021-2024 SnehTV, Inc.
+// Licensed under MIT (https://github.com/mitthu786/TS-JioTV/blob/main/LICENSE)
+// Created By : TechieSneh
+
+error_reporting(0);
+$data = base64_decode($_REQUEST['data']);
+$data = explode('=?=', $data);
+$cid = $data[0];
+$name = str_replace('_', ' ', $cid);
+$id = $data[1];
+
+?>
 
 <html lang="en">
 
 <head>
-    <title>Colors HD | JioTV +</title>
+    <title id="pageTitle">Default Title | Sony Liv</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="ENJOY FREE LIVE TV">
     <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
-    <meta name="author" content="TSNEH">
+    <meta name="author" content="Vaathala">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
-    <script src="assets/js/jwplayer.js"></script>
+    <script src="main/assets/js/jwplayer.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
-    <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
+    <!-- <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script> -->
+    <script type="text/javascript" src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
+<script>
+// Get the ID from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get('id');
+
+// Update the title with the ID
+document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+</script>
 
 </head>
-<script type='text/javascript' src='//eltontry.com/53/45/4b/53454b102df993f84cf9e6a7326adab7.js'></script>
 
 <body>
     <style>
@@ -484,13 +505,25 @@
         #videoContainer {
             height: 100% !important;
         }
-    </style>
-    <video id="myElement"></video>
-    <script type="text/javascript">
-        jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-    </script>
 
-<script type="text/javascript">
+.logo {
+  position: absolute;
+  top: 77px; /* Adjust the top position as needed */
+  left: 30px; /* Adjust the left position as needed */
+  width: 95px; /* Set the width of the logo */
+  height: 35px; /* Set the height of the logo */
+  background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat;
+  background-size: contain;
+  z-index: 0; /* Ensure the logo is on top of the iframe */
+}
+
+    </style>
+   <video id="myElement"></video>
+  <div class="logo"></div>
+<!-- <script type="text/javascript">
+    jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==  7XbXTejkk87tvwYrBXp85CIezb6yZ9XLp4ompZZ3HOJjcl72TBiB2roHSqvJE1dk';
+</script> -->
+ <script type="text/javascript">
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -508,28 +541,30 @@
                 var data = JSON.parse(xhr.responseText);
                 var videoData = data.find(video => video.id === id);
 
-        jwplayer("myElement").setup({
-            title: videoData.name,
-            description: "VaathalaTV",
-            image: videoData.logo,
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            file: videoData.link,
-            type: "mp4",
-            captions: {color: '#ffb800',fontSize: 30,backgroundOpacity: 0},
-            sharing: {
-                sites: ['facebook','twitter']
+                jwplayer("myElement").setup({
+                    title: videoData.name,
+                    description: "VaathalaTV",
+                    image: videoData.logo,
+                    aspectratio: '16:9',
+                    key: "Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==",
+                    width: '100%',
+                    mute: false,
+                    autostart: true,
+                    file: videoData.link,
+                    type: "hls",
+                    captions: {color: '#ffb800', fontSize: 30, backgroundOpacity: 0},
+                    sharing: {
+                        sites: ['facebook', 'twitter']
+                    }
+                });
             }
-        });
-      }
-    };
+        };
         xhr.open('GET', 'm3u_jio.json', true);
         xhr.send();
     </script>
 
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9383ab5fd9f0fd2c","version":"2025.4.0-1-g37f21b1","r":1,"token":"b3e83dd70e9d4de083bf8f21b004a866","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</script>
 </body>
 
+</body>
 </html>
