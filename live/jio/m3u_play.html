@@ -1,5 +1,4 @@
-
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +14,7 @@
     <script src="assets/js/jwplayer.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script> <!-- Add HLS.js -->
 </head>
 
 <body>
@@ -482,14 +481,13 @@
 
         #videoContainer {
             height: 100% !important;
-        }
-    </style>
-    <video id="myElement"></video>
+        }    </style>
+
+    <video id="myElement" controls></video>
+
     <script type="text/javascript">
         jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';
-    </script>
 
-<script type="text/javascript">
         // Function to get URL parameter by name
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -499,7 +497,7 @@
         }
 
         var id = getUrlParameter('id');
-        
+
         // Load the m1.json file and get the video data by ID
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -507,28 +505,31 @@
                 var data = JSON.parse(xhr.responseText);
                 var videoData = data.find(video => video.id === id);
 
-        jwplayer("myElement").setup({
-            title: videoData.name,
-            description: "VaathalaTV",
-            image: videoData.logo,
-            aspectratio: '16:9',
-            width: '100%',
-            mute: false,
-            autostart: true,
-            file: videoData.link,
-            type: "mp4",
-            captions: {color: '#ffb800',fontSize: 30,backgroundOpacity: 0},
-            sharing: {
-                sites: ['facebook','twitter']
+                // Initialize HLS.js player
+                var videoElement = document.getElementById('myElement');
+                var referer = "https://amit-1.allinonereborn.in/jiotv141/app/play_486973746f72795f48443d3f3d313436"; // Set the referer URL
+
+                if (Hls.isSupported()) {
+                    var hls = new Hls({
+                        xhrSetup: function(xhr) {
+                            xhr.setRequestHeader('Referer', referer); // Set custom Referer header
+                        }
+                    });
+
+                    // Load the HLS stream
+                    hls.loadSource(videoData.link); // Assuming videoData.link contains the .m3u8 URL
+                    hls.attachMedia(videoElement);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                        videoElement.play();
+                    });
+                } else {
+                    console.error('HLS.js is not supported in this browser.');
+                }
             }
-        });
-      }
-    };
+        };
         xhr.open('GET', 'm3u_jio.json', true);
         xhr.send();
     </script>
-
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9383ab5fd9f0fd2c","version":"2025.4.0-1-g37f21b1","r":1,"token":"b3e83dd70e9d4de083bf8f21b004a866","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 
 </html>
