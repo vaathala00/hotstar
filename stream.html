@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Direct ZIP Download</title>
+</head>
+<style>
+  .notes-box {
+    border: 2px solid #333;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+  }
+
+  .notes-box h2 {
+    margin-top: 0;
+  }
+
+  .notes-box ol {
+    padding-left: 20px;
+  }
+
+  .notes-box li {
+    margin-bottom: 10px;
+  }
+
+  .notes-box code {
+    background-color: #eee;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .notes-box a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+
+  .notes-box a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<body>
+  <h1>Download ZIP File</h1>
+  <label for="filename">Enter Game ID:</label>
+  <input type="text" id="filename" placeholder="examplefile" />
+  <button id="downloadBtn">Download</button>
+
+  <p id="status"></p>
+  <p>
+    <a href="https://steamdb.info/" target="_blank">
+      Click here to view the GameList 
+    </a>
+
+    <a href="https://steamtools.net/" target="_blank">
+      Download Steam tools From 
+    </a>
+  </p>
+
+<div class="notes-box">
+  <h2>Installation Steps:</h2>
+  <ol>
+    <li><strong>Step 1:</strong> Download Steam tools from <a href="https://steamtools.net/" target="_blank">steamtools.net</a> and install it.</li>
+    <li><strong>Step 2:</strong> After opening Steam tools, an icon will appear on the screen. Right-click it, then go to <em>Launch Steam Options</em> and enable:
+      <ul>
+        <li>✅ Activate Unlock Mode</li>
+        <li>✅ Launch on Steam</li>
+      </ul>
+    </li>
+    <li><strong>Step 3:</strong> Copy the Game ID from <a href="https://steamdb.info/" target="_blank">steamdb.info</a> (e.g., <code>2878980</code>).</li>
+    <li><strong>Step 4:</strong> Paste that Game ID into the input box on <a href="https://gamepez.netlify.app/" target="_blank">this website</a> (e.g., <code>2878980</code>).</li>
+    <li><strong>Step 5:</strong> Click the <strong>Download</strong> button, complete the shortener, and you will get a ZIP file (e.g., <code>2878980.zip</code>).</li>
+    <li><strong>Step 6:</strong> Open the ZIP file, copy all its contents, then drag and drop the files onto the Steam Tools icon.</li>
+    <li><strong>Step 7:</strong> Right-click the icon and click <strong>Restart Steam</strong>.</li>
+    <li><strong>Step 8:</strong> You will now find the game in your Steam Library. Click <strong>Download</strong> and enjoy your game 😁</li>
+  </ol>
+</div>
+
+
+  <script>
+    const GITHUB_BASE = "https://github.com/MrKira007/Gamepez/raw/refs/heads/master/";
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      const filename = document.getElementById("filename").value.trim();
+      const status = document.getElementById("status");
+      status.textContent = "";
+
+      if (!filename) {
+        alert("Please enter a file name.");
+        return;
+      }
+
+      const fileUrl = `${GITHUB_BASE}${filename}.zip`;
+
+      // Create a temporary anchor element to trigger download
+      const a = document.createElement("a");
+      a.href = fileUrl;
+      a.download = `${filename}.zip`; // Suggest filename
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      status.textContent = "Download started...";
+    });
+  </script>
+</body>
+</html>
