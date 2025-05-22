@@ -59,6 +59,12 @@
       color: #00796b;
     }
 
+    .copy-count {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
     button {
       background-color: #00796b;
       color: white;
@@ -94,14 +100,22 @@
 </div>
 
 <script>
-  const JSON_URL = 'https://od.lk/s/NjdfNDA5Njk1Mjdf/Temp.json'; // Replace with your actual URL
+  const JSON_URL = 'https://od.lk/s/NjdfNDA5Njk1Mjdf/Temp.json';
+
+  // Update visit count
+  const totalVisits = localStorage.getItem('totalVisits') || 0;
+  localStorage.setItem('totalVisits', Number(totalVisits) + 1);
 
   fetch(JSON_URL)
     .then(response => response.json())
     .then(json => {
       const container = document.getElementById('linksContainer');
+
       json.data.forEach((item, index) => {
         const id = `link${index}`;
+        const copyKey = `copyCount_${id}`;
+        const copyCount = localStorage.getItem(copyKey) || 0;
+
         const box = document.createElement('div');
         box.className = 'link-box';
         box.setAttribute('data-language', item.language.toLowerCase());
@@ -110,7 +124,20 @@
           <strong>${item.language}</strong>
           <input type="text" value="${item.url}" id="${id}" class="hidden" readonly>
           <button onclick="copyToClipboard('${id}')">Copy link (paste in NS Player or Autholptv)</button>
+          <div class="copy-count" id="${id}_count">Copied ${copyCount} times</div>
         `;
+
+        // Add total visits to first box
+        if (index === 0) {
+          const visits = localStorage.getItem('totalVisits') || 1;
+          const visitDisplay = document.createElement('div');
+          visitDisplay.style.marginTop = '10px';
+          visitDisplay.style.fontSize = '14px';
+          visitDisplay.style.color = '#333';
+          visitDisplay.textContent = `Total visits: ${visits}`;
+          box.appendChild(visitDisplay);
+        }
+
         container.appendChild(box);
       });
     })
@@ -126,6 +153,14 @@
     document.execCommand('copy');
     input.classList.add('hidden');
     alert('Link copied to clipboard');
+
+    // Update copy count
+    const countKey = `copyCount_${id}`;
+    let count = localStorage.getItem(countKey) || 0;
+    count = Number(count) + 1;
+    localStorage.setItem(countKey, count);
+
+    document.getElementById(`${id}_count`).textContent = `Copied ${count} times`;
   }
 
   function filterLinks() {
