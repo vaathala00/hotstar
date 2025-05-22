@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Stream Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #e0f2f1, #ffffff);
+      padding: 40px 20px;
+      margin: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .note {
+      background-color: #fff3cd;
+      border-left: 6px solid #ffca28;
+      padding: 15px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .link-box {
+      background-color: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .link-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .link-box strong {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+      color: #00796b;
+    }
+
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="note">
+    <strong>Note:</strong> Use the copied link in <b>NS Player</b> or <b>Autholptv</b>.
+  </div>
+
+  <input type="text" id="searchInput" class="search-box" placeholder="Search language..." onkeyup="filterLinks()">
+
+  <div id="linksContainer">
+    <!-- Links load here -->
+  </div>
+</div>
+
+<script>
+  const JSON_URL = 'https://od.lk/s/NjdfNDA5Njk1Mjdf/Temp.json'; // Replace with your actual URL
+
+  fetch(JSON_URL)
+    .then(response => response.json())
+    .then(json => {
+      const container = document.getElementById('linksContainer');
+      json.data.forEach((item, index) => {
+        const id = `link${index}`;
+        const box = document.createElement('div');
+        box.className = 'link-box';
+        box.setAttribute('data-language', item.language.toLowerCase());
+
+        box.innerHTML = `
+          <strong>${item.language}</strong>
+          <input type="text" value="${item.url}" id="${id}" class="hidden" readonly>
+          <button onclick="copyToClipboard('${id}')">Copy link (paste in NS Player or Autholptv)</button>
+        `;
+        container.appendChild(box);
+      });
+    })
+    .catch(error => {
+      document.getElementById('linksContainer').innerHTML = '<p style="color: red;">Failed to load data.</p>';
+      console.error('Error fetching JSON:', error);
+    });
+
+  function copyToClipboard(id) {
+    const input = document.getElementById(id);
+    input.classList.remove('hidden');
+    input.select();
+    document.execCommand('copy');
+    input.classList.add('hidden');
+    alert('Link copied to clipboard');
+  }
+
+  function filterLinks() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const boxes = document.querySelectorAll('.link-box');
+    boxes.forEach(box => {
+      const lang = box.getAttribute('data-language');
+      box.style.display = lang.includes(input) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
