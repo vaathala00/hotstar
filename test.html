@@ -77,21 +77,20 @@
 </head>
 <body>
   <div class="container">
-    <div class="note">
+   <div class="note">
       <strong>Note:</strong> Use the copied link in <b>NS Player</b> or <b>Autholptv</b>.
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="Search language..." onkeyup="filterLinks()" />
 
-    <div id="linksContainer">
-      <!-- Links load here -->
-    </div>
+    <div id="linksContainer"></div>
   </div>
+
+  <!-- Load the widget script once -->
+  <script type="text/javascript" src="//widget.supercounters.com/ssl/texthit.js"></script>
 
   <script>
     const JSON_URL = 'https://od.lk/s/NjdfNDA5Njk1Mjdf/Temp.json';
-
-    // List of your Supercounters IDs for "Copied X times"
     const counterIds = [
       1714463,1714464,1714465,1714466,1714467,1714468,1714469,
       1714470,1714471,1714472,1714473,1714474,1714475,1714476
@@ -104,7 +103,7 @@
 
         json.data.forEach((item, index) => {
           const id = `link${index}`;
-          const scId = counterIds[index] || counterIds[0]; // fallback if out of range
+          const scId = counterIds[index] || counterIds[0];
 
           const box = document.createElement('div');
           box.className = 'link-box';
@@ -114,16 +113,17 @@
             <strong>${item.language}</strong>
             <input type="text" value="${item.url}" id="${id}" class="hidden" readonly />
             <button onclick="copyToClipboard('${id}')">Copy link (paste in NS Player or Autholptv)</button>
-            <div class="copy-count" id="${id}_count">
-              <script type="text/javascript" src="//widget.supercounters.com/ssl/texthit.js"></script>
-              <script type="text/javascript">
-                var sc_texthit_var = sc_texthit_var || [];
-                sc_text_hit(${scId}, "Copied", "444444");
-              </script>
-            </div>
+            <div class="copy-count" id="${id}_count"></div>
           `;
 
           container.appendChild(box);
+
+          // After appending, call the Supercounters counter function:
+          if (typeof sc_text_hit === 'function') {
+            sc_text_hit(scId, "Copied", "444444");
+          } else {
+            console.warn("sc_text_hit function is not loaded yet.");
+          }
         });
       })
       .catch(error => {
