@@ -80,7 +80,7 @@
       background-color: #004d40;
     }
 
-    textarea.hidden {
+    .hidden {
       display: none;
     }
 
@@ -98,21 +98,24 @@
     <strong>Note:</strong> Use the copied link in <b>NS Player</b> or <b>Autholptv</b>.
   </div>
 
-  <div class="counter-box">
-    <div style="font-size: 13px; line-height: 1.4; color: #444;">
-      <script type="text/javascript" src="//widget.supercounters.com/ssl/texthit.js"></script>
-      <script type="text/javascript">
-        var sc_texthit_var = sc_texthit_var || [];
-        sc_text_hit(1714462, "Live", "444444");
-      </script>
-      <div>join <a href="https://t.me/vaathala" target="_blank" style="color: #00796b; text-decoration: none;">@vaathala</a></div>
-    </div>
+  <!-- Supercounter for total visits -->
+  <!-- Compact counter style -->
+<div class="counter-box">
+  <div style="font-size: 13px; line-height: 1.4; color: #444;">
+    <script type="text/javascript" src="//widget.supercounters.com/ssl/texthit.js"></script>
+    <script type="text/javascript">
+      var sc_texthit_var = sc_texthit_var || [];
+      sc_text_hit(1714462, "Live", "444444");
+    </script>
+    <div>join <a href="https://t.me/vaathala" target="_blank" style="color: #00796b; text-decoration: none;">@vaathala</a></div>
   </div>
+</div>
+
 
   <input type="text" id="searchInput" class="search-box" placeholder="Search language..." onkeyup="filterLinks()">
 
   <div id="linksContainer">
-    <!-- Dynamic links inserted here -->
+    <!-- Links will load here -->
   </div>
 </div>
 
@@ -125,19 +128,20 @@
       const container = document.getElementById('linksContainer');
 
       json.data.forEach((item, index) => {
-        const id = `link${index}`;
-        const linkBox = document.createElement('div');
-        linkBox.className = 'link-box';
-        linkBox.setAttribute('data-language', item.language.toLowerCase());
+        const id = link${index};
 
-        linkBox.innerHTML = `
+        const box = document.createElement('div');
+        box.className = 'link-box';
+        box.setAttribute('data-language', item.language.toLowerCase());
+
+        box.innerHTML = 
           <strong>${item.language}</strong>
-          <textarea id="${id}" class="hidden" readonly>${item.url}</textarea>
+          <input type="text" value="${item.url}" id="${id}" class="hidden" readonly>
           <button onclick="copyToClipboard('${id}')">Copy link (paste in NS Player or Autholptv)</button>
           <div class="copy-count" id="${id}_count"></div>
-        `;
+        ;
 
-        container.appendChild(linkBox);
+        container.appendChild(box);
       });
     })
     .catch(error => {
@@ -146,12 +150,21 @@
     });
 
   function copyToClipboard(id) {
-    const textarea = document.getElementById(id);
-    navigator.clipboard.writeText(textarea.value)
-      .then(() => alert('Link copied to clipboard'))
-      .catch(err => alert('Failed to copy link: ' + err));
+    const input = document.getElementById(id);
+    input.classList.remove('hidden');
+    input.select();
+    document.execCommand('copy');
+    input.classList.add('hidden');
+    alert('Link copied to clipboard');
 
-    const countDisplay = document.getElementById(`${id}_count`);
+    // Show "Copied 1 time"
+    let countDisplay = document.getElementById(${id}_count);
+    if (!countDisplay) {
+      countDisplay = document.createElement('div');
+      countDisplay.id = ${id}_count;
+      countDisplay.className = 'copy-count';
+      input.parentNode.appendChild(countDisplay);
+    }
     countDisplay.textContent = 'Copied 1 time';
   }
 
