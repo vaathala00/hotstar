@@ -83,6 +83,12 @@
     .hidden {
       display: none;
     }
+
+    .counter-box {
+      margin: 20px 0;
+      font-size: 14px;
+      color: #444;
+    }
   </style>
 </head>
 <body>
@@ -92,19 +98,27 @@
     <strong>Note:</strong> Use the copied link in <b>NS Player</b> or <b>Autholptv</b>.
   </div>
 
+  <!-- Supercounter for total visits -->
+  <div class="counter-box">
+    <div style="font-size: 13px; line-height: 1.4; color: #444;">
+      <script type="text/javascript" src="//widget.supercounters.com/ssl/texthit.js"></script>
+      <script type="text/javascript">
+        var sc_texthit_var = sc_texthit_var || [];
+        sc_text_hit(1714462, "Live", "444444");
+      </script>
+      <div>join <a href="https://t.me/vaathala" target="_blank" style="color: #00796b; text-decoration: none;">@vaathala</a></div>
+    </div>
+  </div>
+
   <input type="text" id="searchInput" class="search-box" placeholder="Search language..." onkeyup="filterLinks()">
 
   <div id="linksContainer">
-    <!-- Links load here -->
+    <!-- Links will be loaded here -->
   </div>
 </div>
 
 <script>
   const JSON_URL = 'https://od.lk/s/NjdfNDA0NTIxNTJf/raw.json';
-
-  // Update visit count
-  const totalVisits = localStorage.getItem('totalVisits') || 0;
-  localStorage.setItem('totalVisits', Number(totalVisits) + 1);
 
   fetch(JSON_URL)
     .then(response => response.json())
@@ -127,17 +141,6 @@
           <div class="copy-count" id="${id}_count">Copied ${copyCount} times</div>
         `;
 
-        // Add total visits to first box
-        if (index === 0) {
-          const visits = localStorage.getItem('totalVisits') || 1;
-          const visitDisplay = document.createElement('div');
-          visitDisplay.style.marginTop = '10px';
-          visitDisplay.style.fontSize = '14px';
-          visitDisplay.style.color = '#333';
-          visitDisplay.textContent = `Total visits: ${visits}`;
-          box.appendChild(visitDisplay);
-        }
-
         container.appendChild(box);
       });
     })
@@ -154,7 +157,6 @@
     input.classList.add('hidden');
     alert('Link copied to clipboard');
 
-    // Update copy count
     const countKey = `copyCount_${id}`;
     let count = localStorage.getItem(countKey) || 0;
     count = Number(count) + 1;
