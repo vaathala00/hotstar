@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title id="pageTitle">Default Title | Sony Liv</title>
@@ -12,29 +13,27 @@
     <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
     <script>
-    // Get the ID from the URL
-    var urlParams = new URLSearchParams(window.location.search);
-    var id = urlParams.get('id');
-
-    // Update the title with the ID
-    document.getElementById('pageTitle').innerText = id + " | Sony Liv";
+        // Update title using ID from URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var id = urlParams.get('id');
+        document.getElementById('pageTitle').innerText = id + " | Sony Liv";
     </script>
     <style>
-                body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #131720;
             color: white;
             margin: 0;
             padding: 0;
         }
-        
+
         .container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-        
+
         .box {
             background-color: #212d39;
             padding: 20px;
@@ -43,7 +42,7 @@
             text-align: center;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .logo {
             background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat;
             background-size: contain;
@@ -63,18 +62,17 @@
         }
 
         .channel-logo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    background-size: cover; /* Ensures the logo fills the container */
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%; /* Makes the logo circular */
-    border: 3px solid #fff; /* Adds a border around the logo */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Adds a soft shadow effect */
-    padding: 10px; /* Adds some space inside the logo */
-}
-
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
 
         .info-box {
             background-color: #1b2530;
@@ -96,7 +94,6 @@
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            margin-right: 10px; /* Adds spacing between the buttons */
         }
 
         .play-now-btn:hover {
@@ -129,9 +126,16 @@
         .download-btn:hover {
             background-color: #0061b2;
         }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="box">
@@ -143,7 +147,6 @@
             <div class="info-box">
                 <p><strong>Info:</strong></p>
                 <p>Download HLS extension to enjoy live streams.</p>
-                <!-- Browser Select Dropdown and Download Button -->
                 <select id="browserSelect" class="browser-select">
                     <option value="chrome">Chrome</option>
                     <option value="firefox">Firefox</option>
@@ -151,63 +154,76 @@
                 </select>
                 <a href="#" id="downloadBtn" class="download-btn">Download Extension</a>
             </div>
-            <!-- Two "Play Now" buttons next to each other -->
-            <div style="display: flex; justify-content: center;">
+            <!-- Buttons: Play Now, NS Player, Copy Link -->
+            <div class="button-group">
                 <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
-                <!-- Added data-package and data-title for button 2 -->
                 <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
+                <button id="copyLinkButton" class="play-now-btn" style="cursor: pointer;">Copy Link</button>
             </div>
         </div>
     </div>
 
-<script type="text/javascript">
-    // Fetch JSON data and populate the page content
-    var id = new URLSearchParams(window.location.search).get('id');
-    
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            var videoData = data.find(video => video.id === id);
+    <script type="text/javascript">
+        // Fetch JSON data and populate content
+        var id = new URLSearchParams(window.location.search).get('id');
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var videoData = data.find(video => video.id === id);
 
-            if (videoData) {
-                // Set the channel name and logo
-                document.getElementById('channelName').innerText = videoData.name;
-                document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
-                
-                // Set the Play Now link for button 1
-                document.getElementById('playNowButton1').setAttribute('href', videoData.link);
+                if (videoData) {
+                    document.getElementById('channelName').innerText = videoData.name;
+                    document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
 
-                // Set the Play Now link for button 2 as an intent URL using data-package and data-title
-                var intentUrl = 'intent:' + videoData.link + '#Intent;package=' + document.getElementById('playNowButton2').getAttribute('data-package') + ';S.title=' + document.getElementById('playNowButton2').getAttribute('data-title') + ';end';
-                document.getElementById('playNowButton2').setAttribute('href', intentUrl);
+                    document.getElementById('playNowButton1').setAttribute('href', videoData.link);
+
+                    var intentUrl = 'intent:' + videoData.link +
+                        '#Intent;package=' + document.getElementById('playNowButton2').getAttribute('data-package') +
+                        ';S.title=' + document.getElementById('playNowButton2').getAttribute('data-title') + ';end';
+
+                    document.getElementById('playNowButton2').setAttribute('href', intentUrl);
+                }
             }
-        }
-    };
-    xhr.open('GET', 'm3u_sony.json', true);
-    xhr.send();
-</script>
+        };
+        xhr.open('GET', 'm3u_sony.json', true);
+        xhr.send();
+    </script>
 
-<script type="text/javascript">
-    // Handle the download button click based on the selected browser
-    document.getElementById("downloadBtn").addEventListener("click", function() {
-        var selectedBrowser = document.getElementById("browserSelect").value;
-        var downloadLink = "";
+    <script type="text/javascript">
+        // Handle download button click
+        document.getElementById("downloadBtn").addEventListener("click", function () {
+            var selectedBrowser = document.getElementById("browserSelect").value;
+            var downloadLink = "";
 
-        // Determine the correct download link based on the selected browser
-        if (selectedBrowser === "chrome") {
-            downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
-        } else if (selectedBrowser === "firefox") {
-            downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
-        } else if (selectedBrowser === "safari") {
-            downloadLink = "https://www.apple.com/safari/"; // Safari (native support)
-        }
+            if (selectedBrowser === "chrome") {
+                downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
+            } else if (selectedBrowser === "firefox") {
+                downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
+            } else if (selectedBrowser === "safari") {
+                downloadLink = "https://www.apple.com/safari/";
+            }
 
-        // Redirect to the corresponding download link
-        if (downloadLink) {
-            window.open(downloadLink, "_blank");
-        }
-    });
-</script>
+            if (downloadLink) {
+                window.open(downloadLink, "_blank");
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Copy link to clipboard
+        document.getElementById("copyLinkButton").addEventListener("click", function () {
+            var videoLink = document.getElementById("playNowButton1").getAttribute("href");
+            if (videoLink) {
+                navigator.clipboard.writeText(videoLink).then(function () {
+                    alert("Link copied to clipboard!");
+                }, function (err) {
+                    alert("Failed to copy link: " + err);
+                });
+            } else {
+                alert("Link is not available yet.");
+            }
+        });
+    </script>
 </body>
 </html>
