@@ -389,8 +389,9 @@
 var videoUrl = videoData.adfree_url;
 var packageName = document.getElementById('playNowButton2').getAttribute('data-package') || 'com.genuine.leone';
 var intentUrl = 'intent:' + videoUrl +
-                '#Intent;package=' + packageName +
-                ';scheme=http;end';
+                '#Intent;package=' + document.getElementById('playNowButton2').getAttribute('data-package') +
+                        ';S.title=' + document.getElementById('playNowButton2').getAttribute('data-title') + ';end';
+
 
 document.getElementById('playNowButton2').setAttribute('href', intentUrl);
 
