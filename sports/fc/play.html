@@ -386,9 +386,13 @@
                     initializePlayer(videoData);
 
                     // Set NS Player link
-                    const videoUrl = videoData.adfree_url;
-                    const nsLink = `intent:${videoUrl}#Intent;package=com.genuine.leone;scheme=http;end`;
-                    document.getElementById('playNowButton2').href = nsLink;
+var videoUrl = videoData.adfree_url;
+var packageName = document.getElementById('playNowButton2').getAttribute('data-package') || 'com.genuine.leone';
+var intentUrl = 'intent:' + videoUrl +
+                '#Intent;package=' + packageName +
+                ';scheme=http;end';
+
+document.getElementById('playNowButton2').setAttribute('href', intentUrl);
 
                     // Copy Link functionality
                     document.getElementById('copyLinkButton').addEventListener('click', function (e) {
