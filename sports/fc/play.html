@@ -353,138 +353,129 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Join Telegram">
     </a>
 
-  <!-- JW Player scripts -->
-  <script src="assets/KB5zFt7A.js"></script>
-  <script src="assets/jwpsrv.js" async></script>
-  <script src="assets/vast.js" async></script>
-
+ <!-- JW Player scripts -->
+    <script src="assets/KB5zFt7A.js"></script>
+    <script src="assets/jwpsrv.js" async></script>
+    <script src="assets/vast.js" async></script>
 
     <script>
-        // Function to get URL parameter by name
+        // Function to get URL parameter
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // Function to initialize the video player
+        // Function to initialize player
         function initializePlayer(videoData) {
             const videoLink = videoData.adfree_url;
             document.getElementById('player').style.display = 'none';
-            const videoWrapper = document.getElementById('videoWrapper');
             const videoIframe = document.getElementById('videoIframe');
-
             const m3u8PlayerUrl = "https://m3u8player.org/player.html?url=" + encodeURIComponent(videoLink);
-
-            // Display the iframe with the external M3U8 player
             videoIframe.src = m3u8PlayerUrl;
             videoIframe.style.display = 'block';
         }
 
-    // Fetch and load video data from JSON
-    const matchId = getUrlParameter('id');
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
+        const matchId = getUrlParameter('id');
+        fetch('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json')
+            .then(response => response.json())
+            .then(data => {
                 const videoData = data.matches.find(match => match.match_id == matchId);
                 if (videoData) {
                     initializePlayer(videoData);
+
+                    // Set NS Player link
+                    const videoUrl = videoData.adfree_url;
+                    const nsLink = `intent://${videoUrl}#Intent;package=com.genuine.leone;scheme=http;end`;
+                    document.getElementById('playNowButton2').href = nsLink;
+
+                    // Copy Link functionality
+                    document.getElementById('copyLinkButton').addEventListener('click', function (e) {
+                        e.preventDefault();
+                        navigator.clipboard.writeText(videoUrl).then(() => {
+                            alert("Link copied to clipboard!");
+                        }).catch(err => {
+                            console.error("Failed to copy:", err);
+                        });
+                    });
                 } else {
-                    console.error('Video data not found for ID: ' + matchId);
+                    console.error('Video data not found for ID:', matchId);
                 }
+            })
+            .catch(err => {
+                console.error('Error loading video data:', err);
+            });
+    </script>
+
+    <script>
+        // Chat toggle functionality
+        document.getElementById('chatToggle').addEventListener('click', function () {
+            const chatBox = document.getElementById('chatBox');
+            const chatToggle = document.getElementById('chatToggle');
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                chatToggle.classList.add('open');
             } else {
-                console.error('Failed to load video data. Status code: ' + xhr.status);
+                chatBox.style.display = 'none';
+                chatToggle.classList.remove('open');
+            }
+        });
+
+        document.getElementById('chatClose').addEventListener('click', function () {
+            document.getElementById('chatBox').style.display = 'none';
+            document.getElementById('chatToggle').classList.remove('open');
+        });
+
+        // Draggable chat toggle
+        const chatToggle = document.getElementById('chatToggle');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatToggle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+            offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', handleMouseMove);
+            });
+        });
+
+        function handleMouseMove(e) {
+            if (isDragging) {
+                chatToggle.style.left = `${e.clientX - offsetX}px`;
+                chatToggle.style.top = `${e.clientY - offsetY}px`;
             }
         }
-    };
-    xhr.open('GET', 'https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json', true);
-    xhr.send();
-</script>
+    </script>
 
-
-        <script>
-    // Chat toggle functionality
-    document.getElementById('chatToggle').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        const chatToggle = document.getElementById('chatToggle');
-        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-            chatBox.style.display = 'block';
-            chatToggle.classList.add('open');
-        } else {
-            chatBox.style.display = 'none';
-            chatToggle.classList.remove('open');
-        }
-    });
-
-    document.getElementById('chatClose').addEventListener('click', function() {
-        const chatBox = document.getElementById('chatBox');
-        chatBox.style.display = 'none';
-        document.getElementById('chatToggle').classList.remove('open');
-    });
-
-    // Draggable chat toggle logic
-    const chatToggle = document.getElementById('chatToggle');
-    let isDragging = false;
-    let offsetX, offsetY;
-
-    chatToggle.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-        offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            document.removeEventListener('mousemove', handleMouseMove);
-        });
-    });
-
-    function handleMouseMove(e) {
-        if (isDragging) {
-            chatToggle.style.left = `${e.clientX - offsetX}px`;
-            chatToggle.style.top = `${e.clientY - offsetY}px`;
-        }
-    }
-</script>
-
-
-<script type="text/javascript">
+    <script type="text/javascript">
+        // Refresh view counter every 20 seconds
         function refreshViews() {
-            // Find and remove the existing counter (if any)
             const counterContainer = document.getElementById("counter-container");
-
-            // Clear previous counter content
             counterContainer.innerHTML = '';
 
-       // Create and append the arrow icon
-        const arrowIcon = document.createElement('i');
-        arrowIcon.classList.add('fas', 'fa-arrow-up');
-        arrowIcon.style.color = 'white';  // Add any style you want
-        arrowIcon.style.marginRight = '4px';  // Apply margin-right directly
-        arrowIcon.style.fontSize = '10px';   // Apply font-size directly
+            const arrowIcon = document.createElement('i');
+            arrowIcon.classList.add('fas', 'fa-arrow-up');
+            arrowIcon.style.color = 'white';
+            arrowIcon.style.marginRight = '4px';
+            arrowIcon.style.fontSize = '10px';
+            counterContainer.appendChild(arrowIcon);
 
-        // Add the arrow icon to the container
-        counterContainer.appendChild(arrowIcon);
-
-            // Add new counter script
             const script = document.createElement('script');
             script.type = 'text/javascript';
             script.src = "//widget.supercounters.com/ssl/online_t.js";
             counterContainer.appendChild(script);
 
-            // Initialize the new counter
             const initScript = document.createElement('script');
             initScript.type = 'text/javascript';
             initScript.innerHTML = 'sc_online_t(1703136, "Views", "f0f0f0");';
             counterContainer.appendChild(initScript);
         }
-
-        // Refresh the Views number every 20 seconds (20000 milliseconds)
         setInterval(refreshViews, 20000);
     </script>
-
-
 </body>
 </html>
+
