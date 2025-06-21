@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Language Support</title>
   <style>
     body {
@@ -25,84 +25,81 @@
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
       width: 100%;
       max-width: 700px;
-      overflow: hidden;
     }
 
     .line {
-      overflow: hidden;
-      border-right: 2px solid #0ff;
-      white-space: nowrap;
-      margin: 5vw 0;
       font-size: clamp(1rem, 2.5vw, 1.5rem);
-      width: 0;
+      margin: 2vw 0;
       color: #0ff;
-      opacity: 0;
+      min-height: 1.5em;
     }
 
-    .line2 {
-      color: #4caf50;
-    }
+    .line2 { color: #4caf50; }
+    .line3 { color: #ff9800; }
 
-    .line3 {
-      color: #ff9800;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    .cursor::after {
+      content: '|';
+      animation: blink 1s infinite;
+      margin-left: 3px;
     }
 
     @keyframes blink {
-      0%, 100% { border-color: transparent }
-      50% { border-color: #0ff }
-    }
-
-    .typing {
-      animation: typing 2s steps(40, end) forwards, blink 0.7s step-end infinite;
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="line line1">🌐 Language Support Status</div>
-    <div class="line line2">✅ Tamil and English are currently supported.</div>
-    <div class="line line3">🔜 Other languages will be added soon.</div>
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
   </div>
 
   <script>
-    const lines = document.querySelectorAll('.line');
-    let index = 0;
+    const lines = [
+      { text: "🌐 Language Support Status", class: "line1" },
+      { text: "✅ Tamil and English are currently supported.", class: "line2" },
+      { text: "🔜 Other languages will be added soon.", class: "line3" }
+    ];
 
-    function typeLines() {
-      lines.forEach(line => {
-        line.classList.remove('typing');
-        line.style.width = '0';
-        line.style.opacity = 0;
-      });
+    let currentLine = 0;
+    let currentChar = 0;
 
-      function animateNext() {
-        if (index >= lines.length) {
-          index = 0;
-          setTimeout(typeLines, 1000);
-          return;
-        }
-
-        const line = lines[index];
-        line.classList.add('typing');
-        line.style.opacity = 1;
-
-        const duration = 2000 + line.textContent.length * 20;
-
+    function typeNextLine() {
+      if (currentLine >= lines.length) {
+        // Restart after 2 seconds
         setTimeout(() => {
-          index++;
-          animateNext();
-        }, duration);
+          document.querySelectorAll('.line').forEach(line => line.textContent = '');
+          currentLine = 0;
+          currentChar = 0;
+          typeNextLine();
+        }, 2000);
+        return;
       }
 
-      animateNext();
+      const line = document.querySelector(`.${lines[currentLine].class}`);
+      const text = lines[currentLine].text;
+
+      line.classList.add('cursor');
+
+      const typeChar = () => {
+        if (currentChar <= text.length) {
+          line.textContent = text.substring(0, currentChar);
+          currentChar++;
+          setTimeout(typeChar, 40); // typing speed
+        } else {
+          line.classList.remove('cursor');
+          currentLine++;
+          currentChar = 0;
+          setTimeout(typeNextLine, 600); // delay before next line
+        }
+      };
+
+      typeChar();
     }
 
-    typeLines();
+    typeNextLine();
   </script>
 </body>
 </html>
