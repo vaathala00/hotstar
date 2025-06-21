@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Support</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      max-width: 700px;
+      overflow: hidden;
+    }
+
+    .line {
+      overflow: hidden;
+      border-right: 3px solid #0ff;
+      white-space: nowrap;
+      margin: 10px 0;
+      font-size: 1.4rem;
+      width: 0;
+      color: #0ff;
+      opacity: 0;
+    }
+
+    .line2 {
+      color: #4caf50;
+    }
+
+    .line3 {
+      color: #ff9800;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent }
+      50% { border-color: #0ff }
+    }
+
+    .typing {
+      animation: typing 2s steps(40, end) forwards, blink 0.7s step-end infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="line line1">🌐 Language Support Status</div>
+    <div class="line line2">✅ Tamil and English are currently supported.</div>
+    <div class="line line3">🔜 Other languages will be added soon.</div>
+  </div>
+
+  <script>
+    const lines = document.querySelectorAll('.line');
+    let index = 0;
+
+    function typeLines() {
+      // Reset all lines
+      lines.forEach(line => {
+        line.classList.remove('typing');
+        line.style.width = '0';
+        line.style.opacity = 0;
+      });
+
+      // Animate one by one
+      function animateNext() {
+        if (index >= lines.length) {
+          index = 0;
+          setTimeout(typeLines, 1000); // restart after delay
+          return;
+        }
+
+        const line = lines[index];
+        line.classList.add('typing');
+        line.style.opacity = 1;
+
+        const duration = 2000 + line.textContent.length * 20;
+
+        setTimeout(() => {
+          index++;
+          animateNext();
+        }, duration);
+      }
+
+      animateNext();
+    }
+
+    typeLines();
+  </script>
+</body>
+</html>
