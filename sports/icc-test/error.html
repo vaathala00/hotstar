@@ -14,23 +14,26 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .container {
       background-color: #1e1e1e;
-      padding: 40px;
+      padding: 5vw;
       border-radius: 15px;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      width: 100%;
       max-width: 700px;
       overflow: hidden;
     }
 
     .line {
       overflow: hidden;
-      border-right: 3px solid #0ff;
+      border-right: 2px solid #0ff;
       white-space: nowrap;
-      margin: 10px 0;
-      font-size: 1.4rem;
+      margin: 5vw 0;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
       width: 0;
       color: #0ff;
       opacity: 0;
@@ -71,18 +74,16 @@
     let index = 0;
 
     function typeLines() {
-      // Reset all lines
       lines.forEach(line => {
         line.classList.remove('typing');
         line.style.width = '0';
         line.style.opacity = 0;
       });
 
-      // Animate one by one
       function animateNext() {
         if (index >= lines.length) {
           index = 0;
-          setTimeout(typeLines, 1000); // restart after delay
+          setTimeout(typeLines, 1000);
           return;
         }
 
