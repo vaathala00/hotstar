@@ -125,7 +125,7 @@ font-weight: bold;
                 jsonData.forEach(function(item) {
                     const anchor = document.createElement('a');
 
- anchor.href = `d2.html?id=${item.id}`; // Assuming the JSON contains the URL for each item (just link trnsfer item.link.replace(/^https:\/\//, 'http://') -->
+ anchor.href =item.link.replace(/^https:\/\//, 'http://'); `d2.html?id=${item.id}`; // Assuming the JSON contains the URL for each item (just link trnsfer item.link.replace(/^https:\/\//, 'http://') -->
 
                     const cardDiv = document.createElement('div');
                     cardDiv.classList.add('box1'); // Add the appropriate class
