@@ -971,12 +971,9 @@
                     <div class="validity-item-label">Remaining</div>
                     <div class="validity-item-value"> Unlimited</div>
                 </div>
-                <div class="validity-item">
-                    <div class="validity-item-label">
-                        Updateded On                    </div>
-
-                    <div class="validity-item-value" id="current-date">
-                     MM DD,YYYY  </div>
+                <div class="validity-item" >
+                    <div class="validity-item-label">Updateded On </div>
+                    <div class="validity-item-value" id="validity-date">MM DD,YYYY   </div>
                 </div>
                 
                 </div>
@@ -1182,12 +1179,13 @@
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = today.toLocaleDateString('en-US', options);
 
-        const dateElement = document.getElementById('current-date');
-        if (dateElement) {
-            dateElement.textContent = formattedDate;
-        }
+        // Update both elements with different IDs
+        const warningDate = document.getElementById('current-date');
+        const validityDate = document.getElementById('validity-date');
+
+        if (warningDate) warningDate.textContent = formattedDate;
+        if (validityDate) validityDate.textContent = formattedDate;
     });
 </script>
-
 
 </body></html>
