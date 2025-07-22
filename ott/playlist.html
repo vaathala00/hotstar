@@ -974,6 +974,7 @@
                 <div class="validity-item">
                     <div class="validity-item-label">
                         Updateded On                    </div>
+
                     <div class="validity-item-value" id="current-date">
                      MM DD,YYYY  </div>
                 </div>
@@ -1176,25 +1177,17 @@
 </script>
 
 <script>
-    // Get today's date
-    const today = new Date();
-
-    // Format the date as Month Day, Year (e.g., MM DD, YYYY)
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
-
-    // Insert it into the span
-    document.getElementById('current-date').textContent = formattedDate;
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const today = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = today.toLocaleDateString('en-US', options);
 
-        document.getElementById('current-date').textContent = formattedDate;
+        const dateElement = document.getElementById('current-date');
+        if (dateElement) {
+            dateElement.textContent = formattedDate;
+        }
     });
 </script>
+
 
 </body></html>
