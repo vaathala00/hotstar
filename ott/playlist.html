@@ -931,7 +931,7 @@
                 <div class="url-box">
                     <div class="url-text">https://vaathala/p/server_1.m3u</div>
                     <div class="url-actions">
-                        <button class="url-action-btn" onclick="copyToClipboard('https://od.lk/s/OV8yMDkzMzYwMzNf/raw?=m3u')" title="Copy to clipboard">
+                        <button class="url-action-btn" onclick="copyToClipboard('https://od.lk/s/MzZfODQzNTQ1Nzlf/raw?=m3u')" title="Copy to clipboard">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
@@ -949,7 +949,7 @@
 
                                     <div class="warning-text">
                         <i class="fas fa-exclamation-triangle"></i>
-                        Notice: Refresh the m3u New content updated July 11, 2025.
+                        Notice: Refresh the m3u New content updated <span id="current-date"></span>.
                     </div>
                             </section>
 
@@ -974,8 +974,8 @@
                 <div class="validity-item">
                     <div class="validity-item-label">
                         Updateded On                    </div>
-                    <div class="validity-item-value">
-                        July 11, 2025                    </div>
+                    <div class="validity-item-value" id="current-date">
+                        MM DD, YYYY                    </div>
                 </div>
                 
                 </div>
@@ -1175,5 +1175,16 @@
 
 </script>
 
+<script>
+    // Get today's date
+    const today = new Date();
+
+    // Format the date as Month Day, Year (e.g., MM DD, YYYY)
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
+
+    // Insert it into the span
+    document.getElementById('current-date').textContent = formattedDate;
+</script>
 
 </body></html>
