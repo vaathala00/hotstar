@@ -181,11 +181,11 @@ async function generateHtmlFromJson(url) {
         }
 
         // Set the page title dynamically
-        document.getElementById('kaya_head').textContent = `Live Cricket Matches - ${jsonData.matches[0].event_name}`;
+        document.getElementById('kaya_head').textContent = `Live Cricket Matches - ${jsonData.matches[0].last_updated}`;
 
         const listContainer = document.getElementById('listContainer');
         jsonData.matches.forEach(function (item) {
-            if (!item.match_id || !item.src || !item.match_name || !item.event_category) {
+            if (!item.match_id || !item.adfree_stream || !item.title || !item.category) {
                 console.warn('Missing data in item:', item);
                 return;
             }
@@ -202,9 +202,9 @@ async function generateHtmlFromJson(url) {
             cardDiv.style.position = 'relative'; // Ensure the cardDiv has relative positioning
 
             const image = document.createElement('img');
-            image.src = item.src;
+            image.src = item.image_cdn.TATAPLAY;
             image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-            image.alt = item.match_name;
+            image.alt = item.title;
 
             // Create status element (Red color, positioned top right on the image)
             const status = document.createElement('div');
@@ -219,11 +219,11 @@ status.style.color = '#f87171';
 
             const title = document.createElement('h2');
             title.classList.add('text-center', 'text-sm', 'font-bold');
-            title.textContent = item.match_name;
+            title.textContent = item.title;
 
             const description = document.createElement('p');
             description.classList.add('text-xs', 'text-center');
-            description.textContent = item.event_category;
+            description.textContent = item.category;
 
             // Create start time element
             const startTime = document.createElement('div');
@@ -253,7 +253,7 @@ status.style.color = '#f87171';
 
 
         // Call the function with the URL of your JSON data
-        generateHtmlFromJson('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json');
+        generateHtmlFromJson('https://raw.githubusercontent.com/Jitendraunatti/fancode/refs/heads/main/data/fancode.json');
 
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', function () {
