@@ -165,112 +165,106 @@
     <script type="text/javascript" src="channel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script>
-        // Function to generate HTML from JSON data
-async function generateHtmlFromJson(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
+ <script>
+    // Function to generate HTML from JSON data
+    async function generateHtmlFromJson(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
 
-        const jsonData = await response.json();
-        if (!jsonData || !Array.isArray(jsonData.matches)) {
-            console.error('No valid JSON data available');
-            return;
-        }
-
-        // Set the page title dynamically
-        document.getElementById('kaya_head').textContent = `Live Cricket Matches - ${jsonData.matches[0].event_name}`;
-
-        const listContainer = document.getElementById('listContainer');
-        jsonData.matches.forEach(function (item) {
-            if (!item.match_id || !item.src || !item.match_name || !item.event_category) {
-                console.warn('Missing data in item:', item);
+            const jsonData = await response.json();
+            if (!jsonData || !Array.isArray(jsonData.matches)) {
+                console.error('No valid JSON data available');
                 return;
             }
 
-            const anchor = document.createElement('a');
-            anchor.href = `play.html?id=${item.match_id}`;
+            // Set the page title (use total matches instead of missing last_updated)
+            document.getElementById('kaya_head').textContent = `Live Cricket Matches (${jsonData.live_matches} Live / ${jsonData.total_matches} Total)`;
 
-            const box1Div = document.createElement('div');
-            box1Div.classList.add('box1');
-
-            const cardDiv = document.createElement('div');
-            cardDiv.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-49', 'mb-4', 'flex', 'flex-col');
-
-            cardDiv.style.position = 'relative'; // Ensure the cardDiv has relative positioning
-
-            const image = document.createElement('img');
-            image.src = item.src;
-            image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-            image.alt = item.match_name;
-
-            // Create status element (Red color, positioned top right on the image)
-            const status = document.createElement('div');
-            status.classList.add('text-xs', 'absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'p-1'); // Positioned at top right of image
-status.style.color = '#f87171';
-            status.style.paddingRight = '5px'; // Optional padding to ensure it doesn't touch the edge
-            status.style.paddingTop = '5px'; // Optional padding for positioning
-            status.textContent = item.status || 'Status: Not Available';
-
-            const cardContent = document.createElement('div');
-            cardContent.classList.add('mb-5', 'opacity-100');
-
-            const title = document.createElement('h2');
-            title.classList.add('text-center', 'text-sm', 'font-bold');
-            title.textContent = item.match_name;
-
-            const description = document.createElement('p');
-            description.classList.add('text-xs', 'text-center');
-            description.textContent = item.event_category;
-
-            // Create start time element
-            const startTime = document.createElement('div');
-            startTime.classList.add('text-xs', 'text-center'); // Smaller size for start time
-            startTime.style.color = '#4caf50';
-            startTime.textContent = `Start Time: ${item.startTime || 'Not Available'}`;
-
-            // Append elements to card content
-            cardContent.appendChild(title);
-            cardContent.appendChild(description);
-            cardContent.appendChild(startTime);
-
-            // Append status element on top of the image
-            cardDiv.appendChild(image);
-            cardDiv.appendChild(status); // Add status on top of the image
-            cardDiv.appendChild(cardContent);
-            box1Div.appendChild(cardDiv);
-            anchor.appendChild(box1Div);
-
-            listContainer.appendChild(anchor);
-        });
-    } catch (error) {
-        console.error('Error fetching or parsing JSON:', error);
-    }
-}
-
-
-
-        // Call the function with the URL of your JSON data
-        generateHtmlFromJson('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json');
-
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const searchValue = this.value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
-
-            cards.forEach(card => {
-                const matchName = card.querySelector('h2').textContent.toLowerCase();
-                const eventCategory = card.querySelector('p').textContent.toLowerCase();
-                if (matchName.includes(searchValue) || eventCategory.includes(searchValue)) {
-                    card.parentElement.style.display = 'block';
-                } else {
-                    card.parentElement.style.display = 'none';
+            const listContainer = document.getElementById('listContainer');
+            jsonData.matches.forEach(function (item) {
+                if (!item.match_id || !item.title || !item.category) {
+                    console.warn('Missing essential data in item:', item);
+                    return;
                 }
+
+                const anchor = document.createElement('a');
+                anchor.href = `play.html?id=${item.match_id}`;
+
+                const box1Div = document.createElement('div');
+                box1Div.classList.add('box1');
+
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-49', 'mb-4', 'flex', 'flex-col');
+                cardDiv.style.position = 'relative';
+
+                const image = document.createElement('img');
+                image.src = item?.image_cdn?.TATAPLAY || item?.image || '';
+                image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
+                image.alt = item.title;
+
+                // Status badge
+                const status = document.createElement('div');
+                status.classList.add('text-xs', 'absolute', 'top-0', 'right-0', 'bg-red-500', 'text-white', 'p-1');
+                status.style.color = '#f87171';
+                status.style.paddingRight = '5px';
+                status.style.paddingTop = '5px';
+                status.textContent = item.status || 'Status: Not Available';
+
+                const cardContent = document.createElement('div');
+                cardContent.classList.add('mb-5', 'opacity-100');
+
+                const title = document.createElement('h2');
+                title.classList.add('text-center', 'text-sm', 'font-bold');
+                title.textContent = item.title;
+
+                const description = document.createElement('p');
+                description.classList.add('text-xs', 'text-center');
+                description.textContent = item.category;
+
+                const startTime = document.createElement('div');
+                startTime.classList.add('text-xs', 'text-center');
+                startTime.style.color = '#4caf50';
+                startTime.textContent = `Start Time: ${item.startTime || 'N/A'}`;
+
+                cardContent.appendChild(title);
+                cardContent.appendChild(description);
+                cardContent.appendChild(startTime);
+
+                cardDiv.appendChild(image);
+                cardDiv.appendChild(status);
+                cardDiv.appendChild(cardContent);
+                box1Div.appendChild(cardDiv);
+                anchor.appendChild(box1Div);
+                listContainer.appendChild(anchor);
             });
+        } catch (error) {
+            console.error('Error fetching or parsing JSON:', error);
+        }
+    }
+
+    // Fetch JSON
+    generateHtmlFromJson('https://raw.githubusercontent.com/Jitendraunatti/fancode/refs/heads/main/data/fancode.json');
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const searchValue = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const matchName = card.querySelector('h2')?.textContent.toLowerCase() || '';
+            const eventCategory = card.querySelector('p')?.textContent.toLowerCase() || '';
+            if (matchName.includes(searchValue) || eventCategory.includes(searchValue)) {
+                card.parentElement.style.display = 'block';
+            } else {
+                card.parentElement.style.display = 'none';
+            }
         });
-    </script>
+    });
+</script>
+
 </body>
 
 </html>
