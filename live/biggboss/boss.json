@@ -1,10 +1,10 @@
 [
 
     {
-        "id": "Hindi",
-        "name": "Bigg Boss",
-        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/live-feed-16x9-1731241653873.jpg",
-        "group": "🔴LIV Hindi",
+        "id": "Malayalam",
+        "name": "BB MALAYALAM",
+        "logo": "https://v3img.voot.com/resizeMedium,w_450,h_253/v3Storage/assets/live-feed-16x9-1731241https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3156/1710076893156-i",
+        "group": "Malayalam 24/7🔴",
         "link": "https://prod-ent-live-cf.jiocinema.com/hls/live/2101885/uhd_akamai_atv_avc_24x7_bbhindi_s18_day03/master.m3u8",
         "license_key": "",
         "k": "",
@@ -12,10 +12,10 @@
     },
 
     {
-        "id": "Bigg Boss S8",
-        "name": "Bigg Boss S8",
-        "logo": "https://i.postimg.cc/C5KjJ84V/afs.webp",
-        "group": "🔴LIV Tamil",
+        "id": "TAMIL",
+        "name": "BB TAMIL",
+        "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/7742/1737309667742-i",
+        "group": "Tamil 24/7🔴",
         "link": "https://ok.ru/videoembed/9960537071191",
         "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
         "k": "",
