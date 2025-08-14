@@ -2,173 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>YouTube-Style Live Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Chat</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
       background: #181818;
       color: #fff;
-      margin: 0;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .chat-container {
-      width: 400px;
-      height: 600px;
-      background: #202020;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
       display: flex;
       flex-direction: column;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
+      height: 100vh;
     }
 
     .chat-header {
-      background: #262626;
       padding: 10px;
-      font-size: 14px;
-      border-bottom: 1px solid #383838;
+      background: #2a2a2a;
+      font-size: 16px;
+      font-weight: bold;
+      border-bottom: 2px solid #f0f;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #f5f5f5;
-      position: relative;
-      z-index: 11;
     }
 
-    .chat-header a {
-      color: #00aaff;
-      text-decoration: none;
-      margin-left: 8px;
-      font-weight: bold;
+    .chat-header span {
+      color: #ccc;
+      margin-left: 6px;
+    }
+
+    #set-name-btn {
+      font-size: 13px;
+      padding: 4px 8px;
+      border: 1px solid #f0f;
+      background: none;
+      color: #f0f;
+      border-radius: 4px;
       cursor: pointer;
     }
 
-    .chat-header a:hover {
-      text-decoration: underline;
-    }
-
-    .pinned-container {
-      background: #2a2a2a;
-      padding: 8px;
-      border-bottom: 2px solid #f0f;
-      width: 100%;
-      z-index: 10;
-      position: relative;
-    }
-
-    .pinned-container.hidden {
-      display: none;
-    }
-
-    .pinned-container .unpin-btn {
-      cursor: pointer;
-      font-size: 14px;
-      float: right;
-      color: #888;
-      user-select: none;
-    }
-
-    .pinned-container .unpin-btn:hover {
-      color: #fff;
-    }
-
-    .chat-box {
+    #chat-box {
       flex: 1;
-      padding: 10px;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column-reverse;
-      margin: 0; /* no margin-top needed anymore */
+      padding: 10px;
+      font-size: 14px;
     }
 
     .message {
-      background: #303030;
-      margin-bottom: 6px;
-      padding: 8px;
-      border-radius: 4px;
-      position: relative;
+      margin-bottom: 4px;
     }
 
-    .message .name-time {
-      font-size: 12px;
+    .message-header {
       color: #bbb;
+      font-size: 13px;
     }
 
-    .message .text {
-      font-size: 14px;
-      margin: 4px 0;
-      white-space: pre-wrap;
-    }
-
-    .message .actions {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-    }
-
-    .message .actions span {
-      cursor: pointer;
-      font-size: 14px;
-      margin-left: 8px;
-      color: #888;
-      user-select: none;
-    }
-
-    .message .actions span:hover {
+    .message-text {
       color: #fff;
+      font-size: 15px;
     }
 
     .chat-footer {
       display: flex;
-      align-items: center;
-      padding: 6px;
+      padding: 8px;
       background: #282828;
       border-top: 1px solid #383838;
     }
 
-    .chat-footer button.emoji-btn {
+    #emoji-toggle {
+      font-size: 20px;
       background: none;
       border: none;
-      font-size: 20px;
-      margin-right: 6px;
-      cursor: pointer;
       color: #888;
+      cursor: pointer;
+      margin-right: 6px;
     }
 
-    .chat-footer button.emoji-btn:hover {
-      color: #fff;
-    }
+    #emoji-toggle:hover { color: #fff; }
 
     #message-input {
       flex: 1;
       padding: 8px;
-      border: none;
       font-size: 14px;
       background: #383838;
       color: #fff;
+      border: none;
       border-radius: 4px;
     }
 
-    .chat-footer button.send-btn {
+    #message-input::placeholder {
+      color: #aaa;
+    }
+
+    #send-btn {
       margin-left: 6px;
-      padding: 8px 12px;
-      border: none;
       background: #ff0000;
       color: white;
-      cursor: pointer;
+      border: none;
+      padding: 8px 12px;
       border-radius: 4px;
+      cursor: pointer;
     }
 
     emoji-picker {
       position: absolute;
       bottom: 60px;
       left: 10px;
-      z-index: 20;
       display: none;
     }
 
@@ -178,34 +117,30 @@
   </style>
 </head>
 <body>
-  <div class="chat-container">
 
-    <div class="chat-header">
-      💬 Live Chat <span id="guest-name"></span> | <a href="#" id="set-name-link">Set name</a> |
-    </div>
-
-    <div class="pinned-container hidden" id="pinned-container"></div>
-
-    <div class="chat-box" id="chat-box"></div>
-
-    <div class="chat-footer">
-      <button class="emoji-btn" id="emoji-toggle">☺︎</button>
-      <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off"/>
-      <button class="send-btn" id="send-btn">Send</button>
-    </div>
-
-    <!-- Emoji Picker Web Component -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
-    <emoji-picker id="emoji-picker"></emoji-picker>
-
+  <div class="chat-header">
+    <div>💬 Live Chat <span id="guest-name"></span></div>
+    <button id="set-name-btn">Set name</button>
   </div>
+
+  <div id="chat-box"></div>
+
+  <div class="chat-footer">
+    <button id="emoji-toggle">☺︎</button>
+    <input type="text" id="message-input" placeholder="Type a message and press Enter…" />
+    <button id="send-btn">Send</button>
+  </div>
+
+  <!-- Emoji Picker -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+  <emoji-picker id="emoji-picker"></emoji-picker>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script>
-    // TODO: Replace with your own Firebase config
+    // 🔧 Replace with your Firebase project config
 const firebaseConfig = {
   apiKey: "AIzaSyBFYkzc7A4RQEHVOGYf70-vX-gz36-_Bhs",
   authDomain: "chatbox-432ac.firebaseapp.com",
@@ -220,144 +155,88 @@ const firebaseConfig = {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const chatBox = document.getElementById('chat-box');
-      const messageInput = document.getElementById('message-input');
-      const sendBtn = document.getElementById('send-btn');
-      const emojiToggle = document.getElementById('emoji-toggle');
-      const picker = document.getElementById('emoji-picker');
-      const pinnedContainer = document.getElementById('pinned-container');
-      const guestNameSpan = document.getElementById('guest-name');
-      const setNameLink = document.getElementById('set-name-link');
+    document.addEventListener("DOMContentLoaded", () => {
+      const guestNameSpan = document.getElementById("guest-name");
+      const setNameBtn = document.getElementById("set-name-btn");
+      const chatBox = document.getElementById("chat-box");
+      const messageInput = document.getElementById("message-input");
+      const sendBtn = document.getElementById("send-btn");
+      const emojiToggle = document.getElementById("emoji-toggle");
+      const picker = document.getElementById("emoji-picker");
 
-      // Initialize guest name
       let guestName = localStorage.getItem("guestName");
       if (!guestName) {
-        guestName = "Guest" + Math.floor(Math.random() * 1000);
+        guestName = "Guest" + Math.floor(Math.random() * 100000);
         localStorage.setItem("guestName", guestName);
       }
       guestNameSpan.textContent = guestName;
 
-      // Set name click handler
-      setNameLink.addEventListener("click", e => {
-        e.preventDefault();
-        const newName = prompt("Enter your display name:", guestName);
-        if (newName && newName.trim() !== "") {
-          guestName = newName.trim();
+      setNameBtn.onclick = () => {
+        const name = prompt("Enter your name:", guestName);
+        if (name && name.trim()) {
+          guestName = name.trim();
           localStorage.setItem("guestName", guestName);
           guestNameSpan.textContent = guestName;
         }
-      });
+      };
 
-      // Emoji picker toggle
-      emojiToggle.addEventListener('click', () => {
-        picker.classList.toggle('visible');
-      });
-
-      // Emoji selected
-      picker.addEventListener('emoji-click', e => {
+      emojiToggle.onclick = () => picker.classList.toggle("visible");
+      picker.addEventListener("emoji-click", e => {
         messageInput.value += e.detail.unicode;
-        picker.classList.remove('visible');
+        picker.classList.remove("visible");
         messageInput.focus();
       });
 
-      // Send message
-      sendBtn.addEventListener('click', sendMessage);
-      messageInput.addEventListener('keyup', e => {
-        if (e.key === 'Enter') sendMessage();
+      sendBtn.onclick = sendMessage;
+      messageInput.addEventListener("keyup", e => {
+        if (e.key === "Enter") sendMessage();
       });
 
       function sendMessage() {
         const text = messageInput.value.trim();
         if (!text) return;
-        db.ref('messages').push({
+        db.ref("messages").push({
           name: guestName,
-          text: text,
-          timestamp: Date.now(),
-          pinned: false
+          text,
+          timestamp: Date.now()
         });
-        messageInput.value = '';
+        messageInput.value = "";
       }
 
-      // Listen to all messages
-      db.ref('messages').on('value', snap => {
+      db.ref("messages").orderByChild("timestamp").on("value", snap => {
         const messages = [];
-        snap.forEach(c => messages.push({ key: c.key, ...c.val() }));
-        displayMessages(messages.reverse());
+        snap.forEach(child => messages.push(child.val()));
+        renderMessages(messages);
       });
 
-      function displayMessages(messages) {
-        chatBox.innerHTML = '';
-        let pinnedMsg = null;
-
+      function renderMessages(messages) {
+        chatBox.innerHTML = "";
         messages.forEach(msg => {
-          if (msg.pinned) {
-            pinnedMsg = msg;
-          } else {
-            appendMessage(msg);
-          }
-        });
+          const msgDiv = document.createElement("div");
+          msgDiv.className = "message";
 
-        if (pinnedMsg) {
-          pinnedContainer.classList.remove('hidden');
-          pinnedContainer.innerHTML = `
-            <div class="message">
-              <div class="name-time">
-                ${pinnedMsg.name} — ${formatTime(pinnedMsg.timestamp)}
-                <span class="unpin-btn" title="Unpin">📌</span>
-              </div>
-              <div class="text">${pinnedMsg.text}</div>
-            </div>
+          const time = new Date(msg.timestamp);
+          let hrs = time.getHours() % 12 || 12;
+          const mins = time.getMinutes().toString().padStart(2, '0');
+          const ampm = time.getHours() >= 12 ? "PM" : "AM";
+
+          msgDiv.innerHTML = `
+            <div class="message-header">${escape(msg.name)} ${hrs}:${mins} ${ampm}</div>
+            <div class="message-text">${escape(msg.text)}</div>
           `;
-
-          pinnedContainer.querySelector('.unpin-btn').onclick = () => {
-            db.ref(`messages/${pinnedMsg.key}`).update({ pinned: false });
-          };
-        } else {
-          pinnedContainer.classList.add('hidden');
-        }
+          chatBox.appendChild(msgDiv);
+        });
+        chatBox.scrollTop = chatBox.scrollHeight;
       }
 
-      function appendMessage(msg) {
-        const div = document.createElement('div');
-        div.className = 'message';
-        div.innerHTML = `
-          <div class="name-time">${msg.name} — ${formatTime(msg.timestamp)}</div>
-          <div class="text">${msg.text}</div>
-          <div class="actions">
-            <span title="Edit">✍</span>
-            <span title="Delete">🗑</span>
-            <span title="Pin">${msg.pinned ? 'Unpin' : '📌'}</span>
-          </div>
-        `;
-
-        const [editBtn, deleteBtn, pinBtn] = div.querySelectorAll('.actions span');
-
-        editBtn.onclick = () => {
-          const newText = prompt("Edit message:", msg.text);
-          if (newText !== null) {
-            db.ref(`messages/${msg.key}`).update({ text: newText });
-          }
-        };
-
-        deleteBtn.onclick = () => {
-          db.ref(`messages/${msg.key}`).remove();
-        };
-
-        pinBtn.onclick = () => {
-          db.ref(`messages/${msg.key}`).update({ pinned: !msg.pinned });
-        };
-
-        chatBox.appendChild(div);
-      }
-
-      function formatTime(ms) {
-        const d = new Date(ms);
-        const h = d.getHours(), m = d.getMinutes();
-        const ampm = h >= 12 ? 'PM' : 'AM';
-        const hh = (h % 12) || 12;
-        const mm = m < 10 ? '0' + m : m;
-        return `${hh}:${mm} ${ampm}`;
+      function escape(text) {
+        return ("" + text).replace(/[&<>"']/g, match => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        })[match]);
       }
     });
   </script>
