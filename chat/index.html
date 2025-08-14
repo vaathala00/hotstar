@@ -41,6 +41,10 @@
       cursor: pointer;
       font-size: 12px;
     }
+    #set-name-btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
     .chat-box {
       flex: 1;
       padding: 10px;
@@ -52,6 +56,11 @@
     }
     .message .name {
       font-weight: bold;
+    }
+    .message .time {
+      font-size: 12px;
+      color: gray;
+      margin-left: 8px;
     }
     #chat-form {
       display: flex;
@@ -75,7 +84,7 @@
 <body>
   <div class="chat-container">
     <div class="chat-header">
-      💬 Live Chat <span id="guest-name">Guest...</span>
+      💬 Live Chat <span id="guest-name">Guest__...</span>
       <button id="set-name-btn" title="Click to change name">Set name</button>
     </div>
     <div class="chat-box" id="chat-box"></div>
@@ -90,7 +99,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script>
-    // Replace with your Firebase config
+    // 🔒 Replace with your actual Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBFYkzc7A4RQEHVOGYf70-vX-gz36-_Bhs",
   authDomain: "chatbox-432ac.firebaseapp.com",
@@ -102,7 +111,6 @@ const firebaseConfig = {
   measurementId: "G-SCVLX9SQPF"
 };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
@@ -113,19 +121,35 @@ const firebaseConfig = {
       const guestNameEl = document.getElementById("guest-name");
       const setNameBtn = document.getElementById("set-name-btn");
 
-      let guestName = "Guest" + Math.floor(Math.random() * 1000);
+      // Create and store a default name
+      let guestName = localStorage.getItem("guestName");
+      if (!guestName) {
+        guestName = "Guest__" + Math.floor(Math.random() * 1000);
+        localStorage.setItem("guestName", guestName);
+      }
       guestNameEl.innerText = guestName;
 
-      // Set name button
+      // If user has already set a name, disable the set-name button
+      const nameSet = localStorage.getItem("nameSet") === "true";
+      if (nameSet) {
+        setNameBtn.disabled = true;
+        setNameBtn.title = "Name already set";
+      }
+
       setNameBtn.addEventListener("click", () => {
+        if (localStorage.getItem("nameSet") === "true") return;
+
         const newName = prompt(`Set your name (currently: ${guestName})`);
         if (newName && newName.trim().length > 0) {
           guestName = newName.trim();
+          localStorage.setItem("guestName", guestName);
+          localStorage.setItem("nameSet", "true");
           guestNameEl.innerText = guestName;
+          setNameBtn.disabled = true;
+          setNameBtn.title = "Name already set";
         }
       });
 
-      // Send message
       chatForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const text = messageInput.value.trim();
@@ -139,15 +163,25 @@ const firebaseConfig = {
         }
       });
 
-      // Display messages
       db.ref("messages").on("child_added", (snapshot) => {
         const msg = snapshot.val();
         const div = document.createElement("div");
         div.classList.add("message");
-        div.innerHTML = `<strong>${msg.name}:</strong> ${msg.text}`;
+
+        const time = formatTime(new Date(msg.timestamp));
+        div.innerHTML = `<span class="name">${msg.name}</span><span class="time">${time}</span><br>${msg.text}`;
         chatBox.appendChild(div);
         chatBox.scrollTop = chatBox.scrollHeight;
       });
+
+      function formatTime(date) {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const ampm = hours >= 12 ? "PM" : "AM";
+        const h = hours % 12 || 12;
+        const m = minutes < 10 ? "0" + minutes : minutes;
+        return `${h}:${m} ${ampm}`;
+      }
     });
   </script>
 </body>
