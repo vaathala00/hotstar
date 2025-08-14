@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>YouTube‑Style Live Chat with Emoji</title>
+  <meta charset="UTF-8" />
+  <title>YouTube-Style Live Chat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: center;
     }
+
     .chat-container {
       width: 400px;
       height: 600px;
@@ -25,26 +26,30 @@
       overflow: hidden;
       position: relative;
     }
+
     .pinned-container {
       background: #2a2a2a;
-      padding: 6px;
+      padding: 8px;
       border-bottom: 2px solid #f0f;
       position: absolute;
       top: 0;
       width: 100%;
       z-index: 10;
     }
+
     .pinned-container.hidden {
       display: none;
     }
+
     .chat-box {
       flex: 1;
       padding: 10px;
-      margin-top: 40px;
+      margin-top: 60px;
       overflow-y: auto;
       display: flex;
       flex-direction: column-reverse;
     }
+
     .message {
       background: #303030;
       margin-bottom: 6px;
@@ -52,29 +57,35 @@
       border-radius: 4px;
       position: relative;
     }
+
     .message .name-time {
       font-size: 12px;
       color: #bbb;
     }
+
     .message .text {
       font-size: 14px;
       margin: 4px 0;
       white-space: pre-wrap;
     }
+
     .message .actions {
       position: absolute;
       top: 6px;
       right: 6px;
     }
+
     .message .actions span {
       cursor: pointer;
       font-size: 14px;
       margin-left: 8px;
       color: #888;
     }
+
     .message .actions span:hover {
       color: #fff;
     }
+
     .chat-footer {
       display: flex;
       align-items: center;
@@ -82,6 +93,7 @@
       background: #282828;
       border-top: 1px solid #383838;
     }
+
     .chat-footer button.emoji-btn {
       background: none;
       border: none;
@@ -90,9 +102,11 @@
       cursor: pointer;
       color: #888;
     }
+
     .chat-footer button.emoji-btn:hover {
       color: #fff;
     }
+
     #message-input {
       flex: 1;
       padding: 8px;
@@ -102,6 +116,7 @@
       color: #fff;
       border-radius: 4px;
     }
+
     .chat-footer button.send-btn {
       margin-left: 6px;
       padding: 8px 12px;
@@ -111,13 +126,15 @@
       cursor: pointer;
       border-radius: 4px;
     }
+
     emoji-picker {
       position: absolute;
-      bottom: 50px;
+      bottom: 60px;
       left: 10px;
       z-index: 20;
       display: none;
     }
+
     emoji-picker.visible {
       display: block;
     }
@@ -127,12 +144,14 @@
   <div class="chat-container">
     <div class="pinned-container hidden" id="pinned-container"></div>
     <div class="chat-box" id="chat-box"></div>
+
     <div class="chat-footer">
       <button class="emoji-btn" id="emoji-toggle">☺︎</button>
       <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off"/>
       <button class="send-btn" id="send-btn">Send</button>
     </div>
-    <!-- Emoji picker web component -->
+
+    <!-- Emoji Picker Web Component -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <emoji-picker id="emoji-picker"></emoji-picker>
   </div>
@@ -140,8 +159,10 @@
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
   <script>
-    const firebaseConfig = {
+    // TODO: Replace with your own Firebase config
+const firebaseConfig = {
   apiKey: "AIzaSyBFYkzc7A4RQEHVOGYf70-vX-gz36-_Bhs",
   authDomain: "chatbox-432ac.firebaseapp.com",
   databaseURL: "https://chatbox-432ac-default-rtdb.firebaseio.com",
@@ -151,6 +172,7 @@
   appId: "1:963610029526:web:518ac83ba6ef49fe0cc877",
   measurementId: "G-SCVLX9SQPF"
 };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
@@ -162,52 +184,72 @@
       const picker = document.getElementById('emoji-picker');
       const pinnedContainer = document.getElementById('pinned-container');
 
-      let guestName = localStorage.getItem("guestName") || ("Guest__"+Math.floor(Math.random()*1000));
+      let guestName = localStorage.getItem("guestName") || ("Guest__" + Math.floor(Math.random() * 1000));
       localStorage.setItem("guestName", guestName);
 
-      emojiToggle.addEventListener('click', () => picker.classList.toggle('visible'));
+      // Emoji picker toggle
+      emojiToggle.addEventListener('click', () => {
+        picker.classList.toggle('visible');
+      });
+
+      // Emoji selected
       picker.addEventListener('emoji-click', e => {
         messageInput.value += e.detail.unicode;
         picker.classList.remove('visible');
         messageInput.focus();
       });
 
+      // Send message
       sendBtn.addEventListener('click', sendMessage);
-      messageInput.addEventListener('keyup', e => { if (e.key === 'Enter') sendMessage(); });
+      messageInput.addEventListener('keyup', e => {
+        if (e.key === 'Enter') sendMessage();
+      });
 
       function sendMessage() {
         const text = messageInput.value.trim();
         if (!text) return;
         db.ref('messages').push({
-          name: guestName, text, timestamp: Date.now(), pinned: false
+          name: guestName,
+          text: text,
+          timestamp: Date.now(),
+          pinned: false
         });
         messageInput.value = '';
       }
 
+      // Listen to all messages
       db.ref('messages').on('value', snap => {
-        const msgs = [];
-        snap.forEach(c => msgs.push({ key: c.key, ...c.val() }));
-        displayMessages(msgs.reverse());
+        const messages = [];
+        snap.forEach(c => messages.push({ key: c.key, ...c.val() }));
+        displayMessages(messages.reverse());
       });
 
-      function displayMessages(msgs) {
+      function displayMessages(messages) {
         chatBox.innerHTML = '';
         let pinnedMsg = null;
 
-        msgs.forEach(msg => {
-          if (msg.pinned) pinnedMsg = msg;
-          else appendMsg(msg);
+        messages.forEach(msg => {
+          if (msg.pinned) {
+            pinnedMsg = msg;
+          } else {
+            appendMessage(msg);
+          }
         });
 
         if (pinnedMsg) {
           pinnedContainer.classList.remove('hidden');
-          pinnedContainer.innerHTML = `<div class="message"><div class="name-time">${pinnedMsg.name} — ${formatTime(pinnedMsg.timestamp)}</div><div class="text">${pinnedMsg.text}</div></div>`;
+          pinnedContainer.innerHTML = `
+            <div class="message">
+              <div class="name-time">${pinnedMsg.name} — ${formatTime(pinnedMsg.timestamp)}</div>
+              <div class="text">${pinnedMsg.text}</div>
+            </div>
+          `;
         } else {
           pinnedContainer.classList.add('hidden');
         }
       }
 
-      function appendMsg(msg) {
+      function appendMessage(msg) {
         const div = document.createElement('div');
         div.className = 'message';
         div.innerHTML = `
@@ -217,20 +259,32 @@
             <span title="Edit">✍</span>
             <span title="Delete">🗑</span>
             <span title="Pin">${msg.pinned ? 'Unpin' : '📌'}</span>
-          </div>`;
-        const [editB, delB, pinB] = div.querySelectorAll('.actions span');
-        editB.onclick = () => {
+          </div>
+        `;
+
+        const [editBtn, deleteBtn, pinBtn] = div.querySelectorAll('.actions span');
+
+        editBtn.onclick = () => {
           const newText = prompt("Edit message:", msg.text);
-          if (newText !== null) db.ref(`messages/${msg.key}`).update({ text: newText });
+          if (newText !== null) {
+            db.ref(`messages/${msg.key}`).update({ text: newText });
+          }
         };
-        delB.onclick = () => db.ref(`messages/${msg.key}`).remove();
-        pinB.onclick = () => db.ref(`messages/${msg.key}`).update({ pinned: !msg.pinned });
+
+        deleteBtn.onclick = () => {
+          db.ref(`messages/${msg.key}`).remove();
+        };
+
+        pinBtn.onclick = () => {
+          db.ref(`messages/${msg.key}`).update({ pinned: !msg.pinned });
+        };
+
         chatBox.appendChild(div);
       }
 
-      function formatTime(dateMs) {
-        const date = new Date(dateMs);
-        const h = date.getHours(), m = date.getMinutes();
+      function formatTime(ms) {
+        const d = new Date(ms);
+        const h = d.getHours(), m = d.getMinutes();
         const ampm = h >= 12 ? 'PM' : 'AM';
         const hh = (h % 12) || 12;
         const mm = m < 10 ? '0' + m : m;
