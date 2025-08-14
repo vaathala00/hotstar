@@ -27,27 +27,63 @@
       position: relative;
     }
 
+    .chat-header {
+      background: #262626;
+      padding: 10px;
+      font-size: 14px;
+      border-bottom: 1px solid #383838;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #f5f5f5;
+      position: relative;
+      z-index: 11;
+    }
+
+    .chat-header a {
+      color: #00aaff;
+      text-decoration: none;
+      margin-left: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .chat-header a:hover {
+      text-decoration: underline;
+    }
+
     .pinned-container {
       background: #2a2a2a;
       padding: 8px;
       border-bottom: 2px solid #f0f;
-      position: absolute;
-      top: 0;
       width: 100%;
       z-index: 10;
+      position: relative;
     }
 
     .pinned-container.hidden {
       display: none;
     }
 
+    .pinned-container .unpin-btn {
+      cursor: pointer;
+      font-size: 14px;
+      float: right;
+      color: #888;
+      user-select: none;
+    }
+
+    .pinned-container .unpin-btn:hover {
+      color: #fff;
+    }
+
     .chat-box {
       flex: 1;
       padding: 10px;
-      margin-top: 60px;
       overflow-y: auto;
       display: flex;
       flex-direction: column-reverse;
+      margin: 0; /* no margin-top needed anymore */
     }
 
     .message {
@@ -80,6 +116,7 @@
       font-size: 14px;
       margin-left: 8px;
       color: #888;
+      user-select: none;
     }
 
     .message .actions span:hover {
@@ -142,7 +179,13 @@
 </head>
 <body>
   <div class="chat-container">
+
+    <div class="chat-header">
+      💬 Live Chat <span id="guest-name"></span> | <a href="#" id="set-name-link">Set name</a> |
+    </div>
+
     <div class="pinned-container hidden" id="pinned-container"></div>
+
     <div class="chat-box" id="chat-box"></div>
 
     <div class="chat-footer">
@@ -154,6 +197,7 @@
     <!-- Emoji Picker Web Component -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
     <emoji-picker id="emoji-picker"></emoji-picker>
+
   </div>
 
   <!-- Firebase SDK -->
@@ -183,9 +227,27 @@ const firebaseConfig = {
       const emojiToggle = document.getElementById('emoji-toggle');
       const picker = document.getElementById('emoji-picker');
       const pinnedContainer = document.getElementById('pinned-container');
+      const guestNameSpan = document.getElementById('guest-name');
+      const setNameLink = document.getElementById('set-name-link');
 
-      let guestName = localStorage.getItem("guestName") || ("Guest__" + Math.floor(Math.random() * 1000));
-      localStorage.setItem("guestName", guestName);
+      // Initialize guest name
+      let guestName = localStorage.getItem("guestName");
+      if (!guestName) {
+        guestName = "Guest" + Math.floor(Math.random() * 1000);
+        localStorage.setItem("guestName", guestName);
+      }
+      guestNameSpan.textContent = guestName;
+
+      // Set name click handler
+      setNameLink.addEventListener("click", e => {
+        e.preventDefault();
+        const newName = prompt("Enter your display name:", guestName);
+        if (newName && newName.trim() !== "") {
+          guestName = newName.trim();
+          localStorage.setItem("guestName", guestName);
+          guestNameSpan.textContent = guestName;
+        }
+      });
 
       // Emoji picker toggle
       emojiToggle.addEventListener('click', () => {
@@ -240,10 +302,17 @@ const firebaseConfig = {
           pinnedContainer.classList.remove('hidden');
           pinnedContainer.innerHTML = `
             <div class="message">
-              <div class="name-time">${pinnedMsg.name} — ${formatTime(pinnedMsg.timestamp)}</div>
+              <div class="name-time">
+                ${pinnedMsg.name} — ${formatTime(pinnedMsg.timestamp)}
+                <span class="unpin-btn" title="Unpin">📌</span>
+              </div>
               <div class="text">${pinnedMsg.text}</div>
             </div>
           `;
+
+          pinnedContainer.querySelector('.unpin-btn').onclick = () => {
+            db.ref(`messages/${pinnedMsg.key}`).update({ pinned: false });
+          };
         } else {
           pinnedContainer.classList.add('hidden');
         }
