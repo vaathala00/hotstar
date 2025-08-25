@@ -4,13 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@allinone_reborn</title>
-
-  <!-- Bootstrap for basic styling -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- hls.js for HLS streaming -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
   <style>
     body {
       margin: 0;
@@ -133,121 +128,254 @@
       border-radius: 10px;
       font-size: 20px;
     }
+
+    .player-wrap.hide-controls .controls {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      .controls {
+        flex-direction: column-reverse;
+        padding: 8px;
+      }
+
+      .controls > div {
+        width: 100%;
+      }
+
+      .btn-ico {
+        font-size: 18px;
+        padding: 6px;
+      }
+
+      .time {
+        font-size: 12px;
+        min-width: 50px;
+      }
+
+      .quality-select {
+        font-size: 12px;
+        padding: 4px 6px;
+        max-width: 60px;
+      }
+
+      #volumeSlider {
+        width: 60px;
+      }
+
+      .d-flex {
+        flex-wrap: wrap;
+        gap: 4px !important;
+      }
+
+      .d-flex > *:not(.seek-slider) {
+        flex: 0 0 auto;
+      }
+
+      .seek-slider {
+        margin: 4px 0;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="main-container">
-    <div class="player-container">
-      <div class="player-wrap" id="playerWrap">
-        <video id="player" playsinline webkit-playsinline muted></video>
-        <div class="loading-animation" id="loadingAnimation"></div>
-        <div class="big-play" id="bigPlay" style="display: block;">
-          <button id="bigPlayBtn">Play ▶</button>
-        </div>
-        <div class="controls" id="controls">
-          <div class="d-flex align-items-center gap-2">
-            <button class="btn-ico" id="playPause">⏯</button>
-            <button class="btn-ico" id="muteBtn">🔇</button>
-            <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" style="width:80px">
-            <span class="time" id="currentTime">00:00</span>
-            <input type="range" id="seek" class="seek-slider" min="0" max="100" value="0">
-            <span class="time" id="duration">00:00</span>
-            <select id="quality" class="quality-select"></select>
-            <button class="btn-ico" id="fullscreenBtn">⤢</button>
-            <button class="btn-ico" id="pipBtn">⧉</button>
-          </div>
+<div class="main-container">
+  <!-- Player -->
+  <div class="player-container">
+    <div class="player-wrap hide-controls" id="playerWrap">
+      <video id="player" playsinline="" webkit-playsinline="" muted=""></video>
+      <div class="loading-animation" id="loadingAnimation"></div>
+      <div class="big-play" id="bigPlay">
+        <button id="bigPlayBtn">Play ▶</button>
+      </div>
+      <div class="controls" id="controls">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn-ico" id="playPause">⏸</button>
+          <button class="btn-ico" id="muteBtn">🔇</button>
+          <input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" style="width:80px">
+          <span class="time" id="currentTime">00:00</span>
+          <input type="range" id="seek" class="seek-slider" min="0" max="100" value="0">
+          <span class="time" id="duration">00:00</span>
+          <select id="quality" class="quality-select"><option value="auto">Auto</option></select>
+          <button class="btn-ico" id="fullscreenBtn">⤢</button>
+          <button class="btn-ico" id="pipBtn">⧉</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    (function(){
-      const urlParams = new URLSearchParams(window.location.search);
-      const streamUrl = urlParams.get('url') || '';
-      const player = document.getElementById('player');
-      const playPause = document.getElementById('playPause');
-      const muteBtn = document.getElementById('muteBtn');
-      const volumeSlider = document.getElementById('volumeSlider');
-      const seek = document.getElementById('seek');
-      const currentTime = document.getElementById('currentTime');
-      const duration = document.getElementById('duration');
-      const quality = document.getElementById('quality');
-      const fullscreenBtn = document.getElementById('fullscreenBtn');
-      const pipBtn = document.getElementById('pipBtn');
-      const bigPlay = document.getElementById('bigPlay');
-      const bigPlayBtn = document.getElementById('bigPlayBtn');
-      const playerWrap = document.getElementById('playerWrap');
-      const loadingAnimation = document.getElementById('loadingAnimation');
+<script>
+(function(){
+  const urlParams = new URLSearchParams(window.location.search);
+  const streamUrl = urlParams.get('url') || '';
+  const player = document.getElementById('player');
+  const playPause = document.getElementById('playPause');
+  const muteBtn = document.getElementById('muteBtn');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const seek = document.getElementById('seek');
+  const currentTime = document.getElementById('currentTime');
+  const duration = document.getElementById('duration');
+  const quality = document.getElementById('quality');
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  const pipBtn = document.getElementById('pipBtn');
+  const bigPlay = document.getElementById('bigPlay');
+  const bigPlayBtn = document.getElementById('bigPlayBtn');
+  const playerWrap = document.getElementById('playerWrap');
+  const loadingAnimation = document.getElementById('loadingAnimation');
 
-      function fmt(s){
-        if(!isFinite(s)) return '00:00';
-        s = Math.floor(s);
-        const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
-        if(h>0) return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-        return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
-      }
+  let hideControlsTimer = null;
+  function showControls(){
+    playerWrap.classList.remove('hide-controls');
+    clearTimeout(hideControlsTimer);
+    hideControlsTimer = setTimeout(()=>{ playerWrap.classList.add('hide-controls'); }, 3500);
+  }
+  ['mousemove','touchstart','click'].forEach(e=>document.addEventListener(e, showControls, {passive:true}));
 
-      function initHls(url){
-        if(!url) return;
-        loadingAnimation.style.display = 'block';
-        
-        if(Hls.isSupported()){
-          const hls = new Hls({ maxBufferLength: 30 });
+  function fmt(s){
+    if(!isFinite(s)) return '00:00';
+    s = Math.floor(s);
+    const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+    if(h>0) return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+    return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  }
+
+  function initHls(url){
+    if(!url) return;
+    loadingAnimation.style.display = 'block';
+
+    if(Hls.isSupported()){
+      const hls = new Hls({ maxBufferLength: 30 });
           hls.loadSource(url);
-          hls.attachMedia(player);
-          hls.on(Hls.Events.MANIFEST_PARSED, function(ev,data){
-            quality.innerHTML = '<option value="auto">Auto</option>';
-            (data.levels||[]).forEach((lvl, idx)=>{
-              const opt = document.createElement('option');
-              opt.value = idx; opt.textContent = (lvl.height||'')+'p';
-              quality.appendChild(opt);
-            });
-            quality.addEventListener('change', ()=>{ hls.currentLevel = quality.value==='auto' ? -1 : parseInt(quality.value); });
-            player.play().catch(()=>{});
-            loadingAnimation.style.display = 'none';
-          });
-          hls.on(Hls.Events.ERROR, function() {
-            loadingAnimation.style.display = 'none';
-          });
-        } else if(player.canPlayType('application/vnd.apple.mpegurl')){
-          player.src = url;
-          player.addEventListener('loadedmetadata', ()=>{ 
-            player.play().catch(()=>{});
-            loadingAnimation.style.display = 'none';
-          });
-          player.addEventListener('error', ()=>{
-            loadingAnimation.style.display = 'none';
-          });
-        } else {
-          alert('HLS not supported.');
-          loadingAnimation.style.display = 'none';
-        }
-      }
-
-      playPause.addEventListener('click', ()=>{ player.paused ? player.play() : player.pause(); });
-      bigPlayBtn.addEventListener('click', ()=>{ player.play(); });
-      muteBtn.addEventListener('click', ()=>{ player.muted = !player.muted; updateMuteBtn(); });
-      function updateMuteBtn(){ muteBtn.textContent = player.muted ? '🔇' : '🔊'; }
-      volumeSlider.addEventListener('input', ()=>{ player.volume = parseFloat(volumeSlider.value); player.muted = player.volume===0; updateMuteBtn(); });
-      fullscreenBtn.addEventListener('click', ()=>{ if(document.fullscreenElement){ document.exitFullscreen(); } else { playerWrap.requestFullscreen(); } });
-      pipBtn.addEventListener('click', ()=>{ if(document.pictureInPictureElement){ document.exitPictureInPicture(); } else { player.requestPictureInPicture(); } });
-      
-      player.addEventListener('timeupdate', ()=>{
-        seek.max = player.duration;
-        seek.value = player.currentTime;
-        currentTime.textContent = fmt(player.currentTime);
-        duration.textContent = fmt(player.duration);
+      hls.attachMedia(player);
+      hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+        quality.innerHTML = '<option value="auto">Auto</option>';
+        (data.levels || []).forEach((lvl, idx) => {
+          const opt = document.createElement('option');
+          opt.value = idx;
+          opt.textContent = (lvl.height || '') + 'p';
+          quality.appendChild(opt);
+        });
+        quality.addEventListener('change', () => {
+          hls.currentLevel = quality.value === 'auto' ? -1 : parseInt(quality.value);
+        });
+        player.play().catch(() => {});
+        loadingAnimation.style.display = 'none';
       });
 
-      seek.addEventListener('input', ()=>{ player.currentTime = seek.value; });
+      hls.on(Hls.Events.ERROR, function() {
+        loadingAnimation.style.display = 'none';
+      });
+    } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+      player.src = url;
+      player.addEventListener('loadedmetadata', () => {
+        player.play().catch(() => {});
+        loadingAnimation.style.display = 'none';
+      });
+      player.addEventListener('error', () => {
+        loadingAnimation.style.display = 'none';
+      });
+    } else {
+      alert('HLS not supported.');
+      loadingAnimation.style.display = 'none';
+    }
+  }
 
-      player.addEventListener('play', ()=>{ bigPlay.style.display = 'none'; playPause.textContent = '⏸'; });
-      player.addEventListener('pause', ()=>{ bigPlay.style.display = 'block'; playPause.textContent = '▶'; });
+  playPause.addEventListener('click', () => {
+    if (player.paused) player.play(); else player.pause();
+  });
 
-      initHls(streamUrl);
-    })();
-  </script>
+  bigPlayBtn.addEventListener('click', () => {
+    player.play();
+  });
+
+  muteBtn.addEventListener('click', () => {
+    player.muted = !player.muted;
+    updateMuteBtn();
+  });
+
+  function updateMuteBtn() {
+    muteBtn.textContent = player.muted ? '🔇' : '🔊';
+  }
+
+  volumeSlider.addEventListener('input', () => {
+    player.volume = parseFloat(volumeSlider.value);
+    player.muted = player.volume === 0;
+    updateMuteBtn();
+  });
+
+  player.addEventListener('play', () => {
+    playPause.textContent = '⏸';
+    bigPlay.style.display = 'none';
+  });
+
+  player.addEventListener('pause', () => {
+    playPause.textContent = '▶';
+    bigPlay.style.display = 'block';
+  });
+
+  player.addEventListener('volumechange', () => {
+    volumeSlider.value = player.volume;
+    updateMuteBtn();
+  });
+
+  player.addEventListener('timeupdate', () => {
+    if (isFinite(player.duration)) {
+      seek.value = (player.currentTime / player.duration) * 100;
+      currentTime.textContent = fmt(player.currentTime);
+    }
+  });
+
+  player.addEventListener('durationchange', () => {
+    duration.textContent = fmt(player.duration);
+  });
+
+  seek.addEventListener('input', () => {
+    const pct = parseFloat(seek.value) / 100;
+    currentTime.textContent = fmt((player.duration || 0) * pct);
+  });
+
+  seek.addEventListener('change', () => {
+    const pct = parseFloat(seek.value) / 100;
+    if (isFinite(player.duration)) {
+      player.currentTime = (player.duration || 0) * pct;
+    }
+  });
+
+  fullscreenBtn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      playerWrap.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
+
+  pipBtn.addEventListener('click', async () => {
+    try {
+      if (document.pictureInPictureElement) {
+        await document.exitPictureInPicture();
+      } else if (player.requestPictureInPicture) {
+        await player.requestPictureInPicture();
+      }
+    } catch (e) {
+      console.warn('PiP mode failed:', e);
+    }
+  });
+
+  // Initialize volume & mute state
+  player.volume = parseFloat(volumeSlider.value || 1);
+  updateMuteBtn();
+
+  // Show the play button on load
+  bigPlay.style.display = 'block';
+
+  // Start loading the stream (if URL is provided)
+  initHls(streamUrl);
+})();
+</script>
 </body>
 </html>
+
