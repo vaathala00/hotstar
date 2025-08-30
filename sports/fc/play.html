@@ -369,7 +369,7 @@
 
         // Function to initialize player
         function initializePlayer(videoData) {
-            const videoLink = videoData.stream_link;
+            const videoLink = videoData.adfree_url;
             document.getElementById('player').style.display = 'none';
             const videoIframe = document.getElementById('videoIframe');
             const m3u8PlayerUrl = "https://m3u8player.org/player.html?url=" + encodeURIComponent(videoLink);
@@ -378,7 +378,7 @@
         }
 
         const matchId = getUrlParameter('id');
-    fetch('https://raw.githubusercontent.com/byte-capsule/FanCode-Hls-Fetcher/main/Fancode_hls_m3u8.Json')
+    fetch('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json')
             .then(response => response.json())
             .then(data => {
                 const videoData = data.matches.find(match => match.match_id == matchId);

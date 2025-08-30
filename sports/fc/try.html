@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>Fancode Live Matches</title>
+    <link rel="shortcut icon" href="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9?w=40&q=high">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0 12px;
+            background-color: #1F0C50;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #0D012F;
+            color: white;
+            padding: 20px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 65px;
+            margin-right: 10px;
+        }
+
+        #kaya_head {
+            font-weight: bold;
+            color: #FFFFFF;
+            font-size: 25px;
+            text-transform: uppercase;
+            font-family: 'Tilt Warp', sans-serif;
+        }
+
+        #title {
+            font-family: 'Fjalla One', serif;
+            font-weight: bold;
+            font-size: 28px;
+            color: #e61271;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 20px 0;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .box1 {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card h2 {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .card p {
+            font-size: 12px;
+        }
+
+        #listContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .search-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        input[type="search"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9" alt="Logo" class="logo-img">
+            <h1 id="title">FC Live Matches</h1>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <input type="search" id="searchInput" placeholder="Search Matches">
+    </div>
+
+    <div id="kaya_head">
+        <span class="kayaheadicon" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-left-long"></i>
+        </span> 
+        &nbsp;&nbsp; Live Matches
+    </div>
+
+    <main>
+        <div id="listContainer"></div>
+    </main>
+
+    <script>
+        // Fetch JSON data and generate HTML
+        async function generateHtmlFromJson(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const jsonData = await response.json();
+                const listContainer = document.getElementById('listContainer');
+                
+                jsonData.matches.forEach(item => {
+                    if (!item.match_id || !item.src || !item.match_name || !item.event_category) {
+                        console.warn('Missing data in item:', item);
+                        return;
+                    }
+
+                    const anchor = document.createElement('a');
+                    anchor.href = `play.html?id=${item.match_id}`; // Dynamic link for match
+
+                    const cardDiv = document.createElement('div');
+                    cardDiv.classList.add('box1');
+
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    const image = document.createElement('img');
+                    image.src = item.src;
+                    image.alt = item.match_name || 'Match image';
+
+                    const title = document.createElement('h2');
+                    title.textContent = item.match_name;
+
+                    const description = document.createElement('p');
+                    description.textContent = item.event_category;
+
+                    card.appendChild(image);
+                    card.appendChild(title);
+                    card.appendChild(description);
+                    cardDiv.appendChild(anchor);
+                    anchor.appendChild(card);
+                    listContainer.appendChild(cardDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching or parsing JSON:', error);
+            }
+        }
+
+        // Call function with your JSON URL
+        generateHtmlFromJson('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json');
+
+        // Filter function for search
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const boxes = document.querySelectorAll('.box1');
+            boxes.forEach(box => {
+                const matchName = box.querySelector('h2').textContent.toLowerCase();
+                const eventCategory = box.querySelector('p').textContent.toLowerCase();
+                if (matchName.includes(searchValue) || eventCategory.includes(searchValue)) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
