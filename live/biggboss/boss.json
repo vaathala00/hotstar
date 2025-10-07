@@ -3,7 +3,7 @@
     {
         "id": "Malayalam",
         "name": "BB MALAYALAM",
-        "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/3156/1710076893156-i",
+        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/134/1756206160134-i",
         "group": "Malayalam 24/7🔴",
         "link": "https://ok.ru/videoembed/9960537071191",
         "license_key": "",
@@ -14,7 +14,7 @@
     {
         "id": "HINDI",
         "name": "BB HINDI",
-        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/2483/1755626082483-i",
+        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/9626/1759256589626-i",
         "group": "Hindi 24/7🔴",
         "link": "https://m3u.denver1769.fun/Jh/index.m3u8",
         "license_key": "",
@@ -24,8 +24,30 @@
 
     {
         "id": "TAMIL",
-        "name": "BB TAMIL Soon...",
-        "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/7742/1737309667742-i",
+        "name": "BB TAMIL ",
+        "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/1779/1759685331779-i",
+        "group": "Tamil 24/7🔴 Soon...",
+        "link": "https://c.mockorange.st/stream/kyXM81WCj0lqIu5y0Ap3pZchZ2tjJ1rfL5d4bH7L_LCuRsP1J1ClsrePSSiN3hijyxiv3iQwyKEExfo-j2xogw/W7ZGP_jFGtfQbns4hweNJjSoTcZxP1Aked8U5XcRmY1_y8SPSczZ73RaO2HEIAsEBw0vQbzJ3Bi_G9lsMvWGMw/elenchus.m3u8",
+        "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
+        "k": "",
+        "kid": ""
+    },
+
+    {
+        "id": "TELUGU",
+        "name": "BB TELUGU ",
+        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/7084/1758879647084-i",
+        "group": "Tamil 24/7🔴 Soon...",
+        "link": "https://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8",
+        "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
+        "k": "",
+        "kid": ""
+    },
+
+    {
+        "id": "	KANNADA",
+        "name": "BB KANNADA ",
+        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/585/1759710300585-i",
         "group": "Tamil 24/7🔴 Soon...",
         "link": "https://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8",
         "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
