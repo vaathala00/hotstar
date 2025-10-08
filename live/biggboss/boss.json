@@ -1,5 +1,5 @@
 
-
+[
     {
         "id": "Malayalam",
         "name": "BB MALAYALAM",
@@ -24,7 +24,7 @@
 
     {
         "id": "TAMIL",
-        "name": "BB TAMIL ",
+        "name": "BB TAMIL",
         "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/1779/1759685331779-i",
         "group": "Tamil 24/7🔴",
         "link": "https://c.mockorange.st/stream/kyXM81WCj0lqIu5y0Ap3pZchZ2tjJ1rfL5d4bH7L_LCuRsP1J1ClsrePSSiN3hijyxiv3iQwyKEExfo-j2xogw/W7ZGP_jFGtfQbns4hweNJjSoTcZxP1Aked8U5XcRmY1_y8SPSczZ73RaO2HEIAsEBw0vQbzJ3Bi_G9lsMvWGMw/elenchus.m3u8",
@@ -35,7 +35,7 @@
 
     {
         "id": "TELUGU",
-        "name": "BB TELUGU ",
+        "name": "BB TELUGU",
         "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/7084/1758879647084-i",
         "group": "Telugu 24/7🔴",
         "link": "https://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8",
@@ -55,5 +55,5 @@
         "k": "",
         "kid": ""
     }
-
+]
    
