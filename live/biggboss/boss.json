@@ -1,59 +1,18 @@
 
 [
-    {
-        "id": "Malayalam",
-        "name": "BB MALAYALAM",
-        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/134/1756206160134-i",
-        "group": "Malayalam 24/7🔴",
-        "link": "https://ok.ru/videoembed/9487481839325",
-        "license_key": "",
-        "k": "",
-        "kid": ""
-    },
-
-    {
-        "id": "HINDI",
-        "name": "BB HINDI",
-        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/9626/1759256589626-i",
-        "group": "Hindi 24/7🔴",
-        "link": "https://ok.ru/videoembed/",
-        "license_key": "",
-        "k": "",
-        "kid": ""
-    },
+ 
 
     {
         "id": "TAMIL",
         "name": "BB TAMIL",
         "logo": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/1779/1759685331779-i",
         "group": "Tamil 24/7🔴",
-        "link": "https://c.mockorange.st/stream/kyXM81WCj0lqIu5y0Ap3pZchZ2tjJ1rfL5d4bH7L_LCuRsP1J1ClsrePSSiN3hijyxiv3iQwyKEExfo-j2xogw/W7ZGP_jFGtfQbns4hweNJjSoTcZxP1Aked8U5XcRmY1_y8SPSczZ73RaO2HEIAsEBw0vQbzJ3Bi_G9lsMvWGMw/elenchus.m3u8",
-        "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
-        "k": "",
-        "kid": ""
-    },
-
-    {
-        "id": "TELUGU",
-        "name": "BB TELUGU",
-        "logo": "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/7084/1758879647084-i",
-        "group": "Telugu 24/7🔴",
-        "link": "https://ok.ru/videoembed/",
-        "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
-        "k": "",
-        "kid": ""
-    },
-
-    {
-        "id": "KANNADA",
-        "name": "BB KANNADA",
-        "logo":
-"https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/585/1759710300585-i",
-        "group": "kannada 24/7🔴 ",
-        "link": "https://ok.ru/videoembed/",
+        "link": "https://player.twitch.tv/?channel=rasigan247&parent=vaathala00.github.io",
         "license_key": "https://live.tamiltool.online/livestream-source.m3u8",
         "k": "",
         "kid": ""
     }
+
+ 
 ]
    
