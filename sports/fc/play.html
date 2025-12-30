@@ -372,7 +372,7 @@
             const videoLink = videoData.adfree_url;
             document.getElementById('player').style.display = 'none';
             const videoIframe = document.getElementById('videoIframe');
-            const m3u8PlayerUrl = "https://m3u8player.org/player.html?url=" + encodeURIComponent(videoLink);
+            const m3u8PlayerUrl = "https://player.dtvworld.site/jwplayer?dtv=" + encodeURIComponent(videoLink);
             videoIframe.src = m3u8PlayerUrl;
             videoIframe.style.display = 'block';
         }
