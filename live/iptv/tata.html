@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TataTv web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' https: data: blob:;
+               script-src 'self' https://cdn.jwplayer.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+               img-src 'self' https: data:;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com;
+               font-src 'self' https://fonts.gstatic.com;">
+
+    
+    <style>
+        :root {
+            --primary: #8a2be2;
+            --primary-dark: #6a1cb8;
+            --primary-light: #9d4edd;
+            --secondary: #00d4ff;
+            --dark: #0a0a0a;
+            --dark-light: #111111;
+            --dark-lighter: #1a1a1a;
+            --light: #ffffff;
+            --light-gray: #f0f0f0;
+            --gray: #a1a1a1;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 25px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--light);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .select-container {
+            position: relative;
+        }
+
+        .category-select {
+            padding: 10px 15px;
+            border-radius: 30px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: rgba(26, 26, 26, 0.8);
+            color: var(--light);
+            font-size: 0.9rem;
+            appearance: none;
+            padding-right: 40px;
+            min-width: 180px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .main-container {
+            display: flex;
+            height: calc(100vh - 75px);
+            overflow: hidden;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .player-section {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            min-width: 0;
+        }
+
+        .player-container {
+            width: 100%;
+            position: relative;
+            flex: 1;
+        }
+
+        .player-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #000;
+        }
+
+        #my-jwplayer {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .now-playing {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 15px 20px;
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .now-playing h3 {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .now-playing h3 i {
+            color: var(--secondary);
+        }
+
+        .channel-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 5px;
+        }
+
+        .channel-category {
+            display: inline-block;
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .channels-section {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            min-width: 0;
+        }
+
+        .section-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title h2 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title h2 i {
+            color: var(--secondary);
+        }
+
+        .channels-count {
+            background: var(--primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .channels-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .channels-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .channels-container::-webkit-scrollbar-track {
+            background: rgba(26, 26, 26, 0.3);
+        }
+
+        .channels-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .channel-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(37, 37, 37, 0.9));
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .channel-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(138, 43, 226, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .channel-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.3);
+        }
+
+        .channel-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .channel-logo {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .channel-logo img {
+            max-width: 100%;
+            max-height: 80px;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+
+        .channel-info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .channel-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--light);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .channel-cat {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(138, 43, 226, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .channel-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            background: white;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .channel-card:hover .play-btn {
+            transform: scale(1);
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .player-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(15, 15, 15, 0.9));
+            color: var(--gray);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .player-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .player-placeholder h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        @media (max-width: 1200px) {
+            .channels-section {
+                width: 450px;
+            }
+            
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+                height: auto;
+                min-height: calc(100vh - 75px);
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .player-section {
+                position: sticky;
+                top: 75px;
+                z-index: 5;
+                width: 100%;
+                height: 45vh;
+                min-height: 300px;
+                flex-shrink: 0;
+                border-radius: var(--radius);
+            }
+            
+            .channels-section {
+                width: 100%;
+                height: 50vh;
+                flex-grow: 1;
+            }
+            
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            
+            .search-container {
+                max-width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-header {
+                flex-wrap: wrap;
+                padding: 12px 15px;
+            }
+            
+            .logo-container {
+                order: 1;
+                width: 100%;
+                margin-bottom: 10px;
+                justify-content: center;
+            }
+            
+            .search-container {
+                order: 3;
+                max-width: 100%;
+                margin: 10px 0;
+            }
+            
+            .user-controls {
+                order: 2;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.2rem;
+            }
+            
+            .player-section {
+                height: 40vh;
+                min-height: 250px;
+            }
+            
+            .channels-section {
+                height: 50vh;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            .player-section {
+                height: 35vh;
+                min-height: 220px;
+            }
+            
+            .channels-section {
+                height: 55vh;
+            }
+            
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+            
+            .channel-logo {
+                height: 100px;
+                padding: 15px;
+            }
+            
+            .channel-info {
+                padding: 12px;
+            }
+            
+            .channel-title {
+                font-size: 0.9rem;
+            }
+            
+            .category-select {
+                min-width: 140px;
+                font-size: 0.85rem;
+                padding: 8px 12px;
+            }
+            
+            .search-box {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .channels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+            
+            .channel-logo {
+                height: 90px;
+            }
+            
+            .section-header {
+                padding: 15px;
+            }
+            
+            .channels-container {
+                padding: 15px;
+            }
+            
+            .player-section {
+                min-height: 200px;
+            }
+            
+            .now-playing {
+                padding: 12px 15px;
+            }
+            
+            .channel-name {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <div class="logo-icon">
+                <i class="fas fa-satellite-dish"></i>
+            </div>
+            <div class="logo-text">TATA TV WEB</div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search channels...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div class="user-controls">
+            <div class="select-container">
+                <select class="category-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <section class="player-section">
+            <div class="player-container">
+                <div class="player-wrap">
+                    <div class="player-placeholder" id="playerPlaceholder">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Select a Channel to Start Streaming</h3>
+                        <p>Click on any channel card to instantly start watching</p>
+                    </div>
+                    
+                    <div id="my-jwplayer" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="now-playing" id="nowPlaying" style="display: none;">
+                <h3><i class="fas fa-broadcast-tower"></i> NOW PLAYING</h3>
+                <div class="channel-name" id="currentChannelName">Channel Name</div>
+                <div class="channel-category" id="currentChannelCategory">Category</div>
+            </div>
+        </section>
+        
+        <section class="channels-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2><i class="fas fa-tv"></i> Live Channels</h2>
+                    <div class="channels-count" id="channelsCount">0 Channels</div>
+                </div>
+            </div>
+            
+            <div class="channels-container">
+                <div class="channels-grid" id="channelGrid">
+                    <div class="loading-container">
+                        <div class="spinner"></div>
+                        <div>Loading channels...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =========================
+       ELEMENT REFERENCES
+    ========================= */
+    const channelGrid = document.getElementById("channelGrid");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const searchBox = document.getElementById("searchBox");
+
+    const playerPlaceholder = document.getElementById("playerPlaceholder");
+    const playerContainer = document.getElementById("my-jwplayer");
+    const nowPlaying = document.getElementById("nowPlaying");
+
+    const currentChannelName = document.getElementById("currentChannelName");
+    const currentChannelCategory = document.getElementById("currentChannelCategory");
+    const channelsCount = document.getElementById("channelsCount");
+
+    /* =========================
+       STATE VARIABLES
+    ========================= */
+    let allChannels = [];
+    let activeChannel = null;
+    let jw = null;
+
+    /* =========================
+       FETCH CHANNEL DATA
+    ========================= */
+    fetch("https://allinonereborn.xyz/tatatv-web/xchannels.json")
+        .then(res => res.json())
+        .then(data => {
+            buildChannelList(data);
+        })
+        .catch(err => {
+            channelGrid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Error loading channels</h3>
+                    <p>Please try again later</p>
+                </div>
+            `;
+            console.error(err);
+        });
+
+    /* =========================
+       BUILD CHANNEL LIST
+    ========================= */
+    function buildChannelList(data) {
+        allChannels = [];
+        categoryFilter.innerHTML = `<option value="">All Categories</option>`;
+
+        const categories = new Set();
+
+        Object.keys(data).forEach(category => {
+            categories.add(category);
+            data[category].forEach(channel => {
+                channel.category = category;
+                allChannels.push(channel);
+            });
+        });
+
+        categories.forEach(cat => {
+            const opt = document.createElement("option");
+            opt.value = cat;
+            opt.textContent = cat;
+            categoryFilter.appendChild(opt);
+        });
+
+        renderChannels(allChannels);
+    }
+
+    /* =========================
+       RENDER CHANNELS
+    ========================= */
+    function renderChannels(list) {
+        channelGrid.innerHTML = "";
+
+        if (list.length === 0) {
+            channelGrid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-tv"></i>
+                    <h3>No channels found</h3>
+                    <p>Try changing search or category</p>
+                </div>
+            `;
+            updateCount(0);
+            return;
+        }
+
+        list.forEach(channel => {
+            channelGrid.appendChild(createChannelCard(channel));
+        });
+
+        updateCount(list.length);
+    }
+
+    /* =========================
+       CREATE CHANNEL CARD
+    ========================= */
+    function createChannelCard(channel) {
+        const card = document.createElement("div");
+        card.className = "channel-card";
+        card.dataset.name = channel.name;
+
+        if (activeChannel && activeChannel.name === channel.name) {
+            card.classList.add("active");
+        }
+
+        card.innerHTML = `
+            <div class="channel-logo">
+                <img src="${channel.logo || ''}" 
+                     alt="${channel.name}"
+                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100\\' height=\\'50\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23111111\\'/><text x=\\'50%\\' y=\\'50%\\' fill=\\'%23888\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\'>TV</text></svg>'">
+            </div>
+
+            <div class="channel-info">
+                <div class="channel-title">${channel.name}</div>
+                <div class="channel-cat">${channel.category}</div>
+            </div>
+
+            <div class="play-overlay">
+                <div class="play-btn">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        `;
+
+        card.addEventListener("click", () => playChannel(channel));
+        return card;
+    }
+
+    /* =========================
+       PLAY CHANNEL
+    ========================= */
+    function playChannel(channel) {
+        activeChannel = channel;
+
+        playerPlaceholder.style.display = "none";
+        playerContainer.style.display = "block";
+        nowPlaying.style.display = "block";
+
+        currentChannelName.textContent = channel.name;
+        currentChannelCategory.textContent = channel.category;
+
+        document.querySelectorAll(".channel-card").forEach(c => {
+            c.classList.toggle("active", c.dataset.name === channel.name);
+        });
+
+        if (jw) {
+            jw.load([{ file: channel.url, type: "hls" }]);
+            jw.play();
+        } else {
+            jw = jwplayer("my-jwplayer").setup({
+                file: channel.url,
+                type: "hls",
+                width: "100%",
+                aspectratio: "16:9",
+                autostart: true,
+                controls: true,
+                mute: false,
+                preload: "auto",
+                stretching: "uniform",
+                skin: { name: "seven" }
+            });
+
+            jw.on("error", () => {
+                playerPlaceholder.style.display = "flex";
+                playerContainer.style.display = "none";
+                nowPlaying.style.display = "none";
+            });
+        }
+    }
+
+    /* =========================
+       FILTER & SEARCH
+    ========================= */
+    function applyFilters() {
+        const category = categoryFilter.value;
+        const query = searchBox.value.toLowerCase();
+
+        const filtered = allChannels.filter(ch =>
+            (category === "" || ch.category === category) &&
+            (query === "" || ch.name.toLowerCase().includes(query))
+        );
+
+        renderChannels(filtered);
+    }
+
+    categoryFilter.addEventListener("change", applyFilters);
+    searchBox.addEventListener("input", applyFilters);
+
+    /* =========================
+       CHANNEL COUNT
+    ========================= */
+    function updateCount(count) {
+        channelsCount.textContent = `${count} Channel${count !== 1 ? "s" : ""}`;
+    }
+
+    /* =========================
+       KEYBOARD CONTROLS
+    ========================= */
+    document.addEventListener("keydown", e => {
+        if (!jw) return;
+
+        if (e.code === "Space") {
+            e.preventDefault();
+            jw.getState() === "playing" ? jw.pause() : jw.play();
+        }
+
+        if (e.code === "Escape") {
+            searchBox.value = "";
+            applyFilters();
+            searchBox.blur();
+        }
+    });
+
+});
+
+    </script>
+</body>
+</html>

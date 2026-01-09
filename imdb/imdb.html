@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMDb EXTINF Generator - Multiple Links</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1e1e2f;
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    background: #2b2b3f;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffd700;
+  }
+
+  textarea, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  textarea {
+    background: #1e1e2f;
+    color: #fff;
+    border: 1px solid #444;
+    resize: none;
+    min-height: 200px;
+    font-family: monospace;
+    font-size: 0.95rem;
+  }
+
+  button {
+    background: #ffd700;
+    color: #1e1e2f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  button:hover {
+    background: #e6c200;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .buttons button {
+    flex: 1;
+  }
+
+  .footer {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>IMDb EXTINF Generator</h1>
+  <textarea id="url" placeholder="Paste IMDb links (one per line)"></textarea>
+  <div class="buttons">
+    <button onclick="generate()">Generate EXTINF</button>
+    <button onclick="copyOutput()">Copy Output</button>
+  </div>
+  <textarea id="out" placeholder="EXTINF output will appear here..."></textarea>
+  <div class="footer">Made with ❤️ for Tamil Movie Lovers</div>
+</div>
+
+<script>
+async function generate() {
+  const input = document.getElementById("url").value.trim();
+  if (!input) return alert("Please enter at least one IMDb link");
+
+  const urls = input.split("\n").map(u => u.trim()).filter(u => u);
+  const results = [];
+
+  for (const url of urls) {
+    const imdbID = url.match(/tt\d+/)?.[0];
+    if (!imdbID) {
+      results.push(`# Could not parse IMDb ID from: ${url}`);
+      continue;
+    }
+
+    const workerURL = `https://imdb.vodep39240327.workers.dev?id=${imdbID}`;
+    try {
+      const res = await fetch(workerURL);
+      if (!res.ok) throw new Error("Failed to fetch data");
+      const d = await res.json();
+      if (!d.poster) d.poster = "";
+
+      const extinf = `#EXTINF:-1 type="movie" group-logo="" tvg-logo="${d.poster}" group-title="VT 🎬 | Tamil Movies",
+${d.title} (𝗜𝗠𝗗𝗕 ${d.rating} ${d.year} ‧ ${d.genres} ‧ ${d.runtime} Director ${d.director} | Writers ${d.writers} | Stars ${d.stars})`;
+      
+      results.push(extinf);
+    } catch (err) {
+      results.push(`# Error fetching data for: ${url} → ${err.message}`);
+    }
+  }
+
+  document.getElementById("out").value = results.join("\n\n");
+}
+
+function copyOutput() {
+  const output = document.getElementById("out");
+  if (!output.value) return alert("Nothing to copy!");
+  output.select();
+  output.setSelectionRange(0, 99999); // For mobile devices
+  navigator.clipboard.writeText(output.value)
+    .then(() => alert("Copied to clipboard!"))
+    .catch(() => alert("Failed to copy."));
+}
+</script>
+
+</body>
+</html>
