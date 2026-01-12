@@ -4,894 +4,287 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sports</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amita">
   <link rel="shortcut icon" href="https://t4.ftcdn.net/jpg/03/02/12/83/360_F_302128359_q6aCwgAvdYZBPF4XSwxXddLPE0h3Kor1.jpg">
-  <link rel="stylesheet" href="./style.css">
-  <script src="https://www.w3schools.com/lib/w3.js"></script>
-
   <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-}
+    /* ===== Global ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background-color: #fff; color: #000; overflow-x: hidden; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s; }
+    body.dark { background-color: #18191A; color: #fff; }
+
+    /* ===== Navigation ===== */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; height: 55px;
+      background-color: #2770ff; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; z-index: 100; box-shadow: 0 3px 6px rgba(0,0,0,.3);
+    }
+    nav .logo a { color: #fff; font-size: 25px; text-decoration: none; font-weight: bold; letter-spacing: 1px; }
 
 
-:root {
-  --body-color: #ffffff;
-  --nav-color: #2770ff;
-  --side-nav: #010718;
-  --text-color: #FFF;
-  --search-bar: #F2F2F2;
-  --search-text: #010718;
-   --font-color: #000;
-   --more-color: #EBFF0049;
-}
-body::-webkit-scrollbar {
-  display: none;
-}
-body {
-  height: 100vh;
-  background-color: var(--body-color);
-    font-family: Amita, cursive;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-}
-
-body.dark {
-  --body-color: #18191A;
-  --nav-color: #242526;
-  --side-nav: #242526;
-  --text-color: #CCC;
-  --search-bar: #242526;
-  --font-color: #fff;
-}
-body.dark nav {
-  border: 1px solid #393838;
-}
-body.dark .search-field input {
-  color: var(--text-color);
-}
-body.dark .search-field i {
-  color: var(--text-color);
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 55px;
-  width: 100%;
-  background-color: var(--nav-color);
-  z-index: 100;
-  box-shadow: 0 6px 6px 0 rgb(0,0,0,.4);
-}
-nav .nav-bar {
-  position: relative;
-  height: 100%;
-  max-width: 1000px;
-  width: 100%;
-  background-color: var(--nav-color);
-  margin: 0 auto;
-  padding: 0 30px;
+/* Right side icons */
+.nav-actions{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-nav .nav-bar .sidebarOpen {
-  color: var(--text-color);
-  font-size: 25px;
-  padding: 5px;
-  cursor: pointer;
-  display: none;
-}
-nav .nav-bar .logo a {
-  font-size: 25px;
-  font-weight: 500;
-  color: var(--text-color);
-  text-decoration: none;
+  gap: 15px; /* space between icons */
 }
 
-.menu .logo-toggle {
-  display: none;
+    /* ===== Dark/Light Toggle ===== */
+    .dark-light { cursor: pointer; font-size: 22px; color: #fff;
 }
 
-.nav-bar .nav-links {
-  display: flex;
-  align-items: center;
-}
-.nav-bar .nav-links li {
-  margin: 0 5px;
-  list-style: none;
-}
-.nav-bar .darkLight-searchBox {
-  display: flex;
-  align-items: center;
-}
+    /* ===== Search Icon & Search Bar ===== */
+    .search-container {
+      position: relative; display: flex; align-items: center;
+    }
+    .search-container input {
+      width: 0;
+      opacity: 0;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: none;
+      font-size: 14px;
+      outline: none;
+      transition:.4s;
+    }
+    .search-container.active input {
+      width: 200px; /* expanded width */
+      opacity: 1;
+    }
+    .search-container .search-icon {
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+          }
 
-.nav-links li a {
-  position: relative;
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--text-color);
-  text-decoration: none;
-  font-family: Amita, cursive;
-  padding: 10px;
-}
-.nav-links li a::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  height: 6px;
-  width: 6px;
-  border-radius: 50%;
-  background-color: var(--text-color);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-.nav-links li:hover a::before {
-  opacity: 1;
-}
+    /* ===== Scroll to top ===== */
+    .up {
+      position: fixed; bottom: 40px; right: 40px; font-size: 15px;
+      background-color: #2770ff; color: white; padding: 10px 15px; border-radius: 5px;
+      cursor: pointer; display: none; z-index: 999;
+    }
 
-.darkLight-searchBox .dark-light {
-  height: 40px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-}
-.darkLight-searchBox .searchToggle {
-  height: 40px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-}
+    /* ===== Animated Section Titles ===== */
+    .section-title {
+      padding: 15px 20px 10px; font-size: 22px; font-weight: bold;
+      color: #0099cc; display: inline-block; position: relative; overflow: hidden; cursor: default;
+      margin-top: 20px;
+    }
+    .section-title::after {
+      content: '⮞'; display: inline-block; margin-left: 10px; position: relative;
+      animation: arrowMove 1s infinite alternate;
+    }
+    @keyframes arrowMove { 0% { transform: translateX(0); } 50% { transform: translateX(5px); } 100% { transform: translateX(0); } }
+    .section-title span { position: relative; display: inline-block; overflow: hidden; }
+    .section-title span::before {
+      content: ''; position: absolute; bottom: 0; left: -100%; width: 100%; height: 3px;
+      background-color: #2770ff; animation: underline 2s infinite;
+    }
+    @keyframes underline { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
 
-.dark-light i {
-  position: absolute;
-  color: var(--text-color);
-  font-size: 22px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.dark-light i.sun {
-  opacity: 0;
-  pointer-events: none;
-}
+    /* ===== Scrollable section ===== */
+    .scroll-section { overflow-x: auto; white-space: nowrap; padding: 15px 10px; scroll-behavior: smooth; }
+    .scroll-section::-webkit-scrollbar { display: none; }
 
-.searchToggle i {
-  position: absolute;
-  color: var(--text-color);
-  font-size: 22px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.searchToggle i.cancel {
-  opacity: 0;
-  pointer-events: none;
-}
+    /* ===== Cards ===== */
+    .scroll-section a { display: inline-block; text-decoration: none; color: inherit; margin: 0 10px; }
+    .card {
+      width: 200px; height: 220px; border-radius: 15px; overflow: hidden;
+      background-color: #333; color: #fff; text-align: center;
+      box-shadow: 2px 2px 15px rgba(0,0,0,0.3); transition: transform 0.3s, filter 0.3s, box-shadow 0.3s;
+      position: relative; display: flex; flex-direction: column; cursor: pointer;
+    }
+    .card img { width: 100%; height: 70%; object-fit: cover; transition: transform 0.5s; }
+    .card span {
+      font-size: 14px; font-weight: bold; margin-top: 5px; flex-grow: 1;
+      display: flex; align-items: center; justify-content: center; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .card .live-tag {
+      position: absolute; top: 8px; left: 8px; background-color: red; padding: 2px 6px;
+      font-size: 12px; border-radius: 5px; animation: pulse 1.5s infinite;
+    }
+    .card .channel {
+      position: absolute; top: 8px; right: 8px; background-color: #673AB7; padding: 2px 6px;
+      font-size: 12px; border-radius: 5px;
+    }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
-.dark-light.active i.sun {
-  opacity: 1;
-  pointer-events: auto;
-}
-.dark-light.active i.moon {
-  opacity: 0;
-  pointer-events: none;
-}
+    /* ===== Card Hover Effects ===== */
+    .card:hover {
+      transform: scale(1.08);
+      filter: brightness(1.2);
+      box-shadow: 0 0 25px rgba(39,112,255,0.7), 0 0 50px rgba(255,255,255,0.2);
+    }
+    .card:hover img { transform: scale(1.1); }
 
-.searchToggle.active i.cancel {
-  opacity: 1;
-  pointer-events: auto;
-}
-.searchToggle.active i.search {
-  opacity: 0;
-  pointer-events: none;
-}
-.searchToggle.active ~ .search-field {
-  bottom: -74px;
-  opacity: 1;
-  pointer-events: auto;
-}
+    /* ===== Live Cricket Custom Card ===== */
+    .live-card {
+      width: 240px; height: 220px; border-radius: 25px; transition: transform 0.4s, box-shadow 0.4s, filter 0.4s, background-color 0.4s;
+      overflow: hidden; position: relative; display: flex; flex-direction: column; cursor: pointer;
+      background-color: #333;
+    }
+    body.dark .live-card { background-color: #282828; }
+    .live-card img { height: 65%; border-radius: 20px 20px 0 0; }
 
-.searchBox {
-  position: relative;
-}
-.searchBox .search-field {
-  position: absolute;
-  bottom: -60px;
-  right: 5px;
-  height: 50px;
-  width: 300px;
-  display: flex;
-  align-items: center;
-  background-color: var(--nav-color);
-  padding: 3px;
-  border-radius: 6px;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
+    /* ===== Hover Glow for All Cards ===== */
+    .card::before, .live-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s, box-shadow 0.3s;
+    }
+    .card:hover::before, .live-card:hover::before {
+      opacity: 1;
+      box-shadow: 0 0 25px 10px rgba(39,112,255,0.5);
+      animation: glowPulse 1.5s infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
+      50% { box-shadow: 0 0 35px 15px rgba(39,112,255,0.5); }
+      100% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
+    }
 
-.search-field::before {
-  content: "";
-  position: absolute;
-  right: 14px;
-  top: -4px;
-  height: 12px;
-  width: 12px;
-  background-color: var(--nav-color);
-  transform: rotate(-45deg);
-  z-index: -1;
-}
-.search-field input {
-  height: 100%;
-  width: 100%;
-  padding: 0 45px 0 15px;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-family: Amita, cursive;
-  font-weight: 400;
-  color: var(--search-text);
-  background-color: var(--search-bar);
-}
-.search-field i {
-  position: absolute;
-  color: var(--nav-color);
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
-}
+    /* ===== Iframe ===== */
+    iframe { width: 100%; min-height: 220px; border: none; margin-top: 60px; border-radius: 10px; }
 
-@media (max-width: 790px) {
-  nav .nav-bar .sidebarOpen {
-    display: block;
-  }
-
-  .menu {
-    position: fixed;
-    font-family: Amita, cursive;
-    height: 100%;
-    width: 320px;
-    left: -100%;
-    top: 0;
-    padding: 20px;
-    background-color: var(--nav-color);
-    z-index: 100;
-    transition: all 0.4s ease;
-    box-shadow: 12px 0 12px -6px rgba(0, 0, 0, 0.2);
-  }
-  .menu .logo-toggle {
-    display: block;
-    width: 100%;
-    font-family: Amita, cursive;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  nav.active .menu {
-    left: 0%;
-  }
-  nav.active .nav-bar .navLogo a {
-    opacity: 0;
-    font-family: Amita, cursive;
-    transition: all 0.3s ease;
-  }
-
-  .logo-toggle .siderbarClose {
-  	font-family: Amita, cursive;
-    color: var(--text-color);
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  .nav-bar .nav-links {
-    flex-direction: column;
-    padding-top: 30px;
-  }
-
-  .nav-links li a {
-    display: block;
-    font-family: Amita, cursive;
-    margin-top: 20px;
-  }
-}
-
-	.alignleft {
-  float: left;
-  margin-left: 5px;
-  background-color: var(--bg-color);
-  color: var(--font-color);
-  font-family: Amita, cursive;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.alignright {
-  float: right;
-  margin-right: 10px;
-  background-color: var(--bg-color);
-  color: #0099cc;
-  font-size: 15px;
-  font-family: Amita, cursive;
-  font-weight: normal;
-}
-h4 {
-  margin-left: 5px;
-  color: #0099cc;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.nta {
-  overflow: hidden;
-  background-color: var(--bg-color);
-}
-.cent {
-  font-size: auto;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-div.scrollmenu::-webkit-scrollbar {
-  display: none;
-}
-div.scrollmenu {
-  background-color: var(--bg-color);
-  overflow: auto;
-  white-space: nowrap;
-  overflow-y: hidden;
-}
-
-div.scrollmenu a {
-    display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 4px;
-  text-decoration: none;
-  height: 130px;
-  margin: 10px;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);"
-}
-
-div.scrollmenu a:hover {
-	filter: blur(3px);
-  transform: scale(0.97);
-  background-color: var(--bg-color);
-}
-div.scrollvoot::-webkit-scrollbar {
-  display: none;
-}
-div.scrollvoot {
-  background-color: var(--bg-color);
-  overflow: auto;
-  white-space: nowrap;
-  overflow-y: hidden;
-}
-div.scrollvoot a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 4px;
-  text-decoration: none;
-  height: 130px;
-  margin: 10px;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-div.scrollvoot a:hover {
-  background-color: var(--bg-color);
-  filter: blur(3px);
-  transform: scale(0.97);
-}
-.cen {
-  text-align: center;
-  width: 205px;
-}
-
-.nt {
-  width: 205px; 
-   border-radius: 15px; 
-   height: 123px ; 
-}
-div.scrollme::-webkit-scrollbar {
-  display: none;
-}
-div.scrollme {
-  background-color: var(--bg-color);
-  overflow: auto;
-
-  white-space: nowrap;
-  overflow-y: hidden;
-}
-div.scrollme a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  height: 255px;
-  margin: 10px;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-div.scrollme a:hover {
-  background-color: var(--bg-color);
-  filter: blur(3px);
-  transform: scale(0.97);
-}
-.cean {
-  text-align: center;
-  width: 365px;
-}
-.net {
-  width: 365px;
-  border-radius: 15px;
-  height: 230px;
-}
-.in{ 
-   width: 205px; 
-   border-radius: 5px; 
-   height: 110px ; 
-} 
-div.ott::-webkit-scrollbar {
-  display: none;
-}
-div.ott {
-  background-color: var(--bg-color);
-  overflow: auto;
-  white-space: nowrap;
-  overflow-y: hidden;
-}
-div.ott a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  height: 110px;
-  margin: 10px;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-div.ott a:hover {
-  background-color: var(--bg-color);
-  filter: blur(3px);
-  transform: scale(0.97);
-}
-.cn {
-  text-align: center;
-  width: 205px;
-}
-.nit {
-  width: 205px; 
-   border-radius: 15px; 
-   height: 110px ; 
-}
-
-       .nature:hover { 
-filter: blur(3px);
-  transform: scale(0.97);
-  }
-.nature{
-	margin-top: 15px;
-	margin-bottom: 10px;
-	border-radius: 10px;
-box-shadow: 2px 2px 5px rgba(0,0,0, .3); 
-	}
-	
-	.up {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  font-size: 15px;
-  background-color: #2770ff;
-  border: 2px solid #490a3d; 
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: none;
-  z-index: 999999;
-}
-
-
-
-footer {
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    background: var(--nav-color);
-    color: var(--font-color);
-}
-
-footer p {
-    padding: 25px 20px;
-    text-align: center;
-}
-
-footer img {
-    width: 45px;
-    margin-bottom: -10px;
-}
-
-html{
-
-    scroll-behavior: smooth;
-
-}
-
-.live-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: red;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 12px;
-}
-
-.nature:hover {
-  filter: none;
-}
-
-div.scrollmenu a:hover,
-div.scrollme a:hover,
-div.scrollvoot a:hover,
-div.ott a:hover {
-  filter: none;
-}
-
-
-.channel {
-position: absolute;
-top: -23px;
-left: -209px;
-font-family: Arial, sans-serif;
- font-size: 16px; /* Set the font size */
-  font-weight: bold; /* Set the font weight to bold */
-  color: #fff;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background: #673AB7;
-    padding: 1px 7px 1px 7px;
-    position: relative;
-    z-index: 1;
-    display: inline-block;
-    box-shadow: 1px 0px 2px 0px black;
-}
-
-.aligncenter {
-  margin-left: 5px;
-  color: #0099cc;
-  font-weight: bold;
-  font-size: 15px;
-  background-color: var(--bg-color);
-  color: var(--font-color);
-  font-family: Arial, cursive;
-}
-
-<!-- yt -->
-
-.vit {
-  border-radius: 10px; /* Adjust the value to change the roundness of the corners */
-
-}
-
-div.ytt a {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  height: 110px;
-  margin: 10px;
-  border-radius: 15px;
-  
-}
-
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .card { width: 150px; height: 180px; }
+      .live-card { width: 180px; height: 180px; border-radius: 20px; }
+      .section-title { font-size: 18px; }
+      .search-container.active input { width: 200px; }
+    }
   </style>
-
 </head>
 <body>
 
   <nav>
-    <div class="nav-bar">
-      <span class="logo navLogo"><a href="#">Sports</a></span>
-
-      <!-- Dark/Light mode toggle -->
-      <div class="darkLight-searchBox">
-        <div class="dark-light">
-          <i class='bx bx-moon moon'></i>
-          <i class='bx bx-sun sun'></i>
-        </div>
-
-        <!-- Search box -->
-<div class="searchBox">
-  <!-- Search Toggle Button -->
-  <div class="searchToggle">
-    <i class='bx bx-x cancel' id="cancelIcon"></i> <!-- Added an id to cancel icon -->
-    <i class='bx bx-search search' id="searchIcon"></i>
-  </div>
-
-  <!-- Search Input Field -->
-  <div class="search-field">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <i class='bx bx-search' id="searchInputIcon"></i> <!-- Optional icon inside the input field -->
-  </div>
-</div>
-      </div>
+    <div class="logo"><a href="#">Sports</a></div>
+ <!-- Right Icons -->
+  <div class="nav-actions">
+    <div class="search-container" id="searchContainer">
+      <input type="text" id="searchInput" placeholder="Search channels...">
+      <i class="uil uil-search search-icon" id="searchIcon"></i>
     </div>
+
+    <div class="dark-light" id="modeToggle"><i class='bx bx-moon'></i></div>
   </nav>
 
   <i class="uil uil-angle-up up" id="scrollToTopBtn"></i>
 
-  <br><br>
-
   <!-- Embedded cricket live stream -->
-  <iframe src="https://bwidget.crictimes.org/" style="width:100%; min-height: 210px;" frameborder="0" scrolling="no"></iframe>
+  <iframe src="https://bwidget.crictimes.org/"></iframe>
 
   <!-- Live Cricket Section -->
-  <div class="nta">
-    <h4 class="alignleft"></h4>
-  </div>
-  <div class="ott">
-
-
-    <!-- <a href="sony/index"><div class="cn">
-      <img class="nit" src="https://www.bizasialive.com/wp-content/uploads/2020/05/899ec721-sonylivnew001.jpg">
-      <span class="channel">SL</span> <span class="live-tag">Live</span>
-    </div></a>  -->
-
-  </div>
-
-
-
-<div class="nta">
-    <h4 class="alignleft">Live Cricket ⮞</h4>
-  </div>
-  <div class="ott">
-
-
-   <a href="icc-test"><div class="cn">
-      <img class="nit" src="https://img1.hscicdn.com/image/upload/f_auto/lsci/db/PICTURES/CMS/299000/299073.4.jpg">
-      <span class="channel">Test cricket</span> <span class="live-tag">Live</span>
-    </div></a>
-
-    <!-- <a href="sony/index"><div class="cn">
-      <img class="nit" src="https://www.bizasialive.com/wp-content/uploads/2020/05/899ec721-sonylivnew001.jpg">
-      <span class="channel">SL</span><span class="live-tag">Live</span>
-    </div></a> -->
-
-    <a href="fc/index"><div class="cn">
-      <img class="nit" src="https://cdn-prod.dreamsports.group/wp-content/uploads/2021/05/08054043/5ec7bd164133673.Y3JvcCwxMzgwLDEwODAsMjcwLDA.png">
-      <span class="channel">FC</span> <span class="live-tag">Live</span>
-    </div></a> 
-
- </div>
-
-  <div class="nta">
-    <h4 class="alignleft">Sports ⮞</h4>
-  </div>
-  <div class="ott">
-    <a href="play/sptel"><div class="cn">
-      <img class="nit" src="https://i.postimg.cc/qBFDFvYH/Telugu-HD.png">
-      <br><span class="aligncenter">Telugu</span>
-    </div></a>
-
-    <a href="play/sst"><div class="cn">
-      <img class="nit" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU">
-      <br><span class="aligncenter">Tamil</span>
-    </div></a>
-
-    <a href="play/ssh"><div class="cn">
-      <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h">
-      <br><span class="aligncenter">Hindi</span>
-    </div></a>
-
-    <a href="play/sse"><div class="cn">
-      <img class="nit" src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h">
-      <br><span class="aligncenter">English</span>
-    </div></a>
+  <div class="section-title"><span>Live Cricket</span></div>
+  <div class="scroll-section" id="liveCricketSection">
+    <a href="wpl/wpl">
+      <div class="card live-card" data-title="WPL">
+        <img src="https://upload.wikimedia.org/wikipedia/en/b/bb/2026_Women%27s_Premier_League_%28cricket%29.jpg" alt=" Cricket">
+        <span>WPL</span>
+        <div class="live-tag">Live</div>
+        <div class="channel">WPL</div>
+      </div>
+    </a>
+    <a href="fc/index">
+      <div class="card live-card" data-title="FanCode">
+        <img src="https://technosports.co.in/wp-content/uploads/2024/02/23196-fancode-1024x614.webp" alt="FanCode">
+        <span>FanCode</span>
+        <div class="live-tag">Live</div>
+        <div class="channel">FC</div>
+      </div>
+    </a>
   </div>
 
+  <!-- Sports Section -->
+  <div class="section-title"><span>Sports</span></div>
+  <div class="scroll-section" id="sportsSection">
+    <a href="play/sptel">
+      <div class="card" data-title="Telugu">
+        <img src="https://i.postimg.cc/qBFDFvYH/Telugu-HD.png" alt="Telugu">
+        <span>Telugu</span>
+      </div>
+    </a>
+    <a href="play/sst">
+      <div class="card" data-title="Tamil">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU" alt="Tamil">
+        <span>Tamil</span>
+      </div>
+    </a>
+    <a href="play/ssh">
+      <div class="card" data-title="Hindi">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h" alt="Hindi">
+        <span>Hindi</span>
+      </div>
+    </a>
+    <a href="play/sse">
+      <div class="card" data-title="English">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h" alt="English">
+        <span>English</span>
+      </div>
+    </a>
+  </div>
 
-<div class="nta"> 
-<h4 class="alignleft"></h4>
-<a href="#">
-<h4 class="alignright"> ⮞</h4></a> </div> 
-<div class="scrollmenu"> 
- 
- <a href="play/sports18_3"><div class="cen"> <img class="nt" src="https://jiotvimages.cdn.jio.com/dare_images/images/Sports18_3.png" width="110px" height="110px">   <br> <span class="aligncenter">sports 18_3</span> </div></a> 
+  <!-- More Channels Section -->
+  <div class="section-title"><span>More</span></div>
+  <div class="scroll-section" id="moreSection">
+    <a href="https://live.drmlive.in/jiotv/play.php?id=162&e=">
+      <div class="card" data-title="Sony 1">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg" alt="Sony 1">
+        <span>Sony 1</span>
+      </div>
+    </a>
+    <a href="https://live.drmlive.in/jiotv/play.php?id=891&e=">
+      <div class="card" data-title="Sony 2">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg" alt="Sony 2">
+        <span>Sony 2</span>
+      </div>
+    </a>
+    <a href="https://live.drmlive.in/jiotv/play.php?id=524&e=">
+      <div class="card" data-title="Sony 3">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg" alt="Sony 3">
+        <span>Sony 3</span>
+      </div>
+    </a>
+  </div>
 
- <a href="play/tnt"><div class="cen"> <img class="nt" src="https://www.bt.com/content/dam/bt/portal/images/articles/sport/tnt-sports/tntsports.jpg" width="110px" height="110px">   <br> <span class="aligncenter">TNT Sports</span> </div></a> 
-
-  <a href="play/astro"><div class="cen"> <img class="nt" src="https://dj7fdt04hl8tv.cloudfront.net/acm/media/njoi/cricket.png" width="110px" height="110px">   <br> <span class="aligncenter">Astro Cricket</span> </div></a> 
- 
- <a href="play/skycricket"><div class="cen"> <img class="nt" src="https://e0.365dm.com/23/07/2048x1152/skysports-cricket-podcast_6230507.jpg" width="110px" height="110px">   <br> <span class="aligncenter">SKY Cricket</span> </div></a> 
- 
- <a href="play/18main"><div class="cen"> <img class="nt" src="https://assets.mspimages.in/gear/wp-content/uploads/2022/11/Sports-18.jpg" width="110px" height="110px">   <br> <span class="aligncenter">18 Sports</span> </div></a> -->
- 
- <a href="play/willow"><div class="cen"> <img class="nt" src="https://cdn6.aptoide.com/imgs/8/2/9/8297c2bdee06363d19f3f7d95ac774ae_fgraphic.jpg" width="110px" height="110px">  <br> <span class="aligncenter">	Willow</span> </div></a> 
- 
-</div>
-
-
-
-<div class="nta"> 
-<h4 class="alignleft">more ⮞</h4>
-<a href="#">
-<h4 class="alignright"></h4></a> </div> 
-<div class="scrollmenu"> 
- 
-	 <a href="https://live.drmlive.in/jiotv/play.php?id=162&e="><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg">  <br> <span class="aligncenter">Sony 1</span> </div></a> 
-
-		<a href="https://live.drmlive.in/jiotv/play.php?id=891&e="><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg">  <br> <span class="aligncenter">Sony 2</span> </div></a> 
-
-	<a href="https://live.drmlive.in/jiotv/play.php?id=524&e="><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg">  <br> <span class="aligncenter">Sony 3</span> </div></a> 
- 
-        <a href="https://live.drmlive.in/jiotv/play.php?id=1772&e="><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%204.jpg">  <br> <span class="aligncenter">Sony 4</span> </div></a> 
- 
-        <a href="https://live.drmlive.in/jiotv/play.php?id=155&e="><div class="cen"> <img class="nt" src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%205.jpg">  <br> <span class="aligncenter">Sony 5</span> </div></a> 
- 
-</div>
-
-
-  <!-- Scroll to top functionality -->
- <script>
-  // Select DOM elements
-  const body = document.querySelector("body"),
-        nav = document.querySelector("nav"),
-        modeToggle = document.querySelector(".dark-light"),
-        searchToggle = document.querySelector(".searchToggle"),
-        searchInput = document.getElementById("searchInput"), // Add the input field for search
-        sidebarOpen = document.querySelector(".sidebarOpen"),
-        sidebarClose = document.querySelector(".sidebarClose"),
-        up = document.querySelector('.up'),
-        htmlbar = document.querySelector('.htmlbar'),  // Assuming you have these elements for progress bars
-        cssbar = document.querySelector('.cssbar'),
-        jsbar = document.querySelector('.jsbar');
-
-  // Check localStorage for saved theme mode and apply it
-  let getMode = localStorage.getItem("mode");
-  if (getMode && getMode === "dark-mode") {
-    body.classList.add("dark");
-  }
-
-  // Toggle Dark/Light mode
-  modeToggle.addEventListener("click", () => {
-    modeToggle.classList.toggle("active");
-    body.classList.toggle("dark");
-
-    // Save user-selected mode in localStorage
-    if (!body.classList.contains("dark")) {
-      localStorage.setItem("mode", "light-mode");
-    } else {
-      localStorage.setItem("mode", "dark-mode");
-    }
-  });
-
-  // Toggle search box visibility
-  searchToggle.addEventListener("click", () => {
-    searchToggle.classList.toggle("active");
-    searchInput.style.display = searchInput.style.display === "block" ? "none" : "block"; // Show or hide the input box
-  });
-
-  // Handle Search Functionality
-  function handleSearch(query) {
-    const allItems = document.querySelectorAll(".search-item"); // Assuming all searchable items have the class 'search-item'
-    allItems.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(query.toLowerCase())) {
-        item.style.display = "block"; // Show matching item
-      } else {
-        item.style.display = "none"; // Hide non-matching item
-      }
+  <script>
+    // Dark/Light toggle
+    const modeToggle = document.getElementById("modeToggle");
+    modeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
     });
-    alert("Searching for: " + query);
-  }
 
-  // Add an event listener to the search input field to call the search function when user types
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value;
-    handleSearch(query);
-  });
-
-  // Open sidebar when sidebarOpen button is clicked
-  sidebarOpen.addEventListener("click", () => {
-    nav.classList.add("active");
-  });
-
-  // Close sidebar when clicking outside the sidebar or on the menu button
-  body.addEventListener("click", (e) => {
-    let clickedElm = e.target;
-    if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
-      nav.classList.remove("active");
-    }
-  });
-
-  // Show "scroll to top" button on scroll
-  window.addEventListener('scroll', () => {
-    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
-      up.style.display = "block"; // Show button
-    } else {
-      up.style.display = "none"; // Hide button
-    }
-  });
-
-  // Scroll to top functionality
-  up.addEventListener('click', () => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For other browsers
-  });
-
-  // Add classes to progress bars when the user scrolls past a certain point
-  window.addEventListener('scroll', () => {
-    if (document.body.scrollTop > 1200 || document.documentElement.scrollTop > 1200) {
-      htmlbar.classList.add('activehtml');
-      cssbar.classList.add('activecss');
-      jsbar.classList.add('activejs');
-    }
-  });
-</script>
-
-<!-- Include the necessary JavaScript for functionality -->
-<script>
-  const searchToggle = document.querySelector(".searchToggle"),
-        searchInput = document.getElementById("searchInput"),
-        cancelIcon = document.getElementById("cancelIcon"),
-        searchIcon = document.getElementById("searchIcon");
-
-  // Toggle search box visibility when search icon is clicked
-  searchIcon.addEventListener("click", () => {
-    searchInput.style.display = "block"; // Show the input field
-    searchInput.focus(); // Focus on the input field
-    cancelIcon.style.display = "block"; // Show the cancel button
-    searchIcon.style.display = "none"; // Hide the search icon
-  });
-
-  // Hide the search box and reset when cancel icon is clicked
-  cancelIcon.addEventListener("click", () => {
-    searchInput.style.display = "none"; // Hide the input field
-    cancelIcon.style.display = "none"; // Hide the cancel button
-    searchIcon.style.display = "block"; // Show the search icon again
-    searchInput.value = ""; // Clear the input field
-  });
-
-  // Handle search functionality (can be integrated with handleSearch function from earlier)
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value;
-    handleSearch(query); // Call handleSearch function from earlier
-  });
-
-  // Example of how the handleSearch function can be implemented
-  function handleSearch(query) {
-    const allItems = document.querySelectorAll(".search-item"); // Adjust based on your content
-    allItems.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      if (text.includes(query.toLowerCase())) {
-        item.style.display = "block"; // Show matching item
-      } else {
-        item.style.display = "none"; // Hide non-matching item
-      }
+    // Scroll to top button
+    const upBtn = document.getElementById("scrollToTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) upBtn.style.display = "block";
+      else upBtn.style.display = "none";
     });
-  }
-</script>
+    upBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Search toggle
+    const searchContainer = document.getElementById('searchContainer');
+    const searchIcon = document.getElementById('searchIcon');
+    const searchInput = document.getElementById('searchInput');
+
+    searchIcon.addEventListener('click', () => {
+      searchContainer.classList.toggle('active');
+      if(searchContainer.classList.contains('active')) searchInput.focus();
+    });
+
+    // Search functionality
+    searchInput.addEventListener('input', function() {
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('.scroll-section .card').forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        card.parentElement.style.display = title.includes(filter) ? 'inline-block' : 'none';
+      });
+    });
+  </script>
 
 </body>
 </html>
