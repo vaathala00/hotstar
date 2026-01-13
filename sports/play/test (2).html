@@ -10,7 +10,7 @@
 
 <style>
 /* ======================
-   GLOBAL
+   GLOBAL STYLES
 ====================== */
 * {
     box-sizing: border-box;
@@ -19,14 +19,8 @@
     font-family: "Segoe UI", sans-serif;
 }
 
-html, body {
-    height: 100%;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-}
-
 body {
-    background: #0b0f14;
+    background: #0f0f0f;
     color: #fff;
 }
 
@@ -34,20 +28,19 @@ body {
     max-width: 1100px;
     margin: auto;
     padding: 10px;
-    padding-bottom: 90px; /* safe space for servers */
 }
 
 /* ======================
-   VIDEO
+   VIDEO AREA
 ====================== */
 .my-iframe {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
     background: #000;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,255,200,0.18);
+    box-shadow: 0 0 30px rgba(0,255,200,0.15);
 }
 
 .my-iframe iframe {
@@ -57,19 +50,19 @@ body {
 }
 
 /* ======================
-   VIEW COUNTER
+   VIEW COUNTER (ANIMATED)
 ====================== */
 #counter-container {
     position: absolute;
     top: 12px;
     right: 12px;
+    background: rgba(0,0,0,0.65);
     padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 14px;
     animation: pulse 2s infinite;
     z-index: 10;
 }
@@ -85,72 +78,43 @@ body {
 }
 
 /* ======================
-   SERVERS
+   SERVER LIST
 ====================== */
-.servers {
+.info-box {
+    margin-top: 15px;
+}
+
+#channel-list {
+    list-style: none;
     display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 14px;
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.servers li {
-    padding: 6px 14px;
-    font-size: 13px;
-    border-radius: 999px;
+#channel-list li {
+    flex: 1;
+    background: #1b1b1b;
+    padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
     transition: all 0.25s ease;
-    user-select: none;
-    min-width: 78px;
-    text-align: center;
-    margin: 5px;
+    border: 1px solid transparent;
 }
 
-.servers li:hover {
-    background: rgba(0,255,200,0.15);
-    transform: translateY(-1px);
+#channel-list li:hover {
+    transform: translateY(-3px);
+    background: #222;
 }
 
-.servers li.active {
-    background: linear-gradient(135deg, #00ffcc, #00bfff);
-    color: #000;
-    font-weight: 600;
-    box-shadow: 0 0 14px rgba(0,255,200,0.5);
+#channel-list li.active {
+    border-color: #00ffcc;
+    box-shadow: 0 0 12px rgba(0,255,200,0.4);
 }
 
-.servers .dot {
-    width: 6px;
-    height: 6px;
-    background: #ff3b3b;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
-    animation: blink 1.2s infinite;
-}
-
-@keyframes blink {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* ======================
-   SCROLL HINT
-====================== */
-.scroll-hint {
-    text-align: center;
-    margin: 10px 0 0;
-    font-size: 13px;
-    opacity: 0.6;
-    animation: float 1.5s infinite;
-}
-
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
+.channel-icon {
+    width: 22px;
+    display: block;
+    margin: auto auto 6px;
 }
 
 /* ======================
@@ -188,7 +152,7 @@ body {
     width: 320px;
     height: 420px;
     background: #111;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
     display: none;
     box-shadow: 0 0 30px rgba(0,0,0,0.7);
@@ -212,6 +176,24 @@ body {
     cursor: pointer;
     z-index: 2;
 }
+
+/* ======================
+   TELEGRAM
+====================== */
+.telegram-link {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+.telegram-link img {
+    width: 45px;
+    transition: transform 0.3s ease;
+}
+
+.telegram-link img:hover {
+    transform: scale(1.15);
+}
 </style>
 </head>
 
@@ -222,7 +204,7 @@ body {
     <!-- VIDEO -->
     <div class="my-iframe" id="iframe-container">
 
-        <!-- COUNTER -->
+        <!-- VIEW COUNTER -->
         <div id="counter-container">
             <i class="fas fa-eye"></i>
             <script src="//widget.supercounters.com/ssl/online_t.js"></script>
@@ -234,19 +216,19 @@ body {
         <iframe src="" allowfullscreen></iframe>
     </div>
 
-    <!-- SCROLL HINT -->
-    <div class="scroll-hint">⬇ Select Server</div>
-
     <!-- SERVERS -->
-    <ul id="channel-list" class="servers">
-        <li data-src="https://iptv.vodep39240327.workers.dev/?url=https://allinonereborn.xyz/tatatv-web/live.php?id=12154">
-            <span class="dot"></span> Server 1
-        </li>
-        <li data-src="https://iptv.vodep39240327.workers.dev/?url=https://allinonereborn.xyz/airteltv-web/live3.php?id=276742">
-            <span class="dot"></span> Server 2
-        </li>
-    </ul>
-
+    <div class="info-box">
+        <ul id="channel-list">
+            <li data-src="https://iptv.vodep39240327.workers.dev/?url=https://allinonereborn.xyz/tatatv-web/live.php?id=12154">
+                <img class="channel-icon" src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg">
+                Server 1
+            </li>
+            <li data-src="https://iptv.vodep39240327.workers.dev/?url=https://allinonereborn.xyz/airteltv-web/live3.php?id=276742">
+                <img class="channel-icon" src="https://www.svgrepo.com/show/308977/youtube-play-button-play-video-youtube-logo.svg">
+                Server 2
+            </li>
+        </ul>
+    </div>
 </div>
 
 <!-- CHAT -->
@@ -257,35 +239,31 @@ body {
     <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"></iframe>
 </div>
 
+<!-- TELEGRAM -->
+<a class="telegram-link" href="https://t.me/vaathala1" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+</a>
+
 <script>
 /* ======================
-   SERVER LOGIC
+   AUTO LOAD SERVER 1
 ====================== */
 const list = document.getElementById("channel-list");
-const iframe = document.querySelector("#iframe-container iframe");
+const iframeContainer = document.getElementById("iframe-container");
 
-function loadServer(li) {
+function loadChannel(li) {
     list.querySelectorAll("li").forEach(x => x.classList.remove("active"));
     li.classList.add("active");
-    iframe.src = li.dataset.src;
+    iframeContainer.querySelector("iframe").src = li.dataset.src;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadServer(list.querySelector("li"));
-});
-
-/* auto scroll if servers are hidden */
-window.addEventListener("load", () => {
-    const servers = document.getElementById("channel-list");
-    const rect = servers.getBoundingClientRect();
-    if (rect.bottom > window.innerHeight) {
-        servers.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    loadChannel(list.querySelector("li"));
 });
 
 list.addEventListener("click", e => {
     const li = e.target.closest("li");
-    if (li) loadServer(li);
+    if (li) loadChannel(li);
 });
 
 /* ======================
