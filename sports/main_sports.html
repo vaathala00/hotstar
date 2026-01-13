@@ -148,7 +148,7 @@
     }
 
     /* ===== Iframe ===== */
-    iframe { width: 100%; min-height: 220px; border: none; margin-top: 60px; border-radius: 10px; }
+    iframe { width: 100%; min-height: 212px; border: none; margin-top: 60px; border-radius: 10px; }
 
     /* ===== Responsive ===== */
     @media (max-width: 600px) {
@@ -168,15 +168,15 @@
     <div class="search-container" id="searchContainer">
       <input type="text" id="searchInput" placeholder="Search channels...">
       <i class="uil uil-search search-icon" id="searchIcon"></i>
-    </div>
+     </div>
 
-    <div class="dark-light" id="modeToggle"><i class='bx bx-moon'></i></div>
+    <div class="dark-light" id="modeToggle"><i class='bx bx-moon' id="modeIcon"></i></div>
   </nav>
 
   <i class="uil uil-angle-up up" id="scrollToTopBtn"></i>
 
   <!-- Embedded cricket live stream -->
-  <iframe src="https://bwidget.crictimes.org/"></iframe>
+  <iframe src="https://bwidget.crictimes.org/" scrolling="no"></iframe>
 
   <!-- Live Cricket Section -->
   <div class="section-title"><span>Live Cricket</span></div>
@@ -254,9 +254,30 @@
   <script>
     // Dark/Light toggle
     const modeToggle = document.getElementById("modeToggle");
+    const modeIcon = document.getElementById("modeIcon");
     modeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-    });
+  document.body.classList.toggle("dark"); // toggle dark mode
+
+  if (document.body.classList.contains("dark")) {
+    modeIcon.classList.replace("bx-moon", "bx-sun"); // 🌙 → ☀️
+  } else {
+    modeIcon.classList.replace("bx-sun", "bx-moon"); // ☀️ → 🌙
+  }
+});
+
+
+   // js code to keep user selected mode even page refresh or file reopen
+ modeToggle.addEventListener("click" , () =>{
+        modeToggle.classList.toggle("active");
+        body.classList.toggle("dark");
+
+        if(!body.classList.contains("dark")){
+            localStorage.setItem("mode" , "light-mode");
+        }else{
+            localStorage.setItem("mode" , "dark-mode");
+        }
+      });
+
 
     // Scroll to top button
     const upBtn = document.getElementById("scrollToTopBtn");
@@ -273,8 +294,17 @@
 
     searchIcon.addEventListener('click', () => {
       searchContainer.classList.toggle('active');
-      if(searchContainer.classList.contains('active')) searchInput.focus();
+      if (searchContainer.classList.contains("active")) {
+    searchIcon.classList.replace("uil-search", "uil-times"); // 🔍 → ❌
+    searchInput.focus();
+  } else {
+    searchIcon.classList.replace("uil-times", "uil-search"); // ❌ → 🔍
+    searchInput.value = ""; // clear search input
+    document.querySelectorAll(".card").forEach(card => {
+      card.parentElement.style.display = "inline-block"; // reset filter
     });
+  }
+});
 
     // Search functionality
     searchInput.addEventListener('input', function() {
