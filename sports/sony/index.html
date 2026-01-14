@@ -1,253 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SonyLiv Live Events</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
-<html>
+<!-- LazySizes -->
+<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js" async></script>
 
-	<head>
-		
-		<title>SL</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;display=swap" rel="stylesheet">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
-		<link rel="shortcut icon" href="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high">
-		<link rel="stylesheet" href="style.css">
-		<!-- ===== Boxicons CSS ===== -->
-		<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-		<style>
-			body {
-			      /* display: flex; */
-			      align-items: center;
-			      justify-content: center;
-			      margin: 0 12px;
-			      height: 100%;
-			      background-color: #1F0C50;
-			
-			    }
-			
-			    .box-shadow {
-			      font-family: sans-serif;
-			      font-weight: 600;
-			      background-color: #2ecc71;
-			      color: white;
-			      padding: 10px;
-			      border-radius: 4px;
-			      box-shadow: 2px 2px 20px 23px #7fecad;
-			      background-color: #f8f8f8;
-			      padding: 20px;
-			      border-radius: 10px;
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			      text-align: center;
-			      font-family: 'Arial', sans-serif;
-			      font-size: 15px;
-			      color: #333;
-			    }
-			
-			    #title {
-			      font-family: 'Gloock', serif;
-			      font-weight: bold;
-			      font-size: 28px;
-			      color: #e61271;
-			      text-align: center;
-			      text-transform: uppercase;
-			      letter-spacing: 4px;
-			      margin: 20px 0;
-			      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-			      background-color: #f1f1f1;
-			      padding: 10px 20px;
-			      border-radius: 10px;
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-			    }
-			
-			    a. {
-			      text-decoration: none !important;
-			    }
-
-
-header {
-  background-color: #0D012F;
-  color: #fff;
-  padding: 20px 20px;
-  display: flex;
-  align-items: center;
+<style>
+/* ===== THEME VARIABLES ===== */
+:root {
+  --bg: linear-gradient(135deg, #1F0C50, #0D012F);
+  --card-bg: rgba(255,255,255,0.12);
+  --text: #ffffff;
+  --accent: #e61271;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
+body.light {
+  --bg: #f4f4f4;
+  --card-bg: #ffffff;
+  --text: #111;
 }
 
-.logo-img {
-  width: 65px; /* Adjust the width of the logo */
-  height: auto;
-  margin-right: 0px;
-}
-
-.site-title {
-font-weight: bold;
-font-size: 18px;
+body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  transition: background 0.4s, color 0.4s;
 }
 
-#kaya_head {
-font-weight: bold;
-  color: #FFFFFF;
-  font-size: 25px;
-  text-transform: uppercase;
-  font-family: 'Tilt Warp', sans-serif;
+/* ===== HEADER ===== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Logo left, controls right */
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(14px);
 }
 
-		</style>
-		<link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
-		<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
-		
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
-		<link rel="stylesheet" href="style.css">
+/* Logo */
+.logo-img {
+  width: 46px;
+}
+
+/* ===== SEARCH + THEME AREA ===== */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* Search icon */
+#searchBtn {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Search box (hidden initially) */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 4px 8px;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: width 0.35s ease, opacity 0.2s ease;
+}
+
+/* Active search */
+.controls.active #searchBtn {
+  display: none;
+}
+.controls.active .search-box {
+  width: 200px;
+  opacity: 1;
+}
+
+/* Search input */
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  width: 100%;
+}
+
+/* Close icon inside search box */
+.search-box i {
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+/* Theme icon */
+.theme-icon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ===== CATEGORY ===== */
+#categoryFilters {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+
+.category-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ===== GRID ===== */
+#listContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 10px;
+  height: 220px;
+  position: relative;
+  transition: 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.04);
+}
+
+.card img {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.card h2 {
+  font-size: 13px;
+  text-align: center;
+}
+
+.card p {
+  font-size: 11px;
+  opacity: 0.8;
+  text-align: center;
+}
+
+/* ===== LIVE BADGE ===== */
+.live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  padding: 4px 8px;
+  font-size: 10px;
+  border-radius: 20px;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <img src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high" class="logo-img">
+
+  <!-- RIGHT CONTROLS: Search + Theme -->
+  <div class="controls" id="controls">
+    <i id="searchBtn" class="fa-solid fa-magnifying-glass"></i>
+
+    <div class="search-box">
+      <input type="search" id="searchInput" placeholder="Search channel...">
+      <i id="closeBtn" class="fa-solid fa-xmark"></i>
+    </div>
+
+    <i id="themeToggle" class="fa-solid fa-moon theme-icon"></i>
+  </div>
+</header>
+
+<div id="categoryFilters"></div>
+<div id="listContainer"></div>
+
 
 <script>
-    // Function to generate HTML from JSON data
-    async function generateHtmlFromJson(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
+let allMatches = [];
+let selectedCategory = 'All';
 
-            const jsonData = await response.json();
-            if (!jsonData || !Array.isArray(jsonData.matches)) {
-                console.error('No valid JSON data available');
-                return;
-            }
+/* ===== SEARCH TOGGLE ===== */
+const controls = document.getElementById('controls');
+const searchBtn = document.getElementById('searchBtn');
+const closeBtn = document.getElementById('closeBtn');
+const searchInput = document.getElementById('searchInput');
 
-            const listContainer = document.getElementById('listContainer');
-            jsonData.matches.forEach(function(item) {
-                if (!item.contentId || !item.src || !item.event_name || !item.event_category) {
-                    console.warn('Missing data in item:', item);
-                    return;
-                }
+searchBtn.onclick = () => {
+  controls.classList.add('active');
+  searchInput.focus();
+};
 
-                const anchor = document.createElement('a');
-                anchor.href = `rd_play.html?id=${item.contentId}`; // Use contentId as the match identifier
+closeBtn.onclick = () => {
+  controls.classList.remove('active');
+  searchInput.value = '';
+  applyFilters();
+};
 
-                const cardDiv = document.createElement('div');
-                cardDiv.classList.add('box1'); // Add the appropriate class
+/* ===== THEME TOGGLE ===== */
+const themeToggle = document.getElementById('themeToggle');
 
-                const card = document.createElement('div');
-                card.classList.add('card', 'w-40', 'bg-gray-100', 'rounded-xl', 'bg-base-100', 'shadow-lg', 'h-48', 'mb-4', 'flex', 'flex-col');
+function setTheme(theme) {
+  document.body.className = theme;
+  themeToggle.className =
+    theme === 'light'
+      ? 'fa-solid fa-moon theme-icon'
+      : 'fa-solid fa-sun theme-icon';
+  localStorage.setItem('theme', theme);
+}
 
-                const image = document.createElement('img');
-                image.src = item.src; // Banner image for the match
-                image.classList.add('h-28', 'mt-5', 'm-auto', 'opacity-100');
-                image.alt = item.event_name || 'Match image'; // Add alt text for accessibility
+themeToggle.onclick = () => {
+  setTheme(document.body.classList.contains('light') ? '' : 'light');
+};
 
-                const title = document.createElement('h2');
-                title.classList.add('text-center', 'text-sm', 'font-bold');
-                title.textContent = item.event_name; // Event name (like 'Football Blockbusters 24x7')
+setTheme(localStorage.getItem('theme') || '');
 
-                const description = document.createElement('div');
-                description.classList.add('mb-5', 'opacity-100');
-                const descriptionText = document.createElement('p');
-                descriptionText.classList.add('text-xs', 'text-center');
-                descriptionText.textContent = item.event_category; // Event category (like 'Football')
+/* ===== DATA ===== */
+async function loadData() {
+  const res = await fetch('https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json');
+  const data = await res.json();
+  allMatches = data.matches || [];
+  createCategories();
+  applyFilters();
+}
 
-                description.appendChild(title);
-                description.appendChild(descriptionText);
+function createCategories() {
+  const box = document.getElementById('categoryFilters');
+  box.innerHTML = '';
+  ['All', ...new Set(allMatches.map(i => i.event_category).filter(Boolean))]
+    .forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'category-btn' + (cat === 'All' ? ' active' : '');
+      btn.textContent = cat;
+      btn.onclick = () => {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedCategory = cat;
+        applyFilters();
+      };
+      box.appendChild(btn);
+    });
+}
 
-                card.appendChild(image);
-                card.appendChild(description);
-                anchor.appendChild(card);
-                cardDiv.appendChild(anchor);
-                listContainer.appendChild(cardDiv);
-            });
-        } catch (error) {
-            console.error('Error fetching or parsing JSON:', error);
-        }
-    }
+function applyFilters() {
+  const val = searchInput.value.toLowerCase();
+  renderCards(
+    allMatches.filter(i =>
+      (selectedCategory === 'All' || i.event_category === selectedCategory) &&
+      (i.event_name || '').toLowerCase().includes(val)
+    )
+  );
+}
 
-    // Call the function with the URL of your JSON data
-    generateHtmlFromJson('https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json');
+function renderCards(data) {
+  const box = document.getElementById('listContainer');
+  box.innerHTML = '';
+
+  data.forEach(i => {
+    // Create anchor element for clickable card
+    const anchor = document.createElement('a');
+    anchor.href = `rd_play.html?id=${i.contentId || ''}`;
+    anchor.style.textDecoration = 'none';
+    anchor.style.color = 'inherit';
+
+    // Create card
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    if (i.isLive) card.innerHTML += '<div class="live-badge">LIVE</div>';
+
+    card.innerHTML += `
+      <img data-src="${i.src}" class="lazyload">
+      <h2>${i.event_name || ''}</h2>
+      <p>${i.event_category || ''}</p>
+    `;
+
+    anchor.appendChild(card);
+    box.appendChild(anchor);
+  });
+}
+
+/* ===== SEARCH FILTER ===== */
+searchInput.addEventListener('input', applyFilters);
+
+loadData();
 </script>
 
-
-
-	</head>
-
-
-
-	<body data-sveltekit-preload-data="hover" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0=">
-		<div style="display: contents">
-  <!-- <header class="text-gray-600 body-font" style="margin: 20px;">
-    <h1 id="title">VAATHALA</h1>
-  </header> -->
-
-<!-- <header class="text-gray-600 body-font">
-<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"> <a href="/" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"> <span class="ml-3 text-xl">VAATHALA</span> </a> <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center"> <a href="https://telegram.me/vaathala1" class="mr-5 hover:text-gray-900">Sony TV+</a> </nav>
-					<div class="">
-<div class="relative flex w-full flex-wrap items-stretch mt-4"></div></div></div></header> -->
-
-<header>
-    <div class="logo">
-      <img src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png?w=40&q=high" alt="Logo" class="logo-img">
-     <h1 class="site-title"></h1>
-    </div>
-  </header>
-
-</div>
-		<main class="">
-			<title>𝐉𝐈𝐎-𝐓𝐕</title>
-			<div class="container" bis_skin_checked="1">
-				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
-  <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-black  bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
-				
-<!-- bg-transparent -->
-
-<div id="kaya_head"><span class="kayaheadicon" onclick="window.history.back()"><i class="fa-solid fa-arrow-left-long"></i></span>&nbsp;&nbsp; </div>
-
-<div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
-				
-
-
-		</main>
-
-
-
-		<div id="svelte-announcer" aria-live="assertive" aria-atomic="true" style="position: absolute; left: 0px; top: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px;" bis_skin_checked="1"></div>
-		<script type="text/javascript" src="channel.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script>
-		 // Get search input element
-  const searchInput = document.getElementById('searchInput');
-
-  // Add input event listener
-  searchInput.addEventListener('input', filterData);
-
-  // Search functionality
-  function filterData() {
-    const updatedSearchValue = searchInput.value.toLowerCase();
-
-    // Get all box elements
-    const boxes = document.querySelectorAll('.box1');
-
-    boxes.forEach((box) => {
-      const h2Text = box.querySelector('h2').textContent.toLowerCase();
-      const pText = box.querySelector('p').textContent.toLowerCase();
-
-      if (h2Text.includes(updatedSearchValue) || pText.includes(updatedSearchValue)) {
-        box.style.display = 'block'; // Show matching box
-      } else {
-        box.style.display = 'none'; // Hide non-matching box
-      }
-    });
-  }
-		</script>
-
-
-	</body>
-
+</body>
 </html>
