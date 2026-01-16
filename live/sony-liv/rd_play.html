@@ -2,251 +2,222 @@
 <html lang="en">
 <head>
     <title id="pageTitle">Default Title | Sony Liv</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ENJOY FREE LIVE TV">
     <meta name="keywords" content="LIVETV, SPORTS, MOVIES, MUSIC">
     <meta name="author" content="Vaathala">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="https://i.ibb.co/BcjC6R8/jiotv.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
     <script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="https://i.ibb.co/BcjC6R8/jiotv.png">
     <script type='text/javascript' src='https://content.jwplatform.com/libraries/IDzF9Zmk.js'></script>
-    <script>
-        // Update title using ID from URL
-        var urlParams = new URLSearchParams(window.location.search);
-        var id = urlParams.get('id');
-        document.getElementById('pageTitle').innerText = id + " | Sony Liv";
-    </script>
+
     <style>
-       body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: #ffffff;
-    margin: 0;
-    padding: 0;
-    animation: fadeIn 1s ease-in;
-}
+        /* ---- Animated Gradient Background ---- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(270deg, #0f2027, #203a43, #2c5364, #1b2735);
+            background-size: 800% 800%;
+            animation: gradientAnimation 20s ease infinite;
+            color: #fff;
+        }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
-}
+        @keyframes gradientAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
 
-.box {
-    background: rgba(33, 45, 57, 0.95);
-    padding: 30px;
-    border-radius: 12px;
-    width: 340px;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
-}
+        /* ---- Container ---- */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
 
-.box:hover {
-    transform: scale(1.02);
-}
+        .box {
+            background: rgba(33, 45, 57, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: fadeUp 1.2s ease forwards;
+        }
 
-.logo {
-    background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat center;
-    background-size: contain;
-    width: 180px;
-    height: 50px;
-    margin: 0 auto 20px;
-    filter: drop-shadow(0 0 5px #fff);
-}
+        .box:hover {
+            transform: scale(1.05) rotateX(5deg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
 
-.channel-logo {
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 15px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s ease;
-}
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
 
-.channel-logo:hover {
-    transform: rotate(5deg) scale(1.05);
-}
+        /* ---- Logo ---- */
+        .logo {
+            background: url('https://i.postimg.cc/JzSrQ7qW/Vaathala-23-5-2024.png') no-repeat center;
+            background-size: contain;
+            width: 180px;
+            height: 50px;
+            margin: 0 auto 25px;
+            filter: drop-shadow(0 0 10px #ffcc00);
+            animation: logoPulse 2s infinite alternate;
+        }
 
-.channel-name {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #ffcc00;
-    text-shadow: 1px 1px 5px #000;
-}
+        @keyframes logoPulse {
+            0% {transform: scale(1);}
+            100% {transform: scale(1.05);}
+        }
 
-.info-box {
-    background-color: #1b2530;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-}
+        /* ---- Channel ---- */
+        .channel-logo {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #ffcc00;
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
 
-.info-box p {
-    margin: 6px 0;
-    font-size: 14px;
-}
+        .channel-logo:hover {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 204, 0, 0.6);
+        }
 
-.play-now-btn, .download-btn {
-    display: inline-block;
-    padding: 12px 15px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
+        .channel-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 10px #000;
+        }
 
-.play-now-btn {
-    background: linear-gradient(to right, #ffb800, #f59e00);
-    color: #131720;
-    box-shadow: 0 4px 10px rgba(255, 184, 0, 0.4);
-}
+        /* ---- Info Box ---- */
+        .info-box {
+            background: rgba(27, 37, 48, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            line-height: 1.5;
+        }
 
-.play-now-btn:hover {
-    background: linear-gradient(to right, #f59e00, #ffa500);
-    box-shadow: 0 6px 12px rgba(255, 184, 0, 0.6);
-}
+        /* ---- Buttons ---- */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
 
-.download-btn {
-    background: linear-gradient(to right, #1c80ff, #0078d7);
-    color: white;
-    box-shadow: 0 4px 10px rgba(28, 128, 255, 0.4);
-    margin-top: 10px;
-}
+        .play-now-btn {
+            position: relative;
+            display: inline-block;
+            padding: 14px 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ffb800, #f59e00, #ffcc00);
+            background-size: 200% 200%;
+            color: #131720;
+            box-shadow: 0 6px 15px rgba(255, 184, 0, 0.5);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
 
-.download-btn:hover {
-    background: linear-gradient(to right, #0078d7, #005bb5);
-    box-shadow: 0 6px 12px rgba(28, 128, 255, 0.6);
-}
+        .play-now-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.7s ease;
+        }
 
-.browser-select {
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
-    border-radius: 5px;
-    background-color: #2a3a4d;
-    color: white;
-    border: none;
-    width: 100%;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
-}
+        .play-now-btn:hover {
+            background-position: 100% 0;
+            box-shadow: 0 8px 25px rgba(255, 184, 0, 0.7);
+        }
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 15px;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        .play-now-btn:hover::before {
+            top: -30%;
+            left: -30%;
+        }
 
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="box">
-            <div class="logo"></div>
-            <div class="channel-info">
-                <div class="channel-name" id="channelName">Channel Name</div>
-                <div class="channel-logo" id="channelLogo"></div>
-            </div>
-            <div class="info-box">
-                <p><strong>Info:</strong></p>
-                <p>Download HLS extension to enjoy live streams on browser.</p>
-                <select id="browserSelect" class="browser-select">
-                    <option value="chrome">Chrome</option>
-                    <option value="firefox">Firefox</option>
-                    <option value="safari">Safari (Native Support)</option>
-                </select>
-                <a href="#" id="downloadBtn" class="download-btn">Download Extension</a>
-            </div>
-            <!-- Buttons: Play Now, NS Player, Copy Link -->
-            <div class="button-group">
-                <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
-                <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
-                <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
-            </div>
+<div class="container">
+    <div class="box">
+        <div class="logo"></div>
+        <div class="channel-info">
+            <div class="channel-name" id="channelName">Channel Name</div>
+            <div class="channel-logo" id="channelLogo"></div>
+        </div>
+        <div class="info-box">
+            <p><strong>Info:</strong></p>
+            <p>Download HLS extension to enjoy live streams on browser.</p>
+        </div>
+        <div class="button-group">
+            <a href="" id="playNowButton1" class="play-now-btn" target="_blank">Play Now</a>
+            <a href="" id="playNowButton2" class="play-now-btn" target="_blank" data-package="com.genuine.leone" data-title="VT">NS Player</a>
+            <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
-        // Fetch JSON data and populate content
-        var id = new URLSearchParams(window.location.search).get('id');
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText);
-                var videoData = data.find(video => video.id === id);
+<script>
+    // Fetch channel info from M3U
+    const id = new URLSearchParams(window.location.search).get('id');
+    document.title = id + " | Sony Liv";
 
-                if (videoData) {
-                    document.getElementById('channelName').innerText = videoData.name;
-                    document.getElementById('channelLogo').style.backgroundImage = 'url(' + videoData.logo + ')';
+    fetch('https://raw.githubusercontent.com/vaathala00/sl/main/stream.m3u')
+    .then(r => r.text())
+    .then(text => {
+        const lines = text.split("\n");
+        for(let i=0;i<lines.length;i++){
+            if(lines[i].includes(`tvg-id="${id}"`)){
+                const info = lines[i];
+                const url = lines[i+1].trim();
+                const name = info.split(",").pop().trim();
+                const logo = info.match(/tvg-logo="(.*?)"/)?.[1];
 
-                    document.getElementById('playNowButton1').setAttribute('href', videoData.link);
+                document.getElementById('channelName').innerText = name;
+                document.getElementById('channelLogo').style.backgroundImage = `url(${logo})`;
+                document.getElementById('playNowButton1').href = url;
 
-                    var intentUrl = 'intent:' + videoData.link +
-                        '#Intent;package=' + document.getElementById('playNowButton2').getAttribute('data-package') +
-                        ';S.title=' + document.getElementById('playNowButton2').getAttribute('data-title') + ';end';
+                document.getElementById('playNowButton2').href =
+                    `intent:${url}#Intent;package=${document.getElementById('playNowButton2').dataset.package};S.title=${document.getElementById('playNowButton2').dataset.title};end`;
 
-                    document.getElementById('playNowButton2').setAttribute('href', intentUrl);
-                }
-            }
-        };
-        xhr.open('GET', 'm3u_sony.json', true);
-        xhr.send();
-    </script>
-
-    <script type="text/javascript">
-        // Handle download button click
-        document.getElementById("downloadBtn").addEventListener("click", function () {
-            var selectedBrowser = document.getElementById("browserSelect").value;
-            var downloadLink = "";
-
-            if (selectedBrowser === "chrome") {
-                downloadLink = "https://chromewebstore.google.com/detail/reproductor-m3u8-hls-+-da/lcipembjfkmeggpihdpdgnjildgniffl";
-            } else if (selectedBrowser === "firefox") {
-                downloadLink = "https://addons.mozilla.org/en-US/firefox/addon/m3u8-hls-player-with-shortcuts/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search";
-            } else if (selectedBrowser === "safari") {
-                downloadLink = "https://www.apple.com/safari/";
-            }
-
-            if (downloadLink) {
-                window.open(downloadLink, "_blank");
-            }
-        });
-    </script>
-
-    <script type="text/javascript">
-        // Copy link to clipboard
-        document.getElementById("copyLinkButton").addEventListener("click", function () {
-            var videoLink = document.getElementById("playNowButton1").getAttribute("href");
-            if (videoLink) {
-                navigator.clipboard.writeText(videoLink).then(function () {
+                document.getElementById('copyLinkButton').onclick = ()=>{
+                    navigator.clipboard.writeText(url);
                     alert("Link copied to clipboard!");
-                }, function (err) {
-                    alert("Failed to copy link: " + err);
-                });
-            } else {
-                alert("Link is not available yet.");
+                };
+                break;
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>

@@ -1,1390 +1,506 @@
-
-
-
-
-
-<html>
-
-
-
-	<head>
-
-		
-
-		<title>ZEE</title>
-
-		<meta charset="utf-8">
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-
-		<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;display=swap" rel="stylesheet">
-
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-
-		<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&amp;display=swap" rel="stylesheet">
-
-		<link rel="shortcut icon" href="https://www.zee5.com/images/ZEE5_logo.svg?ver=3.12.10?w=40&q=high">
-
-		<link rel="stylesheet" href="style.css">
-
-		<!-- ===== Boxicons CSS ===== -->
-
-		<link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-		<style>
-
-			body {
-
-			      /* display: flex; */
-
-			      align-items: center;
-
-			      justify-content: center;
-
-			      margin: 0 12px;
-
-			      height: 100%;
-
-			      background-color: #1F0C50;
-
-			
-
-			    }
-
-			
-
-			    .box-shadow {
-
-			      font-family: sans-serif;
-
-			      font-weight: 600;
-
-			      background-color: #2ecc71;
-
-			      color: white;
-
-			      padding: 10px;
-
-			      border-radius: 4px;
-
-			      box-shadow: 2px 2px 20px 23px #7fecad;
-
-			      background-color: #f8f8f8;
-
-			      padding: 20px;
-
-			      border-radius: 10px;
-
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-			      text-align: center;
-
-			      font-family: 'Arial', sans-serif;
-
-			      font-size: 15px;
-
-			      color: #333;
-
-			    }
-
-			
-
-			    #title {
-
-			      font-family: 'Gloock', serif;
-
-			      font-weight: bold;
-
-			      font-size: 28px;
-
-			      color: red;
-
-			      text-align: center;
-
-			      text-transform: uppercase;
-
-			      letter-spacing: 4px;
-
-			      margin: 20px 0;
-
-			      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-
-			      background-color: #f1f1f1;
-
-			      padding: 10px 20px;
-
-			      border-radius: 10px;
-
-			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-			    }
-
-			
-
-			    a. {
-
-			      text-decoration: none !important;
-
-			    }
-
-		
-
-header {
-  background-color: #0D012F;
-  color: #fff;
-  padding: 20px 20px;
-  display: flex;
-  align-items: center;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ZEE Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Icons & Fonts -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Fjalla+One&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* THEME VARIABLES */
+:root{
+  --bg:#1f0c50;
+  --bg2:#0d012f;
+  --text:#ffffff;
+  --card:rgba(255,255,255,.14);
+  --header:rgba(0,0,0,.25);
 }
 
-.logo {
-  display: flex;
-  align-items: center;
+.light{
+  --bg:#f4f4f4;
+  --bg2:#ffffff;
+  --text:#111;
+  --card:#ffffff;
+  --header:rgba(255,255,255,.75);
 }
 
-.logo-img {
-  width: 65px; /* Adjust the width of the logo */
-  height: auto;
-  margin-right: 0px;
+body{
+  font-family:'Fjalla One',sans-serif;
+  background:linear-gradient(135deg,var(--bg),var(--bg2));
+  color:var(--text);
+  min-height:100vh;
+  transition:.3s;
 }
 
-.site-title {
-font-weight: bold;
-font-size: 18px;
-  margin: 0;
+/* HEADER */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* logo left, right container right */
+  padding:14px 18px;
+  background:var(--header);
+  backdrop-filter:blur(12px);
 }
 
-#kaya_head {
-font-weight: bold;
-  color: #FFFFFF;
-  font-size: 25px;
-  text-transform: uppercase;
-  font-family: 'Tilt Warp', sans-serif;
+/* LOGO */
+.header-left img{
+  width:46px;
 }
 
+/* RIGHT CONTAINER: SEARCH + ICONS */
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* SEARCH BAR */
+.search-wrapper{
+  display:none;
+  align-items:center;
+  max-width:200px; 
+  transition: all 0.25s ease;
+}
+
+.search-wrapper.active{
+  display:flex;
+}
+
+.search-wrapper input{
+  width:100%;
+  height:32px;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:16px;
+  border:none;
+  outline:none;
+}
+
+/* ICONS */
+.icon-btn{
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.icon-btn:hover{
+  transform:scale(1.15);
+}
+
+/* CATEGORY BAR */
+.category-bar{
+  display:flex;
+  gap:12px;
+  padding:14px;
+  overflow-x:auto;
+}
+
+.category-btn{
+  padding:7px 14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.15);
+  font-size:12px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.category-btn.active{
+  background:#ffffff;
+  color:#000;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  height:220px;
+  border-radius:18px;
+  background:var(--card);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+}
+
+.card img{
+  height:90px;
+}
+
+.card h2{
+  font-size:14px;
+  margin-top:10px;
+}
+
+.card p{
+  font-size:11px;
+  opacity:.8;
+}
+
+a{text-decoration:none;color:inherit}
 </style>
+</head>
 
-		<link rel="stylesheet" href="https://ipl-2023-schedule.pages.dev/jtv.css">
+<body>
 
-		<script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script>
+<header>
+  <div class="header-left">
+    <img src="https://akamaividz2.zee5.com/image/upload/frontend/branding/images/version-2/logo.png">
+  </div>
 
-		
-
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet">
-
-		<link rel="stylesheet" href="style.css">
-
-	</head>
-
-
-
-	<body data-sveltekit-preload-data="hover" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMS45LjEwIiwic2NvcmUiOjEwOTEwfV0=">
-
-		<div style="display: contents">
-  <header>
-    <div class="logo">
-      <img src="https://www.zee5.com/images/ZEE5_logo.svg" alt="Logo" class="logo-img">
-      <h1 class="site-title"> </h1>
+  <div class="header-right">
+    <!-- Search bar -->
+    <div class="search-wrapper" id="searchWrap">
+      <input type="search" id="searchInput" placeholder="Search channels...">
     </div>
-  </header>
 
+    <!-- Icons -->
+    <i class="fa-solid fa-magnifying-glass icon-btn" id="searchBtn"></i>
+    <i class="fa-solid fa-xmark icon-btn" id="closeBtn" style="display:none;"></i>
+    <i class="fa-solid fa-moon icon-btn" id="themeBtn"></i>
+  </div>
+</header>
+
+<!-- CATEGORY BAR -->
+<div class="category-bar">
+  <div class="category-btn active" data-category="all">ALL</div>
+  <div class="category-btn" data-category="Entertainment">Entertainment</div>
+  <div class="category-btn" data-category="Movies">Movies</div>
+  <div class="category-btn" data-category="News">News</div>
 </div>
 
-		<main class="">
+<!-- CHANNEL GRID -->
+<div class="grid" id="grid">
 
-			<title> </title>
-
-			<div class="container" bis_skin_checked="1">
-
-				<div class="flex flex-row mb-3 ml-1 gap-3 justify-center align-middle" bis_skin_checked="1" style="margin: 25px;">
-  <input type="search" id="searchInput" class="relative w-[100%] col-span-4 block mx-4 rounded-l border border-solid border-neutral-300 bg-black bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:text-neutral-600 dark:placeholder:text-neutral-700" placeholder="Search"></div>
-				
-<div id="kaya_head"><span class="kayaheadicon" onclick="window.history.back()"><i class="fa-solid fa-arrow-left-long"></i></span>&nbsp;&nbsp; </div>
-
-<div id="listContainer" class="container grid place-items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 mx-auto" bis_skin_checked="1">
-				
-
-<div class="box1" bis_skin_checked="1">
-<a href="https://t.me/vaathala1" id="" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-<img src="https://static.vecteezy.com/system/resources/previews/021/672/626/original/telegram-logo-transparent-free-png.png" loading="lazy" class="h-28 mt-5 m-auto opacity-100">
-<div class="mb-5 opacity-100" bis_skin_checked="1">
-<h2 class="text-center text-sm font-bold">join now</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center"></p></div>
-</div>
-</div>
+ 
+<a href="https://t.me/vaathala1" data-category="Entertainment">
+  <div class="card">
+    <img src="https://static.vecteezy.com/system/resources/previews/021/672/626/original/telegram-logo-transparent-free-png.png">
+    <h2>join now</h2>
+    <p>Entertainment</p>
+  </div>
 </a>
-</div>
-
-
-
-  <!--        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=153" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Talkies" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Talkies.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Talkies.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Talkies</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-      <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=165" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Cinema HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinema_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinema_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Cinema HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=167" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee TV HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_TV_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_TV_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee TV HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=413" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Cinemalu" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinemalu.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinemalu.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Cinemalu</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=414" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Yuva" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Yuva.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Yuva.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Yuva</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=415" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Anmol Cinema" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Anmol_Cinema.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Anmol_Cinema.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Anmol Cinema</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=442" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee 24 Taas" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_24_Taas.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_24_Taas.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee 24 Taas</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=445" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Marathi" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Marathi.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Marathi.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Marathi</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=473" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Anmol" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Anmol.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Anmol.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Anmol</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=484" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Cinema" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinema.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinema.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Cinema</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=487" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Bollywood" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Classic.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Classic.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Bollywood</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=488" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Action" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Action.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Action.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Action</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=504" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee News" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_News.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_News.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee News</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=572" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee UP UK" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Living_Foodz.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Living_Foodz.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee UP UK</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=625" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Bangla" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Bangla</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=628" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Tamil" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Tamil.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Tamil.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Tamil</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=638" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Telugu" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Telugu.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Telugu.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Telugu</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=652" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Hindustan" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_SANGAM.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_SANGAM.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Hindustan</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=654" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Punjabi HP Haryana" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Punjabi_HP_Haryana.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Punjabi_HP_Haryana.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Punjabi HP Haryana</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=657" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Business" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Business.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Business.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Business</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=658" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee News MP Chattisgarh" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_News_MP_Chattisgarh.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_News_MP_Chattisgarh.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee News MP Chattisgarh</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=659" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Rajasthan" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Rajasthan.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Rajasthan.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Rajasthan</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=661" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Bihar Jharkhand" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Purvaiya.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Purvaiya.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Bihar Jharkhand</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=685" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Bangla Cinema" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla_Cinema.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla_Cinema.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Bangla Cinema</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=689" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Kannada" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Kannada</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=722" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Sarthak" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sarthak_TV.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Sarthak_TV.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Sarthak</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=724" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Delhi NCR Haryana" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kalinga.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kalinga.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Delhi NCR Haryana</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=728" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Salaam" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Salaam.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Salaam.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Salaam</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=929" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee 24 Kalak" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_24_Kalak.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_24_Kalak.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee 24 Kalak</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1319" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Cafe HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cafe_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cafe_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Cafe HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1351" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee TV" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_TV.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_TV.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee TV</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1354" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Telugu HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Telugu_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Telugu_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Telugu HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1356" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Tamil HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Tamil_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Tamil_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Tamil HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1358" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Talkies HD " data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Talkies_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Talkies_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Talkies HD </h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1360" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Marathi HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Marathi_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Marathi_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Marathi HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1362" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Kannada HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Kannada HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1363" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Cinemalu HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinemalu_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Cinemalu_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Cinemalu HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1641" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Keralam HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Keralam_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Keralam_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Keralam HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1691" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Classic" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Classic_SD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Classic_SD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Classic</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1746" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Picchar HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Picchar_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Picchar_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Picchar HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1751" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Punjabi" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Punjabi.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Punjabi.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Punjabi</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=1977" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Bangla HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Bangla_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Bangla HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=2256" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Thirai" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Thirai.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Thirai.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Thirai</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=2742" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Kannada News" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada_News.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Kannada_News.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Kannada News</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=2757" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Zest HD" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Zest_HD.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Zest_HD.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Zest HD</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=2758" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Chitramandir" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Chitramandir.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Chitramandir.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Chitramandir</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div>
-      
-        <div class="box1" bis_skin_checked="1">
-          <a href="https://c2ag.short.gy/Joker_play?cid=&id=2761" data-sveltekit-preload-data="hover">
-<div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-            <img class="card-img-top lazyloaded" alt="Zee Ganga" data-src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Ganga.png" style="height: 120px" src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Zee_Ganga.png">
-            <div class="mb-5 opacity-100" bis_skin_checked="1">
-              <h2 class="text-center text-sm font-bold">Zee Ganga</h2>
-<div class="flex justify-center space-x-1" bis_skin_checked="1"><img src="1.svg" alt="">
-<p class="text-xs text-center">Entertainment</p></div>
-</div>
-            </div>
-          </a>
-        </div> -->
-
-
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20TV" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE TV" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/yHNSuG1V.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/yHNSuG1V.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE TV</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=AND%20TV" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="AND TV" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/T1CCvaAQ.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/T1CCvaAQ.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">AND TV</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20ANMOL" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE ANMOL" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/QjKdER9Z.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/QjKdER9Z.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE ANMOL</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20ANMOL%20CINEMA" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE ANMOL CINEMA" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/diYkUOnX.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/diYkUOnX.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE ANMOL CINEMA</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20CINEMA" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE CINEMA" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/qss9gFuH.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/qss9gFuH.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE CINEMA</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=AND%20PICTURES" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="AND PICTURES" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/HivVrdof.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/HivVrdof.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">AND PICTURES</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BOLLYWOOD" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE BOLLYWOOD" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/EqDlflgi.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/EqDlflgi.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE BOLLYWOOD</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Bangla%20Cinema" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Bangla Cinema" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/gLSSl4nG.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/gLSSl4nG.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Bangla Cinema</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Bangla%20" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Bangla " data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/9XHWylqs.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/9XHWylqs.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Bangla </h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZOOM" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZOOM" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/jLvKrs62.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/jLvKrs62.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZOOM</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZING" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZING" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/Nyi83z1G.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/Nyi83z1G.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZING</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=MTVBEATS" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="MTVBEATS" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/MJZdklJi.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/MJZdklJi.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">MTVBEATS</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20TURBO" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="DISCOVERY TURBO" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6eCv1iuk.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6eCv1iuk.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">DISCOVERY TURBO</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20SCIENCE" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="DISCOVERY SCIENCE" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vIA7TExn.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vIA7TExn.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">DISCOVERY SCIENCE</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=INVESTIGATION%20DISCOVERY" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="INVESTIGATION DISCOVERY" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/mHhlDCiL.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/mHhlDCiL.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">INVESTIGATION DISCOVERY</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=TLC" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="TLC" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/FOvFsIgt.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/FOvFsIgt.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">TLC</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20CHANNEL" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="DISCOVERY CHANNEL" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/UyI5ljKM.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/UyI5ljKM.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">DISCOVERY CHANNEL</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20KIDS" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="DISCOVERY KIDS" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/RzedYhFG.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/RzedYhFG.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">DISCOVERY KIDS</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20News" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee News" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuqgsvfVCC5WZxPxIp7vXTQ11WpCqTd8BZeg&s" style="height: 120px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuqgsvfVCC5WZxPxIp7vXTQ11WpCqTd8BZeg&s">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee News</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=NDTVINDIA" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="NDTVINDIA" data-src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/iqfloc.png" style="height: 120px" src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/iqfloc.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">NDTVINDIA</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20HINDUSTAN" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE HINDUSTAN" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/TknReKLD.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/TknReKLD.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE HINDUSTAN</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BUSINESS" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE BUSINESS" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vExrDK9r.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vExrDK9r.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE BUSINESS</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BIH%2FJH" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="ZEE BIH/JH" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/5zkMvEbF.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/5zkMvEbF.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">ZEE BIH/JH</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Talkies" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Talkies" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/VGfIqjrc.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/VGfIqjrc.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Talkies</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Sarthak" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Sarthak" data-src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/zee-sarthak.png" style="height: 120px" src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/zee-sarthak.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Sarthak</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Kannada%20HD%20" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Kannada HD " data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/1PrOGXAh.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/1PrOGXAh.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Kannada HD </h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Telugu%20HD" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Telugu HD" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6vNzRaRK.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6vNzRaRK.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Telugu HD</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Tamil" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Tamil" data-src="https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Tamil.png" style="height: 120px" src="https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Tamil.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Tamil</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Marathi%20HD" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="Zee Marathi HD" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/4bimlHJj.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/4bimlHJj.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">Zee Marathi HD</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=SHORTSTV" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="SHORTSTV" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/lcMc75Xr.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/lcMc75Xr.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">SHORTSTV</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=KOREAN%20DRAMAS" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="KOREAN DRAMAS" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">KOREAN DRAMAS</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-<div class="box1" bis_skin_checked="1">
-  <a href="https://zplay.vodep39240327.workers.dev/?play=KOREAN%20DRAMAS" data-sveltekit-preload-data="hover">
-    <div class="card w-40 bg-gray-100 rounded-xl bg-base-100 shadow-lg h-48 mb-4 flex flex-col" bis_skin_checked="1">
-      <img class="h-28 mt-5 m-auto opacity-100" alt="KOREAN DRAMAS" data-src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png" style="height: 120px" src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png">
-      <div class="mb-5 opacity-100" bis_skin_checked="1">
-        <h2 class="text-center text-sm font-bold">KOREAN DRAMAS</h2>
-        <div class="flex justify-center space-x-1" bis_skin_checked="1">
-          <img src="1.svg" alt="">
-          <p class="text-xs text-center">Entertainment</p>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-
-      </div>
-				</div>
-			</div>
-		</main>
-
-		<div id="svelte-announcer" aria-live="assertive" aria-atomic="true" style="position: absolute; left: 0px; top: 0px; clip: rect(0px, 0px, 0px, 0px); clip-path: inset(50%); overflow: hidden; white-space: nowrap; width: 1px; height: 1px;" bis_skin_checked="1"></div>
-
-		<script type="text/javascript" src="channel.js"></script>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-		<script>
-
-		 // Get search input element
-
-  const searchInput = document.getElementById('searchInput');
-
-
-
-  // Add input event listener
-
-  searchInput.addEventListener('input', filterData);
-
-
-
-  // Search functionality
-
-  function filterData() {
-
-    const updatedSearchValue = searchInput.value.toLowerCase();
-
-
-
-    // Get all box elements
-
-    const boxes = document.querySelectorAll('.box1');
-
-
-
-    boxes.forEach((box) => {
-
-      const h2Text = box.querySelector('h2').textContent.toLowerCase();
-
-      const pText = box.querySelector('p').textContent.toLowerCase();
-
-
-
-      if (h2Text.includes(updatedSearchValue) || pText.includes(updatedSearchValue)) {
-
-        box.style.display = 'block'; // Show matching box
 
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20TV" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/yHNSuG1V.png">
+    <h2>ZEE TV</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=AND%20TV" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/T1CCvaAQ.png">
+    <h2>AND TV</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20ANMOL" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/QjKdER9Z.png">
+    <h2>ZEE ANMOL</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20ANMOL%20CINEMA" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/diYkUOnX.png">
+    <h2>ZEE ANMOL CINEMA</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20CINEMA" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/qss9gFuH.png">
+    <h2>ZEE CINEMA</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=AND%20PICTURES" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/HivVrdof.png">
+    <h2>AND PICTURES</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BOLLYWOOD" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/EqDlflgi.png">
+    <h2>ZEE BOLLYWOOD</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Bangla%20Cinema" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/gLSSl4nG.png">
+    <h2>Zee Bangla Cinema</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Bangla%20" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/9XHWylqs.png">
+    <h2>Zee Bangla</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZOOM" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/jLvKrs62.png">
+    <h2>ZOOM</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZING" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/Nyi83z1G.png">
+    <h2>ZING</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=MTVBEATS" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/MJZdklJi.png">
+    <h2>MTVBEATS</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20TURBO" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6eCv1iuk.png">
+    <h2>DISCOVERY TURBO</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20SCIENCE" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vIA7TExn.png">
+    <h2>DISCOVERY SCIENCE</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=INVESTIGATION%20DISCOVERY" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/mHhlDCiL.png">
+    <h2>INVESTIGATION DISCOVERY</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=TLC" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/FOvFsIgt.png">
+    <h2>TLC</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20CHANNEL" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/UyI5ljKM.png">
+    <h2>DISCOVERY CHANNEL</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=DISCOVERY%20KIDS" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/RzedYhFG.png">
+    <h2>DISCOVERY KIDS</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20News" data-category="Entertainment">
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuqgsvfVCC5WZxPxIp7vXTQ11WpCqTd8BZeg&s">
+    <h2>Zee News</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=NDTVINDIA" data-category="Entertainment">
+  <div class="card">
+    <img src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/iqfloc.png">
+    <h2>NDTVINDIA</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20HINDUSTAN" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/TknReKLD.png">
+    <h2>ZEE HINDUSTAN</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BUSINESS" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vExrDK9r.png">
+    <h2>ZEE BUSINESS</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BIH%2FJH" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/5zkMvEbF.png">
+    <h2>ZEE BIH/JH</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Talkies" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/VGfIqjrc.png">
+    <h2>Zee Talkies</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Sarthak" data-category="Entertainment">
+  <div class="card">
+    <img src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/zee-sarthak.png">
+    <h2>Zee Sarthak</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Kannada%20HD%20" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/1PrOGXAh.png">
+    <h2>Zee Kannada HD</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Telugu%20HD" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/6vNzRaRK.png">
+    <h2>Zee Telugu HD</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Tamil" data-category="Entertainment">
+  <div class="card">
+    <img src="https://jiotvimages.cdn.jio.com/dare_images/images/Zee_Tamil.png">
+    <h2>Zee Tamil</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Marathi%20HD" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/4bimlHJj.png">
+    <h2>Zee Marathi HD</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=SHORTSTV" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/lcMc75Xr.png">
+    <h2>SHORTSTV</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=KOREAN%20DRAMAS" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png">
+    <h2>KOREAN DRAMAS</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+<a href="https://zplay.vodep39240327.workers.dev/?play=KOREAN%20DRAMAS" data-category="Entertainment">
+  <div class="card">
+    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png">
+    <h2>KOREAN DRAMAS</h2>
+    <p>Entertainment</p>
+  </div>
+</a>
+
+</div>
+
+<script>
+// SEARCH BAR TOGGLE
+const searchBtn = document.getElementById('searchBtn');
+const closeBtn = document.getElementById('closeBtn');
+const searchWrap = document.getElementById('searchWrap');
+const themeBtn = document.getElementById('themeBtn');
+
+searchBtn.onclick = () => {
+  searchWrap.classList.add('active');
+  searchBtn.style.display = 'none';
+  closeBtn.style.display = 'block';
+};
+
+closeBtn.onclick = () => {
+  searchWrap.classList.remove('active');
+  searchBtn.style.display = 'block';
+  closeBtn.style.display = 'none';
+};
+
+// DARK / LIGHT MODE
+themeBtn.onclick = () => {
+  document.body.classList.toggle('light');
+  themeBtn.classList.toggle('fa-moon');
+  themeBtn.classList.toggle('fa-sun');
+};
+
+// CATEGORY FILTER
+const categoryBtns = document.querySelectorAll('.category-btn');
+const gridItems = document.querySelectorAll('#grid a');
+
+categoryBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // remove active from all
+    categoryBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cat = btn.dataset.category;
+
+    gridItems.forEach(item => {
+      if(cat === 'all' || item.dataset.category === cat){
+        item.style.display = 'block';
       } else {
-
-        box.style.display = 'none'; // Hide non-matching box
-
+        item.style.display = 'none';
       }
-
     });
+  });
+});
+</script>
 
-  }
-
-		</script>
-
-	</body>
-
-
-
+</body>
 </html>
