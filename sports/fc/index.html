@@ -42,7 +42,6 @@ header{
   padding:10px 15px;
   background:var(--header);
   gap:10px;
-  position:relative;
 }
 
 /* LOGO */
@@ -64,9 +63,9 @@ header{
   color:var(--text);
 }
 
-/* SEARCH BAR (hidden by default) */
+/* SEARCH BAR */
 .header-search{
-  display:flex;
+  display:none;
   align-items:center;
   gap:6px;
   max-width:260px;
@@ -75,7 +74,6 @@ header{
   background:rgba(255,255,255,.12);
   padding:4px 8px;
   border-radius:20px;
-  display:none;
 }
 
 .header-search input{
@@ -85,11 +83,6 @@ header{
   outline:none;
   color:var(--text);
   font-size:13px;
-  padding:4px 6px;
-}
-
-.header-search input::placeholder{
-  color:#bbb;
 }
 
 /* CATEGORY */
@@ -107,7 +100,6 @@ header{
   background:var(--card);
   cursor:pointer;
   font-size:12px;
-  transition:.3s;
 }
 
 .category-btn.active{
@@ -179,6 +171,23 @@ header{
 .card h3{font-size:14px;margin:8px 0 4px}
 .card p{font-size:12px;opacity:.7}
 .time{font-size:11px;color:#4CAF50}
+
+/* 🔥 MOBILE FIX: FORCE 2 CARDS */
+@media (max-width: 600px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:12px;
+  }
+
+  .card img{
+    height:150px;
+  }
+
+  .card h3{
+    font-size:13px;
+  }
+}
 </style>
 </head>
 
@@ -187,23 +196,18 @@ header{
 <header>
   <img class="logo" src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9">
 
-  <!-- SEARCH BAR -->
   <div id="headerSearch" class="header-search">
     <input id="searchInput" placeholder="Search channel...">
     <i class="fa-solid fa-xmark icon-btn" onclick="closeSearch()"></i>
   </div>
 
-  <!-- HEADER ACTIONS -->
   <div id="headerActions" class="header-actions">
     <i class="fa-solid fa-magnifying-glass icon-btn" onclick="openSearch()"></i>
     <i id="themeIcon" class="fa-solid fa-sun icon-btn" onclick="toggleTheme()"></i>
   </div>
 </header>
 
-<!-- CATEGORY FILTER -->
 <div id="categories" class="categories"></div>
-
-<!-- MATCH CARDS GRID -->
 <div id="grid" class="grid"></div>
 
 <script>
@@ -216,7 +220,6 @@ const themeIcon=document.getElementById('themeIcon');
 
 let allMatches=[],activeCategory='All';
 
-/* SEARCH TOGGLE */
 function openSearch(){
   searchBox.style.display='flex';
   headerActions.style.display='none';
@@ -230,7 +233,6 @@ function closeSearch(){
   filter();
 }
 
-/* THEME TOGGLE */
 function toggleTheme(){
   document.body.classList.toggle('light');
   const isLight=document.body.classList.contains('light');
@@ -239,7 +241,6 @@ function toggleTheme(){
 }
 if(localStorage.getItem('theme')==='light')toggleTheme();
 
-/* FETCH MATCH DATA */
 fetch('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json')
 .then(r=>r.json())
 .then(data=>{
@@ -248,7 +249,6 @@ fetch('https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancod
   render(allMatches);
 });
 
-/* CREATE CATEGORY FILTER */
 function buildCategories(matches){
   const cats=['All',...new Set(matches.map(m=>m.event_category))];
   cats.forEach(c=>{
@@ -265,7 +265,6 @@ function buildCategories(matches){
   });
 }
 
-/* RENDER CARDS */
 function render(matches){
   grid.innerHTML='';
   matches.forEach(m=>{
@@ -273,7 +272,7 @@ function render(matches){
     card.className='card';
     card.innerHTML=`
       <div class="badge ${m.status==='LIVE'?'live':'upcoming'}">
-        ${m.status==='LIVE'?'LIVE':'UPCOMING'}
+        ${m.status}
       </div>
       <img src="${m.src}">
       <h3>${m.match_name}</h3>
@@ -285,7 +284,6 @@ function render(matches){
   });
 }
 
-/* FILTER FUNCTION */
 function filter(){
   const q=searchInput.value.toLowerCase();
   const filtered=allMatches.filter(m=>{
