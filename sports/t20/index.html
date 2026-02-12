@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Stream</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:"Segoe UI",sans-serif;
+}
+
+body{
+    background:#0b0f14;
+    color:#fff;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:10px;
+    padding-bottom:120px;
+}
+
+.my-iframe{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 0 30px rgba(0,255,200,0.18);
+}
+
+.my-iframe iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+/* COUNTER */
+#counter-container{
+    position:absolute;
+    top:10px;
+    right:10px;
+    padding:5px 10px;
+    border-radius:999px;
+    background:rgba(0,0,0,0.6);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    z-index:10;
+}
+
+/* SELECT STYLE */
+.language-selector-container{
+    margin-top:12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+}
+
+.language-label{
+    opacity:0.7;
+}
+
+#channelSelector{
+    background:#111;
+    color:#00ffcc;
+    border:1px solid rgba(255,255,255,0.1);
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:13px;
+    cursor:pointer;
+}
+
+#channelSelector:focus{
+    outline:none;
+    border-color:#00ffcc;
+}
+
+/* CHAT */
+.chat-toggle{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#00ffcc,#008cff);
+    border:none;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(0,255,200,0.6);
+    z-index:50;
+}
+
+.chat-toggle::before{
+    content:"💬";
+    font-size:22px;
+}
+
+.chat-container{
+    position:fixed;
+    right:20px;
+    bottom:80px;
+    width:320px;
+    height:420px;
+    background:#111;
+    border-radius:14px;
+    overflow:hidden;
+    display:none;
+    box-shadow:0 0 30px rgba(0,0,0,0.7);
+    z-index:40;
+}
+
+.chat-container iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+.chat-close{
+    position:absolute;
+    top:6px;
+    right:8px;
+    background:none;
+    color:white;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="my-iframe">
+<div id="counter-container">
+<i class="fas fa-eye"></i>
+<script src="//widget.supercounters.com/ssl/online_t.js"></script>
+<script>
+sc_online_t(1703136,"LIVE","00ffcc");
+</script>
+</div>
+<iframe id="videoFrame" src="" allowfullscreen></iframe>
+</div>
+
+<!-- SELECT DROPDOWN -->
+<div class="language-selector-container">
+<label for="channelSelector" class="language-label">
+Change Channel:
+</label>
+
+<select id="channelSelector" onchange="changeChannel(this.value)">
+
+<!-- ADD CHANNEL IDS MANUALLY -->
+<option value="1106">Star Sports 1HD</option>
+<option value="362">Star Sports 1 Hindi</option>
+<option value="1108">Star Sports 1 Hindi HD</option>
+<option value="2853">Star Sports 2 Tamil HD</option>
+<option value="3277">Star Sports 1 Tamil HD</option>
+<option value="3274">Star Sports 2 telugu HD</option>
+<option value="3278">Star Sports 1 telugu HD</option>
+<option value="1122">Star Sports 2 kannada HD</option>
+<option value="1650">Star Sports 1 kannada HD</option>
+
+
+</select>
+</div>
+
+</div>
+
+<button class="chat-toggle" id="chatToggle"></button>
+
+<div class="chat-container" id="chatBox">
+<button class="chat-close" id="chatClose">✕</button>
+<iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"></iframe>
+</div>
+
+<script>
+const iframe=document.getElementById("videoFrame");
+const selector=document.getElementById("channelSelector");
+
+function getIdFromUrl(){
+const params=new URLSearchParams(window.location.search);
+return params.get("id");
+}
+
+async function loadChannel(id){
+try{
+const response=await fetch("https://raw.githubusercontent.com/vaathala00/jow/main/output.json");
+const data=await response.json();
+const channel=data.find(c=>c.id===id);
+
+if(channel){
+iframe.src=channel.link;
+document.title=channel.name+" - Live";
+selector.value=id;
+}
+}catch(err){
+console.error(err);
+}
+}
+
+function changeChannel(id){
+window.location.search="?id="+id;
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+const id=getIdFromUrl() || "1106";
+loadChannel(id);
+});
+
+/* CHAT */
+const chatToggle=document.getElementById("chatToggle");
+const chatBox=document.getElementById("chatBox");
+const chatClose=document.getElementById("chatClose");
+
+chatToggle.onclick=()=>{
+chatBox.style.display=chatBox.style.display==="block"?"none":"block";
+};
+
+chatClose.onclick=()=>chatBox.style.display="none";
+</script>
+
+</body>
+</html>

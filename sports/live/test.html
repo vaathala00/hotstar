@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Stream</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #0b0f14;
+    color: #fff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 10px;
+    padding-bottom: 100px;
+}
+
+.my-iframe {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,255,200,0.18);
+}
+
+.my-iframe iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#counter-container {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    z-index: 10;
+}
+
+.channel-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+.channel-info img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background: #111;
+    padding: 6px;
+    border-radius: 10px;
+}
+
+.channel-details h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.channel-details span {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* CHAT */
+.chat-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ffcc, #008cff);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0,255,200,0.6);
+    z-index: 50;
+}
+
+.chat-toggle::before {
+    content: "💬";
+    font-size: 24px;
+}
+
+.chat-container {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    width: 320px;
+    height: 420px;
+    background: #111;
+    border-radius: 14px;
+    overflow: hidden;
+    display: none;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+    z-index: 40;
+}
+
+.chat-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.chat-close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: none;
+    color: white;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="my-iframe" id="iframe-container">
+
+    <div id="counter-container">
+        <i class="fas fa-eye"></i>
+        <script src="//widget.supercounters.com/ssl/online_t.js"></script>
+        <script>
+            sc_online_t(1703136, "LIVE", "00ffcc");
+        </script>
+    </div>
+
+    <iframe src="" allowfullscreen></iframe>
+</div>
+
+<!-- CHANNEL INFO -->
+<div class="channel-info">
+    <img id="channelLogo" src="" alt="Logo">
+    <div class="channel-details">
+        <h2 id="channelName">Loading...</h2>
+        <span id="channelGroup"></span>
+    </div>
+</div>
+
+</div>
+
+<!-- CHAT -->
+<button class="chat-toggle" id="chatToggle"></button>
+
+<div class="chat-container" id="chatBox">
+    <button class="chat-close" id="chatClose">✕</button>
+    <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io"></iframe>
+</div>
+
+<script>
+/* ======================
+   JSON CHANNEL LOADER
+====================== */
+
+const iframe = document.querySelector("#iframe-container iframe");
+const logo = document.getElementById("channelLogo");
+const nameEl = document.getElementById("channelName");
+const groupEl = document.getElementById("channelGroup");
+
+function getIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
+}
+
+async function loadChannel() {
+    const urlId = getIdFromUrl();
+    const finalId = urlId || ""; // default ID
+
+    try {
+        const response = await fetch("https://raw.githubusercontent.com/vaathala00/jow/main/output.json");
+        const data = await response.json();
+
+        const channel = data.find(item => item.id === finalId);
+
+        if (channel) {
+            iframe.src = channel.link;
+            logo.src = channel.logo;
+            nameEl.textContent = channel.name;
+            groupEl.textContent = "Group: " + channel.group;
+            document.title = channel.name + " - Live Stream";
+        } else {
+            nameEl.textContent = "Channel Not Found";
+        }
+
+    } catch (error) {
+        console.error("Error loading JSON:", error);
+        nameEl.textContent = "Error Loading Channel";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadChannel);
+
+/* ======================
+   CHAT TOGGLE
+====================== */
+const chatToggle = document.getElementById("chatToggle");
+const chatBox = document.getElementById("chatBox");
+const chatClose = document.getElementById("chatClose");
+
+chatToggle.onclick = () => {
+    chatBox.style.display = chatBox.style.display === "block" ? "none" : "block";
+};
+
+chatClose.onclick = () => chatBox.style.display = "none";
+</script>
+
+</body>
+</html>
