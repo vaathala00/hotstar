@@ -8,118 +8,83 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial;
-  background: linear-gradient(135deg, #141e30, #243b55);
-  color: white;
+  background: #1e1333;
+  color: #f5f1e6;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  animation: fadeIn 1s ease;
-  position: relative;
+  padding: 40px 20px;
 }
 
-/* Back Button */
 .back-btn {
   position: absolute;
-  top: 25px;
-  left: 25px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
+  top: 20px;
+  left: 20px;
+  background: transparent;
   border: none;
-  color: white;
-  font-size: 22px;
-  padding: 10px 15px;
-  border-radius: 50%;
+  color: #c9a227;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.back-btn:hover {
-  transform: scale(1.15);
-  background: rgba(255,255,255,0.2);
 }
 
 .container {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  padding: 40px;
-  border-radius: 25px;
-  width: 90%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  animation: slideUp 0.8s ease;
 }
 
 .icon {
-  width: 130px;
-  border-radius: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
+  width: 100px;
+  border-radius: 22px;
+  border: 1px solid #c9a227;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-.icon:hover {
-  transform: scale(1.1);
+h2 {
+  font-size: 18px;
+  margin: 12px 0;
+  color: #c9a227;
+  font-weight: 500;
 }
 
 .download-btn {
-  padding: 14px 30px;
-  background: linear-gradient(45deg, #00f2fe, #4facfe);
-  color: white;
+  padding: 8px 20px;
+  font-size: 13px;
+  background: #c9a227;
+  color: #1e1333;
   border: none;
-  border-radius: 30px;
+  border-radius: 20px;
   cursor: pointer;
-  margin: 25px 0;
-  font-size: 16px;
-  transition: 0.3s;
+  margin: 15px 0;
+  transition: 0.25s;
 }
 
 .download-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  opacity: 0.85;
 }
 
 .screenshots {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .screenshots img {
-  width: 110px;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
+  width: 85px;
+  border-radius: 12px;
+  border: 1px solid #c9a227;
   cursor: pointer;
-}
-
-.screenshots img:hover {
-  transform: scale(1.1);
-}
-
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
-}
-
-@keyframes slideUp {
-  from {opacity:0; transform: translateY(40px);}
-  to {opacity:1; transform: translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<button class="back-btn" onclick="goBack()">←</button>
+<button class="back-btn" onclick="window.history.back()">← Back</button>
 
 <div id="details"></div>
 
 <script>
-function goBack() {
-  window.history.back();
-}
-
 const params = new URLSearchParams(window.location.search);
 const appId = parseInt(params.get("id"));
 
@@ -141,7 +106,6 @@ fetch("apps.json")
           <button class="download-btn">Download</button>
         </a>
 
-        <h3>Screenshots</h3>
         <div class="screenshots">
           ${app.screenshots.map(s => `<img src="${s}">`).join("")}
         </div>

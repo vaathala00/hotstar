@@ -7,82 +7,59 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color: white;
-  animation: fadeIn 1s ease-in;
+  font-family: 'Segoe UI', Arial;
+  background: #1e1333;
+  color: #f5f1e6;
 }
 
 h1 {
   text-align: center;
-  padding-top: 20px;
-  font-size: 40px;
+  padding: 18px 0;
+  font-size: 24px;
+  font-weight: 500;
   letter-spacing: 1px;
-}
-
-hr {
-  margin-bottom: 40px;
-  border: none;
-  height: 2px;
-  background: rgba(255,255,255,0.2);
+  color: #c9a227;
 }
 
 #appContainer {
   padding: 20px 40px;
 }
 
-.category-section {
-  margin-bottom: 50px;
-  animation: slideUp 0.8s ease forwards;
-}
-
 .category-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  border-left: 4px solid #00f2fe;
-  padding-left: 10px;
+  font-size: 16px;
+  margin: 20px 0 12px 0;
+  color: #c9a227;
 }
 
 .app-row {
   display: flex;
-  gap: 25px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
 .app-card {
-  width: 110px;
+  width: 85px;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.25s ease;
 }
 
 .app-card:hover {
-  transform: translateY(-10px) scale(1.05);
+  transform: translateY(-6px);
 }
 
 .app-card img {
-  width: 90px;
-  height: 90px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  transition: 0.3s;
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  border: 1px solid #c9a227;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
 .app-name {
-  margin-top: 10px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
-}
-
-@keyframes slideUp {
-  from {opacity:0; transform: translateY(30px);}
-  to {opacity:1; transform: translateY(0);}
+  margin-top: 6px;
+  font-size: 12px;
+  color: #f5f1e6;
 }
 </style>
 </head>
@@ -90,8 +67,6 @@ hr {
 <body>
 
 <h1>Application</h1>
-<hr>
-
 <div id="appContainer"></div>
 
 <script>
@@ -103,17 +78,13 @@ fetch("apps.json")
     const grouped = {};
 
     data.apps.forEach(app => {
-      if (!grouped[app.category]) {
-        grouped[app.category] = [];
-      }
+      if (!grouped[app.category]) grouped[app.category] = [];
       grouped[app.category].push(app);
     });
 
     Object.keys(grouped).forEach(category => {
 
       const section = document.createElement("div");
-      section.className = "category-section";
-
       section.innerHTML = `<div class="category-title">${category}</div>`;
 
       const row = document.createElement("div");
