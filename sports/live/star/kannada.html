@@ -151,7 +151,15 @@ body{
 sc_online_t(1703136,"LIVE","00ffcc");
 </script>
 </div>
-<iframe id="videoFrame" src="" allowfullscreen></iframe>
+<!-- FIX APPLIED HERE: Added 'allow' for encrypted-media and autoplay -->
+<iframe 
+    id="videoFrame" 
+    src="" 
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+    allowfullscreen 
+    referrerpolicy="no-referrer">
+</iframe>
+
 </div>
 
 <!-- SELECT DROPDOWN -->

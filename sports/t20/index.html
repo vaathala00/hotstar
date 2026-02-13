@@ -44,7 +44,16 @@ body{background:#0b0f14;color:#fff;}
 sc_online_t(1703136,"LIVE","00ffcc");
 </script>
 </div>
-<iframe id="videoFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+<!-- FIX APPLIED HERE: Added 'allow' for encrypted-media and autoplay -->
+<iframe 
+    id="videoFrame" 
+    src="" 
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+    allowfullscreen 
+    referrerpolicy="no-referrer">
+</iframe>
+
 </div>
 
 <!-- SELECT DROPDOWN -->
@@ -69,7 +78,7 @@ sc_online_t(1703136,"LIVE","00ffcc");
 
 <div class="chat-container" id="chatBox">
 <button class="chat-close" id="chatClose">✕</button>
-<iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=YOUR_DOMAIN_HERE" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
 <script>
@@ -87,7 +96,6 @@ async function loadChannel(id){
     const data=await response.json();
     const channel=data.find(c=>c.id===id);
     if(channel){
-      // Some providers block iframe embed; we can try sandboxing
       iframe.src = channel.link; 
       document.title = channel.name + " - Live";
       selector.value = id;
