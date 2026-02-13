@@ -1,0 +1,93 @@
+{
+  "apps": [
+    {
+      "id": 1,
+      "category": "Mobile Player",
+      "name": "Network Stream [Premium]",
+      "logo": "https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc",
+      "screenshots": [
+        "screenshots/network_stream/1.jpg",
+        "screenshots/network_stream/2.jpg",
+        "screenshots/network_stream/3.jpg"
+      ],
+      "install": {
+        "type": "download",
+        "url": "Network_Stream.apk"
+      }
+    },
+    {
+      "id": 2,
+      "category": "Mobile Player",
+      "name": "OTT Navigator TV [Premium]",
+      "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
+      "screenshots": [
+        "screenshots/ott_tv/1.jpg",
+        "screenshots/ott_tv/2.jpg",
+        "screenshots/ott_tv/3.jpg"
+      ],
+      "install": {
+        "type": "download",
+        "url": "OTT_Navigator_1.7.3.1.apk"
+      }
+    },
+    {
+      "id": 3,
+      "category": "Mobile Player",
+      "name": "OTT Navigator Mobile [Premium]",
+      "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
+      "screenshots": [
+        "screenshots/ott_mobile/1.jpg",
+        "screenshots/ott_mobile/2.jpg",
+        "screenshots/ott_mobile/3.jpg"
+      ],
+      "install": {
+        "type": "download",
+        "url": "OTT_Navigator_v1.7.3.2.apk"
+      }
+    },
+    {
+      "id": 4,
+      "category": "PC Player",
+      "name": "AuthoIPTV PC/Mac OS",
+      "logo": "https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true",
+      "screenshots": [
+        "screenshots/authoiptv/1.png",
+        "screenshots/authoiptv/2.png"
+      ],
+      "install": {
+        "type": "external",
+        "url": "https://github.com/glitport/AuthoIPTV/releases/tag/v0.6.4-beta"
+      }
+    },
+    {
+      "id": 5,
+      "category": "Mobile Player",
+      "name": "TV WoW (Our App)",
+      "logo": "https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg",
+      "screenshots": [
+        "screenshots/tvwow/1.jpg",
+        "screenshots/tvwow/2.jpg",
+        "screenshots/tvwow/3.jpg",
+        "screenshots/tvwow/4.jpg"
+      ],
+      "install": {
+        "type": "download",
+        "url": "TV_WoW.apk"
+      }
+    },
+    {
+      "id": 6,
+      "category": "PC Player",
+      "name": "Media Stream Player (PC)",
+      "logo": "https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png",
+      "screenshots": [
+        "screenshots/media_player/1.png",
+        "screenshots/media_player/2.png"
+      ],
+      "install": {
+        "type": "external",
+        "url": "https://github.com/MirazMac/Media-Stream-Player/releases"
+      }
+    }
+  ]
+}
