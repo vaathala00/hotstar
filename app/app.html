@@ -11,8 +11,6 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: #1e1333;
   color: #f5f1e6;
-  display: flex;
-  justify-content: center;
   padding: 40px 20px;
 }
 
@@ -28,8 +26,8 @@ body {
 }
 
 .container {
-  max-width: 700px;
-  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .top-section {
@@ -68,23 +66,32 @@ body {
   opacity: 0.85;
 }
 
-/* Screenshots container */
-.screenshots {
+/* Horizontal scrolling screenshots container */
+.screenshots-container {
+  margin-top: 35px;
+  overflow-x: auto;
   display: flex;
   gap: 16px;
-  margin-top: 35px;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding-bottom: 10px;
 }
 
-/* Screenshots images with original aspect ratio */
+.screenshots-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.screenshots-container::-webkit-scrollbar-thumb {
+  background: #c9a227;
+  border-radius: 4px;
+}
+
 .screenshots img {
-  height: 360px;     /* same height for all */
-  width: auto;       /* maintain aspect ratio */
+  height: 360px; /* uniform height */
+  width: auto;   /* maintain aspect ratio */
   border-radius: 16px;
   border: 1px solid #2c2144;
   cursor: pointer;
   transition: 0.25s;
+  flex-shrink: 0; /* prevent shrinking */
 }
 
 .screenshots img:hover {
@@ -150,8 +157,10 @@ fetch("apps.json")
           </div>
         </div>
 
-        <div class="screenshots">
-          ${app.screenshots.map(s => `<img src="${s}">`).join("")}
+        <div class="screenshots-container">
+          <div class="screenshots">
+            ${app.screenshots.map(s => `<img src="${s}">`).join("")}
+          </div>
         </div>
       </div>
     `;
