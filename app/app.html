@@ -66,35 +66,37 @@ body {
   opacity: 0.85;
 }
 
-/* Horizontal scrolling screenshots container */
-.screenshots-container {
-  margin-top: 35px;
-  overflow-x: auto;
+/* Horizontal scroll gallery */
+.screenshot-gallery {
   display: flex;
-  gap: 16px;
-  padding-bottom: 10px;
+  overflow-x: auto;
+  gap: 12px;
+  margin-top: 30px;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
 }
 
-.screenshots-container::-webkit-scrollbar {
+.screenshot-gallery::-webkit-scrollbar {
   height: 8px;
 }
 
-.screenshots-container::-webkit-scrollbar-thumb {
+.screenshot-gallery::-webkit-scrollbar-thumb {
   background: #c9a227;
   border-radius: 4px;
 }
 
-.screenshots img {
-  height: 360px; /* uniform height */
-  width: auto;   /* maintain aspect ratio */
-  border-radius: 16px;
+/* Each screenshot */
+.screenshot-gallery img {
+  height: 360px;   /* fixed height */
+  width: auto;     /* maintain aspect ratio */
+  border-radius: 12px;
   border: 1px solid #2c2144;
   cursor: pointer;
-  transition: 0.25s;
-  flex-shrink: 0; /* prevent shrinking */
+  flex-shrink: 0;  /* prevent shrinking in row */
+  transition: transform 0.25s;
 }
 
-.screenshots img:hover {
+.screenshot-gallery img:hover {
   transform: scale(1.05);
 }
 
@@ -119,7 +121,7 @@ body {
     font-size: 13px;
   }
 
-  .screenshots img {
+  .screenshot-gallery img {
     height: 220px;
   }
 }
@@ -139,7 +141,6 @@ const appId = parseInt(params.get("id"));
 fetch("apps.json")
   .then(res => res.json())
   .then(data => {
-
     const app = data.apps.find(a => a.id === appId);
     if (!app) return;
 
@@ -157,10 +158,8 @@ fetch("apps.json")
           </div>
         </div>
 
-        <div class="screenshots-container">
-          <div class="screenshots">
-            ${app.screenshots.map(s => `<img src="${s}">`).join("")}
-          </div>
+        <div class="screenshot-gallery">
+          ${app.screenshots.map(s => `<img src="${s}">`).join("")}
         </div>
       </div>
     `;
