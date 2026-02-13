@@ -21,9 +21,9 @@
       "name": "OTT Navigator TV [Premium]",
       "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
       "screenshots": [
-        "screenshots/ott_tv/1.jpg",
-        "screenshots/ott_tv/2.jpg",
-        "screenshots/ott_tv/3.jpg"
+        "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/h03ZWkfxX4psa5XW3eKZYXinGC9CBCmeHmMPCXUjUn1k6msdRMPoXn1v9UJA-CoilXc=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/b0FoxBGih4FOw22Y_0yCCzuy9pUJlouWch-3xp0LjbTybwycJ-RWfnsl6vIqHOuLZ1E=w1052-h592-rw"
       ],
       "install": {
         "type": "download",
@@ -36,9 +36,9 @@
       "name": "OTT Navigator Mobile [Premium]",
       "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
       "screenshots": [
-        "screenshots/ott_mobile/1.jpg",
-        "screenshots/ott_mobile/2.jpg",
-        "screenshots/ott_mobile/3.jpg"
+        "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/h03ZWkfxX4psa5XW3eKZYXinGC9CBCmeHmMPCXUjUn1k6msdRMPoXn1v9UJA-CoilXc=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/b0FoxBGih4FOw22Y_0yCCzuy9pUJlouWch-3xp0LjbTybwycJ-RWfnsl6vIqHOuLZ1E=w1052-h592-rw"
       ],
       "install": {
         "type": "download",
@@ -51,8 +51,10 @@
       "name": "AuthoIPTV PC/Mac OS",
       "logo": "https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true",
       "screenshots": [
-        "screenshots/authoiptv/1.png",
-        "screenshots/authoiptv/2.png"
+        "https://i.ibb.co/TyPsDvS/Screenshot-41.png",
+        "https://i.ibb.co/cK1GjRhV/Screenshot-42.png",
+        "https://i.ibb.co/cK1GjRhV/Screenshot-43.png",
+        "https://i.ibb.co/cK1GjRhV/Screenshot-44.png"
       ],
       "install": {
         "type": "external",
@@ -65,10 +67,10 @@
       "name": "TV WoW (Our App)",
       "logo": "https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg",
       "screenshots": [
-        "screenshots/tvwow/1.jpg",
-        "screenshots/tvwow/2.jpg",
-        "screenshots/tvwow/3.jpg",
-        "screenshots/tvwow/4.jpg"
+        "https://i.ibb.co/JR54NBCC/2026-02-13-18-25-27-High-Res-Screenshot.png",
+        "https://i.ibb.co/CFvLbBq/2026-02-13-18-19-45-High-Res-Screenshot.png",
+        "https://i.ibb.co/Vpzrq8K8/2026-02-13-18-19-51-High-Res-Screenshot.png"
+        
       ],
       "install": {
         "type": "download",
@@ -81,8 +83,8 @@
       "name": "Media Stream Player (PC)",
       "logo": "https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png",
       "screenshots": [
-        "screenshots/media_player/1.png",
-        "screenshots/media_player/2.png"
+        "https://i.ibb.co/QvPR9r5X/Screenshot-45.png",
+        "https://i.ibb.co/Q3dsX4Sd/Screenshot-47.png"
       ],
       "install": {
         "type": "external",
