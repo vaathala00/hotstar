@@ -1,183 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Apps</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<title>Application</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-
 body {
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-    padding: 40px 20px;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  animation: fadeIn 1s ease-in;
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-weight: 600;
-    font-size: 28px;
-    color: #0f172a;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 40px;
+  letter-spacing: 1px;
 }
 
-/* Container */
-.container {
-    max-width: 850px;
-    margin: auto;
-    display: grid;
-    gap: 20px;
+hr {
+  margin-bottom: 40px;
+  border: none;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
 }
 
-/* Card */
-.card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease forwards;
+#appContainer {
+  padding: 20px 40px;
 }
 
-/* Auto stagger animation */
-.card:nth-child(n) {
-    animation-delay: calc(0.1s * var(--i));
+.category-section {
+  margin-bottom: 50px;
+  animation: slideUp 0.8s ease forwards;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+.category-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid #00f2fe;
+  padding-left: 10px;
 }
 
-/* App Info */
-.app-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.app-row {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
 }
 
-/* Logo */
-.logo {
-    width: 55px;
-    height: 55px;
-    border-radius: 14px;
-    object-fit: cover;
+.app-card {
+  width: 110px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Name */
+.app-card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+
+.app-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
 .app-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #0f172a;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-/* Button */
-.btn {
-    padding: 9px 20px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #1db954, #17a44a);
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s ease;
-    display: inline-block;
+/* Animations */
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
 }
 
-.btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(29,185,84,0.4);
-}
-
-/* Animation */
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Mobile */
-@media (max-width: 500px) {
-    .card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
+@keyframes slideUp {
+  from {opacity:0; transform: translateY(30px);}
+  to {opacity:1; transform: translateY(0);}
 }
 </style>
 </head>
+
 <body>
 
-<h1>📱 My Apps</h1>
+<h1>App Store</h1>
+<hr>
 
-<div class="container">
+<div id="appContainer"></div>
 
-    <div class="card" style="--i:1">
-        <div class="app-info">
-            <img src="https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc" class="logo">
-            <div class="app-name">Network Stream [Premium]</div>
-        </div>
-        <a href="Network_Stream.apk" class="btn" download>Install</a>
-    </div>
+<script>
+fetch("appa.json")
+  .then(res => res.json())
+  .then(data => {
 
-    <div class="card" style="--i:2">
-        <div class="app-info">
-            <img src="https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw" class="logo">
-            <div class="app-name">OTT Navigator TV [Premium]</div>
-        </div>
-        <a href="OTT_Navigator_1.7.3.1.apk" class="btn" download>Install</a>
-    </div>
+    const container = document.getElementById("appContainer");
+    const grouped = {};
 
-    <div class="card" style="--i:3">
-        <div class="app-info">
-            <img src="https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw" class="logo">
-            <div class="app-name">OTT Navigator Mobile [Premium]</div>
-        </div>
-        <a href="OTT_Navigator_v1.7.3.2.apk" class="btn" download>Install</a>
-    </div>
+    data.apps.forEach(app => {
+      if (!grouped[app.category]) {
+        grouped[app.category] = [];
+      }
+      grouped[app.category].push(app);
+    });
 
-    <div class="card" style="--i:4">
-        <div class="app-info">
-            <img src="https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true" class="logo">
-            <div class="app-name">AuthoIPTV PC/Mac OS</div>
-        </div>
-        <a href="https://github.com/glitport/AuthoIPTV/releases/tag/v0.6.4-beta" class="btn" target="_blank">Install</a>
-    </div>
+    Object.keys(grouped).forEach(category => {
 
-    <div class="card" style="--i:5">
-        <div class="app-info">
-            <img src="https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg" class="logo">
-            <div class="app-name">TV WoW (Our App)</div>
-        </div>
-        <a href="TV_WoW.apk" class="btn" download>Install</a>
-    </div>
+      const section = document.createElement("div");
+      section.className = "category-section";
 
-    <div class="card" style="--i:6">
-        <div class="app-info">
-            <img src="https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png" class="logo">
-            <div class="app-name">Media Stream Player (PC)</div>
-        </div>
-        <a href="https://github.com/MirazMac/Media-Stream-Player/releases" class="btn" target="_blank">Install</a>
-    </div>
+      section.innerHTML = `<div class="category-title">${category}</div>`;
 
-</div>
+      const row = document.createElement("div");
+      row.className = "app-row";
+
+      grouped[category].forEach(app => {
+
+        const card = document.createElement("div");
+        card.className = "app-card";
+
+        card.innerHTML = `
+          <img src="${app.logo}">
+          <div class="app-name">${app.name}</div>
+        `;
+
+        card.onclick = () => {
+          window.location.href = `app.html?id=${app.id}`;
+        };
+
+        row.appendChild(card);
+      });
+
+      section.appendChild(row);
+      container.appendChild(section);
+    });
+
+  });
+</script>
 
 </body>
 </html>

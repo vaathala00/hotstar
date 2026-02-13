@@ -6,45 +6,120 @@
 
 <style>
 body {
-  font-family: Arial;
-  padding: 30px;
+  margin: 0;
+  font-family: 'Segoe UI', Arial;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  animation: fadeIn 1s ease;
+  position: relative;
+}
+
+/* Back Button */
+.back-btn {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: none;
+  color: white;
+  font-size: 22px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.back-btn:hover {
+  transform: scale(1.15);
+  background: rgba(255,255,255,0.2);
+}
+
+.container {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 25px;
+  width: 90%;
+  max-width: 500px;
   text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  animation: slideUp 0.8s ease;
 }
 
 .icon {
-  width: 120px;
-  border-radius: 20px;
+  width: 130px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
 }
 
 .download-btn {
-  padding: 12px 25px;
-  background: #1db954;
+  padding: 14px 30px;
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
   color: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
-  margin: 20px 0;
+  margin: 25px 0;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.download-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
 
 .screenshots {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .screenshots img {
-  width: 120px;
-  border-radius: 10px;
+  width: 110px;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.screenshots img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes slideUp {
+  from {opacity:0; transform: translateY(40px);}
+  to {opacity:1; transform: translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
+<button class="back-btn" onclick="goBack()">←</button>
+
 <div id="details"></div>
 
 <script>
+function goBack() {
+  window.history.back();
+}
+
 const params = new URLSearchParams(window.location.search);
 const appId = parseInt(params.get("id"));
 
@@ -53,22 +128,23 @@ fetch("apps.json")
   .then(data => {
 
     const app = data.apps.find(a => a.id === appId);
-
     if (!app) return;
 
     const container = document.getElementById("details");
 
     container.innerHTML = `
-      <img src="${app.logo}" class="icon">
-      <h2>${app.name}</h2>
+      <div class="container">
+        <img src="${app.logo}" class="icon">
+        <h2>${app.name}</h2>
 
-      <a href="${app.install.url}" ${app.install.type === "external" ? 'target="_blank"' : ''}>
-        <button class="download-btn">Download</button>
-      </a>
+        <a href="${app.install.url}" ${app.install.type === "external" ? 'target="_blank"' : ''}>
+          <button class="download-btn">Download</button>
+        </a>
 
-      <h3>Screenshot:</h3>
-      <div class="screenshots">
-        ${app.screenshots.map(s => `<img src="${s}">`).join("")}
+        <h3>Screenshots</h3>
+        <div class="screenshots">
+          ${app.screenshots.map(s => `<img src="${s}">`).join("")}
+        </div>
       </div>
     `;
   });

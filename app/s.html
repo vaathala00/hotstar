@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Apps</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    padding: 40px 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+/* Container */
+.container {
+    max-width: 850px;
+    margin: auto;
+    display: grid;
+    gap: 20px;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+}
+
+/* Auto stagger animation */
+.card:nth-child(n) {
+    animation-delay: calc(0.1s * var(--i));
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* App Info */
+.app-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Logo */
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+/* Name */
+.app-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Button */
+.btn {
+    padding: 9px 20px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #1db954, #17a44a);
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(29,185,84,0.4);
+}
+
+/* Animation */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+
+<h1>📱 My Apps</h1>
+
+<div class="container">
+
+    <div class="card" style="--i:1">
+        <div class="app-info">
+            <img src="https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc" class="logo">
+            <div class="app-name">Network Stream [Premium]</div>
+        </div>
+        <a href="Network_Stream.apk" class="btn" download>Install</a>
+    </div>
+
+    <div class="card" style="--i:2">
+        <div class="app-info">
+            <img src="https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw" class="logo">
+            <div class="app-name">OTT Navigator TV [Premium]</div>
+        </div>
+        <a href="OTT_Navigator_1.7.3.1.apk" class="btn" download>Install</a>
+    </div>
+
+    <div class="card" style="--i:3">
+        <div class="app-info">
+            <img src="https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw" class="logo">
+            <div class="app-name">OTT Navigator Mobile [Premium]</div>
+        </div>
+        <a href="OTT_Navigator_v1.7.3.2.apk" class="btn" download>Install</a>
+    </div>
+
+    <div class="card" style="--i:4">
+        <div class="app-info">
+            <img src="https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true" class="logo">
+            <div class="app-name">AuthoIPTV PC/Mac OS</div>
+        </div>
+        <a href="https://github.com/glitport/AuthoIPTV/releases/tag/v0.6.4-beta" class="btn" target="_blank">Install</a>
+    </div>
+
+    <div class="card" style="--i:5">
+        <div class="app-info">
+            <img src="https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg" class="logo">
+            <div class="app-name">TV WoW (Our App)</div>
+        </div>
+        <a href="TV_WoW.apk" class="btn" download>Install</a>
+    </div>
+
+    <div class="card" style="--i:6">
+        <div class="app-info">
+            <img src="https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png" class="logo">
+            <div class="app-name">Media Stream Player (PC)</div>
+        </div>
+        <a href="https://github.com/MirazMac/Media-Stream-Player/releases" class="btn" target="_blank">Install</a>
+    </div>
+
+</div>
+
+</body>
+</html>
