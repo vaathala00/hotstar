@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>App Details</title>
+
+<style>
+body {
+  font-family: Arial;
+  padding: 30px;
+  text-align: center;
+}
+
+.icon {
+  width: 120px;
+  border-radius: 20px;
+}
+
+.download-btn {
+  padding: 12px 25px;
+  background: #1db954;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.screenshots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.screenshots img {
+  width: 120px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="details"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const appId = parseInt(params.get("id"));
+
+fetch("apps.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const app = data.apps.find(a => a.id === appId);
+
+    if (!app) return;
+
+    const container = document.getElementById("details");
+
+    container.innerHTML = `
+      <img src="${app.logo}" class="icon">
+      <h2>${app.name}</h2>
+
+      <a href="${app.install.url}" ${app.install.type === "external" ? 'target="_blank"' : ''}>
+        <button class="download-btn">Download</button>
+      </a>
+
+      <h3>Screenshot:</h3>
+      <div class="screenshots">
+        ${app.screenshots.map(s => `<img src="${s}">`).join("")}
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>

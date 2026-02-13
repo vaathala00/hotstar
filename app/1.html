@@ -1,0 +1,62 @@
+<body>
+
+<h1 style="text-align:center;">Application</h1>
+<hr style="margin-bottom:40px;">
+
+<div id="appContainer"></div>
+
+<script>
+fetch("https://pasteking.u0k.workers.dev/9n1wm.json")
+  .then(res => res.json())
+  .then(data => {
+
+    const container = document.getElementById("appContainer");
+
+    // Group apps by category
+    const grouped = {};
+
+    data.apps.forEach(app => {
+      if (!grouped[app.category]) {
+        grouped[app.category] = [];
+      }
+      grouped[app.category].push(app);
+    });
+
+    // Render categories
+    Object.keys(grouped).forEach(category => {
+
+      const section = document.createElement("div");
+      section.style.marginBottom = "40px";
+
+      section.innerHTML = `<h2>${category}</h2>`;
+
+      const row = document.createElement("div");
+      row.style.display = "flex";
+      row.style.gap = "20px";
+      row.style.flexWrap = "wrap";
+
+      grouped[category].forEach(app => {
+
+        const img = document.createElement("img");
+        img.src = app.logo;
+        img.style.width = "80px";
+        img.style.height = "80px";
+        img.style.borderRadius = "15px";
+        img.style.cursor = "pointer";
+        img.title = app.name;
+
+        img.onclick = () => {
+          window.location.href = `app.html?id=${app.id}`;
+        };
+
+        row.appendChild(img);
+      });
+
+      section.appendChild(row);
+      container.appendChild(section);
+    });
+
+  });
+</script>
+
+</body>
