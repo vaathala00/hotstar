@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>App Details</title>
 
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', Arial;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: #1e1333;
   color: #f5f1e6;
   display: flex;
@@ -27,33 +28,37 @@ body {
 }
 
 .container {
-  max-width: 400px;
-  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .icon {
-  width: 100px;
-  border-radius: 22px;
-  border: 1px solid #c9a227;
+  width: 120px;
+  border-radius: 26px;
+  border: 1px solid #2c2144;
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-h2 {
-  font-size: 18px;
-  margin: 12px 0;
+.app-info h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
   color: #c9a227;
-  font-weight: 500;
 }
 
 .download-btn {
-  padding: 8px 20px;
-  font-size: 13px;
+  padding: 10px 28px;
+  font-size: 14px;
   background: #c9a227;
   color: #1e1333;
   border: none;
-  border-radius: 20px;
+  border-radius: 22px;
   cursor: pointer;
-  margin: 15px 0;
   transition: 0.25s;
 }
 
@@ -63,17 +68,42 @@ h2 {
 
 .screenshots {
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
   flex-wrap: wrap;
-  margin-top: 10px;
 }
 
 .screenshots img {
-  width: 85px;
-  border-radius: 12px;
-  border: 1px solid #c9a227;
+  width: 160px;
+  border-radius: 14px;
+  border: 1px solid #2c2144;
   cursor: pointer;
+  transition: 0.25s;
+}
+
+.screenshots img:hover {
+  transform: scale(1.05);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+
+  .top-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .icon {
+    width: 100px;
+  }
+
+  .app-info h2 {
+    font-size: 18px;
+  }
+
+  .screenshots img {
+    width: 120px;
+  }
 }
 </style>
 </head>
@@ -99,12 +129,15 @@ fetch("apps.json")
 
     container.innerHTML = `
       <div class="container">
-        <img src="${app.logo}" class="icon">
-        <h2>${app.name}</h2>
-
-        <a href="${app.install.url}" ${app.install.type === "external" ? 'target="_blank"' : ''}>
-          <button class="download-btn">Download</button>
-        </a>
+        <div class="top-section">
+          <img src="${app.logo}" class="icon">
+          <div class="app-info">
+            <h2>${app.name}</h2>
+            <a href="${app.install.url}" ${app.install.type === "external" ? 'target="_blank"' : ''}>
+              <button class="download-btn">Install</button>
+            </a>
+          </div>
+        </div>
 
         <div class="screenshots">
           ${app.screenshots.map(s => `<img src="${s}">`).join("")}
