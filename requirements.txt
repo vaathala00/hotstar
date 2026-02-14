@@ -1,0 +1,5 @@
+# Heroku deployment requirements
+# Basic Python server for static files
+
+# No additional packages required for basic static file serving
+# Heroku will use Python's built-in HTTP server
