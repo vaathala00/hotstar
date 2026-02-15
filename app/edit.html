@@ -282,8 +282,15 @@
             </button>
             <button class="btn-primary" onclick="downloadJSON()">
                 <span class="material-icons-round">download</span>
-                <span>Export JSON</span>
+                <span>Export</span>
             </button>
+            
+            <!-- GLOBAL COMMIT BUTTON -->
+            <button class="btn-primary" style="background-color: var(--success);" onclick="globalCommit()" title="Save all changes (deletions/edits) to GitHub">
+                <span class="material-icons-round">cloud_upload</span>
+                <span>Commit Changes</span>
+            </button>
+
             <button class="btn-primary" onclick="openModal('add')">
                 <span class="material-icons-round">add</span>
                 <span>New App</span>
@@ -387,7 +394,6 @@
             <div class="modal-body">
                 <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
                     To save directly to your repository, you need a Personal Access Token with <code>repo</code> scope.
-                    Leave empty to use only "Export JSON".
                 </p>
                 <div class="form-group">
                     <label>GitHub Username</label>
@@ -398,15 +404,15 @@
                     <input type="text" id="gh-repo" placeholder="e.g. my-app-store">
                 </div>
                 <div class="form-group">
-                    <label>File Path (optional)</label>
-                    <!-- UPDATED DEFAULT VALUE FOR /app/ FOLDER -->
+                    <label>File Path</label>
+                    <!-- Default path updated for /app/ folder -->
                     <input type="text" id="gh-path" value="app/apps.json">
                 </div>
                 <div class="form-group">
                     <label>Personal Access Token</label>
                     <input type="password" id="gh-token" placeholder="ghp_...">
                     <div class="help-text" style="color: var(--danger);">
-                        ⚠️ Warning: Your token is saved in your browser's LocalStorage only. Do not share this file publicly with a token pre-filled.
+                        ⚠️ Warning: Your token is saved in your browser's LocalStorage only.
                     </div>
                 </div>
             </div>
@@ -419,7 +425,7 @@
     <div id="toast-container"></div>
 
     <script>
-        // Initial Data from User (Fallback if fetch fails)
+        // Initial Data (Fallback if fetch fails)
         const initialData = {
           "apps": [
             {
@@ -557,37 +563,30 @@
           ]
         };
 
-        // State Management
         let appsData = { ...initialData };
         let currentFilter = 'All';
         
-        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', async () => {
             loadSettings();
-            await loadLiveApps(); // NEW: Fetch live data before rendering
+            await loadLiveApps();
             renderFilters();
             renderApps();
             updateStats();
         });
 
-        // NEW FUNCTION: Fetch data from server
         async function loadLiveApps() {
             try {
-                // Fetch relative to current directory (app/apps.json)
                 const response = await fetch('apps.json');
                 if (response.ok) {
                     const data = await response.json();
-                    appsData = data; // Update global state with live data
-                    console.log('✅ Loaded live data from server');
-                } else {
-                    console.warn('⚠️ Server returned error, using fallback data');
+                    appsData = data;
+                    console.log('✅ Loaded live data');
                 }
             } catch (error) {
-                console.warn('⚠️ Could not fetch (CORS/Offline). Using fallback data.', error);
+                console.warn('⚠️ Using fallback data');
             }
         }
 
-        // --- Rendering ---
         function renderFilters() {
             const categories = ['All', ...new Set(appsData.apps.map(app => app.category))];
             const container = document.getElementById('category-filters');
@@ -609,14 +608,14 @@
                 : appsData.apps.filter(a => a.category === currentFilter);
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">No apps found in this category.</div>`;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">No apps found.</div>`;
                 return;
             }
 
             grid.innerHTML = filtered.map(app => `
                 <div class="card">
                     <div class="card-header">
-                        <img src="${app.logo}" alt="${app.name}" class="app-logo" onerror="this.src='https://picsum.photos/seed/err/64/64.jpg'">
+                        <img src="${app.logo}" class="app-logo" onerror="this.src='https://picsum.photos/seed/err/64/64.jpg'">
                         <div class="app-info">
                             <div class="app-category">${app.category}</div>
                             <div class="app-name">${app.name}</div>
@@ -634,21 +633,18 @@
                     </div>
                 </div>
             `).join('');
-            
             updateStats();
         }
 
         function updateStats() {
             const count = appsData.apps.length;
-            document.getElementById('stats-display').innerHTML = `Total <strong>${count}</strong> Apps installed`;
+            document.getElementById('stats-display').innerHTML = `Total <strong>${count}</strong> Apps`;
         }
 
-        // --- Form & Modal Handling ---
         function openModal(mode, id = null) {
             const modal = document.getElementById('editor-modal');
             const title = document.getElementById('modal-title');
             const form = document.getElementById('app-form');
-            
             modal.classList.add('open');
 
             if (mode === 'add') {
@@ -659,7 +655,6 @@
                 title.innerText = 'Edit App';
                 const app = appsData.apps.find(a => a.id === id);
                 if (!app) return;
-
                 document.getElementById('app-id').value = app.id;
                 document.getElementById('inp-name').value = app.name;
                 document.getElementById('inp-category').value = app.category;
@@ -675,9 +670,7 @@
             document.getElementById(modalId).classList.remove('open');
         }
 
-        function openSettings() {
-            document.getElementById('settings-modal').classList.add('open');
-        }
+        function openSettings() { document.getElementById('settings-modal').classList.add('open'); }
 
         function saveSettings() {
             const settings = {
@@ -687,7 +680,7 @@
                 token: document.getElementById('gh-token').value
             };
             localStorage.setItem('gh_settings', JSON.stringify(settings));
-            showToast('Settings saved locally', 'success');
+            showToast('Settings saved', 'success');
             closeModal('settings-modal');
         }
 
@@ -697,7 +690,7 @@
                 const s = JSON.parse(saved);
                 document.getElementById('gh-user').value = s.user || '';
                 document.getElementById('gh-repo').value = s.repo || '';
-                // Only overwrite path if it was not the default, to respect the new HTML default
+                // Only set path if not empty, to respect HTML default
                 if(s.path) document.getElementById('gh-path').value = s.path; 
                 document.getElementById('gh-token').value = s.token || '';
             }
@@ -713,144 +706,122 @@
             const installType = document.getElementById('inp-install-type').value;
             const installUrl = document.getElementById('inp-install-url').value;
 
-            if (!name || !logo) {
-                showToast('Name and Logo are required', 'error');
-                return;
-            }
+            if (!name || !logo) { showToast('Name and Logo required', 'error'); return; }
 
             const newApp = {
-                id: idStr ? parseInt(idStr) : Date.now(), 
-                category,
-                name,
-                version: version || '1.0',
+                id: idStr ? parseInt(idStr) : Date.now(),
+                category, name, version: version || '1.0',
                 dateAdded: new Date().toISOString(),
-                logo,
-                screenshots,
-                install: {
-                    type: installType,
-                    url: installUrl
-                }
+                logo, screenshots,
+                install: { type: installType, url: installUrl }
             };
 
             if (idStr) {
                 const index = appsData.apps.findIndex(a => a.id === parseInt(idStr));
                 if (index !== -1) appsData.apps[index] = newApp;
             } else {
-                appsData.apps.unshift(newApp); 
+                appsData.apps.unshift(newApp);
             }
-
             renderApps();
             closeModal('editor-modal');
-            showToast(`App ${idStr ? 'updated' : 'added'} locally. Remember to Export or Push!`, 'success');
+            showToast(`Saved locally. Click Commit to save to GitHub.`, 'success');
         }
 
         function deleteApp(id) {
-            if (confirm('Are you sure you want to delete this app?')) {
+            if (confirm('Delete this app?')) {
                 appsData.apps = appsData.apps.filter(a => a.id !== id);
                 renderApps();
-                showToast('App deleted locally', 'success');
+                showToast('Deleted locally. Click Commit to save changes.', 'success');
             }
         }
 
-        function toggleInstallUrl() {
-            // Optional logic
-        }
-
-        // --- Persistence / Export ---
         function downloadJSON() {
             const dataStr = JSON.stringify(appsData, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = 'apps.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast('apps.json downloaded', 'success');
+            a.href = url; a.download = 'apps.json';
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            showToast('File downloaded', 'success');
         }
 
-        // --- GitHub API Integration ---
-        async function saveAndCommit() {
-            const idStr = document.getElementById('app-id').value;
-            saveAppForm(); 
-            closeModal('editor-modal'); 
-
+        // --- Shared Commit Logic ---
+        async function pushToGitHub() {
             const settings = JSON.parse(localStorage.getItem('gh_settings') || '{}');
-            
             if (!settings.token || !settings.user || !settings.repo) {
-                showToast('Please configure GitHub Settings first', 'error');
+                showToast('Configure Settings first', 'error');
                 openSettings();
-                return;
+                return false;
             }
 
             const content = JSON.stringify(appsData, null, 2);
             const path = settings.path || 'app/apps.json';
             const url = `https://api.github.com/repos/${settings.user}/${settings.repo}/contents/${path}`;
 
-            showToast('Committing to GitHub...', 'success');
+            showToast('Pushing to GitHub...', 'success');
 
             try {
                 let sha = null;
                 try {
                     const getRes = await fetch(url, {
-                        headers: { 
-                            'Authorization': `token ${settings.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
+                        headers: { 'Authorization': `token ${settings.token}`, 'Accept': 'application/vnd.github.v3+json' }
                     });
                     if (getRes.ok) {
                         const data = await getRes.json();
                         sha = data.sha;
                     }
-                } catch (e) { console.log('File might be new', e); }
+                } catch (e) {}
 
                 const contentBase64 = btoa(unescape(encodeURIComponent(content)));
-
-                const body = {
-                    message: `Update apps.json via App Manager`,
-                    content: contentBase64
-                };
+                const body = { message: `Update apps.json via Manager`, content: contentBase64 };
                 if (sha) body.sha = sha;
 
                 const putRes = await fetch(url, {
                     method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${settings.token}`,
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Authorization': `token ${settings.token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 });
 
                 if (putRes.ok) {
-                    showToast('Successfully pushed to GitHub!', 'success');
+                    showToast('Pushed successfully!', 'success');
+                    return true;
                 } else {
                     const err = await putRes.json();
                     throw new Error(err.message);
                 }
-
             } catch (error) {
-                console.error(error);
                 showToast(`Error: ${error.message}`, 'error');
+                return false;
             }
         }
 
-        // --- Utilities ---
+        // --- Button Handlers ---
+        async function saveAndCommit() {
+            saveAppForm();
+            const success = await pushToGitHub();
+            if(success) {
+                // Optional: wait a moment for workflow then reload
+                setTimeout(() => { location.reload(); }, 2000); 
+            }
+        }
+
+        async function globalCommit() {
+            if(!confirm('Commit all current changes to GitHub?')) return;
+            const success = await pushToGitHub();
+            if(success) {
+                setTimeout(() => { location.reload(); }, 2000);
+            }
+        }
+
+        function toggleInstallUrl() {}
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <span class="material-icons-round">${type === 'success' ? 'check_circle' : 'error'}</span>
-                <span>${message}</span>
-            `;
+            toast.innerHTML = `<span class="material-icons-round">${type === 'success' ? 'check_circle' : 'error'}</span><span>${message}</span>`;
             container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 4000);
         }
-
     </script>
 </body>
 </html>
