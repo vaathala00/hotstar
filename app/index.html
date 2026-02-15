@@ -477,13 +477,16 @@
   function openModal(app) {
     const screenshots = app.screenshots.map(src => `<img src="${src}" alt="Screenshot">`).join('');
     
+    // Safe check for version
+    const versionDisplay = app.version ? ` • v${app.version}` : '';
+
     modalContent.innerHTML = `
       <button class="close-btn" onclick="closeModal()">&times;</button>
       <div class="modal-header">
         <img src="${app.logo}" class="modal-icon">
         <div class="modal-title-area">
           <h2>${app.name}</h2>
-          <div class="modal-subtitle">${app.category}</div>
+          <div class="modal-subtitle">${app.category}${versionDisplay}</div>
           <a href="${app.install.url}" ${app.install.type === 'external' ? 'target="_blank"' : ''} class="install-btn">Get</a>
         </div>
       </div>

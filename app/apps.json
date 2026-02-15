@@ -1,9 +1,12 @@
+
 {
   "apps": [
     {
       "id": 1,
       "category": "Mobile Player",
       "name": "Network Stream [Premium]",
+      "version": "1.0",
+      "dateAdded": "2025-05-21T10:00:00Z",
       "logo": "https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc",
       "screenshots": [
         "https://play-lh.googleusercontent.com/9x3-EN0GZlFVAeAurDtsH_r60v1ZcdbUlvph5THgPx9SeT9p36PCtCqNsFD1x8ItuaIhhg4z6tN7DGd8zEGYeA=w1052-h592-rw",
@@ -19,6 +22,8 @@
       "id": 2,
       "category": "Mobile Player",
       "name": "OTT Navigator TV [Premium]",
+      "version": "1.7.3.2",
+      "dateAdded": "2025-05-21T10:00:00Z",
       "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
       "screenshots": [
         "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
@@ -34,6 +39,8 @@
       "id": 3,
       "category": "Mobile Player",
       "name": "OTT Navigator Mobile [Premium]",
+      "version": "1.7.3.1",
+      "dateAdded": "2025-05-21T10:00:00Z",
       "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
       "screenshots": [
         "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
@@ -47,8 +54,27 @@
     },
     {
       "id": 4,
+      "category": "Mobile Player",
+      "name": "TV WoW (Our App)",
+      "version": "1.0",
+      "dateAdded": "2025-05-21T10:00:00Z",
+      "logo": "https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg",
+      "screenshots": [
+        "https://i.ibb.co/JR54NBCC/2026-02-13-18-25-27-High-Res-Screenshot.png",
+        "https://i.ibb.co/CFvLbBq/2026-02-13-18-19-45-High-Res-Screenshot.png",
+        "https://i.ibb.co/Vpzrq8K8/2026-02-13-18-19-51-High-Res-Screenshot.png"
+      ],
+      "install": {
+        "type": "download",
+        "url": "TV WoW.apk"
+      }
+    },
+    {
+      "id": 5,
       "category": "PC Player",
       "name": "AuthoIPTV PC/Mac OS",
+      "version": "0.6.4-beta",
+      "dateAdded": "2025-05-21T10:00:00Z",
       "logo": "https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true",
       "screenshots": [
         "https://i.ibb.co/TyPsDvS/Screenshot-41.png",
@@ -62,25 +88,11 @@
       }
     },
     {
-      "id": 5,
-      "category": "Mobile Player",
-      "name": "TV WoW (Our App)",
-      "logo": "https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg",
-      "screenshots": [
-        "https://i.ibb.co/JR54NBCC/2026-02-13-18-25-27-High-Res-Screenshot.png",
-        "https://i.ibb.co/CFvLbBq/2026-02-13-18-19-45-High-Res-Screenshot.png",
-        "https://i.ibb.co/Vpzrq8K8/2026-02-13-18-19-51-High-Res-Screenshot.png"
-        
-      ],
-      "install": {
-        "type": "download",
-        "url": "TV WoW.apk"
-      }
-    },
-    {
       "id": 6,
       "category": "PC Player",
       "name": "Media Stream Player (PC)",
+      "version": "1.0",
+      "dateAdded": "2025-05-21T10:00:00Z",
       "logo": "https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png",
       "screenshots": [
         "https://i.ibb.co/QvPR9r5X/Screenshot-45.png",
