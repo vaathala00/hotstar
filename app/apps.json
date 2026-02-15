@@ -145,6 +145,24 @@
         "type": "download",
         "url": "Ruby Player Setup 1.0.0.exe"
       }
+    },
+
+    {
+      "id": 9,
+      "category": "Android TV Player",
+      "name": "OTT Navigator TV [Premium]",
+      "version": "1.7.3.1",
+      "dateAdded": "2025-05-21T10:00:00Z",
+      "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/h03ZWkfxX4psa5XW3eKZYXinGC9CBCmeHmMPCXUjUn1k6msdRMPoXn1v9UJA-CoilXc=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/b0FoxBGih4FOw22Y_0yCCzuy9pUJlouWch-3xp0LjbTybwycJ-RWfnsl6vIqHOuLZ1E=w1052-h592-rw"
+      ],
+      "install": {
+        "type": "download",
+        "url": "OTT Navigator 1.7.3.1_25040508.apk"
+      }
     }
 
   ]
