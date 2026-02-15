@@ -1,6 +1,19 @@
 {
   "apps": [
     {
+      "id": 1771136757767,
+      "category": "Mobile Player",
+      "name": "test",
+      "version": "1.0",
+      "dateAdded": "2026-02-15T06:26:06.139Z",
+      "logo": "https://cdn-icons-png.flaticon.com/512/825/825590.png",
+      "screenshots": [],
+      "install": {
+        "type": "download",
+        "url": ""
+      }
+    },
+    {
       "id": 1,
       "category": "Mobile Player",
       "name": "Network Stream [Premium]",
