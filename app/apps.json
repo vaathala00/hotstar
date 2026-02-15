@@ -102,6 +102,66 @@
         "type": "external",
         "url": "https://github.com/MirazMac/Media-Stream-Player/releases"
       }
+    },
+    {
+      "id": 7,
+      "category": "Mobile Player",
+      "name": "Ruby Player (Mobile)",
+      "version": "2.0.1",
+      "dateAdded": "2026-05-21T10:00:00Z",
+      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "screenshots": [
+        "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
+        "https://i.ibb.co/S4CCzSgC/photo-2026-02-15-08-57-52.jpg",
+        "https://i.ibb.co/tTHTFP6Y/photo-2026-02-15-09-01-28.jpg",
+        "https://i.ibb.co/8DRF31C4/photo-2026-02-15-09-01-24.jpg",
+        "https://i.ibb.co/zh5FBTnS/photo-2026-02-15-08-58-30.jpg",
+        "https://i.ibb.co/kV3yffqv/photo-2026-02-15-08-58-24.jpg"
+      ],
+      "install": {
+        "type": "download",
+        "url": "Ruby Player v2.0.1.apk"
+      }
+    },
+ {
+      "id": 8,
+      "category": "Mobile Player",
+      "name": "Playify",
+      "version": "1.0.6",
+      "dateAdded": "2026-05-21T10:00:00Z",
+      "logo": "https://play-lh.googleusercontent.com/QDGh-zfDPHM4L66DEzr-_rdzHJgMmkVwLULzqekGHSndDP5hBja2dfa6uR52J5waKuHlXveJxAYhX_C3cPSghQg=w480-h960-rw",
+      "screenshots": [
+        "https://play-lh.googleusercontent.com/NLZqKQBylpGI7giJAPxUjadabjtAZ9fIlEDHbd_vrPgduofcQ9M0LbO3tb4y1sFYvGWpuow8O8Scg1KtrW1EbRc=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/C14fuUpTHr4-kUQSqkmq4-xgLeKdgEWOA6Btzvq2Xp6NTEHLKktH_jjGfzLtQGZVoaCgS2AVHFD1tZYGeoO6tg=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/q0oP8S9e0OGw1xcJTLTOgKofbXhoySVjhOYAvjoNlEq-8RIgjJSSR6vKysGLk_mahVq7gbtOTwAX8-vxl0h1=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/sOLBOq9jLI9iWzQ-WRUWq90vtC2dquX8V-R7eF5RMdlCxDgLPd-VHjCCCz0578_MluKxLaVI7X4jkD-5tTObhA=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/WbaqsRcgPaK6Z6-rpMoR2oIV4_hR09iFlN0BUmrhz1NqRYL0HQ0sNEK0JHnylIu_VqHglm62OnvBtJ5Y2hY20lg=w1052-h592-rw",
+        "https://play-lh.googleusercontent.com/W2iWKXdfCr3pMjZN-f9JpAYgoCYZ8ZCaace4YVkiJXRg22_rJGCPf7lorOmlhqZQw5mZNUYqQAR9zBu7boOXog=w1052-h592-rw"
+
+      ],
+      "install": {
+        "type": "download",
+        "url": "Ruby Player v2.0.1.apk"
+      }
+    },
+
+ {
+      "id": 9,
+      "category": "PC Player",
+      "name": "Ruby Player (PC)",
+      "version": "1.0.0",
+      "dateAdded": "2026-05-21T10:00:00Z",
+      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "screenshots": [
+        "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
+        "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
+        "https://i.ibb.co/6JchdkVh/Screenshot-51.png"
+      ],
+      "install": {
+        "type": "download",
+        "url": "Ruby Player Setup 1.0.0.exe"
+      }
     }
+
   ]
 }
