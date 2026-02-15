@@ -158,23 +158,6 @@
         "type": "download",
         "url": "OTT Navigator 1.7.3.1_25040508.apk"
       }
-    },
-    {
-      "id": 1771143927016,
-      "category": "Android TV Player",
-      "name": "Ruby Player Smart/Android Tv",
-      "version": "1.0.5",
-      "dateAdded": "2026-02-15T08:25:27.016Z",
-      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
-      "screenshots": [
-        "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
-        "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
-        "https://i.ibb.co/6JchdkVh/Screenshot-51.png"
-      ],
-      "install": {
-        "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6300?code=e7843e30cff0f4c4a41be4f2-1155774872"
-      }
     }
   ]
 }
