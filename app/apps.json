@@ -1,6 +1,23 @@
 {
   "apps": [
     {
+      "id": 1771144702546,
+      "category": "Android TV Player",
+      "name": "Ruby Player Smart/Android Tv",
+      "version": "1.0.5",
+      "dateAdded": "2026-02-15T08:38:22.546Z",
+      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "screenshots": [
+        "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
+        "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
+        "https://i.ibb.co/6JchdkVh/Screenshot-51.png"
+      ],
+      "install": {
+        "type": "external",
+        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6300?code=e7843e30cff0f4c4a41be4f2-1155774872"
+      }
+    },
+    {
       "id": 1,
       "category": "Mobile Player",
       "name": "Network Stream [Premium]",
@@ -90,7 +107,7 @@
       "category": "Mobile Player",
       "name": "Ruby Player (Mobile)",
       "version": "2.0.1",
-      "dateAdded": "2026-02-15T08:35:52.551Z",
+      "dateAdded": "2026-05-21T10:00:00Z",
       "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
       "screenshots": [
         "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
@@ -101,8 +118,8 @@
         "https://i.ibb.co/kV3yffqv/photo-2026-02-15-08-58-24.jpg"
       ],
       "install": {
-        "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6307?code=613a7297f4449ec4a97bdfa0-1155774872"
+        "type": "download",
+        "url": "Ruby Player v2.0.1.apk"
       }
     },
     {
