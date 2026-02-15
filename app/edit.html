@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Store Manager</title>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #ef4444;
+            --success: #10b981;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-body: #111827;
+                --bg-card: #1f2937;
+                --text-main: #f9fafb;
+                --text-muted: #9ca3af;
+                --border: #374151;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 40px; }
+
+        /* Header */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.25rem; }
+        .brand span { color: var(--primary); }
+
+        .header-actions { display: flex; gap: 10px; }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-secondary { background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border); }
+        .btn-secondary:hover { border-color: var(--text-muted); }
+        .btn-icon { padding: 0.6rem; }
+
+        /* Main Layout */
+        main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* Stats & Filters */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stats { color: var(--text-muted); font-size: 0.9rem; }
+        .stats strong { color: var(--text-main); }
+
+        .filters { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 5px; }
+        
+        .filter-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Grid */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* App Card */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .card:hover { transform: translateY(-4px); }
+
+        .card-header {
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .app-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #eee;
+        }
+
+        .app-info { flex: 1; }
+        .app-category { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+        .app-name { font-weight: 600; font-size: 1.1rem; margin: 4px 0; line-height: 1.3; }
+        .app-meta { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 5px; }
+
+        .card-body {
+            padding: 0 1.5rem 1.5rem;
+            margin-top: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--bg-body);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        .badge.download { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
+        .badge.external { color: var(--primary); border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
+
+        .card-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .btn-card { flex: 1; justify-content: center; font-size: 0.8rem; padding: 0.5rem; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .modal-overlay.open { display: flex; opacity: 1; }
+
+        .modal {
+            background: var(--bg-card);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Form */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.85rem; font-weight: 500; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.6rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+        input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); border-color: transparent; }
+
+        .help-text { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* Toast */
+        #toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
+        .toast {
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 250px;
+            animation: slideIn 0.3s ease;
+        }
+        .toast.success { border-color: var(--success); }
+        .toast.error { border-color: var(--danger); }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header-actions span { display: none; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <span class="material-icons-round">grid_view</span>
+            App Manager
+        </div>
+        <div class="header-actions">
+            <button class="btn-secondary" onclick="openSettings()" title="GitHub Settings">
+                <span class="material-icons-round">settings</span>
+                <span>Settings</span>
+            </button>
+            <button class="btn-primary" onclick="downloadJSON()">
+                <span class="material-icons-round">download</span>
+                <span>Export JSON</span>
+            </button>
+            <button class="btn-primary" onclick="openModal('add')">
+                <span class="material-icons-round">add</span>
+                <span>New App</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="controls">
+            <div class="stats" id="stats-display">Loading...</div>
+            <div class="filters" id="category-filters">
+                <!-- Filters injected by JS -->
+            </div>
+        </div>
+
+        <div class="app-grid" id="app-grid">
+            <!-- App Cards injected by JS -->
+        </div>
+    </main>
+
+    <!-- Editor Modal -->
+    <div class="modal-overlay" id="editor-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Add New App</h3>
+                <button class="btn-icon btn-secondary" onclick="closeModal('editor-modal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="app-form">
+                    <input type="hidden" id="app-id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>App Name</label>
+                            <input type="text" id="inp-name" required placeholder="e.g. My Cool App">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="inp-category">
+                                <option value="Mobile Player">Mobile Player</option>
+                                <option value="PC Player">PC Player</option>
+                                <option value="Android TV Player">Android TV Player</option>
+                                <option value="Utility">Utility</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Version</label>
+                            <input type="text" id="inp-version" placeholder="1.0.0">
+                        </div>
+                        <div class="form-group">
+                            <label>Logo URL</label>
+                            <input type="url" id="inp-logo" required placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Screenshots (One per line)</label>
+                        <textarea id="inp-screenshots" rows="3" placeholder="https://image1.png&#10;https://image2.png"></textarea>
+                        <div class="help-text">Enter full URLs, each on a new line.</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Install Type</label>
+                            <select id="inp-install-type" onchange="toggleInstallUrl()">
+                                <option value="download">Direct Download (.apk/.exe)</option>
+                                <option value="external">External Link</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Install URL / Filename</label>
+                            <input type="text" id="inp-install-url" required placeholder="file.apk or https://...">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('editor-modal')">Cancel</button>
+                <button class="btn-primary" onclick="saveAppForm()">Save App</button>
+                <button class="btn-primary" style="background-color: var(--success);" onclick="saveAndCommit()">
+                    <span class="material-icons-round">cloud_upload</span> Save & Push to GitHub
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>GitHub API Settings</h3>
+                <button class="btn-icon btn-secondary" onclick="closeModal('settings-modal')">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                    To save directly to your repository, you need a Personal Access Token with <code>repo</code> scope.
+                    Leave empty to use only "Export JSON".
+                </p>
+                <div class="form-group">
+                    <label>GitHub Username</label>
+                    <input type="text" id="gh-user" placeholder="e.g. johndoe">
+                </div>
+                <div class="form-group">
+                    <label>Repository Name</label>
+                    <input type="text" id="gh-repo" placeholder="e.g. my-app-store">
+                </div>
+                <div class="form-group">
+                    <label>File Path (optional)</label>
+                    <!-- UPDATED DEFAULT VALUE FOR /app/ FOLDER -->
+                    <input type="text" id="gh-path" value="app/apps.json">
+                </div>
+                <div class="form-group">
+                    <label>Personal Access Token</label>
+                    <input type="password" id="gh-token" placeholder="ghp_...">
+                    <div class="help-text" style="color: var(--danger);">
+                        ⚠️ Warning: Your token is saved in your browser's LocalStorage only. Do not share this file publicly with a token pre-filled.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        // Initial Data from User (Fallback if fetch fails)
+        const initialData = {
+          "apps": [
+            {
+              "id": 1,
+              "category": "Mobile Player",
+              "name": "Network Stream [Premium]",
+              "version": "1.0",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc",
+              "screenshots": [
+                "https://play-lh.googleusercontent.com/9x3-EN0GZlFVAeAurDtsH_r60v1ZcdbUlvph5THgPx9SeT9p36PCtCqNsFD1x8ItuaIhhg4z6tN7DGd8zEGYeA=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/_cOKYGsx7no6ER6s0KtaeCdaf0GNN-qg6egSmikEpuGuYHuUG2Tx-p8WXXSaQQAR0PS1p8p8UviR7Z4MhiT9BQ=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/pitqBWql2H4Ucb3tdIaFke0FoC1pPubqDUGodpNiWa1Fy4imI9Ku6YgtfbL7RCbekHNjl0uYzVj5DLkkPvcppdw=w1052-h592-rw"
+              ],
+              "install": { "type": "download", "url": "Network Stream .apk" }
+            },
+            {
+              "id": 2,
+              "category": "Mobile Player",
+              "name": "OTT Navigator Mobile [Premium]",
+              "version": "1.7.3.1",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
+              "screenshots": [
+                "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/h03ZWkfxX4psa5XW3eKZYXinGC9CBCmeHmMPCXUjUn1k6msdRMPoXn1v9UJA-CoilXc=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/b0FoxBGih4FOw22Y_0yCCzuy9pUJlouWch-3xp0LjbTybwycJ-RWfnsl6vIqHOuLZ1E=w1052-h592-rw"
+              ],
+              "install": { "type": "download", "url": "OTT Navigator 1.7.3.1_25040508.apk" }
+            },
+            {
+              "id": 3,
+              "category": "Mobile Player",
+              "name": "TV WoW (Our App)",
+              "version": "1.0",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://vaathala00.github.io/hotstar/assets/imgs/vt.jpg",
+              "screenshots": [
+                "https://i.ibb.co/JR54NBCC/2026-02-13-18-25-27-High-Res-Screenshot.png",
+                "https://i.ibb.co/CFvLbBq/2026-02-13-18-19-45-High-Res-Screenshot.png",
+                "https://i.ibb.co/Vpzrq8K8/2026-02-13-18-19-51-High-Res-Screenshot.png"
+              ],
+              "install": { "type": "download", "url": "TV WoW.apk" }
+            },
+            {
+              "id": 4,
+              "category": "PC Player",
+              "name": "AuthoIPTV PC/Mac OS",
+              "version": "0.6.4-beta",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://github.com/glitport/AuthoIPTV/blob/main/screenshots/authoiptv-logo.png?raw=true",
+              "screenshots": [
+                "https://i.ibb.co/TyPsDvS/Screenshot-41.png",
+                "https://i.ibb.co/cK1GjRhV/Screenshot-42.png",
+                "https://i.ibb.co/cK1GjRhV/Screenshot-43.png",
+                "https://i.ibb.co/cK1GjRhV/Screenshot-44.png"
+              ],
+              "install": { "type": "external", "url": "https://github.com/glitport/AuthoIPTV/releases/tag/v0.6.4-beta" }
+            },
+            {
+              "id": 5,
+              "category": "PC Player",
+              "name": "Media Stream Player (PC)",
+              "version": "1.0",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://raw.githubusercontent.com/MirazMac/Media-Stream-Player/refs/heads/main/static/favicon.png",
+              "screenshots": [
+                "https://i.ibb.co/QvPR9r5X/Screenshot-45.png",
+                "https://i.ibb.co/Q3dsX4Sd/Screenshot-47.png"
+              ],
+              "install": { "type": "external", "url": "https://github.com/MirazMac/Media-Stream-Player/releases" }
+            },
+            {
+              "id": 6,
+              "category": "Mobile Player",
+              "name": "Ruby Player (Mobile)",
+              "version": "2.0.1",
+              "dateAdded": "2026-05-21T10:00:00Z",
+              "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+              "screenshots": [
+                "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
+                "https://i.ibb.co/S4CCzSgC/photo-2026-02-15-08-57-52.jpg",
+                "https://i.ibb.co/tTHTFP6Y/photo-2026-02-15-09-01-28.jpg",
+                "https://i.ibb.co/8DRF31C4/photo-2026-02-15-09-01-24.jpg",
+                "https://i.ibb.co/zh5FBTnS/photo-2026-02-15-08-58-30.jpg",
+                "https://i.ibb.co/kV3yffqv/photo-2026-02-15-08-58-24.jpg"
+              ],
+              "install": { "type": "download", "url": "Ruby Player v2.0.1.apk" }
+            },
+            {
+              "id": 7,
+              "category": "Mobile Player",
+              "name": "Playify",
+              "version": "1.0.6",
+              "dateAdded": "2026-05-21T10:00:00Z",
+              "logo": "https://play-lh.googleusercontent.com/QDGh-zfDPHM4L66DEzr-_rdzHJgMmkVwLULzqekGHSndDP5hBja2dfa6uR52J5waKuHlXveJxAYhX_C3cPSghQg=w480-h960-rw",
+              "screenshots": [
+                "https://play-lh.googleusercontent.com/NLZqKQBylpGI7giJAPxUjadabjtAZ9fIlEDHbd_vrPgduofcQ9M0LbO3tb4y1sFYvGWpuow8O8Scg1KtrW1EbRc=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/C14fuUpTHr4-kUQSqkmq4-xgLeKdgEWOA6Btzvq2Xp6NTEHLKktH_jjGfzLtQGZVoaCgS2AVHFD1tZYGeoO6tg=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/q0oP8S9e0OGw1xcJTLTOgKofbXhoySVjhOYAvjoNlEq-8RIgjJSSR6vKysGLk_mahVq7gbtOTwAX8-vxl0h1=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/sOLBOq9jLI9iWzQ-WRUWq90vtC2dquX8V-R7eF5RMdlCxDgLPd-VHjCCCz0578_MluKxLaVI7X4jkD-5tTObhA=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/WbaqsRcgPaK6Z6-rpMoR2oIV4_hR09iFlN0BUmrhz1NqRYL0HQ0sNEK0JHnylIu_VqHglm62OnvBtJ5Y2hY20lg=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/W2iWKXdfCr3pMjZN-f9JpAYgoCYZ8ZCaace4YVkiJXRg22_rJGCPf7lorOmlhqZQw5mZNUYqQAR9zBu7boOXog=w1052-h592-rw"
+              ],
+              "install": { "type": "download", "url": "playify.apk" }
+            },
+            {
+              "id": 8,
+              "category": "PC Player",
+              "name": "Ruby Player (PC)",
+              "version": "1.0.0",
+              "dateAdded": "2026-05-21T10:00:00Z",
+              "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+              "screenshots": [
+                "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
+                "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
+                "https://i.ibb.co/6JchdkVh/Screenshot-51.png"
+              ],
+              "install": { "type": "download", "url": "Ruby Player Setup 1.0.0.exe" }
+            },
+            {
+              "id": 9,
+              "category": "Android TV Player",
+              "name": "OTT Navigator TV [Premium]",
+              "version": "1.7.3.1",
+              "dateAdded": "2025-05-21T10:00:00Z",
+              "logo": "https://play-lh.googleusercontent.com/R1n2QXI_c7oXejqmqDW8RmXVxhIzJOrwth862i70V5X6y57Gbtz9hnhVSO40eCIucyw",
+              "screenshots": [
+                "https://play-lh.googleusercontent.com/i93U974HZJFmdN835sNn00sDnMduX85_KiTvjp698mrw6qQaYqUH6Qby4JLFSvlptQ=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/h03ZWkfxX4psa5XW3eKZYXinGC9CBCmeHmMPCXUjUn1k6msdRMPoXn1v9UJA-CoilXc=w1052-h592-rw",
+                "https://play-lh.googleusercontent.com/b0FoxBGih4FOw22Y_0yCCzuy9pUJlouWch-3xp0LjbTybwycJ-RWfnsl6vIqHOuLZ1E=w1052-h592-rw"
+              ],
+              "install": { "type": "download", "url": "OTT Navigator 1.7.3.1_25040508.apk" }
+            }
+          ]
+        };
+
+        // State Management
+        let appsData = { ...initialData };
+        let currentFilter = 'All';
+        
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            loadSettings();
+            await loadLiveApps(); // NEW: Fetch live data before rendering
+            renderFilters();
+            renderApps();
+            updateStats();
+        });
+
+        // NEW FUNCTION: Fetch data from server
+        async function loadLiveApps() {
+            try {
+                // Fetch relative to current directory (app/apps.json)
+                const response = await fetch('apps.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    appsData = data; // Update global state with live data
+                    console.log('✅ Loaded live data from server');
+                } else {
+                    console.warn('⚠️ Server returned error, using fallback data');
+                }
+            } catch (error) {
+                console.warn('⚠️ Could not fetch (CORS/Offline). Using fallback data.', error);
+            }
+        }
+
+        // --- Rendering ---
+        function renderFilters() {
+            const categories = ['All', ...new Set(appsData.apps.map(app => app.category))];
+            const container = document.getElementById('category-filters');
+            container.innerHTML = categories.map(cat => 
+                `<div class="filter-chip ${cat === currentFilter ? 'active' : ''}" onclick="setFilter('${cat}')">${cat}</div>`
+            ).join('');
+        }
+
+        function setFilter(cat) {
+            currentFilter = cat;
+            renderFilters();
+            renderApps();
+        }
+
+        function renderApps() {
+            const grid = document.getElementById('app-grid');
+            const filtered = currentFilter === 'All' 
+                ? appsData.apps 
+                : appsData.apps.filter(a => a.category === currentFilter);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">No apps found in this category.</div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(app => `
+                <div class="card">
+                    <div class="card-header">
+                        <img src="${app.logo}" alt="${app.name}" class="app-logo" onerror="this.src='https://picsum.photos/seed/err/64/64.jpg'">
+                        <div class="app-info">
+                            <div class="app-category">${app.category}</div>
+                            <div class="app-name">${app.name}</div>
+                            <div class="app-meta">
+                                <span class="material-icons-round" style="font-size:14px">tag</span> v${app.version}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge ${app.install.type}">${app.install.type.toUpperCase()}</span>
+                        <div class="card-actions">
+                            <button class="btn-secondary btn-card" onclick="openModal('edit', ${app.id})">Edit</button>
+                            <button class="btn-secondary btn-card" style="color:var(--danger); border-color:var(--danger)" onclick="deleteApp(${app.id})">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            updateStats();
+        }
+
+        function updateStats() {
+            const count = appsData.apps.length;
+            document.getElementById('stats-display').innerHTML = `Total <strong>${count}</strong> Apps installed`;
+        }
+
+        // --- Form & Modal Handling ---
+        function openModal(mode, id = null) {
+            const modal = document.getElementById('editor-modal');
+            const title = document.getElementById('modal-title');
+            const form = document.getElementById('app-form');
+            
+            modal.classList.add('open');
+
+            if (mode === 'add') {
+                title.innerText = 'Add New App';
+                form.reset();
+                document.getElementById('app-id').value = '';
+            } else if (mode === 'edit') {
+                title.innerText = 'Edit App';
+                const app = appsData.apps.find(a => a.id === id);
+                if (!app) return;
+
+                document.getElementById('app-id').value = app.id;
+                document.getElementById('inp-name').value = app.name;
+                document.getElementById('inp-category').value = app.category;
+                document.getElementById('inp-version').value = app.version;
+                document.getElementById('inp-logo').value = app.logo;
+                document.getElementById('inp-screenshots').value = app.screenshots.join('\n');
+                document.getElementById('inp-install-type').value = app.install.type;
+                document.getElementById('inp-install-url').value = app.install.url;
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('open');
+        }
+
+        function openSettings() {
+            document.getElementById('settings-modal').classList.add('open');
+        }
+
+        function saveSettings() {
+            const settings = {
+                user: document.getElementById('gh-user').value,
+                repo: document.getElementById('gh-repo').value,
+                path: document.getElementById('gh-path').value,
+                token: document.getElementById('gh-token').value
+            };
+            localStorage.setItem('gh_settings', JSON.stringify(settings));
+            showToast('Settings saved locally', 'success');
+            closeModal('settings-modal');
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('gh_settings');
+            if (saved) {
+                const s = JSON.parse(saved);
+                document.getElementById('gh-user').value = s.user || '';
+                document.getElementById('gh-repo').value = s.repo || '';
+                // Only overwrite path if it was not the default, to respect the new HTML default
+                if(s.path) document.getElementById('gh-path').value = s.path; 
+                document.getElementById('gh-token').value = s.token || '';
+            }
+        }
+
+        function saveAppForm() {
+            const idStr = document.getElementById('app-id').value;
+            const name = document.getElementById('inp-name').value;
+            const category = document.getElementById('inp-category').value;
+            const version = document.getElementById('inp-version').value;
+            const logo = document.getElementById('inp-logo').value;
+            const screenshots = document.getElementById('inp-screenshots').value.split('\n').map(s => s.trim()).filter(s => s);
+            const installType = document.getElementById('inp-install-type').value;
+            const installUrl = document.getElementById('inp-install-url').value;
+
+            if (!name || !logo) {
+                showToast('Name and Logo are required', 'error');
+                return;
+            }
+
+            const newApp = {
+                id: idStr ? parseInt(idStr) : Date.now(), 
+                category,
+                name,
+                version: version || '1.0',
+                dateAdded: new Date().toISOString(),
+                logo,
+                screenshots,
+                install: {
+                    type: installType,
+                    url: installUrl
+                }
+            };
+
+            if (idStr) {
+                const index = appsData.apps.findIndex(a => a.id === parseInt(idStr));
+                if (index !== -1) appsData.apps[index] = newApp;
+            } else {
+                appsData.apps.unshift(newApp); 
+            }
+
+            renderApps();
+            closeModal('editor-modal');
+            showToast(`App ${idStr ? 'updated' : 'added'} locally. Remember to Export or Push!`, 'success');
+        }
+
+        function deleteApp(id) {
+            if (confirm('Are you sure you want to delete this app?')) {
+                appsData.apps = appsData.apps.filter(a => a.id !== id);
+                renderApps();
+                showToast('App deleted locally', 'success');
+            }
+        }
+
+        function toggleInstallUrl() {
+            // Optional logic
+        }
+
+        // --- Persistence / Export ---
+        function downloadJSON() {
+            const dataStr = JSON.stringify(appsData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'apps.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('apps.json downloaded', 'success');
+        }
+
+        // --- GitHub API Integration ---
+        async function saveAndCommit() {
+            const idStr = document.getElementById('app-id').value;
+            saveAppForm(); 
+            closeModal('editor-modal'); 
+
+            const settings = JSON.parse(localStorage.getItem('gh_settings') || '{}');
+            
+            if (!settings.token || !settings.user || !settings.repo) {
+                showToast('Please configure GitHub Settings first', 'error');
+                openSettings();
+                return;
+            }
+
+            const content = JSON.stringify(appsData, null, 2);
+            const path = settings.path || 'app/apps.json';
+            const url = `https://api.github.com/repos/${settings.user}/${settings.repo}/contents/${path}`;
+
+            showToast('Committing to GitHub...', 'success');
+
+            try {
+                let sha = null;
+                try {
+                    const getRes = await fetch(url, {
+                        headers: { 
+                            'Authorization': `token ${settings.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    if (getRes.ok) {
+                        const data = await getRes.json();
+                        sha = data.sha;
+                    }
+                } catch (e) { console.log('File might be new', e); }
+
+                const contentBase64 = btoa(unescape(encodeURIComponent(content)));
+
+                const body = {
+                    message: `Update apps.json via App Manager`,
+                    content: contentBase64
+                };
+                if (sha) body.sha = sha;
+
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${settings.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (putRes.ok) {
+                    showToast('Successfully pushed to GitHub!', 'success');
+                } else {
+                    const err = await putRes.json();
+                    throw new Error(err.message);
+                }
+
+            } catch (error) {
+                console.error(error);
+                showToast(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        // --- Utilities ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <span class="material-icons-round">${type === 'success' ? 'check_circle' : 'error'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+    </script>
+</body>
+</html>
