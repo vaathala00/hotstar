@@ -1,149 +1,518 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>App Store</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #1e1333;
-  color: #f5f1e6;
-}
-
-h1 {
-  text-align: center;
-  padding: 20px 0;
-  font-size: 26px;
-  font-weight: 600;
-  color: #c9a227;
-}
-
-#appContainer {
-  padding: 20px 40px;
-}
-
-/* Category */
-.category-title {
-  font-size: 18px;
-  margin: 25px 0 15px;
-  color: #c9a227;
-  font-weight: 500;
-}
-
-/* Grid Layout */
-.app-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 20px;
-}
-
-/* App Card */
-.app-card {
-  text-align: center;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-
-.app-card:hover {
-  transform: translateY(-6px);
-}
-
-.app-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 22px;
-  border: 1px solid #2c2144;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
-
-.app-name {
-  margin-top: 8px;
-  font-size: 14px;
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
-
-  h1 {
-    font-size: 20px;
+  :root {
+    /* Colors */
+    --bg-body: #121018;
+    --bg-header: rgba(18, 16, 24, 0.95);
+    --bg-card: #1c1926;
+    --text-main: #ffffff;
+    --text-sub: #9ca3af;
+    --accent: #00d287; /* Modern Green */
+    --accent-gold: #fbbf24; /* For 'New' badge */
+    --border: #2d283d;
+    
+    /* Spacing & Radius */
+    --radius-lg: 18px;
+    --radius-sm: 8px;
+    --header-height: 70px;
   }
 
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    padding-top: var(--header-height); /* Space for sticky header */
+  }
+
+  /* === HEADER === */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .header-content {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  /* === SEARCH BAR === */
+  .search-wrapper {
+    flex-grow: 1;
+    max-width: 450px;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    background: #2a2438;
+    border: 1px solid var(--border);
+    padding: 10px 15px 10px 42px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+    background: #302940;
+    box-shadow: 0 0 0 3px rgba(0, 210, 135, 0.15);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    fill: var(--text-sub);
+    pointer-events: none;
+  }
+
+  /* === MAIN CONTAINER === */
   #appContainer {
-    padding: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  /* === CATEGORIES === */
+  .category-section {
+    margin-bottom: 50px;
   }
 
   .category-title {
-    font-size: 16px;
+    font-size: 18px;
+    color: var(--text-sub);
+    margin-bottom: 20px;
+    padding-left: 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
   }
 
-  .app-row {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 15px;
+  /* === IMPROVED GRID LAYOUT === */
+  .app-grid {
+    display: grid;
+    /* Auto-fill: Cards will be at least 100px wide, but will stretch to fill space */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 30px 20px; /* Row gap 30px, Column gap 20px */
   }
 
-  .app-card img {
-    width: 75px;
-    height: 75px;
+  .app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    group: 'card';
+    transition: transform 0.2s ease;
+  }
+
+  .app-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .icon-wrapper {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 12px;
+  }
+
+  .app-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px; /* Squircle shape */
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .app-card:hover .app-icon {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  /* "NEW" BADGE */
+  .badge-new {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--accent-gold);
+    color: #000;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 3px 6px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    z-index: 2;
+    text-transform: uppercase;
   }
 
   .app-name {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-main);
+    /* Truncate text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   }
-}
+
+  .app-category-text {
+    font-size: 11px;
+    color: var(--text-sub);
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  /* === MODAL (Details View) === */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-content {
+    background: #1c1926;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .modal-overlay.active .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-header {
+    padding: 30px 30px 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .modal-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 22px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  .modal-title-area {
+    flex: 1;
+  }
+
+  .modal-title-area h2 {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .modal-subtitle {
+    color: var(--text-sub);
+    font-size: 14px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    transition: background 0.2s;
+  }
+
+  .close-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .modal-body {
+    padding: 30px;
+  }
+
+  .install-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--accent);
+    color: #002e1f;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: filter 0.2s;
+  }
+
+  .install-btn:hover {
+    filter: brightness(1.1);
+  }
+
+  .gallery {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    margin-top: 25px;
+    padding-bottom: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .gallery img {
+    height: 300px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    h1 { font-size: 18px; }
+    .header-content { gap: 10px; }
+    .search-input { padding-left: 35px; font-size: 14px; }
+    .search-wrapper { max-width: 200px; }
+    .app-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 25px 10px; }
+    .icon-wrapper { width: 75px; height: 75px; }
+    .modal-header { flex-direction: column; text-align: center; }
+  }
 </style>
 </head>
-
 <body>
 
-<h1>App Store</h1>
-<div id="appContainer"></div>
+<!-- Sticky Header -->
+<header>
+  <div class="header-content">
+    <h1>App Store</h1>
+    <div class="search-wrapper">
+      <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search Apps...">
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main id="appContainer">
+  <!-- Content injected by JS -->
+  <div style="text-align:center; padding: 50px; color: var(--text-sub);">Loading apps...</div>
+</main>
+
+<!-- Modal -->
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal-content" id="modalContent">
+    <!-- Modal Details Injected by JS -->
+  </div>
+</div>
 
 <script>
-fetch("apps.json")
-  .then(res => res.json())
-  .then(data => {
+  // State
+  let allApps = [];
 
-    const container = document.getElementById("appContainer");
+  // 1. Fetch Data
+  fetch('apps.json')
+    .then(res => {
+      if (!res.ok) throw new Error("Could not load apps.json");
+      return res.json();
+    })
+    .then(data => {
+      allApps = data.apps;
+      renderApps(allApps);
+    })
+    .catch(err => {
+      document.getElementById('appContainer').innerHTML = 
+        `<div style="text-align:center; color: #ff6b6b; padding: 50px;">
+          Error: ${err.message}<br><small>Ensure 'apps.json' exists in the same folder.</small>
+        </div>`;
+    });
+
+  // 2. Logic: Check if app is new (Added within last 2 days)
+  function isNewApp(dateString) {
+    if (!dateString) return false;
+    const addedDate = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - addedDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    return diffDays <= 2;
+  }
+
+  // 3. Render Logic
+  const container = document.getElementById('appContainer');
+  const searchInput = document.getElementById('searchInput');
+
+  function renderApps(appsToRender) {
+    container.innerHTML = "";
+
+    if (appsToRender.length === 0) {
+      container.innerHTML = `<div style="text-align:center; color: var(--text-sub); margin-top: 40px;">No apps found.</div>`;
+      return;
+    }
+
+    // Group by Category
     const grouped = {};
-
-    data.apps.forEach(app => {
+    appsToRender.forEach(app => {
       if (!grouped[app.category]) grouped[app.category] = [];
       grouped[app.category].push(app);
     });
 
-    Object.keys(grouped).forEach(category => {
+    // Build DOM
+    for (const [category, apps] of Object.entries(grouped)) {
+      const section = document.createElement('div');
+      section.className = 'category-section';
 
-      const section = document.createElement("div");
-      section.innerHTML = `<div class="category-title">${category}</div>`;
+      const title = document.createElement('div');
+      title.className = 'category-title';
+      title.textContent = category;
+      section.appendChild(title);
 
-      const row = document.createElement("div");
-      row.className = "app-row";
+      const grid = document.createElement('div');
+      grid.className = 'app-grid';
 
-      grouped[category].forEach(app => {
+      apps.forEach(app => {
+        const card = document.createElement('div');
+        card.className = 'app-card';
+        card.onclick = () => openModal(app);
 
-        const card = document.createElement("div");
-        card.className = "app-card";
+        const isNew = isNewApp(app.dateAdded);
+        const badgeHtml = isNew ? `<div class="badge-new">New</div>` : '';
 
         card.innerHTML = `
-          <img src="${app.logo}">
+          <div class="icon-wrapper">
+            ${badgeHtml}
+            <img src="${app.logo}" class="app-icon" alt="${app.name}" loading="lazy">
+          </div>
           <div class="app-name">${app.name}</div>
+          <div class="app-category-text">${app.category}</div>
         `;
-
-        card.onclick = () => {
-          window.location.href = `app.html?id=${app.id}`;
-        };
-
-        row.appendChild(card);
+        grid.appendChild(card);
       });
 
-      section.appendChild(row);
+      section.appendChild(grid);
       container.appendChild(section);
-    });
+    }
+  }
 
+  // 4. Search Filter
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = allApps.filter(app => 
+      app.name.toLowerCase().includes(term) || 
+      app.category.toLowerCase().includes(term)
+    );
+    renderApps(filtered);
   });
+
+  // 5. Modal Logic
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalContent = document.getElementById('modalContent');
+
+  function openModal(app) {
+    const screenshots = app.screenshots.map(src => `<img src="${src}" alt="Screenshot">`).join('');
+    
+    modalContent.innerHTML = `
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <div class="modal-header">
+        <img src="${app.logo}" class="modal-icon">
+        <div class="modal-title-area">
+          <h2>${app.name}</h2>
+          <div class="modal-subtitle">${app.category}</div>
+          <a href="${app.install.url}" ${app.install.type === 'external' ? 'target="_blank"' : ''} class="install-btn">Get</a>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="gallery">
+          ${screenshots}
+        </div>
+      </div>
+    `;
+    
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on background click
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
 </script>
 
 </body>
