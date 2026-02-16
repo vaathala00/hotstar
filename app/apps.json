@@ -90,7 +90,7 @@
       "category": "Mobile Player",
       "name": "Ruby Player (Mobile)",
       "version": "1.0.6",
-      "dateAdded": "2026-02-16T03:20:44.673Z",
+      "dateAdded": "2026-02-16T14:14:28.798Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
@@ -102,7 +102,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6307?code=613a7297f4449ec4a97bdfa0-1155774872"
+        "url": "https://uploda.sh/dRY9me5ECsMg"
       }
     },
     {
@@ -130,7 +130,7 @@
       "category": "PC Player",
       "name": "Ruby Player (PC)",
       "version": "1.0.3",
-      "dateAdded": "2026-02-16T03:20:35.299Z",
+      "dateAdded": "2026-02-16T14:14:10.072Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
@@ -139,7 +139,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6308?code=ba6c9f3df7fc7d46dcb13f2f-1155774872"
+        "url": "https://uploda.sh/0dvFbTztT89f"
       }
     },
     {
@@ -164,7 +164,7 @@
       "category": "Android TV Player",
       "name": "Ruby Player Smart/Android Tv",
       "version": "1.0.5",
-      "dateAdded": "2026-02-16T03:20:25.453Z",
+      "dateAdded": "2026-02-16T14:13:53.990Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
@@ -173,7 +173,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6300?code=e7843e30cff0f4c4a41be4f2-1155774872"
+        "url": "https://uploda.sh/ayaB03lMMwl4"
       }
     }
   ]
