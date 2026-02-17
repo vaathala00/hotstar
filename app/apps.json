@@ -1,23 +1,6 @@
 {
   "apps": [
     {
-      "id": 1,
-      "category": "Mobile Player",
-      "name": "Network Stream [Premium]",
-      "version": "7.7",
-      "dateAdded": "2026-02-15T07:34:41.393Z",
-      "logo": "https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc",
-      "screenshots": [
-        "https://play-lh.googleusercontent.com/9x3-EN0GZlFVAeAurDtsH_r60v1ZcdbUlvph5THgPx9SeT9p36PCtCqNsFD1x8ItuaIhhg4z6tN7DGd8zEGYeA=w1052-h592-rw",
-        "https://play-lh.googleusercontent.com/_cOKYGsx7no6ER6s0KtaeCdaf0GNN-qg6egSmikEpuGuYHuUG2Tx-p8WXXSaQQAR0PS1p8p8UviR7Z4MhiT9BQ=w1052-h592-rw",
-        "https://play-lh.googleusercontent.com/pitqBWql2H4Ucb3tdIaFke0FoC1pPubqDUGodpNiWa1Fy4imI9Ku6YgtfbL7RCbekHNjl0uYzVj5DLkkPvcppdw=w1052-h592-rw"
-      ],
-      "install": {
-        "type": "download",
-        "url": "Network Stream .apk"
-      }
-    },
-    {
       "id": 2,
       "category": "Mobile Player",
       "name": "OTT Navigator Mobile [Premium]",
