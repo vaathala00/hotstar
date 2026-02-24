@@ -3,124 +3,239 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Stream</title>
-
+<title>Star Sports HD1 - Live</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",sans-serif;}
-body{background:#0b0f14;color:#fff;}
-.container{max-width:1100px;margin:auto;padding:10px;padding-bottom:120px;}
-.my-iframe{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden;box-shadow:0 0 30px rgba(0,255,200,0.18);}
-.my-iframe iframe{width:100%;height:100%;border:none;}
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+body { background: #0f1318; color: #fff; min-height: 125vh; }
 
-/* COUNTER */
-#counter-container{position:absolute;top:10px;right:10px;padding:5px 10px;border-radius:999px;background:rgba(0,0,0,0.6);display:flex;align-items:center;gap:6px;font-size:12px;z-index:10;}
+/* Header */
+.header { padding: 15px 20px; background: #161b22; border-bottom: 1px solid #21262d; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #00ffcc, #008cff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.live-badge { background: #ff0055; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 1px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
 
-/* SELECT STYLE */
-.language-selector-container{margin-top:12px;display:flex;align-items:center;gap:8px;font-size:13px;}
-.language-label{opacity:0.7;}
-#channelSelector{background:#111;color:#00ffcc;border:1px solid rgba(255,255,255,0.1);padding:6px 10px;border-radius:6px;font-size:13px;cursor:pointer;}
-#channelSelector:focus{outline:none;border-color:#00ffcc;}
+/* Container */
+.container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
 
-/* CHAT */
-.chat-toggle{position:fixed;right:20px;bottom:20px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#00ffcc,#008cff);border:none;cursor:pointer;box-shadow:0 0 20px rgba(0,255,200,0.6);z-index:50;}
-.chat-toggle::before{content:"💬";font-size:22px;}
-.chat-container{position:fixed;right:20px;bottom:80px;width:320px;height:420px;background:#111;border-radius:14px;overflow:hidden;display:none;box-shadow:0 0 30px rgba(0,0,0,0.7);z-index:40;}
-.chat-container iframe{width:100%;height:100%;border:none;}
-.chat-close{position:absolute;top:6px;right:8px;background:none;color:white;border:none;font-size:16px;cursor:pointer;}
+/* Player Wrapper */
+.player-wrapper { position: relative; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+.my-iframe { width: 100%; aspect-ratio: 16/9; display: block; position: relative; }
+.my-iframe iframe { width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; }
+
+/* Control Bar - Updated Layout */
+.control-bar { 
+    background: #161b22; 
+    padding: 12px 20px; 
+    display: flex; 
+    justify-content: center; /* Centers everything */
+    align-items: center; 
+    gap: 15px; /* Space between items */
+    border-top: 1px solid #21262d; 
+    font-size: 15px;
+}
+
+.channel-title { font-weight: 600; color: #e6e6e6; display: flex; gap: 8px; align-items: center; }
+.channel-title span.quality { color: #888; font-weight: 400; }
+.channel-title span.name { color: #fff; }
+
+/* View Counter - Inline Style */
+.viewer-count { display: flex; align-items: center; gap: 6px; color: #aaa; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; }
+.viewer-count i { color: #00ffcc; font-size: 12px; }
+.viewer-count div { display: inline-block; font-size: 13px; }
+
+/* Fix Counter Link Issue */
+#counter-div, #counter-div a {
+    pointer-events: none !important;    /* Disables clicking */
+    text-decoration: none !important;   /* Removes underline */
+    cursor: default !important;         /* Changes cursor to default arrow */
+    color: #aaa !important;             /* Forces the color to match your theme */
+}
+
+/* Channel Selector Area */
+.selector-area { margin-top: 20px; background: #161b22; padding: 15px; border-radius: 10px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+.selector-label { font-size: 14px; color: #8b949e; font-weight: 500; }
+#channelSelector { 
+    flex: 1; 
+    min-width: 200px;
+    background: #0d1117; 
+    color: #fff; 
+    border: 1px solid #30363d; 
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+#channelSelector:focus { outline: none; border-color: #00ffcc; }
+
+/* Floating Buttons */
+.telegram-toggle {
+    position: fixed;
+    left: 20px;
+    bottom: 50px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #0088cc; 
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,136,204,0.5);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    text-decoration: none;
+}
+.telegram-toggle:hover { transform: scale(1.1); }
+.telegram-toggle i { color: #fff; font-size: 24px; }
+
+.chat-toggle { 
+    position: fixed; 
+    right: 20px; 
+    bottom: 50px; 
+    width: 55px; 
+    height: 55px; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, #00ffcc, #008cff); 
+    border: none; 
+    cursor: pointer; 
+    box-shadow: 0 5px 20px rgba(0,255,200,0.4); 
+    z-index: 100; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: transform 0.2s; 
+}
+.chat-toggle:hover { transform: scale(1.1); }
+.chat-toggle i { color: #000; font-size: 22px; }
+
+/* Chat Container */
+.chat-container { position: fixed; right: 20px; bottom: 90px; width: 340px; height: 450px; background: #161b22; border-radius: 12px; overflow: hidden; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.8); z-index: 99; border: 1px solid #30363d; }
+.chat-container.active { display: block; }
+.chat-header { background: #21262d; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; }
+.chat-title { font-size: 14px; font-weight: 600; }
+.chat-close { background: none; border: none; color: #888; font-size: 18px; cursor: pointer; }
+.chat-container iframe { width: 100%; height: calc(100% - 42px); border: none; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .control-bar { font-size: 13px; gap: 8px; padding: 10px 15px; }
+    .viewer-count { padding: 3px 8px; }
+}
 </style>
 </head>
-
 <body>
 
+<header class="header">
+    <div class="logo">LIVE STREAM</div>
+    <div class="live-badge">● LIVE</div>
+</header>
+
 <div class="container">
+    
+    <div class="player-wrapper" id="playerWrapper">
+        <div class="my-iframe">
+            <iframe id="videoFrame" src="https://dash.vodep39240327.workers.dev/?url=https://jiotvmblive.cdn.jio.com/bpk-tv/Star_Sports_HD1_BTS/output/index.mpd?name=Star_Sports_HD1&amp;keyId=965dc2ddb1d85138ad787999a7f30ca5&amp;key=859695076e67fe961836b564db6d689c&amp;cookie=__hdnea__=st=1771918562~exp=1772004962~acl=/*~hmac=e1e6f6ac1debf6ac5fbf0bc0e4b4c7e0c8818fee4e0160b12424eeaac42aa1f7" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
+        </div>
+        
+        <!-- Control Bar -->
+        <div class="control-bar">
+            <div class="channel-title">
+                <span class="name" id="currentChannelName">Star Sports 1HD</span>
+                <span class="quality">HD Quality</span>
+            </div>
+            
+            <!-- View Counter -->
+            <div class="viewer-count">
+                <i class="fas fa-eye"></i>
+                <div id="counter-div">
+                   <script src="//widget.supercounters.com/ssl/online_t.js"></script>
+                   <script>sc_online_t(1703136,"Watching","00ffcc");</script>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="my-iframe">
-<div id="counter-container">
-<i class="fas fa-eye"></i>
-<script src="//widget.supercounters.com/ssl/online_t.js"></script>
-<script>
-sc_online_t(1703136,"LIVE","00ffcc");
-</script>
+    <!-- Selector -->
+    <div class="selector-area">
+        <label class="selector-label"><i class="fas fa-tv"></i> Switch Channel:</label>
+        <select id="channelSelector" onchange="changeChannel(this.value)">
+            <option value="1106">Star Sports 1HD</option>
+            <option value="362">Star Sports 1 Hindi</option>
+            <option value="1108">Star Sports 1 Hindi HD</option>
+            <option value="2853">Star Sports 2 Tamil HD</option>
+            <option value="3277">Star Sports 1 Tamil HD</option>
+            <option value="3274">Star Sports 2 Telugu HD</option>
+            <option value="3278">Star Sports 1 Telugu HD</option>
+            <option value="1122">Star Sports 2 Kannada HD</option>
+            <option value="1650">Star Sports 1 Kannada HD</option>
+        </select>
+    </div>
+
 </div>
 
-<!-- FIX APPLIED HERE: Added 'allow' for encrypted-media and autoplay -->
-<iframe 
-    id="videoFrame" 
-    src="" 
-    allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
-    allowfullscreen 
-    referrerpolicy="no-referrer">
-</iframe>
+<!-- Telegram Floating Button (Left) -->
+<a href="https://t.me/vaathala1" target="_blank" class="telegram-toggle" title="Join Telegram">
+    <i class="fab fa-telegram-plane"></i>
+</a>
 
-</div>
+<!-- Chat Floating Button (Right) -->
+<button class="chat-toggle" id="chatToggle">
+    <i class="fas fa-comment-dots"></i>
+</button>
 
-<!-- SELECT DROPDOWN -->
-<div class="language-selector-container">
-<label for="channelSelector" class="language-label">Change Channel:</label>
-<select id="channelSelector" onchange="changeChannel(this.value)">
-<option value="1106">Star Sports 1HD</option>
-<option value="362">Star Sports 1 Hindi</option>
-<option value="1108">Star Sports 1 Hindi HD</option>
-<option value="2853">Star Sports 2 Tamil HD</option>
-<option value="3277">Star Sports 1 Tamil HD</option>
-<option value="3274">Star Sports 2 Telugu HD</option>
-<option value="3278">Star Sports 1 Telugu HD</option>
-<option value="1122">Star Sports 2 Kannada HD</option>
-<option value="1650">Star Sports 1 Kannada HD</option>
-</select>
-</div>
-
-</div>
-
-<button class="chat-toggle" id="chatToggle"></button>
-
+<!-- Chat Container -->
 <div class="chat-container" id="chatBox">
-<button class="chat-close" id="chatClose">✕</button>
-<iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="chat-header">
+        <span class="chat-title">Live Chat</span>
+        <button class="chat-close" id="chatClose"><i class="fas fa-times"></i></button>
+    </div>
+    <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&amp;embed_domain=vaathala00.github.io" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
 
 <script>
-const iframe=document.getElementById("videoFrame");
-const selector=document.getElementById("channelSelector");
+const iframe = document.getElementById("videoFrame");
+const selector = document.getElementById("channelSelector");
+const nameDisplay = document.getElementById("currentChannelName");
 
-function getIdFromUrl(){
-  const params=new URLSearchParams(window.location.search);
-  return params.get("id");
+function getIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
 }
 
-async function loadChannel(id){
-  try{
-    const response=await fetch("https://raw.githubusercontent.com/vaathala00/jow/main/output.json");
-    const data=await response.json();
-    const channel=data.find(c=>c.id===id);
-    if(channel){
-      iframe.src = channel.link; 
-      document.title = channel.name + " - Live";
-      selector.value = id;
+async function loadChannel(id) {
+    try {
+        const response = await fetch("https://raw.githubusercontent.com/vaathala00/jow/main/output.json");
+        const data = await response.json();
+        const channel = data.find(c => c.id === id);
+        if (channel) {
+            iframe.src = channel.link;
+            document.title = channel.name + " - Live";
+            nameDisplay.textContent = channel.name;
+            selector.value = id;
+        }
+    } catch (err) {
+        console.error("Failed to load channel:", err);
     }
-  }catch(err){
-    console.error("Failed to load channel:", err);
-  }
 }
 
-function changeChannel(id){
-  window.location.search="?id="+id;
+function changeChannel(id) {
+    window.location.search = "?id=" + id;
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-  const id=getIdFromUrl() || "1106";
-  loadChannel(id);
+document.addEventListener("DOMContentLoaded", () => {
+    const id = getIdFromUrl() || "1106";
+    loadChannel(id);
 });
 
-/* CHAT */
-const chatToggle=document.getElementById("chatToggle");
-const chatBox=document.getElementById("chatBox");
-const chatClose=document.getElementById("chatClose");
+const chatToggle = document.getElementById("chatToggle");
+const chatBox = document.getElementById("chatBox");
+const chatClose = document.getElementById("chatClose");
 
-chatToggle.onclick=()=>{ chatBox.style.display = chatBox.style.display==="block"?"none":"block"; };
-chatClose.onclick=()=>chatBox.style.display="none";
+chatToggle.onclick = () => chatBox.classList.toggle("active");
+chatClose.onclick = () => chatBox.classList.remove("active");
 </script>
 
 </body>
