@@ -44,6 +44,10 @@ body { background: #0f1318; color: #fff; min-height: 125vh; }
 .viewer-count i { color: #00ffcc; font-size: 12px; }
 .viewer-count div { display: inline-block; font-size: 13px; }
 
+.viewer-count, #live-viewers {
+    color: #f0f0f0 !important;
+}
+
 /* Fix Counter Link Issue */
 #counter-div, #counter-div a {
     pointer-events: none !important;    /* Disables clicking */
@@ -152,6 +156,7 @@ body { background: #0f1318; color: #fff; min-height: 125vh; }
                 <i class="fas fa-eye"></i>
                 <div id="counter-div">
                    <script src="//widget.supercounters.com/ssl/online_t.js"></script>
+               <font color="f0f0f0"></font>
                    <script>sc_online_t(1703136,"Watching","00ffcc");</script>
                 </div>
             </div>
