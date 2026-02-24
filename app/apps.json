@@ -1,23 +1,6 @@
 {
   "apps": [
     {
-      "id": 1,
-      "category": "Mobile Player",
-      "name": "Network Stream [Premium]",
-      "version": "7.7",
-      "dateAdded": "2026-02-15T07:34:41.393Z",
-      "logo": "https://play-lh.googleusercontent.com/WWNgq1QOSm1GNkhyiSJlRhyY53afvUvZ-Oc5GPXGZxdRF1bc0NvljrPDk0BJoRAm9Wc",
-      "screenshots": [
-        "https://play-lh.googleusercontent.com/9x3-EN0GZlFVAeAurDtsH_r60v1ZcdbUlvph5THgPx9SeT9p36PCtCqNsFD1x8ItuaIhhg4z6tN7DGd8zEGYeA=w1052-h592-rw",
-        "https://play-lh.googleusercontent.com/_cOKYGsx7no6ER6s0KtaeCdaf0GNN-qg6egSmikEpuGuYHuUG2Tx-p8WXXSaQQAR0PS1p8p8UviR7Z4MhiT9BQ=w1052-h592-rw",
-        "https://play-lh.googleusercontent.com/pitqBWql2H4Ucb3tdIaFke0FoC1pPubqDUGodpNiWa1Fy4imI9Ku6YgtfbL7RCbekHNjl0uYzVj5DLkkPvcppdw=w1052-h592-rw"
-      ],
-      "install": {
-        "type": "download",
-        "url": "Network Stream .apk"
-      }
-    },
-    {
       "id": 2,
       "category": "Mobile Player",
       "name": "OTT Navigator Mobile [Premium]",
@@ -90,8 +73,8 @@
       "category": "Mobile Player",
       "name": "Ruby Player (Mobile)",
       "version": "1.0.6",
-      "dateAdded": "2026-02-15T08:48:18.617Z",
-      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "dateAdded": "2026-02-16T14:14:28.798Z",
+      "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
         "https://i.ibb.co/S4CCzSgC/photo-2026-02-15-08-57-52.jpg",
@@ -102,7 +85,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6307?code=613a7297f4449ec4a97bdfa0-1155774872"
+        "url": "https://uploda.sh/dRY9me5ECsMg"
       }
     },
     {
@@ -130,8 +113,8 @@
       "category": "PC Player",
       "name": "Ruby Player (PC)",
       "version": "1.0.3",
-      "dateAdded": "2026-02-15T08:47:31.052Z",
-      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "dateAdded": "2026-02-16T14:14:10.072Z",
+      "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
         "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
@@ -139,7 +122,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6308?code=ba6c9f3df7fc7d46dcb13f2f-1155774872"
+        "url": "https://uploda.sh/0dvFbTztT89f"
       }
     },
     {
@@ -164,8 +147,8 @@
       "category": "Android TV Player",
       "name": "Ruby Player Smart/Android Tv",
       "version": "1.0.5",
-      "dateAdded": "2026-02-15T08:38:22.546Z",
-      "logo": "https://cdn5.telesco.pe/file/dYSz4Fl4Owz7STu6YAYkNHM_ZY3zUoh4QW7uHOMURRfQVsYF-BuLPuxwFUh0f8-5pujhAICwf3qStwDnjQ6QabjFxffdh5r8Jw_PBeD34ziJGmmVLXfEg_Ae_LRT2egXGGda_OzmFmr3flNfchzi_2_CoHV5WBLQrhIb_Zz9dLT8q2xD1tj2vSXzsz3lsOSubVIEcJU7QSMlqXKngnSZAbp9r42bRp-g-iDDR0n85tIDvV5mGIr_jT5eag-DN-Ui3MB0jyTxRXokNl6CXyObSl9ZGAaj8HJwGKD6oU6TdaBpy3Q0OtXmMZFuvTIremJ0zJp1Rx35Q937XPEyHupQJQ.jpg",
+      "dateAdded": "2026-02-16T14:13:53.990Z",
+      "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
         "https://i.ibb.co/NgyPDd6j/Screenshot-49.png",
@@ -173,7 +156,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://filetolinkelone-a7f521e48354.herokuapp.com//dl/6300?code=e7843e30cff0f4c4a41be4f2-1155774872"
+        "url": "https://uploda.sh/ayaB03lMMwl4"
       }
     }
   ]
