@@ -245,9 +245,10 @@ body {
 <button class="chat-toggle" id="chatToggle"></button>
 
 <script>
-// Fetch JSON and display match info
+// Fetch JSON and display match info https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json
+
 const matchId = parseInt(new URLSearchParams(window.location.search).get('id'));
-const jsonUrl = 'https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json';
+const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
 
 fetch(jsonUrl)
 .then(res => res.json())
