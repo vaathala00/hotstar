@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Live Match</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <style>
 body {
     margin: 0;
@@ -15,7 +16,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .container {
     width: 100%;
     max-width: 900px;
@@ -24,8 +24,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
-/* Player */
 .player-wrapper {
     position: relative;
     width: 100%;
@@ -37,8 +35,6 @@ body {
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
-
-/* Floating Live Counter */
 #live-counter {
     position: absolute;
     top: 15px;
@@ -53,21 +49,17 @@ body {
     font-size: 13px;
     color: #fff;
     z-index: 20;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 #live-counter i {
     color: #ff3d3d;
     font-size: 12px;
 }
-
-/* Match Info: small left image, right text */
 .match-info {
     width: 100%;
     display: flex;
     background: rgba(255,255,255,0.05);
     padding: 10px 15px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     margin-bottom: 20px;
     align-items: center;
     gap: 15px;
@@ -77,12 +69,6 @@ body {
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
-    flex-shrink: 0;
-}
-.match-info .info-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 .match-info .info-right h2 {
     margin: 0;
@@ -96,8 +82,6 @@ body {
     color: #ff3d3d;
     font-weight: bold;
 }
-
-/* Buttons */
 .button-group {
     display: flex;
     justify-content: center;
@@ -113,225 +97,110 @@ body {
     background: linear-gradient(90deg,#ffb800,#ff9100);
     color: #131720;
     transition: 0.3s;
-    text-align: center;
 }
 .play-now-btn:hover {
     background: linear-gradient(90deg,#f59e00,#e68400);
-}
-
-/* Floating Telegram */
-.telegram-link {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1001;
-}
-.telegram-link img {
-    width: 50px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    cursor: pointer;
-}
-
-/* Floating Chat */
-.chat-container {
-    width: 350px;
-    height: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 1000;
-    background: #fff;
-    overflow: hidden;
-}
-.chat-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-.chat-close {
-    width: 35px;
-    height: 35px;
-    background: #f44336;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-.chat-close:before {
-    content: '×';
-    font-size: 20px;
-}
-.chat-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1001;
-    user-select: none;
-}
-.chat-toggle:after {
-    content: "Chat";
-    font-size: 12px;
-}
-.chat-toggle.open:after {
-    content: "Close";
-}
-
-@media(max-width:768px){
-    .player-wrapper iframe { height: 280px; }
-    .match-info { flex-direction: row; justify-content: flex-start; }
-    .match-info img { width: 60px; height: 60px; }
-    .chat-container { width: 90%; height: 400px; right: 5%; bottom: 10px; }
-    .chat-toggle { width: 40px; height: 40px; bottom: 10px; right: 10px; }
-    .telegram-link img { width: 40px; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Player & Counter -->
+
     <div class="player-wrapper">
-        <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
+        <iframe id="videoIframe" src="" allowfullscreen></iframe>
         <div id="live-counter">
             <i class="fas fa-eye"></i>
             <span id="counter-container"></span>
         </div>
     </div>
 
-    <!-- Match Info -->
     <div class="match-info" id="matchInfo"></div>
 
-    <!-- Buttons -->
     <div class="button-group">
         <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
-        <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
-        <a href="" id="rubbyButton" class="play-now-btn" data-package="com.rubby.leone" data-title="VT">Ruby Pc</a>
+        <a href="" id="playNowButton2" class="play-now-btn"
+           data-package="com.genuine.leone"
+           data-title="VT">NS Player</a>
+
+        <a href="" id="rubbyButton" class="play-now-btn"
+           data-package="com.rubby.leone"
+           data-title="VT">Ruby Pc</a>
 
         <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
     </div>
-</div>
 
-<!-- Telegram -->
-<a class="telegram-link" href="https://t.me/vaathala1" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-</a>
-
-<!-- Chat -->
-<div class="chat-container" id="chatBox">
-    <button class="chat-close" id="chatClose"></button>
-    <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
 </div>
-<button class="chat-toggle" id="chatToggle"></button>
 
 <script>
 
-// Get match_id from URL
+// Get match_id
 const matchId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
 
-// Fetch JSON
 fetch(jsonUrl)
-.then(res => {
-    if (!res.ok) {
-        throw new Error("Network response was not ok");
-    }
-    return res.json();
-})
+.then(res => res.json())
 .then(data => {
 
     let match = null;
 
-    // Case 1: JSON contains matches array
     if (Array.isArray(data.matches)) {
         match = data.matches.find(m => m.match_id === matchId);
+    } else if (data.match_id === matchId) {
+        match = data;
     }
 
-    // Case 2: JSON contains single match object
-    else if (data.match_id) {
-        if (data.match_id === matchId) {
-            match = data;
-        }
-    }
-
-    // If match not found
     if (!match) {
         document.getElementById('matchInfo').innerHTML =
             '<p style="color:red;">Match not found!</p>';
         return;
     }
 
-    // Display match info
     document.getElementById('matchInfo').innerHTML = `
-        <img src="${match.src}" alt="${match.match_name}">
+        <img src="${match.src}">
         <div class="info-right">
             <h2>${match.match_name}</h2>
             <p>Status: <span class="status-live">${match.status}</span></p>
         </div>
     `;
 
-    // Load iframe using match_id
+    // Load iframe
     document.getElementById('videoIframe').src =
         "https://allinonereborn.online/fanc/player_india.html?id=" +
         encodeURIComponent(match.match_id);
 
-    // Get video URL for buttons
     const videoLink = match.adfree_url || "";
 
-
-// ruby Player Intent
-const playBtn2 = document.getElementById('rubbyButton');
-
-const extraParams = '?|Origin=https://allinonereborn.online/fcww&Referer=https://allinonereborn.online/fcww';
-
-// Append headers to the video link
-const finalVideoLink = videoLink + extraParams;
-
-playBtn2.href = 'intent:' + finalVideoLink +
-    '#Intent;package=' + playBtn2.dataset.package +
-    ';S.title=' + playBtn2.dataset.title +
-    ';end';
-
-// NS Player Intent
-const playBtn2 = document.getElementById('playNowButton2');
-
-const extraParams = '?|Origin=https://allinonereborn.online/fcww&Referer=https://allinonereborn.online/fcww';
-
-// Append headers to the video link
-const finalVideoLink = videoLink + extraParams;
-
-playBtn2.href = 'intent:' + finalVideoLink +
-    '#Intent;package=' + playBtn2.dataset.package +
-    ';S.title=' + playBtn2.dataset.title +
-    ';end';
-
-
-    // Optional: Play Now Button 1
+    // Direct play
     document.getElementById('playNowButton1').href = videoLink;
 
-    // Copy Link
+    // Extra headers
+    const extraParams =
+        '?|Origin=https://allinonereborn.online/fcww&Referer=https://allinonereborn.online/fcww';
+
+    const finalVideoLink = videoLink + extraParams;
+
+    /* =========================
+       Ruby PC Intent
+    ========================= */
+    const rubyBtn = document.getElementById('rubbyButton');
+    rubyBtn.href =
+        'intent:' + finalVideoLink +
+        '#Intent;package=' + rubyBtn.dataset.package +
+        ';S.title=' + rubyBtn.dataset.title +
+        ';end';
+
+    /* =========================
+       NS Player Intent
+    ========================= */
+    const nsBtn = document.getElementById('playNowButton2');
+    nsBtn.href =
+        'intent:' + finalVideoLink +
+        '#Intent;package=' + nsBtn.dataset.package +
+        ';S.title=' + nsBtn.dataset.title +
+        ';end';
+
+    // Copy
     document.getElementById('copyLinkButton').addEventListener('click', e => {
         e.preventDefault();
         if (videoLink) {
@@ -342,13 +211,11 @@ playBtn2.href = 'intent:' + finalVideoLink +
 
 })
 .catch(err => {
-    console.error("Fetch error:", err);
     document.getElementById('matchInfo').innerHTML =
         '<p style="color:red;">Error loading match info!</p>';
 });
 
-
-// Floating Live Counter
+// Live Counter
 function loadCounter(){
     const container = document.getElementById("counter-container");
     container.innerHTML = "";
@@ -362,49 +229,7 @@ function loadCounter(){
 loadCounter();
 setInterval(loadCounter, 20000);
 
-
-// Chat Toggle
-const chatToggle = document.getElementById('chatToggle');
-const chatBox = document.getElementById('chatBox');
-
-chatToggle.addEventListener('click', () => {
-    if(chatBox.style.display === 'none' || chatBox.style.display === ''){
-        chatBox.style.display = 'block';
-        chatToggle.classList.add('open');
-    } else {
-        chatBox.style.display = 'none';
-        chatToggle.classList.remove('open');
-    }
-});
-
-document.getElementById('chatClose').addEventListener('click', () => {
-    chatBox.style.display = 'none';
-    chatToggle.classList.remove('open');
-});
-
-
-// Draggable chat toggle
-let isDragging = false, offsetX, offsetY;
-
-chatToggle.addEventListener('mousedown', e => {
-    isDragging = true;
-    offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-    offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-    });
-});
-
-function handleMouseMove(e){
-    if(isDragging){
-        chatToggle.style.left = `${e.clientX - offsetX}px`;
-        chatToggle.style.top = `${e.clientY - offsetY}px`;
-    }
-}
-
 </script>
+
 </body>
 </html>
