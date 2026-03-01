@@ -16,6 +16,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
 .container {
     width: 100%;
     max-width: 900px;
@@ -24,6 +25,8 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+/* Player */
 .player-wrapper {
     position: relative;
     width: 100%;
@@ -35,6 +38,8 @@ body {
     border-radius: 14px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
+
+/* Floating Live Counter */
 #live-counter {
     position: absolute;
     top: 15px;
@@ -49,17 +54,21 @@ body {
     font-size: 13px;
     color: #fff;
     z-index: 20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 #live-counter i {
     color: #ff3d3d;
     font-size: 12px;
 }
+
+/* Match Info: small left image, right text */
 .match-info {
     width: 100%;
     display: flex;
     background: rgba(255,255,255,0.05);
     padding: 10px 15px;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     margin-bottom: 20px;
     align-items: center;
     gap: 15px;
@@ -69,6 +78,12 @@ body {
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
+    flex-shrink: 0;
+}
+.match-info .info-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .match-info .info-right h2 {
     margin: 0;
@@ -82,6 +97,8 @@ body {
     color: #ff3d3d;
     font-weight: bold;
 }
+
+/* Buttons */
 .button-group {
     display: flex;
     justify-content: center;
@@ -97,9 +114,99 @@ body {
     background: linear-gradient(90deg,#ffb800,#ff9100);
     color: #131720;
     transition: 0.3s;
+    text-align: center;
 }
 .play-now-btn:hover {
     background: linear-gradient(90deg,#f59e00,#e68400);
+}
+
+/* Floating Telegram */
+.telegram-link {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+.telegram-link img {
+    width: 50px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+/* Floating Chat */
+.chat-container {
+    width: 350px;
+    height: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 1000;
+    background: #fff;
+    overflow: hidden;
+}
+.chat-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.chat-close {
+    width: 35px;
+    height: 35px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    z-index: 1001;
+}
+.chat-close:before {
+    content: '×';
+    font-size: 20px;
+}
+.chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+    user-select: none;
+}
+.chat-toggle:after {
+    content: "Chat";
+    font-size: 12px;
+}
+.chat-toggle.open:after {
+    content: "Close";
+}
+
+@media(max-width:768px){
+    .player-wrapper iframe { height: 280px; }
+    .match-info { flex-direction: row; justify-content: flex-start; }
+    .match-info img { width: 60px; height: 60px; }
+    .chat-container { width: 90%; height: 400px; right: 5%; bottom: 10px; }
+    .chat-toggle { width: 40px; height: 40px; bottom: 10px; right: 10px; }
+    .telegram-link img { width: 40px; }
 }
 </style>
 </head>
@@ -131,6 +238,20 @@ body {
     </div>
 
 </div>
+
+
+<!-- Telegram -->
+<a class="telegram-link" href="https://t.me/vaathala1" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+</a>
+
+<!-- Chat -->
+<div class="chat-container" id="chatBox">
+    <button class="chat-close" id="chatClose"></button>
+    <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
+</div>
+<button class="chat-toggle" id="chatToggle"></button>
+
 
 <script>
 
@@ -228,6 +349,43 @@ function loadCounter(){
 }
 loadCounter();
 setInterval(loadCounter, 20000);
+
+// Chat Toggle
+const chatToggle = document.getElementById('chatToggle');
+const chatBox = document.getElementById('chatBox');
+document.getElementById('chatToggle').addEventListener('click', () => {
+    if(chatBox.style.display === 'none' || chatBox.style.display === ''){
+        chatBox.style.display = 'block';
+        chatToggle.classList.add('open');
+    } else {
+        chatBox.style.display = 'none';
+        chatToggle.classList.remove('open');
+    }
+});
+document.getElementById('chatClose').addEventListener('click', () => {
+    chatBox.style.display = 'none';
+    chatToggle.classList.remove('open');
+});
+
+// Draggable chat toggle
+let isDragging = false, offsetX, offsetY;
+chatToggle.addEventListener('mousedown', e => {
+    isDragging = true;
+    offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
+    offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', handleMouseMove);
+    });
+});
+function handleMouseMove(e){
+    if(isDragging){
+        chatToggle.style.left = `${e.clientX - offsetX}px`;
+        chatToggle.style.top = `${e.clientY - offsetY}px`;
+    }
+}
+
 
 </script>
 
