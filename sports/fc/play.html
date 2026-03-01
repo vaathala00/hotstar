@@ -228,7 +228,7 @@ body {
     <div class="button-group">
         <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
         <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
-        <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">Ruby Pc</a>
+        <a href="" id="rubbyButton" class="play-now-btn" data-package="com.rubby.leone" data-title="VT">Ruby Pc</a>
 
         <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
     </div>
@@ -300,6 +300,19 @@ fetch(jsonUrl)
     // Get video URL for buttons
     const videoLink = match.adfree_url || "";
 
+
+// ruby Player Intent
+const playBtn2 = document.getElementById('rubbyButton');
+
+const extraParams = '?|Origin=https://allinonereborn.online/fcww&Referer=https://allinonereborn.online/fcww';
+
+// Append headers to the video link
+const finalVideoLink = videoLink + extraParams;
+
+playBtn2.href = 'intent:' + finalVideoLink +
+    '#Intent;package=' + playBtn2.dataset.package +
+    ';S.title=' + playBtn2.dataset.title +
+    ';end';
 
 // NS Player Intent
 const playBtn2 = document.getElementById('playNowButton2');
