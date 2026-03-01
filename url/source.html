@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkMaster - URL Shortener Control Panel</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #ef4444;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-box {
+            background: var(--primary);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        button.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        button.btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Table/List */
+        .url-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .url-item {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.1s;
+        }
+
+        @media (min-width: 768px) {
+            .url-item {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .url-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .short-url {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .original-url {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .actions {
+                margin-top: 0;
+            }
+        }
+
+        .btn-icon {
+            border: 1px solid var(--border);
+            background: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-icon:hover {
+            background: #f9fafb;
+            color: var(--text-main);
+            border-color: #d1d5db;
+        }
+
+        .btn-icon.delete:hover {
+            color: var(--danger);
+            border-color: #fca5a5;
+            background: #fef2f2;
+        }
+
+        /* Code Block */
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .copy-code-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .copy-code-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(20px);
+            transition: transform 0.2s;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Config Section */
+        .config-bar {
+            background: #fff;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>
+            <div class="icon-box">L</div>
+            LinkMaster
+        </h1>
+        <div>
+            <!-- Header Actions could go here -->
+        </div>
+    </header>
+
+    <!-- Domain Config -->
+    <div class="config-bar">
+        <label for="domainInput" style="margin-bottom:0; white-space:nowrap;">Worker Domain:</label>
+        <input type="text" id="domainInput" value="https://short.vodep39240327.workers.dev/" placeholder="https://your-worker.workers.dev" style="flex:1; min-width: 200px;">
+        <small style="color: var(--text-muted);">Used to generate the output URL.</small>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
+        <button class="tab-btn" onclick="switchTab('code')">Worker.js Code</button>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div id="dashboard" class="tab-content active">
+        
+        <!-- Create Form -->
+        <div class="card">
+            <h2>Create Shortened URL</h2>
+            <form id="createForm">
+                <div class="form-group">
+                    <label for="longUrl">Long URL</label>
+                    <input type="url" id="longUrl" placeholder="https://example.com/very/long/path" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="alias">Alias (Optional)</label>
+                    <input type="text" id="alias" placeholder="e.g., in-mc-fdlive-fc" pattern="[a-zA-Z0-9-_]+" title="Alphanumeric, dashes, or underscores only">
+                    <small style="color: var(--text-muted); font-size: 0.8rem;">Leave empty to generate random ID.</small>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="preservePath" checked>
+                    <label for="preservePath" title="If checked, visiting /alias/extra will redirect to LongURL/extra">
+                        Append Path (Base URL Mode)
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-primary">Shorten URL</button>
+            </form>
+        </div>
+
+        <!-- URL List -->
+        <div class="card">
+            <h2>Active Links</h2>
+            <div id="urlList" class="url-list">
+                <!-- Links will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Worker Code Tab -->
+    <div id="code" class="tab-content">
+        <div class="card">
+            <h2>Cloudflare Worker Script</h2>
+            <p style="margin-bottom: 15px; color: var(--text-muted);">
+                Copy this code and paste it into your Cloudflare Worker script editor. 
+                This handles the redirection logic for the links you create in the Dashboard.
+            </p>
+            <pre><code id="workerCodeBlock" class="language-javascript">
+// Cloudflare Worker Script
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+
+    // 1. Remove leading slash for key lookup
+    let key = path.replace(/^\//, '');
+    
+    // 2. Handle the specific use case: /alias//match...
+    // If the user has double slashes, normalize or pass through.
+    // We check if the key contains a slash to determine if there's extra path.
+    let extraPath = '';
+    let mainKey = key;
+
+    // Check for path separator (single or double slashes)
+    const firstSlashIndex = key.indexOf('/');
+    
+    if (firstSlashIndex !== -1) {
+        mainKey = key.substring(0, firstSlashIndex);
+        // Keep everything after the key (including the slash)
+        extraPath = key.substring(firstSlashIndex); 
+    }
+
+    // 3. Fetch the mapping from KV (or hardcode for testing if env.LINKS isn't ready)
+    // In a real setup, bind a KV namespace named 'LINKS' in wrangler.toml
+    let targetUrl = null;
+    let options = {};
+
+    if (env.LINKS) {
+      const storedData = await env.LINKS.get(mainKey, { type: 'json' });
+      if (storedData) {
+        targetUrl = storedData.url;
+        // If the user checked "Append Path" (preservePath: true)
+        if (storedData.preservePath && extraPath) {
+            // Clean up double slashes in target if needed, or just append
+            // If target ends with / and extra starts with //, clean it.
+            // But per user request, they might want specific structure.
+            // We simply join them:
+            targetUrl = targetUrl.replace(/\/+$/, '') + extraPath;
+        }
+      }
+    } else {
+        // FALLBACK FOR TESTING WITHOUT KV:
+        // This allows you to test the worker logic locally or before binding KV
+        // by returning a hardcoded response for the example.
+        if (mainKey === 'in-mc-fdlive-fc') {
+            targetUrl = 'https://allinonereborn.online/fcdata/playlists' + extraPath;
+        }
+    }
+
+    // 4. Perform Redirect
+    if (targetUrl) {
+      return Response.redirect(targetUrl, 301);
+    }
+
+    // 5. Default Response (Not Found)
+    return new Response('404 - Link not found', { status: 404 });
+  },
+};
+</code><button class="copy-code-btn" onclick="copyCode()">Copy Code</button></pre>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">
+                <strong>Note:</strong> For production, create a KV Namespace in Cloudflare, bind it as `LINKS` in your `wrangler.toml`, and update your Dashboard to write to that KV namespace (this HTML tool currently uses LocalStorage for UI management).
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Edit Link</h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="editForm">
+            <input type="hidden" id="editIndex">
+            <div class="form-group">
+                <label for="editLongUrl">Long URL</label>
+                <input type="url" id="editLongUrl" required>
+            </div>
+            <div class="form-group">
+                <label for="editAlias">Alias</label>
+                <input type="text" id="editAlias" required pattern="[a-zA-Z0-9-_]+">
+                <small style="color: var(--text-muted);">Warning: Changing alias will break existing links.</small>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="editPreservePath">
+                <label for="editPreservePath">Append Path (Base URL Mode)</label>
+            </div>
+            <button type="submit" class="btn-primary">Update Link</button>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">Action Successful</div>
+
+<script>
+    // --- State Management ---
+    // Using localStorage to simulate a database
+    let links = JSON.parse(localStorage.getItem('linkMasterData')) || [];
+
+    // Pre-fill example if empty for the first time
+    if (links.length === 0) {
+        links.push({
+            longUrl: 'https://allinonereborn.online/fcdata/playlists',
+            alias: 'in-mc-fdlive-fc',
+            preservePath: true,
+            created: Date.now()
+        });
+        saveData();
+    }
+
+    const domainInput = document.getElementById('domainInput');
+    
+    // --- DOM Elements ---
+    const urlListEl = document.getElementById('urlList');
+    const createForm = document.getElementById('createForm');
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+    const toastEl = document.getElementById('toast');
+
+    // --- Initialization ---
+    renderLinks();
+
+    // --- Event Listeners ---
+    
+    // Update domain display dynamically
+    domainInput.addEventListener('input', renderLinks);
+
+    // Create New Link
+    createForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const longUrl = document.getElementById('longUrl').value;
+        let alias = document.getElementById('alias').value.trim();
+        const preservePath = document.getElementById('preservePath').checked;
+
+        // Generate Alias if empty
+        if (!alias) {
+            alias = Math.random().toString(36).substr(2, 6);
+        }
+
+        // Check for duplicate alias
+        if (links.some(link => link.alias === alias)) {
+            showToast('Error: Alias already exists', true);
+            return;
+        }
+
+        const newLink = {
+            longUrl,
+            alias,
+            preservePath,
+            created: Date.now()
+        };
+
+        links.unshift(newLink); // Add to top
+        saveData();
+        renderLinks();
+        createForm.reset();
+        document.getElementById('preservePath').checked = true; // Reset default
+        showToast('Link Created Successfully!');
+    });
+
+    // Edit Link (Open Modal)
+    window.openEditModal = (index) => {
+        const link = links[index];
+        document.getElementById('editIndex').value = index;
+        document.getElementById('editLongUrl').value = link.longUrl;
+        document.getElementById('editAlias').value = link.alias;
+        document.getElementById('editPreservePath').checked = link.preservePath;
+        
+        editModal.classList.add('open');
+    };
+
+    // Edit Link (Save)
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const index = document.getElementById('editIndex').value;
+        const newAlias = document.getElementById('editAlias').value.trim();
+
+        // Duplicate check (excluding current)
+        if (links.some((link, i) => link.alias === newAlias && i != index)) {
+            showToast('Error: Alias already in use', true);
+            return;
+        }
+
+        links[index].longUrl = document.getElementById('editLongUrl').value;
+        links[index].alias = newAlias;
+        links[index].preservePath = document.getElementById('editPreservePath').checked;
+
+        saveData();
+        renderLinks();
+        closeModal();
+        showToast('Link Updated!');
+    });
+
+    // Delete Link
+    window.deleteLink = (index) => {
+        if(confirm('Are you sure you want to delete this link?')) {
+            links.splice(index, 1);
+            saveData();
+            renderLinks();
+            showToast('Link Deleted');
+        }
+    };
+
+    // Copy Short URL
+    window.copyUrl = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Short URL copied to clipboard!');
+        });
+    };
+
+    // --- Helper Functions ---
+
+    function saveData() {
+        localStorage.setItem('linkMasterData', JSON.stringify(links));
+    }
+
+    function renderLinks() {
+        const domain = domainInput.value.replace(/\/$/, ''); // Remove trailing slash
+        
+        if (links.length === 0) {
+            urlListEl.innerHTML = '<div class="empty-state">No links found. Create one above.</div>';
+            return;
+        }
+
+        urlListEl.innerHTML = links.map((link, index) => {
+            const shortUrl = `${domain}/${link.alias}`;
+            return `
+                <div class="url-item">
+                    <div class="url-info">
+                        <div class="short-url">
+                            <span class="icon">🔗</span>
+                            <span>${shortUrl}</span>
+                            ${link.preservePath ? '<span class="badge">Base Path</span>' : ''}
+                        </div>
+                        <div class="original-url" title="${link.longUrl}">
+                            Target: ${link.longUrl}
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn-icon" onclick="copyUrl('${shortUrl}')" title="Copy URL">
+                            📋 Copy
+                        </button>
+                        <button class="btn-icon" onclick="openEditModal(${index})" title="Edit">
+                            ✏️ Edit
+                        </button>
+                        <button class="btn-icon delete" onclick="deleteLink(${index})" title="Delete">
+                            🗑️ Delete
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function closeModal() {
+        editModal.classList.remove('open');
+    }
+
+    function showToast(message, isError = false) {
+        toastEl.textContent = message;
+        toastEl.style.background = isError ? 'var(--danger)' : '#333';
+        toastEl.classList.add('show');
+        setTimeout(() => {
+            toastEl.classList.remove('show');
+        }, 3000);
+    }
+
+    window.switchTab = (tabId) => {
+        // Update buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+    };
+
+    window.copyCode = () => {
+        const code = document.getElementById('workerCodeBlock').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+            const btn = document.querySelector('.copy-code-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'Copied!';
+            setTimeout(() => btn.innerText = originalText, 2000);
+        });
+    };
+
+    // Close modal on outside click
+    editModal.addEventListener('click', (e) => {
+        if (e.target === editModal) closeModal();
+    });
+
+</script>
+
+</body>
+</html>

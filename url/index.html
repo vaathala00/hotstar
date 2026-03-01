@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkMaster - URL Shortener</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #ef4444;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .icon-box {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            background: #f9fafb;
+        }
+
+        /* Search Bar Specifics */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .search-wrapper input {
+            padding-left: 40px; /* Space for icon */
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: #f0f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #bae6fd;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: #0369a1;
+        }
+
+        button.btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        button.btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button.btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Table/List */
+        .url-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-height: 200px; /* Prevent jump when content loads */
+        }
+
+        .url-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .url-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+        }
+
+        @media (min-width: 640px) {
+            .url-item {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+
+        .url-info {
+            flex: 1;
+            overflow: hidden;
+            padding-right: 10px;
+        }
+
+        .short-url {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .original-url {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 3px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .btn-icon {
+            border: 1px solid var(--border);
+            background: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .btn-icon:hover {
+            background: #f3f4f6;
+            color: var(--text-main);
+            border-color: #d1d5db;
+        }
+
+        .btn-icon.copy:hover {
+            background: #eff6ff;
+            color: var(--primary);
+            border-color: #93c5fd;
+        }
+
+        .btn-icon.delete:hover {
+            color: var(--danger);
+            border-color: #fca5a5;
+            background: #fef2f2;
+        }
+
+        /* Pagination */
+        .pagination-container {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            overflow-x: auto; /* Allow scrolling on small screens if many pages */
+            padding-bottom: 5px;
+        }
+
+        .page-btn {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            min-width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            font-family: monospace;
+            font-weight: 700;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: var(--bg-body);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .page-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f3f4f6;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(20px);
+            transition: transform 0.2s;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--text-main);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>
+            <div class="icon-box">L</div>
+            LinkMaster
+        </h1>
+        <p style="color: var(--text-muted); margin-top: 5px;">Manage your short links efficiently</p>
+    </header>
+
+    <!-- Create Form -->
+    <div class="card fade-in">
+        <h2>Create New Short URL</h2>
+        <form id="createForm">
+            <div class="form-group">
+                <label for="longUrl">Long URL</label>
+                <input type="url" id="longUrl" placeholder="https://example.com/very/long/path" required autocomplete="off">
+            </div>
+            
+            <div class="form-group">
+                <label for="alias">Alias (Optional)</label>
+                <input type="text" id="alias" placeholder="e.g., in-mc-fdlive-fc" pattern="[a-zA-Z0-9-_]+" title="Alphanumeric, dashes, or underscores only" autocomplete="off">
+                <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 4px; display:block;">Leave empty to generate a random ID.</small>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="preservePath" checked>
+                <label for="preservePath" title="If checked, visiting /alias/extra will redirect to LongURL/extra">
+                    Append Path (Base URL Mode)
+                </label>
+            </div>
+
+            <button type="submit" class="btn-primary">Shorten URL</button>
+        </form>
+    </div>
+
+    <!-- URL List -->
+    <div class="card">
+        <h2>Active Links</h2>
+        
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by alias or URL...">
+        </div>
+
+        <div id="urlList" class="url-list">
+            <!-- Links injected here -->
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination-container"></div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Edit Link</h3>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="editForm">
+            <input type="hidden" id="editIndex">
+            <div class="form-group">
+                <label for="editLongUrl">Long URL</label>
+                <input type="url" id="editLongUrl" required>
+            </div>
+            <div class="form-group">
+                <label for="editAlias">Alias</label>
+                <input type="text" id="editAlias" required pattern="[a-zA-Z0-9-_]+">
+                <small style="color: var(--danger); font-size: 0.8rem; display:block; margin-top:5px;">Warning: Changing alias breaks existing links.</small>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="editPreservePath">
+                <label for="editPreservePath">Append Path (Base URL Mode)</label>
+            </div>
+            <button type="submit" class="btn-primary">Update Link</button>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMsg">Action Successful</span>
+</div>
+
+<script>
+    // --- CONFIGURATION ---
+    // SET YOUR WORKER DOMAIN HERE
+    const WORKER_DOMAIN = 'https://short.vodep39240327.workers.dev'; 
+    const ITEMS_PER_PAGE = 10;
+
+    // --- State Management ---
+    let links = JSON.parse(localStorage.getItem('linkMasterData')) || [];
+    let currentPage = 1;
+
+    // --- DOM Elements ---
+    const urlListEl = document.getElementById('urlList');
+    const paginationEl = document.getElementById('pagination');
+    const createForm = document.getElementById('createForm');
+    const editModal = document.getElementById('editModal');
+    const editForm = document.getElementById('editForm');
+    const searchInput = document.getElementById('searchInput');
+    const toastEl = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    const toastIcon = document.getElementById('toastIcon');
+
+    // --- Initialization ---
+    renderLinks();
+
+    // --- Event Listeners ---
+    
+    // Search Input
+    searchInput.addEventListener('input', () => {
+        currentPage = 1; // Reset to page 1 on new search
+        renderLinks();
+    });
+
+    // Create New Link
+    createForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const longUrl = document.getElementById('longUrl').value;
+        let alias = document.getElementById('alias').value.trim();
+        const preservePath = document.getElementById('preservePath').checked;
+
+        // Generate Alias if empty
+        if (!alias) {
+            alias = Math.random().toString(36).substr(2, 6);
+        }
+
+        // Check for duplicate alias
+        if (links.some(link => link.alias === alias)) {
+            showToast('Alias already exists', true);
+            return;
+        }
+
+        const newLink = {
+            longUrl,
+            alias,
+            preservePath,
+            created: Date.now()
+        };
+
+        links.unshift(newLink); 
+        saveData();
+        
+        currentPage = 1; // Go to first page to see new link
+        renderLinks();
+        
+        createForm.reset();
+        document.getElementById('preservePath').checked = true; // Reset default
+        showToast('Link created successfully');
+    });
+
+    // Edit Link (Save)
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const index = document.getElementById('editIndex').value;
+        const newAlias = document.getElementById('editAlias').value.trim();
+
+        // Duplicate check (excluding current)
+        if (links.some((link, i) => link.alias === newAlias && i != index)) {
+            showToast('Alias already in use', true);
+            return;
+        }
+
+        links[index].longUrl = document.getElementById('editLongUrl').value;
+        links[index].alias = newAlias;
+        links[index].preservePath = document.getElementById('editPreservePath').checked;
+
+        saveData();
+        renderLinks();
+        closeModal();
+        showToast('Link updated');
+    });
+
+    // --- Helper Functions ---
+
+    function saveData() {
+        localStorage.setItem('linkMasterData', JSON.stringify(links));
+    }
+
+    function renderLinks() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        // Filter links based on search term
+        const filteredLinks = links.filter(link => 
+            link.alias.toLowerCase().includes(searchTerm) || 
+            link.longUrl.toLowerCase().includes(searchTerm)
+        );
+
+        const totalPages = Math.ceil(filteredLinks.length / ITEMS_PER_PAGE);
+        
+        // Safety check: if we deleted the last item on the last page
+        if (currentPage > totalPages && totalPages > 0) {
+            currentPage = totalPages;
+        }
+        if (currentPage < 1) currentPage = 1;
+
+        // Calculate slice indices
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        const end = start + ITEMS_PER_PAGE;
+        const visibleLinks = filteredLinks.slice(start, end);
+
+        // Render List Items
+        if (filteredLinks.length === 0) {
+            if (links.length === 0) {
+                urlListEl.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📭</div>
+                        <p>No links created yet.</p>
+                    </div>`;
+            } else {
+                urlListEl.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <p>No links found matching "${searchTerm}".</p>
+                    </div>`;
+            }
+        } else {
+            urlListEl.innerHTML = visibleLinks.map((link) => {
+                // We need to find the original index for editing/deleting
+                const originalIndex = links.findIndex(l => l.alias === link.alias);
+                
+                const shortUrl = `${WORKER_DOMAIN}/${link.alias}`;
+                return `
+                    <div class="url-item fade-in">
+                        <div class="url-info">
+                            <div class="short-url">
+                                <span class="icon">🔗</span>
+                                <span>${shortUrl}</span>
+                                ${link.preservePath ? '<span class="badge">Base Path</span>' : ''}
+                            </div>
+                            <div class="original-url" title="${link.longUrl}">
+                                Target: ${link.longUrl}
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="btn-icon copy" onclick="copyUrl('${shortUrl}')" title="Copy URL">
+                                📋 Copy
+                            </button>
+                            <button class="btn-icon" onclick="openEditModal(${originalIndex})" title="Edit">
+                                ✏️ Edit
+                            </button>
+                            <button class="btn-icon delete" onclick="deleteLink(${originalIndex})" title="Delete">
+                                🗑️ Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+        if (totalPages <= 1) {
+            paginationEl.innerHTML = '';
+            return;
+        }
+
+        let html = `
+            <button class="page-btn" 
+                ${currentPage === 1 ? 'disabled' : ''} 
+                onclick="changePage(${currentPage - 1})">
+                &lt;-
+            </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+            // Add separator
+            if (i < totalPages) {
+                html += `<span style="color:var(--text-muted); font-size:0.8rem;">|</span>`;
+            }
+        }
+
+        html += `
+            <button class="page-btn" 
+                ${currentPage === totalPages ? 'disabled' : ''} 
+                onclick="changePage(${currentPage + 1})">
+                -&gt;
+            </button>
+        `;
+
+        paginationEl.innerHTML = html;
+    }
+
+    window.changePage = (newPage) => {
+        currentPage = newPage;
+        renderLinks();
+    };
+
+    window.openEditModal = (index) => {
+        const link = links[index];
+        document.getElementById('editIndex').value = index;
+        document.getElementById('editLongUrl').value = link.longUrl;
+        document.getElementById('editAlias').value = link.alias;
+        document.getElementById('editPreservePath').checked = link.preservePath;
+        
+        editModal.classList.add('open');
+    };
+
+    window.deleteLink = (index) => {
+        if(confirm('Are you sure you want to delete this link?')) {
+            links.splice(index, 1);
+            saveData();
+            renderLinks();
+            showToast('Link deleted');
+        }
+    };
+
+    window.copyUrl = (text) => {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Copied to clipboard');
+        });
+    };
+
+    function closeModal() {
+        editModal.classList.remove('open');
+    }
+
+    function showToast(message, isError = false) {
+        toastMsg.textContent = message;
+        toastIcon.textContent = isError ? '⚠️' : '✅';
+        toastEl.style.background = isError ? '#ef4444' : '#1f2937';
+        toastEl.classList.add('show');
+        setTimeout(() => {
+            toastEl.classList.remove('show');
+        }, 3000);
+    }
+
+    // Close modal on outside click
+    editModal.addEventListener('click', (e) => {
+        if (e.target === editModal) closeModal();
+    });
+</script>
+
+</body>
+</html>
