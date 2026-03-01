@@ -246,42 +246,23 @@ body {
 
 <script>
 
-// Get match_id from URL
+// Fetch JSON and display match info https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json
+
 const matchId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
 
-// Fetch JSON
 fetch(jsonUrl)
-.then(res => {
-    if (!res.ok) {
-        throw new Error("Network response was not ok");
-    }
-    return res.json();
-})
+.then(res => res.json())
 .then(data => {
-
-    let match = null;
-
-    // Case 1: JSON contains matches array
-    if (Array.isArray(data.matches)) {
+    let match;
+    if(data.matches && Array.isArray(data.matches)){
         match = data.matches.find(m => m.match_id === matchId);
     }
-
-    // Case 2: JSON contains single match object
-    else if (data.match_id) {
-        if (data.match_id === matchId) {
-            match = data;
-        }
-    }
-
-    // If match not found
-    if (!match) {
-        document.getElementById('matchInfo').innerHTML =
-            '<p style="color:red;">Match not found!</p>';
+    if(!match){
+        document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Match not found!</p>';
         return;
     }
 
-    // Display match info
     document.getElementById('matchInfo').innerHTML = `
         <img src="${match.src}" alt="${match.match_name}">
         <div class="info-right">
@@ -290,39 +271,43 @@ fetch(jsonUrl)
         </div>
     `;
 
-    // Load iframe using match_id
+
+// Video
+// const videoLink = match.adfree_url || '';
+// if(videoLink){
+//     document.getElementById('videoIframe').src =
+//     "https://allinonereborn.online/fanc/player_india.html?id=" +
+//     encodeURIComponent(videoLink);
+// }
+
+
+// Use match_id instead of adfree_url
+const matchIdValue = match.match_id;
+
+if (matchIdValue) {
     document.getElementById('videoIframe').src =
         "https://allinonereborn.online/fanc/player_india.html?id=" +
-        encodeURIComponent(match.match_id);
+        encodeURIComponent(matchIdValue);
+}
 
-    // Get video URL for buttons
-    const videoLink = match.adfree_url || "";
 
     // NS Player Intent
     const playBtn2 = document.getElementById('playNowButton2');
-    playBtn2.href = 'intent:' + videoLink +
-        '#Intent;package=' + playBtn2.dataset.package +
-        ';S.title=' + playBtn2.dataset.title + ';end';
-
-    // Optional: Play Now Button 1
-    document.getElementById('playNowButton1').href = videoLink;
+    const intentUrl = 'intent:' + videoLink +
+        '#Intent;package=' + playBtn2.getAttribute('data-package') +
+        ';S.title=' + playBtn2.getAttribute('data-title') + ';end';
+    playBtn2.setAttribute('href', intentUrl);
 
     // Copy Link
     document.getElementById('copyLinkButton').addEventListener('click', e => {
         e.preventDefault();
-        if (videoLink) {
-            navigator.clipboard.writeText(videoLink)
-                .then(() => alert('Link copied!'));
-        }
+        navigator.clipboard.writeText(videoLink).then(() => alert('Link copied!'));
     });
-
 })
 .catch(err => {
-    console.error("Fetch error:", err);
-    document.getElementById('matchInfo').innerHTML =
-        '<p style="color:red;">Error loading match info!</p>';
+    console.error(err);
+    document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Error loading match info!</p>';
 });
-
 
 // Floating Live Counter
 function loadCounter(){
@@ -338,12 +323,10 @@ function loadCounter(){
 loadCounter();
 setInterval(loadCounter, 20000);
 
-
 // Chat Toggle
 const chatToggle = document.getElementById('chatToggle');
 const chatBox = document.getElementById('chatBox');
-
-chatToggle.addEventListener('click', () => {
+document.getElementById('chatToggle').addEventListener('click', () => {
     if(chatBox.style.display === 'none' || chatBox.style.display === ''){
         chatBox.style.display = 'block';
         chatToggle.classList.add('open');
@@ -352,35 +335,29 @@ chatToggle.addEventListener('click', () => {
         chatToggle.classList.remove('open');
     }
 });
-
 document.getElementById('chatClose').addEventListener('click', () => {
     chatBox.style.display = 'none';
     chatToggle.classList.remove('open');
 });
 
-
 // Draggable chat toggle
 let isDragging = false, offsetX, offsetY;
-
 chatToggle.addEventListener('mousedown', e => {
     isDragging = true;
     offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
     offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', () => {
         isDragging = false;
         document.removeEventListener('mousemove', handleMouseMove);
     });
 });
-
 function handleMouseMove(e){
     if(isDragging){
         chatToggle.style.left = `${e.clientX - offsetX}px`;
         chatToggle.style.top = `${e.clientY - offsetY}px`;
     }
 }
-
 </script>
 </body>
 </html>
