@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Live Match</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 <style>
 body {
     margin: 0;
@@ -213,32 +212,25 @@ body {
 <body>
 
 <div class="container">
-
+    <!-- Player & Counter -->
     <div class="player-wrapper">
-        <iframe id="videoIframe" src="" allowfullscreen></iframe>
+        <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
         <div id="live-counter">
             <i class="fas fa-eye"></i>
             <span id="counter-container"></span>
         </div>
     </div>
 
+    <!-- Match Info -->
     <div class="match-info" id="matchInfo"></div>
 
+    <!-- Buttons -->
     <div class="button-group">
         <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
-        <a href="" id="playNowButton2" class="play-now-btn"
-           data-package="com.genuine.leone"
-           data-title="VT">NS Player</a>
-
-        <a href="" id="rubbyButton" class="play-now-btn"
-           data-package="com.rubby.leone"
-           data-title="VT">Ruby Pc</a>
-
+        <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
         <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
     </div>
-
 </div>
-
 
 <!-- Telegram -->
 <a class="telegram-link" href="https://t.me/vaathala1" target="_blank">
@@ -252,91 +244,72 @@ body {
 </div>
 <button class="chat-toggle" id="chatToggle"></button>
 
-
 <script>
 
-// Get match_id
+// Fetch JSON and display match info https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json
+
 const matchId = parseInt(new URLSearchParams(window.location.search).get('id'));
 const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
 
 fetch(jsonUrl)
 .then(res => res.json())
 .then(data => {
-
-    let match = null;
-
-    if (Array.isArray(data.matches)) {
+    let match;
+    if(data.matches && Array.isArray(data.matches)){
         match = data.matches.find(m => m.match_id === matchId);
-    } else if (data.match_id === matchId) {
-        match = data;
     }
-
-    if (!match) {
-        document.getElementById('matchInfo').innerHTML =
-            '<p style="color:red;">Match not found!</p>';
+    if(!match){
+        document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Match not found!</p>';
         return;
     }
 
     document.getElementById('matchInfo').innerHTML = `
-        <img src="${match.src}">
+        <img src="${match.src}" alt="${match.match_name}">
         <div class="info-right">
             <h2>${match.match_name}</h2>
             <p>Status: <span class="status-live">${match.status}</span></p>
         </div>
     `;
 
-    // Load iframe
+
+// Video
+// const videoLink = match.adfree_url || '';
+// if(videoLink){
+//     document.getElementById('videoIframe').src =
+//     "https://allinonereborn.online/fanc/player_india.html?id=" +
+//     encodeURIComponent(videoLink);
+// }
+
+
+// Use match_id instead of adfree_url
+const matchIdValue = match.match_id;
+
+if (matchIdValue) {
     document.getElementById('videoIframe').src =
-        "https://allinonereborn.online/fanc/player_india.html?id=" +
-        encodeURIComponent(match.match_id);
+        "https://allinonereborn.online/fcww/player_india.html?stream=" +
+        encodeURIComponent(matchIdValue);
+}
 
-    const videoLink = match.adfree_url || "";
 
-    // Direct play
-    document.getElementById('playNowButton1').href = videoLink;
+    // NS Player Intent
+    const playBtn2 = document.getElementById('playNowButton2');
+    const intentUrl = 'intent:' + videoLink +
+        '#Intent;package=' + playBtn2.getAttribute('data-package') +
+        ';S.title=' + playBtn2.getAttribute('data-title') + ';end';
+    playBtn2.setAttribute('href', intentUrl);
 
-    // Extra headers
-    const extraParams =
-        '?|Origin=https://allinonereborn.online/fcww&Referer=https://allinonereborn.online/fcww';
-
-    const finalVideoLink = videoLink + extraParams;
-
-    /* =========================
-       Ruby PC Intent
-    ========================= */
-    const rubyBtn = document.getElementById('rubbyButton');
-    rubyBtn.href =
-        'intent:' + finalVideoLink +
-        '#Intent;package=' + rubyBtn.dataset.package +
-        ';S.title=' + rubyBtn.dataset.title +
-        ';end';
-
-    /* =========================
-       NS Player Intent
-    ========================= */
-    const nsBtn = document.getElementById('playNowButton2');
-    nsBtn.href =
-        'intent:' + finalVideoLink +
-        '#Intent;package=' + nsBtn.dataset.package +
-        ';S.title=' + nsBtn.dataset.title +
-        ';end';
-
-    // Copy
+    // Copy Link
     document.getElementById('copyLinkButton').addEventListener('click', e => {
         e.preventDefault();
-        if (videoLink) {
-            navigator.clipboard.writeText(videoLink)
-                .then(() => alert('Link copied!'));
-        }
+        navigator.clipboard.writeText(videoLink).then(() => alert('Link copied!'));
     });
-
 })
 .catch(err => {
-    document.getElementById('matchInfo').innerHTML =
-        '<p style="color:red;">Error loading match info!</p>';
+    console.error(err);
+    document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Error loading match info!</p>';
 });
 
-// Live Counter
+// Floating Live Counter
 function loadCounter(){
     const container = document.getElementById("counter-container");
     container.innerHTML = "";
@@ -385,9 +358,6 @@ function handleMouseMove(e){
         chatToggle.style.top = `${e.clientY - offsetY}px`;
     }
 }
-
-
 </script>
-
 </body>
 </html>
