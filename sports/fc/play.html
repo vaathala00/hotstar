@@ -1,354 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Match</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #121212;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Live Match Streaming</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0f1115;
+            --card-bg: #1c1f26;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --primary: #3b82f6; /* Modern Blue */
+            --primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
+            --accent: #f59e0b; /* Amber/Gold for accents */
+            --danger: #ef4444;
+            --success: #10b981;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --glass: rgba(28, 31, 38, 0.7);
+        }
 
-.container {
-    width: 100%;
-    max-width: 900px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        * {
+            box-sizing: border-box;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-/* Player */
-.player-wrapper {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-}
-.player-wrapper iframe {
-    width: 100%;
-    height: 480px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 125vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-/* Floating Live Counter */
-#live-counter {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
-    border-radius: 20px;
-    font-size: 13px;
-    color: #fff;
-    z-index: 20;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-#live-counter i {
-    color: #ff3d3d;
-    font-size: 12px;
-}
+        /* --- Main Layout --- */
+        main {
+            width: 100%;
+            max-width: 1000px;
+            padding: 16px;
+            padding-bottom: 100px; /* Space for floating elements */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-/* Match Info: small left image, right text */
-.match-info {
-    width: 100%;
-    display: flex;
-    background: rgba(255,255,255,0.05);
-    padding: 10px 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    margin-bottom: 20px;
-    align-items: center;
-    gap: 15px;
-}
-.match-info img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-.match-info .info-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.match-info .info-right h2 {
-    margin: 0;
-    font-size: 18px;
-}
-.match-info .info-right p {
-    margin: 5px 0 0;
-    font-size: 14px;
-}
-.status-live {
-    color: #ff3d3d;
-    font-weight: bold;
-}
+        /* --- Video Player Section --- */
+        .player-section {
+            position: relative;
+            width: 100%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #000;
+            box-shadow: var(--shadow);
+            aspect-ratio: 16/9; /* Responsive Video Ratio */
+        }
 
-/* Buttons */
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-.play-now-btn {
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    background: linear-gradient(90deg,#ffb800,#ff9100);
-    color: #131720;
-    transition: 0.3s;
-    text-align: center;
-}
-.play-now-btn:hover {
-    background: linear-gradient(90deg,#f59e00,#e68400);
-}
+        .player-section iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
 
-/* Floating Telegram */
-.telegram-link {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 1001;
-}
-.telegram-link img {
-    width: 50px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    cursor: pointer;
-}
+        /* Floating Live Counter */
+        #live-counter {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 50px;
+            font-size: 12px;
+            color: #fff;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-/* Floating Chat */
-.chat-container {
-    width: 350px;
-    height: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
-    z-index: 1000;
-    background: #fff;
-    overflow: hidden;
-}
-.chat-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-.chat-close {
-    width: 35px;
-    height: 35px;
-    background: #f44336;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 1001;
-}
-.chat-close:before {
-    content: '×';
-    font-size: 20px;
-}
-.chat-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1001;
-    user-select: none;
-}
-.chat-toggle:after {
-    content: "Chat";
-    font-size: 12px;
-}
-.chat-toggle.open:after {
-    content: "Close";
-}
+        #live-counter i {
+            color: var(--danger);
+            animation: pulse 2s infinite;
+        }
 
-@media(max-width:768px){
-    .player-wrapper iframe { height: 280px; }
-    .match-info { flex-direction: row; justify-content: flex-start; }
-    .match-info img { width: 60px; height: 60px; }
-    .chat-container { width: 90%; height: 400px; right: 5%; bottom: 10px; }
-    .chat-toggle { width: 40px; height: 40px; bottom: 10px; right: 10px; }
-    .telegram-link img { width: 40px; }
-}
-</style>
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* --- Match Info Card --- */
+        .match-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .match-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            background: #2a2d36;
+            flex-shrink: 0;
+        }
+
+        .match-details {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .match-title {
+            margin: 0 0 6px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-main);
+        }
+
+        .match-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .badge-live {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Action Buttons Grid --- */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+
+        .btn i { font-size: 1.1rem; }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:active { transform: scale(0.98); }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+        }
+
+        /* --- Floating Telegram --- */
+        .telegram-fab {
+            position: fixed;
+            bottom: 55px;
+            left: 20px;
+            width: 56px;
+            height: 56px;
+            background: #229ED9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(34, 158, 217, 0.4);
+            z-index: 1000;
+            transition: transform 0.2s;
+            text-decoration: none;
+        }
+
+        .telegram-fab:hover { transform: scale(1.1); }
+        .telegram-fab img { width: 32px; height: 32px; }
+
+        /* --- Floating Chat --- */
+        .chat-fab {
+            position: fixed;
+            bottom: 55px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            z-index: 1001;
+            cursor: move; /* Indicates draggable */
+            color: white;
+            font-size: 24px;
+            user-select: none;
+            touch-action: none; /* Crucial for custom drag on mobile */
+        }
+        
+        .chat-fab:active { transform: scale(0.95); }
+
+        .chat-window {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            display: none; /* Hidden by default */
+            z-index: 1000;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .chat-header {
+            background: #f1f1f1;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-header h4 { margin: 0; font-size: 14px; color: #333; }
+        
+        .close-chat {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .chat-window iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Toast Notification --- */
+        #toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--card-bg);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        #toast i { color: var(--success); }
+
+        /* --- Responsive Tweaks --- */
+        @media (min-width: 768px) {
+            main { padding: 40px 20px; }
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr); /* 4 in a row on desktop */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .match-card { padding: 12px; }
+            .match-thumb { width: 60px; height: 60px; }
+            .match-title { font-size: 1rem; }
+            .chat-window {
+                width: 95%;
+                height: 60vh;
+                left: 2.5%;
+                right: auto;
+                bottom: 80px;
+            }
+            .telegram-fab, .chat-fab { width: 48px; height: 48px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Player & Counter -->
-    <div class="player-wrapper">
+<!-- Toast Notification -->
+<div id="toast"><i class="fas fa-check-circle"></i> <span>Link copied successfully!</span></div>
+
+<main>
+    <!-- Player Section -->
+    <section class="player-section">
         <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
+        
         <div id="live-counter">
-            <i class="fas fa-eye"></i>
-            <span id="counter-container"></span>
+            <i class="fas fa-circle"></i>
+            <span id="counter-container">Loading...</span>
         </div>
-    </div>
+    </section>
 
     <!-- Match Info -->
-    <div class="match-info" id="matchInfo"></div>
+    <section class="match-card" id="matchInfo">
+        <!-- Content injected via JS -->
+        <div class="match-details">
+            <h3 class="match-title">Loading Match Data...</h3>
+            <div class="match-meta">Please wait</div>
+        </div>
+    </section>
 
     <!-- Buttons -->
-    <div class="button-group">
-        <a href="" id="playNowButton1" class="play-now-btn">Play Now</a>
-        <a href="" id="playNowButton2" class="play-now-btn" data-package="com.genuine.leone" data-title="VT">NS Player</a>
-        <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
-    </div>
-</div>
+    <section class="actions-grid">
+        <a href="" id="playNowButton1" class="btn btn-primary">
+            <i class="fas fa-play"></i> Play Now
+        </a>
+        <a href="" id="playNowButton2" class="btn btn-secondary" data-package="com.genuine.leone" data-title="VT">
+            <i class="fas fa-tv"></i> NS Player
+        </a>
+        <a href="" id="rubbyButton" class="btn btn-secondary" data-package="com.rubby.leone" data-title="VT">
+            <i class="fas fa-desktop"></i> Ruby PC
+        </a>
+        <button id="copyLinkButton" class="btn btn-accent">
+            <i class="fas fa-copy"></i> Copy Link
+        </button>
+    </section>
+</main>
 
-<!-- Telegram -->
-<a class="telegram-link" href="https://t.me/vaathala1" target="_blank">
+<!-- Telegram Link -->
+<a class="telegram-fab" href="https://t.me/vaathala1" target="_blank" aria-label="Telegram">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
 </a>
 
-<!-- Chat -->
-<div class="chat-container" id="chatBox">
-    <button class="chat-close" id="chatClose"></button>
+<!-- Chat Toggle Button (Draggable) -->
+<div class="chat-fab" id="chatToggle" title="Toggle Chat">
+    <i class="fas fa-comment-dots"></i>
+</div>
+
+<!-- Chat Window -->
+<div class="chat-window" id="chatBox">
+    <div class="chat-header">
+        <h4>Live Chat</h4>
+        <button class="close-chat" id="chatClose">&times;</button>
+    </div>
     <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
 </div>
-<button class="chat-toggle" id="chatToggle"></button>
 
 <script>
+    // --- Configuration & State ---
+    const matchId = parseInt(new URLSearchParams(window.location.search).get('id')) || 0;
+    const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
+    
+    // Common Headers for Intent URLs
+    const streamOrigin = 'https://allinonereborn.online/fcww';
+    const streamReferer = 'https://allinonereborn.online/fcww';
 
-// Fetch JSON and display match info https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.json
-
-const matchId = parseInt(new URLSearchParams(window.location.search).get('id'));
-const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
-
-fetch(jsonUrl)
-.then(res => res.json())
-.then(data => {
-    let match;
-    if(data.matches && Array.isArray(data.matches)){
-        match = data.matches.find(m => m.match_id === matchId);
+    // --- Helper: Show Toast Notification ---
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.querySelector('span').innerText = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
     }
-    if(!match){
-        document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Match not found!</p>';
-        return;
+
+    // --- Helper: Construct Headers ---
+    function appendHeaders(url) {
+        const separator = url.includes('?') ? '&' : '?';
+        return url + separator + 
+            '|Origin=' + encodeURIComponent(streamOrigin) + 
+            '&Referer=' + encodeURIComponent(streamReferer);
     }
 
-    document.getElementById('matchInfo').innerHTML = `
-        <img src="${match.src}" alt="${match.match_name}">
-        <div class="info-right">
-            <h2>${match.match_name}</h2>
-            <p>Status: <span class="status-live">${match.status}</span></p>
-        </div>
-    `;
+    // --- Data Fetching Logic ---
+    function initMatch() {
+        fetch(jsonUrl)
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
+            .then(data => {
+                let match = null;
+                // Handle different JSON structures safely
+                if (data.matches && Array.isArray(data.matches)) {
+                    match = data.matches.find(m => m.match_id === matchId);
+                }
 
+                if (!match) {
+                    renderError('Match not found or ID invalid.');
+                    return;
+                }
 
-// Video
- const videoLink = match.adfree_url || '';
- if(videoLink){
-     document.getElementById('videoIframe').src =
-     "https://allinonereborn.online/fcww/player_india.html?stream=" +
-     encodeURIComponent(videoLink);
- }
+                renderMatchInfo(match);
+                setupPlayer(match);
+                setupButtons(match);
+            })
+            .catch(err => {
+                console.error('Fetch error:', err);
+                renderError('Error loading match data.');
+            });
+    }
 
+    function renderError(msg) {
+        const container = document.getElementById('matchInfo');
+        container.innerHTML = `
+            <div class="match-details" style="text-align:center; padding: 20px; color: var(--danger);">
+                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                <p>${msg}</p>
+            </div>
+        `;
+    }
 
+    function renderMatchInfo(match) {
+        const container = document.getElementById('matchInfo');
+        const imgSrc = match.src || `https://picsum.photos/seed/${match.match_id}/100/100`; // Fallback image
+        
+        container.innerHTML = `
+            <img src="${imgSrc}" alt="${match.match_name}" class="match-thumb">
+            <div class="match-details">
+                <h2 class="match-title">${match.match_name}</h2>
+                <div class="match-meta">
+                    <span class="badge-live"><i class="fas fa-circle" style="font-size:6px; vertical-align:middle; margin-right:4px;"></i> ${match.status}</span>
+                </div>
+            </div>
+        `;
+    }
 
-    // NS Player Intent
-    const playBtn2 = document.getElementById('playNowButton2');
-    const intentUrl = 'intent:' + videoLink +
-        '#Intent;package=' + playBtn2.getAttribute('data-package') +
-        ';S.title=' + playBtn2.getAttribute('data-title') + ';end';
-    playBtn2.setAttribute('href', intentUrl);
+    function setupPlayer(match) {
+        const videoLink = match.adfree_url || '';
+        if (videoLink) {
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = "https://allinonereborn.online/fcww/player_india.html?stream=" + encodeURIComponent(videoLink);
+        }
+    }
 
-    // Copy Link
-    document.getElementById('copyLinkButton').addEventListener('click', e => {
-        e.preventDefault();
-        navigator.clipboard.writeText(videoLink).then(() => alert('Link copied!'));
+    function setupButtons(match) {
+        const videoLink = match.adfree_url || '';
+        const modifiedLink = appendHeaders(videoLink);
+
+        // NS Player
+        const nsBtn = document.getElementById('playNowButton2');
+        const nsIntent = 'intent:' + modifiedLink + '#Intent;package=' + nsBtn.dataset.package + ';S.title=' + encodeURIComponent(nsBtn.dataset.title) + ';end';
+        nsBtn.setAttribute('href', nsIntent);
+
+        // Ruby Player
+        const rubyBtn = document.getElementById('rubbyButton');
+        const rubyIntent = 'intent:' + modifiedLink + '#Intent;package=' + rubyBtn.dataset.package + ';S.title=' + encodeURIComponent(rubyBtn.dataset.title) + ';end';
+        rubyBtn.setAttribute('href', rubyIntent);
+
+        // Copy Button
+        document.getElementById('copyLinkButton').addEventListener('click', (e) => {
+            e.preventDefault();
+            navigator.clipboard.writeText(modifiedLink)
+                .then(() => showToast('Link copied with Headers!'))
+                .catch(() => showToast('Failed to copy link.'));
+        });
+    }
+
+    // --- Live Counter Logic ---
+    function loadCounter() {
+        const container = document.getElementById("counter-container");
+        // Only reload if empty to avoid flickering, or simple innerHTML clear
+        if(container.innerText !== "Loading...") return; 
+
+        container.innerHTML = "";
+        const script = document.createElement("script");
+        script.src = "//widget.supercounters.com/ssl/online_t.js";
+        container.appendChild(script);
+        
+        const init = document.createElement("script");
+        init.innerHTML = 'sc_online_t(1703136,"","ffffff");';
+        container.appendChild(init);
+    }
+
+    // --- Chat UI Logic ---
+    const chatToggle = document.getElementById('chatToggle');
+    const chatBox = document.getElementById('chatBox');
+    const chatClose = document.getElementById('chatClose');
+
+    function toggleChat() {
+        const isHidden = getComputedStyle(chatBox).display === 'none';
+        chatBox.style.display = isHidden ? 'flex' : 'none';
+        chatToggle.classList.toggle('open', isHidden);
+    }
+
+    chatToggle.addEventListener('click', (e) => {
+        // Prevent drag conflict: if mouse moved significantly, don't click
+        if (isDragging) return; 
+        toggleChat();
     });
-})
-.catch(err => {
-    console.error(err);
-    document.getElementById('matchInfo').innerHTML = '<p style="color:red;">Error loading match info!</p>';
-});
 
-// Floating Live Counter
-function loadCounter(){
-    const container = document.getElementById("counter-container");
-    container.innerHTML = "";
-    const script = document.createElement("script");
-    script.src = "//widget.supercounters.com/ssl/online_t.js";
-    container.appendChild(script);
-    const init = document.createElement("script");
-    init.innerHTML = 'sc_online_t(1703136,"","ffffff");';
-    container.appendChild(init);
-}
-loadCounter();
-setInterval(loadCounter, 20000);
+    chatClose.addEventListener('click', toggleChat);
 
-// Chat Toggle
-const chatToggle = document.getElementById('chatToggle');
-const chatBox = document.getElementById('chatBox');
-document.getElementById('chatToggle').addEventListener('click', () => {
-    if(chatBox.style.display === 'none' || chatBox.style.display === ''){
-        chatBox.style.display = 'block';
-        chatToggle.classList.add('open');
-    } else {
-        chatBox.style.display = 'none';
-        chatToggle.classList.remove('open');
+    // --- Draggable Logic (Mouse + Touch) ---
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
+
+    function dragStart(e) {
+        // Get correct position based on touch or mouse
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const rect = chatToggle.getBoundingClientRect();
+        
+        // Record offsets
+        startX = clientX;
+        startY = clientY;
+        
+        // Get current computed left/top
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        isDragging = false; // Reset drag flag, will set to true on move
+
+        // Attach listeners
+        document.addEventListener('mousemove', dragMove);
+        document.addEventListener('touchmove', dragMove, { passive: false });
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('touchend', dragEnd);
     }
-});
-document.getElementById('chatClose').addEventListener('click', () => {
-    chatBox.style.display = 'none';
-    chatToggle.classList.remove('open');
-});
 
-// Draggable chat toggle
-let isDragging = false, offsetX, offsetY;
-chatToggle.addEventListener('mousedown', e => {
-    isDragging = true;
-    offsetX = e.clientX - chatToggle.getBoundingClientRect().left;
-    offsetY = e.clientY - chatToggle.getBoundingClientRect().top;
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', () => {
-        isDragging = false;
-        document.removeEventListener('mousemove', handleMouseMove);
+    function dragMove(e) {
+        isDragging = true; // Movement detected
+        
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        // Apply new position using fixed positioning
+        chatToggle.style.left = `${initialLeft + dx}px`;
+        chatToggle.style.top = `${initialTop + dy}px`;
+        
+        // Remove 'bottom' and 'right' to avoid conflict
+        chatToggle.style.bottom = 'auto';
+        chatToggle.style.right = 'auto';
+        
+        if(e.cancelable) e.preventDefault(); // Prevent scrolling on mobile while dragging
+    }
+
+    function dragEnd() {
+        document.removeEventListener('mousemove', dragMove);
+        document.removeEventListener('touchmove', dragMove);
+        document.removeEventListener('mouseup', dragEnd);
+        document.removeEventListener('touchend', dragEnd);
+    }
+
+    // Attach Drag Events
+    chatToggle.addEventListener('mousedown', dragStart);
+    chatToggle.addEventListener('touchstart', dragStart, { passive: false });
+
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+        initMatch();
+        loadCounter();
+        // Refresh counter periodically
+        setInterval(loadCounter, 20000);
     });
-});
-function handleMouseMove(e){
-    if(isDragging){
-        chatToggle.style.left = `${e.clientX - offsetX}px`;
-        chatToggle.style.top = `${e.clientY - offsetY}px`;
-    }
-}
+
 </script>
 </body>
 </html>
