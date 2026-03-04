@@ -1,364 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stream Player</title>
-    <!-- HLS.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <!-- Google Cast SDK -->
-    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            overflow: hidden; /* No scrolling */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        /* Full Viewport Player Container */
-        .player-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            outline: none;
-            object-fit: contain; /* Keeps aspect ratio without stretching */
-        }
-
-        /* Message if no URL is provided */
-        .no-url-message {
-            position: absolute;
-            color: #64748b;
-            text-align: center;
-            z-index: 0;
-        }
-
-        /* Controls Overlay (Top Right) */
-        .controls-overlay {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 12px;
-            z-index: 10;
-        }
-
-        .icon-btn {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .icon-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-
-        .icon-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: currentColor;
-        }
-
-        /* Google Cast Button specific override */
-        google-cast-launcher {
-            --connect-color: #fff;
-            --disconnected-color: #fff;
-        }
-
-        /* Settings Menu */
-        .settings-menu {
-            position: absolute;
-            top: 75px;
-            right: 20px;
-            width: 280px;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 15px;
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            gap: 15px;
-            z-index: 20;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            color: white;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .settings-menu.active { display: flex; }
-
-        .setting-group h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #94a3b8;
-            margin: 0 0 8px 8px;
-            font-weight: 700;
-        }
-
-        .option-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .option-item {
-            padding: 12px 15px;
-            cursor: pointer;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
-        }
-
-        .option-item:hover { background: rgba(255,255,255,0.1); }
-        
-        .option-item.active { 
-            color: #3b82f6; 
-            background: rgba(59, 130, 246, 0.15); 
-            font-weight: 600; 
-        }
-        
-        .option-item.active::after { content: '✓'; }
-
-        /* Scrollbar for menu */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M3U8 Player</title>
+<style>
+body {
+    margin: 0;
+    background: black;
+}
+video {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+</style>
 </head>
 <body>
 
-    <div class="player-container">
-        <!-- Fallback Message -->
-        <div class="no-url-message" id="noUrlMsg">
-            <h2>No Stream URL Found</h2>
-            <p>Please add a URL to the address bar like this:</p>
-            <p style="font-family: monospace; background: #1e293b; padding: 5px; border-radius: 4px; display:inline-block; margin-top:10px;">
-                index.html?url=YOUR_LINK_HERE
-            </p>
-        </div>
+<video id="video" controls playsinline></video>
 
-        <video id="video" controls playsinline></video>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const videoSrc = params.get("url");
+const video = document.getElementById("video");
 
-        <!-- Controls Overlay -->
-        <div class="controls-overlay" id="controlsArea" style="display:none;">
-            <!-- Settings Button -->
-            <button class="icon-btn" id="settingsBtn" title="Settings (Quality/Audio)">
-                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            </button>
-            
-            <!-- Google Cast Button -->
-            <google-cast-launcher id="castBtn"></google-cast-launcher>
-        </div>
+if (videoSrc) {
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = videoSrc;
+    } else if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+    } else {
+        alert("HLS not supported.");
+    }
+}
+</script>
 
-        <!-- Settings Menu -->
-        <div class="settings-menu" id="settingsMenu">
-            
-            <!-- Audio Selection -->
-            <div class="setting-group" id="audioGroup" style="display:none;">
-                <h3>Audio Language</h3>
-                <ul class="option-list" id="audioList"></ul>
-            </div>
-
-            <!-- Quality Selection -->
-            <div class="setting-group" id="qualityGroup" style="display:none;">
-                <h3>Video Quality</h3>
-                <ul class="option-list" id="qualityList">
-                    <!-- Populated by JS -->
-                </ul>
-            </div>
-
-            <div id="noSettingsMsg" style="display:none; text-align:center; color:#64748b; padding:10px;">
-                No options available
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const video = document.getElementById('video');
-        const noUrlMsg = document.getElementById('noUrlMsg');
-        const controlsArea = document.getElementById('controlsArea');
-        
-        // Settings UI
-        const settingsBtn = document.getElementById('settingsBtn');
-        const settingsMenu = document.getElementById('settingsMenu');
-        const audioGroup = document.getElementById('audioGroup');
-        const audioList = document.getElementById('audioList');
-        const qualityGroup = document.getElementById('qualityGroup');
-        const qualityList = document.getElementById('qualityList');
-        const noSettingsMsg = document.getElementById('noSettingsMsg');
-
-        let hls = null;
-
-        // 1. Parse URL Parameters Immediately
-        window.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const urlParam = params.get('url');
-
-            if (urlParam) {
-                // Hide error message, show controls
-                noUrlMsg.style.display = 'none';
-                controlsArea.style.display = 'flex';
-                
-                // Load the stream
-                loadStream(urlParam);
-            }
-        });
-
-        // 2. Toggle Settings Menu
-        settingsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            settingsMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!settingsMenu.contains(e.target) && e.target !== settingsBtn) {
-                settingsMenu.classList.remove('active');
-            }
-        });
-
-        // 3. Player Logic
-        function loadStream(url) {
-            if (hls) {
-                hls.destroy();
-            }
-
-            if (Hls.isSupported()) {
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(video);
-
-                // --- Quality ---
-                hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-                    updateQualityOptions(data.levels);
-                });
-
-                // --- Audio ---
-                hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (event, data) => {
-                    updateAudioOptions(data.audioTracks);
-                });
-
-                // --- Error Handling ---
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    if (data.fatal) {
-                        switch (data.type) {
-                            case Hls.ErrorTypes.NETWORK_ERROR:
-                                hls.startLoad();
-                                break;
-                            case Hls.ErrorTypes.MEDIA_ERROR:
-                                hls.recoverMediaError();
-                                break;
-                            default:
-                                hls.destroy();
-                                break;
-                        }
-                    }
-                });
-
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // Native HLS (Safari)
-                video.src = url;
-            }
-        }
-
-        // --- UI Update Functions ---
-
-        function updateQualityOptions(levels) {
-            qualityList.innerHTML = '';
-            
-            if (levels.length > 0) {
-                qualityGroup.style.display = 'block';
-                noSettingsMsg.style.display = 'none';
-            } else {
-                qualityGroup.style.display = 'none';
-            }
-
-            // Auto Option
-            const autoLi = document.createElement('li');
-            autoLi.className = 'option-item active';
-            autoLi.textContent = 'Auto';
-            autoLi.onclick = () => {
-                hls.currentLevel = -1;
-                updateActiveUI(qualityList, autoLi);
-            };
-            qualityList.appendChild(autoLi);
-
-            // Manual Levels
-            levels.forEach((level, index) => {
-                const li = document.createElement('li');
-                li.className = 'option-item';
-                const label = level.height ? `${level.height}p` : `Level ${index + 1}`;
-                li.textContent = label;
-                li.onclick = () => {
-                    hls.currentLevel = index;
-                    updateActiveUI(qualityList, li);
-                };
-                qualityList.appendChild(li);
-            });
-        }
-
-        function updateAudioOptions(tracks) {
-            audioList.innerHTML = '';
-
-            if (tracks.length > 1) {
-                audioGroup.style.display = 'block';
-                noSettingsMsg.style.display = 'none';
-            } else {
-                audioGroup.style.display = 'none';
-            }
-
-            tracks.forEach((track, index) => {
-                const li = document.createElement('li');
-                li.className = 'option-item';
-                let name = track.name || (track.lang ? `Audio ${track.lang}` : `Track ${index + 1}`);
-                
-                li.textContent = name;
-                li.onclick = () => {
-                    hls.audioTrack = index;
-                    updateActiveUI(audioList, li);
-                };
-                audioList.appendChild(li);
-            });
-        }
-
-        function updateActiveUI(list, activeItem) {
-            const items = list.querySelectorAll('.option-item');
-            items.forEach(item => item.classList.remove('active'));
-            activeItem.classList.add('active');
-        }
-
-    </script>
 </body>
 </html>
