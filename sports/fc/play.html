@@ -2,628 +2,363 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Live Match Streaming</title>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Player</title>
+    <!-- HLS.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Google Cast SDK -->
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     
     <style>
-        :root {
-            --bg-color: #0f1115;
-            --card-bg: #1c1f26;
-            --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --primary: #3b82f6; /* Modern Blue */
-            --primary-gradient: linear-gradient(135deg, #3b82f6, #2563eb);
-            --accent: #f59e0b; /* Amber/Gold for accents */
-            --danger: #ef4444;
-            --success: #10b981;
-            --radius-lg: 16px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            --glass: rgba(28, 31, 38, 0.7);
-        }
-
         * {
             box-sizing: border-box;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 125vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- Main Layout --- */
-        main {
-            width: 100%;
-            max-width: 1000px;
-            padding: 16px;
-            padding-bottom: 100px; /* Space for floating elements */
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* --- Video Player Section --- */
-        .player-section {
-            position: relative;
-            width: 100%;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            background: #000;
-            box-shadow: var(--shadow);
-            aspect-ratio: 16/9; /* Responsive Video Ratio */
-        }
-
-        .player-section iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            background-color: #000;
+            overflow: hidden; /* No scrolling */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        /* Floating Live Counter */
-        #live-counter {
+        /* Full Viewport Player Container */
+        .player-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            object-fit: contain; /* Keeps aspect ratio without stretching */
+        }
+
+        /* Message if no URL is provided */
+        .no-url-message {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 50px;
-            font-size: 12px;
-            color: #fff;
-            z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #live-counter i {
-            color: var(--danger);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        /* --- Match Info Card --- */
-        .match-card {
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .match-thumb {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius-md);
-            object-fit: cover;
-            background: #2a2d36;
-            flex-shrink: 0;
-        }
-
-        .match-details {
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .match-title {
-            margin: 0 0 6px 0;
-            font-size: 1.1rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--text-main);
-        }
-
-        .match-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .badge-live {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- Action Buttons Grid --- */
-        .actions-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            user-select: none;
+            color: #64748b;
             text-align: center;
+            z-index: 0;
         }
 
-        .btn i { font-size: 1.1rem; }
-
-        .btn-primary {
-            background: var(--primary-gradient);
-            color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-primary:active { transform: scale(0.98); }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .btn-accent {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #000;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
-        }
-
-        /* --- Floating Telegram --- */
-        .telegram-fab {
-            position: fixed;
-            bottom: 55px;
-            left: 20px;
-            width: 56px;
-            height: 56px;
-            background: #229ED9;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(34, 158, 217, 0.4);
-            z-index: 1000;
-            transition: transform 0.2s;
-            text-decoration: none;
-        }
-
-        .telegram-fab:hover { transform: scale(1.1); }
-        .telegram-fab img { width: 32px; height: 32px; }
-
-        /* --- Floating Chat --- */
-        .chat-fab {
-            position: fixed;
-            bottom: 55px;
+        /* Controls Overlay (Top Right) */
+        .controls-overlay {
+            position: absolute;
+            top: 20px;
             right: 20px;
-            width: 56px;
-            height: 56px;
-            background: var(--primary);
-            border-radius: 50%;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            z-index: 1001;
-            cursor: move; /* Indicates draggable */
-            color: white;
-            font-size: 24px;
-            user-select: none;
-            touch-action: none; /* Crucial for custom drag on mobile */
+            gap: 12px;
+            z-index: 10;
         }
-        
-        .chat-fab:active { transform: scale(0.95); }
 
-        .chat-window {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background: #fff;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-            display: none; /* Hidden by default */
-            z-index: 1000;
-            flex-direction: column;
-            animation: slideUp 0.3s ease-out;
+        .icon-btn {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
             border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        .chat-header {
-            background: #f1f1f1;
-            padding: 10px 15px;
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .icon-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Google Cast Button specific override */
+        google-cast-launcher {
+            --connect-color: #fff;
+            --disconnected-color: #fff;
+        }
+
+        /* Settings Menu */
+        .settings-menu {
+            position: absolute;
+            top: 75px;
+            right: 20px;
+            width: 280px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 15px;
+            z-index: 20;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            color: white;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .settings-menu.active { display: flex; }
+
+        .setting-group h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #94a3b8;
+            margin: 0 0 8px 8px;
+            font-weight: 700;
+        }
+
+        .option-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 0.95rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
+            transition: background 0.2s;
         }
 
-        .chat-header h4 { margin: 0; font-size: 14px; color: #333; }
+        .option-item:hover { background: rgba(255,255,255,0.1); }
         
-        .close-chat {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #666;
-            cursor: pointer;
-            padding: 5px;
+        .option-item.active { 
+            color: #3b82f6; 
+            background: rgba(59, 130, 246, 0.15); 
+            font-weight: 600; 
         }
+        
+        .option-item.active::after { content: '✓'; }
 
-        .chat-window iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Toast Notification --- */
-        #toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: var(--card-bg);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        #toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-        #toast i { color: var(--success); }
-
-        /* --- Responsive Tweaks --- */
-        @media (min-width: 768px) {
-            main { padding: 40px 20px; }
-            .actions-grid {
-                grid-template-columns: repeat(4, 1fr); /* 4 in a row on desktop */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .match-card { padding: 12px; }
-            .match-thumb { width: 60px; height: 60px; }
-            .match-title { font-size: 1rem; }
-            .chat-window {
-                width: 95%;
-                height: 60vh;
-                left: 2.5%;
-                right: auto;
-                bottom: 80px;
-            }
-            .telegram-fab, .chat-fab { width: 48px; height: 48px; }
-        }
+        /* Scrollbar for menu */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
     </style>
 </head>
 <body>
 
-<!-- Toast Notification -->
-<div id="toast"><i class="fas fa-check-circle"></i> <span>Link copied successfully!</span></div>
-
-<main>
-    <!-- Player Section -->
-    <section class="player-section">
-        <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
-        
-        <div id="live-counter">
-            <i class="fas fa-circle"></i>
-            <span id="counter-container">Loading...</span>
+    <div class="player-container">
+        <!-- Fallback Message -->
+        <div class="no-url-message" id="noUrlMsg">
+            <h2>No Stream URL Found</h2>
+            <p>Please add a URL to the address bar like this:</p>
+            <p style="font-family: monospace; background: #1e293b; padding: 5px; border-radius: 4px; display:inline-block; margin-top:10px;">
+                index.html?url=YOUR_LINK_HERE
+            </p>
         </div>
-    </section>
 
-    <!-- Match Info -->
-    <section class="match-card" id="matchInfo">
-        <!-- Content injected via JS -->
-        <div class="match-details">
-            <h3 class="match-title">Loading Match Data...</h3>
-            <div class="match-meta">Please wait</div>
+        <video id="video" controls playsinline></video>
+
+        <!-- Controls Overlay -->
+        <div class="controls-overlay" id="controlsArea" style="display:none;">
+            <!-- Settings Button -->
+            <button class="icon-btn" id="settingsBtn" title="Settings (Quality/Audio)">
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            </button>
+            
+            <!-- Google Cast Button -->
+            <google-cast-launcher id="castBtn"></google-cast-launcher>
         </div>
-    </section>
 
-    <!-- Buttons -->
-    <section class="actions-grid">
-        <a href="" id="playNowButton1" class="btn btn-primary">
-            <i class="fas fa-play"></i> Play Now
-        </a>
-        <a href="" id="playNowButton2" class="btn btn-secondary" data-package="com.genuine.leone" data-title="VT">
-            <i class="fas fa-tv"></i> NS Player
-        </a>
-        <a href="" id="rubbyButton" class="btn btn-secondary" data-package="com.rubby.leone" data-title="VT">
-            <i class="fas fa-desktop"></i> Ruby PC
-        </a>
-        <button id="copyLinkButton" class="btn btn-accent">
-            <i class="fas fa-copy"></i> Copy Link
-        </button>
-    </section>
-</main>
+        <!-- Settings Menu -->
+        <div class="settings-menu" id="settingsMenu">
+            
+            <!-- Audio Selection -->
+            <div class="setting-group" id="audioGroup" style="display:none;">
+                <h3>Audio Language</h3>
+                <ul class="option-list" id="audioList"></ul>
+            </div>
 
-<!-- Telegram Link -->
-<a class="telegram-fab" href="https://t.me/vaathala1" target="_blank" aria-label="Telegram">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-</a>
+            <!-- Quality Selection -->
+            <div class="setting-group" id="qualityGroup" style="display:none;">
+                <h3>Video Quality</h3>
+                <ul class="option-list" id="qualityList">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
 
-<!-- Chat Toggle Button (Draggable) -->
-<div class="chat-fab" id="chatToggle" title="Toggle Chat">
-    <i class="fas fa-comment-dots"></i>
-</div>
-
-<!-- Chat Window -->
-<div class="chat-window" id="chatBox">
-    <div class="chat-header">
-        <h4>Live Chat</h4>
-        <button class="close-chat" id="chatClose">&times;</button>
+            <div id="noSettingsMsg" style="display:none; text-align:center; color:#64748b; padding:10px;">
+                No options available
+            </div>
+        </div>
     </div>
-    <iframe src="https://www.youtube.com/live_chat?v=9M02G5c6x6w&embed_domain=vaathala00.github.io" allow="microphone; camera"></iframe>
-</div>
 
-<script>
-    // --- Configuration & State ---
-    const matchId = parseInt(new URLSearchParams(window.location.search).get('id')) || 0;
-    const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
-    
-    // Common Headers for Intent URLs
-    const streamOrigin = 'https://allinonereborn.online/fcww';
-    const streamReferer = 'https://allinonereborn.online/fcww';
-
-    // --- Helper: Show Toast Notification ---
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.querySelector('span').innerText = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
-
-    // --- Helper: Construct Headers ---
-    function appendHeaders(url) {
-        const separator = url.includes('?') ? '&' : '?';
-        return url + separator + 
-            '|Origin=' + encodeURIComponent(streamOrigin) + 
-            '&Referer=' + encodeURIComponent(streamReferer);
-    }
-
-    // --- Data Fetching Logic ---
-    function initMatch() {
-        fetch(jsonUrl)
-            .then(res => {
-                if (!res.ok) throw new Error('Network response was not ok');
-                return res.json();
-            })
-            .then(data => {
-                let match = null;
-                // Handle different JSON structures safely
-                if (data.matches && Array.isArray(data.matches)) {
-                    match = data.matches.find(m => m.match_id === matchId);
-                }
-
-                if (!match) {
-                    renderError('Match not found or ID invalid.');
-                    return;
-                }
-
-                renderMatchInfo(match);
-                setupPlayer(match);
-                setupButtons(match);
-            })
-            .catch(err => {
-                console.error('Fetch error:', err);
-                renderError('Error loading match data.');
-            });
-    }
-
-    function renderError(msg) {
-        const container = document.getElementById('matchInfo');
-        container.innerHTML = `
-            <div class="match-details" style="text-align:center; padding: 20px; color: var(--danger);">
-                <i class="fas fa-exclamation-triangle fa-2x"></i>
-                <p>${msg}</p>
-            </div>
-        `;
-    }
-
-    function renderMatchInfo(match) {
-        const container = document.getElementById('matchInfo');
-        const imgSrc = match.src || `https://picsum.photos/seed/${match.match_id}/100/100`; // Fallback image
+    <script>
+        const video = document.getElementById('video');
+        const noUrlMsg = document.getElementById('noUrlMsg');
+        const controlsArea = document.getElementById('controlsArea');
         
-        container.innerHTML = `
-            <img src="${imgSrc}" alt="${match.match_name}" class="match-thumb">
-            <div class="match-details">
-                <h2 class="match-title">${match.match_name}</h2>
-                <div class="match-meta">
-                    <span class="badge-live"><i class="fas fa-circle" style="font-size:6px; vertical-align:middle; margin-right:4px;"></i> ${match.status}</span>
-                </div>
-            </div>
-        `;
-    }
+        // Settings UI
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const audioGroup = document.getElementById('audioGroup');
+        const audioList = document.getElementById('audioList');
+        const qualityGroup = document.getElementById('qualityGroup');
+        const qualityList = document.getElementById('qualityList');
+        const noSettingsMsg = document.getElementById('noSettingsMsg');
 
-    function setupPlayer(match) {
-        const videoLink = match.adfree_url || '';
-        if (videoLink) {
-            const iframe = document.getElementById('videoIframe');
-            iframe.src = "https://allinonereborn.online/fcww/player_india.html?stream=" + encodeURIComponent(videoLink);
-        }
-    }
+        let hls = null;
 
-    function setupButtons(match) {
-        const videoLink = match.adfree_url || '';
-        const modifiedLink = appendHeaders(videoLink);
+        // 1. Parse URL Parameters Immediately
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const urlParam = params.get('url');
 
-        // NS Player
-        const nsBtn = document.getElementById('playNowButton2');
-        const nsIntent = 'intent:' + modifiedLink + '#Intent;package=' + nsBtn.dataset.package + ';S.title=' + encodeURIComponent(nsBtn.dataset.title) + ';end';
-        nsBtn.setAttribute('href', nsIntent);
-
-        // Ruby Player
-        const rubyBtn = document.getElementById('rubbyButton');
-        const rubyIntent = 'intent:' + modifiedLink + '#Intent;package=' + rubyBtn.dataset.package + ';S.title=' + encodeURIComponent(rubyBtn.dataset.title) + ';end';
-        rubyBtn.setAttribute('href', rubyIntent);
-
-        // Copy Button
-        document.getElementById('copyLinkButton').addEventListener('click', (e) => {
-            e.preventDefault();
-            navigator.clipboard.writeText(modifiedLink)
-                .then(() => showToast('Link copied with Headers!'))
-                .catch(() => showToast('Failed to copy link.'));
+            if (urlParam) {
+                // Hide error message, show controls
+                noUrlMsg.style.display = 'none';
+                controlsArea.style.display = 'flex';
+                
+                // Load the stream
+                loadStream(urlParam);
+            }
         });
-    }
 
-    // --- Live Counter Logic ---
-    function loadCounter() {
-        const container = document.getElementById("counter-container");
-        // Only reload if empty to avoid flickering, or simple innerHTML clear
-        if(container.innerText !== "Loading...") return; 
+        // 2. Toggle Settings Menu
+        settingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            settingsMenu.classList.toggle('active');
+        });
 
-        container.innerHTML = "";
-        const script = document.createElement("script");
-        script.src = "//widget.supercounters.com/ssl/online_t.js";
-        container.appendChild(script);
-        
-        const init = document.createElement("script");
-        init.innerHTML = 'sc_online_t(1703136,"","ffffff");';
-        container.appendChild(init);
-    }
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!settingsMenu.contains(e.target) && e.target !== settingsBtn) {
+                settingsMenu.classList.remove('active');
+            }
+        });
 
-    // --- Chat UI Logic ---
-    const chatToggle = document.getElementById('chatToggle');
-    const chatBox = document.getElementById('chatBox');
-    const chatClose = document.getElementById('chatClose');
+        // 3. Player Logic
+        function loadStream(url) {
+            if (hls) {
+                hls.destroy();
+            }
 
-    function toggleChat() {
-        const isHidden = getComputedStyle(chatBox).display === 'none';
-        chatBox.style.display = isHidden ? 'flex' : 'none';
-        chatToggle.classList.toggle('open', isHidden);
-    }
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(video);
 
-    chatToggle.addEventListener('click', (e) => {
-        // Prevent drag conflict: if mouse moved significantly, don't click
-        if (isDragging) return; 
-        toggleChat();
-    });
+                // --- Quality ---
+                hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+                    updateQualityOptions(data.levels);
+                });
 
-    chatClose.addEventListener('click', toggleChat);
+                // --- Audio ---
+                hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (event, data) => {
+                    updateAudioOptions(data.audioTracks);
+                });
 
-    // --- Draggable Logic (Mouse + Touch) ---
-    let isDragging = false;
-    let startX, startY, initialLeft, initialTop;
+                // --- Error Handling ---
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                hls.destroy();
+                                break;
+                        }
+                    }
+                });
 
-    function dragStart(e) {
-        // Get correct position based on touch or mouse
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Native HLS (Safari)
+                video.src = url;
+            }
+        }
 
-        const rect = chatToggle.getBoundingClientRect();
-        
-        // Record offsets
-        startX = clientX;
-        startY = clientY;
-        
-        // Get current computed left/top
-        initialLeft = rect.left;
-        initialTop = rect.top;
+        // --- UI Update Functions ---
 
-        isDragging = false; // Reset drag flag, will set to true on move
+        function updateQualityOptions(levels) {
+            qualityList.innerHTML = '';
+            
+            if (levels.length > 0) {
+                qualityGroup.style.display = 'block';
+                noSettingsMsg.style.display = 'none';
+            } else {
+                qualityGroup.style.display = 'none';
+            }
 
-        // Attach listeners
-        document.addEventListener('mousemove', dragMove);
-        document.addEventListener('touchmove', dragMove, { passive: false });
-        document.addEventListener('mouseup', dragEnd);
-        document.addEventListener('touchend', dragEnd);
-    }
+            // Auto Option
+            const autoLi = document.createElement('li');
+            autoLi.className = 'option-item active';
+            autoLi.textContent = 'Auto';
+            autoLi.onclick = () => {
+                hls.currentLevel = -1;
+                updateActiveUI(qualityList, autoLi);
+            };
+            qualityList.appendChild(autoLi);
 
-    function dragMove(e) {
-        isDragging = true; // Movement detected
-        
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            // Manual Levels
+            levels.forEach((level, index) => {
+                const li = document.createElement('li');
+                li.className = 'option-item';
+                const label = level.height ? `${level.height}p` : `Level ${index + 1}`;
+                li.textContent = label;
+                li.onclick = () => {
+                    hls.currentLevel = index;
+                    updateActiveUI(qualityList, li);
+                };
+                qualityList.appendChild(li);
+            });
+        }
 
-        const dx = clientX - startX;
-        const dy = clientY - startY;
+        function updateAudioOptions(tracks) {
+            audioList.innerHTML = '';
 
-        // Apply new position using fixed positioning
-        chatToggle.style.left = `${initialLeft + dx}px`;
-        chatToggle.style.top = `${initialTop + dy}px`;
-        
-        // Remove 'bottom' and 'right' to avoid conflict
-        chatToggle.style.bottom = 'auto';
-        chatToggle.style.right = 'auto';
-        
-        if(e.cancelable) e.preventDefault(); // Prevent scrolling on mobile while dragging
-    }
+            if (tracks.length > 1) {
+                audioGroup.style.display = 'block';
+                noSettingsMsg.style.display = 'none';
+            } else {
+                audioGroup.style.display = 'none';
+            }
 
-    function dragEnd() {
-        document.removeEventListener('mousemove', dragMove);
-        document.removeEventListener('touchmove', dragMove);
-        document.removeEventListener('mouseup', dragEnd);
-        document.removeEventListener('touchend', dragEnd);
-    }
+            tracks.forEach((track, index) => {
+                const li = document.createElement('li');
+                li.className = 'option-item';
+                let name = track.name || (track.lang ? `Audio ${track.lang}` : `Track ${index + 1}`);
+                
+                li.textContent = name;
+                li.onclick = () => {
+                    hls.audioTrack = index;
+                    updateActiveUI(audioList, li);
+                };
+                audioList.appendChild(li);
+            });
+        }
 
-    // Attach Drag Events
-    chatToggle.addEventListener('mousedown', dragStart);
-    chatToggle.addEventListener('touchstart', dragStart, { passive: false });
+        function updateActiveUI(list, activeItem) {
+            const items = list.querySelectorAll('.option-item');
+            items.forEach(item => item.classList.remove('active'));
+            activeItem.classList.add('active');
+        }
 
-
-    // --- Initialization ---
-    document.addEventListener('DOMContentLoaded', () => {
-        initMatch();
-        loadCounter();
-        // Refresh counter periodically
-        setInterval(loadCounter, 20000);
-    });
-
-</script>
+    </script>
 </body>
 </html>
