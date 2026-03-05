@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,5 +36,57 @@
       document.body.innerHTML = "<p style='text-align:center; margin-top:20px;'>No URL provided. Add ?url=YOUR_VIDEO_URL to the address bar.</p>";
     }
   </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Live Stream</title>
+
+<style>
+body{
+  margin:0;
+  background:black;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+}
+
+/* Animated text */
+.live-text{
+  font-size:50px;
+  font-weight:bold;
+  text-decoration:none;
+  background:linear-gradient(90deg, red, yellow, red);
+  background-size:200%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:move 2s linear infinite;
+  text-align:center;
+}
+
+/* Animation */
+@keyframes move{
+  0%{background-position:0%;}
+  100%{background-position:200%;}
+}
+
+.live-text:hover{
+  transform:scale(1.1);
+}
+</style>
+
+</head>
+
+<body>
+
+<a class="live-text" href="https://example.com/stream">
+CLICK PLAY NOW<br>TO WATCH LIVE
+</a>
+
 </body>
 </html>

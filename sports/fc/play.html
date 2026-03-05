@@ -375,15 +375,19 @@
 
     <!-- Buttons -->
     <section class="actions-grid">
-        <a href="" id="playNowButton1" class="btn btn-primary">
+        <!-- Play Now Button: Logic added in JS -->
+        <a href="#" id="playNowButton1" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-play"></i> Play Now
         </a>
+        
         <a href="" id="playNowButton2" class="btn btn-secondary" data-package="com.genuine.leone" data-title="VT">
             <i class="fas fa-tv"></i> NS Player
         </a>
+        
         <a href="" id="rubbyButton" class="btn btn-secondary" data-package="com.rubby.leone" data-title="VT">
             <i class="fas fa-desktop"></i> Ruby PC
         </a>
+        
         <button id="copyLinkButton" class="btn btn-accent">
             <i class="fas fa-copy"></i> Copy Link
         </button>
@@ -494,25 +498,38 @@
         const videoLink = match.adfree_url || '';
         if (videoLink) {
             const iframe = document.getElementById('videoIframe');
-            iframe.src = "https://cdpn.io/cpe/boomboom/index.html?key=index.html-67dc8363-82ab-38b6-a9f1-303f3d7309f3" + encodeURIComponent(videoLink);
+            iframe.src = "m3u8.html?" + encodeURIComponent(videoLink);
         }
     }
 
     function setupButtons(match) {
         const videoLink = match.adfree_url || '';
-        const modifiedLink = appendHeaders(videoLink);
+        
+        // --- 1. Play Now Button Logic (NEW) ---
+        const playNowBtn = document.getElementById('playNowButton1');
+        if (playNowBtn && videoLink) {
+            const baseUrl = "https://allinonereborn.store/fcww/player_india.html";
+            // Construct the URL with query parameter
+            const fullUrl = `${baseUrl}?stream=${encodeURIComponent(videoLink)}`;
+            
+            playNowBtn.href = fullUrl;
+            // target="_blank" is already in HTML, but ensuring it here via JS is also safe
+            playNowBtn.target = "_blank"; 
+            playNowBtn.rel = "noopener noreferrer"; // Security best practice
+        }
 
-        // NS Player
+        // --- 2. NS Player Logic ---
         const nsBtn = document.getElementById('playNowButton2');
+        const modifiedLink = appendHeaders(videoLink);
         const nsIntent = 'intent:' + modifiedLink + '#Intent;package=' + nsBtn.dataset.package + ';S.title=' + encodeURIComponent(nsBtn.dataset.title) + ';end';
         nsBtn.setAttribute('href', nsIntent);
 
-        // Ruby Player
+        // --- 3. Ruby Player Logic ---
         const rubyBtn = document.getElementById('rubbyButton');
         const rubyIntent = 'intent:' + modifiedLink + '#Intent;package=' + rubyBtn.dataset.package + ';S.title=' + encodeURIComponent(rubyBtn.dataset.title) + ';end';
         rubyBtn.setAttribute('href', rubyIntent);
 
-        // Copy Button
+        // --- 4. Copy Button Logic ---
         document.getElementById('copyLinkButton').addEventListener('click', (e) => {
             e.preventDefault();
             navigator.clipboard.writeText(modifiedLink)
@@ -524,7 +541,7 @@
     // --- Live Counter Logic ---
     function loadCounter() {
         const container = document.getElementById("counter-container");
-        // Only reload if empty to avoid flickering, or simple innerHTML clear
+        // Only reload if empty to avoid flickering
         if(container.innerText !== "Loading...") return; 
 
         container.innerHTML = "";
@@ -549,7 +566,6 @@
     }
 
     chatToggle.addEventListener('click', (e) => {
-        // Prevent drag conflict: if mouse moved significantly, don't click
         if (isDragging) return; 
         toggleChat();
     });
@@ -561,23 +577,19 @@
     let startX, startY, initialLeft, initialTop;
 
     function dragStart(e) {
-        // Get correct position based on touch or mouse
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
         const rect = chatToggle.getBoundingClientRect();
         
-        // Record offsets
         startX = clientX;
         startY = clientY;
         
-        // Get current computed left/top
         initialLeft = rect.left;
         initialTop = rect.top;
 
-        isDragging = false; // Reset drag flag, will set to true on move
+        isDragging = false;
 
-        // Attach listeners
         document.addEventListener('mousemove', dragMove);
         document.addEventListener('touchmove', dragMove, { passive: false });
         document.addEventListener('mouseup', dragEnd);
@@ -585,7 +597,7 @@
     }
 
     function dragMove(e) {
-        isDragging = true; // Movement detected
+        isDragging = true;
         
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -593,15 +605,12 @@
         const dx = clientX - startX;
         const dy = clientY - startY;
 
-        // Apply new position using fixed positioning
         chatToggle.style.left = `${initialLeft + dx}px`;
         chatToggle.style.top = `${initialTop + dy}px`;
-        
-        // Remove 'bottom' and 'right' to avoid conflict
         chatToggle.style.bottom = 'auto';
         chatToggle.style.right = 'auto';
         
-        if(e.cancelable) e.preventDefault(); // Prevent scrolling on mobile while dragging
+        if(e.cancelable) e.preventDefault();
     }
 
     function dragEnd() {
@@ -611,7 +620,6 @@
         document.removeEventListener('touchend', dragEnd);
     }
 
-    // Attach Drag Events
     chatToggle.addEventListener('mousedown', dragStart);
     chatToggle.addEventListener('touchstart', dragStart, { passive: false });
 
@@ -620,7 +628,6 @@
     document.addEventListener('DOMContentLoaded', () => {
         initMatch();
         loadCounter();
-        // Refresh counter periodically
         setInterval(loadCounter, 20000);
     });
 
