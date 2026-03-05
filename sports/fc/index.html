@@ -377,8 +377,8 @@ function render(matches){
         //<i class="fas fa-microphone"></i> ${m['language '] || 'ENGLISH'}
        //</span>` : '';
 
-// Language Tag (Only show if LIVE)
-const languageHtml = isLive 
+// Language Tag (Only show if LIVE and stream exists)
+const languageHtml = (isLive && (m.dai_url || m.adfree_url)) 
   ? `<span class="language-tag">
        <i class="fas fa-microphone"></i> ${m['language-tag'] || 'ENGLISH'}
      </span>` 
