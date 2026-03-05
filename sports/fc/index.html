@@ -377,12 +377,19 @@ function render(matches){
         //<i class="fas fa-microphone"></i> ${m['language '] || 'ENGLISH'}
        //</span>` : '';
 
+// Language Tag (Only show if LIVE)
+const languageHtml = isLive 
+  ? `<span class="language-tag">
+       <i class="fas fa-microphone"></i> ${m['language-tag'] || 'ENGLISH'}
+     </span>` 
+  : '';
+
 
 // Language Tag (Only show if LIVE)
-const languageHtml = isLive ? 
-  `<span class="language-tag">
-    <i class="fas fa-microphone"></i> ${m.language-tag || 'ENGLISH'}
-   </span>` : '';
+//const languageHtml = isLive ? 
+  //`<span class="language-tag">
+   // <i class="fas fa-microphone"></i> ${m.language-tag || 'ENGLISH'}
+   //</span>` : '';
 
     // Team Codes
     const team1Code = getShortCode(m.team_1);
