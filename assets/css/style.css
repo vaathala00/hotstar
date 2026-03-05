@@ -20,6 +20,8 @@
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -144,6 +146,7 @@ body {
   min-height: 100vh;
   background: var(--white);
   transition: 0.5s;
+  overflow-x: hidden;
 }
 .main.active {
   width: calc(100% - 80px);
@@ -156,7 +159,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 20px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .toggle {
@@ -173,30 +181,43 @@ body {
 .search {
   position: relative;
   width: 400px;
-  margin: 0 10px;
+  margin: 0 20px;
+  flex-shrink: 0;
+  flex-grow: 1;
+  max-width: 500px;
 }
 
 .search label {
   position: relative;
   width: 100%;
+  display: block;
 }
 
 .search label input {
   width: 100%;
   height: 40px;
   border-radius: 40px;
-  padding: 5px 20px;
-  padding-left: 35px;
-  font-size: 18px;
+  padding: 5px 45px 5px 20px;
+  font-size: 16px;
   outline: none;
-  border: 1px solid var(--black2);
+  border: 2px solid #e0e0e0;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.search label input:focus {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(42, 33, 133, 0.1);
 }
 
 .search label ion-icon {
   position: absolute;
-  top: 0;
-  left: 10px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
   font-size: 1.2rem;
+  color: #666;
 }
 
 .user {
@@ -221,39 +242,64 @@ body {
 .cardBox {
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .cardBox .card {
   position: relative;
   background: var(--white);
-  padding: 30px;
+  padding: 25px;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-height: 120px;
+}
+
+.cardBox .card:hover {
+  background: var(--blue);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
 .cardBox .card .numbers {
   position: relative;
-  font-weight: 500;
-  font-size: 2.5rem;
+  font-weight: 600;
+  font-size: 1.8rem;
   color: var(--blue);
+  transition: color 0.3s ease;
 }
 
 .cardBox .card .cardName {
   color: var(--black2);
-  font-size: 1.1rem;
-  margin-top: 5px;
+  font-size: 0.9rem;
+  margin-top: 3px;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .cardBox .card .iconBx {
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   color: var(--black2);
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardBox .card .iconBx img {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
 }
 
 .cardBox .card:hover {
@@ -265,15 +311,23 @@ body {
   color: var(--white);
 }
 
+/* Remove text decoration from links */
+.cardBox .card a {
+  text-decoration: none;
+  color: inherit;
+  display: contents;
+}
+
 /* ================== Order Details List ============== */
 .details {
   position: relative;
-  width: 108%;
+  width: 100%;
   padding: 20px;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
-  /* margin-top: 10px; */
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .details .recentOrders {
@@ -430,12 +484,31 @@ body {
   }
   .cardBox {
     grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+  }
+  .search {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 10px;
+  }
+  .search label input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  .topbar {
+    padding: 0 15px;
+  }
+  .toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
   }
 }
 
 @media (max-width: 768px) {
   .details {
     grid-template-columns: 1fr;
+    width: 100%;
+    padding: 15px;
   }
   .recentOrders {
     overflow-x: auto;
@@ -443,39 +516,286 @@ body {
   .status.inProgress {
     white-space: nowrap;
   }
+  .search {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 10px;
+  }
+  .search label input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  .topbar {
+    padding: 0 15px;
+  }
+  .toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cardBox {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  .cardBox .card {
+    padding: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cardBox .card .numbers {
+    font-size: 1.8rem;
+  }
+  .cardBox .card .iconBx {
+    font-size: 2.5rem;
+  }
+  .cardHeader h2 {
+    font-size: 18px;
+  }
+  .user {
+    min-width: 35px;
+    width: 35px;
+    height: 35px;
+  }
+  .navigation {
+    width: 280px;
+    left: -100%;
+    z-index: 1000;
+  }
+  .navigation.active {
+    width: 280px;
+    left: 0;
+  }
+  .navigation ul li a .icon {
+    min-width: 50px;
+    height: 50px;
+    line-height: 60px;
+  }
+  .navigation ul li a .title {
+    font-size: 14px;
+  }
+  .toggle {
+    z-index: 10001;
+    width: 45px;
+    height: 45px;
+  }
+  .main.active .toggle {
+    color: #fff;
+    position: fixed;
+    right: 20px;
+    left: initial;
+    top: 10px;
+  }
+  .search {
+    display: none; /* Hide search on very small screens */
+  }
+  /* Mobile overlay */
+  .main.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
 }
 
 @media (max-width: 480px) {
   .cardBox {
-    grid-template-columns: repeat(1, 1fr);
+    padding: 10px;
   }
-  .cardHeader h2 {
-    font-size: 20px;
+  .cardBox .card {
+    padding: 15px;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
   }
-  .user {
-    min-width: 40px;
+  .cardBox .card .numbers {
+    font-size: 1.5rem;
+  }
+  .cardBox .card .cardName {
+    font-size: 0.9rem;
+  }
+  .cardBox .card .iconBx {
+    font-size: 2rem;
   }
   .navigation {
     width: 100%;
     left: -100%;
-    z-index: 1000;
   }
   .navigation.active {
     width: 100%;
     left: 0;
   }
+  .navigation ul li a .icon {
+    min-width: 45px;
+    height: 45px;
+    line-height: 55px;
+  }
+  .navigation ul li a .title {
+    font-size: 13px;
+  }
   .toggle {
-    z-index: 10001;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
   .main.active .toggle {
-    color: #fff;
-    position: fixed;
-    right:135;
-    left: initial;
+    right: 15px;
+    top: 8px;
   }
 }
 
 /* ====================== vaathala home ========================== */
+
+/* Channel grid responsive fixes */
+#listContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 15px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.box1 {
+  width: 100%;
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+.box1 .card {
+  width: 100% !important;
+  max-width: 160px;
+  height: auto;
+  min-height: 180px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.box1 .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.box1 .card img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+.box1 .card h2 {
+  font-size: 12px !important;
+  line-height: 1.2;
+  margin: 5px 0;
+  height: 30px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.box1 .card p {
+  font-size: 10px !important;
+  margin: 0;
+  color: #666;
+}
+
+/* Search input mobile fixes */
+#searchInput {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 10px 0 !important;
+  padding: 12px 15px !important;
+  font-size: 16px !important; /* Prevents zoom on iOS */
+  border-radius: 25px !important;
+  border: 2px solid #e0e0e0 !important;
+  background: #f8f9fa !important;
+}
+
+#searchInput:focus {
+  outline: none !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(42, 33, 133, 0.1) !important;
+}
+
+/* Mobile specific adjustments */
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 100%;
+  padding: 0 10px;
+}
+
+/* Responsive grid for different screen sizes */
+@media (max-width: 1200px) {
+  #listContainer {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  #listContainer {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    padding: 10px;
+  }
+  
+  .box1 .card {
+    min-height: 160px;
+  }
+  
+  .box1 .card img {
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  #listContainer {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 8px;
+  }
+  
+  .box1 .card {
+    min-height: 140px;
+    padding: 10px !important;
+  }
+  
+  .box1 .card img {
+    height: 60px;
+  }
+  
+  .box1 .card h2 {
+    font-size: 11px !important;
+    height: 25px;
+  }
+  
+  .box1 .card p {
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #listContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .box1 .card {
+    min-height: 130px;
+  }
+}
 
 body {
 			      /* display: flex; */
@@ -521,6 +841,6 @@ body {
 			      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 			    }
 			
-			    a. {
-			      text-decoration: none !important;
-			    }
+			    a {
+  text-decoration: none !important;
+}
