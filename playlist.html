@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Playlist Generator</title>
+</head>
+<body>
+
+<pre id="output">Generating playlist...</pre>
+
+<script>
+
+const TAMIL_JSON = [
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/2",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/3",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/4",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/5",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/6",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/local-tamil-tv/page/7"
+];
+
+const TELUGU_JSON = [
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/telugu-tv/",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/telugu-tv/page/2",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/telugu-tv/page/3",
+"https://b4u.vodep39240327.workers.dev/1.json?url=https://tulnit.com/channel/telugu-tv/page/4"
+];
+
+async function fetchChannels(urls, group){
+
+let result = "";
+let seen = new Set();
+
+for (const url of urls){
+
+const res = await fetch(url);
+const json = await res.json();
+
+json.forEach(ch=>{
+
+if(!seen.has(ch.stream_url)){
+
+seen.add(ch.stream_url);
+
+result += `#EXTINF:-1 tvg-name="${ch.title}" tvg-logo="${ch.image}" group-title="${group}", ${ch.title}\n`;
+result += `${ch.stream_url}\n\n`;
+
+}
+
+});
+
+}
+
+return result;
+
+}
+
+async function generate(){
+
+let playlist = "#EXTM3U\n\n";
+
+playlist += await fetchChannels(TAMIL_JSON,"VT 📺 | Local Channel Tamil");
+playlist += await fetchChannels(TELUGU_JSON,"VT 📺 | Local Channel Telugu");
+
+document.getElementById("output").textContent = playlist;
+
+}
+
+generate();
+
+</script>
+
+</body>
+</html>
