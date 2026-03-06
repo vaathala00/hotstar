@@ -67,7 +67,7 @@
 
         .player-section iframe {
             position: absolute;
-            top: -56;
+            top: -56; /* Kept as requested, though typically requires a unit like px */
             left: 0;
             width: 100%;
             height: 100%;
@@ -415,7 +415,8 @@
 
 <script>
     // --- Configuration & State ---
-    const matchId = parseInt(new URLSearchParams(window.location.search).get('id')) || 0;
+    // FIX: Removed parseInt() because the JSON IDs are strings (e.g., "140453_ENGLISH"), not numbers.
+    const matchId = new URLSearchParams(window.location.search).get('id');
     const jsonUrl = 'https://fanco.vodep39240327.workers.dev/';
     
     // Common Headers for Intent URLs
@@ -494,6 +495,7 @@
         `;
     }
 
+    // --- Kept exactly as requested ---
     function setupPlayer(match) {
         const videoLink = match.adfree_url || '';
         if (videoLink) {
