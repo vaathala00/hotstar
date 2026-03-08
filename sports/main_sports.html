@@ -3,625 +3,320 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sports Hub - Live Streaming</title>
-  <!-- Icons -->
+  <title>Sports</title>
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
   <link rel="shortcut icon" href="https://t4.ftcdn.net/jpg/03/02/12/83/360_F_302128359_q6aCwgAvdYZBPF4XSwxXddLPE0h3Kor1.jpg">
-  
   <style>
-    /* ===== CSS Variables & Reset ===== */
-    :root {
-      --primary-color: #3b82f6; /* Modern Blue */
-      --accent-color: #00E0FF; /* Cyan for highlights */
-      --bg-color: #0f1014; /* Deep dark background */
-      --surface-color: #1e2029; /* Card background */
-      --text-main: #ffffff;
-      --text-secondary: #a0a0a0;
-      --nav-bg: rgba(15, 16, 20, 0.85);
-      --card-radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
+    /* ===== Global ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background-color: #fff; color: #000; overflow-x: hidden; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s; }
+    body.dark { background-color: #18191A; color: #fff; }
 
-    body.light {
-      --bg-color: #f3f4f6;
-      --surface-color: #ffffff;
-      --text-main: #1f2937;
-      --text-secondary: #6b7280;
-      --nav-bg: rgba(255, 255, 255, 0.85);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-
-    /* ===== Scrollbar Styling ===== */
-    ::-webkit-scrollbar { width: 8px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--surface-color); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
-    /* ===== Navigation (Glassmorphism) ===== */
+    /* ===== Navigation ===== */
     nav {
-      position: fixed; top: 0; left: 0; width: 100%; height: 70px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 30px; z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      transition: background 0.3s;
+      position: fixed; top: 0; left: 0; width: 100%; height: 55px;
+      background-color: #2770ff; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; z-index: 100; box-shadow: 0 3px 6px rgba(0,0,0,.3);
     }
-    body.light nav { border-bottom: 1px solid rgba(0,0,0,0.05); }
+    nav .logo a { color: #fff; font-size: 25px; text-decoration: none; font-weight: bold; letter-spacing: 1px; }
 
-    nav .logo a {
-      color: var(--primary-color); 
-      font-size: 28px; 
-      text-decoration: none; 
-      font-weight: 800; 
-      letter-spacing: -0.5px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    nav .logo a span { color: var(--text-main); }
 
-    .nav-actions { display: flex; align-items: center; gap: 20px; }
+/* Right side icons */
+.nav-actions{
+  display: flex;
+  align-items: center;
+  gap: 15px; /* space between icons */
+}
 
-    /* Search Bar */
+    /* ===== Dark/Light Toggle ===== */
+    .dark-light { cursor: pointer; font-size: 22px; color: #fff;
+}
+
+    /* ===== Search Icon & Search Bar ===== */
     .search-container {
       position: relative; display: flex; align-items: center;
-      background: rgba(255,255,255,0.1);
-      border-radius: 30px;
-      padding: 5px;
-      transition: var(--transition);
     }
-    body.light .search-container { background: rgba(0,0,0,0.05); }
-
     .search-container input {
       width: 0;
       opacity: 0;
-      background: transparent;
+      padding: 8px 14px;
+      border-radius: 20px;
       border: none;
-      color: var(--text-main);
-      padding: 8px 12px;
-      font-size: 15px;
+      font-size: 14px;
       outline: none;
-      transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+      transition:.4s;
     }
-    .search-container.active input { width: 220px; opacity: 1; }
-
+    .search-container.active input {
+      width: 200px; /* expanded width */
+      opacity: 1;
+    }
     .search-container .search-icon {
       font-size: 20px;
-      color: var(--text-main);
+      color: #fff;
       cursor: pointer;
-      padding: 8px;
-      border-radius: 50%;
-      transition: background 0.2s;
-    }
-    .search-container .search-icon:hover { background: rgba(255,255,255,0.1); }
+          }
 
-    /* Dark/Light Toggle */
-    .dark-light { 
-      cursor: pointer; font-size: 24px; 
-      color: var(--text-main);
-      display: flex; align-items: center; justify-content: center;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      transition: var(--transition);
-    }
-    .dark-light:hover { background: rgba(255,255,255,0.1); transform: rotate(15deg); }
-
-    /* ===== Scroll To Top ===== */
+    /* ===== Scroll to top ===== */
     .up {
-      position: fixed; bottom: 30px; right: 30px; 
-      font-size: 20px;
-      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-      color: white; 
-      width: 50px; height: 50px;
-      border-radius: 50%;
-      cursor: pointer; 
-      display: none; 
-      z-index: 999;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      justify-content: center; align-items: center;
-      transition: var(--transition);
-    }
-    .up:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4); }
-
-    /* ===== Main Content Layout ===== */
-    main { padding-top: 90px; padding-bottom: 50px; }
-
-    /* ===== Hero / Iframe Section ===== */
-    .hero-section {
-      width: 95%;
-      max-width: 1000px;
-      margin: 0 auto 40px auto;
-      background: var(--surface-color);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.05);
-      animation: fadeInDown 0.8s ease-out;
-    }
-    .hero-header {
-      padding: 15px 25px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .hero-header h3 { font-size: 16px; color: var(--accent-color); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-    
-    iframe { 
-      width: 100%; 
-      height: 260px; 
-      border: none; 
-      display: block; 
-      background: #000;
+      position: fixed; bottom: 40px; right: 40px; font-size: 15px;
+      background-color: #2770ff; color: white; padding: 10px 15px; border-radius: 5px;
+      cursor: pointer; display: none; z-index: 999;
     }
 
-    /* ===== Section Titles ===== */
-    .section-header {
-      padding: 0 5%; 
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-      opacity: 0; /* For scroll animation */
-      transform: translateY(20px);
-      transition: var(--transition);
-    }
-    .section-header.visible { opacity: 1; transform: translateY(0); }
-
+    /* ===== Animated Section Titles ===== */
     .section-title {
-      font-size: 24px; font-weight: 700;
-      color: var(--text-main);
-      position: relative;
-      padding-left: 15px;
+      padding: 15px 20px 10px; font-size: 22px; font-weight: bold;
+      color: #0099cc; display: inline-block; position: relative; overflow: hidden; cursor: default;
+      margin-top: 20px;
     }
-    .section-title::before {
-      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 4px; height: 24px;
-      background: var(--primary-color);
-      border-radius: 2px;
+    .section-title::after {
+      content: '🏀'; display: inline-block; margin-left: 10px; position: relative;
+      animation: arrowMove 1s infinite alternate;
     }
-    .section-icon { font-size: 24px; color: var(--accent-color); }
+    @keyframes arrowMove { 0% { transform: translateX(0); } 50% { transform: translateX(5px); } 100% { transform: translateX(0); } }
+    .section-title span { position: relative; display: inline-block; overflow: hidden; }
+    .section-title span::before {
+      content: ''; position: absolute; bottom: 0; left: -100%; width: 100%; height: 3px;
+      background-color: #2770ff; animation: underline 2s infinite;
+    }
+    @keyframes underline { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
 
-    /* ===== Scrollable Section ===== */
-    .scroll-section {
-      overflow-x: auto; 
-      white-space: nowrap; 
-      padding: 10px 5% 30px 5%; 
-      scroll-behavior: smooth;
-      display: flex;
-      gap: 20px;
-    }
-    .scroll-section::-webkit-scrollbar { height: 0; width: 0; } /* Hide scrollbar for clean look */
+    /* ===== Scrollable section ===== */
+    .scroll-section { overflow-x: auto; white-space: nowrap; padding: 15px 10px; scroll-behavior: smooth; }
+    .scroll-section::-webkit-scrollbar { display: none; }
 
     /* ===== Cards ===== */
-    .card-link {
-      display: inline-block; 
-      text-decoration: none; 
-      color: inherit; 
-      position: relative;
-      border-radius: var(--card-radius);
-      transition: transform 0.3s ease;
-      /* Initial state for scroll animation */
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    
+    .scroll-section a { display: inline-block; text-decoration: none; color: inherit; margin: 0 10px; }
     .card {
-      width: 220px; 
-      height: 195px; 
-      border-radius: var(--card-radius);
-      background-color: var(--surface-color);
-      overflow: hidden; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      transition: var(--transition);
-      position: relative;
-      display: flex; flex-direction: column;
-      border: 1px solid rgba(255,255,255,0.05);
+      width: 200px; height: 220px; border-radius: 15px; overflow: hidden;
+      background-color: #333; color: #fff; text-align: center;
+      box-shadow: 2px 2px 15px rgba(0,0,0,0.3); transition: transform 0.3s, filter 0.3s, box-shadow 0.3s;
+      position: relative; display: flex; flex-direction: column; cursor: pointer;
     }
-
-    .card-img-wrapper {
-      width: 100%;
-      height: 75%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .card img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      transition: transform 0.5s ease;
-    }
-
-    .card-content {
-      height: 25%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      background: var(--surface-color);
-      z-index: 2;
-    }
-
+    .card img { width: 100%; height: 70%; object-fit: cover; transition: transform 0.5s; }
     .card span {
-      font-size: 14px; font-weight: 600; color: var(--text-main);
-      text-align: center;
-      white-space: normal; /* Allow text wrapping */
-      line-height: 1.2;
+      font-size: 10px; font-weight: bold; margin-top: 5px; flex-grow: 1;
+      display: flex; align-items: center; justify-content: center; text-transform: uppercase; letter-spacing: 1px;
     }
+    .card .live-tag {
+      position: absolute; top: 8px; left: 8px; background-color: red; padding: 2px 6px;
+      font-size: 12px; border-radius: 5px; animation: pulse 1.5s infinite;
+    }
+    .card .channel {
+      position: absolute; top: 8px; right: 8px; background-color: #673AB7; padding: 2px 6px;
+      font-size: 12px; border-radius: 5px;
+    }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
-    /* Tags */
-    .live-tag {
-      position: absolute; top: 12px; left: 12px; 
-      background: rgba(239, 68, 68, 0.9);
-      backdrop-filter: blur(4px);
-      color: white; padding: 4px 8px;
-      font-size: 10px; font-weight: 800; border-radius: 4px;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      z-index: 5;
-      box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
-      animation: pulse-red 2s infinite;
-    }
-    
-    .channel-tag {
-      position: absolute; top: 12px; right: 12px; 
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
-      color: white; padding: 4px 8px;
-      font-size: 10px; border-radius: 4px;
-      z-index: 5;
-    }
-
-    /* Hover Effects */
-    .card-link:hover { transform: translateY(-5px); }
+    /* ===== Card Hover Effects ===== */
     .card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.3), 0 0 15px rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.3);
+      transform: scale(1.08);
+      filter: brightness(1.2);
+      box-shadow: 0 0 25px rgba(39,112,255,0.7), 0 0 50px rgba(255,255,255,0.2);
     }
-    .card:hover img { transform: scale(1.15); filter: brightness(1.1); }
+    .card:hover img { transform: scale(1.1); }
 
-    /* Play Button Overlay */
-    .play-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity 0.3s;
-      z-index: 4;
+    /* ===== Live Cricket Custom Card ===== */
+    .live-card {
+      width: 240px; height: 220px; border-radius: 25px; transition: transform 0.4s, box-shadow 0.4s, filter 0.4s, background-color 0.4s;
+      overflow: hidden; position: relative; display: flex; flex-direction: column; cursor: pointer;
+      background-color: #333;
     }
-    .card:hover .play-overlay { opacity: 1; }
-    .play-overlay i { font-size: 50px; color: #fff; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); transform: scale(0.8); transition: transform 0.3s; }
-    .card:hover .play-overlay i { transform: scale(1); }
+    body.dark .live-card { background-color: #282828; }
+    .live-card img { height: 65%; border-radius: 20px 20px 0 0; }
 
-    /* ===== Animations ===== */
-    @keyframes pulse-red {
-      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-      70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    /* ===== Hover Glow for All Cards ===== */
+    .card::before, .live-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s, box-shadow 0.3s;
+    }
+    .card:hover::before, .live-card:hover::before {
+      opacity: 1;
+      box-shadow: 0 0 25px 10px rgba(39,112,255,0.5);
+      animation: glowPulse 1.5s infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
+      50% { box-shadow: 0 0 35px 15px rgba(39,112,255,0.5); }
+      100% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ===== Iframe ===== */
+    iframe { width: 100%; min-height: 212px; border: none; margin-top: 60px; border-radius: 10px; }
 
     /* ===== Responsive ===== */
-    @media (max-width: 768px) {
-      nav { padding: 0 15px; height: 60px; }
-      nav .logo a { font-size: 22px; }
-      .hero-section { width: 100%; border-radius: 0; border-left: none; border-right: none; }
-      iframe { height: 200px; }
-      .card { width: 160px; height: 200px; }
-      .search-container.active input { width: 150px; }
-      .section-title { font-size: 20px; }
-    }
-    @media (max-width: 480px) {
-      .card { width: 140px; height: 180px; }
-      .card span { font-size: 12px; }
-      .search-container.active input { width: 120px; }
+    @media (max-width: 600px) {
+      .card { width: 150px; height: 180px; }
+      .live-card { width: 180px; height: 180px; border-radius: 20px; }
+      .section-title { font-size: 18px; }
+      .search-container.active input { width: 200px; }
     }
   </style>
 </head>
 <body class="dark">
-
-  <!-- Navigation -->
   <nav>
-    <div class="logo">
-      <a href="#">
-        <i class='bx bxs-movie-play'></i>
-        <span>SportsHub</span>
-      </a>
-    </div>
+    <div class="logo"><a href="#">Sports</a></div>
+ <!-- Right Icons -->
+  <div class="nav-actions">
+    <div class="search-container" id="searchContainer">
+      <input type="text" id="searchInput" placeholder="Search channels...">
+      <i class="uil uil-search search-icon" id="searchIcon"></i>
+     </div>
 
-    <div class="nav-actions">
-      <div class="search-container" id="searchContainer">
-        <input type="text" id="searchInput" placeholder="Search sports, teams...">
-        <i class="uil uil-search search-icon" id="searchIcon"></i>
-      </div>
-
-      <div class="dark-light" id="modeToggle" title="Toggle Theme">
-        <i class='bx bx-moon' id="modeIcon"></i>
-      </div>
-    </div>
+    <div class="dark-light" id="modeToggle"><i class='bx bx-moon' id="modeIcon"></i></div>
   </nav>
 
-  <!-- Scroll To Top -->
-  <div class="up" id="scrollToTopBtn">
-    <i class="uil uil-arrow-up"></i>
+  <i class="uil uil-angle-up up" id="scrollToTopBtn"></i>
+
+  <!-- Embedded cricket live stream -->
+  <iframe src="https://bwidget.crictimes.org/" scrolling="no"></iframe>
+
+  <!-- Live Cricket Section -->
+  <div class="section-title"><span>Live Cricket</span></div>
+  <div class="scroll-section" id="liveCricketSection">
+    <a href="t20">
+      <div class="card live-card" data-title="t20">
+        <img src="https://img10.hotstar.com/image/upload//f_auto,q_90/sources/r1/cms/prod/5409/1772853405409-h" alt=" Cricket">
+        <span>ICC Mens T20 World Cup</span>
+        <div class="live-tag">Live</div>
+        <div class="channel">T20 Mens</div>
+      </div>
+    </a>
+    <a href="fc/index">
+      <div class="card live-card" data-title="FanCode">
+        <img src="https://technosports.co.in/wp-content/uploads/2024/02/23196-fancode-1024x614.webp" alt="FanCode">
+        <span>FanCode</span>
+        <div class="live-tag">Live</div>
+        <div class="channel">FC</div>
+      </div>
+    </a>
   </div>
 
-  <main>
-    <!-- Hero: Cricket Widget -->
-    <section class="hero-section">
-      <div class="hero-header">
-        <h3><i class='uil uil-cricket-ball'></i> Live Match Center</h3>
-        <div style="font-size:12px; color:var(--text-secondary);">Live Updates</div>
+  <!-- Sports Section -->
+  <div class="section-title"><span>Sports</span></div>
+  <div class="scroll-section" id="sportsSection">
+    <a href="live/star/telugu">
+      <div class="card" data-title="Telugu">
+        <img src="https://i.postimg.cc/qBFDFvYH/Telugu-HD.png" alt="Telugu">
+        <span>Telugu</span>
       </div>
-      <iframe src="https://bwidget.crictimes.org/" scrolling="no"></iframe>
-    </section>
+    </a>
+    <a href="live/star/tamil">
+      <div class="card" data-title="Tamil">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU" alt="Tamil">
+        <span>Tamil</span>
+      </div>
+    </a>
+    <a href="live/star/hindi">
+      <div class="card" data-title="Hindi">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h" alt="Hindi">
+        <span>Hindi</span>
+      </div>
+    </a>
+    <a href="live/star/english">
+      <div class="card" data-title="English">
+        <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h" alt="English">
+        <span>English</span>
+      </div>
+    </a>
+  </div>
 
-    <!-- Section 1: Live Cricket -->
-    <div class="section-header">
-      <div class="section-icon"><i class='uil uil-baseball-ball'></i></div>
-      <div class="section-title">Live Cricket</div>
-    </div>
-    
-    <div class="scroll-section" id="liveCricketSection">
-      <!-- Card 1 -->
-      <a href="t20" class="card-link">
-        <div class="card" data-title="t20">
-          <div class="card-img-wrapper">
-            <img src="https://images.money9live.com/wp-content/uploads/2026/03/Untitled-design-2026-03-08T071516.972.png" alt="T20 World Cup">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="live-tag">Live Now</div>
-          <div class="channel-tag">T20 Mens</div>
-          <div class="card-content">
-            <span>ICC T20 World Cup</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 2 -->
-      <a href="fc/index" class="card-link">
-        <div class="card" data-title="FanCode">
-          <div class="card-img-wrapper">
-            <img src="https://technosports.co.in/wp-content/uploads/2024/02/23196-fancode-1024x614.webp" alt="FanCode">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="live-tag">Live Now</div>
-          <div class="channel-tag">FC</div>
-          <div class="card-content">
-            <span>FanCode Live</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Section 2: Sports Channels -->
-    <div class="section-header">
-      <div class="section-icon"><i class='uil uil-tv'></i></div>
-      <div class="section-title">Sports Channels</div>
-    </div>
-
-    <div class="scroll-section" id="sportsSection">
-      <a href="live/star/telugu" class="card-link">
-        <div class="card" data-title="Telugu">
-          <div class="card-img-wrapper">
-            <img src="https://i.postimg.cc/qBFDFvYH/Telugu-HD.png" alt="Telugu">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Star Sports Telugu</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="live/star/tamil" class="card-link">
-        <div class="card" data-title="Tamil">
-          <div class="card-img-wrapper">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEXuHOJzhgV5_PuQ-GxDVU2q3YF5O0pv9dRlLwh6liXRStI3gThJ1_1A83tdNKuEdfi88&usqp=CAU" alt="Tamil">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Star Sports Tamil</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="live/star/hindi" class="card-link">
-        <div class="card" data-title="Hindi">
-          <div class="card-img-wrapper">
-            <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7433/567433-h" alt="Hindi">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Star Sports Hindi</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="live/star/english" class="card-link">
-        <div class="card" data-title="English">
-          <div class="card-img-wrapper">
-            <img src="https://img1.hotstarext.com/image/upload/f_auto,t_hcdl/sources/r1/cms/prod/7430/567430-h" alt="English">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Star Sports English</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- Section 3: More -->
-    <div class="section-header">
-      <div class="section-icon"><i class='uil uil-apps'></i></div>
-      <div class="section-title">More Channels</div>
-    </div>
-
-    <div class="scroll-section" id="moreSection">
-      <a href="https://live.drmlive.in/jiotv/play.php?id=162&e=" class="card-link">
-        <div class="card" data-title="Sony 1">
-          <div class="card-img-wrapper">
-            <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg" alt="Sony 1">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Sony Ten 1</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://live.drmlive.in/jiotv/play.php?id=891&e=" class="card-link">
-        <div class="card" data-title="Sony 2">
-          <div class="card-img-wrapper">
-            <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg" alt="Sony 2">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Sony Ten 2</span>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://live.drmlive.in/jiotv/play.php?id=524&e=" class="card-link">
-        <div class="card" data-title="Sony 3">
-          <div class="card-img-wrapper">
-            <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg" alt="Sony 3">
-            <div class="play-overlay"><i class='bx bx-play-circle'></i></div>
-          </div>
-          <div class="card-content">
-            <span>Sony Ten 3</span>
-          </div>
-        </div>
-      </a>
-    </div>
-  </main>
+  <!-- More Channels Section -->
+  <div class="section-title"><span>More</span></div>
+  <div class="scroll-section" id="moreSection">
+    <a href="https://live.drmlive.in/jiotv/play.php?id=162&e=">
+      <div class="card" data-title="Sony 1">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%201.jpg" alt="Sony 1">
+        <span>Sony 1</span>
+      </div>
+    </a>
+    <a href="https://live.drmlive.in/jiotv/play.php?id=891&e=">
+      <div class="card" data-title="Sony 2">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%202.jpg" alt="Sony 2">
+        <span>Sony 2</span>
+      </div>
+    </a>
+    <a href="https://live.drmlive.in/jiotv/play.php?id=524&e=">
+      <div class="card" data-title="Sony 3">
+        <img src="https://assets.airtel.in/static-assets/cms/dth/images/logo-adapt-pages/SONY%20SPORTS%20TEN%203.jpg" alt="Sony 3">
+        <span>Sony 3</span>
+      </div>
+    </a>
+  </div>
 
   <script>
-    /* ===== Theme Management (Dark/Light) ===== */
+    // Dark/Light toggle
     const modeToggle = document.getElementById("modeToggle");
     const modeIcon = document.getElementById("modeIcon");
-    const body = document.body;
-
-    // Check Local Storage on Load
-    const savedMode = localStorage.getItem("mode");
-    if (savedMode === "light-mode") {
-      body.classList.remove("dark");
-      body.classList.add("light");
-      modeIcon.classList.replace("bx-moon", "bx-sun");
-    }
-
     modeToggle.addEventListener("click", () => {
-      body.classList.toggle("dark");
-      body.classList.toggle("light");
-      
-      const isDark = body.classList.contains("dark");
-      
-      // Toggle Icon
-      if (isDark) {
-        modeIcon.classList.replace("bx-sun", "bx-moon");
-        localStorage.setItem("mode", "dark-mode");
-      } else {
-        modeIcon.classList.replace("bx-moon", "bx-sun");
-        localStorage.setItem("mode", "light-mode");
-      }
-    });
+  document.body.classList.toggle("dark"); // toggle dark mode
 
-    /* ===== Search Functionality ===== */
+  if (document.body.classList.contains("dark")) {
+    modeIcon.classList.replace("bx-moon", "bx-sun"); // 🌙 → ☀️
+  } else {
+    modeIcon.classList.replace("bx-sun", "bx-moon"); // ☀️ → 🌙
+  }
+});
+
+
+   // js code to keep user selected mode even page refresh or file reopen
+ modeToggle.addEventListener("click" , () =>{
+        modeToggle.classList.toggle("active");
+        body.classList.toggle("dark");
+
+        if(!body.classList.contains("dark")){
+            localStorage.setItem("mode" , "light-mode");
+        }else{
+            localStorage.setItem("mode" , "dark-mode");
+        }
+      });
+
+
+    // Scroll to top button
+    const upBtn = document.getElementById("scrollToTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) upBtn.style.display = "block";
+      else upBtn.style.display = "none";
+    });
+    upBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Search toggle
     const searchContainer = document.getElementById('searchContainer');
     const searchIcon = document.getElementById('searchIcon');
     const searchInput = document.getElementById('searchInput');
 
-    // Toggle Search Bar
     searchIcon.addEventListener('click', () => {
-      const isActive = searchContainer.classList.toggle("active");
-      
-      if (isActive) {
-        searchIcon.classList.replace("uil-search", "uil-times");
-        searchInput.focus();
-      } else {
-        searchIcon.classList.replace("uil-times", "uil-search");
-        searchInput.value = "";
-        resetCards();
-      }
+      searchContainer.classList.toggle('active');
+      if (searchContainer.classList.contains("active")) {
+    searchIcon.classList.replace("uil-search", "uil-times"); // 🔍 → ❌
+    searchInput.focus();
+  } else {
+    searchIcon.classList.replace("uil-times", "uil-search"); // ❌ → 🔍
+    searchInput.value = ""; // clear search input
+    document.querySelectorAll(".card").forEach(card => {
+      card.parentElement.style.display = "inline-block"; // reset filter
     });
+  }
+});
 
-    // Filter Logic
+    // Search functionality
     searchInput.addEventListener('input', function() {
-      const filter = this.value.toLowerCase().trim();
-      const cards = document.querySelectorAll('.card-link');
-      
-      cards.forEach(link => {
-        const title = link.querySelector('.card').getAttribute('data-title').toLowerCase();
-        if (title.includes(filter)) {
-          link.style.display = "inline-block";
-          // Small animation to show result found
-          link.style.animation = "fadeInDown 0.5s ease";
-        } else {
-          link.style.display = "none";
-        }
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('.scroll-section .card').forEach(card => {
+        const title = card.getAttribute('data-title').toLowerCase();
+        card.parentElement.style.display = title.includes(filter) ? 'inline-block' : 'none';
       });
     });
-
-    function resetCards() {
-      const cards = document.querySelectorAll('.card-link');
-      cards.forEach(link => {
-        link.style.display = "inline-block";
-        link.style.animation = "none";
-      });
-    }
-
-    /* ===== Scroll To Top ===== */
-    const upBtn = document.getElementById("scrollToTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        upBtn.style.display = "flex";
-        // Small animation when appearing
-        upBtn.style.animation = "fadeInDown 0.3s ease";
-      } else {
-        upBtn.style.display = "none";
-      }
-    });
-    upBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:'smooth'}));
-
-    /* ===== Intersection Observer for Scroll Animations ===== */
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // Staggered delay based on index of sibling
-          const delay = index % 5 * 100; 
-          entry.target.style.animation = `fadeUp 0.6s ease forwards ${delay}ms`;
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    // Observe Headers
-    document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
-    
-    // Observe Cards
-    document.querySelectorAll('.card-link').forEach(el => {
-      el.style.opacity = "0"; // Ensure hidden before animation
-      observer.observe(el);
-    });
-
   </script>
+
 </body>
 </html>
+
+
+advanced UI update 
