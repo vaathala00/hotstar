@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby Player</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- <script src="consoleBlocker.js"></script> -->
+  <script src="node_modules/mux.js/dist/mux.js"></script>
+  <script src="node_modules/shaka-player/dist/shaka-player.compiled.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Custom Title Bar -->
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <img src="logo.png" alt="Ruby Player" class="app-logo">
+        <span class="app-title">Ruby Player</span>
+      </div>
+      <div class="title-bar-controls">
+        <button class="title-btn minimize-btn" onclick="window.electronAPI?.minimize()">─</button>
+        <button class="title-btn maximize-btn" onclick="window.electronAPI?.maximize()">□</button>
+        <button class="title-btn close-btn" onclick="window.electronAPI?.close()">✕</button>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <!-- Left Sidebar Navigation -->
+      <div class="sidebar">
+        <nav class="nav-menu">
+          <button class="nav-item active" data-view="media">
+            <i class="nav-icon fas fa-play-circle"></i>
+            <span class="nav-label">Media</span>
+          </button>
+          <button class="nav-item" data-view="iptv">
+            <i class="nav-icon fas fa-tv"></i>
+            <span class="nav-label">IPTV</span>
+          </button>
+          <button class="nav-item" data-view="xtream">
+            <i class="nav-icon fas fa-stream"></i>
+            <span class="nav-label">Xtream</span>
+          </button>
+          <button class="nav-item" data-view="wishlist">
+            <i class="nav-icon fas fa-star"></i>
+            <span class="nav-label">Wishlist</span>
+          </button>
+          <button class="nav-item" data-view="more">
+            <i class="nav-icon fas fa-ellipsis-h"></i>
+            <span class="nav-label">More</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="content-area">
+        <!-- Left Sidebar - Changes per tab -->
+        <div class="sidebar-content">
+          <!-- Media View (Active by default) -->
+          <div class="view-sidebar" id="media-sidebar">
+            <!-- Media Library -->
+            <div class="media-library">
+              <div class="library-header">
+                <div class="filter-tabs">
+                  <button class="filter-tab active">All</button>
+                  <button class="filter-tab">Videos</button>
+                  <button class="filter-tab">Music</button>
+                </div>
+                <div class="library-actions">
+                  <button class="action-btn" id="addMediaBtn" title="Add Files">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="action-btn" id="searchBtn" title="Search">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button class="action-btn" id="viewToggle" title="Toggle View">
+                    <i class="fas fa-th"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="search-bar hidden" id="searchBar">
+                <input type="text" class="search-input" placeholder="Search videos..." id="searchInput">
+                <button class="search-clear-btn" id="searchClearBtn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+
+              <div class="video-list" id="videoList">
+                <div class="loading">Loading videos...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IPTV View -->
+          <div class="view-sidebar hidden" id="iptv-sidebar">
+            <!-- IPTV Content (same as before) -->
+            <div class="media-library">
+              <div class="library-header" id="iptvLibraryHeader">
+                <h2 class="iptv-title">Ruby IPTV</h2>
+                <div class="library-actions">
+                  <button class="action-btn" id="iptvRefreshBtn" title="Refresh">
+                    <i class="fas fa-sync-alt"></i>
+                  </button>
+                  <button class="action-btn" id="iptvAddBtn" title="Add Playlist">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button class="action-btn" id="iptvPlayBtn" title="Play URL">
+                    <i class="fas fa-play"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Playlist List View -->
+              <div class="iptv-playlist-view" id="iptvPlaylistView">
+                <div class="playlist-list" id="playlistList">
+                  <div class="no-playlists">No playlists available</div>
+                </div>
+              </div>
+
+              <!-- Channel List View -->
+              <div class="iptv-channel-view hidden" id="iptvChannelView">
+                <div class="channel-header">
+                  <button class="back-btn" id="backToPlaylistsBtn">
+                    <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <div class="channel-header-info">
+                    <h3 id="currentPlaylistName">Playlist</h3>
+                    <span id="channelCount">0 channels</span>
+                  </div>
+                  <div class="channel-actions">
+                    <button class="action-btn" id="channelRefreshBtn" title="Refresh">
+                      <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="action-btn" id="channelSearchBtn" title="Search">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn" id="channelViewBtn" title="Grid View">
+                      <i class="fas fa-th"></i>
+                    </button>
+                    <button class="action-btn" id="channelFilterBtn" title="Filter">
+                      <i class="fas fa-filter"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="search-bar hidden" id="channelSearchBar">
+                  <input type="text" class="search-input" placeholder="Search channels..." id="channelSearchInput">
+                  <button class="search-clear-btn" id="channelSearchClearBtn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="category-tabs" id="categoryTabs">
+                  <button class="category-tab active" data-category="all">All</button>
+                </div>
+
+                <div class="channel-list" id="channelList">
+                  <div class="loading">Loading channels...</div>
+                </div>
+              </div>
+
+              <!-- Stream Configuration Popup -->
+              <div class="stream-popup hidden" id="streamPopup">
+                <div class="stream-popup-content">
+                  <h2 class="stream-popup-title">Stream Configuration</h2>
+                  
+                  <div class="stream-form">
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="streamUrl" placeholder="Stream URL">
+                    </div>
+                    
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="streamCookies" placeholder="Cookies (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="streamReferer" placeholder="Referer (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="streamOrigin" placeholder="Origin (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="streamDrmUrl" placeholder="DRM License URL (optional)">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="form-label">User Agent</label>
+                      <select class="stream-select" id="streamUserAgent">
+                        <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36">Mozilla/5.0...in64; x64)</option>
+                        <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X)">iOS Safari</option>
+                        <option value="Mozilla/5.0 (Linux; Android 10)">Android Chrome</option>
+                        <option value="custom">Custom</option>
+                      </select>
+                    </div>
+                    
+                    <div class="form-group hidden" id="customUserAgentGroup">
+                      <input type="text" class="stream-input" id="customUserAgent" placeholder="Enter custom User Agent">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="form-label">DRM Scheme</label>
+                      <select class="stream-select" id="streamDrmScheme">
+                        <option value="none">None</option>
+                        <option value="widevine">Widevine</option>
+                        <option value="playready">PlayReady</option>
+                        <option value="clearkey">ClearKey</option>
+                      </select>
+                    </div>
+                    
+                    <div class="stream-popup-actions">
+                      <button class="stream-btn stream-btn-secondary" id="streamCancelBtn">Cancel</button>
+                      <button class="stream-btn stream-btn-primary" id="streamPlayBtn">Play</button>
+                      <button class="stream-btn stream-btn-icon" id="streamQrBtn" title="QR Config">
+                        <i class="fas fa-qrcode"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add Playlist Popup -->
+              <div class="stream-popup hidden" id="addPlaylistPopup">
+                <div class="stream-popup-content add-playlist-content">
+                  <h2 class="stream-popup-title">Import Playlist</h2>
+                  
+                  <!-- Tabs -->
+                  <div class="popup-tabs">
+                    <button class="popup-tab active" data-tab="file">Import File</button>
+                    <button class="popup-tab" data-tab="link">Playlist Link</button>
+                    <button class="popup-tab" data-tab="qr">QR/URL</button>
+                  </div>
+                  
+                  <div class="stream-form">
+                    <!-- Playlist Name (common for all tabs) -->
+                    <div class="form-group">
+                      <input type="text" class="stream-input" id="playlistName" placeholder="Playlist Name">
+                    </div>
+                    
+                    <!-- Import File Tab -->
+                    <div class="tab-content active" id="fileTab">
+                      <div class="form-group">
+                        <input type="file" id="playlistFileInput" accept=".m3u,.m3u8" style="display: none;">
+                        <button class="file-select-btn" id="selectFileBtn">
+                          <i class="fas fa-folder-open"></i>
+                          <span id="fileNameDisplay">Select M3U File</span>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <!-- Playlist Link Tab -->
+                    <div class="tab-content hidden" id="linkTab">
+                      <div class="form-group">
+                        <input type="text" class="stream-input" id="playlistUrl" placeholder="Enter M3U/M3U8 URL">
+                      </div>
+                    </div>
+                    
+                    <!-- QR/URL Tab -->
+                    <div class="tab-content hidden" id="qrTab">
+                      <div class="form-group">
+                        <div class="qr-placeholder">
+                          <i class="fas fa-qrcode"></i>
+                          <p>QR Code Scanner</p>
+                          <small>Coming soon...</small>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="stream-popup-actions">
+                      <button class="stream-btn stream-btn-secondary" id="addPlaylistCancelBtn">Cancel</button>
+                      <button class="stream-btn stream-btn-primary" id="addPlaylistImportBtn">Import</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Xtream View -->
+          <div class="view-sidebar hidden" id="xtream-sidebar">
+            <div class="media-library">
+              <!-- Login View -->
+              <div id="xtreamLoginView">
+                <div class="library-header">
+                  <h2 class="iptv-title">XTream Login</h2>
+                </div>
+                
+                <div class="xtream-container">
+                  <!-- Login Form -->
+                  <div class="xtream-login-section">
+                    <h3 class="xtream-section-title">Login to XTream Server</h3>
+                    <p class="xtream-description">Enter your XTream Codes server details to access live channels, VOD, and series.</p>
+                    
+                    <div class="xtream-form">
+                      <div class="form-group">
+                        <input type="text" class="form-input" id="xtreamServerUrl" placeholder="Server URL" />
+                      </div>
+                      
+                      <div class="form-group">
+                        <input type="text" class="form-input" id="xtreamUsername" placeholder="Username" />
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="password-input-wrapper">
+                          <input type="password" class="form-input" id="xtreamPassword" placeholder="Password" />
+                          <button class="password-toggle-btn" id="xtreamPasswordToggle">
+                            <i class="fas fa-eye-slash"></i>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <button class="btn-primary btn-full" id="xtreamLoginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div class="xtream-divider"></div>
+                  
+                  <!-- Saved Logins -->
+                  <div class="xtream-saved-section">
+                    <div class="xtream-saved-header">
+                      <h3 class="xtream-section-title">Saved Logins (<span id="xtreamSavedCount">0</span>/20)</h3>
+                    </div>
+                    
+                    <div class="xtream-saved-list" id="xtreamSavedList">
+                      <div class="no-saved-logins">No saved logins yet</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Categories View (After Login) -->
+              <div id="xtreamCategoriesView" class="hidden">
+                <div class="library-header">
+                  <button class="action-btn" id="xtreamBackBtn" title="Back to Login">
+                    <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <h2 class="iptv-title" id="xtreamViewTitle">Live TV</h2>
+                  <div class="library-actions">
+                    <button class="action-btn" id="xtreamRefreshBtn" title="Refresh">
+                      <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="action-btn" id="xtreamSortBtn" title="Sort A-Z">
+                      <i class="fas fa-sort-alpha-down"></i>
+                    </button>
+                    <button class="action-btn" id="xtreamSearchBtn" title="Search">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn" id="xtreamViewToggleBtn" title="Toggle View">
+                      <i class="fas fa-th"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="search-bar hidden" id="xtreamSearchBar">
+                  <input type="text" class="search-input" placeholder="Search categories..." id="xtreamSearchInput">
+                  <button class="search-clear-btn" id="xtreamSearchClearBtn">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                
+                <!-- Bottom Navigation Tabs -->
+                <div class="xtream-tabs">
+                  <button class="xtream-tab active" data-type="live">
+                    <i class="fas fa-tv"></i>
+                    <span>Live TV</span>
+                  </button>
+                  <button class="xtream-tab" data-type="vod">
+                    <i class="fas fa-film"></i>
+                    <span>VOD</span>
+                  </button>
+                  <button class="xtream-tab" data-type="series">
+                    <i class="fas fa-video"></i>
+                    <span>Series</span>
+                  </button>
+                  <button class="xtream-tab" data-type="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                  </button>
+                </div>
+                
+                <!-- Categories List -->
+                <div class="xtream-categories-list" id="xtreamCategoriesList">
+                  <div class="loading">Loading categories...</div>
+                </div>
+                
+                <!-- Streams List (Channels/VOD) -->
+                <div class="xtream-streams-list hidden" id="xtreamStreamsList">
+                  <div class="loading">Loading streams...</div>
+                </div>
+                
+                <!-- Settings View -->
+                <div class="xtream-settings-view hidden" id="xtreamSettingsView">
+                  <div class="xtream-settings-container">
+                    <!-- Account Information -->
+                    <div class="xtream-settings-section">
+                      <h3 class="xtream-settings-title">Account Information</h3>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Server URL</div>
+                        <div class="xtream-info-value" id="xtreamInfoServerUrl">-</div>
+                      </div>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Username</div>
+                        <div class="xtream-info-value" id="xtreamInfoUsername">-</div>
+                      </div>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Password</div>
+                        <div class="xtream-info-value password-hidden" id="xtreamInfoPassword">
+                          <span class="password-dots">••••••••</span>
+                          <button class="password-reveal-btn" id="xtreamPasswordReveal">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Expiration Date</div>
+                        <div class="xtream-info-value" id="xtreamInfoExpiration">-</div>
+                      </div>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Connections</div>
+                        <div class="xtream-info-value" id="xtreamInfoConnections">-</div>
+                      </div>
+                      
+                      <div class="xtream-info-card">
+                        <div class="xtream-info-label">Account Status</div>
+                        <div class="xtream-info-value" id="xtreamInfoStatus">-</div>
+                      </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="xtream-settings-section">
+                      <h3 class="xtream-settings-title">Actions</h3>
+                      
+                      <button class="xtream-settings-btn btn-dark" id="xtreamRefreshAccountBtn">
+                        <i class="fas fa-sync-alt"></i> Refresh Account Info
+                      </button>
+                      
+                      <button class="xtream-settings-btn btn-light" id="xtreamTestConnectionBtn">
+                        <i class="fas fa-plug"></i> Test Connection
+                      </button>
+                      
+                      <button class="xtream-settings-btn btn-danger" id="xtreamLogoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                      </button>
+                    </div>
+                    
+                    <!-- Cache Management -->
+                    <div class="xtream-settings-section">
+                      <h3 class="xtream-settings-title">Cache Management</h3>
+                      
+                      <button class="xtream-settings-btn btn-light" id="xtreamClearCountsBtn">
+                        Clear Category Counts Cache
+                      </button>
+                      
+                      <button class="xtream-settings-btn btn-light" id="xtreamClearThumbnailsBtn">
+                        Clear Channel/VOD Thumbnails Cache
+                      </button>
+                      
+                      <button class="xtream-settings-btn btn-danger-outline" id="xtreamClearAllDataBtn">
+                        <span style="color: #dc2626;">Clear All Xtream Data</span>
+                      </button>
+                    </div>
+                    
+                    <!-- Display Preferences -->
+                    <div class="xtream-settings-section">
+                      <h3 class="xtream-settings-title">Display Preferences</h3>
+                      
+                      <div class="xtream-toggle-item">
+                        <div class="xtream-toggle-info">
+                          <div class="xtream-toggle-label">Show Channel Logos</div>
+                          <div class="xtream-toggle-description">Display channel and video thumbnails</div>
+                        </div>
+                        <label class="xtream-toggle-switch">
+                          <input type="checkbox" id="xtreamShowLogos" checked>
+                          <span class="xtream-toggle-slider"></span>
+                        </label>
+                      </div>
+                      
+                      <div class="xtream-toggle-item">
+                        <div class="xtream-toggle-info">
+                          <div class="xtream-toggle-label">Show Category Counts</div>
+                          <div class="xtream-toggle-description">Display number of items in each category</div>
+                        </div>
+                        <label class="xtream-toggle-switch">
+                          <input type="checkbox" id="xtreamShowCounts" checked>
+                          <span class="xtream-toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wishlist View (Placeholder) -->
+          <!-- Wishlist View -->
+          <div class="view-sidebar hidden" id="wishlist-sidebar">
+            <div class="media-library">
+              <div class="library-header">
+                <h2 class="iptv-title">
+                  Wishlist
+                  <span class="wishlist-count-badge" id="wishlistCountBadge">0</span>
+                </h2>
+                <div class="library-actions">
+                  <button class="action-btn" id="wishlistSortBtn" title="Sort">
+                    <i class="fas fa-sort-alpha-down"></i>
+                  </button>
+                  <button class="action-btn" id="wishlistSearchBtn" title="Search">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button class="action-btn" id="wishlistExportBtn" title="Export as M3U">
+                    <i class="fas fa-download"></i>
+                  </button>
+                  <button class="action-btn" id="wishlistClearBtn" title="Clear All">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="search-bar hidden" id="wishlistSearchBar">
+                <input type="text" class="search-input" placeholder="Search wishlist..." id="wishlistSearchInput">
+                <button class="search-clear-btn" id="wishlistSearchClearBtn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+
+              <div class="wishlist-container" id="wishlistContainer">
+                <div class="loading">Loading wishlist...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- More View (Settings) -->
+          <div class="view-sidebar hidden" id="more-sidebar">
+            <div class="media-library">
+              <div class="library-header">
+                <h2 class="iptv-title">Settings</h2>
+              </div>
+              
+              <div class="settings-container">
+                <!-- Appearance Section -->
+                <div class="settings-section">
+                  <h3 class="settings-section-title">Appearance</h3>
+                  
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <div class="settings-item-label">Theme</div>
+                      <div class="settings-item-description">Choose between light and dark theme</div>
+                    </div>
+                    <div class="settings-item-control">
+                      <button class="theme-toggle-btn" id="themeToggleBtn">
+                        <i class="fas fa-sun theme-icon-light"></i>
+                        <i class="fas fa-moon theme-icon-dark"></i>
+                        <span class="theme-toggle-slider"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- About Section -->
+                <div class="settings-section">
+                  <h3 class="settings-section-title">About</h3>
+                  
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <div class="settings-item-label">Ruby Player</div>
+                      <div class="settings-item-description">Version 0.1.0 - PC Edition</div>
+                    </div>
+                  </div>
+                  
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <div class="settings-item-label">Slogan</div>
+                      <div class="settings-item-description">Play Anything, Anywhere & Anytime</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Join Us Section -->
+                <div class="settings-section">
+                  <h3 class="settings-section-title">Join Us</h3>
+                  
+                  <div class="settings-item settings-item-clickable" id="telegramGroupBtn">
+                    <div class="settings-item-info">
+                      <div class="settings-item-label">
+                        <i class="fab fa-telegram"></i> Telegram Community
+                      </div>
+                      <div class="settings-item-description">Join us and enjoy every moment</div>
+                    </div>
+                    <div class="settings-item-control">
+                      <i class="fas fa-external-link-alt"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Video Player (Always Visible) -->
+        <div class="player-section">
+            <div class="player-wrapper">
+              <div class="player-placeholder" id="playerPlaceholder">
+                <img src="logo.png" alt="Ruby Player" class="placeholder-logo">
+                <h2 class="placeholder-title">Ruby Player PC Edition</h2>
+                <p class="placeholder-slogan">Play Anything, Anywhere & Anytime</p>
+              </div>
+
+              <!-- Custom Video Player Container -->
+              <div class="video-player-container hidden" id="videoPlayerContainer">
+                <div class="video-container" id="videoContainer">
+                  <video id="video" class="custom-video" preload="metadata"></video>
+                  
+                  <!-- Video Controls Overlay -->
+                  <div class="video-controls-overlay">
+                    <!-- Top Bar -->
+                    <div class="video-top-bar">
+                      <div class="video-title" id="videoTitle">Video Title</div>
+                      <div class="video-top-controls">
+                        <button class="video-icon-btn" id="videoWishlistBtn" title="Add to Wishlist">
+                          <i class="far fa-star"></i>
+                        </button>
+                        <button class="video-icon-btn" id="videoSpeedBtn" title="Speed">
+                          <i class="fas fa-tachometer-alt"></i>
+                        </button>
+                        <div class="video-dropdown" id="speedDropdown">
+                          <div class="dropdown-item speed-option" data-speed="0.25">0.25x</div>
+                          <div class="dropdown-item speed-option" data-speed="0.5">0.5x</div>
+                          <div class="dropdown-item speed-option" data-speed="0.75">0.75x</div>
+                          <div class="dropdown-item speed-option active" data-speed="1">Normal</div>
+                          <div class="dropdown-item speed-option" data-speed="1.25">1.25x</div>
+                          <div class="dropdown-item speed-option" data-speed="1.5">1.5x</div>
+                          <div class="dropdown-item speed-option" data-speed="2">2x</div>
+                        </div>
+                        <button class="video-icon-btn" id="videoAudioBtn" title="Audio Track">
+                          <i class="fas fa-volume-up"></i>
+                        </button>
+                        <div class="video-dropdown" id="audioDropdown">
+                          <div class="dropdown-item active">Default Audio</div>
+                        </div>
+                        <button class="video-icon-btn" id="videoQualityBtn" title="Quality">
+                          <span class="quality-badge">HD</span>
+                        </button>
+                        <div class="video-dropdown" id="qualityDropdown">
+                          <div class="dropdown-item active">Auto</div>
+                          <div class="dropdown-item">1080p</div>
+                          <div class="dropdown-item">720p</div>
+                          <div class="dropdown-item">480p</div>
+                        </div>
+                        <button class="video-icon-btn" id="videoCcBtn" title="Subtitles">
+                          <i class="fas fa-closed-captioning"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Center Play Controls -->
+                    <div class="video-center-controls">
+                      <button class="video-control-btn" id="videoPrevBtn">
+                        <i class="fas fa-step-backward"></i>
+                      </button>
+                      <button class="video-control-btn video-control-btn-large" id="videoPlayPauseBtn">
+                        <i class="fas fa-play"></i>
+                      </button>
+                      <button class="video-control-btn" id="videoNextBtn">
+                        <i class="fas fa-step-forward"></i>
+                      </button>
+                    </div>
+
+                    <!-- Bottom Bar -->
+                    <div class="video-bottom-bar">
+                      <div class="video-seek-container">
+                        <span class="video-time" id="videoCurrentTime">0:00</span>
+                        <div class="video-seek-bar">
+                          <div class="video-seek-progress" id="videoSeekProgress"></div>
+                          <div class="video-seek-handle" id="videoSeekHandle"></div>
+                        </div>
+                        <span class="video-time" id="videoTotalTime">0:00</span>
+                      </div>
+                      <div class="video-bottom-controls">
+                        <div class="video-volume-control">
+                          <button class="video-icon-btn" id="videoMuteBtn" title="Volume">
+                            <i class="fas fa-volume-up"></i>
+                          </button>
+                          <div class="volume-slider-container">
+                            <input type="range" min="0" max="200" value="100" class="volume-slider" id="videoVolumeSlider" title="Volume (0-200%)">
+                            <span class="volume-label" id="videoVolumeLabel">100%</span>
+                          </div>
+                        </div>
+                        <button class="video-icon-btn" id="videoAspectBtn" title="Aspect Ratio">
+                          <i class="fas fa-expand-arrows-alt"></i>
+                        </button>
+                        <button class="video-icon-btn" id="videoPipBtn" title="Picture in Picture">
+                          <i class="fas fa-external-link-alt"></i>
+                        </button>
+                        <button class="video-icon-btn" id="videoFullscreenBtn" title="Fullscreen">
+                          <i class="fas fa-expand"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Audio Visualizer -->
+              <div class="audio-player hidden" id="audioPlayer">
+                <canvas id="audioVisualizer" class="audio-visualizer"></canvas>
+                
+                <div class="audio-controls">
+                  <div class="audio-info">
+                    <div class="audio-title" id="audioTitle">No track playing</div>
+                    <div class="audio-artist" id="audioArtist"></div>
+                  </div>
+
+                  <div class="seek-bar-container">
+                    <span class="time-label" id="currentTime">0:00</span>
+                    <div class="seek-bar">
+                      <div class="seek-bar-progress" id="seekProgress"></div>
+                      <div class="seek-bar-handle" id="seekHandle"></div>
+                    </div>
+                    <span class="time-label" id="totalTime">0:00</span>
+                  </div>
+
+                  <div class="main-controls-row">
+                    <div class="volume-control">
+                      <button class="volume-btn" id="volumeBtn" title="Mute/Unmute">
+                        <i class="fas fa-volume-up"></i>
+                      </button>
+                      <div class="volume-slider">
+                        <div class="volume-bar">
+                          <div class="volume-bar-progress" id="volumeProgress"></div>
+                          <div class="volume-bar-handle" id="volumeHandle"></div>
+                        </div>
+                      </div>
+                      <span class="volume-label" id="volumeLabel">100%</span>
+                    </div>
+
+                    <div class="playback-controls">
+                      <button class="control-btn" id="prevBtn" title="Previous">
+                        <i class="fas fa-step-backward"></i>
+                      </button>
+                      <button class="control-btn control-btn-large" id="playPauseBtn" title="Play/Pause">
+                        <i class="fas fa-play"></i>
+                      </button>
+                      <button class="control-btn" id="nextBtn" title="Next">
+                        <i class="fas fa-step-forward"></i>
+                      </button>
+                    </div>
+
+                    <div class="playback-modes">
+                      <button class="mode-btn" id="repeatTrackBtn" title="Repeat Track">
+                        <i class="fas fa-redo"></i>
+                      </button>
+                      <button class="mode-btn" id="repeatListBtn" title="Repeat List">
+                        <i class="fas fa-repeat"></i>
+                      </button>
+                      <button class="mode-btn" id="shuffleBtn" title="Shuffle">
+                        <i class="fas fa-random"></i>
+                      </button>
+                      <button class="mode-btn" id="reverseBtn" title="Reverse Order">
+                        <i class="fas fa-sort-amount-down"></i>
+                      </button>
+                      <button class="mode-btn active" id="onceBtn" title="Play Once">
+                        <i class="fas fa-play-circle"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="controls-panel">
+              <div class="panel-header">
+                <h3>Stream Info</h3>
+                <div class="panel-actions">
+                  <!-- Video Adjustment Controls -->
+                  <div class="video-adjustment-controls">
+                    <div class="adjustment-slider-container">
+                      <label class="adjustment-label">
+                        <i class="fas fa-adjust"></i>
+                        <span>Contrast</span>
+                      </label>
+                      <input type="range" class="adjustment-slider" id="contrastSlider" 
+                             min="0" max="200" value="100" step="1">
+                      <span class="adjustment-value" id="contrastValue">100%</span>
+                    </div>
+                    <div class="adjustment-slider-container">
+                      <label class="adjustment-label">
+                        <i class="fas fa-palette"></i>
+                        <span>Saturation</span>
+                      </label>
+                      <input type="range" class="adjustment-slider" id="saturationSlider" 
+                             min="0" max="200" value="100" step="1">
+                      <span class="adjustment-value" id="saturationValue">100%</span>
+                    </div>
+                  </div>
+                  
+                  <button class="panel-btn" id="screenshotBtn" title="Take Screenshot">
+                    <i class="fas fa-camera"></i>
+                  </button>
+                  <button class="panel-btn" id="addToWishlistBtn" title="Add to Wishlist">
+                    <i class="far fa-star"></i>
+                  </button>
+                  <button class="panel-btn" id="refreshStatsBtn" title="Refresh Stats">
+                    <i class="fas fa-sync-alt"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="stream-info-panel" id="streamInfoPanel">
+                <div class="stream-info-grid">
+                  <div class="info-item">
+                    <div class="info-label">Stream</div>
+                    <div class="info-value" id="streamName">No stream playing</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Resolution</div>
+                    <div class="info-value" id="streamResolution">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Bitrate</div>
+                    <div class="info-value" id="streamBitrate">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">FPS</div>
+                    <div class="info-value" id="streamFps">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Codec</div>
+                    <div class="info-value" id="streamCodec">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Buffer</div>
+                    <div class="info-value" id="streamBuffer">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Network</div>
+                    <div class="info-value" id="streamNetwork">--</div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-label">Dropped Frames</div>
+                    <div class="info-value" id="streamDropped">--</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Channel Context Menu -->
+        <div class="context-menu hidden" id="channelContextMenu">
+          <div class="context-menu-item" id="contextShareChannel">
+            <i class="fas fa-share-alt"></i>
+            <span>Share Channel</span>
+          </div>
+          <div class="context-menu-item" id="contextCopyLink">
+            <i class="fas fa-link"></i>
+            <span>Copy Deeplink</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Playlist Context Menu (outside sidebar to avoid overflow clipping) -->
+  <div class="context-menu hidden" id="playlistContextMenu">
+    <div class="context-menu-item" id="contextEditPlaylistName">
+      <i class="fas fa-edit"></i>
+      <span>Edit Name</span>
+    </div>
+    <div class="context-menu-item" id="contextEditPlaylistURL">
+      <i class="fas fa-link"></i>
+      <span>Edit URL</span>
+    </div>
+    <div class="context-menu-item" id="contextPinPlaylist">
+      <i class="fas fa-thumbtack"></i>
+      <span>Pin to Top</span>
+    </div>
+    <div class="context-menu-item" id="contextSharePlaylist">
+      <i class="fas fa-share-alt"></i>
+      <span>Share Playlist</span>
+    </div>
+    <div class="context-menu-item context-menu-danger" id="contextDeletePlaylist">
+      <i class="fas fa-trash"></i>
+      <span>Delete Playlist</span>
+    </div>
+  </div>
+
+  <script src="themeManager.js"></script>
+  <script src="xtreamManager.js"></script>
+  <script src="player.js"></script>
+  <script src="audioVisualizer.js"></script>
+  <script src="audioPlayer.js"></script>
+  <!-- Context Menu -->
+  <div class="context-menu hidden" id="contextMenu">
+    <div class="context-menu-item" id="contextPlayChannel">
+      <i class="fas fa-play"></i>
+      <span>Play</span>
+    </div>
+    <div class="context-menu-item" id="contextAddWishlist">
+      <i class="fas fa-star"></i>
+      <span>Add to Wishlist</span>
+    </div>
+    <div class="context-menu-item" id="contextRemoveWishlist">
+      <i class="fas fa-star-half-alt"></i>
+      <span>Remove from Wishlist</span>
+    </div>
+    <div class="context-menu-divider"></div>
+    <div class="context-menu-item" id="contextShareChannel">
+      <i class="fas fa-share-alt"></i>
+      <span>Share</span>
+    </div>
+    <div class="context-menu-item" id="contextCopyUrl">
+      <i class="fas fa-link"></i>
+      <span>Copy Link</span>
+    </div>
+  </div>
+
+  <script src="videoPlayer.js"></script>
+  <script src="streamInfo.js"></script>
+  <script src="playbackHistory.js"></script>
+  <script src="deeplink.js"></script>
+  <script src="iptvManager.js"></script>
+  <script src="wishlistManager.js"></script>
+  <script src="contextMenu.js"></script>
+  <script src="mediaLibrary.js"></script>
+  <script src="navigation.js"></script>
+</body>
+</html>
+
