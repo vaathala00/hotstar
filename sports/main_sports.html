@@ -7,169 +7,342 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
   <link rel="shortcut icon" href="https://t4.ftcdn.net/jpg/03/02/12/83/360_F_302128359_q6aCwgAvdYZBPF4XSwxXddLPE0h3Kor1.jpg">
+  
   <style>
-    /* ===== Global ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { background-color: #fff; color: #000; overflow-x: hidden; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s; }
-    body.dark { background-color: #18191A; color: #fff; }
+    /* ===== VARIABLES (Based on index.html) ===== */
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(148, 163, 184, 0.1);
+      --accent-color: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --gradient-start: #1e293b;
+      --gradient-end: #0f172a;
+      --header-bg: rgba(15, 23, 42, 0.85);
+      --radius: 16px;
+    }
 
-    /* ===== Navigation ===== */
+    /* Light Mode Variables */
+    body.light {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --header-bg: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ===== GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end));
+      background-attachment: fixed;
+      color: var(--text-main);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    /* ===== NAVIGATION ===== */
     nav {
-      position: fixed; top: 0; left: 0; width: 100%; height: 55px;
-      background-color: #2770ff; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 20px; z-index: 100; box-shadow: 0 3px 6px rgba(0,0,0,.3);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s;
     }
-    nav .logo a { color: #fff; font-size: 25px; text-decoration: none; font-weight: bold; letter-spacing: 1px; }
 
+    nav .logo a {
+      color: var(--text-main);
+      font-size: 24px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, var(--accent-color), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-/* Right side icons */
-.nav-actions{
-  display: flex;
-  align-items: center;
-  gap: 15px; /* space between icons */
-}
+    /* Right side icons */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-    /* ===== Dark/Light Toggle ===== */
-    .dark-light { cursor: pointer; font-size: 22px; color: #fff;
-}
+    /* ===== DARK/LIGHT TOGGLE ===== */
+    .dark-light {
+      cursor: pointer;
+      font-size: 22px;
+      color: var(--text-muted);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s;
+    }
+    .dark-light:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--accent-color);
+    }
 
-    /* ===== Search Icon & Search Bar ===== */
+    /* ===== SEARCH BAR (Styled like index.html) ===== */
     .search-container {
-      position: relative; display: flex; align-items: center;
+      position: relative;
+      display: flex;
+      align-items: center;
     }
+
     .search-container input {
       width: 0;
       opacity: 0;
-      padding: 8px 14px;
+      padding: 0.6rem 1rem;
       border-radius: 20px;
-      border: none;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      color: var(--text-main);
       font-size: 14px;
       outline: none;
-      transition:.4s;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      backdrop-filter: blur(10px);
     }
+
     .search-container.active input {
-      width: 200px; /* expanded width */
+      width: 220px;
       opacity: 1;
+      padding: 0.6rem 1rem 0.6rem 2.5rem; /* Add left padding for icon space if needed, or just style nicely */
     }
+
     .search-container .search-icon {
       font-size: 20px;
-      color: #fff;
+      color: var(--text-muted);
       cursor: pointer;
-          }
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    
+    .search-container.active .search-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--accent-color);
+    }
 
-    /* ===== Scroll to top ===== */
+    /* ===== SCROLL TO TOP ===== */
     .up {
-      position: fixed; bottom: 40px; right: 40px; font-size: 15px;
-      background-color: #2770ff; color: white; padding: 10px 15px; border-radius: 5px;
-      cursor: pointer; display: none; z-index: 999;
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      font-size: 15px;
+      background: var(--accent-color);
+      color: #0f172a;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+      transition: transform 0.2s;
     }
+    .up:hover { transform: scale(1.1); }
 
-    /* ===== Animated Section Titles ===== */
+    /* ===== SECTION TITLES ===== */
     .section-title {
-      padding: 15px 20px 10px; font-size: 22px; font-weight: bold;
-      color: #0099cc; display: inline-block; position: relative; overflow: hidden; cursor: default;
-      margin-top: 20px;
+      padding: 25px 20px 10px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      margin-top: 30px;
     }
+    
     .section-title::after {
-      content: '🏀'; display: inline-block; margin-left: 10px; position: relative;
+      content: '🏀';
+      display: inline-block;
+      margin-left: 10px;
+      position: relative;
       animation: arrowMove 1s infinite alternate;
     }
-    @keyframes arrowMove { 0% { transform: translateX(0); } 50% { transform: translateX(5px); } 100% { transform: translateX(0); } }
-    .section-title span { position: relative; display: inline-block; overflow: hidden; }
-    .section-title span::before {
-      content: ''; position: absolute; bottom: 0; left: -100%; width: 100%; height: 3px;
-      background-color: #2770ff; animation: underline 2s infinite;
-    }
-    @keyframes underline { 0% { left: -100%; } 50% { left: 0; } 100% { left: 100%; } }
 
-    /* ===== Scrollable section ===== */
-    .scroll-section { overflow-x: auto; white-space: nowrap; padding: 15px 10px; scroll-behavior: smooth; }
+    @keyframes arrowMove {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ===== SCROLLABLE SECTION ===== */
+    .scroll-section {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 15px 20px;
+      scroll-behavior: smooth;
+    }
     .scroll-section::-webkit-scrollbar { display: none; }
 
-    /* ===== Cards ===== */
-    .scroll-section a { display: inline-block; text-decoration: none; color: inherit; margin: 0 10px; }
-    .card {
-      width: 200px; height: 220px; border-radius: 15px; overflow: hidden;
-      background-color: #333; color: #fff; text-align: center;
-      box-shadow: 2px 2px 15px rgba(0,0,0,0.3); transition: transform 0.3s, filter 0.3s, box-shadow 0.3s;
-      position: relative; display: flex; flex-direction: column; cursor: pointer;
+    /* ===== CARDS (Styled like index.html) ===== */
+    .scroll-section a {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+      margin: 0 10px;
     }
-    .card img { width: 100%; height: 70%; object-fit: cover; transition: transform 0.5s; }
+
+    .card, .live-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      display: inline-flex; /* Changed to inline-flex for better layout */
+      flex-direction: column;
+      cursor: pointer;
+      vertical-align: top;
+    }
+    
+    /* Hover Effect from index.html */
+    .card:hover, .live-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .card img, .live-card img {
+      width: 100%;
+      height: 70%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .card:hover img, .live-card:hover img {
+      transform: scale(1.05);
+    }
+
     .card span {
-      font-size: 10px; font-weight: bold; margin-top: 5px; flex-grow: 1;
-      display: flex; align-items: center; justify-content: center; text-transform: uppercase; letter-spacing: 1px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
     }
-    .card .live-tag {
-      position: absolute; top: 8px; left: 8px; background-color: red; padding: 2px 6px;
-      font-size: 12px; border-radius: 5px; animation: pulse 1.5s infinite;
-    }
-    .card .channel {
-      position: absolute; top: 8px; right: 8px; background-color: #673AB7; padding: 2px 6px;
-      font-size: 12px; border-radius: 5px;
-    }
-    @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
 
-    /* ===== Card Hover Effects ===== */
-    .card:hover {
-      transform: scale(1.08);
-      filter: brightness(1.2);
-      box-shadow: 0 0 25px rgba(39,112,255,0.7), 0 0 50px rgba(255,255,255,0.2);
+    /* Badges */
+    .live-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--live-color, #ef4444);
+      color: white;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      border-radius: 6px;
+      font-weight: 700;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      animation: pulse-red 2s infinite;
+      z-index: 2;
     }
-    .card:hover img { transform: scale(1.1); }
 
-    /* ===== Live Cricket Custom Card ===== */
+    .channel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(124, 58, 237, 0.9); /* Purple accent */
+      color: white;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      border-radius: 6px;
+      font-weight: 700;
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
+
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Live Card specific sizing */
     .live-card {
-      width: 240px; height: 220px; border-radius: 25px; transition: transform 0.4s, box-shadow 0.4s, filter 0.4s, background-color 0.4s;
-      overflow: hidden; position: relative; display: flex; flex-direction: column; cursor: pointer;
-      background-color: #333;
+      width: 240px;
+      height: 220px;
     }
-    body.dark .live-card { background-color: #282828; }
     .live-card img { height: 65%; border-radius: 20px 20px 0 0; }
 
-    /* ===== Hover Glow for All Cards ===== */
-    .card::before, .live-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.3s, box-shadow 0.3s;
-    }
-    .card:hover::before, .live-card:hover::before {
-      opacity: 1;
-      box-shadow: 0 0 25px 10px rgba(39,112,255,0.5);
-      animation: glowPulse 1.5s infinite alternate;
-    }
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
-      50% { box-shadow: 0 0 35px 15px rgba(39,112,255,0.5); }
-      100% { box-shadow: 0 0 20px 5px rgba(39,112,255,0.3); }
+    /* Standard Card sizing */
+    .card {
+      width: 200px;
+      height: 220px;
     }
 
-    /* ===== Iframe ===== */
-    iframe { width: 100%; min-height: 212px; border: none; margin-top: 60px; border-radius: 10px; }
+    /* ===== IFRAME ===== */
+    iframe {
+      width: 100%;
+      min-height: 213px;
+      border: 1px solid var(--card-border);
+      margin-top: 80px; /* Space for fixed header */
+      border-radius: 20px;
+      background: #000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
 
-    /* ===== Responsive ===== */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .card { width: 150px; height: 180px; }
-      .live-card { width: 180px; height: 180px; border-radius: 20px; }
-      .section-title { font-size: 18px; }
-      .search-container.active input { width: 200px; }
+      .live-card { width: 180px; height: 180px; }
+      .section-title { font-size: 18px; padding: 20px 15px 10px; }
+      .search-container.active input { width: 160px; }
+      nav { height: 60px; }
     }
   </style>
 </head>
+
 <body class="dark">
   <nav>
     <div class="logo"><a href="#">Sports</a></div>
- <!-- Right Icons -->
-  <div class="nav-actions">
-    <div class="search-container" id="searchContainer">
-      <input type="text" id="searchInput" placeholder="Search channels...">
-      <i class="uil uil-search search-icon" id="searchIcon"></i>
-     </div>
+    
+    <!-- Right Icons -->
+    <div class="nav-actions">
+      <div class="search-container" id="searchContainer">
+        <input type="text" id="searchInput" placeholder="Search channels...">
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+      </div>
 
-    <div class="dark-light" id="modeToggle"><i class='bx bx-moon' id="modeIcon"></i></div>
+      <div class="dark-light" id="modeToggle"><i class='bx bx-moon' id="modeIcon"></i></div>
+    </div>
   </nav>
 
   <i class="uil uil-angle-up up" id="scrollToTopBtn"></i>
@@ -185,7 +358,7 @@
         <img src="https://indiantelevision.com/wp-content/uploads/2026/03/IPL-1000x600.jpg" alt=" Cricket">
         <span>IPL Soon...</span>
         <div class="live-tag">Live</div>
-        <div class="channel">IPL </div>
+        <div class="channel">IPL</div>
       </div>
     </a>
     <a href="fc/index">
@@ -254,29 +427,28 @@
     // Dark/Light toggle
     const modeToggle = document.getElementById("modeToggle");
     const modeIcon = document.getElementById("modeIcon");
+    const body = document.body;
+
+    // Check local storage
+    const savedMode = localStorage.getItem("mode");
+    if (savedMode === "light-mode") {
+      body.classList.remove("dark");
+      body.classList.add("light");
+      modeIcon.classList.replace("bx-moon", "bx-sun");
+    }
+
     modeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark"); // toggle dark mode
+      body.classList.toggle("dark");
+      body.classList.toggle("light");
 
-  if (document.body.classList.contains("dark")) {
-    modeIcon.classList.replace("bx-moon", "bx-sun"); // 🌙 → ☀️
-  } else {
-    modeIcon.classList.replace("bx-sun", "bx-moon"); // ☀️ → 🌙
-  }
-});
-
-
-   // js code to keep user selected mode even page refresh or file reopen
- modeToggle.addEventListener("click" , () =>{
-        modeToggle.classList.toggle("active");
-        body.classList.toggle("dark");
-
-        if(!body.classList.contains("dark")){
-            localStorage.setItem("mode" , "light-mode");
-        }else{
-            localStorage.setItem("mode" , "dark-mode");
-        }
-      });
-
+      if (body.classList.contains("light")) {
+        modeIcon.classList.replace("bx-moon", "bx-sun");
+        localStorage.setItem("mode", "light-mode");
+      } else {
+        modeIcon.classList.replace("bx-sun", "bx-moon");
+        localStorage.setItem("mode", "dark-mode");
+      }
+    });
 
     // Scroll to top button
     const upBtn = document.getElementById("scrollToTopBtn");
@@ -294,16 +466,16 @@
     searchIcon.addEventListener('click', () => {
       searchContainer.classList.toggle('active');
       if (searchContainer.classList.contains("active")) {
-    searchIcon.classList.replace("uil-search", "uil-times"); // 🔍 → ❌
-    searchInput.focus();
-  } else {
-    searchIcon.classList.replace("uil-times", "uil-search"); // ❌ → 🔍
-    searchInput.value = ""; // clear search input
-    document.querySelectorAll(".card").forEach(card => {
-      card.parentElement.style.display = "inline-block"; // reset filter
+        searchIcon.classList.replace("uil-search", "uil-times");
+        searchInput.focus();
+      } else {
+        searchIcon.classList.replace("uil-times", "uil-search");
+        searchInput.value = ""; 
+        document.querySelectorAll(".card").forEach(card => {
+          card.parentElement.style.display = "inline-block";
+        });
+      }
     });
-  }
-});
 
     // Search functionality
     searchInput.addEventListener('input', function() {
@@ -314,6 +486,5 @@
       });
     });
   </script>
-
 </body>
 </html>
