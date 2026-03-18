@@ -192,7 +192,7 @@
     const id = new URLSearchParams(window.location.search).get('id');
     document.title = id + " | Sony Liv";
 
-    fetch('https://raw.githubusercontent.com/vaathala00/sl/main/stream.m3u')
+    fetch('stream.m3u')
     .then(r => r.text())
     .then(text => {
         const lines = text.split("\n");
