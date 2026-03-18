@@ -172,7 +172,7 @@
     <div class="box">
         <div class="logo"></div>
         <div class="channel-info">
-            <div class="channel-name" id="channelName">Channel Name</div>
+            <div class="channel-name" id="channelName">Loading Channel...</div>
             <div class="channel-logo" id="channelLogo"></div>
         </div>
         <div class="info-box">
@@ -180,44 +180,96 @@
             <p>Download HLS extension to enjoy live streams on browser.</p>
         </div>
         <div class="button-group">
-            <a href="" id="playNowButton1" class="play-now-btn" target="_blank">Play Now</a>
-            <a href="" id="playNowButton2" class="play-now-btn" target="_blank" data-package="com.genuine.leone" data-title="VT">NS Player</a>
-            <a href="" id="copyLinkButton" class="play-now-btn">Copy Link</a>
+            <a href="#" id="playNowButton1" class="play-now-btn" target="_blank">Play Now</a>
+            <a href="#" id="playNowButton2" class="play-now-btn" target="_blank" data-package="com.genuine.leone" data-title="VT">NS Player</a>
+            <a href="#" id="copyLinkButton" class="play-now-btn">Copy Link</a>
         </div>
     </div>
 </div>
 
 <script>
     // Fetch channel info from M3U
-    const id = new URLSearchParams(window.location.search).get('id');
-    document.title = id + " | Sony Liv";
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
 
-    fetch('stream.m3u')
-    .then(r => r.text())
-    .then(text => {
-        const lines = text.split("\n");
-        for(let i=0;i<lines.length;i++){
-            if(lines[i].includes(`tvg-id="${id}"`)){
-                const info = lines[i];
-                const url = lines[i+1].trim();
-                const name = info.split(",").pop().trim();
-                const logo = info.match(/tvg-logo="(.*?)"/)?.[1];
+    if(id) {
+        document.title = id + " | Sony Liv";
+        
+        fetch('stream.m3u')
+        .then(r => {
+            if (!r.ok) throw new Error("M3U file not found");
+            return r.text();
+        })
+        .then(text => {
+            const lines = text.split("\n");
+            let found = false;
+            
+            for(let i=0; i<lines.length; i++){
+                // Check if this line contains the ID
+                if(lines[i].includes(`tvg-id="${id}"`)){
+                    const info = lines[i];
+                    
+                    // --- FIX STARTS HERE ---
+                    // Your M3U has #EXTHTTP on the line after #EXTINF, 
+                    // so the URL is actually at lines[i+2]
+                    let urlIndex = i + 1;
+                    
+                    // If the line after EXTINF starts with #, it's a metadata tag, skip it
+                    if (lines[urlIndex] && lines[urlIndex].trim().startsWith('#')) {
+                        urlIndex = i + 2;
+                    }
+                    
+                    const url = lines[urlIndex].trim();
+                    // --- FIX ENDS HERE ---
 
-                document.getElementById('channelName').innerText = name;
-                document.getElementById('channelLogo').style.backgroundImage = `url(${logo})`;
-                document.getElementById('playNowButton1').href = url;
+                    const name = info.split(",").pop().trim();
+                    const logo = info.match(/tvg-logo="(.*?)"/)?.[1];
 
-                document.getElementById('playNowButton2').href =
-                    `intent:${url}#Intent;package=${document.getElementById('playNowButton2').dataset.package};S.title=${document.getElementById('playNowButton2').dataset.title};end`;
+                    // Update UI
+                    document.getElementById('channelName').innerText = name || "Unknown Channel";
+                    
+                    if(logo) {
+                        document.getElementById('channelLogo').style.backgroundImage = `url(${logo})`;
+                    } else {
+                        document.getElementById('channelLogo').style.backgroundColor = '#333';
+                    }
 
-                document.getElementById('copyLinkButton').onclick = ()=>{
-                    navigator.clipboard.writeText(url);
-                    alert("Link copied to clipboard!");
-                };
-                break;
+                    document.getElementById('playNowButton1').href = url;
+
+                    // NS Player Intent
+                    const pkg = document.getElementById('playNowButton2').dataset.package;
+                    const ttl = document.getElementById('playNowButton2').dataset.title;
+                    document.getElementById('playNowButton2').href = `intent:${url}#Intent;package=${pkg};S.title=${ttl};end`;
+
+                    document.getElementById('copyLinkButton').onclick = ()=>{
+                        navigator.clipboard.writeText(url).then(() => {
+                            const btn = document.getElementById('copyLinkButton');
+                            const originalText = btn.innerText;
+                            btn.innerText = "Copied!";
+                            setTimeout(() => btn.innerText = originalText, 2000);
+                        }).catch(err => {
+                            alert("Failed to copy");
+                        });
+                    };
+                    
+                    found = true;
+                    break;
+                }
             }
-        }
-    });
+            
+            if(!found) {
+                document.getElementById('channelName').innerText = "Channel Not Found";
+                document.getElementById('channelLogo').style.backgroundImage = 'none';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('channelName').innerText = "Error Loading Data";
+            alert("Could not load stream.m3u. Make sure the file exists in the same folder.");
+        });
+    } else {
+        document.getElementById('channelName').innerText = "No ID Provided";
+    }
 </script>
 </body>
 </html>
