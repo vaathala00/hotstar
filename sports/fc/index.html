@@ -1,158 +1,238 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
 <title>FanCode Live</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-:root{
-  --bg:#140836;
-  --card:#1e1155;
-  --header:#0b0228;
-  --text:#fff;
-  --text-muted:rgba(255,255,255,0.85); /* Increased opacity for better contrast */
-  --accent:#ff2e93;
-  --live:#ff3b3b;
-  --upcoming:#3b82f6;
-  --primary:var(--accent);
-  --radius:12px;
-}
-
-.light{
-  --bg:#f4f4f4;
-  --card:#ffffff;
-  --header:#ffffff;
-  --text:#111;
-  --text-muted:rgba(0,0,0,0.7);
-}
-
-body{
-  margin:0;
-  /* Use system fonts for best HD quality on small text */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s;
-  padding-bottom: 40px;
+/* --- THEME VARIABLES (Based on index.html) --- */
+:root {
+  /* Core Colors */
+  --bg-color: #0f172a;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(148, 163, 184, 0.1);
+  --accent-color: #38bdf8;
+  --gradient-start: #1e293b;
+  --gradient-end: #0f172a;
   
-  /* Crisp Text Fixes */
+  /* Text Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  /* Functional Colors */
+  --live: #ef4444;
+  --upcoming: #38bdf8;
+  
+  /* Layout */
+  --radius: 16px;
+  --header-bg: rgba(15, 23, 42, 0.85);
+  
+  /* Transitions */
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Light Mode Override */
+.light {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --gradient-start: #f1f5f9;
+  --gradient-end: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --header-bg: rgba(255, 255, 255, 0.9);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Applied the radial gradient from index.html */
+  background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end));
+  background-attachment: fixed;
+  color: var(--text-main);
+  transition: background 0.3s, color 0.3s;
+  padding-bottom: 40px;
+  min-height: 100vh;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-/* HEADER */
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 15px;
-  background:var(--header);
-  gap:10px;
-  position:sticky;
-  top:0;
-  z-index:100;
+/* --- HEADER --- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
 }
 
-/* LOGO */
-.logo{
-  width:70px;
+.logo {
+  height: 40px;
+  width: auto;
+  border-radius: 8px;
 }
 
-/* HEADER ACTIONS */
-.header-actions{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* ICON BUTTONS */
-.icon-btn{
-  font-size:18px;
-  cursor:pointer;
-  color:var(--text);
+.icon-btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
 }
 
-/* SEARCH BAR */
-.header-search{
-  display:none;
-  align-items:center;
-  gap:6px;
-  max-width:260px;
-  flex:1;
-  margin-left:auto;
-  background:rgba(255,255,255,.12);
-  padding:4px 8px;
-  border-radius:20px;
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent-color);
 }
 
-.header-search input{
-  flex:1;
-  background:transparent;
-  border:none;
-  outline:none;
-  color:var(--text);
-  font-size:13px;
+/* --- SEARCH BAR (Stylized like index.html) --- */
+.header-search {
+  display: none;
+  align-items: center;
+  max-width: 300px;
+  flex: 1;
+  margin-left: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  animation: slideDown 0.3s ease forwards;
 }
 
-/* CATEGORY */
-.categories{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin:12px 0;
+.header-search:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+  background: rgba(30, 41, 59, 0.9);
 }
 
-.category-btn{
-  padding:6px 14px;
-  border-radius:20px;
-  background:var(--card);
-  cursor:pointer;
-  font-size:12px;
-  font-weight:600; /* Bolder for readability */
+.header-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-family: inherit;
 }
 
-.category-btn.active{
-  background:var(--accent);
-  color:white;
+.header-search i {
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.header-search i:hover {
+  color: var(--text-main);
 }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:20px;
-  padding:20px;
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CATEGORIES --- */
+.categories {
+  display: flex;
+  justify-content: center; /* Center like index.html */
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+  padding: 0 1rem;
+}
+
+.category-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+}
+
+.category-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+}
+
+.category-btn.active {
+  background: var(--accent-color);
+  color: #0f172a; /* Dark text on blue accent */
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+}
+
+/* --- GRID --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 0 16px 20px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 /* --- CARD STYLES --- */
-
 .card {
-  background: var(--card);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
   position: relative;
-  animation: fade 0.5s forwards;
-  /* Removed transform scale to prevent blur on hover */
+  transition: var(--transition);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease forwards;
 }
 
-@keyframes fade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; }
+/* Hover effect from index.html */
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(30, 41, 59, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .card:active {
-  opacity: 0.9; /* Simple fade instead of scale */
+  transform: scale(0.98);
 }
 
 /* Image Container */
@@ -167,6 +247,11 @@ header{
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-image {
+  transform: scale(1.05);
 }
 
 /* Utility Classes */
@@ -178,32 +263,38 @@ header{
 
 /* Badges */
 .badge {
-  padding: 4px 8px;
-  font-size: 10px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.65rem;
+  border-radius: 6px;
   color: white;
   text-transform: uppercase;
-  font-weight: 700; /* Extra bold for HD readability */
+  font-weight: 700;
   z-index: 2;
-  letter-spacing: 0.5px; /* Spacing for clarity */
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
 }
 
 .badge-category {
-  background: var(--accent);
+  background: var(--accent-color); /* Use the accent color */
+  color: #0f172a;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .status-live {
   background: var(--live);
-  animation: pulse 1.4s infinite;
-}
-.status-upcoming {
-  background: var(--upcoming);
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: pulse-red 2s infinite;
 }
 
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(255,59,59,.7)}
-  70%{box-shadow:0 0 0 6px rgba(255,59,59,0)}
+.status-upcoming {
+  background: var(--upcoming); /* Uses the accent blue */
+  color: #0f172a;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
 /* Language Tag */
@@ -211,12 +302,13 @@ header{
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(2px);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
   color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -231,15 +323,16 @@ header{
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: transparent; /* Removed background to show card backdrop */
 }
 
-.text-xs { font-size: 11px; letter-spacing: 0.2px; }
-.text-sm { font-size: 14px; }
+.text-xs { font-size: 0.75rem; letter-spacing: 0.2px; }
+.text-sm { font-size: 0.9rem; }
 .text-muted { color: var(--text-muted); }
 .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.font-bold { font-weight: bold; }
+.font-bold { font-weight: 700; }
 .font-semibold { font-weight: 600; }
-.text-white { color: var(--text); }
+.text-white { color: var(--text-main); }
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -250,27 +343,41 @@ header{
 .mt-2 { margin-top: 8px; }
 .mr-1 { margin-right: 4px; }
 
-/* Specific Title Styling for Sharpness */
+/* Specific Title Styling */
 .card h2 {
-  font-family: 'Fjalla One', sans-serif; /* Custom font only for main title */
-  letter-spacing: 0.5px; /* Improves HD look */
+  font-family: 'Fjalla One', sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
 }
 
 /* Versus Row */
 .flex { display: flex; }
 .justify-between { justify-content: space-between; }
 .items-center { align-items: center; }
-.text-primary { color: var(--accent); }
+.text-primary { color: var(--accent-color); }
 
-/* MOBILE FIX */
-@media (max-width: 600px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    padding:12px;
+/* Light Mode Specific Overrides */
+.light .badge-category {
+  background: var(--accent-color);
+  color: #fff; /* White text on blue bg for light mode */
+}
+.light .status-upcoming {
+  background: var(--upcoming);
+  color: #fff;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
   }
   .card-image-container {
     aspect-ratio: 3/2; 
+  }
+  .header-search {
+    margin-right: 10px;
   }
 }
 </style>
@@ -282,13 +389,17 @@ header{
   <img class="logo" src="https://images.fancode.com/eyJrZXkiOiJza2lsbHVwLXVwbG9hZHMvZmMtd2ViLWxvZ28vZmNfbG9nb193aGl0ZV9iZy5zdmciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiY29udGFpbiIsImJhY2tncm91bmQiOiJ0cmFuc3BhcmVudCIsIndpZHRoIjoyNjAsImhlaWdodCI6ODB9fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9">
 
   <div id="headerSearch" class="header-search">
-    <input id="searchInput" placeholder="Search channel...">
-    <i class="fa-solid fa-xmark icon-btn" onclick="closeSearch()"></i>
+    <input id="searchInput" placeholder="Search matches...">
+    <i class="fa-solid fa-xmark" onclick="closeSearch()"></i>
   </div>
 
   <div id="headerActions" class="header-actions">
-    <i class="fa-solid fa-magnifying-glass icon-btn" onclick="openSearch()"></i>
-    <i id="themeIcon" class="fa-solid fa-sun icon-btn" onclick="toggleTheme()"></i>
+    <button class="icon-btn" onclick="openSearch()" aria-label="Search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <button id="themeIcon" class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+      <i class="fa-solid fa-sun"></i>
+    </button>
   </div>
 </header>
 
@@ -296,110 +407,128 @@ header{
 <div id="grid" class="grid"></div>
 
 <script>
-const grid=document.getElementById('grid');
-const categoriesDiv=document.getElementById('categories');
-const searchBox=document.getElementById('headerSearch');
-const searchInput=document.getElementById('searchInput');
-const headerActions=document.getElementById('headerActions');
-const themeIcon=document.getElementById('themeIcon');
+// --- DOM ELEMENTS ---
+const grid = document.getElementById('grid');
+const categoriesDiv = document.getElementById('categories');
+const searchBox = document.getElementById('headerSearch');
+const searchInput = document.getElementById('searchInput');
+const headerActions = document.getElementById('headerActions');
+const themeIcon = document.getElementById('themeIcon');
 
-let allMatches=[],activeCategory='All';
+// --- STATE ---
+let allMatches = [];
+let activeCategory = 'All';
 
-function openSearch(){
-  searchBox.style.display='flex';
-  headerActions.style.display='none';
+// --- SEARCH FUNCTIONS ---
+function openSearch() {
+  searchBox.style.display = 'flex';
+  headerActions.style.display = 'none';
   searchInput.focus();
 }
 
-function closeSearch(){
-  searchBox.style.display='none';
-  headerActions.style.display='flex';
-  searchInput.value='';
+function closeSearch() {
+  searchBox.style.display = 'none';
+  headerActions.style.display = 'flex';
+  searchInput.value = '';
   filter();
 }
 
-function toggleTheme(){
+// --- THEME TOGGLE ---
+function toggleTheme() {
   document.body.classList.toggle('light');
-  const isLight=document.body.classList.contains('light');
-  themeIcon.className=isLight?'fa-solid fa-moon icon-btn':'fa-solid fa-sun icon-btn';
-  localStorage.setItem('theme',isLight?'light':'dark');
+  const isLight = document.body.classList.contains('light');
+  themeIcon.innerHTML = isLight ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+  localStorage.setItem('fc_theme', isLight ? 'light' : 'dark');
 }
-if(localStorage.getItem('theme')==='light')toggleTheme();
 
-// Helper to create short codes
+// Load saved theme
+if (localStorage.getItem('fc_theme') === 'light') {
+  document.body.classList.add('light');
+  themeIcon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+}
+
+// --- HELPER: Team Short Codes ---
 function getShortCode(name) {
-    if(!name) return "TBA";
-    const parts = name.trim().split(' ');
-    let code = "";
-    if(parts.length > 0) code += parts[0][0];
-    if(parts.length > 1) code += parts[1][0];
-    else if(parts[0].length > 1) code += parts[0][1];
-    return code.substring(0,3).toUpperCase();
+  if (!name) return "TBA";
+  const parts = name.trim().split(' ');
+  let code = "";
+  if (parts.length > 0) code += parts[0][0];
+  if (parts.length > 1) code += parts[1][0];
+  else if (parts[0].length > 1) code += parts[0][1];
+  return code.substring(0, 3).toUpperCase();
 }
 
+// --- DATA FETCHING ---
 fetch('https://fanco.vodep39240327.workers.dev/')
-.then(r=>r.json())
-.then(data=>{
-  allMatches=data.matches;
-  buildCategories(allMatches);
-  render(allMatches);
-});
+  .then(r => {
+    if (!r.ok) throw new Error('Network error');
+    return r.json();
+  })
+  .then(data => {
+    if (!data || !data.matches) {
+      grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No matches data available.</div>';
+      return;
+    }
+    allMatches = data.matches;
+    buildCategories(allMatches);
+    render(allMatches);
+  })
+  .catch(err => {
+    console.error(err);
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">Failed to load data. Please try again later.</div>';
+  });
 
-function buildCategories(matches){
-  const cats=['All',...new Set(matches.map(m=>m.event_category))];
-  cats.forEach(c=>{
-    const b=document.createElement('div');
-    b.className='category-btn'+(c==='All'?' active':'');
-    b.textContent=c;
-    b.onclick=()=>{
-      document.querySelectorAll('.category-btn').forEach(x=>x.classList.remove('active'));
+// --- RENDER CATEGORIES ---
+function buildCategories(matches) {
+  const cats = ['All', ...new Set(matches.map(m => m.event_category))];
+  
+  cats.forEach(c => {
+    const b = document.createElement('div');
+    b.className = 'category-btn' + (c === 'All' ? ' active' : '');
+    b.textContent = c;
+    b.onclick = () => {
+      document.querySelectorAll('.category-btn').forEach(x => x.classList.remove('active'));
       b.classList.add('active');
-      activeCategory=c;
+      activeCategory = c;
       filter();
     };
     categoriesDiv.appendChild(b);
   });
 }
 
-function render(matches){
-  grid.innerHTML='';
+// --- RENDER CARDS ---
+function render(matches) {
+  grid.innerHTML = '';
+  
+  if (matches.length === 0) {
+    grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No matches found.</div>';
+    return;
+  }
+
   matches.forEach(m => {
-    const card=document.createElement('div');
-    card.className='card';
+    const card = document.createElement('div');
+    card.className = 'card';
     
     // Status Logic
     const isLive = m.status === 'LIVE';
     const statusClass = isLive ? 'status-live' : 'status-upcoming';
     const statusText = isLive ? 'LIVE' : 'UPCOMING';
     
-    // Language Tag (Only show if LIVE)
-    //const languageHtml = isLive ? 
-     //`<span class="language-tag">
-        //<i class="fas fa-microphone"></i> ${m['language '] || 'ENGLISH'}
-       //</span>` : '';
-
-// Language Tag (Only show if LIVE and stream exists)
-const languageHtml = (isLive && (m.dai_url || m.adfree_url)) 
-  ? `<span class="language-tag">
-       <i class="fas fa-microphone"></i> ${m['language-tag'] || 'ENGLISH'}
-     </span>` 
-  : '';
-
-
-// Language Tag (Only show if LIVE)
-//const languageHtml = isLive ? 
-  //`<span class="language-tag">
-   // <i class="fas fa-microphone"></i> ${m.language-tag || 'ENGLISH'}
-   //</span>` : '';
+    // Language Tag (Only show if LIVE and stream exists)
+    const languageHtml = (isLive && (m.dai_url || m.adfree_url)) 
+      ? `<span class="language-tag">
+           <i class="fas fa-microphone"></i> ${m['language-tag'] || 'ENGLISH'}
+         </span>` 
+      : '';
 
     // Team Codes
     const team1Code = getShortCode(m.team_1);
     const team2Code = getShortCode(m.team_2);
 
-    // Constructing HTML without Button
-    card.innerHTML=`
+    // Construct HTML
+    card.innerHTML = `
       <div class="card-image-container">
-        <img src="${m.src}" alt="${m.match_name}" class="card-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x200?text=No+Image'">
+        <img src="${m.src}" alt="${m.match_name}" class="card-image" loading="lazy" onerror="this.src='https://via.placeholder.com/400x225/1e293b/94a3b8?text=No+Image'">
         
         <!-- Category Badge (Top Left) -->
         <span class="absolute top-2 left-2 badge badge-category">${m.event_category}</span>
@@ -417,7 +546,7 @@ const languageHtml = (isLive && (m.dai_url || m.adfree_url))
         <!-- Tournament / Subtitle -->
         <h3 class="text-xs text-muted truncate">${m.event_name}</h3>
         
-        <!-- Main Title (Reduced Size) -->
+        <!-- Main Title -->
         <h2 class="text-sm font-bold mt-1 text-white line-clamp-2">${m.match_name}</h2>
         
         <!-- Team Versus Row -->
@@ -434,24 +563,28 @@ const languageHtml = (isLive && (m.dai_url || m.adfree_url))
       </div>
     `;
     
-    // Card Click Event
-    card.onclick=()=>location.href=`play.html?id=${m.match_id}`;
+    // Interaction
+    card.onclick = () => {
+      // Preserve smooth transition, maybe add a ripple later?
+      location.href = `play.html?id=${m.match_id}`;
+    };
     
     grid.appendChild(card);
   });
 }
 
-function filter(){
-  const q=searchInput.value.toLowerCase();
-  const filtered=allMatches.filter(m=>{
-    const catOk=activeCategory==='All'||m.event_category===activeCategory;
-    const txt=(m.match_name+m.event_category).toLowerCase().includes(q);
-    return catOk&&txt;
+// --- FILTER LOGIC ---
+function filter() {
+  const q = searchInput.value.toLowerCase();
+  const filtered = allMatches.filter(m => {
+    const catOk = activeCategory === 'All' || m.event_category === activeCategory;
+    const txt = (m.match_name + m.event_category + (m.team_1 || '') + (m.team_2 || '')).toLowerCase().includes(q);
+    return catOk && txt;
   });
   render(filtered);
 }
 
-searchInput.addEventListener('input',filter);
+searchInput.addEventListener('input', filter);
 </script>
 
 </body>
