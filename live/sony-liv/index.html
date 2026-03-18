@@ -3,129 +3,315 @@
 <head>
 <meta charset="UTF-8">
 <title>SONY LIV</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
 
-<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+<!-- Fonts: Inter (from index.html) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Icons: FontAwesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#0d012f;
-  --bg2:#1f0c50;
-  --card:#1a1a2e;
-  --text:#ffffff;
-}
-.light{
-  --bg:#f4f4f4;
-  --bg2:#ffffff;
-  --card:#ffffff;
-  --text:#000000;
-}
+    /* --- COLOR PALETTE & VARIABLES (From index.html) --- */
+    :root {
+        --bg-color: #0f172a;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --card-border: rgba(148, 163, 184, 0.1);
+        --accent-color: #38bdf8;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --gradient-start: #1e293b;
+        --gradient-end: #0f172a;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Fjalla One',sans-serif}
+    /* Light Mode Variables (Adapted to match index style) */
+    .light {
+        --bg-color: #f8fafc;
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --card-border: rgba(203, 213, 225, 0.4);
+        --accent-color: #0284c7;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --gradient-start: #f1f5f9;
+        --gradient-end: #ffffff;
+    }
 
-body{
-  background:linear-gradient(135deg,var(--bg),var(--bg2));
-  color:var(--text);
-  transition:.3s;
-}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
 
-/* HEADER */
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 18px;
-  background:var(--bg);
-  box-shadow:0 0 25px rgba(230,18,113,.4);
-}
+    body {
+        /* Background from index.html */
+        background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end));
+        min-height: 100vh;
+        color: var(--text-main);
+        transition: background 0.3s ease, color 0.3s ease;
+    }
 
-.header-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.logo-img{width:55px}
-.site-title{font-size:22px;letter-spacing:2px}
+    /* --- HEADER --- */
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(15, 23, 42, 0.8); /* Fallback */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
 
-/* RIGHT AREA */
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
+    .light header {
+        background: rgba(255, 255, 255, 0.8);
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
 
-/* SEARCH (RIGHT SIDE) */
-.right-search{
-  display:none;
-  align-items:center;
-  gap:8px;
-  background:var(--card);
-  padding:6px 14px;
-  border-radius:30px;
-  width:260px;
-  animation:searchIn .25s ease;
-}
-.right-search input{
-  background:transparent;
-  border:none;
-  outline:none;
-  color:var(--text);
-  width:100%;
-  font-size:14px;
-}
-.right-search i{cursor:pointer}
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-@keyframes searchIn{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1}
-}
+    /* Logo Wrapper mimicking index.html logo-icon */
+    .logo-icon {
+        background: linear-gradient(135deg, #38bdf8, #3b82f6);
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: white;
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        flex-shrink: 0;
+    }
 
-/* GROUPS */
-#groups{
-  display:flex;
-  gap:10px;
-  padding:12px;
-  overflow-x:auto;
-}
-.group-btn{
-  padding:6px 14px;
-  border-radius:20px;
-  background:var(--card);
-  cursor:pointer;
-  white-space:nowrap;
-}
-.group-btn.active{background:#e61271}
+    .site-title {
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        background: linear-gradient(to right, #fff, #94a3b8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-/* GRID */
-#listContainer{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
-  gap:20px;
-  padding:20px;
-}
+    .light .site-title {
+        background: linear-gradient(to right, #0f172a, #475569);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-/* CARD */
-.box1{animation:card .5s ease forwards}
-@keyframes card{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1}
-}
-.card{
-  background:var(--card);
-  border-radius:18px;
-  padding:15px;
-  text-align:center;
-  transition:.4s;
-}
-.card:hover{
-  transform:scale(1.1);
-  box-shadow:0 20px 40px rgba(0,0,0,.5);
-}
-.card img{width:90px;margin:15px auto}
-.card h2{font-size:14px}
-.card p{font-size:12px;opacity:.7}
-a{text-decoration:none;color:inherit}
+    /* --- HEADER RIGHT (Search & Theme) --- */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    /* Expandable Search Bar (Styled like index.html search-wrapper) */
+    .right-search {
+        display: none;
+        align-items: center;
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--card-border);
+        width: 260px;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        animation: searchIn 0.25s ease;
+    }
+
+    .right-search input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-main);
+        width: 100%;
+        font-size: 0.95rem;
+        margin-left: 8px;
+    }
+
+    .right-search i {
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    
+    .right-search i:hover { color: var(--accent-color); }
+
+    /* Header Icons */
+    .header-icon {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        color: var(--text-muted);
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .header-icon:hover {
+        background: rgba(255,255,255,0.1);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .light .header-icon:hover {
+        background: rgba(0,0,0,0.05);
+        color: var(--accent-color);
+    }
+
+    @keyframes searchIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* --- GROUPS / CATEGORIES --- */
+    #groups {
+        display: flex;
+        gap: 8px;
+        padding: 1.5rem 1rem 0.5rem 1rem;
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE */
+    }
+    #groups::-webkit-scrollbar { display: none; }
+
+    .group-btn {
+        background: rgba(255,255,255,0.03);
+        padding: 0.5rem 1.2rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        cursor: pointer;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+
+    .group-btn:hover {
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+    }
+
+    .light .group-btn:hover {
+        background: rgba(0,0,0,0.05);
+        color: var(--text-main);
+    }
+
+    .group-btn.active {
+        background: var(--accent-color);
+        color: #0f172a;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+    }
+
+    /* --- GRID --- */
+    #listContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1.2rem;
+        padding: 1.5rem 1rem;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- CARD STYLING (Adapting index.html channel-card) --- */
+    .box1 { animation: fadeIn 0.5s ease forwards; }
+    
+    .card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 1rem 0.5rem;
+        border: 1px solid var(--card-border);
+        backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        text-decoration: none;
+        height: 100%;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(56, 189, 248, 0.4);
+        background: rgba(30, 41, 59, 0.9);
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .light .card:hover {
+        background: #ffffff;
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+    }
+
+    /* Logo Container Mimic */
+    .card img {
+        width: 80px;
+        height: 80px;
+        border-radius: 18px;
+        background: rgba(15, 23, 42, 0.6); /* Dark bg for logo */
+        object-fit: contain;
+        padding: 8px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .light .card img {
+        background: rgba(241, 245, 249, 0.8);
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .card:hover img {
+        transform: scale(1.05);
+    }
+
+    .card h2 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.3;
+    }
+
+    .card p {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        background: rgba(255,255,255,0.05);
+        padding: 2px 8px;
+        border-radius: 6px;
+    }
+    
+    .light .card p {
+        background: rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 600px) {
+        .header { flex-direction: row; }
+        #listContainer { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 1rem; }
+        .card img { width: 60px; height: 60px; }
+        .site-title { display: none; } /* Hide text on very small screens to save space */
+    }
 </style>
 </head>
 
@@ -134,22 +320,22 @@ a{text-decoration:none;color:inherit}
 <header>
   <!-- LEFT -->
   <div class="header-left">
-    <img class="logo-img" src="https://play-lh.googleusercontent.com/4VsxQM_JpvxB-qlQaVmYiZMZd9YCUs6AIxUfKADL9iZF-sl2Cmz3vjBebtlV0KI2DNs=w600-h300-pc0xffffff-pd">
+    <div class="logo-icon"><i class="fas fa-play"></i></div>
     <div class="site-title">SONY LIV</div>
   </div>
 
   <!-- RIGHT -->
   <div class="header-right">
-    <!-- SEARCH BAR -->
+    <!-- EXPANDABLE SEARCH -->
     <div class="right-search" id="rightSearch">
       <i class="fa-solid fa-search"></i>
-      <input type="search" id="searchInput" placeholder="Search Channel...">
+      <input type="search" id="searchInput" placeholder="Search channels...">
       <i class="fa-solid fa-xmark" id="closeSearch"></i>
     </div>
 
     <!-- ICONS -->
-    <i class="fa-solid fa-search" id="openSearch"></i>
-    <i class="fa-solid fa-moon" id="themeBtn"></i>
+    <i class="fa-solid fa-search header-icon" id="openSearch"></i>
+    <i class="fa-solid fa-moon header-icon" id="themeBtn"></i>
   </div>
 </header>
 
@@ -157,7 +343,7 @@ a{text-decoration:none;color:inherit}
 <div id="listContainer"></div>
 
 <script>
-const M3U_URL="https://raw.githubusercontent.com/vaathala00/sl/main/stream.m3u";
+const M3U_URL="stream.m3u";
 const container=document.getElementById("listContainer");
 const groupsDiv=document.getElementById("groups");
 const searchInput=document.getElementById("searchInput");
@@ -165,31 +351,39 @@ const rightSearch=document.getElementById("rightSearch");
 const openSearch=document.getElementById("openSearch");
 const closeSearch=document.getElementById("closeSearch");
 
-let channels=[],currentGroup="All";
+let channels=[], currentGroup="All";
 
-/* LOAD M3U */
+/* --- LOAD M3U --- */
 async function loadM3U(){
-  const res=await fetch(M3U_URL);
-  const text=await res.text();
-  const lines=text.split("\n");
-  const groups=new Set(["All"]);
+  try {
+    const res=await fetch(M3U_URL);
+    const text=await res.text();
+    const lines=text.split("\n");
+    const groups=new Set(["All"]);
 
-  for(let i=0;i<lines.length;i++){
-    if(lines[i].startsWith("#EXTINF")){
-      const info=lines[i];
-      const id=info.match(/tvg-id="(.*?)"/)?.[1]||"";
-      const name=info.split(",").pop().trim();
-      const logo=info.match(/tvg-logo="(.*?)"/)?.[1]||"";
-      const group=info.match(/group-title="(.*?)"/)?.[1]||"Other";
-      groups.add(group);
-      channels.push({id,name,logo,group});
+    for(let i=0;i<lines.length;i++){
+      if(lines[i].startsWith("#EXTINF")){
+        const info=lines[i];
+        // Parsing logic kept from sp.html
+        const id=info.match(/tvg-id="(.*?)"/)?.[1]||Math.random().toString(36).substr(2, 9);
+        const name=info.split(",").pop().trim();
+        const logo=info.match(/tvg-logo="(.*?)"/)?.[1]||"";
+        const group=info.match(/group-title="(.*?)"/)?.[1]||"Other";
+        groups.add(group);
+        channels.push({id,name,logo,group});
+      }
     }
+    buildGroups([...groups]);
+    render();
+  } catch (e) {
+    container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-muted);">
+      <i class="fas fa-exclamation-circle" style="font-size: 2rem; margin-bottom: 10px;"></i><br>
+      Failed to load stream.m3u. Check file path.
+    </div>`;
   }
-  buildGroups([...groups]);
-  render();
 }
 
-/* GROUPS */
+/* --- GROUPS --- */
 function buildGroups(list){
   groupsDiv.innerHTML="";
   list.forEach(g=>{
@@ -206,17 +400,25 @@ function buildGroups(list){
   });
 }
 
-/* RENDER */
+/* --- RENDER GRID --- */
 function render(){
   container.innerHTML="";
-  channels.filter(c=>currentGroup==="All"||c.group===currentGroup)
-  .forEach(c=>{
+  
+  const filtered = channels.filter(c => currentGroup==="All" || c.group===currentGroup);
+  
+  if(filtered.length === 0) {
+     container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-muted);">No channels found.</div>`;
+     return;
+  }
+
+  filtered.forEach(c=>{
     const box=document.createElement("div");
     box.className="box1";
+    // Link structure preserved, but styling applied via CSS
     box.innerHTML=`
       <a href="rd_play.html?id=${c.id}">
         <div class="card">
-          <img src="${c.logo}">
+          <img src="${c.logo}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/80x80?text=No+Logo'">
           <h2>${c.name}</h2>
           <p>${c.group}</p>
         </div>
@@ -225,38 +427,47 @@ function render(){
   });
 }
 
-/* SEARCH */
+/* --- SEARCH INTERACTION --- */
 openSearch.onclick=()=>{
   rightSearch.style.display="flex";
   openSearch.style.display="none";
   searchInput.focus();
 };
+
 closeSearch.onclick=()=>{
   rightSearch.style.display="none";
-  openSearch.style.display="block";
+  openSearch.style.display="flex";
   searchInput.value="";
-  document.querySelectorAll(".box1").forEach(b=>b.style.display="block");
+  // Reset view to show all of current group
+  render(); 
 };
+
 searchInput.oninput=e=>{
   const v=e.target.value.toLowerCase();
-  document.querySelectorAll(".box1").forEach(b=>{
-    b.style.display=b.innerText.toLowerCase().includes(v)?"block":"none";
+  const boxes = document.querySelectorAll(".box1");
+  
+  boxes.forEach(b=>{
+    const text = b.innerText.toLowerCase();
+    b.style.display = text.includes(v) ? "block" : "none";
   });
 };
 
-/* THEME */
+/* --- THEME TOGGLE --- */
 const themeBtn=document.getElementById("themeBtn");
+// Check local storage
 if(localStorage.theme==="light"){
   document.body.classList.add("light");
-  themeBtn.className="fa-solid fa-sun";
+  themeBtn.className="fa-solid fa-sun header-icon";
 }
+
 themeBtn.onclick=()=>{
   document.body.classList.toggle("light");
-  const light=document.body.classList.contains("light");
-  themeBtn.className=light?"fa-solid fa-sun":"fa-solid fa-moon";
-  localStorage.theme=light?"light":"dark";
+  const isLight=document.body.classList.contains("light");
+  themeBtn.className=isLight?"fa-solid fa-sun header-icon":"fa-solid fa-moon header-icon";
+  localStorage.theme=isLight?"light":"dark";
 };
 
+// Init
 loadM3U();
 </script>
 
