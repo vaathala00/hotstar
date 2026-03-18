@@ -5,66 +5,104 @@
 <title>ZEE Live</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Icons & Fonts -->
+<!-- Icons & Fonts (Using Inter to match index.html) -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Fjalla+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+/* RESET & BASE */
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* THEME VARIABLES */
+/* THEME VARIABLES - Derived from index.html */
 :root{
-  --bg:#1f0c50;
-  --bg2:#0d012f;
-  --text:#ffffff;
-  --card:rgba(255,255,255,.14);
-  --header:rgba(0,0,0,.25);
+  /* Backgrounds */
+  --bg-color: #0f172a;
+  --bg-gradient: radial-gradient(circle at top left, #1e293b, #0f172a);
+  
+  /* Text Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  /* Cards & Surfaces */
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(148, 163, 184, 0.1);
+  --header-bg: rgba(30, 41, 59, 0.7);
+  
+  /* Accents */
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  
+  /* Search */
+  --search-bg: rgba(15, 23, 42, 0.6);
+  
+  /* Transition */
+  --trans-speed: 0.3s;
 }
 
+/* Light Mode Variables (Adapted to match the palette) */
 .light{
-  --bg:#f4f4f4;
-  --bg2:#ffffff;
-  --text:#111;
-  --card:#ffffff;
-  --header:rgba(255,255,255,.75);
+  --bg-color: #f1f5f9;
+  --bg-gradient: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-border: rgba(0, 0, 0, 0.05);
+  --header-bg: rgba(255, 255, 255, 0.8);
+  
+  --search-bg: rgba(255, 255, 255, 0.9);
 }
 
 body{
-  font-family:'Fjalla One',sans-serif;
-  background:linear-gradient(135deg,var(--bg),var(--bg2));
-  color:var(--text);
-  min-height:100vh;
-  transition:.3s;
+  font-family: 'Inter', sans-serif; /* Matching index.html font */
+  background: var(--bg-gradient);
+  background-color: var(--bg-color); /* Fallback */
+  color: var(--text-main);
+  min-height: 100vh;
+  transition: background var(--trans-speed), color var(--trans-speed);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* HEADER */
 header{
   display:flex;
   align-items:center;
-  justify-content:space-between; /* logo left, right container right */
-  padding:14px 18px;
-  background:var(--header);
-  backdrop-filter:blur(12px);
+  justify-content:space-between;
+  padding:12px 20px;
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 /* LOGO */
 .header-left img{
-  width:46px;
+  height: 36px; /* Adjusted for cleaner look */
+  width: auto;
 }
 
-/* RIGHT CONTAINER: SEARCH + ICONS */
+/* RIGHT CONTAINER */
 .header-right{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:12px;
 }
 
 /* SEARCH BAR */
 .search-wrapper{
   display:none;
   align-items:center;
-  max-width:200px; 
-  transition: all 0.25s ease;
+  max-width:220px; 
+  transition: all 0.3s ease;
+  background: var(--search-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 0 12px;
+  height: 40px;
 }
 
 .search-wrapper.active{
@@ -73,85 +111,154 @@ header{
 
 .search-wrapper input{
   width:100%;
-  height:32px;
-  padding:6px 12px;
-  font-size:12px;
-  border-radius:16px;
+  height:100%;
+  background:transparent;
   border:none;
   outline:none;
+  color: var(--text-main);
+  font-size: 0.9rem;
 }
 
 /* ICONS */
 .icon-btn{
   font-size:18px;
   cursor:pointer;
-  transition:0.3s;
+  color: var(--text-muted);
+  transition: 0.2s;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-btn:hover{
-  transform:scale(1.15);
+  color: #fff;
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1);
+  border-color: var(--text-muted);
+}
+
+/* Light mode hover specific */
+.light .icon-btn:hover {
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+  border-color: var(--accent);
 }
 
 /* CATEGORY BAR */
 .category-bar{
   display:flex;
-  gap:12px;
-  padding:14px;
+  gap:10px;
+  padding: 16px 20px;
   overflow-x:auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.category-bar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .category-btn{
-  padding:7px 14px;
-  border-radius:18px;
-  background:rgba(255,255,255,.15);
-  font-size:12px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor:pointer;
   white-space:nowrap;
+  transition: all 0.2s;
+}
+
+.category-btn:hover{
+  background: rgba(255,255,255,0.1);
+  color: var(--text-main);
 }
 
 .category-btn.active{
-  background:#ffffff;
-  color:#000;
+  background: var(--accent);
+  color: #0f172a; /* Dark text on bright accent */
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+  border-color: var(--accent);
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:20px;
-  padding:20px;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:16px;
+  padding: 0 20px 40px 20px;
 }
 
+/* CARD STYLING - Matching index.html */
 .card{
-  height:220px;
-  border-radius:18px;
-  background:var(--card);
+  /* Adjusted height to be more compact/boxy like index */
+  height: 160px; 
+  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  transition:.35s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
 }
 
 .card:hover{
-  transform:translateY(-10px) scale(1.05);
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+  background: rgba(30, 41, 59, 0.9);
 }
 
+/* Card Image Container - Simulating index.html logo box */
 .card img{
-  height:90px;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  /* Subtle background for image to pop */
+  background: rgba(15, 23, 42, 0.4); 
+  padding: 6px;
 }
 
 .card h2{
-  font-size:14px;
-  margin-top:10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+  text-align: center;
+  width: 90%;
+  /* Text truncation */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card p{
-  font-size:11px;
-  opacity:.8;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
+/* Link reset */
 a{text-decoration:none;color:inherit}
+
 </style>
 </head>
 
@@ -159,7 +266,8 @@ a{text-decoration:none;color:inherit}
 
 <header>
   <div class="header-left">
-    <img src="https://akamaividz2.zee5.com/image/upload/frontend/branding/images/version-2/logo.png">
+    <!-- Keeping original Zee Logo, but it might need transparent bg if it's rectangular -->
+    <img src="https://akamaividz2.zee5.com/image/upload/frontend/branding/images/version-2/logo.png" alt="ZEE">
   </div>
 
   <div class="header-right">
@@ -177,7 +285,7 @@ a{text-decoration:none;color:inherit}
 
 <!-- CATEGORY BAR -->
 <div class="category-bar">
-  <div class="category-btn active" data-category="all">ALL</div>
+  <div class="category-btn active" data-category="all">All</div>
   <div class="category-btn" data-category="Entertainment">Entertainment</div>
   <div class="category-btn" data-category="Movies">Movies</div>
   <div class="category-btn" data-category="News">News</div>
@@ -186,12 +294,11 @@ a{text-decoration:none;color:inherit}
 <!-- CHANNEL GRID -->
 <div class="grid" id="grid">
 
- 
 <a href="https://t.me/vaathala1" data-category="Entertainment">
   <div class="card">
     <img src="https://static.vecteezy.com/system/resources/previews/021/672/626/original/telegram-logo-transparent-free-png.png">
-    <h2>join now</h2>
-    <p>Entertainment</p>
+    <h2>Join Now</h2>
+    <p>Social</p>
   </div>
 </a>
 
@@ -339,35 +446,35 @@ a{text-decoration:none;color:inherit}
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20News" data-category="Entertainment">
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20News" data-category="News">
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuqgsvfVCC5WZxPxIp7vXTQ11WpCqTd8BZeg&s">
     <h2>Zee News</h2>
-    <p>Entertainment</p>
+    <p>News</p>
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=NDTVINDIA" data-category="Entertainment">
+<a href="https://zplay.vodep39240327.workers.dev/?play=NDTVINDIA" data-category="News">
   <div class="card">
     <img src="https://d388d59m61mm0v.cloudfront.net/optimized/content/common/logos/channel/logos/iqfloc.png">
     <h2>NDTVINDIA</h2>
-    <p>Entertainment</p>
+    <p>News</p>
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20HINDUSTAN" data-category="Entertainment">
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20HINDUSTAN" data-category="News">
   <div class="card">
     <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/TknReKLD.png">
     <h2>ZEE HINDUSTAN</h2>
-    <p>Entertainment</p>
+    <p>News</p>
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BUSINESS" data-category="Entertainment">
+<a href="https://zplay.vodep39240327.workers.dev/?play=ZEE%20BUSINESS" data-category="News">
   <div class="card">
     <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/vExrDK9r.png">
     <h2>ZEE BUSINESS</h2>
-    <p>Entertainment</p>
+    <p>News</p>
   </div>
 </a>
 
@@ -379,11 +486,11 @@ a{text-decoration:none;color:inherit}
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Talkies" data-category="Entertainment">
+<a href="https://zplay.vodep39240327.workers.dev/?play=Zee%20Talkies" data-category="Movies">
   <div class="card">
     <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/VGfIqjrc.png">
     <h2>Zee Talkies</h2>
-    <p>Entertainment</p>
+    <p>Movies</p>
   </div>
 </a>
 
@@ -443,14 +550,6 @@ a{text-decoration:none;color:inherit}
   </div>
 </a>
 
-<a href="https://zplay.vodep39240327.workers.dev/?play=KOREAN%20DRAMAS" data-category="Entertainment">
-  <div class="card">
-    <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/BNu8WvFw.png">
-    <h2>KOREAN DRAMAS</h2>
-    <p>Entertainment</p>
-  </div>
-</a>
-
 </div>
 
 <script>
@@ -463,12 +562,12 @@ const themeBtn = document.getElementById('themeBtn');
 searchBtn.onclick = () => {
   searchWrap.classList.add('active');
   searchBtn.style.display = 'none';
-  closeBtn.style.display = 'block';
+  closeBtn.style.display = 'flex';
 };
 
 closeBtn.onclick = () => {
   searchWrap.classList.remove('active');
-  searchBtn.style.display = 'block';
+  searchBtn.style.display = 'flex';
   closeBtn.style.display = 'none';
 };
 
@@ -494,6 +593,13 @@ categoryBtns.forEach(btn => {
     gridItems.forEach(item => {
       if(cat === 'all' || item.dataset.category === cat){
         item.style.display = 'block';
+        // Add a small animation for re-appearing items
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        }, 50);
       } else {
         item.style.display = 'none';
       }
