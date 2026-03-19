@@ -86,7 +86,7 @@ body.light .logo-img {
 .controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0px; /* The standard gap between visible items */
   position: relative;
 }
 
@@ -105,11 +105,11 @@ body.light .logo-img {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 20px;
-  padding: 4px 8px;
+  padding: 0; /* FIX: No padding when collapsed */
   width: 0;
   opacity: 0;
   overflow: hidden;
-  transition: width 0.35s ease, opacity 0.2s ease;
+  transition: width 0.35s ease, opacity 0.2s ease, padding 0.2s ease;
   backdrop-filter: blur(10px);
 }
 
@@ -117,9 +117,11 @@ body.light .logo-img {
 .controls.active #searchBtn {
   display: none;
 }
+
 .controls.active .search-box {
   width: 200px;
   opacity: 1;
+  padding: 4px 8px; /* FIX: Add padding only when active */
   border-color: var(--accent-color);
 }
 
