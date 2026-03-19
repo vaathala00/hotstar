@@ -561,10 +561,99 @@
             transform: translateY(100%); transition: transform 0.3s ease;
         }
         .lyrics-modal.open { transform: translateY(0); }
-        .lyrics-header { padding: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid #333; align-items: center; max-width: 900px; width: 100%; margin: 0 auto; }
-        .lyrics-content { flex-grow: 1; overflow-y: auto; padding: 40px 20px; max-width: 800px; width: 100%; margin: 0 auto; text-align: center; white-space: pre-wrap; line-height: 2; font-size: 1.3rem; color: #888; }
-        .lyrics-content p { margin: 20px 0; transition: 0.3s; opacity: 0.4; }
-        .lyrics-content p.active { color: white; opacity: 1; transform: scale(1.05); text-shadow: 0 0 10px rgba(255,255,255,0.3); font-weight: 600; }
+        
+        .lyrics-header { 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: rgba(20,20,20,0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+        }
+
+        /* LYRICS LANGUAGE DROPDOWN STYLES */
+        .lyrics-lang-container {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .lyrics-lang-title {
+            font-size: 1.1rem; font-weight: 600; color: white;
+        }
+        .lyrics-lang-dropdown { position: relative; }
+        .lyrics-lang-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: #ccc; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem;
+            display: flex; align-items: center; gap: 4px; cursor: pointer;
+            transition: 0.2s;
+        }
+        .lyrics-lang-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+        .lyrics-lang-menu {
+            position: absolute; top: 120%; left: 0;
+            background: #2a2a2a; border: 1px solid #444;
+            border-radius: 8px; width: 140px; display: none;
+            flex-direction: column; padding: 5px; z-index: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            max-height: 250px; overflow-y: auto;
+        }
+        .lyrics-lang-menu.show { display: flex; }
+        .lyrics-lang-item {
+            padding: 8px 12px; font-size: 0.85rem; color: #ccc; cursor: pointer; border-radius: 4px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .lyrics-lang-item:hover { background: #333; color: white; }
+        .lyrics-lang-item.active { color: var(--primary); background: rgba(0, 181, 151, 0.1); }
+        
+        .lang-icon-check { font-size: 0.9rem; opacity: 0; }
+        .lyrics-lang-item.active .lang-icon-check { opacity: 1; }
+
+        .lyrics-content { 
+            flex-grow: 1; 
+            overflow-y: auto; 
+            padding: 40px 20px; 
+            max-width: 800px; 
+            width: 100%; 
+            margin: 0 auto; 
+            text-align: center; 
+            white-space: pre-wrap; 
+            line-height: 2.2; 
+            font-size: 1.2rem; 
+            color: #888; 
+            scroll-behavior: smooth;
+        }
+        
+        .lyrics-content p { margin: 15px 0; transition: 0.3s; opacity: 0.4; transform: scale(0.95); }
+        .lyrics-content p.active { 
+            color: white; 
+            opacity: 1; 
+            transform: scale(1.05); 
+            text-shadow: 0 0 10px rgba(255,255,255,0.3); 
+            font-weight: 600; 
+            font-size: 1.3rem;
+        }
+        
+        .lyrics-translated-badge {
+            font-size: 0.75rem; color: var(--primary); background: rgba(0,181,151,0.1);
+            padding: 2px 8px; border-radius: 4px; margin-bottom: 20px; display: inline-block;
+        }
+
+        .lyrics-fallback {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            display: inline-block;
+        }
+        .lyrics-fallback a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .lyrics-fallback a:hover { text-decoration: underline; }
 
         .spinner { width: 40px; height: 40px; border: 3px solid #333; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 50px auto; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -611,7 +700,7 @@
         <header>
             <div class="logo">
                 <i class="ri-music-2-fill"></i>
-                <span>VT Music</span>
+                <span>VTMus</span>
             </div>
 
             <div class="header-right">
@@ -780,11 +869,25 @@
     <!-- LYRICS MODAL -->
     <div class="lyrics-modal" id="lyricsModal">
         <div class="lyrics-header">
-            <h3>Lyrics</h3>
+            <div class="lyrics-lang-container">
+                <h3>Lyrics</h3>
+                
+                <!-- LANGUAGE SELECTOR -->
+                <div class="lyrics-lang-dropdown">
+                    <button class="lyrics-lang-btn" id="lyricsLangBtn" onclick="toggleLyricsLangMenu()">
+                        <span id="currentLyricsLang">Original</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <div class="lyrics-lang-menu" id="lyricsLangMenu">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
             <button onclick="toggleLyrics()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;"><i class="ri-close-line"></i></button>
         </div>
         <div class="lyrics-content" id="lyricsContent">
-            <p style="color:#666; margin-top:80px;">Play a song to view lyrics...</p>
+            <div class="spinner"></div>
         </div>
     </div>
 
@@ -799,8 +902,13 @@
         let isPlaying = false;
         let isShuffle = false;
         let isRepeat = false;
-        let lyricsData = [];
+        
+        // Lyrics Data
+        let lyricsData = []; 
+        let lyricsType = 'none'; // 'synced', 'plain', 'none'
+        let currentLyricsLang = 'all'; // Default
         let currentSongObj = null; 
+        let originalPlainLyrics = ""; // Store original text for translation
         
         // PLAYLIST STATE
         let myPlaylist = JSON.parse(localStorage.getItem('vt_music_playlist')) || [];
@@ -846,6 +954,11 @@
         const currentLangSpan = document.getElementById('currentLang');
         const langGrid = document.getElementById('langGrid');
         const volumeSlider = document.getElementById('volumeSlider');
+
+        // Lyrics Lang Elements
+        const lyricsLangBtn = document.getElementById('lyricsLangBtn');
+        const lyricsLangMenu = document.getElementById('lyricsLangMenu');
+        const currentLyricsLangSpan = document.getElementById('currentLyricsLang');
         
         // Playlist Elements
         const playlistHeaderBtn = document.getElementById('playlistHeaderBtn');
@@ -854,6 +967,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initLanguages();
+            initLyricsLanguages();
             loadHome();
             setupEventListeners();
             setupSwipeGesture();
@@ -974,9 +1088,7 @@
         function handleSectionClick(type, query) {
             let finalQuery = query;
             
-            // If a specific language is selected (not 'all'), prepend it to the search
             if (currentLanguage !== 'all') {
-                // Capitalize first letter of language for better look (e.g., "Tamil new releases")
                 const lang = currentLanguage.charAt(0).toUpperCase() + currentLanguage.slice(1);
                 finalQuery = `${lang} ${query}`;
             }
@@ -1042,9 +1154,7 @@
                         image: getBestImage(track.image),
                         url: getBestAudio(track.downloadUrl),
                         album: track.album?.name || '',
-                        year: track.year || '',
-                        hasLyrics: track.hasLyrics || false,
-                        lyricsId: track.lyricsId || null
+                        year: track.year || ''
                     }));
                 }
             } catch (e) {
@@ -1227,8 +1337,7 @@
                         image: getBestImage(s.image),
                         url: getBestAudio(s.downloadUrl),
                         album: albumData.name,
-                        year: albumData.year,
-                        lyricsId: s.lyricsId || null
+                        year: albumData.year
                     }));
 
                     if (songs.length === 0) {
@@ -1347,7 +1456,7 @@
                     isPlaying = true;
                     updatePlayBtns();
                     renderQueue();
-                    if(song.hasLyrics && song.lyricsId) fetchLyrics(song.lyricsId); 
+                    fetchLyrics(song); 
                 }).catch(err => {
                     console.error("Playback Error", err);
                     showToast("Error playing audio source.");
@@ -1367,8 +1476,14 @@
             fpArtBig.src = song.image;
             fpArtistList.innerHTML = `<a href="#" class="fp-artist-link">${song.artist}</a>`;
             
-            lyricsContent.innerHTML = '<p style="color:#666; margin-top:80px;">Loading lyrics...</p>';
+            // Reset Lyrics
+            lyricsContent.innerHTML = '<div class="spinner"></div>';
             lyricsData = [];
+            lyricsType = 'none';
+            originalPlainLyrics = "";
+            currentLyricsLang = 'all';
+            currentLyricsLangSpan.textContent = 'Original';
+            initLyricsLanguages();
         }
 
         function togglePlay() {
@@ -1580,6 +1695,9 @@
                 if (!contextMenu.contains(e.target) && !e.target.closest('.card-menu-btn')) {
                     contextMenu.classList.remove('active');
                 }
+                if (!lyricsLangMenu.contains(e.target) && !lyricsLangBtn.contains(e.target)) {
+                    lyricsLangMenu.classList.remove('show');
+                }
             });
         }
 
@@ -1625,60 +1743,269 @@
             }
         }
 
-        // --- LYRICS ---
+        // --- LYRICS LOGIC WITH TRANSLATION ---
+        
         function toggleLyrics() {
             lyricsModal.classList.toggle('open');
         }
 
-        async function fetchLyrics(lyricsId) {
-            lyricsContent.innerHTML = '<div class="spinner"></div>';
-            let lyricsText = "";
-            try {
-                if(!lyricsId) throw new Error("No Lyrics ID");
-
-                const res = await fetch(`${API_BASE}/lyrics?id=${lyricsId}`);
-                if (!res.ok) throw new Error("Lyrics not found");
-                
-                const data = await res.json();
-                if (data.success && data.data) {
-                    lyricsText = data.data.lyrics || data.lyrics || "";
-                }
-            } catch (e) {
-                lyricsContent.innerHTML = `<p style="color:#666; margin-top:50px;">Lyrics not available.</p>`;
-                return;
-            }
+        // Helper to parse LRC format to JSON
+        function parseLRC(lrc) {
+            const lines = lrc.split('\n');
+            const result = [];
+            const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
             
-            if (lyricsText) {
-                parseAndRenderLyrics(lyricsText);
-            } else {
-                lyricsContent.innerHTML = '<p style="color:#666; margin-top:50px;">Lyrics text is empty.</p>';
+            for (const line of lines) {
+                const match = timeReg.exec(line);
+                if (match) {
+                    const min = parseInt(match[1]);
+                    const sec = parseInt(match[2]);
+                    const ms = parseFloat("0." + match[3]);
+                    const time = min * 60 + sec + ms;
+                    const text = line.replace(timeReg, '').trim();
+                    if (text) {
+                        result.push({ time, text });
+                    }
+                }
             }
+            return result;
         }
 
-        function parseAndRenderLyrics(text) {
-            lyricsContent.innerHTML = '';
-            const lines = text.split('\n').filter(l => l.trim() !== '' && l.length > 1);
-            lyricsData = lines;
-            lines.forEach((line, i) => {
-                const p = document.createElement('p');
-                p.textContent = line.replace(/\[\d{2}:\d{2}\.\d{2}\]/g, '').trim();
-                p.id = `lyric-${i}`;
-                lyricsContent.appendChild(p);
+        // Initialize Lyrics Languages Dropdown
+        function initLyricsLanguages() {
+            const langs = [
+                { code: 'all', name: 'Original' },
+                { code: 'hi', name: 'Hindi' },
+                { code: 'en', name: 'English' },
+                { code: 'es', name: 'Spanish' },
+                { code: 'fr', name: 'French' },
+                { code: 'de', name: 'German' },
+                { code: 'it', name: 'Italian' },
+                { code: 'ja', name: 'Japanese' },
+                { code: 'ko', name: 'Korean' },
+                { code: 'pt', name: 'Portuguese' },
+                { code: 'ru', name: 'Russian' },
+                { code: 'zh-CN', name: 'Chinese' },
+                { code: 'ar', name: 'Arabic' }
+            ];
+            
+            lyricsLangMenu.innerHTML = '';
+            langs.forEach(lang => {
+                const div = document.createElement('div');
+                div.className = `lyrics-lang-item ${lang.code === currentLyricsLang ? 'active' : ''}`;
+                div.innerHTML = `
+                    <span>${lang.name}</span>
+                    <i class="ri-check-line lang-icon-check"></i>
+                `;
+                
+                div.onclick = () => selectLyricsLanguage(lang.code, lang.name);
+                lyricsLangMenu.appendChild(div);
             });
         }
 
-        function updateLyrics() {
-            if (!lyricsModal.classList.contains('open') || !lyricsData.length) return;
-            const duration = audio.duration || 1;
-            const currentTime = audio.currentTime;
-            const percent = currentTime / duration;
-            const activeIndex = Math.floor(percent * lyricsData.length);
+        function toggleLyricsLangMenu() {
+            lyricsLangMenu.classList.toggle('show');
+        }
+
+        function selectLyricsLanguage(code, name) {
+            if (currentLyricsLang === code) {
+                lyricsLangMenu.classList.remove('show');
+                return;
+            }
+
+            currentLyricsLang = code;
+            currentLyricsLangSpan.textContent = name;
+            lyricsLangMenu.classList.remove('show');
             
-            document.querySelectorAll('.lyrics-content p').forEach(p => p.classList.remove('active'));
-            const activeEl = document.getElementById(`lyric-${activeIndex}`);
-            if (activeEl) {
-                activeEl.classList.add('active');
-                activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Refresh UI for active state
+            initLyricsLanguages();
+            
+            // If switching back to Original
+            if (code === 'all') {
+                renderLyrics(); // Re-render stored data
+            } else {
+                // Trigger Translation
+                translateLyrics(code);
+            }
+        }
+
+        // New Translation Function using MyMemory API
+        async function translateLyrics(targetLang) {
+            if (!originalPlainLyrics) {
+                // If we don't have plain lyrics, try to get them from synced
+                if (lyricsData.length > 0) {
+                    originalPlainLyrics = lyricsData.map(l => l.text).join('\n');
+                } else {
+                    lyricsContent.innerHTML = '<p style="color:#666; margin-top:50px;">No lyrics to translate.</p>';
+                    return;
+                }
+            }
+
+            lyricsContent.innerHTML = '<div class="spinner"></div>';
+            
+            try {
+                // Split text into chunks because free API has a limit (~500 chars)
+                // We'll split by double newline to keep verses together
+                const verses = originalPlainLyrics.split('\n\n');
+                let translatedText = "";
+                
+                for (let verse of verses) {
+                    // If a single verse is still too long (e.g. rap), split by space/lines roughly
+                    if (verse.length > 450) {
+                        const lines = verse.split('\n');
+                        for (let line of lines) {
+                            const chunk = await fetchTranslationChunk(line, targetLang);
+                            translatedText += chunk + "\n";
+                            // Small delay to avoid hitting rate limits
+                            await new Promise(r => setTimeout(r, 200));
+                        }
+                    } else {
+                        const chunk = await fetchTranslationChunk(verse, targetLang);
+                        translatedText += chunk + "\n\n";
+                        await new Promise(r => setTimeout(r, 200));
+                    }
+                }
+
+                // Render the translated text as Plain Text
+                lyricsType = 'plain'; // Switch to plain text mode
+                lyricsData = translatedText.split('\n').filter(l => l.trim() !== '');
+                renderLyrics();
+                
+                // Add a small badge
+                const badge = document.createElement('div');
+                badge.className = 'lyrics-translated-badge';
+                badge.textContent = `Translated to ${currentLyricsLangSpan.textContent}`;
+                lyricsContent.prepend(badge);
+
+            } catch (error) {
+                console.error(error);
+                lyricsContent.innerHTML = `
+                    <p style="color:#666; margin-top:50px;">Translation failed or limit reached.</p>
+                    <p style="font-size:0.9rem; color:#888;">Try again later or switch to Original.</p>
+                `;
+            }
+        }
+
+        async function fetchTranslationChunk(text, targetLang) {
+            // Using autodetect as source for simplicity
+            const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=autodetect|${targetLang}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            
+            if (data.responseStatus === 200) {
+                return data.responseData.translatedText;
+            } else {
+                // If it fails, return original text for that chunk
+                return text; 
+            }
+        }
+
+        async function fetchLyrics(song) {
+            if (!song) return;
+
+            lyricsContent.innerHTML = '<div class="spinner"></div>';
+            lyricsData = [];
+            lyricsType = 'none';
+            originalPlainLyrics = "";
+
+            try {
+                const query = `artist_name=${encodeURIComponent(song.artist)}&track_name=${encodeURIComponent(song.title)}`;
+                // Removed language param to always get the primary/original version first
+                const url = `https://lrclib.net/api/get?${query}`;
+                
+                const response = await fetch(url);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data) {
+                        if (data.syncedLyrics) {
+                            lyricsData = parseLRC(data.syncedLyrics);
+                            lyricsType = 'synced';
+                            // Store plain version just in case
+                            originalPlainLyrics = data.plainLyrics || lyricsData.map(l => l.text).join('\n');
+                        } else if (data.plainLyrics) {
+                            originalPlainLyrics = data.plainLyrics;
+                            lyricsData = data.plainLyrics.split('\n').filter(line => line.trim() !== '');
+                            lyricsType = 'plain';
+                        } else {
+                            throw new Error("No lyrics found");
+                        }
+                        
+                        renderLyrics();
+                    } else {
+                        throw new Error("Empty response");
+                    }
+                } else {
+                    throw new Error("API Error");
+                }
+            } catch (error) {
+                console.log("Lyrics fetch failed:", error);
+                lyricsContent.innerHTML = `
+                    <p style="color:#666; margin-top:50px;">Lyrics not found.</p>
+                    <div class="lyrics-fallback">
+                        <a href="https://www.google.com/search?q=lyrics+${encodeURIComponent(song.artist + ' ' + song.title)}" target="_blank">
+                            <i class="ri-search-line"></i> Search on Google
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        function renderLyrics() {
+            lyricsContent.innerHTML = '';
+            
+            if (lyricsType === 'synced') {
+                lyricsData.forEach((line, i) => {
+                    const p = document.createElement('p');
+                    p.textContent = line.text;
+                    p.id = `lyric-${i}`;
+                    p.dataset.time = line.time;
+                    lyricsContent.appendChild(p);
+                });
+            } else if (lyricsType === 'plain') {
+                lyricsData.forEach((line, i) => {
+                    const p = document.createElement('p');
+                    p.textContent = line;
+                    p.id = `lyric-${i}`;
+                    p.style.opacity = "0.8"; 
+                    p.style.color = "#ccc";
+                    lyricsContent.appendChild(p);
+                });
+            }
+        }
+
+        function updateLyrics() {
+            if (!lyricsModal.classList.contains('open')) return;
+            if (lyricsType !== 'synced' || lyricsData.length === 0) return;
+
+            const currentTime = audio.currentTime;
+
+            // Find the active line based on current time
+            let activeIndex = -1;
+            for (let i = 0; i < lyricsData.length; i++) {
+                if (currentTime >= lyricsData[i].time) {
+                    activeIndex = i;
+                } else {
+                    break;
+                }
+            }
+
+            // Update classes
+            const lines = document.querySelectorAll('.lyrics-content p');
+            // Avoid querying if index hasn't changed
+            const currentActive = document.querySelector('.lyrics-content p.active');
+            if (currentActive && currentActive.id === `lyric-${activeIndex}`) return;
+
+            lines.forEach(p => p.classList.remove('active'));
+
+            if (activeIndex !== -1) {
+                const activeEl = document.getElementById(`lyric-${activeIndex}`);
+                if (activeEl) {
+                    activeEl.classList.add('active');
+                    // Scroll logic
+                    activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
             }
         }
 
