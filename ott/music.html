@@ -64,6 +64,52 @@
         .logo { font-size: 1.4rem; font-weight: 700; background: linear-gradient(45deg, var(--primary), #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
         .logo i { font-size: 1.6rem; color: var(--primary); -webkit-text-fill-color: initial; background: none; }
 
+        .header-right {
+            display: flex; align-items: center; gap: 15px;
+        }
+
+        /* PLAYLIST BUTTON */
+        .playlist-header-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-sub);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .playlist-header-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .playlist-header-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 181, 151, 0.4);
+        }
+
+        .playlist-count {
+            position: absolute;
+            top: -2px; right: -2px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            min-width: 16px; height: 16px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 4px;
+            border: 2px solid var(--bg-main);
+            display: none; 
+        }
+
         /* Language Dropdown */
         .lang-dropdown { position: relative; }
         .lang-btn {
@@ -173,6 +219,22 @@
         }
         .card:hover .card-menu-btn { opacity: 1; }
         .card-menu-btn:hover { background: white; color: black; }
+
+        /* Playlist Remove Button (NEW) */
+        .playlist-remove-btn {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white; border: none;
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.2s; cursor: pointer; z-index: 20;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+        }
+        .playlist-remove-btn:hover {
+            background: #ef4444;
+            transform: scale(1.1);
+        }
 
         /* Context Menu Dropdown */
         .context-menu {
@@ -302,9 +364,9 @@
                 display: flex; 
                 flex-direction: column;
                 align-items: center;
-                padding-bottom: 80px; /* Space for queue handle */
+                padding-bottom: 80px; 
                 gap: 15px;
-                overflow-y: scroll; /* Ensure body scrolls if content is tall */
+                overflow-y: scroll; 
             }
 
             .fp-art-container { 
@@ -313,7 +375,6 @@
             }
             .fp-art { max-width: 220px; } 
 
-            /* Make info container compact on mobile */
             .fp-info-container {
                 width: 100%;
                 display: flex;
@@ -446,7 +507,7 @@
             background: rgba(0,0,0,0.2); border-top: 1px solid var(--border);
             height: 250px; overflow-y: auto; padding: 15px 25px;
             position: relative; z-index: 10; flex-shrink: 0;
-            touch-action: pan-y; /* Allow vertical scrolling/swiping */
+            touch-action: pan-y;
         }
         .queue-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -481,7 +542,7 @@
                 position: absolute; bottom: 0; left: 0; width: 100%;
                 height: 350px; background: var(--bg-card); z-index: 10;
                 border-top: 1px solid var(--border);
-                transform: translateY(calc(100% - 60px)); /* Show handle area */
+                transform: translateY(calc(100% - 60px));
                 transition: transform 0.3s ease-in-out;
                 border-radius: 20px 20px 0 0;
                 box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
@@ -529,6 +590,19 @@
         .album-song-artist { color: var(--text-sub); font-size: 0.85rem; margin-top: 2px; }
         .album-play-icon { color: var(--primary); font-size: 1.5rem; opacity: 0; transition: 0.2s; }
         .album-row:hover .album-play-icon { opacity: 1; }
+
+        /* Playlist View specific header */
+        .playlist-view-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+        }
+        .playlist-view-header h2 { color: white; }
+        .clear-playlist {
+            color: var(--text-sub); font-size: 0.9rem; cursor: pointer;
+            padding: 5px 10px; border: 1px solid var(--border); border-radius: 20px;
+        }
+        .clear-playlist:hover { color: #ff4757; border-color: #ff4757; }
+
     </style>
 </head>
 <body>
@@ -540,14 +614,22 @@
                 <span>VT Music</span>
             </div>
 
-            <div class="lang-dropdown">
-                <div class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
-                    <span id="currentLang">All Languages</span>
-                    <i class="ri-arrow-down-s-line"></i>
+            <div class="header-right">
+                <!-- PLAYLIST BUTTON -->
+                <div class="playlist-header-btn" id="playlistHeaderBtn" title="My Playlist">
+                    <i class="ri-play-list-add-line"></i>
+                    <span class="playlist-count" id="playlistCount">0</span>
                 </div>
-                <div class="lang-menu" id="langMenu">
-                    <h3 style="color:#ccc; font-size:0.9rem; margin-bottom:10px; padding: 0 5px;">Pick a language</h3>
-                    <div class="lang-grid" id="langGrid"></div>
+
+                <div class="lang-dropdown">
+                    <div class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
+                        <span id="currentLang">All Languages</span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    <div class="lang-menu" id="langMenu">
+                        <h3 style="color:#ccc; font-size:0.9rem; margin-bottom:10px; padding: 0 5px;">Pick a language</h3>
+                        <div class="lang-grid" id="langGrid"></div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -660,7 +742,7 @@
 
                     <div class="fp-actions">
                         <div class="fp-action-left">
-                            <button class="fp-btn-ctrl" title="Add to Playlist" onclick="showToast('Added to Playlist')">
+                            <button class="fp-btn-ctrl" title="Add to Playlist" id="addPlaylistBtn" onclick="toggleCurrentSongInPlaylist()">
                                 <i class="ri-play-list-add-line" style="font-size: 1.5rem;"></i>
                             </button>
                             <button class="fp-btn-ctrl" title="Like" onclick="toggleLike(this)">
@@ -718,7 +800,12 @@
         let isShuffle = false;
         let isRepeat = false;
         let lyricsData = [];
+        let currentSongObj = null; 
         
+        // PLAYLIST STATE
+        let myPlaylist = JSON.parse(localStorage.getItem('vt_music_playlist')) || [];
+        let isViewingPlaylist = false;
+
         let contextMenuTargetSong = null;
         let contextMenuSourceList = null;
 
@@ -759,13 +846,135 @@
         const currentLangSpan = document.getElementById('currentLang');
         const langGrid = document.getElementById('langGrid');
         const volumeSlider = document.getElementById('volumeSlider');
+        
+        // Playlist Elements
+        const playlistHeaderBtn = document.getElementById('playlistHeaderBtn');
+        const playlistCount = document.getElementById('playlistCount');
+        const addPlaylistBtn = document.getElementById('addPlaylistBtn');
 
         document.addEventListener('DOMContentLoaded', () => {
             initLanguages();
             loadHome();
             setupEventListeners();
             setupSwipeGesture();
+            updatePlaylistCount();
+            updatePlaylistBtnState(); 
         });
+
+        // --- PLAYLIST LOGIC ---
+        
+        function updatePlaylistCount() {
+            playlistCount.textContent = myPlaylist.length;
+            playlistCount.style.display = myPlaylist.length > 0 ? 'flex' : 'none';
+        }
+
+        // Toggle Add/Remove Current Song (Player Button)
+        function toggleCurrentSongInPlaylist() {
+            if (!currentSongObj) return;
+
+            const index = myPlaylist.findIndex(s => s.id === currentSongObj.id);
+
+            if (index === -1) {
+                myPlaylist.push(currentSongObj);
+                showToast("Added to Playlist");
+                addPlaylistBtn.style.color = 'var(--primary)';
+            } else {
+                myPlaylist.splice(index, 1);
+                showToast("Removed from Playlist");
+                addPlaylistBtn.style.color = ''; 
+            }
+
+            localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
+            updatePlaylistCount();
+            updatePlaylistBtnState();
+
+            if (isViewingPlaylist) {
+                renderMyPlaylist();
+            }
+        }
+
+        // Update Button State (Green if saved)
+        function updatePlaylistBtnState() {
+            if (!currentSongObj) return;
+            const isSaved = myPlaylist.some(s => s.id === currentSongObj.id);
+            
+            if (isSaved) {
+                addPlaylistBtn.style.color = 'var(--primary)';
+            } else {
+                addPlaylistBtn.style.color = '';
+            }
+        }
+
+        // Remove Specific Song (Red X Button)
+        window.removeFromMyPlaylist = function(id, event) {
+            if (event) event.stopPropagation(); // Stop card click (play)
+            
+            myPlaylist = myPlaylist.filter(s => s.id !== id);
+            localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
+            
+            updatePlaylistCount();
+            
+            // If we removed the currently playing song, update the player button state
+            if (currentSongObj && currentSongObj.id === id) {
+                updatePlaylistBtnState();
+            }
+
+            renderMyPlaylist();
+            showToast("Removed from Playlist");
+        }
+
+        // Toggle Playlist View (Header Button)
+        playlistHeaderBtn.addEventListener('click', () => {
+            isViewingPlaylist = !isViewingPlaylist;
+            
+            if (isViewingPlaylist) {
+                playlistHeaderBtn.classList.add('active');
+                renderMyPlaylist();
+            } else {
+                playlistHeaderBtn.classList.remove('active');
+                loadHome();
+            }
+        });
+
+        function renderMyPlaylist() {
+            if (myPlaylist.length === 0) {
+                mainContent.innerHTML = `
+                    <div class="playlist-view-header">
+                        <h2>My Playlist</h2>
+                    </div>
+                    <div style="text-align:center; padding: 60px 20px; color: var(--text-sub);">
+                        <i class="ri-play-list-add-line" style="font-size: 3rem; margin-bottom: 20px; display:block; opacity:0.5;"></i>
+                        <p>Your playlist is empty.</p>
+                        <p style="font-size:0.9rem; margin-top:10px;">Click the + icon in the player to add songs.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <div class="playlist-view-header">
+                    <h2>My Playlist (${myPlaylist.length})</h2>
+                    <div class="clear-playlist" onclick="clearMyPlaylist()">Clear All</div>
+                </div>
+                <div class="scroll-container" id="myPlaylistGrid" style="overflow-x: hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));"></div>
+            `;
+            mainContent.innerHTML = html;
+
+            // Call renderCards with isPlaylistView = true
+            const container = document.getElementById('myPlaylistGrid');
+            renderCards(myPlaylist, container, 'song', true);
+        }
+
+        function clearMyPlaylist() {
+            if(confirm("Are you sure you want to clear your entire playlist?")) {
+                myPlaylist = [];
+                localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
+                updatePlaylistCount();
+                renderMyPlaylist();
+                updatePlaylistBtnState();
+                showToast("Playlist Cleared");
+            }
+        }
 
         // --- HELPERS ---
         function getBestImage(images) {
@@ -857,6 +1066,9 @@
         }
 
         async function loadHome() {
+            isViewingPlaylist = false;
+            playlistHeaderBtn.classList.remove('active');
+            
             mainContent.innerHTML = '<div style="text-align:center; padding:50px;"><div class="spinner"></div></div>';
             
             const currentYear = new Date().getFullYear();
@@ -932,7 +1144,8 @@
             searchInput.dispatchEvent(event);
         }
 
-        function renderCards(items, container, type = 'song') {
+        // Updated renderCards to handle Playlist View (Add Remove Button)
+        function renderCards(items, container, type = 'song', isPlaylistView = false) {
             if (!items || items.length === 0) {
                 container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">No results found.</div>';
                 return;
@@ -947,12 +1160,27 @@
                     ? (item.artist + (item.songCount ? ` • ${item.songCount} Songs` : ''))
                     : item.artist;
 
-                card.innerHTML = `
-                    <div class="card-img-wrapper">
-                        <img src="${item.image}" class="card-img" loading="lazy" alt="${item.title}">
+                let extraButtons = '';
+                
+                // Logic: If Playlist View, show Remove Button. Else show Context Menu.
+                if (isPlaylistView) {
+                    extraButtons = `
+                        <button class="playlist-remove-btn" onclick="removeFromMyPlaylist('${item.id}', event)">
+                            <i class="ri-close-line"></i>
+                        </button>
+                    `;
+                } else {
+                    extraButtons = `
                         <button class="card-menu-btn" onclick="openContextMenu(event, '${type}')">
                             <i class="ri-more-2-fill"></i>
                         </button>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        <img src="${item.image}" class="card-img" loading="lazy" alt="${item.title}">
+                        ${extraButtons}
                         <div class="play-overlay">
                             <div class="play-btn">
                                 <i class="ri-play-fill"></i>
@@ -970,7 +1198,7 @@
                 card.dataset.type = type;
 
                 card.onclick = (e) => {
-                    if(!e.target.closest('.card-menu-btn')) {
+                    if(!e.target.closest('.card-menu-btn') && !e.target.closest('.playlist-remove-btn')) {
                          if (type === 'album') {
                             showToast("Loading Album...");
                             loadAlbumById(item.id);
@@ -1106,6 +1334,9 @@
             currentIndex = playlist.findIndex(s => s.id === song.id);
             if (currentIndex === -1) currentIndex = 0;
             
+            currentSongObj = song;
+            updatePlaylistBtnState();
+            
             updatePlayerUI(song);
             
             if (song.url) {
@@ -1199,7 +1430,6 @@
                     playSong(song, currentPlaylist);
                 };
                 
-                // Add X button
                 const isCurrent = index === currentIndex;
                 
                 div.innerHTML = `
@@ -1217,16 +1447,14 @@
         }
 
         function removeFromQueue(event, index) {
-            event.stopPropagation(); // Prevent playing the song when clicking X
+            event.stopPropagation(); 
             if (index === currentIndex) {
                 showToast("Cannot remove currently playing song");
                 return;
             }
             
-            // Remove the song
             currentPlaylist.splice(index, 1);
             
-            // If removed song was before current index, shift index down
             if (index < currentIndex) {
                 currentIndex--;
             }
@@ -1257,15 +1485,12 @@
             }, false);
             
             function handleSwipe() {
-                // Calculate the difference (Positive = Swipe Up, Negative = Swipe Down)
                 const diff = touchStartY - touchEndY;
                 const threshold = 50;
 
                 if (diff > threshold) {
-                    // Swipe Up detected -> Expand
                     fpQueueSection.classList.add('expanded');
                 } else if (diff < -threshold) {
-                    // Swipe Down detected -> Collapse
                     fpQueueSection.classList.remove('expanded');
                 }
             }
