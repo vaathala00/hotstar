@@ -220,7 +220,7 @@
         .card:hover .card-menu-btn { opacity: 1; }
         .card-menu-btn:hover { background: white; color: black; }
 
-        /* Playlist Remove Button (NEW) */
+        /* Playlist Remove Button */
         .playlist-remove-btn {
             position: absolute; top: 8px; right: 8px;
             background: rgba(239, 68, 68, 0.9);
@@ -868,7 +868,6 @@
             playlistCount.style.display = myPlaylist.length > 0 ? 'flex' : 'none';
         }
 
-        // Toggle Add/Remove Current Song (Player Button)
         function toggleCurrentSongInPlaylist() {
             if (!currentSongObj) return;
 
@@ -893,7 +892,6 @@
             }
         }
 
-        // Update Button State (Green if saved)
         function updatePlaylistBtnState() {
             if (!currentSongObj) return;
             const isSaved = myPlaylist.some(s => s.id === currentSongObj.id);
@@ -905,16 +903,14 @@
             }
         }
 
-        // Remove Specific Song (Red X Button)
         window.removeFromMyPlaylist = function(id, event) {
-            if (event) event.stopPropagation(); // Stop card click (play)
+            if (event) event.stopPropagation(); 
             
             myPlaylist = myPlaylist.filter(s => s.id !== id);
             localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
             
             updatePlaylistCount();
             
-            // If we removed the currently playing song, update the player button state
             if (currentSongObj && currentSongObj.id === id) {
                 updatePlaylistBtnState();
             }
@@ -923,7 +919,6 @@
             showToast("Removed from Playlist");
         }
 
-        // Toggle Playlist View (Header Button)
         playlistHeaderBtn.addEventListener('click', () => {
             isViewingPlaylist = !isViewingPlaylist;
             
@@ -960,7 +955,6 @@
             `;
             mainContent.innerHTML = html;
 
-            // Call renderCards with isPlaylistView = true
             const container = document.getElementById('myPlaylistGrid');
             renderCards(myPlaylist, container, 'song', true);
         }
@@ -974,6 +968,22 @@
                 updatePlaylistBtnState();
                 showToast("Playlist Cleared");
             }
+        }
+
+        // --- UPDATED SEE ALL LOGIC ---
+        function handleSectionClick(type, query) {
+            let finalQuery = query;
+            
+            // If a specific language is selected (not 'all'), prepend it to the search
+            if (currentLanguage !== 'all') {
+                // Capitalize first letter of language for better look (e.g., "Tamil new releases")
+                const lang = currentLanguage.charAt(0).toUpperCase() + currentLanguage.slice(1);
+                finalQuery = `${lang} ${query}`;
+            }
+
+            searchInput.value = finalQuery;
+            const event = new Event('input');
+            searchInput.dispatchEvent(event);
         }
 
         // --- HELPERS ---
@@ -1083,7 +1093,7 @@
             if (currentLanguage !== 'all') {
                 sections.unshift({
                     title: "New Releases",
-                    query: `new releases ${currentYear}`, 
+                    query: `new  ${currentYear}`, 
                     type: 'songs'
                 });
             }
@@ -1108,7 +1118,7 @@
                     let items = [];
                     
                     if (sec.title === "New Releases") {
-                        items = await fetchSongs(`new releases ${currentYear}`, 12, true);
+                        items = await fetchSongs(`new  ${currentYear}`, 12, true);
                         if (items.length === 0) {
                             items = await fetchSongs(`new releases`, 12, true);
                         }
@@ -1138,13 +1148,6 @@
             }
         }
 
-        function handleSectionClick(type, query) {
-            searchInput.value = query;
-            const event = new Event('input');
-            searchInput.dispatchEvent(event);
-        }
-
-        // Updated renderCards to handle Playlist View (Add Remove Button)
         function renderCards(items, container, type = 'song', isPlaylistView = false) {
             if (!items || items.length === 0) {
                 container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">No results found.</div>';
@@ -1162,7 +1165,6 @@
 
                 let extraButtons = '';
                 
-                // Logic: If Playlist View, show Remove Button. Else show Context Menu.
                 if (isPlaylistView) {
                     extraButtons = `
                         <button class="playlist-remove-btn" onclick="removeFromMyPlaylist('${item.id}', event)">
