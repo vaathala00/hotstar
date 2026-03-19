@@ -295,18 +295,70 @@
             box-shadow: 0 15px 50px rgba(0,0,0,0.4);
             object-fit: cover;
         }
-        /* MOBILE FIX: Ensure art is visible but smaller */
+        
+        /* MOBILE FIXES */
         @media (max-width: 767px) {
-            .fp-art-container { 
+            .fp-body { 
                 display: flex; 
-                flex: 0 0 auto; 
-                margin-bottom: 10px; 
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 80px; /* Space for queue handle */
+                gap: 15px;
+                overflow-y: scroll; /* Ensure body scrolls if content is tall */
             }
-            .fp-art { max-width: 200px; } 
-            .fp-body { gap: 10px; } /* Reduce gap to fit content */
-            .fp-song-title { font-size: 1.2rem; margin-bottom: 5px; }
-            .fp-artist-list { margin-bottom: 15px; }
-            .fp-progress-area { margin-bottom: 15px; }
+
+            .fp-art-container { 
+                flex: 0 0 auto; 
+                margin-bottom: 5px;
+            }
+            .fp-art { max-width: 220px; } 
+
+            /* Make info container compact on mobile */
+            .fp-info-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 10px;
+            }
+
+            .fp-song-title { 
+                font-size: 1.2rem; 
+                margin-bottom: 4px; 
+                text-align: center;
+                line-height: 1.2;
+            }
+            .fp-artist-list { 
+                font-size: 0.9rem; 
+                margin-bottom: 12px; 
+                justify-content: center;
+            }
+            .fp-artist-link { color: var(--text-sub); }
+            
+            .fp-progress-area { 
+                width: 100%; 
+                margin-bottom: 12px; 
+            }
+            .fp-time-display { font-size: 0.75rem; }
+            
+            .fp-main-controls { 
+                margin-bottom: 15px; 
+                gap: 20px;
+            }
+            .fp-btn-ctrl { padding: 5px; }
+            .fp-btn-ctrl i { font-size: 1.5rem; }
+            
+            .fp-btn-play {
+                width: 56px; height: 56px;
+            }
+            .fp-btn-play i { font-size: 1.5rem; }
+
+            .fp-actions {
+                width: 100%;
+                justify-content: space-between;
+                padding-top: 10px;
+            }
+            .fp-action-left, .fp-action-right { gap: 15px; }
         }
 
         .fp-info-container {
@@ -1205,9 +1257,16 @@
             }, false);
             
             function handleSwipe() {
-                // Swipe Up detected
-                if (touchStartY - touchEndY > 50) {
-                    fpQueueSection.classList.toggle('expanded');
+                // Calculate the difference (Positive = Swipe Up, Negative = Swipe Down)
+                const diff = touchStartY - touchEndY;
+                const threshold = 50;
+
+                if (diff > threshold) {
+                    // Swipe Up detected -> Expand
+                    fpQueueSection.classList.add('expanded');
+                } else if (diff < -threshold) {
+                    // Swipe Down detected -> Collapse
+                    fpQueueSection.classList.remove('expanded');
                 }
             }
         }
