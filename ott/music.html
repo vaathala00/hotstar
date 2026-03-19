@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Premium</title>
+    <title> Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ICON LIBRARY -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     
     <style>
         :root {
@@ -40,6 +42,7 @@
         }
 
         .logo { font-size: 1.4rem; font-weight: 700; background: linear-gradient(45deg, var(--primary), #a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 8px; }
+        .logo i { font-size: 1.6rem; color: var(--primary); -webkit-text-fill-color: initial; background: none; }
 
         /* Language Dropdown */
         .lang-dropdown { position: relative; }
@@ -69,16 +72,21 @@
         .search-container { padding: 15px 20px; }
         .search-box { position: relative; }
         .search-input {
-            width: 100%; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border);
+            width: 100%; padding: 12px 20px 12px 45px;
+            border-radius: 12px; border: 1px solid var(--border);
             background: var(--bg-card); color: white; font-size: 0.95rem; outline: none; transition: 0.3s;
         }
         .search-input:focus { border-color: var(--primary); background: #202025; }
+        .search-icon-wrapper {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--text-sub); pointer-events: none;
+        }
 
         /* --- Content Sections --- */
         main { padding: 0 20px; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 15px 0; }
         .section-title { font-size: 1.4rem; font-weight: 700; }
-        .section-link { font-size: 0.9rem; color: var(--primary); text-decoration: none; cursor: pointer; }
+        .section-link { font-size: 0.9rem; color: var(--primary); text-decoration: none; cursor: pointer; font-weight: 600; }
         
         .scroll-container { 
             display: flex; overflow-x: auto; gap: 18px; padding-bottom: 25px; 
@@ -101,7 +109,12 @@
             display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.2s;
         }
         .card:hover .play-overlay { opacity: 1; }
-        .play-btn { width: 36px; height: 36px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .play-btn { 
+            width: 40px; height: 40px; background: var(--primary); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; color: white; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            font-size: 1.2rem;
+        }
 
         .card-info { padding: 8px 4px 0 4px; }
         .card-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; color: white; }
@@ -110,10 +123,11 @@
         /* Context Menu Button */
         .card-menu-btn {
             position: absolute; top: 5px; right: 5px;
-            background: rgba(0,0,0,0.5); color: white; border: none;
-            width: 28px; height: 28px; border-radius: 50%;
+            background: rgba(0,0,0,0.6); color: white; border: none;
+            width: 30px; height: 30px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             opacity: 0; transition: 0.2s; cursor: pointer; z-index: 10;
+            font-size: 1.1rem;
         }
         .card:hover .card-menu-btn { opacity: 1; }
         .card-menu-btn:hover { background: var(--primary); }
@@ -122,14 +136,16 @@
         .context-menu {
             position: fixed; background: #2A2A2E; border-radius: 8px; padding: 5px 0;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 2000;
-            display: none; width: 180px; border: 1px solid var(--border);
+            display: none; width: 200px; border: 1px solid var(--border);
         }
         .context-menu.active { display: block; animation: fadeIn 0.1s ease; }
         .context-item {
             padding: 12px 15px; color: white; cursor: pointer; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
         }
+        .context-item i { font-size: 1.1rem; color: var(--text-sub); }
         .context-item:hover { background: var(--primary); color: white; }
+        .context-item:hover i { color: white; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         /* --- MINI PLAYER BAR --- */
@@ -149,12 +165,18 @@
         .np-title { font-size: 0.95rem; font-weight: 600; color: white; margin-bottom: 2px; }
         .np-artist { font-size: 0.8rem; color: var(--text-sub); }
 
-        .mini-controls { display: flex; align-items: center; gap: 15px; }
+        .mini-controls { display: flex; align-items: center; gap: 15px; position: relative; z-index: 10; }
         .btn-ctrl { background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; padding: 5px; }
         .btn-ctrl:hover { color: white; }
-        .btn-play-mini { width: 36px; height: 36px; background: white; color: var(--bg-main); border-radius: 50%; }
+        .btn-ctrl i { font-size: 1.4rem; }
+
+        .btn-play-mini { 
+            width: 40px; height: 40px; background: white; color: var(--bg-main); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .btn-play-mini i { font-size: 1.2rem; color: var(--bg-main); }
         
-        .progress-mini { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.1); cursor: pointer; }
+        .progress-mini { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,0.1); cursor: pointer; z-index: 5; }
         .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.1s linear; }
 
         /* --- FULL PLAYER OVERLAY --- */
@@ -176,7 +198,7 @@
             background: none; border: none; color: var(--text-sub); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px;
         }
         .fp-queue-title { font-weight: 600; color: white; letter-spacing: 0.5px; }
-        .fp-close-btn { background: none; border: none; color: var(--text-sub); cursor: pointer; padding: 5px; }
+        .fp-close-btn { background: none; border: none; color: var(--text-sub); cursor: pointer; padding: 5px; font-size: 1.5rem; }
 
         .fp-body {
             flex: 1;
@@ -188,6 +210,7 @@
             margin: 0 auto;
             width: 100%;
             overflow-y: auto;
+            position: relative; z-index: 1;
         }
 
         .fp-art-container {
@@ -203,6 +226,7 @@
 
         .fp-info-container {
             display: flex; flex-direction: column; justify-content: center;
+            position: relative; z-index: 2;
         }
 
         .fp-song-title {
@@ -219,7 +243,7 @@
         .fp-progress-area { margin-bottom: 30px; }
         .fp-progress-track {
             width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;
-            position: relative; cursor: pointer;
+            position: relative; cursor: pointer; z-index: 5;
         }
         .fp-progress-fill {
             height: 100%; background: var(--primary); border-radius: 2px; width: 0%; position: relative;
@@ -236,29 +260,39 @@
             font-size: 0.85rem; color: var(--text-sub); font-weight: 500;
         }
 
+        /* FIX: High z-index and padding for buttons */
         .fp-main-controls {
-            display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 30px;
+            display: flex; justify-content: center; align-items: center; gap: 50px; margin-bottom: 30px;
+            position: relative; z-index: 50;
+            padding: 10px 0; /* Clickable area */
         }
         .fp-btn-ctrl {
             background: none; border: none; color: #ccc; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+            padding: 15px; /* Larger tap target */
         }
         .fp-btn-ctrl:hover { color: white; transform: scale(1.1); }
+        .fp-btn-ctrl i { font-size: 2rem; }
+
         .fp-btn-play {
-            width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%;
+            width: 72px; height: 72px; background: var(--primary); color: white; border-radius: 50%;
             box-shadow: 0 0 20px rgba(0, 181, 151, 0.4);
-            z-index: 10; position: relative;
+            z-index: 60; /* Highest priority */
+            position: relative;
+            padding: 0; /* Keep button size tight */
         }
         .fp-btn-play:hover { transform: scale(1.05); background: var(--primary-dark); color: white; }
+        .fp-btn-play i { font-size: 2rem; }
         
         .fp-actions {
             display: flex; justify-content: space-between; align-items: center;
             border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;
+            position: relative; z-index: 50; /* Above queue */
         }
-        .fp-action-left, .fp-action-right { display: flex; align-items: center; gap: 20px; }
+        .fp-action-left, .fp-action-right { display: flex; align-items: center; gap: 25px; }
         
         .volume-container { display: flex; align-items: center; gap: 10px; }
         .volume-slider { 
-            width: 80px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; 
+            width: 100px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; 
             -webkit-appearance: none; outline: none; cursor: pointer;
         }
         .volume-slider::-webkit-slider-thumb {
@@ -268,6 +302,7 @@
         .fp-queue-section {
             background: #000; border-top: 1px solid var(--border);
             height: 250px; overflow-y: auto; padding: 10px 20px;
+            position: relative; z-index: 10; /* Lower than controls */
         }
         .queue-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -306,7 +341,6 @@
 
         .spinner { width: 30px; height: 30px; border: 3px solid #333; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 40px auto; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        svg { width: 1em; height: 1em; fill: currentColor; }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -318,6 +352,8 @@
             .fp-art-container { display: none; }
             .fp-info-container { justify-content: flex-start; padding-top: 20px; }
             .fp-song-title { font-size: 1.5rem; }
+            .fp-main-controls { gap: 30px; }
+            .fp-btn-ctrl i { font-size: 1.5rem; }
             .fp-queue-section {
                 position: absolute; bottom: 0; left: 0; width: 100%;
                 height: 300px; background: var(--bg-card); z-index: 10;
@@ -333,14 +369,14 @@
 
     <header>
         <div class="logo">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v9.28c-.47-.17-.97-.28-1.5-.28C8.01 12 6 14.01 6 16.5S8.01 21 10.5 21c2.31 0 4.2-1.75 4.45-4H15V6h4V3h-7z"/></svg>
+            <i class="ri-music-2-fill"></i>
             <span>VT Music</span>
         </div>
 
         <div class="lang-dropdown">
             <div class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
                 <span id="currentLang">All Languages</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                <i class="ri-arrow-down-s-line"></i>
             </div>
             <div class="lang-menu" id="langMenu">
                 <h3 style="color:#ccc; font-size:0.9rem; margin-bottom:10px;">Pick a language</h3>
@@ -351,7 +387,8 @@
 
     <div class="search-container">
         <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="Search globally for songs, artists, albums...">
+            <div class="search-icon-wrapper"><i class="ri-search-line"></i></div>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search globally for songs, artists...">
         </div>
     </div>
 
@@ -362,13 +399,13 @@
     <!-- CONTEXT MENU -->
     <div id="contextMenu" class="context-menu">
         <div class="context-item" onclick="contextAction('playNow')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play Now
+            <i class="ri-play-circle-fill"></i> Play Now
         </div>
         <div class="context-item" onclick="contextAction('playNext')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg> Play Next
+            <i class="ri-skip-forward-fill"></i> Play Next
         </div>
         <div class="context-item" onclick="contextAction('addToQueue')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8z"/></svg> Add to Queue
+            <i class="ri-add-line"></i> Add to Queue
         </div>
     </div>
 
@@ -384,13 +421,13 @@
         </div>
         
         <div class="mini-controls">
-            <button class="btn-ctrl" onclick="playPrev()"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+            <button class="btn-ctrl" onclick="playPrev()"><i class="ri-skip-back-fill"></i></button>
             <button class="btn-ctrl btn-play-mini" id="playPauseBtn">
-                <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <i id="playIcon" class="ri-play-fill"></i>
+                <i id="pauseIcon" class="ri-pause-fill hidden"></i>
             </button>
-            <button class="btn-ctrl" onclick="playNext()"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
-            <button class="btn-ctrl" onclick="toggleFullPlayer(true)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
+            <button class="btn-ctrl" onclick="playNext()"><i class="ri-skip-forward-fill"></i></button>
+            <button class="btn-ctrl" onclick="toggleFullPlayer(true)"><i class="ri-fullscreen-line"></i></button>
         </div>
     </div>
 
@@ -398,12 +435,12 @@
     <div class="full-player-overlay" id="fullPlayer">
         <div class="fp-header">
             <button class="fp-history-btn" onclick="alert('History feature coming soon')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7h3l-2.04-2.04L21 21l-3-3H6c-4.97 0-9-4.03-9-9s4.03-9 9-9z"/></svg>
+                <i class="ri-history-line"></i>
                 <span>History</span>
             </button>
             <div class="fp-queue-title">Queue</div>
             <button class="fp-close-btn" onclick="toggleFullPlayer(false)">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <i class="ri-close-line"></i>
             </button>
         </div>
 
@@ -432,44 +469,44 @@
 
                 <div class="fp-main-controls">
                     <button class="fp-btn-ctrl" id="btnShuffle" title="Shuffle" onclick="toggleShuffle()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10.59 9.17L5.41 4 4 5.41 5.41 10.59 10.59 4 5.41 5.41 4 10.59 9.17 14 5.76 14 5.76 10.59 9.17 14.59 4 16 5.41 14.59 9.17 19.76 4 21.17 5.41 19.76 9.17 14 14.24 14 14.24 19.76 9.17 21.17 14 19.76 9.17z"/></svg>
+                        <i class="ri-shuffle-line"></i>
                     </button>
                     <button class="fp-btn-ctrl" onclick="playPrev()">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                        <i class="ri-skip-back-fill"></i>
                     </button>
                     <button class="fp-btn-play" id="fpPlayPauseBtn">
-                        <svg id="fpPlayIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                        <svg id="fpPauseIcon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        <i id="fpPlayIcon" class="ri-play-fill"></i>
+                        <i id="fpPauseIcon" class="ri-pause-fill hidden"></i>
                     </button>
                     <button class="fp-btn-ctrl" onclick="playNext()">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                        <i class="ri-skip-forward-fill"></i>
                     </button>
                     <button class="fp-btn-ctrl" id="btnRepeat" title="Repeat" onclick="toggleRepeat()">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v3l4-4-4-4v3H5v6h2v-4h5v-4zM7 17v-3l-4 4 4 4v-3h10v-6h-2v4H9v4z"/></svg>
+                        <i class="ri-repeat-line"></i>
                     </button>
                 </div>
 
                 <div class="fp-actions">
                     <div class="fp-action-left">
                         <button class="fp-btn-ctrl" title="Add to Queue">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8z"/></svg>
+                            <i class="ri-add-circle-line" style="font-size: 1.5rem;"></i>
                         </button>
                         <button class="fp-btn-ctrl" title="Like" onclick="this.style.color = this.style.color === '#00B597' ? '#ccc' : '#00B597'">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 5 7.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35z"/></svg>
+                            <i class="ri-heart-line" style="font-size: 1.5rem;"></i>
                         </button>
                     </div>
                     <div class="fp-action-right">
                         <div class="volume-container">
                             <button class="fp-btn-ctrl" id="muteBtn" onclick="toggleMute()">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                                <i class="ri-volume-up-line" style="font-size: 1.5rem;"></i>
                             </button>
                             <input type="range" min="0" max="1" step="0.1" value="1" class="volume-slider" id="volumeSlider">
                         </div>
                         <button class="fp-btn-ctrl" title="Lyrics" onclick="toggleLyrics()">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 2.21 0 4-1.79 4-4 0-1.32-.64-2.47-1.61-3.21V3h-1zm6 6h-1v2h1c2.76 0 5-2.24 5-5s-2.24-5-5-5v-2h1V3h-2v4h-1V3h-1v10.55c.59.34 1.27.55 2 .55 2.21 0 4-1.79 4-4s-1.79-4-4-4c-.73 0-1.41.21-2 .55V5h5z"/></svg>
+                            <i class="ri-file-text-line" style="font-size: 1.5rem;"></i>
                         </button>
                         <button class="fp-btn-ctrl" title="Download" onclick="downloadCurrentSong()">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            <i class="ri-download-line" style="font-size: 1.5rem;"></i>
                         </button>
                     </div>
                 </div>
@@ -489,7 +526,7 @@
     <div class="lyrics-modal" id="lyricsModal">
         <div class="lyrics-header">
             <h3>Lyrics</h3>
-            <button onclick="toggleLyrics()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
+            <button onclick="toggleLyrics()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;"><i class="ri-close-line"></i></button>
         </div>
         <div class="lyrics-content" id="lyricsContent">
             <p style="color:#666; margin-top:50px;">Play a song to view lyrics...</p>
@@ -713,11 +750,11 @@
                     <div class="card-img-wrapper">
                         <img src="${item.image}" class="card-img" loading="lazy" alt="${item.title}">
                         <button class="card-menu-btn" onclick="openContextMenu(event, '${type}')">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-.9 2-2 2 .9 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 .9-2 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 .9-2 2-2-.9-2-2-2z"/></svg>
+                            <i class="ri-more-2-fill"></i>
                         </button>
                         <div class="play-overlay">
                             <div class="play-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                <i class="ri-play-fill"></i>
                             </div>
                         </div>
                     </div>
@@ -727,13 +764,11 @@
                     </div>
                 `;
 
-                // Store item data on the element for context menu access
                 card.dataset.item = JSON.stringify(item);
                 card.dataset.list = JSON.stringify(items);
                 card.dataset.type = type;
 
                 card.onclick = (e) => {
-                    // Only play if not clicking the menu button
                     if(!e.target.closest('.card-menu-btn')) {
                          if (type === 'album') {
                             showToast("Loading Album...");
@@ -791,8 +826,8 @@
                         mainContent.innerHTML = `
                             <div class="section-header">
                                 <button class="view-all-btn" onclick="loadHome()" style="background:none; border:none; color:white; cursor:pointer; display:flex; align-items:center; gap:5px;">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                                    Back
+                                    <i class="ri-arrow-go-back-line" style="font-size:1.2rem;"></i>
+                                    <span>Back</span>
                                 </button>
                             </div>
                             <div style="display:flex; gap:20px; margin-bottom:30px; align-items:flex-end;">
@@ -814,6 +849,7 @@
                                             <div style="font-weight:500; color:white;">${s.title}</div>
                                             <div style="font-size:0.8rem; color:var(--text-sub);">${s.artist}</div>
                                         </div>
+                                        <i class="ri-play-circle-line" style="color:var(--primary); font-size:1.5rem;"></i>
                                     </div>
                                 `).join('')}
                             </div>
@@ -844,12 +880,10 @@
             contextMenuTargetSong = item;
             contextMenuSourceList = list;
             
-            // Position menu
             const x = e.clientX;
             const y = e.clientY;
             
-            // Prevent going off screen
-            const menuWidth = 180;
+            const menuWidth = 200;
             const menuHeight = 120;
             const winWidth = window.innerWidth;
             const winHeight = window.innerHeight;
@@ -866,14 +900,11 @@
             if (!contextMenuTargetSong) return;
             
             if (action === 'playNow') {
-                // Play this song, replace queue with the list it came from
-                // or just append to current queue? Let's replace with source list to mimic "Play Album/Section"
                 playSong(contextMenuTargetSong, contextMenuSourceList);
             } else if (action === 'playNext') {
                 if (currentPlaylist.length === 0) {
                     playSong(contextMenuTargetSong, [contextMenuTargetSong]);
                 } else {
-                    // Insert after current
                     const insertIndex = currentIndex + 1;
                     currentPlaylist.splice(insertIndex, 0, contextMenuTargetSong);
                     renderQueue();
@@ -935,10 +966,17 @@
         }
 
         function updatePlayBtns() {
-            playIcon.style.display = isPlaying ? 'none' : 'block';
-            pauseIcon.style.display = isPlaying ? 'block' : 'none';
-            fpPlayIcon.style.display = isPlaying ? 'none' : 'block';
-            fpPauseIcon.style.display = isPlaying ? 'block' : 'none';
+            if (isPlaying) {
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                fpPlayIcon.classList.add('hidden');
+                fpPauseIcon.classList.remove('hidden');
+            } else {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                fpPlayIcon.classList.remove('hidden');
+                fpPauseIcon.classList.add('hidden');
+            }
         }
 
         function playNext() {
@@ -1002,11 +1040,9 @@
         }
 
         function setupEventListeners() {
-            // Play/Pause Buttons
             playPauseBtn.addEventListener('click', togglePlay);
-            fpPlayPauseBtn.addEventListener('click', togglePlay); // Fixed: Ensure this is bound correctly
+            fpPlayPauseBtn.addEventListener('click', togglePlay);
             
-            // Audio Events
             audio.addEventListener('timeupdate', () => {
                 if (audio.duration) {
                     const percent = (audio.currentTime / audio.duration) * 100;
@@ -1028,7 +1064,6 @@
             
             audio.addEventListener('ended', playNext);
             
-            // Progress Bars
             progressBar.addEventListener('click', (e) => {
                 const rect = progressBar.getBoundingClientRect();
                 audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
@@ -1039,13 +1074,11 @@
                 audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
             });
 
-            // Volume
             volumeSlider.addEventListener('input', (e) => {
                 audio.volume = e.target.value;
                 document.getElementById('muteBtn').style.opacity = audio.volume === 0 ? 0.5 : 1;
             });
             
-            // Search
             let debounceTimer;
             searchInput.addEventListener('input', async (e) => {
                 clearTimeout(debounceTimer);
@@ -1081,7 +1114,6 @@
                 }, 600);
             });
 
-            // Click Outside to close menus
             document.addEventListener('click', (e) => {
                 if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
                     langMenu.classList.remove('open');
