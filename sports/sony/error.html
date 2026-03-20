@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video Player Error</title>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .player {
+        width: 800px;
+        height: 450px;
+        background: #111;
+        border: 2px solid #333;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 20px #000;
+    }
+
+    .text {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        animation: flicker 2s infinite;
+    }
+
+    .text h1 {
+        font-size: 48px;
+        color: #ff3b3b;
+        margin: 0;
+        animation: glitch 1s infinite;
+    }
+
+    .text p {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #ccc;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    .buttons button {
+        background: #ff3b3b;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: 0.3s;
+    }
+
+    .buttons button:hover {
+        background: #ff0000;
+        transform: scale(1.1);
+    }
+
+    @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+        80% { opacity: 0.4; }
+    }
+
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(2px, -2px); }
+        60% { transform: translate(-1px, 1px); }
+        80% { transform: translate(1px, -1px); }
+        100% { transform: translate(0); }
+    }
+
+    .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 5px;
+        width: 0%;
+        background: red;
+        animation: load 5s linear infinite;
+    }
+
+    @keyframes load {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+</style>
+</head>
+<body>
+
+<div class="player">
+    <div class="text">
+        <h1>403</h1>
+        <p>Currently the player is not working</p>
+        <p>Use the below buttons to watch stream</p>
+
+        
+
+    <div class="progress"></div>
+</div>
+
+<script>
+function openPlayer(url) {
+    window.open(url, '_blank');
+}
+</script>
+
+</body>
+</html>
