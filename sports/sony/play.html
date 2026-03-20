@@ -356,7 +356,7 @@
 <main>
     <!-- Player Section -->
     <section class="player-section">
-        <iframe id="videoIframe" src="error.html" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
+        <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
         
         <div id="live-counter">
             <i class="fas fa-circle"></i>
@@ -426,8 +426,8 @@
     const jsonUrl = 'https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json';
     
     // Common Headers for Intent URLs
-    const streamOrigin = '';
-    const streamReferer = '';
+    const streamOrigin = 'https://www.sonyliv.com';
+    const streamReferer = 'https://www.sonyliv.com';
 
     // --- Helper: Show Toast Notification ---
     function showToast(message) {
@@ -514,12 +514,12 @@
 
     function setupPlayer(match) {
         // Prioritize video_url, fallback to dai_url or pub_url https://proxy.lrl45.workers.dev/?url=
-        //const videoLink = match.video_url || match.dai_url || match.pub_url;
+         const videoLink = match.video_url || match.dai_url || match.pub_url;
         
         if (videoLink) {
             const iframe = document.getElementById('videoIframe');
             // Using the proxy as established in the original code
-            iframe.src = "error.html" + encodeURIComponent(videoLink);
+            iframe.src = "https://proxy.lrl45.workers.dev/?url=" + encodeURIComponent(videoLink);
         } else {
             renderError("No stream URL available in data.");
         }
