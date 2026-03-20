@@ -356,6 +356,7 @@
 <main>
     <!-- Player Section -->
     <section class="player-section">
+        <!-- The iframe tag remains exactly as you requested -->
         <iframe id="videoIframe" src="" allowfullscreen scrolling="no" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer"></iframe>
         
         <div id="live-counter">
@@ -420,6 +421,11 @@
 </div>
 
 <script>
+    // ================= CONFIGURATION =================
+    // SET THIS TO 'false' IN THE FUTURE TO ENABLE VIDEO PLAYER
+    const LOAD_ERROR_PAGE_MODE = true; 
+    // =================================================
+
     // --- Configuration & State ---
     const matchId = new URLSearchParams(window.location.search).get('id');
     // Updated to the new JSON URL provided by user
@@ -513,15 +519,24 @@
     }
 
     function setupPlayer(match) {
-        // Prioritize video_url, fallback to dai_url or pub_url 
-         const videoLink = match.video_url || match.dai_url || match.pub_url;
-        
-        if (videoLink) {
-            const iframe = document.getElementById('videoIframe');
-            // Using the proxy as established in the original code
-            iframe.src = "https://proxy.lrl45.workers.dev/?url=" + encodeURIComponent(videoLink);
+        // Get the iframe element
+        const iframe = document.getElementById('videoIframe');
+        // Prioritize video_url, fallback to dai_url or pub_url
+        const videoLink = match.video_url || match.dai_url || match.pub_url;
+
+        if (LOAD_ERROR_PAGE_MODE) {
+            // --- CURRENT MODE: IFRAME ERROR.HTML ---
+            console.log("Loading error.html");
+            iframe.src = "error.html";
+            // Note: Ensure 'error.html' exists in the same directory
         } else {
-            renderError("No stream URL available in data.");
+            // --- FUTURE MODE: ORIGINAL VIDEO PLAYER LOGIC (Kept as requested) ---
+            if (videoLink) {
+                // Using the proxy as established in the original code
+                iframe.src = "https://proxy.lrl45.workers.dev/?url=" + encodeURIComponent(videoLink);
+            } else {
+                renderError("No stream URL available in data.");
+            }
         }
     }
 
