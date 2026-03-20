@@ -73,7 +73,7 @@
       "category": "Mobile Player",
       "name": "Ruby Player (Mobile)",
       "version": "1.0.9",
-      "dateAdded": "2026-03-01T18:16:13.767Z",
+      "dateAdded": "2026-03-20T01:59:56.790Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/dsMSSD62/photo-2026-02-15-08-58-18.jpg",
@@ -85,7 +85,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://uploda.sh/S58UgSpV1LM7"
+        "url": "https://uploda.sh/4uwcK4j7bL8q"
       }
     },
     {
@@ -113,7 +113,7 @@
       "category": "PC Player",
       "name": "Ruby Player (PC)",
       "version": "0.0.9",
-      "dateAdded": "2026-03-01T18:15:42.780Z",
+      "dateAdded": "2026-03-20T02:00:27.670Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
@@ -122,7 +122,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://uploda.sh/Bge1BkNPusCw"
+        "url": "https://uploda.sh/WcZVoD2oazyD"
       }
     },
     {
@@ -147,7 +147,7 @@
       "category": "Android TV Player",
       "name": "Ruby Player Smart/Android Tv",
       "version": "1.0.9",
-      "dateAdded": "2026-03-01T18:16:27.228Z",
+      "dateAdded": "2026-03-20T02:00:45.276Z",
       "logo": "https://img.u0k.workers.dev/Rubyplayer.jpg",
       "screenshots": [
         "https://i.ibb.co/9Hz63jHk/Screenshot-50.png",
@@ -156,7 +156,7 @@
       ],
       "install": {
         "type": "external",
-        "url": "https://uploda.sh/S58UgSpV1LM7"
+        "url": "https://uploda.sh/7cbUehEFi1Dt"
       }
     }
   ]
