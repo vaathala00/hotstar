@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VT Music Premium</title>
+    <title>VT Music Premium (FLAC Enabled)</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ICON LIBRARY -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
@@ -23,6 +23,7 @@
             --border-light: rgba(255,255,255,0.1);
             --accent-green: #00B597;
             --container-max: 1400px;
+            --flac-gold: #FFD700;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -268,9 +269,26 @@
 
         .np-art { width: 56px; height: 56px; border-radius: 6px; object-fit: cover; margin-right: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); cursor: pointer; }
         
-        .np-info { flex-grow: 1; overflow: hidden; padding-right: 10px; cursor: pointer; }
-        .np-title { font-size: 1rem; font-weight: 600; color: white; margin-bottom: 4px; }
+        .np-info { flex-grow: 1; overflow: hidden; padding-right: 10px; cursor: pointer; position: relative; }
+        .np-title { font-size: 1rem; font-weight: 600; color: white; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
         .np-artist { font-size: 0.85rem; color: var(--text-sub); }
+
+        /* Quality Badge (Mini Player) */
+        .quality-badge-mini {
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .quality-badge-mini.flac {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--flac-gold);
+            border-color: var(--flac-gold);
+        }
 
         .mini-controls { display: flex; align-items: center; gap: 20px; position: relative; z-index: 10; }
         .btn-ctrl { background: none; border: none; color: #ccc; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; padding: 8px; border-radius: 50%; }
@@ -357,7 +375,90 @@
             box-shadow: 0 15px 50px rgba(0,0,0,0.4);
             object-fit: cover;
         }
+
+        /* NEW: VIDEO CONTAINER */
+        .fp-video-container {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
         
+        .fp-video-wrapper {
+            width: 100%;
+            max-width: 350px; /* Same max width as art */
+            aspect-ratio: 16/9;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fp-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+
+        /* Loading Spinner for Video */
+        .video-loading {
+            position: absolute;
+            z-index: 2;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        .video-fallback {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.9);
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .video-fallback h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .video-fallback p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn-watch-yt {
+            background: #ff0000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+            font-size: 1rem;
+        }
+        .btn-watch-yt:hover { transform: scale(1.05); background: #cc0000; }
+
         /* MOBILE FIXES */
         @media (max-width: 767px) {
             .fp-body { 
@@ -369,11 +470,12 @@
                 overflow-y: scroll; 
             }
 
-            .fp-art-container { 
+            .fp-art-container, .fp-video-container { 
                 flex: 0 0 auto; 
                 margin-bottom: 5px;
             }
             .fp-art { max-width: 220px; } 
+            .fp-video-wrapper { max-width: 100%; }
 
             .fp-info-container {
                 width: 100%;
@@ -431,6 +533,28 @@
             font-size: 2rem; font-weight: 700; margin-bottom: 10px; color: white;
             line-height: 1.2;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Quality Badge (Full Player) */
+        .quality-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: #333;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+        .quality-badge.flac {
+            background: linear-gradient(135deg, #FFD700, #B8860B);
+            color: #000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .fp-artist-list {
@@ -475,6 +599,15 @@
         .fp-btn-ctrl:hover { color: white; transform: scale(1.1); }
         .fp-btn-ctrl i { font-size: 1.8rem; }
         @media (min-width: 768px) { .fp-btn-ctrl i { font-size: 2rem; } }
+        
+        /* NEW: YouTube Button Style */
+        .btn-youtube {
+            color: #ff0000 !important; 
+        }
+        .btn-youtube.active {
+            color: white !important;
+            text-shadow: 0 0 10px #ff0000;
+        }
 
         .fp-btn-play {
             width: 64px; height: 64px; background: var(--primary); color: white; border-radius: 50%;
@@ -503,18 +636,45 @@
             -webkit-appearance: none; width: 12px; height: 12px; background: white; border-radius: 50%; cursor: pointer;
         }
 
+        /* --- QUEUE SECTION (UPDATED FOR MOBILE) --- */
         .fp-queue-section {
             background: rgba(0,0,0,0.2); border-top: 1px solid var(--border);
             height: 250px; overflow-y: auto; padding: 15px 25px;
             position: relative; z-index: 10; flex-shrink: 0;
             touch-action: pan-y;
+            transition: height 0.3s ease-in-out;
         }
+        
         .queue-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 0; border-bottom: 1px solid var(--border); margin-bottom: 10px;
         }
         .queue-header h3 { font-size: 1rem; color: #fff; }
         
+        /* Mobile Queue Specifics */
+        .queue-hint {
+            position: absolute; top: 45px; /* Below the visual handle */
+            width: 100%; text-align: center;
+            color: var(--primary); font-weight: 600;
+            animation: blinkText 2s infinite ease-in-out;
+            pointer-events: none; font-size: 0.85rem;
+            display: none; /* Hidden on desktop */
+            z-index: 5;
+        }
+        @keyframes blinkText {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        #queueToggleArrow {
+            font-size: 1.5rem; color: var(--text-main);
+            transition: transform 0.3s ease;
+            display: none; /* Hidden on desktop */
+            cursor: pointer;
+        }
+        .fp-queue-section.expanded #queueToggleArrow { transform: rotate(180deg); }
+        .fp-queue-section.expanded .queue-hint { display: none !important; }
+
         .queue-item {
             display: flex; align-items: center; padding: 10px; border-radius: 6px;
             cursor: pointer; transition: 0.2s; position: relative;
@@ -526,7 +686,7 @@
         .queue-item.active .q-img { border-color: var(--primary); }
         
         .q-info { flex: 1; min-width: 0; padding-right: 10px; }
-        .q-title { font-size: 0.9rem; color: white; font-weight: 500; margin-bottom: 2px; }
+        .q-title { font-size: 0.9rem; color: white; font-weight: 500; margin-bottom: 2px; display: flex; align-items: center; gap: 5px;}
         .q-artist { font-size: 0.8rem; color: var(--text-sub); }
         .queue-item.active .q-title { color: var(--primary); }
         
@@ -536,18 +696,50 @@
             transition: color 0.2s;
         }
         .q-time:hover { color: #ff4757; }
+        
+        /* Queue Item Quality Badge */
+        .q-quality {
+            font-size: 0.6rem;
+            padding: 1px 4px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.1);
+            color: #888;
+            text-transform: uppercase;
+        }
+        .q-quality.flac {
+            color: var(--flac-gold);
+            background: rgba(255, 215, 0, 0.1);
+        }
 
         @media (max-width: 767px) {
+            .queue-hint { display: block; }
+            #queueToggleArrow { display: inline-block; }
+            .queue-header h3, .queue-header div { display: none; } /* Hide desktop text */
+            .queue-header { justify-content: center; padding: 10px; cursor: pointer; } /* Header becomes clickable arrow */
+            
+            /* Clear button for mobile at bottom */
+            .mobile-clear-btn {
+                display: none;
+                padding: 15px; text-align: center;
+                border-top: 1px solid var(--border);
+                margin-top: 10px;
+            }
+            .fp-queue-section.expanded .mobile-clear-btn { display: block; }
+
             .fp-queue-section {
                 position: absolute; bottom: 0; left: 0; width: 100%;
-                height: 350px; background: var(--bg-card); z-index: 10;
+                height: 60px; /* Collapsed height */
+                background: var(--bg-card); z-index: 10;
                 border-top: 1px solid var(--border);
-                transform: translateY(calc(100% - 60px));
-                transition: transform 0.3s ease-in-out;
                 border-radius: 20px 20px 0 0;
                 box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+                /* Removed transform translateY for simpler toggle logic */
+                padding-bottom: 10px;
+                padding-top: 20px; /* Space for handle */
             }
-            .fp-queue-section.expanded { transform: translateY(0); height: 60vh; }
+            .fp-queue-section.expanded {
+                height: 60vh; /* Expanded height */
+            }
             .fp-queue-section::before {
                 content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
                 width: 40px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px;
@@ -675,7 +867,7 @@
         .album-num { color: var(--text-sub); width: 30px; text-align: center; font-size: 0.9rem; }
         .album-art-list { width: 45px; height: 45px; border-radius: 4px; margin-right: 15px; object-fit: cover; }
         .album-meta { flex: 1; }
-        .album-song-title { color: white; font-weight: 500; font-size: 1rem; }
+        .album-song-title { color: white; font-weight: 500; font-size: 1rem; display: flex; align-items: center; gap: 8px;}
         .album-song-artist { color: var(--text-sub); font-size: 0.85rem; margin-top: 2px; }
         .album-play-icon { color: var(--primary); font-size: 1.5rem; opacity: 0; transition: 0.2s; }
         .album-row:hover .album-play-icon { opacity: 1; }
@@ -700,7 +892,7 @@
         <header>
             <div class="logo">
                 <i class="ri-music-2-fill"></i>
-                <span>VTMus</span>
+                <span>VT Music</span>
             </div>
 
             <div class="header-right">
@@ -758,7 +950,7 @@
         </div>
         <img src="" class="np-art" id="npArt" alt="" onclick="toggleFullPlayer(true)">
         <div class="np-info" onclick="toggleFullPlayer(true)">
-            <div class="np-title ellipsis" id="npTitle">Not Playing</div>
+            <div class="np-title ellipsis" id="npTitle">Not Playing <span id="npQuality" class="quality-badge-mini hidden"></span></div>
             <div class="np-artist ellipsis" id="npArtist">Select a song</div>
         </div>
         
@@ -788,8 +980,27 @@
             </div>
 
             <div class="fp-body">
-                <div class="fp-art-container">
+                <!-- ALBUM ART CONTAINER -->
+                <div class="fp-art-container" id="fpArtContainer">
                     <img src="" class="fp-art" id="fpArtBig" alt="">
+                </div>
+
+                <!-- VIDEO CONTAINER -->
+                <div class="fp-video-container" id="fpVideoContainer">
+                    <div class="fp-video-wrapper">
+                        <!-- Loading Spinner -->
+                        <i id="videoLoader" class="ri-loader-4-line video-loading" style="font-size: 2rem; display: none;"></i>
+                        
+                        <iframe id="ytPlayer" class="fp-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+                        
+                        <div id="videoFallback" class="video-fallback hidden">
+                            <h3>Video Unavailable</h3>
+                            <p id="fallbackText">Could not load video automatically.</p>
+                            <a href="#" target="_blank" id="videoSearchLink" class="btn-watch-yt">
+                                <i class="ri-youtube-fill"></i> Search on YouTube
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="fp-info-container">
@@ -831,6 +1042,11 @@
 
                     <div class="fp-actions">
                         <div class="fp-action-left">
+                            <!-- NEW: YouTube Button -->
+                            <button class="fp-btn-ctrl btn-youtube" id="btnYoutube" title="Watch Video" onclick="toggleVideoMode()">
+                                <i class="ri-youtube-fill" style="font-size: 1.8rem;"></i>
+                            </button>
+                            
                             <button class="fp-btn-ctrl" title="Add to Playlist" id="addPlaylistBtn" onclick="toggleCurrentSongInPlaylist()">
                                 <i class="ri-play-list-add-line" style="font-size: 1.5rem;"></i>
                             </button>
@@ -856,12 +1072,22 @@
                 </div>
             </div>
 
-            <div class="fp-queue-section" id="fpQueueSection">
+            <!-- UPDATED QUEUE SECTION -->
+            <div class="fp-queue-section" id="fpQueueSection" onclick="toggleQueueMobile(event)">
+                <div class="queue-hint">Tap to view List</div> <!-- Floating Blinking Text -->
                 <div class="queue-header">
-                    <h3>Up Next</h3>
+                    <!-- Desktop Elements -->
+                    <h3>Up Next</h3> 
                     <div style="font-size: 0.8rem; color: var(--text-sub); cursor: pointer;" onclick="clearQueue(event)">Clear</div>
+                    
+                    <!-- Mobile Arrow (Replaces Header Text) -->
+                    <i class="ri-arrow-up-s-line" id="queueToggleArrow"></i>
                 </div>
                 <div id="queueListContainer"></div>
+                <!-- Mobile Clear Button at Bottom -->
+                <div class="mobile-clear-btn">
+                    <button onclick="clearQueue(event)" style="background:rgba(255,255,255,0.1); color:white; border:none; padding:8px 20px; border-radius:20px; cursor:pointer;">Clear Queue</button>
+                </div>
             </div>
         </div>
     </div>
@@ -903,6 +1129,9 @@
         let isShuffle = false;
         let isRepeat = false;
         
+        // VIDEO STATE
+        let isVideoMode = false;
+        
         // Lyrics Data
         let lyricsData = []; 
         let lyricsType = 'none'; // 'synced', 'plain', 'none'
@@ -927,6 +1156,7 @@
         const npArt = document.getElementById('npArt');
         const npTitle = document.getElementById('npTitle');
         const npArtist = document.getElementById('npArtist');
+        const npQuality = document.getElementById('npQuality');
         const playPauseBtn = document.getElementById('playPauseBtn');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
@@ -946,6 +1176,16 @@
         const queueListContainer = document.getElementById('queueListContainer');
         const fpQueueSection = document.getElementById('fpQueueSection');
         
+        // Video Elements
+        const fpArtContainer = document.getElementById('fpArtContainer');
+        const fpVideoContainer = document.getElementById('fpVideoContainer');
+        const ytPlayer = document.getElementById('ytPlayer');
+        const btnYoutube = document.getElementById('btnYoutube');
+        const videoFallback = document.getElementById('videoFallback');
+        const videoSearchLink = document.getElementById('videoSearchLink');
+        const fallbackText = document.getElementById('fallbackText');
+        const videoLoader = document.getElementById('videoLoader');
+
         const searchInput = document.getElementById('searchInput');
         const lyricsModal = document.getElementById('lyricsModal');
         const lyricsContent = document.getElementById('lyricsContent');
@@ -975,6 +1215,90 @@
             updatePlaylistBtnState(); 
         });
 
+        // --- VIDEO LOGIC (BURST SEARCH STRATEGY) ---
+        
+        const API_INSTANCES = [
+            { type: 'piped', url: 'https://pipedapi.kavin.rocks' },
+            { type: 'piped', url: 'https://piped-api.garudalinux.org' },
+            { type: 'piped', url: 'https://api.piped.io' },
+            { type: 'invidious', url: 'https://invidious.snopyta.org' },
+            { type: 'invidious', url: 'https://invidious.kavin.rocks' },
+            { type: 'invidious', url: 'https://inv.riverside.rocks' },
+            { type: 'invidious', url: 'https://yewtu.be' },
+            { type: 'invidious', url: 'https://invidious.nerdvpn.de' },
+            { type: 'invidious', url: 'https://invidious.fdn.fr' },
+            { type: 'invidious', url: 'https://vid.puffyan.us' }
+        ];
+
+        const fetchWithTimeout = async (resource, options = {}, timeout = 3000) => {
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), timeout);
+            const response = await fetch(resource, { ...options, signal: controller.signal });
+            clearTimeout(id);
+            return response;
+        };
+
+        async function getVideoId(query) {
+            const encodedQuery = encodeURIComponent(query);
+            for (const api of API_INSTANCES) {
+                try {
+                    let apiUrl = '', parser = null;
+                    if (api.type === 'piped') {
+                        apiUrl = `${api.url}/search?q=${encodedQuery}&filter=music_songs`;
+                        parser = (data) => {
+                            if (data.items && data.items.length > 0) {
+                                const match = data.items[0].url.match(/v=([^&]+)/);
+                                return match ? match[1] : null;
+                            }
+                            return null;
+                        };
+                    } else if (api.type === 'invidious') {
+                        apiUrl = `${api.url}/api/v1/search?q=${encodedQuery}`;
+                        parser = (data) => {
+                            if (Array.isArray(data) && data.length > 0) return data[0].videoId;
+                            return null;
+                        };
+                    }
+                    if (!parser) continue;
+                    const response = await fetchWithTimeout(apiUrl);
+                    if (!response.ok) continue;
+                    const data = await response.json();
+                    const videoId = parser(data);
+                    if (videoId) { console.log(`Success with ${api.url}`); return videoId; }
+                } catch (error) { console.warn(`Failed/Timeout: ${api.url}`); continue; }
+            }
+            return null;
+        }
+
+        async function toggleVideoMode() {
+            if (!currentSongObj) return;
+            isVideoMode = !isVideoMode;
+            if (isVideoMode) {
+                fpArtContainer.style.display = 'none'; fpVideoContainer.style.display = 'flex';
+                btnYoutube.classList.add('active'); if(isPlaying) audio.pause();
+                videoLoader.style.display = 'block'; ytPlayer.src = ""; videoFallback.classList.add('hidden');
+                const query = `${currentSongObj.artist} ${currentSongObj.title} official video`;
+                const videoId = await getVideoId(query);
+                videoLoader.style.display = 'none';
+                if (videoId) { ytPlayer.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`; }
+                else {
+                    fallbackText.textContent = "All services busy. Searching YouTube...";
+                    videoSearchLink.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+                    videoFallback.classList.remove('hidden');
+                }
+            } else {
+                fpArtContainer.style.display = 'flex'; fpVideoContainer.style.display = 'none';
+                btnYoutube.classList.remove('active'); ytPlayer.src = "";
+                if(isPlaying) audio.play();
+            }
+        }
+
+        // --- QUEUE MOBILE TOGGLE LOGIC ---
+        function toggleQueueMobile(e) {
+            if(e) e.stopPropagation();
+            fpQueueSection.classList.toggle('expanded');
+        }
+
         // --- PLAYLIST LOGIC ---
         
         function updatePlaylistCount() {
@@ -984,9 +1308,7 @@
 
         function toggleCurrentSongInPlaylist() {
             if (!currentSongObj) return;
-
             const index = myPlaylist.findIndex(s => s.id === currentSongObj.id);
-
             if (index === -1) {
                 myPlaylist.push(currentSongObj);
                 showToast("Added to Playlist");
@@ -996,46 +1318,30 @@
                 showToast("Removed from Playlist");
                 addPlaylistBtn.style.color = ''; 
             }
-
             localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
             updatePlaylistCount();
             updatePlaylistBtnState();
-
-            if (isViewingPlaylist) {
-                renderMyPlaylist();
-            }
+            if (isViewingPlaylist) renderMyPlaylist();
         }
 
         function updatePlaylistBtnState() {
             if (!currentSongObj) return;
             const isSaved = myPlaylist.some(s => s.id === currentSongObj.id);
-            
-            if (isSaved) {
-                addPlaylistBtn.style.color = 'var(--primary)';
-            } else {
-                addPlaylistBtn.style.color = '';
-            }
+            addPlaylistBtn.style.color = isSaved ? 'var(--primary)' : '';
         }
 
         window.removeFromMyPlaylist = function(id, event) {
             if (event) event.stopPropagation(); 
-            
             myPlaylist = myPlaylist.filter(s => s.id !== id);
             localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
-            
             updatePlaylistCount();
-            
-            if (currentSongObj && currentSongObj.id === id) {
-                updatePlaylistBtnState();
-            }
-
+            if (currentSongObj && currentSongObj.id === id) updatePlaylistBtnState();
             renderMyPlaylist();
             showToast("Removed from Playlist");
         }
 
         playlistHeaderBtn.addEventListener('click', () => {
             isViewingPlaylist = !isViewingPlaylist;
-            
             if (isViewingPlaylist) {
                 playlistHeaderBtn.classList.add('active');
                 renderMyPlaylist();
@@ -1054,12 +1360,10 @@
                     <div style="text-align:center; padding: 60px 20px; color: var(--text-sub);">
                         <i class="ri-play-list-add-line" style="font-size: 3rem; margin-bottom: 20px; display:block; opacity:0.5;"></i>
                         <p>Your playlist is empty.</p>
-                        <p style="font-size:0.9rem; margin-top:10px;">Click the + icon in the player to add songs.</p>
                     </div>
                 `;
                 return;
             }
-
             let html = `
                 <div class="playlist-view-header">
                     <h2>My Playlist (${myPlaylist.length})</h2>
@@ -1068,13 +1372,12 @@
                 <div class="scroll-container" id="myPlaylistGrid" style="overflow-x: hidden; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));"></div>
             `;
             mainContent.innerHTML = html;
-
             const container = document.getElementById('myPlaylistGrid');
             renderCards(myPlaylist, container, 'song', true);
         }
 
         function clearMyPlaylist() {
-            if(confirm("Are you sure you want to clear your entire playlist?")) {
+            if(confirm("Clear entire playlist?")) {
                 myPlaylist = [];
                 localStorage.setItem('vt_music_playlist', JSON.stringify(myPlaylist));
                 updatePlaylistCount();
@@ -1084,21 +1387,17 @@
             }
         }
 
-        // --- UPDATED SEE ALL LOGIC ---
+        // --- HELPERS ---
         function handleSectionClick(type, query) {
             let finalQuery = query;
-            
             if (currentLanguage !== 'all') {
                 const lang = currentLanguage.charAt(0).toUpperCase() + currentLanguage.slice(1);
                 finalQuery = `${lang} ${query}`;
             }
-
             searchInput.value = finalQuery;
-            const event = new Event('input');
-            searchInput.dispatchEvent(event);
+            searchInput.dispatchEvent(new Event('input'));
         }
 
-        // --- HELPERS ---
         function getBestImage(images) {
             if (!images || images.length === 0) return 'https://picsum.photos/seed/music/300/300';
             const img = images.find(i => i.quality === '500x500');
@@ -1106,13 +1405,16 @@
         }
 
         function getBestAudio(downloadUrls) {
-            if (!downloadUrls || downloadUrls.length === 0) return null;
-            const priorities = ['320kbps', '160kbps', '96kbps'];
-            for (let q of priorities) {
-                const u = downloadUrls.find(x => x.quality === q);
-                if (u) return u.url;
-            }
-            return downloadUrls[0].url;
+            if (!downloadUrls || downloadUrls.length === 0) return { url: null, quality: 'Unknown' };
+            const flac = downloadUrls.find(x => x.quality === 'flac' || x.quality === 'lossless');
+            if (flac) return { url: flac.url, quality: 'FLAC' };
+            const hq = downloadUrls.find(x => x.quality === '320kbps');
+            if (hq) return { url: hq.url, quality: '320kbps' };
+            const mq = downloadUrls.find(x => x.quality === '160kbps');
+            if (mq) return { url: mq.url, quality: '160kbps' };
+            const lq = downloadUrls.find(x => x.quality === '96kbps');
+            if (lq) return { url: lq.url, quality: '96kbps' };
+            return { url: downloadUrls[0].url, quality: 'Standard' };
         }
 
         function showToast(msg) {
@@ -1138,47 +1440,39 @@
         async function fetchSongs(query, limit = 10, useLanguage = true) {
             try {
                 let finalQuery = query;
-                if (useLanguage && currentLanguage !== 'all') {
-                    finalQuery = `${query} ${currentLanguage}`;
-                }
+                if (useLanguage && currentLanguage !== 'all') finalQuery = `${query} ${currentLanguage}`;
                 const url = `${API_BASE}/search/songs?query=${encodeURIComponent(finalQuery)}&limit=${limit}`;
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("API Error");
                 const json = await res.json();
-                
                 if (json.success && json.data && json.data.results) {
-                    return json.data.results.map(track => ({
-                        id: track.id,
-                        title: track.name,
-                        artist: track.artists?.primary?.[0]?.name || 'Unknown Artist',
-                        image: getBestImage(track.image),
-                        url: getBestAudio(track.downloadUrl),
-                        album: track.album?.name || '',
-                        year: track.year || ''
-                    }));
+                    return json.data.results.map(track => {
+                        const audioData = getBestAudio(track.downloadUrl);
+                        return {
+                            id: track.id, title: track.name,
+                            artist: track.artists?.primary?.[0]?.name || 'Unknown Artist',
+                            image: getBestImage(track.image),
+                            url: audioData.url, quality: audioData.quality,
+                            album: track.album?.name || '', year: track.year || ''
+                        };
+                    });
                 }
-            } catch (e) {
-                console.error("Fetch Error", e);
-            }
+            } catch (e) { console.error("Fetch Error", e); }
             return [];
         }
 
         async function fetchAlbums(query, limit = 5, useLanguage = true) {
             try {
                 let finalQuery = query;
-                if (useLanguage && currentLanguage !== 'all') {
-                    finalQuery = `${query} ${currentLanguage}`;
-                }
+                if (useLanguage && currentLanguage !== 'all') finalQuery = `${query} ${currentLanguage}`;
                 const res = await fetch(`${API_BASE}/search/albums?query=${encodeURIComponent(finalQuery)}&limit=${limit}`);
                 const json = await res.json();
                 if (json.success && json.data && json.data.results) {
                     return json.data.results.map(album => ({
-                        id: album.id,
-                        title: album.name,
+                        id: album.id, title: album.name,
                         artist: album.artists?.primary?.[0]?.name || 'Various Artists',
                         image: getBestImage(album.image),
-                        type: 'album',
-                        songCount: album.songCount || 0
+                        type: 'album', songCount: album.songCount || 0
                     }));
                 }
             } catch (e) { console.error(e); }
@@ -1188,25 +1482,15 @@
         async function loadHome() {
             isViewingPlaylist = false;
             playlistHeaderBtn.classList.remove('active');
-            
             mainContent.innerHTML = '<div style="text-align:center; padding:50px;"><div class="spinner"></div></div>';
-            
             const currentYear = new Date().getFullYear();
-
             let sections = [
                 { title: "Trending Now", query: "trending 2025", type: 'songs' },
                 { title: "Top Albums", query: "top hits", type: 'albums' },
                 { title: "Top 50 - Global", query: "top 50 global", type: 'songs' },
                 { title: "Chill Vibes", query: "lofi chill", type: 'songs' }
             ];
-
-            if (currentLanguage !== 'all') {
-                sections.unshift({
-                    title: "New Releases",
-                    query: `new  ${currentYear}`, 
-                    type: 'songs'
-                });
-            }
+            if (currentLanguage !== 'all') sections.unshift({ title: "New Releases", query: `new  ${currentYear}`, type: 'songs' });
 
             let html = '';
             sections.forEach(sec => {
@@ -1215,9 +1499,7 @@
                         <h2 class="section-title">${sec.title}</h2>
                         <span class="section-link" onclick="handleSectionClick('${sec.type}', '${sec.query}')">SEE ALL</span>
                     </div>
-                    <div class="scroll-container" id="container-${sec.title.replace(/\s/g,'')}">
-                        <div class="spinner"></div>
-                    </div>
+                    <div class="scroll-container" id="container-${sec.title.replace(/\s/g,'')}"><div class="spinner"></div></div>
                 `;
             });
             mainContent.innerHTML = html;
@@ -1226,97 +1508,44 @@
                 const container = document.getElementById(`container-${sec.title.replace(/\s/g,'')}`);
                 try {
                     let items = [];
-                    
                     if (sec.title === "New Releases") {
                         items = await fetchSongs(`new  ${currentYear}`, 12, true);
-                        if (items.length === 0) {
-                            items = await fetchSongs(`new releases`, 12, true);
-                        }
-                        if (items.length === 0) {
-                            items = await fetchSongs(`latest`, 12, true);
-                        }
+                        if (items.length === 0) items = await fetchSongs(`new releases`, 12, true);
+                        if (items.length === 0) items = await fetchSongs(`latest`, 12, true);
                         renderCards(items, container, sec.type);
-                    } 
-                    else {
+                    } else {
                         let searchQuery = sec.query;
-                        let useLang = true;
-
-                        if (sec.title.includes("Global")) {
-                            useLang = false; 
-                        }
-
-                        if (sec.type === 'songs') {
-                            items = await fetchSongs(searchQuery, 12, useLang);
-                        } else if (sec.type === 'albums') {
-                            items = await fetchAlbums(searchQuery, 8, useLang);
-                        }
+                        let useLang = !sec.title.includes("Global");
+                        if (sec.type === 'songs') items = await fetchSongs(searchQuery, 12, useLang);
+                        else if (sec.type === 'albums') items = await fetchAlbums(searchQuery, 8, useLang);
                         renderCards(items, container, sec.type);
                     }
-                } catch (err) {
-                    container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">Error loading section.</div>';
-                }
+                } catch (err) { container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">Error loading.</div>'; }
             }
         }
 
         function renderCards(items, container, type = 'song', isPlaylistView = false) {
-            if (!items || items.length === 0) {
-                container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">No results found.</div>';
-                return;
-            }
+            if (!items || items.length === 0) { container.innerHTML = '<div style="color:#666; font-size:0.9rem; padding:10px;">No results.</div>'; return; }
             container.innerHTML = '';
-            
             items.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'card';
-                
-                const subtitle = type === 'album' 
-                    ? (item.artist + (item.songCount ? ` • ${item.songCount} Songs` : ''))
-                    : item.artist;
-
-                let extraButtons = '';
-                
-                if (isPlaylistView) {
-                    extraButtons = `
-                        <button class="playlist-remove-btn" onclick="removeFromMyPlaylist('${item.id}', event)">
-                            <i class="ri-close-line"></i>
-                        </button>
-                    `;
-                } else {
-                    extraButtons = `
-                        <button class="card-menu-btn" onclick="openContextMenu(event, '${type}')">
-                            <i class="ri-more-2-fill"></i>
-                        </button>
-                    `;
-                }
+                const subtitle = type === 'album' ? (item.artist + (item.songCount ? ` • ${item.songCount} Songs` : '')) : item.artist;
+                let extraButtons = isPlaylistView 
+                    ? `<button class="playlist-remove-btn" onclick="removeFromMyPlaylist('${item.id}', event)"><i class="ri-close-line"></i></button>`
+                    : `<button class="card-menu-btn" onclick="openContextMenu(event, '${type}')"><i class="ri-more-2-fill"></i></button>`;
 
                 card.innerHTML = `
-                    <div class="card-img-wrapper">
-                        <img src="${item.image}" class="card-img" loading="lazy" alt="${item.title}">
-                        ${extraButtons}
-                        <div class="play-overlay">
-                            <div class="play-btn">
-                                <i class="ri-play-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="card-title ellipsis">${item.title}</div>
-                        <div class="card-sub ellipsis">${subtitle}</div>
-                    </div>
+                    <div class="card-img-wrapper"><img src="${item.image}" class="card-img" loading="lazy" alt="${item.title}">${extraButtons}<div class="play-overlay"><div class="play-btn"><i class="ri-play-fill"></i></div></div></div>
+                    <div class="card-info"><div class="card-title ellipsis">${item.title}</div><div class="card-sub ellipsis">${subtitle}</div></div>
                 `;
-
                 card.dataset.item = JSON.stringify(item);
                 card.dataset.list = JSON.stringify(items);
                 card.dataset.type = type;
-
                 card.onclick = (e) => {
                     if(!e.target.closest('.card-menu-btn') && !e.target.closest('.playlist-remove-btn')) {
-                         if (type === 'album') {
-                            showToast("Loading Album...");
-                            loadAlbumById(item.id);
-                        } else {
-                            playSong(item, items); 
-                        }
+                        if (type === 'album') { showToast("Loading Album..."); loadAlbumById(item.id); }
+                        else { playSong(item, items); }
                     }
                 };
                 container.appendChild(card);
@@ -1330,61 +1559,39 @@
                 const json = await res.json();
                 if (json.success && json.data) {
                     const albumData = json.data;
-                    let songs = albumData.songs.map(s => ({
-                        id: s.id,
-                        title: s.name,
-                        artist: s.artists?.primary?.[0]?.name || albumData.artists?.primary?.[0]?.name,
-                        image: getBestImage(s.image),
-                        url: getBestAudio(s.downloadUrl),
-                        album: albumData.name,
-                        year: albumData.year
-                    }));
-
-                    if (songs.length === 0) {
-                         showToast("Album empty or restricted.");
-                         return;
-                    }
-
+                    let songs = albumData.songs.map(s => {
+                        const audioData = getBestAudio(s.downloadUrl);
+                        return {
+                            id: s.id, title: s.name,
+                            artist: s.artists?.primary?.[0]?.name || albumData.artists?.primary?.[0]?.name,
+                            image: getBestImage(s.image),
+                            url: audioData.url, quality: audioData.quality,
+                            album: albumData.name, year: albumData.year
+                        };
+                    });
+                    if (songs.length === 0) { showToast("Album empty."); return; }
                     mainContent.innerHTML = `
-                        <div class="section-header">
-                            <button class="section-link" onclick="loadHome()" style="display:flex; align-items:center; gap:5px;">
-                                <i class="ri-arrow-go-back-line" style="font-size:1.2rem;"></i>
-                                <span>Back</span>
-                            </button>
-                        </div>
+                        <div class="section-header"><button class="section-link" onclick="loadHome()" style="display:flex; align-items:center; gap:5px;"><i class="ri-arrow-go-back-line"></i><span>Back</span></button></div>
                         <div style="display:flex; flex-direction: column; md:flex-row; gap:20px; margin-bottom:30px; align-items:center;">
                             <img src="${getBestImage(albumData.image)}" style="width:180px; height:180px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.4);">
-                            <div style="text-align: center;">
-                                <h1 style="font-size:2rem; margin-bottom:5px;">${albumData.name}</h1>
-                                <p style="color:var(--text-sub); font-size:1.1rem;">${albumData.year} • ${songs.length} Songs</p>
-                            </div>
+                            <div style="text-align: center;"><h1 style="font-size:2rem;">${albumData.name}</h1><p style="color:var(--text-sub);">${albumData.year} • ${songs.length} Songs</p></div>
                         </div>
-                        <div class="album-list-container">
-                            ${songs.map((s, i) => `
-                                <div class="album-row" onclick="playSongFromIndex(${i}, albumSongs)">
-                                    <div class="album-num">${i+1}</div>
-                                    <img src="${s.image}" class="album-art-list">
-                                    <div class="album-meta">
-                                        <div class="album-song-title ellipsis">${s.title}</div>
-                                        <div class="album-song-artist ellipsis">${s.artist}</div>
-                                    </div>
-                                    <i class="ri-play-circle-line album-play-icon"></i>
-                                </div>
-                            `).join('')}
+                        <div class="album-list-container">${songs.map((s, i) => `
+                            <div class="album-row" onclick="playSongFromIndex(${i}, albumSongs)">
+                                <div class="album-num">${i+1}</div>
+                                <img src="${s.image}" class="album-art-list">
+                                <div class="album-meta"><div class="album-song-title ellipsis">${s.title} ${s.quality === 'FLAC' ? '<span class="q-quality flac">FLAC</span>' : ''}</div><div class="album-song-artist ellipsis">${s.artist}</div></div>
+                                <i class="ri-play-circle-line album-play-icon"></i>
+                            </div>`).join('')}
                         </div>
                     `;
                     window.albumSongs = songs;
                     playSong(songs[0], songs);
                 }
-            } catch(e) {
-                console.error(e);
-                showToast("Error loading album.");
-            }
+            } catch(e) { console.error(e); showToast("Error loading album."); }
         }
 
-        window.playSongFromIndex = (index, list) => {
-            playSong(list[index], list);
-        }
+        window.playSongFromIndex = (index, list) => playSong(list[index], list);
 
         // --- CONTEXT MENU ---
         function openContextMenu(e, type) {
@@ -1392,267 +1599,112 @@
             const card = e.target.closest('.card');
             const item = JSON.parse(card.dataset.item);
             const list = JSON.parse(card.dataset.list);
-            
             contextMenuTargetSong = item;
             contextMenuSourceList = list;
-            
-            const x = e.clientX;
-            const y = e.clientY;
-            const menuWidth = 200;
-            const menuHeight = 130;
-            const winWidth = window.innerWidth;
-            const winHeight = window.innerHeight;
-            
-            let posX = x;
-            let posY = y;
-
+            const x = e.clientX, y = e.clientY, menuWidth = 200, menuHeight = 130, winWidth = window.innerWidth, winHeight = window.innerHeight;
+            let posX = x, posY = y;
             if (x + menuWidth > winWidth) posX = x - menuWidth;
             if (y + menuHeight > winHeight) posY = y - menuHeight;
-
-            contextMenu.style.left = `${posX}px`;
-            contextMenu.style.top = `${posY}px`;
+            contextMenu.style.left = `${posX}px`; contextMenu.style.top = `${posY}px`;
             contextMenu.classList.add('active');
         }
 
         function contextAction(action) {
             if (!contextMenuTargetSong) return;
-            
-            if (action === 'playNow') {
-                playSong(contextMenuTargetSong, contextMenuSourceList);
-            } else if (action === 'playNext') {
-                if (currentPlaylist.length === 0) {
-                    playSong(contextMenuTargetSong, [contextMenuTargetSong]);
-                } else {
-                    currentPlaylist.splice(currentIndex + 1, 0, contextMenuTargetSong);
-                    renderQueue();
-                    showToast("Added to Play Next");
-                }
+            if (action === 'playNow') playSong(contextMenuTargetSong, contextMenuSourceList);
+            else if (action === 'playNext') {
+                if (currentPlaylist.length === 0) playSong(contextMenuTargetSong, [contextMenuTargetSong]);
+                else { currentPlaylist.splice(currentIndex + 1, 0, contextMenuTargetSong); renderQueue(); showToast("Added to Play Next"); }
             } else if (action === 'addToQueue') {
-                if (currentPlaylist.length === 0) {
-                    playSong(contextMenuTargetSong, [contextMenuTargetSong]);
-                } else {
-                    currentPlaylist.push(contextMenuTargetSong);
-                    renderQueue();
-                    showToast("Added to Queue");
-                }
+                if (currentPlaylist.length === 0) playSong(contextMenuTargetSong, [contextMenuTargetSong]);
+                else { currentPlaylist.push(contextMenuTargetSong); renderQueue(); showToast("Added to Queue"); }
             }
             contextMenu.classList.remove('active');
         }
 
         // --- PLAYER LOGIC ---
         function playSong(song, playlist) {
+            if(isVideoMode) toggleVideoMode();
             currentPlaylist = playlist;
             currentIndex = playlist.findIndex(s => s.id === song.id);
             if (currentIndex === -1) currentIndex = 0;
-            
             currentSongObj = song;
             updatePlaylistBtnState();
-            
             updatePlayerUI(song);
-            
             if (song.url) {
                 audio.src = song.url;
-                audio.play().then(() => {
-                    isPlaying = true;
-                    updatePlayBtns();
-                    renderQueue();
-                    fetchLyrics(song); 
-                }).catch(err => {
-                    console.error("Playback Error", err);
-                    showToast("Error playing audio source.");
-                });
-            } else {
-                showToast("Audio source unavailable.");
-            }
+                audio.play().then(() => { isPlaying = true; updatePlayBtns(); renderQueue(); fetchLyrics(song); }).catch(err => { console.error("Playback Error", err); showToast("Error playing audio."); });
+            } else { showToast("Audio unavailable."); }
         }
 
         function updatePlayerUI(song) {
-            npTitle.textContent = song.title;
-            npArtist.textContent = song.artist;
-            npArt.src = song.image;
-            playerBar.classList.add('active');
-            
-            fpTitle.textContent = song.title;
+            npTitle.innerHTML = `${song.title} ${song.quality && song.quality !== 'Standard' ? `<span class="quality-badge-mini ${song.quality === 'FLAC' ? 'flac' : ''}">${song.quality}</span>` : ''}`;
+            npArtist.textContent = song.artist; npArt.src = song.image; playerBar.classList.add('active');
+            fpTitle.innerHTML = song.quality === 'FLAC' ? `${song.title} <span class="quality-badge flac">LOSSLESS</span>` : song.title;
             fpArtBig.src = song.image;
             fpArtistList.innerHTML = `<a href="#" class="fp-artist-link">${song.artist}</a>`;
-            
-            // Reset Lyrics
             lyricsContent.innerHTML = '<div class="spinner"></div>';
-            lyricsData = [];
-            lyricsType = 'none';
-            originalPlainLyrics = "";
-            currentLyricsLang = 'all';
-            currentLyricsLangSpan.textContent = 'Original';
+            lyricsData = []; lyricsType = 'none'; originalPlainLyrics = "";
+            currentLyricsLang = 'all'; currentLyricsLangSpan.textContent = 'Original';
             initLyricsLanguages();
         }
 
-        function togglePlay() {
-            if (audio.paused) { audio.play(); } 
-            else { audio.pause(); }
-            isPlaying = !audio.paused;
-            updatePlayBtns();
-        }
-
+        function togglePlay() { if (audio.paused) audio.play(); else audio.pause(); isPlaying = !audio.paused; updatePlayBtns(); }
         function updatePlayBtns() {
-            if (isPlaying) {
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                fpPlayIcon.classList.add('hidden');
-                fpPauseIcon.classList.remove('hidden');
-                fpPlayPauseBtn.classList.add('is-playing');
-            } else {
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                fpPlayIcon.classList.remove('hidden');
-                fpPauseIcon.classList.add('hidden');
-                fpPlayPauseBtn.classList.remove('is-playing');
-            }
+            if (isPlaying) { playIcon.classList.add('hidden'); pauseIcon.classList.remove('hidden'); fpPlayIcon.classList.add('hidden'); fpPauseIcon.classList.remove('hidden'); fpPlayPauseBtn.classList.add('is-playing'); }
+            else { playIcon.classList.remove('hidden'); pauseIcon.classList.add('hidden'); fpPlayIcon.classList.remove('hidden'); fpPauseIcon.classList.add('hidden'); fpPlayPauseBtn.classList.remove('is-playing'); }
         }
-
-        function playNext() {
-            if (!currentPlaylist.length) return;
-            if (isShuffle) {
-                let randIndex = Math.floor(Math.random() * currentPlaylist.length);
-                currentIndex = randIndex;
-            } else {
-                currentIndex = (currentIndex + 1) % currentPlaylist.length;
-            }
-            playSong(currentPlaylist[currentIndex], currentPlaylist);
-        }
-
-        function playPrev() {
-            if (!currentPlaylist.length) return;
-            if (audio.currentTime > 3) {
-                audio.currentTime = 0;
-                return;
-            }
-            currentIndex = (currentIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
-            playSong(currentPlaylist[currentIndex], currentPlaylist);
-        }
-
-        function toggleFullPlayer(show) {
-            if (show) fullPlayer.classList.add('open');
-            else fullPlayer.classList.remove('open');
-        }
+        function playNext() { if (!currentPlaylist.length) return; if (isShuffle) currentIndex = Math.floor(Math.random() * currentPlaylist.length); else currentIndex = (currentIndex + 1) % currentPlaylist.length; playSong(currentPlaylist[currentIndex], currentPlaylist); }
+        function playPrev() { if (!currentPlaylist.length) return; if (audio.currentTime > 3) { audio.currentTime = 0; return; } currentIndex = (currentIndex - 1 + currentPlaylist.length) % currentPlaylist.length; playSong(currentPlaylist[currentIndex], currentPlaylist); }
+        function toggleFullPlayer(show) { if (show) fullPlayer.classList.add('open'); else fullPlayer.classList.remove('open'); }
 
         function renderQueue() {
             if (!currentPlaylist.length) return;
             queueListContainer.innerHTML = '';
-            
             currentPlaylist.forEach((song, index) => {
                 const div = document.createElement('div');
                 div.className = `queue-item ${index === currentIndex ? 'active' : ''}`;
-                div.onclick = (e) => {
-                    e.stopPropagation();
-                    playSong(song, currentPlaylist);
-                };
-                
-                const isCurrent = index === currentIndex;
-                
-                div.innerHTML = `
-                    <img src="${song.image}" class="q-img" alt="">
-                    <div class="q-info">
-                        <div class="q-title ellipsis">${song.title}</div>
-                        <div class="q-artist ellipsis">${song.artist}</div>
-                    </div>
-                    <div class="q-time" onclick="removeFromQueue(event, ${index})">
-                        <i class="ri-close-line"></i>
-                    </div>
-                `;
+                div.onclick = (e) => { e.stopPropagation(); playSong(song, currentPlaylist); };
+                div.innerHTML = `<img src="${song.image}" class="q-img" alt=""><div class="q-info"><div class="q-title ellipsis">${song.title} ${song.quality === 'FLAC' ? '<span class="q-quality flac">FLAC</span>' : ''}</div><div class="q-artist ellipsis">${song.artist}</div></div><div class="q-time" onclick="removeFromQueue(event, ${index})"><i class="ri-close-line"></i></div>`;
                 queueListContainer.appendChild(div);
             });
         }
 
         function removeFromQueue(event, index) {
-            event.stopPropagation(); 
-            if (index === currentIndex) {
-                showToast("Cannot remove currently playing song");
-                return;
-            }
-            
-            currentPlaylist.splice(index, 1);
-            
-            if (index < currentIndex) {
-                currentIndex--;
-            }
-            
-            renderQueue();
-            showToast("Removed from queue");
+            event.stopPropagation(); if (index === currentIndex) { showToast("Can't remove current song"); return; }
+            currentPlaylist.splice(index, 1); if (index < currentIndex) currentIndex--; renderQueue(); showToast("Removed");
         }
-        
-        function clearQueue(e) {
-            if(e) e.stopPropagation();
-            const current = currentPlaylist[currentIndex];
-            currentPlaylist = current ? [current] : [];
-            renderQueue();
-            showToast("Queue Cleared");
-        }
+        function clearQueue(e) { if(e) e.stopPropagation(); const current = currentPlaylist[currentIndex]; currentPlaylist = current ? [current] : []; renderQueue(); showToast("Queue Cleared"); }
 
         function setupSwipeGesture() {
-            let touchStartY = 0;
-            let touchEndY = 0;
-            
-            fpQueueSection.addEventListener('touchstart', e => {
-                touchStartY = e.changedTouches[0].screenY;
-            }, false);
-            
-            fpQueueSection.addEventListener('touchend', e => {
-                touchEndY = e.changedTouches[0].screenY;
-                handleSwipe();
-            }, false);
-            
+            let touchStartY = 0, touchEndY = 0;
+            fpQueueSection.addEventListener('touchstart', e => { touchStartY = e.changedTouches[0].screenY; }, false);
+            fpQueueSection.addEventListener('touchend', e => { touchEndY = e.changedTouches[0].screenY; handleSwipe(); }, false);
             function handleSwipe() {
-                const diff = touchStartY - touchEndY;
-                const threshold = 50;
-
-                if (diff > threshold) {
-                    fpQueueSection.classList.add('expanded');
-                } else if (diff < -threshold) {
-                    fpQueueSection.classList.remove('expanded');
-                }
+                const diff = touchStartY - touchEndY, threshold = 50;
+                if (diff > threshold) { fpQueueSection.classList.add('expanded'); }
+                else if (diff < -threshold) { fpQueueSection.classList.remove('expanded'); }
             }
         }
 
         function setupEventListeners() {
             playPauseBtn.addEventListener('click', togglePlay);
             fpPlayPauseBtn.addEventListener('click', togglePlay);
-            
             audio.addEventListener('timeupdate', () => {
                 if (audio.duration) {
                     const percent = (audio.currentTime / audio.duration) * 100;
                     progressFill.style.width = `${percent}%`;
                     fpProgressFill.style.width = `${percent}%`;
-                    
-                    const curMins = Math.floor(audio.currentTime / 60);
-                    const curSecs = Math.floor(audio.currentTime % 60);
-                    const durMins = Math.floor(audio.duration / 60);
-                    const durSecs = Math.floor(audio.duration % 60);
-                    
+                    const curMins = Math.floor(audio.currentTime / 60), curSecs = Math.floor(audio.currentTime % 60), durMins = Math.floor(audio.duration / 60), durSecs = Math.floor(audio.duration % 60);
                     const fmt = (m, s) => `${m}:${s < 10 ? '0'+s : s}`;
-                    fpCurrentTime.textContent = fmt(curMins, curSecs);
-                    fpTotalTime.textContent = fmt(durMins, durSecs);
-                    
+                    fpCurrentTime.textContent = fmt(curMins, curSecs); fpTotalTime.textContent = fmt(durMins, durSecs);
                     updateLyrics();
                 }
             });
-            
             audio.addEventListener('ended', playNext);
-            
-            progressBar.addEventListener('click', (e) => {
-                const rect = progressBar.getBoundingClientRect();
-                audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
-            });
-
-            fpProgressTrack.addEventListener('click', (e) => {
-                const rect = fpProgressTrack.getBoundingClientRect();
-                audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
-            });
-
-            volumeSlider.addEventListener('input', (e) => {
-                audio.volume = e.target.value;
-                updateVolumeIcon();
-            });
-            
+            progressBar.addEventListener('click', (e) => { const rect = progressBar.getBoundingClientRect(); audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration; });
+            fpProgressTrack.addEventListener('click', (e) => { const rect = fpProgressTrack.getBoundingClientRect(); audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration; });
+            volumeSlider.addEventListener('input', (e) => { audio.volume = e.target.value; updateVolumeIcon(); });
             let debounceTimer;
             searchInput.addEventListener('input', async (e) => {
                 clearTimeout(debounceTimer);
@@ -1660,394 +1712,136 @@
                     const val = e.target.value.trim();
                     if (val.length > 2) {
                         mainContent.innerHTML = `<div style="text-align:center; padding:60px;"><div class="spinner"></div></div>`;
-                        
-                        const songs = await fetchSongs(val, 20, false); 
-                        const albums = await fetchAlbums(val, 5, false);
-                        
-                        let html = `
-                            <div class="section-header">
-                                <h2 class="section-title">Search Results</h2>
-                                <button class="section-link" onclick="loadHome()" style="background:none; border:none; cursor:pointer;">Clear</button>
-                            </div>
-                        `;
-
-                        if(albums.length > 0) {
-                            html += `<h3 style="color:var(--text-sub); margin: 20px 0 10px; font-size:1.1rem;">Albums</h3>`;
-                            html += `<div class="scroll-container" id="search-albums"></div>`;
-                        }
-
-                        html += `<h3 style="color:var(--text-sub); margin: 30px 0 10px; font-size:1.1rem;">Songs</h3>`;
-                        html += `<div class="scroll-container" id="search-songs"></div>`;
-
+                        const songs = await fetchSongs(val, 20, false); const albums = await fetchAlbums(val, 5, false);
+                        let html = `<div class="section-header"><h2 class="section-title">Search Results</h2><button class="section-link" onclick="loadHome()" style="background:none; border:none; cursor:pointer;">Clear</button></div>`;
+                        if(albums.length > 0) { html += `<h3 style="color:var(--text-sub); margin: 20px 0 10px; font-size:1.1rem;">Albums</h3><div class="scroll-container" id="search-albums"></div>`; }
+                        html += `<h3 style="color:var(--text-sub); margin: 30px 0 10px; font-size:1.1rem;">Songs</h3><div class="scroll-container" id="search-songs"></div>`;
                         mainContent.innerHTML = html;
-
                         if(albums.length > 0) renderCards(albums, document.getElementById('search-albums'), 'album');
                         renderCards(songs, document.getElementById('search-songs'), 'song');
-
                     } else if (val.length === 0) loadHome();
                 }, 500);
             });
-
             document.addEventListener('click', (e) => {
-                if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) {
-                    langMenu.classList.remove('open');
-                }
-                if (!contextMenu.contains(e.target) && !e.target.closest('.card-menu-btn')) {
-                    contextMenu.classList.remove('active');
-                }
-                if (!lyricsLangMenu.contains(e.target) && !lyricsLangBtn.contains(e.target)) {
-                    lyricsLangMenu.classList.remove('show');
-                }
+                if (!langMenu.contains(e.target) && !langBtn.contains(e.target)) langMenu.classList.remove('open');
+                if (!contextMenu.contains(e.target) && !e.target.closest('.card-menu-btn')) contextMenu.classList.remove('active');
+                if (!lyricsLangMenu.contains(e.target) && !lyricsLangBtn.contains(e.target)) lyricsLangMenu.classList.remove('show');
             });
         }
-
         function updateVolumeIcon() {
-            const btn = document.getElementById('muteBtn');
-            const icon = btn.querySelector('i');
+            const btn = document.getElementById('muteBtn'), icon = btn.querySelector('i');
             icon.className = '';
             if (audio.volume === 0) icon.className = 'ri-volume-mute-line';
             else if (audio.volume < 0.5) icon.className = 'ri-volume-down-line';
             else icon.className = 'ri-volume-up-line';
         }
-
         function toggleMute() {
-            if(audio.volume > 0) {
-                audio.dataset.prevVol = audio.volume;
-                audio.volume = 0;
-                volumeSlider.value = 0;
-            } else {
-                audio.volume = audio.dataset.prevVol || 1;
-                volumeSlider.value = audio.volume;
-            }
+            if(audio.volume > 0) { audio.dataset.prevVol = audio.volume; audio.volume = 0; volumeSlider.value = 0; }
+            else { audio.volume = audio.dataset.prevVol || 1; volumeSlider.value = audio.volume; }
             updateVolumeIcon();
         }
-        
-        function toggleShuffle() {
-            isShuffle = !isShuffle;
-            document.getElementById('btnShuffle').style.color = isShuffle ? 'var(--primary)' : '#ccc';
-        }
-        
-        function toggleRepeat() {
-            isRepeat = !isRepeat;
-            audio.loop = isRepeat;
-            document.getElementById('btnRepeat').style.color = isRepeat ? 'var(--primary)' : '#ccc';
-        }
-
+        function toggleShuffle() { isShuffle = !isShuffle; document.getElementById('btnShuffle').style.color = isShuffle ? 'var(--primary)' : '#ccc'; }
+        function toggleRepeat() { isRepeat = !isRepeat; audio.loop = isRepeat; document.getElementById('btnRepeat').style.color = isRepeat ? 'var(--primary)' : '#ccc'; }
         async function downloadCurrentSong() {
             if(!audio.src) return;
-            try {
-                window.open(audio.src, '_blank');
-                showToast("Download started...");
-            } catch (e) {
-                showToast("Could not download.");
-            }
+            try { window.open(audio.src, '_blank'); showToast("Download started..."); }
+            catch (e) { showToast("Could not download."); }
         }
 
-        // --- LYRICS LOGIC WITH TRANSLATION ---
-        
-        function toggleLyrics() {
-            lyricsModal.classList.toggle('open');
-        }
-
-        // Helper to parse LRC format to JSON
+        // --- LYRICS LOGIC ---
+        function toggleLyrics() { lyricsModal.classList.toggle('open'); }
         function parseLRC(lrc) {
-            const lines = lrc.split('\n');
-            const result = [];
-            const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
-            
+            const lines = lrc.split('\n'), result = [], timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
             for (const line of lines) {
                 const match = timeReg.exec(line);
                 if (match) {
-                    const min = parseInt(match[1]);
-                    const sec = parseInt(match[2]);
-                    const ms = parseFloat("0." + match[3]);
-                    const time = min * 60 + sec + ms;
-                    const text = line.replace(timeReg, '').trim();
-                    if (text) {
-                        result.push({ time, text });
-                    }
+                    const min = parseInt(match[1]), sec = parseInt(match[2]), ms = parseFloat("0." + match[3]), time = min * 60 + sec + ms, text = line.replace(timeReg, '').trim();
+                    if (text) result.push({ time, text });
                 }
             }
             return result;
         }
-
-        // Initialize Lyrics Languages Dropdown
         function initLyricsLanguages() {
-            const langs = [
-                { code: 'all', name: 'Original' },
-                { code: 'hi', name: 'Hindi' },
-                { code: 'en', name: 'English' },
-                { code: 'es', name: 'Spanish' },
-                { code: 'fr', name: 'French' },
-                { code: 'de', name: 'German' },
-                { code: 'it', name: 'Italian' },
-                { code: 'ja', name: 'Japanese' },
-                { code: 'ko', name: 'Korean' },
-                { code: 'pt', name: 'Portuguese' },
-                { code: 'ru', name: 'Russian' },
-                { code: 'zh-CN', name: 'Chinese' },
-                { code: 'ar', name: 'Arabic' }
-            ];
-            
+            const langs = [{ code: 'all', name: 'Original' }, { code: 'hi', name: 'Hindi' }, { code: 'en', name: 'English' }, { code: 'es', name: 'Spanish' }, { code: 'fr', name: 'French' }, { code: 'de', name: 'German' }, { code: 'it', name: 'Italian' }, { code: 'ja', name: 'Japanese' }, { code: 'ko', name: 'Korean' }, { code: 'pt', name: 'Portuguese' }, { code: 'ru', name: 'Russian' }, { code: 'zh-CN', name: 'Chinese' }, { code: 'ar', name: 'Arabic' }];
             lyricsLangMenu.innerHTML = '';
             langs.forEach(lang => {
                 const div = document.createElement('div');
                 div.className = `lyrics-lang-item ${lang.code === currentLyricsLang ? 'active' : ''}`;
-                div.innerHTML = `
-                    <span>${lang.name}</span>
-                    <i class="ri-check-line lang-icon-check"></i>
-                `;
-                
+                div.innerHTML = `<span>${lang.name}</span><i class="ri-check-line lang-icon-check"></i>`;
                 div.onclick = () => selectLyricsLanguage(lang.code, lang.name);
                 lyricsLangMenu.appendChild(div);
             });
         }
-
-        function toggleLyricsLangMenu() {
-            lyricsLangMenu.classList.toggle('show');
-        }
-
+        function toggleLyricsLangMenu() { lyricsLangMenu.classList.toggle('show'); }
         function selectLyricsLanguage(code, name) {
-            if (currentLyricsLang === code) {
-                lyricsLangMenu.classList.remove('show');
-                return;
-            }
-
-            currentLyricsLang = code;
-            currentLyricsLangSpan.textContent = name;
-            lyricsLangMenu.classList.remove('show');
-            
-            // Refresh UI for active state
+            if (currentLyricsLang === code) { lyricsLangMenu.classList.remove('show'); return; }
+            currentLyricsLang = code; currentLyricsLangSpan.textContent = name; lyricsLangMenu.classList.remove('show');
             initLyricsLanguages();
-            
-            // If switching back to Original
-            if (code === 'all') {
-                renderLyrics(); // Re-render stored data
-            } else {
-                // Trigger Translation
-                translateLyrics(code);
-            }
+            if (code === 'all') renderLyrics(); else translateLyrics(code);
         }
-
-        // New Translation Function using MyMemory API
         async function translateLyrics(targetLang) {
             if (!originalPlainLyrics) {
-                // If we don't have plain lyrics, try to get them from synced
-                if (lyricsData.length > 0) {
-                    originalPlainLyrics = lyricsData.map(l => l.text).join('\n');
-                } else {
-                    lyricsContent.innerHTML = '<p style="color:#666; margin-top:50px;">No lyrics to translate.</p>';
-                    return;
-                }
+                if (lyricsData.length > 0) originalPlainLyrics = lyricsData.map(l => l.text).join('\n');
+                else { lyricsContent.innerHTML = '<p style="color:#666; margin-top:50px;">No lyrics.</p>'; return; }
             }
-
             lyricsContent.innerHTML = '<div class="spinner"></div>';
-            
             try {
-                // Split text into chunks because free API has a limit (~500 chars)
-                // We'll split by double newline to keep verses together
-                const verses = originalPlainLyrics.split('\n\n');
-                let translatedText = "";
-                
+                const verses = originalPlainLyrics.split('\n\n'); let translatedText = "";
                 for (let verse of verses) {
-                    // If a single verse is still too long (e.g. rap), split by space/lines roughly
                     if (verse.length > 450) {
                         const lines = verse.split('\n');
-                        for (let line of lines) {
-                            const chunk = await fetchTranslationChunk(line, targetLang);
-                            translatedText += chunk + "\n";
-                            // Small delay to avoid hitting rate limits
-                            await new Promise(r => setTimeout(r, 200));
-                        }
-                    } else {
-                        const chunk = await fetchTranslationChunk(verse, targetLang);
-                        translatedText += chunk + "\n\n";
-                        await new Promise(r => setTimeout(r, 200));
-                    }
+                        for (let line of lines) { translatedText += await fetchTranslationChunk(line, targetLang) + "\n"; await new Promise(r => setTimeout(r, 200)); }
+                    } else { translatedText += await fetchTranslationChunk(verse, targetLang) + "\n\n"; await new Promise(r => setTimeout(r, 200)); }
                 }
-
-                // Render the translated text as Plain Text
-                lyricsType = 'plain'; // Switch to plain text mode
-                lyricsData = translatedText.split('\n').filter(l => l.trim() !== '');
-                renderLyrics();
-                
-                // Add a small badge
-                const badge = document.createElement('div');
-                badge.className = 'lyrics-translated-badge';
-                badge.textContent = `Translated to ${currentLyricsLangSpan.textContent}`;
-                lyricsContent.prepend(badge);
-
-            } catch (error) {
-                console.error(error);
-                lyricsContent.innerHTML = `
-                    <p style="color:#666; margin-top:50px;">Translation failed or limit reached.</p>
-                    <p style="font-size:0.9rem; color:#888;">Try again later or switch to Original.</p>
-                `;
-            }
+                lyricsType = 'plain'; lyricsData = translatedText.split('\n').filter(l => l.trim() !== ''); renderLyrics();
+                const badge = document.createElement('div'); badge.className = 'lyrics-translated-badge'; badge.textContent = `Translated to ${currentLyricsLangSpan.textContent}`; lyricsContent.prepend(badge);
+            } catch (error) { console.error(error); lyricsContent.innerHTML = `<p style="color:#666; margin-top:50px;">Translation failed.</p>`; }
         }
-
         async function fetchTranslationChunk(text, targetLang) {
-            // Using autodetect as source for simplicity
             const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=autodetect|${targetLang}`;
-            const res = await fetch(url);
-            const data = await res.json();
-            
-            if (data.responseStatus === 200) {
-                return data.responseData.translatedText;
-            } else {
-                // If it fails, return original text for that chunk
-                return text; 
-            }
+            const res = await fetch(url), data = await res.json();
+            return data.responseStatus === 200 ? data.responseData.translatedText : text;
         }
-
         async function fetchLyrics(song) {
             if (!song) return;
-
-            lyricsContent.innerHTML = '<div class="spinner"></div>';
-            lyricsData = [];
-            lyricsType = 'none';
-            originalPlainLyrics = "";
-
+            lyricsContent.innerHTML = '<div class="spinner"></div>'; lyricsData = []; lyricsType = 'none'; originalPlainLyrics = "";
             try {
-                const query = `artist_name=${encodeURIComponent(song.artist)}&track_name=${encodeURIComponent(song.title)}`;
-                // Removed language param to always get the primary/original version first
-                const url = `https://lrclib.net/api/get?${query}`;
-                
-                const response = await fetch(url);
-                
+                const query = `artist_name=${encodeURIComponent(song.artist)}&track_name=${encodeURIComponent(song.title)}`, url = `https://lrclib.net/api/get?${query}`, response = await fetch(url);
                 if (response.ok) {
                     const data = await response.json();
-                    
                     if (data) {
-                        if (data.syncedLyrics) {
-                            lyricsData = parseLRC(data.syncedLyrics);
-                            lyricsType = 'synced';
-                            // Store plain version just in case
-                            originalPlainLyrics = data.plainLyrics || lyricsData.map(l => l.text).join('\n');
-                        } else if (data.plainLyrics) {
-                            originalPlainLyrics = data.plainLyrics;
-                            lyricsData = data.plainLyrics.split('\n').filter(line => line.trim() !== '');
-                            lyricsType = 'plain';
-                        } else {
-                            throw new Error("No lyrics found");
-                        }
-                        
+                        if (data.syncedLyrics) { lyricsData = parseLRC(data.syncedLyrics); lyricsType = 'synced'; originalPlainLyrics = data.plainLyrics || lyricsData.map(l => l.text).join('\n'); }
+                        else if (data.plainLyrics) { originalPlainLyrics = data.plainLyrics; lyricsData = data.plainLyrics.split('\n').filter(line => line.trim() !== ''); lyricsType = 'plain'; }
+                        else throw new Error("No lyrics");
                         renderLyrics();
-                    } else {
-                        throw new Error("Empty response");
-                    }
-                } else {
-                    throw new Error("API Error");
-                }
-            } catch (error) {
-                console.log("Lyrics fetch failed:", error);
-                lyricsContent.innerHTML = `
-                    <p style="color:#666; margin-top:50px;">Lyrics not found.</p>
-                    <div class="lyrics-fallback">
-                        <a href="https://www.google.com/search?q=lyrics+${encodeURIComponent(song.artist + ' ' + song.title)}" target="_blank">
-                            <i class="ri-search-line"></i> Search on Google
-                        </a>
-                    </div>
-                `;
-            }
+                    } else throw new Error("Empty");
+                } else throw new Error("API Error");
+            } catch (error) { console.log("Lyrics fetch failed:", error); lyricsContent.innerHTML = `<p style="color:#666; margin-top:50px;">Lyrics not found.</p><div class="lyrics-fallback"><a href="https://www.google.com/search?q=lyrics+${encodeURIComponent(song.artist + ' ' + song.title)}" target="_blank"><i class="ri-search-line"></i> Search Google</a></div>`; }
         }
-
         function renderLyrics() {
             lyricsContent.innerHTML = '';
-            
-            if (lyricsType === 'synced') {
-                lyricsData.forEach((line, i) => {
-                    const p = document.createElement('p');
-                    p.textContent = line.text;
-                    p.id = `lyric-${i}`;
-                    p.dataset.time = line.time;
-                    lyricsContent.appendChild(p);
-                });
-            } else if (lyricsType === 'plain') {
-                lyricsData.forEach((line, i) => {
-                    const p = document.createElement('p');
-                    p.textContent = line;
-                    p.id = `lyric-${i}`;
-                    p.style.opacity = "0.8"; 
-                    p.style.color = "#ccc";
-                    lyricsContent.appendChild(p);
-                });
-            }
+            if (lyricsType === 'synced') { lyricsData.forEach((line, i) => { const p = document.createElement('p'); p.textContent = line.text; p.id = `lyric-${i}`; p.dataset.time = line.time; lyricsContent.appendChild(p); }); }
+            else if (lyricsType === 'plain') { lyricsData.forEach((line, i) => { const p = document.createElement('p'); p.textContent = line; p.id = `lyric-${i}`; p.style.opacity = "0.8"; p.style.color = "#ccc"; lyricsContent.appendChild(p); }); }
         }
-
         function updateLyrics() {
-            if (!lyricsModal.classList.contains('open')) return;
-            if (lyricsType !== 'synced' || lyricsData.length === 0) return;
-
-            const currentTime = audio.currentTime;
-
-            // Find the active line based on current time
-            let activeIndex = -1;
-            for (let i = 0; i < lyricsData.length; i++) {
-                if (currentTime >= lyricsData[i].time) {
-                    activeIndex = i;
-                } else {
-                    break;
-                }
-            }
-
-            // Update classes
+            if (!lyricsModal.classList.contains('open')) return; if (lyricsType !== 'synced' || lyricsData.length === 0) return;
+            const currentTime = audio.currentTime; let activeIndex = -1;
+            for (let i = 0; i < lyricsData.length; i++) { if (currentTime >= lyricsData[i].time) activeIndex = i; else break; }
             const lines = document.querySelectorAll('.lyrics-content p');
-            // Avoid querying if index hasn't changed
             const currentActive = document.querySelector('.lyrics-content p.active');
             if (currentActive && currentActive.id === `lyric-${activeIndex}`) return;
-
             lines.forEach(p => p.classList.remove('active'));
-
-            if (activeIndex !== -1) {
-                const activeEl = document.getElementById(`lyric-${activeIndex}`);
-                if (activeEl) {
-                    activeEl.classList.add('active');
-                    // Scroll logic
-                    activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }
+            if (activeIndex !== -1) { const activeEl = document.getElementById(`lyric-${activeIndex}`); if (activeEl) { activeEl.classList.add('active'); activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }
         }
 
         // --- LANGUAGE SYSTEM ---
         function initLanguages() {
-            const LANGUAGES = [
-                { id: 'all', name: 'All Languages' },
-                { id: 'hindi', name: 'Hindi' },
-                { id: 'english', name: 'English' },
-                { id: 'punjabi', name: 'Punjabi' },
-                { id: 'tamil', name: 'Tamil' },
-                { id: 'telugu', name: 'Telugu' },
-                { id: 'marathi', name: 'Marathi' },
-                { id: 'gujarati', name: 'Gujarati' },
-                { id: 'bengali', name: 'Bengali' },
-                { id: 'kannada', name: 'Kannada' },
-                { id: 'malayalam', name: 'Malayalam' },
-                { id: 'rajasthani', name: 'Rajasthani' },
-                { id: 'bhojpuri', name: 'Bhojpuri' },
-                { id: 'odia', name: 'Odia' }
-            ];
+            const LANGUAGES = [{ id: 'all', name: 'All Languages' }, { id: 'hindi', name: 'Hindi' }, { id: 'english', name: 'English' }, { id: 'punjabi', name: 'Punjabi' }, { id: 'tamil', name: 'Tamil' }, { id: 'telugu', name: 'Telugu' }, { id: 'marathi', name: 'Marathi' }, { id: 'gujarati', name: 'Gujarati' }, { id: 'bengali', name: 'Bengali' }, { id: 'kannada', name: 'Kannada' }, { id: 'malayalam', name: 'Malayalam' }, { id: 'rajasthani', name: 'Rajasthani' }, { id: 'bhojpuri', name: 'Bhojpuri' }, { id: 'odia', name: 'Odia' }];
             langGrid.innerHTML = '';
-            LANGUAGES.forEach(lang => {
-                const div = document.createElement('div');
-                div.className = `lang-item ${currentLanguage === lang.id ? 'active' : ''}`;
-                div.textContent = lang.name;
-                div.onclick = () => selectLanguage(lang.id, lang.name);
-                langGrid.appendChild(div);
-            });
+            LANGUAGES.forEach(lang => { const div = document.createElement('div'); div.className = `lang-item ${currentLanguage === lang.id ? 'active' : ''}`; div.textContent = lang.name; div.onclick = () => selectLanguage(lang.id, lang.name); langGrid.appendChild(div); });
         }
-
-        function toggleLangMenu() {
-            langMenu.classList.toggle('open');
-        }
-
-        function selectLanguage(id, name) {
-            currentLanguage = id;
-            currentLangSpan.textContent = name;
-            langMenu.classList.remove('open');
-            initLanguages();
-            loadHome();
-        }
+        function toggleLangMenu() { langMenu.classList.toggle('open'); }
+        function selectLanguage(id, name) { currentLanguage = id; currentLangSpan.textContent = name; langMenu.classList.remove('open'); initLanguages(); loadHome(); }
     </script>
 </body>
 </html>

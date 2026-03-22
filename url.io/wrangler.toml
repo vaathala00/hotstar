@@ -1,0 +1,13 @@
+name = "short"
+main = "worker.js"
+compatibility_date = "2023-10-25"
+
+# 1. Configure Static Assets (Serves your index.html)
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# 2. Configure KV Database (Stores your links)
+[[kv_namespaces]]
+binding = "LINKS"
+id = "YOUR_KV_NAMESPACE_ID" # Replace this with your actual KV ID
